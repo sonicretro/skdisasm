@@ -1,6 +1,6 @@
 S3_VInt_DrawLevel:
-		lea     ($C00000).l,a6
-		lea     ($FFFFF100).w,a0
+		lea     (VDP_data_port).l,a6
+		lea     (Plane_buffer).w,a0
 
 loc_239622:
 		move.w  (a0),d0
@@ -19,7 +19,7 @@ loc_239636:
 		andi.w  #$7FFF,d1
 
 loc_239640:
-		move.w  d2,4(a6)
+		move.w  d2,VDP_control_port-VDP_data_port(a6)
 		move.w  d0,d2
 		move.w  d1,d4
 		bsr.s   sub_23965C
@@ -53,8 +53,8 @@ loc_239670:
 ; ---------------------------------------------------------------------------
 
 sub_239690:
-		lea     ($C00000).l,a6
-		lea     ($FFFFF100).w,a0
+		lea     (VDP_data_port).l,a6
+		lea     (Plane_buffer).w,a0
 
 loc_23969A:
 		move.w  (a0),d0
@@ -92,11 +92,11 @@ sub_239822:
 loc_239842:
 		andi.w  #$30,d2
 		cmpi.w  #$10,d2
-		sne     ($FFFFEEA4).w
+		sne     (Plane_double_update_flag).w
 		movem.w d1/d6,-(sp)
 		bsr.s   S3_SetUp_ColumnDraw
 		movem.w (sp)+,d1/d6
-		tst.b   ($FFFFEEA4).w
+		tst.b   (Plane_double_update_flag).w
 		beq.w   locret_23996C
 		addi.w  #$10,d0
 
@@ -110,7 +110,7 @@ S3_SetUp_ColumnDraw:
 		asr.w   #4,d1
 		move.w  d1,d4
 		asr.w   #1,d1
-		and.w   ($FFFFEEAE).w,d1
+		and.w   (Layout_row_index_mask).w,d1
 		andi.w  #$F,d4
 		moveq   #$10,d5
 		sub.w   d4,d5
@@ -210,7 +210,7 @@ loc_23994E:
 		andi.w  #$70,d2
 		bne.s   loc_239964
 		addq.w  #4,d1
-		and.w   ($FFFFEEAE).w,d1
+		and.w   (Layout_row_index_mask).w,d1
 		bsr.s   sub_23996E
 
 loc_239964:
@@ -245,7 +245,7 @@ sub_23996E:
 
 S3_Draw_TileRow:
 		move.w  (a6),d0
-		and.w   ($FFFFEEAC).w,d0
+		and.w   (Camera_Y_pos_mask).w,d0
 		move.w  (a5),d2
 		move.w  d0,(a5)
 		move.w  d2,d3
@@ -256,19 +256,19 @@ S3_Draw_TileRow:
 		neg.w   d2
 		move.w  d3,d0
 		addi.w  #$F0,d0
-		and.w   ($FFFFEEAC).w,d0
+		and.w   (Camera_Y_pos_mask).w,d0
 
 loc_2399B0:
 		andi.w  #$30,d2
 		cmpi.w  #$10,d2
-		sne     ($FFFFEEA4).w
+		sne     (Plane_double_update_flag).w
 		movem.w d1/d6,-(sp)
 		bsr.s   S3_Setup_TileRowDraw
 		movem.w (sp)+,d1/d6
-		tst.b   ($FFFFEEA4).w
+		tst.b   (Plane_double_update_flag).w
 		beq.w   locret_239AFC
 		addi.w  #$10,d0
-		and.w   ($FFFFEEAC).w,d0
+		and.w   (Camera_Y_pos_mask).w,d0
 		bra.s   S3_Setup_TileRowDraw
 ; ---------------------------------------------------------------------------
 		nop
@@ -379,7 +379,7 @@ locret_239AFC:
 S3_GetLevelAddrChunk:
 		move.w  d0,d3
 		asr.w   #5,d3
-		and.w   ($FFFFEEAE).w,d3
+		and.w   (Layout_row_index_mask).w,d3
 		movea.w (a3,d3.w),a4
 
 S3_GetChunk:
@@ -478,12 +478,12 @@ loc_239BD6:
 
 S3_DrawTilesVDeform:
 		movem.l d5/a4-a5,-(sp)
-		lea     ($FFFFEE80).w,a6
+		lea     (Camera_X_pos_copy).w,a6
 		jsr     sub_239DBC(pc)
-		lea     ($FFFFEE88).w,a5
+		lea     (Camera_X_pos_rounded).w,a5
 		jsr     sub_239822(pc)
 		movem.l (sp)+,d5/a4/a6
-		move.w  ($FFFFEE88).w,d6
+		move.w  (Camera_X_pos_rounded).w,d6
 		bra.s   loc_239D58
 ; ---------------------------------------------------------------------------
 		nop
@@ -494,7 +494,7 @@ loc_239D5A:
 		sub.w   (a4)+,d6
 		bcs.s   loc_239D6A
 		move.w  (a6)+,d0
-		and.w   ($FFFFEEAC).w,d0
+		and.w   (Camera_Y_pos_mask).w,d0
 		move.w  d0,(a6)+
 		subq.w  #1,d5
 		bra.s   loc_239D5A
@@ -536,7 +536,7 @@ loc_239DAC:
 		subq.w  #1,d5
 		beq.s   locret_239DBA
 		move.w  (a6)+,d0
-		and.w   ($FFFFEEAC).w,d0
+		and.w   (Camera_Y_pos_mask).w,d0
 		move.w  d0,(a6)+
 		bra.s   loc_239DAC
 ; ---------------------------------------------------------------------------
@@ -571,11 +571,11 @@ loc_239DD0:
 ; ---------------------------------------------------------------------------
 
 S3_PlainDeformation:
-		lea     ($FFFFE000).w,a1
-		move.w  ($FFFFEE80).w,d0
+		lea     (H_scroll_buffer).w,a1
+		move.w  (Camera_X_pos_copy).w,d0
 		neg.w   d0
 		swap    d0
-		move.w  ($FFFFEE8C).w,d0
+		move.w  (Camera_X_pos_BG_copy).w,d0
 		neg.w   d0
 		moveq   #$37,d1
 
@@ -611,9 +611,9 @@ S3_ApplyDeformation:
 
 
 sub_239E90:
-		lea     ($FFFFE000).w,a1
-		move.w  ($FFFFEE90).w,d0
-		move.w  ($FFFFEE80).w,d3
+		lea     (H_scroll_buffer).w,a1
+		move.w  (Camera_Y_pos_BG_copy).w,d0
+		move.w  (Camera_X_pos_copy).w,d3
 
 TwoP_ApplyDeformation:		       ;39E9C
 		move.w  (a4)+,d2
@@ -817,8 +817,8 @@ loc_239FB0:
 ; ---------------------------------------------------------------------------
 S3_Apply_FGVScroll:
 		lea     ($FFFFEEEA).w,a1
-		move.w  ($FFFFEE90).w,d1
-		move.w  ($FFFFEE80).w,d0
+		move.w  (Camera_Y_pos_BG_copy).w,d1
+		move.w  (Camera_X_pos_copy).w,d0
 		move.w  d0,d2
 		andi.w  #$F,d2
 		beq.s   loc_239FCC
@@ -865,13 +865,13 @@ locret_23A000:
 
 ; ---------------------------------------------------------------------------
 S3Reset_TileOffsetPositionActual:
-		move.w  ($FFFFEE80).w,d0
+		move.w  (Camera_X_pos_copy).w,d0
 		move.w  d0,d1
 		andi.w  #$FFF0,d0
-		move.w  d0,($FFFFEE88).w
-		move.w  ($FFFFEE84).w,d0
-		and.w   ($FFFFEEAC).w,d0
-		move.w  d0,($FFFFEE8A).w
+		move.w  d0,(Camera_X_pos_rounded).w
+		move.w  (Camera_Y_pos_copy).w,d0
+		and.w   (Camera_Y_pos_mask).w,d0
+		move.w  d0,(Camera_Y_pos_rounded).w
 		rts
 
 
@@ -880,31 +880,31 @@ S3Reset_TileOffsetPositionActual:
 
 
 S3Reset_TileOffsetPositionEff:
-		move.w  ($FFFFEE8C).w,d0
+		move.w  (Camera_X_pos_BG_copy).w,d0
 		move.w  d0,d1
 		andi.w  #$FFF0,d0
 		move.w  d0,d2
-		move.w  d0,($FFFFEE94).w
-		move.w  ($FFFFEE90).w,d0
-		and.w   ($FFFFEEAC).w,d0
-		move.w  d0,($FFFFEE96).w
+		move.w  d0,(Camera_X_pos_BG_rounded).w
+		move.w  (Camera_Y_pos_BG_copy).w,d0
+		and.w   (Camera_Y_pos_mask).w,d0
+		move.w  d0,(Camera_Y_pos_BG_rounded).w
 		rts
 
 ; ---------------------------------------------------------------------------
 
 sub_23A03C:
-		move.w  ($FFFFEE60).w,($FFFFEE68).w
-		move.w  ($FFFFEE64).w,($FFFFEE6C).w
+		move.w  (Camera_X_pos_P2).w,(Camera_X_pos_P2_copy).w
+		move.w  (Camera_Y_pos_P2).w,(Camera_Y_pos_P2_copy).w
 		rts
 ; ---------------------------------------------------------------------------
 
 loc_23A04A:
-		move.w  ($FFFFEE6C).w,d0
+		move.w  (Camera_Y_pos_P2_copy).w,d0
 		subi.w  #$70,d0
-		move.w  d0,($FFFFF61E).w
+		move.w  d0,(V_scroll_value_P2).w
 		move.w  ($FFFFEE74).w,d0
 		subi.w  #$70,d0
-		move.w  d0,($FFFFF620).w
+		move.w  d0,(V_scroll_value_BG_P2).w
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -936,21 +936,21 @@ loc_23A09A:
 ; ---------------------------------------------------------------------------
 Comp_ScreenInit:
 		jsr     sub_23A03C(pc)
-		move.w  ($FFFFEE80).w,d0
+		move.w  (Camera_X_pos_copy).w,d0
 		move.w  d0,($FFFFEEB4).w
 		move.w  d0,($FFFFEEB6).w
-		move.w  ($FFFFEE68).w,d0
+		move.w  (Camera_X_pos_P2_copy).w,d0
 		move.w  d0,($FFFFEEB8).w
 		move.w  d0,($FFFFEEBA).w
 		moveq   #0,d0
-		move.b  ($FFFFFE10).w,d0
+		move.b  (Current_zone_and_act).w,d0
 		lsl.w   #4,d0
 		lea     Comp_ScreenInitArray-$E0(pc),a1
 		adda.w  d0,a1
-		move.w  (a1)+,($FFFFEEA8).w
-		move.w  (a1)+,($FFFFEEAA).w
-		move.w  (a1)+,($FFFFEEAC).w
-		move.w  (a1)+,($FFFFEEAE).w
+		move.w  (a1)+,(Screen_X_wrap_value).w
+		move.w  (a1)+,(Screen_Y_wrap_value).w
+		move.w  (a1)+,(Camera_Y_pos_mask).w
+		move.w  (a1)+,(Layout_row_index_mask).w
 		move.w  (a1)+,($FFFFEEB0).w
 		move.w  (a1)+,d0
 		move.w  (a1)+,d2
@@ -962,27 +962,27 @@ Comp_ScreenInit:
 
 Comp_ScreenEvent:
 		jsr     sub_23A03C(pc)
-		move.w  ($FFFFEEA8).w,d2
+		move.w  (Screen_X_wrap_value).w,d2
 		addq.w  #1,d2
 		move.w  d2,d3
 		lsr.w   #1,d2
 		lea     ($FFFFEEB4).w,a1
-		move.w  ($FFFFEE80).w,d0
+		move.w  (Camera_X_pos_copy).w,d0
 		jsr     sub_23A080(pc)
-		move.w  ($FFFFEE68).w,d0
+		move.w  (Camera_X_pos_P2_copy).w,d0
 		jmp     sub_23A080(pc)
 ; ---------------------------------------------------------------------------
 
 CGZ_ScreenEvent:
 		bsr.s   Comp_ScreenEvent
-		move.w  ($FFFFEEAA).w,d2
+		move.w  (Screen_Y_wrap_value).w,d2
 		addq.w  #1,d2
 		move.w  d2,d3
 		lsr.w   #1,d2
 		lea     ($FFFFEED2).w,a1
-		move.w  ($FFFFEE84).w,d0
+		move.w  (Camera_Y_pos_copy).w,d0
 		jsr     sub_23A080(pc)
-		move.w  ($FFFFEE6C).w,d0
+		move.w  (Camera_Y_pos_P2_copy).w,d0
 		jmp     sub_23A080(pc)
 ; ---------------------------------------------------------------------------
 
@@ -1002,10 +1002,10 @@ DPZ_BackgroundInit:
 ; ---------------------------------------------------------------------------
 
 CGZ_BackgroundInit:
-		move.w  ($FFFFEE84).w,d0
+		move.w  (Camera_Y_pos_copy).w,d0
 		move.w  d0,($FFFFEED2).w
 		move.w  d0,($FFFFEED4).w
-		move.w  ($FFFFEE6C).w,d0
+		move.w  (Camera_Y_pos_P2_copy).w,d0
 		move.w  d0,($FFFFEED6).w
 		move.w  d0,($FFFFEED8).w
 		moveq   #0,d0
@@ -1024,9 +1024,9 @@ EMZ_BackgroundInit:
 		jsr     EMZ_BackgroundEvent(pc)
 
 TwoP_BackgroundInit:
-		move.l  ($FFFFF61E).w,($FFFFEE3A).w
+		move.l  (V_scroll_value_P2).w,(V_scroll_value_P2_copy).w
 		moveq   #0,d0
-		move.b  ($FFFFFE10).w,d0
+		move.b  (Current_zone_and_act).w,d0
 		lsl.w   #4,d0
 		lea     Comp_ScreenInitArray-$D4(pc),a1
 		adda.w  d0,a1
@@ -1069,18 +1069,18 @@ EMZ_BackgroundEvent:
 		lea     EMZ_DeformArray(pc),a4
 
 loc_23A764:
-		lea     ($FFFFE000).w,a1
+		lea     (H_scroll_buffer).w,a1
 		movea.l a4,a6
 		lea     ($FFFFA800).w,a5
-		move.w  ($FFFFEE90).w,d0
-		move.w  ($FFFFEE80).w,d3
+		move.w  (Camera_Y_pos_BG_copy).w,d0
+		move.w  (Camera_X_pos_copy).w,d3
 		moveq   #$6B,d1
 		jsr     TwoP_ApplyDeformation(pc)
 		movea.l a6,a4
 		lea     ($FFFFA900).w,a5
 		move.w  ($FFFFEE74).w,d0
 		subq.w  #4,d0
-		move.w  ($FFFFEE68).w,d3
+		move.w  (Camera_X_pos_P2_copy).w,d3
 		moveq   #$73,d1
 		jsr     TwoP_ApplyDeformation(pc)
 		jmp     loc_23A04A(pc)
@@ -1089,12 +1089,12 @@ loc_23A764:
 
 DPZ_BackgroundEvent:
 		jsr     DPZ_Deformation(pc)
-		lea     ($FFFFE000).w,a1
-		move.w  ($FFFFEE80).w,d0
-		move.w  ($FFFFEE8C).w,d1
+		lea     (H_scroll_buffer).w,a1
+		move.w  (Camera_X_pos_copy).w,d0
+		move.w  (Camera_X_pos_BG_copy).w,d1
 		moveq   #$1A,d2
 		bsr.s   sub_23A7BA
-		move.w  ($FFFFEE68).w,d0
+		move.w  (Camera_X_pos_P2_copy).w,d0
 		move.w  ($FFFFEE70).w,d1
 		moveq   #$1C,d2
 		bsr.s   sub_23A7BA
@@ -1121,10 +1121,10 @@ loc_23A7C2:
 ; ---------------------------------------------------------------------------
 
 ALZ_Deformation:
-		move.w  ($FFFFEE84).w,d0
+		move.w  (Camera_Y_pos_copy).w,d0
 		bsr.s   sub_23A808
-		move.w  d0,($FFFFEE90).w
-		move.w  ($FFFFEE6C).w,d0
+		move.w  d0,(Camera_Y_pos_BG_copy).w
+		move.w  (Camera_Y_pos_P2_copy).w,d0
 		bsr.s   sub_23A808
 		move.w  d0,($FFFFEE74).w
 		addq.w  #3,($FFFFEED2).w
@@ -1214,10 +1214,10 @@ loc_23A882:
 
 
 BPZ_Deformation:
-		move.w  ($FFFFEE84).w,d0
+		move.w  (Camera_Y_pos_copy).w,d0
 		bsr.s   sub_23A8B6
-		move.w  d0,($FFFFEE90).w
-		move.w  ($FFFFEE6C).w,d0
+		move.w  d0,(Camera_Y_pos_BG_copy).w
+		move.w  (Camera_Y_pos_P2_copy).w,d0
 		bsr.s   sub_23A8B6
 		move.w  d0,($FFFFEE74).w
 		lea     ($FFFFA80E).w,a1
@@ -1262,16 +1262,16 @@ loc_23A8CE:
 
 
 DPZ_Deformation:
-		move.w  ($FFFFEE84).w,d0
+		move.w  (Camera_Y_pos_copy).w,d0
 		bsr.s   sub_23A912
-		move.w  d0,($FFFFEE90).w
-		move.w  ($FFFFEE6C).w,d0
+		move.w  d0,(Camera_Y_pos_BG_copy).w
+		move.w  (Camera_Y_pos_P2_copy).w,d0
 		bsr.s   sub_23A912
 		addi.w  #$80,d0
 		move.w  d0,($FFFFEE74).w
 		move.w  ($FFFFEEB6).w,d0
 		bsr.s   sub_23A91C
-		move.w  d0,($FFFFEE8C).w
+		move.w  d0,(Camera_X_pos_BG_copy).w
 		move.w  d1,($FFFFEEE2).w
 		move.w  ($FFFFEEBA).w,d0
 		bsr.s   sub_23A91C
@@ -1308,7 +1308,7 @@ CGZ_Deformation:
 
 loc_23A928:
 		bsr.s   sub_23A94C
-		move.w  d0,($FFFFEE90).w
+		move.w  d0,(Camera_Y_pos_BG_copy).w
 		move.w  ($FFFFEED8).w,d0
 		bsr.s   sub_23A94C
 
@@ -1365,10 +1365,10 @@ loc_23A968:
 
 
 EMZ_Deformation:
-		move.w  ($FFFFEE84).w,d0
+		move.w  (Camera_Y_pos_copy).w,d0
 		bsr.s   sub_23A9A8
-		move.w  d0,($FFFFEE90).w
-		move.w  ($FFFFEE6C).w,d0
+		move.w  d0,(Camera_Y_pos_BG_copy).w
+		move.w  (Camera_Y_pos_P2_copy).w,d0
 		bsr.s   sub_23A9A8
 		move.w  d0,($FFFFEE74).w
 		lea     ($FFFFA800).w,a1
@@ -1510,10 +1510,10 @@ AIZ_TreeRevealArray:     dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  
 ; ---------------------------------------------------------------------------
 
 AIZ1_IntroDeform:
-		move.w  ($FFFFEE84).w,($FFFFEE90).w
+		move.w  (Camera_Y_pos_copy).w,(Camera_Y_pos_BG_copy).w
 		move.w  ($FFFFEEB6).w,d0
 		bmi.s   loc_23AFE2
-		move.w  ($FFFFEE80).w,d0
+		move.w  (Camera_X_pos_copy).w,d0
 
 loc_23AFE2:
 		asr.w   #1,d0
@@ -1571,10 +1571,10 @@ loc_23B032:
 ; ---------------------------------------------------------------------------
 
 AIZ1_Deform:
-		move.w  ($FFFFEE84).w,d0
+		move.w  (Camera_Y_pos_copy).w,d0
 		asr.w   #1,d0
-		move.w  d0,($FFFFEE90).w
-		move.w  ($FFFFEE80).w,d0
+		move.w  d0,(Camera_Y_pos_BG_copy).w
+		move.w  (Camera_X_pos_copy).w,d0
 		subi.w  #$1300,d0
 		swap    d0
 		clr.w   d0
@@ -1640,10 +1640,10 @@ loc_23B0CA:
 AIZ1_ApplyDeformWater:
 		lea     AIZ1_DeformArray(pc),a4
 		lea     ($FFFFA808).w,a5
-		move.w  ($FFFFF646).w,d1
+		move.w  (Water_level).w,d1
 
 loc_23B0E0:
-		sub.w   ($FFFFEE84).w,d1
+		sub.w   (Camera_Y_pos_copy).w,d1
 		cmpi.w  #$E0,d1
 		blt.s   loc_23B0EE
 		jmp     S3_ApplyDeformation(pc)
@@ -1655,15 +1655,15 @@ loc_23B0EE:
 		move.l  a1,-(sp)
 		lea     ($FFFFA840).w,a1
 		lea     AIZ1_WaterFGDeformDelta(pc),a6
-		move.w  ($FFFFF646).w,d0
+		move.w  (Water_level).w,d0
 		subi.w  #$DE,d1
 		neg.w   d1
-		move.w  ($FFFFFE04).w,d2
+		move.w  (Level_frame_counter).w,d2
 		add.w   d0,d2
 		add.w   d0,d2
 		andi.w  #$7E,d2
 		adda.w  d2,a6
-		move.w  ($FFFFEE80).w,d6
+		move.w  (Camera_X_pos_copy).w,d6
 		neg.w   d6
 		jsr     S3_MakeFGDeformArray(pc)
 		movea.l (sp)+,a1
@@ -1671,10 +1671,10 @@ loc_23B0EE:
 		lea     AIZ1_DeformArray(pc),a4
 		lea     ($FFFFA808).w,a5
 		lea     AIZ1_WaterBGDeformDelta(pc),a6
-		move.w  ($FFFFF646).w,d0
-		sub.w   ($FFFFEE84).w,d0
-		add.w   ($FFFFEE90).w,d0
-		move.w  ($FFFFFE04).w,d2
+		move.w  (Water_level).w,d0
+		sub.w   (Camera_Y_pos_copy).w,d0
+		add.w   (Camera_Y_pos_BG_copy).w,d0
+		move.w  (Level_frame_counter).w,d2
 		asr.w   #1,d2
 		add.w   d0,d2
 		add.w   d0,d2
@@ -1696,7 +1696,7 @@ AIZ1_FireRise:
 loc_23B16E:
 		move.w  d0,($FFFFEED4).w
 		lsl.l   #4,d0
-		add.l   d0,($FFFFEE90).w
+		add.l   d0,(Camera_Y_pos_BG_copy).w
 
 locret_23B178:
 		rts
@@ -1709,13 +1709,13 @@ AIZTrans_WavyFlame:
 		move.w  ($FFFFEE8E).w,d0
 		andi.w  #$60,d0
 		addi.w  #$1000,d0
-		move.w  d0,($FFFFEE8C).w
+		move.w  d0,(Camera_X_pos_BG_copy).w
 		lea     ($FFFFEEEA).w,a1
 		lea     AIZ_FlameVScroll(pc),a5
-		move.w  ($FFFFEE84).w,d0
+		move.w  (Camera_Y_pos_copy).w,d0
 		swap    d0
-		move.w  ($FFFFEE90).w,d1
-		move.w  ($FFFFFE04).w,d2
+		move.w  (Camera_Y_pos_BG_copy).w,d1
+		move.w  (Level_frame_counter).w,d2
 		asr.w   #2,d2
 		moveq   #$13,d3
 
@@ -1793,16 +1793,16 @@ ALZ_AIZ2_BGDeformDelta:     dc.w $FFFE,    1,    2,    2,$FFFF,    2,    2,    1
 ; ---------------------------------------------------------------------------
 
 AIZ2_Deform:
-		move.w  ($FFFFEE84).w,d0
+		move.w  (Camera_Y_pos_copy).w,d0
 		move.w  ($FFFFEECE).w,d1
 		sub.w   d1,d0
 		asr.w   #1,d0
 		add.w   d1,d0
-		move.w  d0,($FFFFEE90).w
+		move.w  d0,(Camera_Y_pos_BG_copy).w
 		cmpi.w  #$10,($FFFFEEC2).w
 		bcs.s   loc_23B648
 		move.w  ($FFFFEEE8).w,d0
-		add.w   d0,($FFFFEE90).w
+		add.w   d0,(Camera_Y_pos_BG_copy).w
 
 loc_23B648:
 		move.w  ($FFFFEEB6).w,d0
@@ -1840,15 +1840,15 @@ locret_23B67E:
 AIZ2_ApplyDeform:
 		lea     ($FFFFA800).w,a1
 		lea     AIZ2_FGDeformDelta(pc),a6
-		move.w  ($FFFFEE84).w,d0
+		move.w  (Camera_Y_pos_copy).w,d0
 		move.w  #$DF,d1
-		move.w  ($FFFFFE04).w,d2
+		move.w  (Level_frame_counter).w,d2
 		add.w   d0,d2
 		add.w   d0,d2
 		moveq   #$3E,d3
-		move.w  ($FFFFEE80).w,d6
+		move.w  (Camera_X_pos_copy).w,d6
 		neg.w   d6
-		move.w  ($FFFFF646).w,d4
+		move.w  (Water_level).w,d4
 		sub.w   d0,d4
 		bls.s   loc_23B6CA			; If completely underwater, only do water deformation
 		cmp.w   d1,d4
@@ -1858,10 +1858,10 @@ AIZ2_ApplyDeform:
 		and.w   d3,d2
 		adda.w  d2,a6
 		jsr     S3_MakeFGDeformArray(pc)
-		move.w  ($FFFFF646).w,d0
+		move.w  (Water_level).w,d0
 		subi.w  #$DE,d1
 		neg.w   d1
-		move.w  ($FFFFFE04).w,d2
+		move.w  (Level_frame_counter).w,d2
 		add.w   d0,d2
 		add.w   d0,d2
 
@@ -1873,20 +1873,20 @@ loc_23B6D0:
 		and.w   d3,d2
 		adda.w  d2,a6
 		jsr     S3_MakeFGDeformArray(pc)
-		lea     ($FFFFE000).w,a1
+		lea     (H_scroll_buffer).w,a1
 		lea     ($FFFFA800).w,a2
 		lea     AIZ2_BGDeformArray(pc),a4
 		lea     ($FFFFA9C0).w,a5
 		lea     ALZ_AIZ2_BGDeformDelta(pc),a6
-		move.w  ($FFFFEE90).w,d0
+		move.w  (Camera_Y_pos_BG_copy).w,d0
 		move.w  #$DF,d1
-		move.w  ($FFFFFE04).w,d2
+		move.w  (Level_frame_counter).w,d2
 		asr.w   #1,d2
 		add.w   d0,d2
 		add.w   d0,d2
 		moveq   #$3E,d3
-		move.w  ($FFFFF646).w,d4
-		sub.w   ($FFFFEE84).w,d4
+		move.w  (Water_level).w,d4
+		sub.w   (Camera_Y_pos_copy).w,d4
 		bls.s   loc_23B73E			; Same as above, if completely underwater only apply water deformation
 		cmp.w   d1,d4
 		bhi.s   loc_23B744			; Same as above, if no water is showing, only do above-ground deformation
@@ -1897,12 +1897,12 @@ loc_23B6D0:
 		jsr     S3_ApplyFGAndBGDeformation(pc)
 		lea     AIZ2_BGDeformArray(pc),a4
 		lea     ($FFFFA9C0).w,a5
-		move.w  ($FFFFF646).w,d0
-		sub.w   ($FFFFEE84).w,d0
-		add.w   ($FFFFEE90).w,d0
+		move.w  (Water_level).w,d0
+		sub.w   (Camera_Y_pos_copy).w,d0
+		add.w   (Camera_Y_pos_BG_copy).w,d0
 		subi.w  #$DE,d1
 		neg.w   d1
-		move.w  ($FFFFFE04).w,d2
+		move.w  (Level_frame_counter).w,d2
 		asr.w   #1,d2
 		add.w   d0,d2
 		add.w   d0,d2
@@ -1917,7 +1917,7 @@ loc_23B744:
 		jsr     S3_ApplyFGAndBGDeformation(pc)
 		tst.w   ($FFFFEED6).w
 		beq.s   locret_23B772
-		lea     ($FFFFE000).w,a1		; This is for what I assume to be the flying battleship sequence.
+		lea     (H_scroll_buffer).w,a1		; This is for what I assume to be the flying battleship sequence.
 		move.w  ($FFFFEE98).w,d0		; Nullifies the top 8 tiles worth of FG waviness for this effect
 		neg.w   d0						; And replaces it with position data from the second BG camera.
 		moveq   #$F,d1
@@ -2138,8 +2138,8 @@ HCZ2_BGDeformIndex:     dc.b   3, $A
 		dc.b $FF,  0
 ; ---------------------------------------------------------------------------
 MGZ1_Deform:
-		move.w  ($FFFFEECE).w,($FFFFEE90).w
-		move.w  ($FFFFEE80).w,d0
+		move.w  ($FFFFEECE).w,(Camera_Y_pos_BG_copy).w
+		move.w  (Camera_X_pos_copy).w,d0
 		swap    d0
 		clr.w   d0
 		asr.l   #2,d0
@@ -2267,13 +2267,13 @@ loc_23D1F4:
 		move.w  #$3580,d2
 
 loc_23D1FC:
-		move.w  ($FFFFEE84).w,d0
+		move.w  (Camera_Y_pos_copy).w,d0
 		sub.w   d1,d0
 		add.w   ($FFFFEED4).w,d0
-		move.w  d0,($FFFFEE90).w		; Effective BG Y is offset, but otherwise matched in ratio during the special BG events
-		move.w  ($FFFFEE80).w,d0
+		move.w  d0,(Camera_Y_pos_BG_copy).w		; Effective BG Y is offset, but otherwise matched in ratio during the special BG events
+		move.w  (Camera_X_pos_copy).w,d0
 		sub.w   d2,d0
-		move.w  d0,($FFFFEE8C).w
+		move.w  d0,(Camera_X_pos_BG_copy).w
 		move.w  d0,($FFFFA804).w
 		move.w  d0,($FFFFA836).w
 		bra.s   loc_23D24C
@@ -2283,7 +2283,7 @@ loc_23D21E:
 		moveq   #0,d1
 
 loc_23D220:
-		move.w  ($FFFFEE84).w,d0		; Get BG Y camera
+		move.w  (Camera_Y_pos_copy).w,d0		; Get BG Y camera
 		move.w  ($FFFFEECE).w,d2		; Get screen shake offset
 		sub.w   d2,d0
 		sub.w   d1,d0					; Subtract from that and the special offset for MGZ2 events
@@ -2295,13 +2295,13 @@ loc_23D220:
 		add.l   d1,d0
 		swap    d0
 		add.w   d2,d0
-		move.w  d0,($FFFFEE90).w		; Effective BG Y is normal 3/16ths normal BG Y during normal play
-		clr.w   ($FFFFEE8C).w
+		move.w  d0,(Camera_Y_pos_BG_copy).w		; Effective BG Y is normal 3/16ths normal BG Y during normal play
+		clr.w   (Camera_X_pos_BG_copy).w
 		clr.w   ($FFFFA804).w
 		clr.w   ($FFFFA836).w
 
 loc_23D24C:
-		move.w  ($FFFFEE80).w,d0
+		move.w  (Camera_X_pos_copy).w,d0
 		cmpi.w  #8,($FFFFEEC0).w
 		bne.s   loc_23D25C
 		move.w  ($FFFFEEDE).w,d0		; If playing on the boss, use the special camera scrolling set by MGZ2's screen event
@@ -2364,7 +2364,7 @@ MGZ2_BGDeformOffset:     dc.w $FFFB,$FFF8,    9,   $A,    2,$FFF4,    3,  $10
 		dc.w   $10,    8,    0,$FFF8,  $10,    8,    0
 ; ---------------------------------------------------------------------------
 ICZ1_SetIntroPal:
-		tst.b   ($FFFFF600).w
+		tst.b   (Game_mode).w
 		bmi.s   loc_23DE92
 		lea     ($FFFFFC62).w,a1
 		bsr.s   sub_23DE96
@@ -2389,7 +2389,7 @@ sub_23DE96:
 		rts
 ; ---------------------------------------------------------------------------
 ICZ1_SetIndoorPal:
-		tst.b   ($FFFFF600).w
+		tst.b   (Game_mode).w
 		bmi.s   loc_23DED2
 		lea     ($FFFFFC62).w,a1
 		bsr.s   sub_23DED6
@@ -2416,9 +2416,9 @@ ICZ1_IntroBGDeformArray:     dc.w   $44,   $C,   $B,   $D,  $18,  $50,    2,    
 		dc.w     8,  $10,  $18,  $20,  $28,$7FFF
 ; ---------------------------------------------------------------------------
 ICZ2_OutDeform:
-		clr.w   ($FFFFEE90).w		; Effective Y is always 0
-		move.w  ($FFFFEE80).w,d0
-		move.w  ($FFFFFE04).w,d1
+		clr.w   (Camera_Y_pos_BG_copy).w		; Effective Y is always 0
+		move.w  (Camera_X_pos_copy).w,d0
+		move.w  (Level_frame_counter).w,d1
 		asr.w   #1,d1
 		add.w   d1,d0
 		swap    d0
@@ -2437,7 +2437,7 @@ loc_23E0E8:
 		sub.l   d1,d0
 		dbf     d2,loc_23E0E8
 		lea     ($FFFFA800).w,a1
-		move.w  ($FFFFEE80).w,d0
+		move.w  (Camera_X_pos_copy).w,d0
 		swap    d0
 		clr.w   d0
 		asr.l   #1,d0
@@ -2453,7 +2453,7 @@ loc_23E0E8:
 		add.l   d1,d0
 		swap    d0
 		move.w  d0,(a1)+
-		move.w  ($FFFFFE04).w,d1
+		move.w  (Level_frame_counter).w,d1
 		lsr.w   #2,d1
 		andi.w  #$3E,d1
 		lea     ALZ_AIZ2_BGDeformDelta(pc),a5
@@ -2473,13 +2473,13 @@ loc_23E12E:
 
 
 ICZ2_InDeform:
-		move.w  ($FFFFEE84).w,d0
+		move.w  (Camera_Y_pos_copy).w,d0
 		subi.w  #$700,d0
 		asr.w   #2,d0
 		addi.w  #$118,d0
-		move.w  d0,($FFFFEE90).w
+		move.w  d0,(Camera_Y_pos_BG_copy).w
 		lea     ($FFFFA800).w,a1
-		move.w  ($FFFFEE80).w,d0
+		move.w  (Camera_X_pos_copy).w,d0
 		swap    d0
 		clr.w   d0
 		asr.l   #1,d0
@@ -2506,7 +2506,7 @@ ICZ2_InDeform:
 		swap    d0
 		sub.l   d1,d0
 		swap    d0
-		move.w  d0,($FFFFEE8C).w
+		move.w  d0,(Camera_X_pos_BG_copy).w
 		move.w  d0,8(a1)
 		swap    d0
 		sub.l   d1,d0
@@ -2520,7 +2520,7 @@ ICZ2_InDeform:
 
 
 ICZ2_SetOutdoorsPal:
-		tst.b   ($FFFFF600).w
+		tst.b   (Game_mode).w
 		bmi.s   loc_23E1B6
 		lea     ($FFFFFC62).w,a1
 		bsr.s   sub_23E1BA
@@ -2547,7 +2547,7 @@ sub_23E1BA:
 
 
 ICZ2_SetIndoorsPal:
-		tst.b   ($FFFFF600).w
+		tst.b   (Game_mode).w
 		bmi.s   loc_23E1E6
 		lea     ($FFFFFC62).w,a1
 		bsr.s   sub_23E1EA
@@ -2575,7 +2575,7 @@ sub_23E1EA:
 
 
 ICZ2_SetICZ1Pal:
-		tst.b   ($FFFFF600).w
+		tst.b   (Game_mode).w
 		bmi.s   loc_23E21A
 		lea     ($FFFFFC62).w,a1
 		bsr.s   sub_23E21E
@@ -2758,13 +2758,13 @@ LBZ1_CollapseScrollSpeed:     dc.w  $1EE, $1F2,  $C7, $1B3, $1B7, $198,   $E, $1
 
 
 LBZ1_Deform:
-		move.w  ($FFFFEE84).w,d0
+		move.w  (Camera_Y_pos_copy).w,d0
 		move.w  ($FFFFEECE).w,d1
 		sub.w   d1,d0
 		asr.w   #4,d0
 		add.w   d1,d0
-		move.w  d0,($FFFFEE90).w
-		move.w  ($FFFFEE80).w,d0
+		move.w  d0,(Camera_Y_pos_BG_copy).w
+		move.w  (Camera_X_pos_copy).w,d0
 		swap    d0
 		clr.w   d0
 		asr.l   #4,d0
@@ -2774,7 +2774,7 @@ LBZ1_Deform:
 		move.w  d0,($FFFFEEE2).w
 		swap    d0
 		swap    d1
-		move.w  d1,($FFFFEE8C).w
+		move.w  d1,(Camera_X_pos_BG_copy).w
 		move.w  d1,($FFFFA800).w
 		move.w  d1,($FFFFA808).w
 		swap    d1
@@ -2792,7 +2792,7 @@ loc_23E79A:
 		dbf     d2,loc_23E79A
 		moveq   #$A,d0
 		add.w   d0,($FFFFEEE2).w
-		add.w   d0,($FFFFEE8C).w
+		add.w   d0,(Camera_X_pos_BG_copy).w
 		add.w   d0,($FFFFA800).w
 		add.w   d0,($FFFFA808).w
 		lea     ($FFFFA80A).w,a1
@@ -2818,10 +2818,10 @@ LBZ2_BGUWDeformRange:     dc.w 7
 ; ---------------------------------------------------------------------------
 
 Gumball_ScreenInit:
-		move.w  #$3FF,($FFFFEEAA).w
-		move.w  #$3F0,($FFFFEEAC).w
-		move.w  #$1C,($FFFFEEAE).w
-		move.w  #4,($FFFFEEA6).w
+		move.w  #$3FF,(Screen_Y_wrap_value).w
+		move.w  #$3F0,(Camera_Y_pos_mask).w
+		move.w  #$1C,(Layout_row_index_mask).w
+		move.w  #4,(Special_V_int_routine).w
 		move.w  #$C0,d0
 		move.w  d0,d1
 		jsr     Gumball_VScroll(pc)
@@ -2829,11 +2829,11 @@ Gumball_ScreenInit:
 		move.w  d2,($FFFFA802).w
 		move.w  d2,($FFFFA80A).w
 		move.w  ($FFFFA80E).w,d0
-		and.w   ($FFFFEEAC).w,d0
+		and.w   (Camera_Y_pos_mask).w,d0
 		move.w  d0,($FFFFA806).w
 		lea     Gumball_VScrollArray(pc),a4
 		lea     ($FFFFA800).w,a5
-		move.w  ($FFFFEE88).w,d0
+		move.w  (Camera_X_pos_rounded).w,d0
 		jmp     S3_RefreshPlaneDirectVScroll(pc)
 ; ---------------------------------------------------------------------------
 
@@ -2849,7 +2849,7 @@ Gumball_ScreenEvent:
 
 
 Gumball_SetUpVScroll:
-		move.w  ($FFFFEE84).w,d0
+		move.w  (Camera_Y_pos_copy).w,d0
 		movea.w ($FFFFFAA4).w,a5
 		move.w  $14(a5),d1
 		subi.w  #$C8,d1
@@ -2897,10 +2897,10 @@ Gumball_BackgroundEvent:
 
 
 Gumball_Deform:
-		move.w  #$FFE0,($FFFFEE8C).w
-		move.w  ($FFFFEE84).w,d0
+		move.w  #$FFE0,(Camera_X_pos_BG_copy).w
+		move.w  (Camera_Y_pos_copy).w,d0
 		asr.w   #1,d0
-		move.w  d0,($FFFFEE90).w
+		move.w  d0,(Camera_Y_pos_BG_copy).w
 		asr.w   #1,d0
 		move.w  d0,($FFFFEEE2).w
 		rts

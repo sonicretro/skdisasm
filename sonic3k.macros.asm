@@ -17,7 +17,7 @@ DMA = %100111
 
 ; tells the VDP to copy a region of 68k memory to VRAM or CRAM or VSRAM
 dma68kToVDP macro source,dest,length,type
-	lea	($C00004).l,a5
+	lea	(VDP_control_port).l,a5
 	move.l	#(($9400|((((length)>>1)&$FF00)>>8))<<16)|($9300|(((length)>>1)&$FF)),(a5)
 	move.l	#(($9600|((((source)>>1)&$FF00)>>8))<<16)|($9500|(((source)>>1)&$FF)),(a5)
 	move.w	#$9700|(((((source)>>1)&$FF0000)>>16)&$7F),(a5)
@@ -28,12 +28,12 @@ dma68kToVDP macro source,dest,length,type
 
 ; tells the VDP to fill a region of VRAM with a certain byte
 dmaFillVRAM macro byte,addr,length
-	lea	($C00004).l,a5
+	lea	(VDP_control_port).l,a5
 	move.w	#$8F01,(a5) ; VRAM pointer increment: $0001
 	move.l	#(($9400|((((length)-1)&$FF00)>>8))<<16)|($9300|(((length)-1)&$FF)),(a5) ; DMA length ...
 	move.w	#$9780,(a5) ; VRAM fill
 	move.l	#$40000080|(((addr)&$3FFF)<<16)|(((addr)&$C000)>>14),(a5) ; Start at ...
-	move.w	#(byte)<<8,($C00000).l ; Fill with byte
+	move.w	#(byte)<<8,(VDP_data_port).l ; Fill with byte
 loop:	move.w	(a5),d1
 	btst	#1,d1
 	bne.s	loop	; busy loop until the VDP is finished filling...
@@ -66,14 +66,14 @@ loop:	move.l	d0,(a1)+
 
 ; tells the Z80 to stop, and waits for it to finish stopping (acquire bus)
 stopZ80 macro
-	move.w	#$100,($A11100).l ; stop the Z80
-loop:	btst	#0,($A11100).l
+	move.w	#$100,(Z80_bus_request).l ; stop the Z80
+loop:	btst	#0,(Z80_bus_request).l
 	bne.s	loop ; loop until it says it's stopped
     endm
 
 ; tells the Z80 to start again
 startZ80 macro
-	move.w	#0,($A11100).l    ; start the Z80
+	move.w	#0,(Z80_bus_request).l    ; start the Z80
     endm
 
 ; function to make a little-endian 16-bit pointer for the Z80 sound driver

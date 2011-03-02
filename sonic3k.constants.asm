@@ -37,6 +37,7 @@ subtype =		$2C ; byte
 ros_bit =		$3B ; byte ; the bit to be cleared when an object is destroyed if the ROS flag is set
 ros_addr =		$3C ; word ; the RAM address whose bit to clear when an object is destroyed if the ROS flag is set
 routine_secondary =	$3C ; byte ; used by monitors for this purpose at least
+vram_art =      $40 ; word ; address of art in VRAM (same as art_tile * $20)
 parent =		$42 ; word ; address of the object that owns or spawned this one, if applicable
 respawn_addr =		$48 ; word ; the address of this object's entry in the respawn table
 ; ---------------------------------------------------------------------------
@@ -75,22 +76,58 @@ object_size =		$4A ; the size of an object's status table entry
 next_object =		object_size
 
 ; ---------------------------------------------------------------------------
+; Controller Buttons
+;
+; Buttons bit numbers
+button_up:			EQU	0
+button_down:			EQU	1
+button_left:			EQU	2
+button_right:			EQU	3
+button_B:			EQU	4
+button_C:			EQU	5
+button_A:			EQU	6
+button_start:			EQU	7
+; Buttons masks (1 << x == pow(2, x))
+button_up_mask:			EQU	1<<button_up	; $01
+button_down_mask:		EQU	1<<button_down	; $02
+button_left_mask:		EQU	1<<button_left	; $04
+button_right_mask:		EQU	1<<button_right	; $08
+button_B_mask:			EQU	1<<button_B	; $10
+button_C_mask:			EQU	1<<button_C	; $20
+button_A_mask:			EQU	1<<button_A	; $40
+button_start_mask:		EQU	1<<button_start	; $80
+
+; ---------------------------------------------------------------------------
 ; Address equates
 ; ---------------------------------------------------------------------------
 
 ; Z80 addresses
 Z80_RAM =			$A00000 ; start of Z80 RAM
 Z80_RAM_end =			$A02000 ; end of non-reserved Z80 RAM
-Z80_version =			$A10001
-Z80_port_1_data =		$A10002
-Z80_port_1_control =		$A10008
-Z80_port_2_control =		$A1000A
-Z80_expansion_control =		$A1000C
 Z80_bus_request =		$A11100
 Z80_reset =			$A11200
 
 SRAM_access_flag =		$A130F1
 Security_addr =			$A14000
+; ---------------------------------------------------------------------------
+
+; I/O Area 
+HW_Version =				$A10001
+HW_Port_1_Data =			$A10003
+HW_Port_2_Data =			$A10005
+HW_Expansion_Data =			$A10007
+HW_Port_1_Control =			$A10009
+HW_Port_2_Control =			$A1000B
+HW_Expansion_Control =		$A1000D
+HW_Port_1_TxData =			$A1000F
+HW_Port_1_RxData =			$A10011
+HW_Port_1_SCtrl =			$A10013
+HW_Port_2_TxData =			$A10015
+HW_Port_2_RxData =			$A10017
+HW_Port_2_SCtrl =			$A10019
+HW_Expansion_TxData =		$A1001B
+HW_Expansion_RxData =		$A1001D
+HW_Expansion_SCtrl =		$A1001F
 ; ---------------------------------------------------------------------------
 
 ; VDP addresses
