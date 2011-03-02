@@ -1,0 +1,80 @@
+Type: Level
+
+Zone ID:    8
+Act ID:     1
+
+Object Def: objdef\skobj
+Object Palette: objdef\skobj1.pcx
+
+8x8 Compression:      5
+Num 8x8 Pages:        2
+8x8 Tiles Page 0:     ..\Levels\SOZ\Tiles\Primary.bin
+8x8 Tiles Page 1:     ..\Levels\SOZ\Tiles\Act 2 Secondary.bin
+
+16x16 Compression:    1
+Num 16x16 Pages:      2
+Page0 8x8 Page:       0
+16x16 Tiles Page 0:   ..\Levels\SOZ\Blocks\Primary.bin
+Page1 8x8 Page:       0
+16x16 Tiles Page 1:   ..\Levels\SOZ\Blocks\Act 2 Secondary.bin
+
+Metatile Size:        128
+128x128 Compression:  1
+Num 128x128 Pages:    1
+Page0 16x16 Page:     0
+128x128 Tiles Page 0: ..\Levels\SOZ\Chunks\Primary.bin
+
+Layout Format:        2
+Layout Compression:   0
+BG 128x128 Page:      0
+Level Layout:         ..\Levels\SOZ\Layout\2.bin
+
+Objects Format:       4
+Objects:              ..\Levels\SOZ\Object Pos\2.bin
+Rings Format:         2
+Objects:              ..\Levels\SOZ\Ring Pos\2.bin
+Misc Format:          0
+Num Start Positions:  2
+Start Position 0:     ..\Levels\SOZ\Start Location\Sonic\2.bin
+Start Position 1:     ..\Levels\SOZ\Start Location\Knuckles\2.bin
+
+Palettes-
+
+Number of files: 4
+
+  Palette 0-
+
+   Start index:        0
+   Number of entries: 16
+   File:              ..\General\Sprites\Sonic\Palettes\SonicAndTails.bin
+
+  Palette 1-
+
+   Start index:       16
+   Number of entries: 48
+   File:              ..\Levels\SOZ\Palettes\2.bin
+
+  Palette 2-
+
+   Start index:       64
+   Number of entries: 16
+   File:              ..\General\Sprites\Knuckles\Palettes\Main.bin
+
+  Palette 3-
+
+   Start index:       80
+   Number of entries: 48
+   File:              ..\Levels\SOZ\Palettes\Act 1 Clone.bin
+
+Collision Map Format:    0
+Collision Array:         ..\Levels\Misc\Height Maps.bin
+Rotated Collision Array: ..\Levels\Misc\Height Maps Rotated.bin
+Angle Array:             ..\Levels\Misc\Angles.bin
+
+Collision Index Format:      3
+Collision Index Compression: 0
+Collision Index: ..\Levels\SOZ\Collision\1.bin
+
+Game Name: Sonic 3
+
+-EOF-

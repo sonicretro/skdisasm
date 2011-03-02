@@ -1,0 +1,74 @@
+Type: Level
+
+Zone ID:    0
+Act ID:     0
+
+Object Def: objdef\s3obj
+Object Palette: objdef\s3obj1.pcx
+
+8x8 Compression:      5
+Num 8x8 Pages:        2
+8x8 Tiles Page 0:     ..\Levels\AIZ\Tiles\Act 1 Primary.bin
+8x8 Tiles Page 1:     ..\Levels\AIZ\Tiles\Act 1 Main Level.bin
+
+16x16 Compression:    1
+Num 16x16 Pages:      2
+Page0 8x8 Page:       0
+16x16 Tiles Page 0:   ..\Levels\AIZ\Blocks\Act 1 Primary.bin
+Page1 8x8 Page:       0
+16x16 Tiles Page 1:   ..\Levels\AIZ\Blocks\Act 1 Main Level.bin
+
+Metatile Size:        128
+128x128 Compression:  1
+Num 128x128 Pages:    1
+Page0 16x16 Page:     0
+128x128 Tiles Page 0: ..\Levels\AIZ\Chunks\Act 1.bin
+
+Layout Format:        2
+Layout Compression:   0
+BG 128x128 Page:      0
+Level Layout:         ..\Levels\AIZ\Layout\1.bin
+
+Objects Format:       4
+Objects:              ..\Levels\AIZ\Object Pos\1.bin
+Rings Format:         2
+Objects:              ..\Levels\AIZ\Ring Pos\1.bin
+Misc Format:          0
+Num Start Positions:  2
+Sonic and Tails:      ..\Levels\AIZ\Start Location\Sonic\1.bin
+Knuckles:             ..\Levels\AIZ\Start Location\Knuckles\1.bin
+
+Palettes-
+
+Number of files: 3
+
+  Palette 0-
+
+   Start index:        0
+   Number of entries: 16
+   File:              ..\General\Sprites\Sonic\Palettes\SonicAndTails.bin
+
+  Palette 1-
+
+   Start index:       16
+   Number of entries: 48
+   File:              ..\Levels\AIZ\Palettes\Main.bin
+
+  Palette 2-
+
+   Start index:       64
+   Number of entries: 64
+   File:              ..\Levels\AIZ\Palettes\Water.bin
+
+Collision Map Format:    0
+Collision Array:         ..\Levels\Misc\Height Maps.bin
+Rotated Collision Array: ..\Levels\Misc\Height Maps Rotated.bin
+Angle Array:             ..\Levels\Misc\Angles.bin
+
+Collision Index Format:      2
+Collision Index Compression: 0
+Collision Index: ..\Levels\AIZ\Collision\1.bin
+
+Game Name: Sonic 3
+
+-EOF-

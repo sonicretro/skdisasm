@@ -1,0 +1,361 @@
+;Sonic 1 Special Stage Object Listing File
+
+;Sprite Listing Loads all sprites used to represent Special Stage objects in this game
+;in this game from "SSObj.pcx"
+;- xoff in file is the x position of the top-left corner of the sprite in
+;  the file it will be loaded from
+;- yoff in file is the y position of the top-left corner of the sprite in
+;  the file it will be loaded from
+;- Width is the width (in pixels) of the sprite
+;- Height is the height (in pixels) of the sprite
+;The image representing player start position must be the last sprite in the list
+
+ # of sprites :    28
+
+ ;Sprite 0- Blue Wall
+  xoff in file:     0
+  yoff in file:     0
+         Width:    24
+        Height:    24
+
+ ;Sprite 1- Yellow Wall
+  xoff in file:    24
+  yoff in file:     0
+         Width:    24
+        Height:    24
+
+ ;Sprite 2- Red Wall
+  xoff in file:    48
+  yoff in file:     0
+         Width:    24
+        Height:    24
+
+ ;Sprite 3- Goal 0
+  xoff in file:    72
+  yoff in file:     0
+         Width:    24
+        Height:    24
+
+ ;Sprite 4- Goal 1
+  xoff in file:    72
+  yoff in file:    24
+         Width:    24
+        Height:    24
+
+ ;Sprite 5- Goal 2
+  xoff in file:    72
+  yoff in file:    48
+         Width:    24
+        Height:    24
+
+ ;Sprite 6- Bumper
+  xoff in file:    96
+  yoff in file:     0
+         Width:    28
+        Height:    28
+
+ ;Sprite 7- R Switch
+  xoff in file:   124
+  yoff in file:     0
+         Width:    24
+        Height:    24
+
+ ;Sprite 8- Peppermint Block 0
+  xoff in file:   148
+  yoff in file:     0
+         Width:    24
+        Height:    24
+
+ ;Sprite 9- Peppermint Block 1
+  xoff in file:   148
+  yoff in file:    24
+         Width:    24
+        Height:    24
+
+;Sprite 10- Peppermint Block 2
+  xoff in file:   148
+  yoff in file:    48
+         Width:    24
+        Height:    24
+
+;Sprite 11- Peppermint Block 3
+  xoff in file:   148
+  yoff in file:    72
+         Width:    24
+        Height:    24
+
+;Sprite 12- Ring 0
+  xoff in file:   172
+  yoff in file:     0
+         Width:    16
+        Height:    16
+
+;Sprite 13- Ring 1
+  xoff in file:   172
+  yoff in file:    16
+         Width:    16
+        Height:    16
+
+;Sprite 14- Ring 2
+  xoff in file:   172
+  yoff in file:    32
+         Width:    16
+        Height:    16
+
+;Sprite 15- Ring 3
+  xoff in file:   172
+  yoff in file:    48
+         Width:    16
+        Height:    16
+
+;Sprite 16- Slot 0
+  xoff in file:   188
+  yoff in file:     0
+         Width:    48
+        Height:    31
+
+;Sprite 17- Slot 1
+  xoff in file:   188
+  yoff in file:    31
+         Width:    48
+        Height:    31
+
+;Sprite 18- Slot 2
+  xoff in file:   188
+  yoff in file:    62
+         Width:    48
+        Height:    31
+
+;Sprite 19- Slot 3
+  xoff in file:   188
+  yoff in file:    93
+         Width:    48
+        Height:    31
+
+;Sprite 20- Bumper 1
+  xoff in file:   236
+  yoff in file:     0
+         Width:    32
+        Height:    32
+
+;Sprite 21- Bumper 2
+  xoff in file:   268
+  yoff in file:     0
+         Width:    24
+        Height:    24
+
+;Sprite 22- R Block 1
+  xoff in file:   292
+  yoff in file:     0
+         Width:    24
+        Height:    24
+
+;Sprite 23- Ring Sparkle 0
+  xoff in file:   172
+  yoff in file:    64
+         Width:    16
+        Height:    15
+
+;Sprite 24- Ring Sparkle 1
+  xoff in file:   172
+  yoff in file:    78
+         Width:    16
+        Height:    15
+
+;Sprite 25- Ring Sparkle 2
+  xoff in file:   172
+  yoff in file:    93
+         Width:    16
+        Height:    15
+
+;Sprite 26- Ring Sparkle 3
+  xoff in file:   172
+  yoff in file:   107
+         Width:    16
+        Height:    15
+
+;Sprite 27- Sonic
+  xoff in file:     0
+  yoff in file:   194
+         Width:    30
+        Height:    30
+
+Num of objects:  20
+
+     Object ID:   0
+   Description: Null Object
+    Num Frames:   0
+
+     Object ID:   1
+   Description: Volatile Blue Wall
+    Num Frames:   1
+  Frame 0-
+        Sprite:   0
+         Delay:   0
+
+     Object ID:   2
+   Description: Volatile Yellow Wall
+    Num Frames:   1
+  Frame 0-
+        Sprite:   1
+         Delay:   0
+
+     Object ID:   3
+   Description: Volatile Red Wall
+    Num Frames:   1
+  Frame 0-
+        Sprite:   2
+         Delay:   0
+
+     Object ID:   4
+   Description: Goal
+    Num Frames:   3
+  Frame 0-
+        Sprite:   3
+         Delay:   2
+  Frame 1-
+        Sprite:   4
+         Delay:   2
+  Frame 2-
+        Sprite:   5
+         Delay:   2
+
+     Object ID:   5
+   Description: Bumper
+    Num Frames:   1
+  Frame 0-
+        Sprite:   6
+         Delay:   0
+
+     Object ID:   6
+   Description: R Switch
+    Num Frames:   1
+  Frame 0-
+        Sprite:   7
+         Delay:   0
+
+     Object ID:   7
+   Description: Peppermint Block
+    Num Frames:   4
+  Frame 0-
+        Sprite:   8
+         Delay:   4
+  Frame 1-
+        Sprite:   9
+         Delay:   4
+  Frame 2-
+        Sprite:  10
+         Delay:   4
+  Frame 3-
+        Sprite:  11
+         Delay:   4
+
+     Object ID:   8
+   Description: Ring
+    Num Frames:   4
+  Frame 0-
+        Sprite:  12
+         Delay:   8
+  Frame 1-
+        Sprite:  13
+         Delay:   8
+  Frame 2-
+        Sprite:  14
+         Delay:   8
+  Frame 3-
+        Sprite:  15
+         Delay:   8
+
+     Object ID:   9
+   Description: Slot
+    Num Frames:   6
+  Frame 0-
+        Sprite:  16
+         Delay:   4
+  Frame 1-
+        Sprite:  18
+         Delay:   4
+  Frame 2-
+        Sprite:  17
+         Delay:   4
+  Frame 3-
+        Sprite:  18
+         Delay:   4
+  Frame 4-
+        Sprite:  19
+         Delay:   4
+  Frame 5-
+        Sprite:  18
+         Delay:   4
+
+     Object ID:   A
+   Description: Bumped Bumper 1
+    Num Frames:   1
+  Frame 0-
+        Sprite:  20
+         Delay:   0
+
+     Object ID:   B
+   Description: Bumped Bumper 2
+    Num Frames:   1
+  Frame 0-
+        Sprite:  21
+         Delay:   0
+
+     Object ID:   C
+   Description: Triggered R Switch
+    Num Frames:   1
+  Frame 0-
+        Sprite:  22
+         Delay:   0
+
+     Object ID:   D
+   Description: Ring Sparkle 0
+    Num Frames:   1
+  Frame 0-
+        Sprite:  23
+         Delay:   0
+
+     Object ID:   E
+   Description: Stable Blue Wall
+    Num Frames:   1
+  Frame 0-
+        Sprite:   0
+         Delay:   0
+
+     Object ID:   F
+   Description: Stable Yellow Wall
+    Num Frames:   1
+  Frame 0-
+        Sprite:   1
+         Delay:   0
+
+     Object ID:  10
+   Description: Stable Red Wall
+    Num Frames:   1
+  Frame 0-
+        Sprite:   2
+         Delay:   0
+
+     Object ID:  11
+   Description: Ring Sparkle 1
+    Num Frames:   1
+  Frame 0-
+        Sprite:  24
+         Delay:   0
+
+     Object ID:  12
+   Description: Ring Sparkle 2
+    Num Frames:   1
+  Frame 0-
+        Sprite:  25
+         Delay:   0
+
+     Object ID:  13
+   Description: Ring Sparkle 3
+    Num Frames:   1
+  Frame 0-
+        Sprite:  26
+         Delay:   0
+
+-EOF-

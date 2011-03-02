@@ -1,0 +1,1040 @@
+/* Sonic & Knuckles/Sonic 3 & Knuckles Split
+   Pietro Gagliardi (andlabs)
+   April 20-?, 2009 */
+
+
+/* Miscellaneous */
+#split	0x00001D64,0x00001FE4,Levels\Misc\sine.bin
+#split	0x00002040,0x00002142,Levels\Misc\arctan.bin
+#split	0x00005F82,0x00005FB2,Sound\Music\Music playlist.bin
+#split	0x00006D2C,0x00006D6C,Levels\Misc\StartingWaterHeights.bin
+#split	0x000B2E36,0x000B6946,General\Special Stage\Layout\Perspective Maps.bin
+#split	0x000CAD00,0x000CB81A,Levels\LRZ\Misc\Act 1 Rock Placement.bin
+#split	0x000CB81A,0x000CB860,Levels\LRZ\Misc\Act 2 Rock Placement.bin
+#split	0x0017B6E0,0x0017C6E0,General\Sprites\Robotnik\Egg Robo Fly Scaled.bin
+#split	0x001FCF2A,0x001FD5CA,General\Special Stage\Layout\SK Set 1.bin
+#split	0x001FD5CA,0x001FF41A,General\Special Stage\Layout\SK Set 2.bin
+
+/* Palettes */
+#split	0x0000459C,0x0000460C,General\Title\Palettes\S3.bin
+#split	0x0000460C,0x0000462C,General\Title\Palettes\S3 Sonic 1.bin
+#split	0x0000462C,0x0000464C,General\Title\Palettes\S3 Sonic 2.bin
+#split	0x0000464C,0x0000466C,General\Title\Palettes\S3 Sonic 3.bin
+#split	0x0000466C,0x0000468C,General\Title\Palettes\S3 Sonic 4.bin
+#split	0x0000468C,0x000046AC,General\Title\Palettes\S3 Sonic 5.bin
+#split	0x000046AC,0x000046CC,General\Title\Palettes\S3 Sonic 6.bin
+#split	0x000046CC,0x000046EC,General\Title\Palettes\S3 Sonic 7.bin
+#split	0x000046EC,0x0000470C,General\Title\Palettes\S3 Sonic 8.bin
+#split	0x0000470C,0x0000472C,General\Title\Palettes\S3 Sonic 9.bin
+#split	0x0000472C,0x0000474C,General\Title\Palettes\S3 Sonic A.bin
+#split	0x0000474C,0x0000476C,General\Title\Palettes\S3 Sonic B.bin
+#split	0x0000476C,0x000047AC,General\Title\Palettes\S3 Sonic C.bin
+#split	0x000047AC,0x0000482C,General\Title\Palettes\S3 Sonic D.bin
+#split	0x00004904,0x00004924,General\Title\Palettes\S3 Water Anim.bin
+#split	0x00005588,0x000055A8,General\Title\Palettes\SK Sonic.bin
+#split	0x000055A8,0x00005608,General\Title\Palettes\SK Sega and BG.bin
+#split	0x00005608,0x00005628,General\Title\Palettes\SK Knuckles.bin
+#split	0x00006C0C,0x00006C2C,Levels\Misc\Palettes\2P Level Secondary.bin
+#split	0x00007A4A,0x00007A74,Levels\Misc\Palettes\Water Knuckles Patch.bin
+#split	0x0000896E,0x000089EE,General\Special Stage\Palettes\Main.bin
+#split	0x000089EE,0x000089FE,General\Special Stage\Palettes\Knux Patch.bin
+#split	0x000089FE,0x00008A24,General\Special Stage\Palettes\3-1.bin
+#split	0x00008A24,0x00008A4A,General\Special Stage\Palettes\3-2.bin
+#split	0x00008A4A,0x00008A70,General\Special Stage\Palettes\3-3.bin
+#split	0x00008A70,0x00008A96,General\Special Stage\Palettes\3-4.bin
+#split	0x00008A96,0x00008ABC,General\Special Stage\Palettes\3-5.bin
+#split	0x00008ABC,0x00008AE2,General\Special Stage\Palettes\3-6.bin
+#split	0x00008AE2,0x00008B08,General\Special Stage\Palettes\3-7.bin
+#split	0x00008B08,0x00008B2E,General\Special Stage\Palettes\3-8.bin
+#split	0x00008B2E,0x00008B54,General\Special Stage\Palettes\K-1.bin
+#split	0x00008B54,0x00008B7A,General\Special Stage\Palettes\K-2.bin
+#split	0x00008B7A,0x00008BA0,General\Special Stage\Palettes\K-3.bin
+#split	0x00008BA0,0x00008BC6,General\Special Stage\Palettes\K-4.bin
+#split	0x00008BC6,0x00008BEC,General\Special Stage\Palettes\K-5.bin
+#split	0x00008BEC,0x00008C12,General\Special Stage\Palettes\K-6.bin
+#split	0x00008C12,0x00008C38,General\Special Stage\Palettes\K-7.bin
+#split	0x00008C38,0x00008C5E,General\Special Stage\Palettes\K-8.bin
+#split	0x00009D1E,0x00009D5E,General\Special Stage\Palettes\Emeralds.bin
+#split	0x0000CA78,0x0000CA9A,General\Save Menu\Palettes\Chars.bin
+#split	0x0000CA9A,0x0000CAB8,General\Save Menu\Palettes\Emeralds.bin
+#split	0x0000CAB8,0x0000CAD8,General\Save Menu\Palettes\Finish Card 1.bin
+#split	0x0000CAD8,0x0000CAF8,General\Save Menu\Palettes\Finish Card 2.bin
+#split	0x0000CAF8,0x0000CB18,General\Save Menu\Palettes\Finish Card 3.bin
+#split	0x0000CB18,0x0000CB38,General\Save Menu\Palettes\Zone Card 1.bin
+#split	0x0000CB38,0x0000CB58,General\Save Menu\Palettes\Zone Card 2.bin
+#split	0x0000CB58,0x0000CB78,General\Save Menu\Palettes\Zone Card 3.bin
+#split	0x0000CB78,0x0000CB98,General\Save Menu\Palettes\Zone Card 4.bin
+#split	0x0000CB98,0x0000CBB8,General\Save Menu\Palettes\Zone Card 5.bin
+#split	0x0000CBB8,0x0000CBD8,General\Save Menu\Palettes\Zone Card 6.bin
+#split	0x0000CBD8,0x0000CBF8,General\Save Menu\Palettes\Zone Card 7.bin
+#split	0x0000CBF8,0x0000CC18,General\Save Menu\Palettes\Zone Card 8.bin
+#split	0x0000CC18,0x0000CC38,General\Save Menu\Palettes\Zone Card 9.bin
+#split	0x0000CC38,0x0000CC58,General\Save Menu\Palettes\Zone Card A.bin
+#split	0x0000CC58,0x0000CC78,General\Save Menu\Palettes\Zone Card B.bin
+#split	0x0000CC78,0x0000CC98,General\Save Menu\Palettes\Zone Card C.bin
+#split	0x0000CC98,0x0000CCB8,General\Save Menu\Palettes\Zone Card D.bin
+#split	0x0000CCB8,0x0000CCD8,General\Save Menu\Palettes\Zone Card E.bin
+#split	0x0000CCD8,0x0000CCF8,General\Save Menu\Palettes\Zone Card F.bin
+#split	0x0000CCF8,0x0000CD18,General\Save Menu\Palettes\Zone Card 10.bin
+#split	0x0000CD18,0x0000CD38,General\Save Menu\Palettes\Zone Card 11.bin
+#split	0x0000CD38,0x0000CD58,General\Save Menu\Palettes\Zone Card 12.bin
+#split	0x0002E318,0x0002E398,General\Results\Palettes\Main.bin
+#split	0x0004CB36,0x0004CBB6,General\Blue Sphere\Palettes\Title 1.bin
+#split	0x0004CBB6,0x0004CC36,General\Blue Sphere\Palettes\Title 2.bin
+#split	0x0004DE08,0x0004DE68,General\Blue Sphere\Palettes\Results Line 0-2.bin
+#split	0x0004DE68,0x0004DE88,General\Blue Sphere\Palettes\Results Line 3.bin
+#split	0x00052DC0,0x00052DD0,Levels\FBZ\Palettes\FBZ BG Indoors.bin
+#split	0x00052DD0,0x00052DE0,Levels\FBZ\Palettes\FBZ BG Outdoors.bin
+#split	0x000550DE,0x000550FE,Levels\MHZ\Palettes\Act 2 Ship.bin
+#split	0x000550FE,0x0005513E,Levels\MHZ\Palettes\Act 2 Gold.bin
+#split	0x000577DA,0x000577FA,Levels\SSZ\Palettes\Death Egg.bin
+#split	0x000592BE,0x000592EE,General\Ending\Palettes\Water Cycle.bin
+#split	0x0005B16E,0x0005B18E,General\Ending\Palettes\Sky.bin
+#split	0x0005CBCA,0x0005CC4A,General\Sprites\Continue\Screen.bin
+#split	0x0005FBE2,0x0005FC1E,General\Ending\Palettes\Super Knuckles End Pose.bin
+#split	0x00060A9A,0x00060ABA,General\Ending\Palettes\Small Plane.bin
+#split	0x00060ABA,0x00060ADA,General\Ending\Palettes\SK Logo.bin
+#split	0x00060ADA,0x00060AFA,General\Ending\Palettes\S3K Logo.bin
+#split	0x00060AFA,0x00060B1A,General\Ending\Palettes\Knuckles Eyecatch.bin
+#split	0x00060B1A,0x00060B3A,General\Ending\Palettes\Master Emerald.bin
+#split	0x00060B3A,0x00060B4A,Levels\FBZ\Palettes\FBZ Cloud.bin
+#split	0x00060B4A,0x00060B6A,General\Ending\Palettes\Tails End Pose.bin
+#split	0x00060B6A,0x00060B8A,General\Ending\Palettes\Sonic End Pose.bin
+#split	0x00060B8A,0x00060BAA,General\Ending\Palettes\Super Sonic End Pose.bin
+#split	0x00060BAA,0x00060BCA,General\Ending\Palettes\Egg Robo Eyecatch.bin
+#split	0x00060BCA,0x00060BEA,General\Ending\Palettes\Eggman Eyecatch.bin
+#split	0x00060BEA,0x00060C0A,General\Ending\Palettes\Knuckles End Pose.bin
+#split	0x00066912,0x00066932,General\Sprites\Knuckles\Cutscene\Pal.bin
+#split	0x00066932,0x000669B2,Levels\CNZ\Palettes\Flash.bin
+#split	0x000669B2,0x000669D2,General\Sprites\Knuckles\Palettes\SSZ End.bin
+#split	0x000669D2,0x000669F2,Levels\HPZ\Palettes\2_A.bin
+#split	0x000669F2,0x00066A32,Levels\HPZ\Palettes\2_B.bin
+#split	0x00066A32,0x00066A52,General\Sprites\Knuckles\Cutscene\Intro Bomb Pal.bin
+#split	0x00067AAA,0x00067ACA,Levels\AIZ\Palettes\Intro Emeralds.bin
+#split	0x0006917C,0x0006919C,Levels\AIZ\Palettes\Miniboss.bin
+#split	0x00069E80,0x00069EA0,Levels\AIZ\Palettes\End Boss.bin
+#split	0x0006AE56,0x0006AE76,Levels\HCZ\Palettes\Miniboss.bin
+#split	0x0006AE76,0x0006AE96,Levels\HCZ\Palettes\Miniboss Water.bin
+#split	0x0006BF0A,0x0006BF2A,Levels\HCZ\Palettes\End Boss.bin
+#split	0x0006D97C,0x0006D99C,Levels\MGZ\Palettes\End Boss.bin
+#split	0x0006E370,0x0006E390,Levels\CNZ\Palettes\Miniboss.bin
+#split	0x0006EE48,0x0006EE68,Levels\CNZ\Palettes\End Boss.bin
+#split	0x0006FAC0,0x0006FAE0,Levels\FBZ\Palettes\FBZ Miniboss.bin
+#split	0x00070420,0x00070440,Levels\FBZ\Palettes\FBZ2 Subboss.bin
+#split	0x00070F94,0x00070FB4,Levels\FBZ\Palettes\FBZ End Boss.bin
+#split	0x000719DA,0x000719FA,Levels\ICZ\Palettes\Miniboss.bin
+#split	0x000723B0,0x000723D0,Levels\ICZ\Palettes\End Boss.bin
+#split	0x0007299A,0x000729BA,Levels\LBZ\Palettes\Miniboss.bin
+#split	0x00073886,0x000738A6,Levels\LBZ\Palettes\Final Boss 1.bin
+#split	0x000738A6,0x000738C6,Levels\LBZ\Palettes\Ending.bin
+#split	0x000741FE,0x00074262,Levels\LBZ\Palettes\End Boss.bin
+#split	0x000751AA,0x000751CA,Levels\LBZ\Palettes\Final Boss 2.bin
+#split	0x00075F28,0x00075F48,Levels\MHZ\Palettes\Miniboss.bin
+#split	0x000769D4,0x000769F4,Levels\MHZ\Palettes\End Boss.bin
+#split	0x00077412,0x00077432,Levels\SOZ\Palettes\Miniboss Fade.bin
+#split	0x00077432,0x00077452,Levels\SOZ\Palettes\Miniboss Main.bin
+#split	0x000784A0,0x000784C0,Levels\SOZ\Palettes\End Boss 1.bin
+#split	0x000784C0,0x000784E0,Levels\SOZ\Palettes\End Boss 2.bin
+#split	0x00078E0A,0x00078E2A,Levels\LRZ\Palettes\Miniboss 1.bin
+#split	0x00078E2A,0x00078E6A,Levels\LRZ\Palettes\Miniboss 2.bin
+#split	0x00078E6A,0x00078EAA,Levels\LRZ\Palettes\Miniboss 3.bin
+#split	0x00079726,0x00079786,Levels\LRZ\Palettes\Boss Act Fire.bin
+#split	0x0007A1EE,0x0007A20E,Levels\LRZ\Palettes\End Boss.bin
+#split	0x0007B268,0x0007B288,Levels\SSZ\Palettes\MTZOrbs.bin
+#split	0x0007D850,0x0007D9EA,Levels\SSZ\Palettes\GHZMisc.bin
+#split	0x0007EFFC,0x0007F01C,Levels\DEZ\Palettes\Miniboss 1.bin
+#split	0x0007F01C,0x0007F03C,Levels\DEZ\Palettes\Miniboss 2.bin
+#split	0x0007FD08,0x0007FD28,Levels\DEZ\Palettes\End Boss.bin
+#split	0x00090680,0x000906A0,Levels\LRZ\Palettes\Rock Crusher.bin
+#split	0x000A893C,0x000A89BC,Levels\Misc\Palettes\Unknown 1.bin
+#split	0x000A89BC,0x000A89DC,Levels\Misc\Palettes\Unknown 2.bin
+#split	0x000A89DC,0x000A8A3C,Levels\Misc\Palettes\Unknown 3.bin
+#split	0x000A8A3C,0x000A8A7C,General\Sprites\Sonic\Palettes\SonicAndTails.bin
+#split	0x000A8A7C,0x000A8AFC,General\Sprites\Sonic\Palettes\\SonicAndTailsS2.bin
+#split	0x000A8AFC,0x000A8B1C,General\Sprites\Knuckles\Palettes\Main.bin
+#split	0x000A8B1C,0x000A8B7C,Levels\AIZ\Palettes\Intro.bin
+#split	0x000A8B7C,0x000A8BDC,Levels\AIZ\Palettes\Main.bin
+#split	0x000A8BDC,0x000A8C3C,Levels\AIZ\Palettes\Fire.bin
+#split	0x000A8C3C,0x000A8C9C,Levels\AIZ\Palettes\Boss.bin
+#split	0x000A8C9C,0x000A8D1C,Levels\AIZ\Palettes\Water.bin
+#split	0x000A8D1C,0x000A8D9C,Levels\AIZ\Palettes\Act 2 Water.bin
+#split	0x000A8D9C,0x000A8DFC,Levels\HCZ\Palettes\1.bin
+#split	0x000A8DFC,0x000A8E5C,Levels\HCZ\Palettes\2.bin
+#split	0x000A8E5C,0x000A8EDC,Levels\HCZ\Palettes\Act 1 Water.bin
+#split	0x000A8EDC,0x000A8F5C,Levels\HCZ\Palettes\Act 2 Water.bin
+#split	0x000A8F5C,0x000A8FBC,Levels\MGZ\Palettes\Main.bin
+#split	0x000A8FBC,0x000A901C,Levels\CNZ\Palettes\Main.bin
+#split	0x000A901C,0x000A909C,Levels\CNZ\Palettes\Water.bin
+#split	0x000A909C,0x000A90FC,Levels\FBZ\Palettes\FBZ1.bin
+#split	0x000A90FC,0x000A915C,Levels\FBZ\Palettes\FBZ2.bin
+#split	0x000A915C,0x000A91BC,Levels\ICZ\Palettes\1.bin
+#split	0x000A91BC,0x000A921C,Levels\ICZ\Palettes\2.bin
+#split	0x000A921C,0x000A929C,Levels\ICZ\Palettes\Act 2 Water.bin
+#split	0x000A929C,0x000A92FC,Levels\LBZ\Palettes\1.bin
+#split	0x000A92FC,0x000A935C,Levels\LBZ\Palettes\2.bin
+#split	0x000A935C,0x000A93DC,Levels\LBZ\Palettes\Act 2 Water.bin
+#split	0x000A93DC,0x000A943C,Levels\LBZ\Palettes\Act 2 Water 2.bin
+#split	0x000A943C,0x000A949C,Levels\MHZ\Palettes\1.bin
+#split	0x000A949C,0x000A94FC,Levels\MHZ\Palettes\2.bin
+#split	0x000A94FC,0x000A955C,Levels\SOZ\Palettes\1.bin
+#split	0x000A955C,0x000A95BC,Levels\SOZ\Palettes\2.bin
+#split	0x000A95BC,0x000A961C,Levels\SOZ\Palettes\Act 1 Clone.bin
+#split	0x000A961C,0x000A967C,Levels\SOZ\Palettes\Act 2 Extra.bin
+#split	0x000A967C,0x000A96DC,Levels\LRZ\Palettes\1.bin
+#split	0x000A96DC,0x000A973C,Levels\LRZ\Palettes\2.bin
+#split	0x000A973C,0x000A979C,Levels\SSZ\Palettes\1.bin
+#split	0x000A979C,0x000A97BC,Levels\SSZ\Palettes\2.bin
+#split	0x000A97BC,0x000A97FC,General\Ending\Palettes\Objects.bin
+#split	0x000A97FC,0x000A985C,General\Ending\Palettes\Ending 1.bin
+#split	0x000A985C,0x000A98BC,General\Ending\Palettes\Ending 2.bin
+#split	0x000A98BC,0x000A991C,Levels\DEZ\Palettes\1.bin
+#split	0x000A991C,0x000A997C,Levels\DEZ\Palettes\2.bin
+#split	0x000A997C,0x000A99DC,Levels\DDZ\Palettes\Main.bin
+#split	0x000A99DC,0x000A9A3C,Levels\ALZ\Palettes\Main.bin
+#split	0x000A9A3C,0x000A9A9C,Levels\BPZ\Palettes\Main.bin
+#split	0x000A9A9C,0x000A9AFC,Levels\DPZ\Palettes\Main.bin
+#split	0x000A9AFC,0x000A9B5C,Levels\CGZ\Palettes\Main.bin
+#split	0x000A9B5C,0x000A9BBC,Levels\EMZ\Palettes\Main.bin
+#split	0x000A9BBC,0x000A9C1C,Levels\Gumball\Palettes\Main.bin
+#split	0x000A9C1C,0x000A9C7C,Levels\Pachinko\Palettes\Main.bin
+#split	0x000A9C7C,0x000A9CDC,Levels\Slots\Palettes\Main.bin
+#split	0x000A9CDC,0x000A9D3C,Levels\LRZ\Palettes\Boss Act.bin
+#split	0x000A9D3C,0x000A9D5C,Levels\HPZ\Palettes\1_A.bin
+#split	0x000A9D5C,0x000A9D9C,Levels\HPZ\Palettes\1_B.bin
+#split	0x000A9D9C,0x000A9DFC,Levels\DEZ\Palettes\Boss.bin
+#split	0x001578F8,0x00157AE8,Levels\Pachinko\Palettes\Compressed Pal.bin
+
+/* Level Layouts */
+#split	0x0009D680,0x0009E428,Levels\FBZ\Layout\1.bin
+#split	0x0009E428,0x0009F3B6,Levels\FBZ\Layout\2.bin
+#split	0x0009F3B6,0x000A00EA,Levels\MHZ\Layout\1.bin
+#split	0x000A00EA,0x000A0D5A,Levels\MHZ\Layout\2.bin
+#split	0x000A0D5A,0x000A1BC6,Levels\SOZ\Layout\1.bin
+#split	0x000A1BC6,0x000A29DE,Levels\SOZ\Layout\2.bin
+#split	0x000A29DE,0x000A3806,Levels\LRZ\Layout\1.bin
+#split	0x000A3806,0x000A458E,Levels\LRZ\Layout\2.bin
+#split	0x000A458E,0x000A51FE,Levels\SSZ\Layout\1.bin
+#split	0x000A51FE,0x000A537A,Levels\SSZ\Layout\2.bin
+#split	0x000A537A,0x000A6348,Levels\DEZ\Layout\1.bin
+#split	0x000A6348,0x000A71D6,Levels\DEZ\Layout\2.bin
+#split	0x000A71D6,0x000A72E2,Levels\DDZ\Layout\1.bin
+#split	0x000A72E2,0x000A74CA,Levels\Pachinko\Layout\1.bin
+#split	0x000A74CA,0x000A766C,Levels\Slots\Layout\1.bin
+#split	0x000A766C,0x000A7924,Levels\LRZ\Layout\3.bin
+#split	0x000A7924,0x000A7F4C,Levels\HPZ\Layout\1.bin
+#split	0x000A7F4C,0x000A8044,Levels\DEZ\Layout\3.bin
+#split	0x000A8044,0x000A872C,Levels\MHZ\Layout\3.bin
+
+/* Uncompressed Art */
+#split	0x000A9DFC,0x000AA57C,General\Sprites\Air Countdown\Air Countdown.bin
+#split	0x000AA57C,0x000AAA7C,General\Sprites\S2Menu\SONICMILES.bin
+#split	0x000AAA7C,0x000ABDFC,General\Sprites\Sonic\Art\SStage Sonic.bin
+#split	0x000ABF22,0x000AD302,General\Sprites\Knuckles\Art\SStage Knuckles.bin
+#split	0x000B69C0,0x000B89C0,Levels\FBZ\Animated Tiles\0.bin
+#split	0x000B89C0,0x000B8CC0,Levels\FBZ\Animated Tiles\1.bin
+#split	0x000B8CC0,0x000B9CC0,Levels\FBZ\Animated Tiles\2.bin
+#split	0x000B9CC0,0x000B9EC0,Levels\FBZ\Animated Tiles\3.bin
+#split	0x000B9EC0,0x000BA1C0,Levels\FBZ\Animated Tiles\4.bin
+#split	0x000BA1C0,0x000BA9C0,Levels\MHZ\Animated Tiles\BG 1.bin
+#split	0x000BA9C0,0x000BC9C0,Levels\MHZ\Animated Tiles\BG 2.bin
+#split	0x000BC9C0,0x000BCCC0,Levels\MHZ\Animated Tiles\0.bin
+#split	0x000BCCC0,0x000BCFC0,Levels\MHZ\Animated Tiles\1.bin
+#split	0x000BCFC0,0x000BD4C0,Levels\MHZ\Animated Tiles\2.bin
+#split	0x000BD4C0,0x000BD9C0,Levels\MHZ\Animated Tiles\3.bin
+#split	0x000BD9C0,0x000BE5C0,Levels\SOZ\Animated Tiles\Act1 BG 1.bin
+#split	0x000BE5C0,0x000BFDC0,Levels\SOZ\Animated Tiles\Act1 BG 2.bin
+#split	0x000BFDC0,0x000C0300,Levels\SOZ\Animated Tiles\Act2 BG.bin
+#split	0x000C0300,0x000C2700,Levels\LRZ\Animated Tiles\BG 1.bin
+#split	0x000C2700,0x000C3300,Levels\LRZ\Animated Tiles\BG 2.bin
+#split	0x000C3300,0x000C3500,Levels\LRZ\Animated Tiles\Act1 0.bin
+#split	0x000C3500,0x000C3700,Levels\LRZ\Animated Tiles\Act1 1.bin
+#split	0x000C3700,0x000C3940,Levels\LRZ\Animated Tiles\Act2 0.bin
+#split	0x000C3940,0x000C4140,Levels\LRZ\Animated Tiles\Act2 1.bin
+#split	0x000C4140,0x000C4440,Levels\HPZ\Animated Tiles\0.bin
+#split	0x000C4440,0x000C45C0,Levels\HPZ\Animated Tiles\1.bin
+#split	0x000C45C0,0x000C49C0,Levels\HPZ\Animated Tiles\2.bin
+#split	0x000C49C0,0x000C4C00,Levels\HPZ\Animated Tiles\3.bin
+#split	0x000C4C00,0x000C5E00,Levels\SSZ\Animated Tiles\0.bin
+#split	0x000C5E00,0x000C6200,Levels\SSZ\Animated Tiles\1.bin
+#split	0x000C6200,0x000C6500,Levels\SSZ\Animated Tiles\2.bin
+#split	0x000C6500,0x000C6980,Levels\SSZ\Animated Tiles\3.bin
+#split	0x000C6980,0x000C6B80,Levels\SSZ\Animated Tiles\4.bin
+#split	0x000C6B80,0x000C7200,Levels\SSZ\Animated Tiles\5.bin
+#split	0x000C7200,0x000C7280,Levels\DEZ\Animated Tiles\0.bin
+#split	0x000C7280,0x000C7DC0,Levels\DEZ\Animated Tiles\1.bin
+#split	0x000C7DC0,0x000C81C0,Levels\DEZ\Animated Tiles\2.bin
+#split	0x000C81C0,0x000C8400,Levels\DEZ\Animated Tiles\3.bin
+#split	0x000C8400,0x000C84C0,Levels\DEZ\Animated Tiles\4.bin
+#split	0x000C84C0,0x000C85E0,Levels\DEZ\Animated Tiles\5.bin
+#split	0x000C85E0,0x000C87E0,Levels\DEZ\Animated Tiles\6.bin
+#split	0x000C87E0,0x000C8E20,Levels\DEZ\Animated Tiles\7.bin
+#split	0x000C8E20,0x000CA5E0,Levels\Pachinko\Animated Tiles\0.bin
+#split	0x000D8766,0x000DAE66,General\Sprites\SS Entry\Entry Ring.bin
+#split	0x000DAE66,0x000DB406,General\Sprites\SS Entry\Entry Flash.bin
+#split	0x000DCC76,0x000DD976,General\Sprites\Signpost\End Signs.bin
+#split	0x00100000,0x001200E0,General\Sprites\Sonic\Art\Sonic.bin
+#split	0x001200E0,0x00140060,General\Sprites\Knuckles\Art\Knuckles.bin
+#split	0x00140060,0x00143D00,General\Sprites\Sonic\Art\Sonic Extra.bin
+#split	0x00143D00,0x00146620,General\Sprites\Tails\Art\Tails Extra.bin
+#split	0x00158CAE,0x00159CAE,Levels\Slots\Uncompressed Art\Options.bin
+#split	0x0015A674,0x0015A774,Levels\DEZ\Uncompressed Art\Final Boss Laser.bin
+#split	0x001649A0,0x00165000,General\Sprites\Knuckles\Cutscene\Intro Laying.bin
+#split	0x0016652A,0x00166A8A,General\Sprites\Butterdroid\Butterdroid.bin
+#split	0x00166A8A,0x001680CA,General\Sprites\Cluckoid\Cluckoid.bin
+#split	0x00169812,0x0016A072,General\Sprites\Knuckles\Cutscene\MHZ2 Press.bin
+#split	0x0016B4BC,0x0016CB5C,General\Sprites\SOZ Ghosts\SOZ Ghosts.bin
+#split	0x0016EFB2,0x0016F332,General\Sprites\Fireworm\Fireworm.bin
+#split	0x00172406,0x00174A86,General\Sprites\Knuckles\Cutscene\HPZ Emerald Grab.bin
+#split	0x00175A9E,0x0017B17E,General\Sprites\Mecha Sonic\Mecha Sonic.bin
+#split	0x0017C802,0x0017DBC2,General\Sprites\SSZ Death Egg Cloud\SSZ Death Egg Cloud.bin
+#split	0x0017E274,0x0017EDB4,General\Sprites\Knuckles\Cutscene\SSZ Tired.bin
+#split	0x0018A204,0x0018A604,General\Sprites\Shields\Invincibility.bin
+#split	0x0018A604,0x0018BD44,General\Sprites\Dash Dust\Dash Dust.bin
+#split	0x0018BD44,0x0018C084,General\Sprites\Shields\Super Sonic and Knuckles Stars.bin
+#split	0x0018C084,0x0018C704,General\Sprites\Shields\Insta-Shield.bin
+#split	0x0018C704,0x0018E8A4,General\Sprites\Shields\Fire Shield.bin
+#split	0x0018E8A4,0x0018F8E4,General\Sprites\Shields\Lightning Shield.bin
+#split	0x0018F8E4,0x0018F984,General\Sprites\Shields\Sparks.bin
+#split	0x0018F984,0x00190AC4,General\Sprites\Shields\Bubble Shield.bin
+
+/* Nemesis-Compressed Art */
+#split	0x00004D2A,0x00004F8C,General\Title\Nemesis Art\SK Screen Text.bin
+#split	0x00039A00,0x00039A40,General\Sprites\Snowboard\Snowboard Dust.bin
+#split	0x0005CD66,0x0005D3C6,General\Sprites\Continue\Player Sprites.bin
+#split	0x0005D3C6,0x0005D788,General\Sprites\Continue\Player Icons.bin
+#split	0x0005D788,0x0005D868,General\Sprites\Continue\Digits.bin
+#split	0x000AD430,0x000AD472,General\Special Stage\Nemesis Art\Shadow.bin
+#split	0x000AD472,0x000AD5F4,General\Special Stage\Nemesis Art\Get Blue Spheres.bin
+#split	0x000AD5F4,0x000AD650,General\Special Stage\Nemesis Art\Get Blue Spheres Arrow.bin
+#split	0x000AD650,0x000AD7BC,General\Special Stage\Nemesis Art\Digits.bin
+#split	0x000AD7BC,0x000AD904,General\Special Stage\Nemesis Art\Icons.bin
+#split	0x000AD904,0x000ADF60,General\Special Stage\Nemesis Art\Sphere.bin
+#split	0x000ADF60,0x000AE3EC,General\Special Stage\Nemesis Art\Ring.bin
+#split	0x000AEED0,0x000AEF54,General\Special Stage\Nemesis Art\BG.bin
+#split	0x000B07B8,0x000B2E36,General\Special Stage\Nemesis Art\Layout.bin
+#split	0x000CA5E0,0x000CAB54,General\Sprites\S2Menu\2P Options.bin
+#split	0x000D6498,0x000D67F0,General\Title\Nemesis Art\SK ANDKnuckles.bin
+#split	0x000D73CE,0x000D771E,General\Sprites\Boss Explosion\Boss Explosion.bin
+#split	0x000D771E,0x000D7C7A,General\Sprites\Robotnik\Ship.bin
+#split	0x000D7C7A,0x000D7EEC,General\Sprites\Robotnik\FBZ Robotnik Head.bin
+#split	0x000D7EEC,0x000D8302,General\Sprites\Robotnik\FBZ Robotnik Stand.bin
+#split	0x000D8302,0x000D8766,General\Sprites\Robotnik\FBZ Robotnik Run.bin
+#split	0x000DB818,0x000DBDDE,Levels\FBZ\Nemesis Art\Miniboss Unused.bin
+#split	0x000DBDDE,0x000DC2E0,Levels\FBZ\Nemesis Art\Act 2 Subboss.bin
+#split	0x000DC2E0,0x000DC6C2,Levels\FBZ\Nemesis Art\End Boss.bin
+#split	0x000DD976,0x000DD990,General\Sprites\Signpost\Stub.bin
+#split	0x000DD990,0x000DDE34,General\Sprites\Robotnik\Egg Capsule.bin
+#split	0x000DDE34,0x000DDFE6,General\Blue Sphere\Nemesis Art\Large Text.bin
+#split	0x000DDFE6,0x000DE362,Levels\FBZ\Nemesis Art\End Boss Flame.bin
+#split	0x000DEA00,0x000DF370,General\Ending\Nemesis Art\Knuckles Ending Pose.bin
+#split	0x0014C926,0x0014DBC0,Levels\FBZ\Nemesis Art\Misc Art 1.bin
+#split	0x0014DBC0,0x0014E1AC,Levels\FBZ\Nemesis Art\Outdoors.bin
+#split	0x0014E1AC,0x0014E846,Levels\FBZ\Nemesis Art\Misc Art 2.bin
+#split	0x0014E846,0x0014F9FE,Levels\MHZ\Nemesis Art\Misc Art.bin
+#split	0x0014F9FE,0x00150AAA,Levels\SOZ\Nemesis Art\Misc Art.bin
+#split	0x00150AAA,0x00150B86,Levels\SOZ\Nemesis Art\Tile.bin
+#split	0x00150B86,0x00150DAC,Levels\SOZ\Nemesis Art\Act 2 Extra Art.bin
+#split	0x00150DAC,0x001517CE,Levels\LRZ\Nemesis Art\Misc Art.bin
+#split	0x001517CE,0x0015183A,Levels\LRZ\Nemesis Art\Spike Crush.bin
+#split	0x0015183A,0x00151DF4,Levels\LRZ\Nemesis Art\Big Spike Ball.bin
+#split	0x00151DF4,0x00152812,Levels\LRZ\Nemesis Art\Act 2 Misc Art.bin
+#split	0x00152812,0x00152BB2,Levels\LRZ\Nemesis Art\Act 2 Spinning Drum.bin
+#split	0x00152BB2,0x001541B0,Levels\SSZ\Nemesis Art\Misc.bin
+#split	0x00154552,0x00155AAA,Levels\DEZ\Nemesis Art\Misc Art.bin
+#split	0x00155AAA,0x00155FDA,Levels\DEZ\Nemesis Art\Miniboss.bin
+#split	0x00155FDA,0x001561C0,Levels\DEZ\Nemesis Art\Act 2 Extra Art.bin
+#split	0x001561C0,0x00156C08,Levels\Pachinko\Nemesis Art\Main.bin
+#split	0x00157AE8,0x00158CAE,Levels\Slots\Nemesis Art\Blocks.bin
+#split	0x00159CD0,0x00159CFE,Levels\ICZ\Nemesis Art\Teleporter Beam.bin
+#split	0x0015FFBE,0x00160340,General\Sprites\Robotnik\Egg Robo Run.bin
+#split	0x00160340,0x001607D8,General\Sprites\Robotnik\Egg Robo Stand.bin
+#split	0x00165C6C,0x00165E80,Levels\FBZ\Nemesis Art\Egg Capsule.bin
+#split	0x00174B28,0x001757B4,Levels\HPZ\Nemesis Art\Emerald Misc Art.bin
+#split	0x001757B4,0x0017588A,Levels\HPZ\Nemesis Art\Gray Emerald.bin
+#split	0x00189C7C,0x00189F62,General\Blue Sphere\Nemesis Art\SK Logo.bin
+#split	0x00189F62,0x0018A110,General\Blue Sphere\Nemesis Art\Tails Pose.bin
+#split	0x0018A110,0x0018A204,General\Sprites\HUD Icon\Miles Life Icon.bin
+#split	0x00190AC4,0x00190B4C,General\Sprites\Buttons\Gray Button.bin
+#split	0x00190B4C,0x00190D34,General\Sprites\Level Misc\Diagonal Spring.bin
+#split	0x00190D34,0x00190E4C,General\Sprites\HUD Icon\Sonic life icon.bin
+#split	0x00190E4C,0x00190F4A,General\Sprites\HUD Icon\Knuckles life icon.bin
+#split	0x00190F4A,0x001913A4,General\Sprites\Monitors\Monitors.bin
+#split	0x001913A4,0x00191B46,General\Sprites\S2Menu\Signpost.bin
+#split	0x00191B46,0x00191DE4,General\Sprites\Bubbles\Bubbles.bin
+#split	0x00191DE4,0x0019200A,General\Sprites\Game Over\GameOver.bin
+#split	0x0019200A,0x001927FE,General\Sprites\Enemy Misc\Explosion.bin
+#split	0x001927FE,0x00192AEE,General\Sprites\Level Misc\SpikesSprings.bin
+#split	0x00192AEE,0x00192D2A,General\Sprites\Ring\Ring.bin
+#split	0x00192D2A,0x00192F6E,General\Sprites\Enemy Misc\Enemy points.bin
+#split	0x00192F6E,0x001931D6,General\Sprites\Animals\Bunny.bin
+#split	0x001931D6,0x00193308,General\Sprites\Animals\Blue Flicky.bin
+#split	0x00193308,0x00193456,General\Sprites\Animals\Chicken.bin
+#split	0x00193456,0x001935A8,General\Sprites\Animals\Penguin.bin
+#split	0x001935A8,0x00193706,General\Sprites\Animals\Squirrel.bin
+#split	0x00193706,0x0019385A,General\Sprites\Animals\Rabbit.bin
+#split	0x0019385A,0x00194388,General\Sprites\Bonus\Bonus Stage.bin
+
+/* Kosinski-Compressed Art */
+
+#split	0x000CC6A0,0x000CCA20,General\Title\Kosinski Art\SK Big SEGA.bin
+#split	0x000CCA20,0x000CD910,General\Title\Kosinski Art\SK Screen Background.bin
+#split	0x000D2504,0x000D33E4,General\Title\Kosinski Art\SK Sonic Falling.bin
+#split	0x000D33E4,0x000D3A64,General\Title\Kosinski Art\SK Death Egg.bin
+#split	0x000D3A64,0x000D3BB4,General\Title\Kosinski Art\SK Mountain Sprite.bin
+#split	0x000D4BA6,0x000D5CC6,General\Title\Kosinski Art\SK Sonic and Knuckles Hands.bin
+#split	0x000DE364,0x000DE684,General\Title\Kosinski Art\SK ANDKnuckles Subtitle.bin
+#split	0x00156C08,0x001574E8,Levels\Pachinko\Kosinski Art\Animated BG 1.bin
+#split	0x001574E8,0x001578F8,Levels\Pachinko\Kosinski Art\Animated BG 2.bin
+#split	0x0015BAC0,0x0015C130,General\Special Stage\Kosinski Art\SSResults General.bin
+#split	0x0015C130,0x0015C2E0,General\Special Stage\Kosinski Art\SSResults Tails Knuckles Icons.bin
+#split	0x0015CD62,0x0015EDB2,General\Save Menu\Kosinski Art\SK Zone Art.bin
+#split	0x0015EDB2,0x0015FC12,General\Save Menu\Kosinski Art\Portraits.bin
+#split	0x0015A774,0x0015B374,General\Save Menu\Kosinski Art\SK Extra.bin
+#split	0x0015FDDE,0x0015FFBE,General\Sprites\Robotnik\Egg Robo Head.bin
+#split	0x00163248,0x00163418,General\Ending\Kosinski Art\Robotnik Standing Smug.bin
+#split	0x0016416E,0x0016461E,General\Ending\Kosinski Art\Sonic Knuckles Pose Banner.bin
+#split	0x0017FCBC,0x0018008C,Levels\HPZ\Kosinski Art\Master Emerald.bin
+#split	0x00187D1C,0x00188E7C,General\Blue Sphere\Kosinski Art\Characters.bin
+#split	0x00188F1E,0x001897DE,General\Blue Sphere\Kosinski Art\Character Sprites.bin
+#split	0x001897DE,0x00189C4E,General\Blue Sphere\Kosinski Art\Normal Text.bin hi 
+
+/* Kosinski Moduled-Compressed Art */
+#split	0x000AE3EC,0x000AE99E,General\Special Stage\KosinskiM Art\Special Stage Chaos Emerald.bin
+#split	0x000AE99E,0x000AEDB0,General\Special Stage\KosinskiM Art\Special Stage Super Emerald.bin
+#split	0x000CD910,0x000D0E12,General\Title\KosinskiM Art\SK Sonic Knuckles.bin
+#split	0x000D0E12,0x000D2504,General\Title\KosinskiM Art\SK Sonic Land Frames.bin
+#split	0x000D3BB4,0x000D4BA6,General\Title\KosinskiM Art\SK Banner.bin
+#split	0x000D5CC6,0x000D6498,General\Title\KosinskiM Art\SK Menu.bin
+#split	0x000D67F0,0x000D6A62,General\Sprites\Results\Results KNUCKLES.bin
+#split	0x000D6A62,0x000D6D84,General\Sprites\Results\Results General.bin
+#split	0x000D6D84,0x000D6E46,General\Sprites\Title Card\Title Card Number 1.bin
+#split	0x000D6E46,0x000D6F28,General\Sprites\Title Card\Title Card Number 2.bin
+#split	0x000D6F28,0x000D710A,General\Sprites\Title Card\Title Card Red ACT.bin
+#split	0x000D710A,0x000D726C,Levels\FBZ\KosinskiM Art\Title Card.bin
+#split	0x000D726C,0x000D73CE,General\Sprites\Title Card\Bonus Title Card.bin
+#split	0x000DB406,0x000DB818,General\Sprites\Enemy Misc\Badnik Explosion.bin
+#split	0x000DC6C2,0x000DC9C4,General\Sprites\Blaster\Blaster.bin
+#split	0x000DC9C4,0x000DCC76,General\Sprites\Technosqueek\Technosqueek.bin
+#split	0x0014C652,0x0014C7D4,General\Sprites\Sonic\Art\Hyper Sonic Stars.bin
+#split	0x0014C7D4,0x0014C926,General\Sprites\Tails\Art\Super Tails birds.bin
+#split	0x001541B0,0x00154552,Levels\SSZ\KosinskiM Art\Spiral Ramp.bin
+#split	0x00159CAE,0x00159CD0,Levels\SSZ\KosinskiM Art\Teleporter Beam.bin
+#split	0x00159CFE,0x00159F10,Levels\MHZ\KosinskiM Art\End Boss Pillar.bin
+#split	0x00159F10,0x0015A112,Levels\MHZ\KosinskiM Art\Ship Propeller.bin
+#split	0x0015A112,0x0015A674,Levels\LRZ\KosinskiM Art\BG Death Egg.bin
+#split	0x0015B374,0x0015B4F6,General\Special Stage\KosinskiM Art\SSResults SUPER.bin
+#split	0x0015B4F6,0x0015B678,General\Special Stage\KosinskiM Art\SSResults SUPER (K).bin
+#split	0x0015B678,0x0015B7EA,General\Special Stage\KosinskiM Art\SSResults HYPER.bin
+#split	0x0015B7EA,0x0015B95C,General\Special Stage\KosinskiM Art\SSResults HYPER (K).bin
+#split	0x0015B95C,0x0015BABE,General\Sprites\Results\Results SONIC.bin
+#split	0x0015C2E0,0x0015C3A2,General\Sprites\Title Card\Title Card SK Zone.bin
+#split	0x0015C3A2,0x0015C454,General\Sprites\Title Card\Title Card S3K Zone.bin
+#split	0x0015C454,0x0015C5D6,Levels\MHZ\KosinskiM Art\Title Card.bin
+#split	0x0015C5D6,0x0015C6E8,Levels\SOZ\KosinskiM Art\Title Card.bin
+#split	0x0015C6E8,0x0015C7FA,Levels\LRZ\KosinskiM Art\Title Card.bin
+#split	0x0015C7FA,0x0015C9BC,Levels\SSZ\KosinskiM Art\Title Card.bin
+#split	0x0015C9BC,0x0015CA9E,Levels\DEZ\KosinskiM Art\Title Card.bin
+#split	0x0015CA9E,0x0015CC30,Levels\DDZ\KosinskiM Art\Title Card.bin
+#split	0x0015CC30,0x0015CD62,Levels\HPZ\KosinskiM Art\Title Card.bin
+#split	0x001607D8,0x00160AAA,General\Sprites\Robotnik\Robotnik Ship Crane.bin
+#split	0x00160AAA,0x00160D8C,General\Ending\KosinskiM Art\Island Lift Animated Tiles.bin
+#split	0x00160D8C,0x0016118E,General\Ending\KosinskiM Art\Pelican and Dolphin.bin
+#split	0x0016118E,0x00161660,General\Ending\KosinskiM Art\Egg Robo.bin
+#split	0x00161660,0x001620D2,General\Ending\KosinskiM Art\Normal Sonic Ending Pose.bin
+#split	0x001620D2,0x00162914,General\Ending\KosinskiM Art\Super Sonic Ending Pose.bin
+#split	0x00162914,0x00163246,General\Ending\KosinskiM Art\Sonic Plane Ending.bin
+#split	0x00163418,0x00163B9A,General\Ending\KosinskiM Art\Sonic Plane.bin
+#split	0x00163B9A,0x0016416C,General\Sprites\Knuckles\Cutscene\Knuckles Ending Cutscene.bin
+#split	0x0016461E,0x001649A0,General\Ending\KosinskiM Art\Sonic 3 Pose Banner.bin
+#split	0x00165000,0x001651D2,General\Sprites\Knuckles\Cutscene\Knuckles Intro Bomb.bin
+#split	0x001651D2,0x001652B4,Levels\FBZ\KosinskiM Art\Exit Hall.bin
+#split	0x001652B4,0x00165826,Levels\FBZ\KosinskiM Art\Miniboss.bin
+#split	0x00165826,0x00165AB8,Levels\FBZ\KosinskiM Art\Cloud.bin
+#split	0x00165AB8,0x00165BCA,Levels\FBZ\KosinskiM Art\Before Boss Pillar.bin
+#split	0x00165BCA,0x00165C6C,Levels\FBZ\KosinskiM Art\Exit Door.bin
+#split	0x00165E80,0x00165F02,Levels\FBZ\KosinskiM Art\Button.bin
+#split	0x00165F02,0x00166234,General\Sprites\Madmole\Madmole.bin
+#split	0x00166234,0x00166386,General\Sprites\Mushmeanie\Mushmeanie.bin
+#split	0x00166386,0x001664C8,General\Sprites\Dragonfly\Dragonfly.bin
+#split	0x001664C8,0x0016652A,General\Sprites\Cluckoid\Cluckoid Arrow.bin
+#split	0x001680CA,0x0016908C,Levels\MHZ\KosinskiM Art\Miniboss.bin
+#split	0x0016908C,0x0016942E,Levels\MHZ\KosinskiM Art\Miniboss Log.bin
+#split	0x0016942E,0x001695C0,Levels\MHZ\KosinskiM Art\End Boss Spikes.bin
+#split	0x001695C0,0x00169812,General\Sprites\Knuckles\Cutscene\Knuckles Peering.bin
+#split	0x0016A072,0x0016A104,General\Sprites\Knuckles\Cutscene\Knuckles MHZ Switch.bin
+#split	0x0016A104,0x0016ADC6,Levels\MHZ\KosinskiM Art\End Boss.bin
+#split	0x0016ADC6,0x0016B038,General\Sprites\Skorp\Skorp.bin
+#split	0x0016B038,0x0016B2BA,General\Sprites\Sandworm\Sandworm.bin
+#split	0x0016B2BA,0x0016B4BC,General\Sprites\Rockn\Rock'n.bin
+#split	0x0016CB5C,0x0016E0EE,Levels\SOZ\KosinskiM Art\Miniboss.bin
+#split	0x0016E0EE,0x0016E1B0,Levels\SOZ\KosinskiM Art\Sand Particles.bin
+#split	0x0016E1B0,0x0016EFB2,Levels\SOZ\KosinskiM Art\End Boss.bin
+#split	0x0016F332,0x0016F4E4,General\Sprites\Fireworm\Fireworm Segments.bin
+#split	0x0016F4E4,0x0016F7E6,General\Sprites\Iwamodoki\Iwamodoki.bin
+#split	0x0016F7E6,0x0016F928,General\Sprites\Toxomister\Toxomister.bin
+#split	0x0016F928,0x0016FCDA,Levels\LRZ\KosinskiM Art\Rock Crusher.bin
+#split	0x0016FCDA,0x0017093C,Levels\LRZ\KosinskiM Art\Miniboss.bin
+#split	0x0017093C,0x00170F4E,Levels\LRZ\KosinskiM Art\Autoscroll.bin
+#split	0x00170F4E,0x001714C0,Levels\LRZ\KosinskiM Art\Death Egg Flash.bin
+#split	0x001714C0,0x001715F2,Levels\LRZ\KosinskiM Art\Platform Debris.bin
+#split	0x001715F2,0x00172214,Levels\LRZ\KosinskiM Art\End Boss.bin
+#split	0x00172214,0x00172406,Levels\LRZ\KosinskiM Art\Knuckles Boulder.bin
+#split	0x00174A86,0x00174B28,Levels\HPZ\KosinskiM Art\Knuckles Dizzy Stars.bin
+#split	0x0017588A,0x001759AC,General\Sprites\Teleporter\Teleporter.bin
+#split	0x001759AC,0x00175A9E,Levels\HPZ\KosinskiM Art\Special Stage Emeralds.bin
+#split	0x0017B17E,0x0017B6E0,General\Sprites\Egg Robo Badnik\Egg Robo Badnik.bin
+#split	0x0017C6E0,0x0017C802,General\Sprites\Mecha Sonic\Mecha Sonic Head.bin
+#split	0x0017DBC2,0x0017E274,Levels\SSZ\KosinskiM Art\Death Egg Small.bin
+#split	0x0017EDB4,0x0017EFA6,Levels\SSZ\KosinskiM Art\GHZ Ball and Chain.bin
+#split	0x0017EFA6,0x0017F738,Levels\SSZ\KosinskiM Art\MTZ Orbs.bin
+#split	0x0017F738,0x0017FCBA,General\Sprites\Mecha Sonic\Mecha Sonic Extra Art.bin
+#split	0x0018008C,0x001803EE,General\Sprites\Spikebonker\Spikebonker.bin
+#split	0x001803EE,0x001805A0,General\Sprites\Chainspike\Chainspike.bin
+#split	0x001805A0,0x00181002,Levels\DEZ\KosinskiM Art\Miniboss Misc Art.bin
+#split	0x00181002,0x00181D44,Levels\DEZ\KosinskiM Art\End Boss.bin
+#split	0x00181D44,0x00182BE6,Levels\DEZ\KosinskiM Art\Final Boss Misc Art.bin
+#split	0x00182BE6,0x00182ED8,General\Sprites\Master Emerald\Master Emerald.bin
+#split	0x00182ED8,0x0018322A,Levels\DEZ\KosinskiM Art\Final Boss Debris.bin
+#split	0x0018322A,0x00184D9C,Levels\DDZ\KosinskiM Art\Misc Art.bin
+#split	0x00187B8A,0x00187BEC,General\Sprites\Starpost\Starpost Stars 1.bin
+#split	0x00187BEC,0x00187C4E,General\Sprites\Starpost\Starpost Stars 2.bin
+#split	0x00187C4E,0x00187CB0,General\Sprites\Starpost\Starpost Stars 3.bin
+#split	0x00195040,0x001974A2,Levels\FBZ\Tiles\Primary.bin
+#split	0x0019ABF2,0x0019D044,Levels\MHZ\Tiles\Primary.bin
+#split	0x0019E714,0x0019F8A6,Levels\MHZ\Tiles\Secondary.bin
+#split	0x001A1EB6,0x001A30E8,Levels\MHZ\Tiles\Custom.bin
+#split	0x001A4198,0x001A773A,Levels\SOZ\Tiles\Primary.bin
+#split	0x001AA36A,0x001AD05C,Levels\SOZ\Tiles\Act 1 Secondary.bin
+#split	0x001AD24C,0x001AD68E,Levels\SOZ\Tiles\Act 1 Custom.bin
+#split	0x001AD81E,0x001B0720,Levels\SOZ\Tiles\Act 2 Secondary.bin
+#split	0x001B0860,0x001B0FC2,Levels\SOZ\Tiles\Act 2 Custom.bin
+#split	0x001B1102,0x001B1AA4,Levels\LRZ\Tiles\Primary.bin
+#split	0x001B28F4,0x001B5CD6,Levels\LRZ\Tiles\Act 1 Secondary.bin
+#split	0x001B97D6,0x001BC738,Levels\LRZ\Tiles\Act 2 Secondary.bin
+#split	0x001BEE58,0x001BFBEA,Levels\HPZ\Tiles\Primary.bin
+#split	0x001C051A,0x001C290C,Levels\LRZ\Tiles\Boss Secondary.bin
+#split	0x001C3F2C,0x001C71FE,Levels\HPZ\Tiles\Secondary.bin
+#split	0x001C8AFE,0x001C8E00,Levels\SSZ\Tiles\Act 1 Primary.bin
+#split	0x001C9C50,0x001CBDA2,Levels\SSZ\Tiles\Act 1 Secondary.bin
+#split	0x001CE832,0x001CEFE4,Levels\SSZ\Tiles\Act 1 Custom.bin
+#split	0x001CFB44,0x001D17A6,Levels\SSZ\Tiles\Act 2.bin
+#split	0x001D2CE6,0x001D5068,Levels\DEZ\Tiles\Primary.bin
+#split	0x001D77D8,0x001D7E3A,Levels\DEZ\Tiles\Act 1 Secondary.bin
+#split	0x001D7FCA,0x001D899C,Levels\DEZ\Tiles\Act 2 Secondary.bin
+#split	0x001D93FC,0x001DC24E,Levels\DEZ\Tiles\Final Boss Act.bin
+#split	0x001DCD4E,0x001DE530,Levels\DDZ\Tiles\Primary.bin
+#split	0x001DEB40,0x001DFE92,Levels\Pachinko\Tiles\Pachinko.bin
+#split	0x001E0AF2,0x001E36C4,Levels\Slots\Tiles\Slots.bin
+
+/* Music */
+#split	0x000E4104,0x000E5D4B,Sound\Music\Credits.bin
+#split	0x000E5D4B,0x000E5FA6,Sound\Music\Game Over.bin
+#split	0x000E5FA6,0x000E63C0,Sound\Music\Continue.bin
+#split	0x000E63C0,0x000E6574,Sound\Music\Level Outro.bin
+#split	0x000E6574,0x000E67AF,Sound\Music\Invincible.bin
+#split	0x000E67AF,0x000E774C,Sound\Music\Menu.bin
+#split	0x000E774C,0x000E7CDE,Sound\Music\Final Boss.bin
+#split	0x000E7CDE,0x000E8000,Sound\Music\Game Complete.bin
+#split	0x000E8000,0x000E8597,Sound\Music\FBZ1.bin
+#split	0x000E8597,0x000E8AFE,Sound\Music\FBZ2.bin
+#split	0x000E8AFE,0x000E9106,Sound\Music\MHZ1.bin
+#split	0x000E9106,0x000E9688,Sound\Music\MHZ2.bin
+#split	0x000E9688,0x000E9CF2,Sound\Music\SOZ1.bin
+#split	0x000E9CF2,0x000EA2E5,Sound\Music\SOZ2.bin
+#split	0x000EA2E5,0x000EACF3,Sound\Music\LRZ1.bin
+#split	0x000EACF3,0x000EBE80,Sound\Music\LRZ2.bin
+#split	0x000EBE80,0x000EC2B4,Sound\Music\SSZ.bin
+#split	0x000EC2B4,0x000EC79F,Sound\Music\DEZ1.bin
+#split	0x000EC79F,0x000ECBB1,Sound\Music\DEZ2.bin
+#split	0x000ECBB1,0x000ECEE1,Sound\Music\Miniboss.bin
+#split	0x000ECEE1,0x000ED3DD,Sound\Music\Zone Boss.bin
+#split	0x000ED3DD,0x000EDCC0,Sound\Music\DDZ.bin
+#split	0x000EDCC0,0x000EE223,Sound\Music\Pachinko.bin
+#split	0x000EE223,0x000EEABB,Sound\Music\Special Stage.bin
+#split	0x000EEABB,0x000EF5A3,Sound\Music\Slots.bin
+#split	0x000EF5A3,0x000EF88E,Sound\Music\Knuckles.bin
+#split	0x000EF88E,0x000EFD4B,Sound\Music\Title.bin
+#split	0x000EFD4B,0x000EFE75,Sound\Music\1UP.bin
+#split	0x000EFE75,0x000EFF41,Sound\Music\Chaos Emerald.bin
+
+/* Sound Effects */
+#split	0x000FDE30,0x000FDE5E,Sound\SFX\33.bin
+#split	0x000FDE5E,0x000FDE6F,Sound\SFX\34.bin
+#split	0x000FDE6F,0x000FDEA1,Sound\SFX\35.bin
+#split	0x000FDEA1,0x000FDEC5,Sound\SFX\36.bin
+#split	0x000FDEC5,0x000FDEF4,Sound\SFX\37.bin
+#split	0x000FDEF4,0x000FDF2A,Sound\SFX\38.bin
+#split	0x000FDF2A,0x000FDF6B,Sound\SFX\39.bin
+#split	0x000FDF6B,0x000FDF96,Sound\SFX\3A.bin
+#split	0x000FDF96,0x000FDFE5,Sound\SFX\3B.bin
+#split	0x000FDFE5,0x000FE023,Sound\SFX\3C.bin
+#split	0x000FE023,0x000FE05D,Sound\SFX\3D.bin
+#split	0x000FE05D,0x000FE088,Sound\SFX\3E.bin
+#split	0x000FE088,0x000FE0AB,Sound\SFX\3F.bin
+#split	0x000FE0AB,0x000FE0CE,Sound\SFX\40.bin
+#split	0x000FE0CE,0x000FE0F1,Sound\SFX\41.bin
+#split	0x000FE0F1,0x000FE109,Sound\SFX\42.bin
+#split	0x000FE109,0x000FE122,Sound\SFX\43.bin
+#split	0x000FE122,0x000FE14F,Sound\SFX\44.bin
+#split	0x000FE14F,0x000FE177,Sound\SFX\45.bin
+#split	0x000FE177,0x000FE1A4,Sound\SFX\46.bin
+#split	0x000FE1A4,0x000FE1C4,Sound\SFX\47.bin
+#split	0x000FE1C4,0x000FE1DE,Sound\SFX\48.bin
+#split	0x000FE1DE,0x000FE206,Sound\SFX\49.bin
+#split	0x000FE206,0x000FE22E,Sound\SFX\4A.bin
+#split	0x000FE22E,0x000FE278,Sound\SFX\4B.bin
+#split	0x000FE278,0x000FE2A2,Sound\SFX\4C.bin
+#split	0x000FE2A2,0x000FE2CF,Sound\SFX\4D.bin
+#split	0x000FE2CF,0x000FE313,Sound\SFX\4E.bin
+#split	0x000FE313,0x000FE322,Sound\SFX\4F.bin
+#split	0x000FE322,0x000FE35A,Sound\SFX\50.bin
+#split	0x000FE35A,0x000FE38B,Sound\SFX\51.bin
+#split	0x000FE38B,0x000FE3A8,Sound\SFX\52.bin
+#split	0x000FE3A8,0x000FE3E8,Sound\SFX\53.bin
+#split	0x000FE3E8,0x000FE42B,Sound\SFX\54.bin
+#split	0x000FE42B,0x000FE453,Sound\SFX\55.bin
+#split	0x000FE453,0x000FE463,Sound\SFX\56.bin
+#split	0x000FE463,0x000FE481,Sound\SFX\57.bin
+#split	0x000FE481,0x000FE49A,Sound\SFX\58.bin
+#split	0x000FE49A,0x000FE4F6,Sound\SFX\59.bin
+#split	0x000FE4F6,0x000FE523,Sound\SFX\5A.bin
+#split	0x000FE523,0x000FE530,Sound\SFX\5B.bin
+#split	0x000FE530,0x000FE558,Sound\SFX\5C.bin
+#split	0x000FE558,0x000FE581,Sound\SFX\5D.bin
+#split	0x000FE581,0x000FE5B2,Sound\SFX\5E.bin
+#split	0x000FE5B2,0x000FE5DA,Sound\SFX\5F.bin
+#split	0x000FE5DA,0x000FE61B,Sound\SFX\60.bin
+#split	0x000FE61B,0x000FE64C,Sound\SFX\61.bin
+#split	0x000FE64C,0x000FE662,Sound\SFX\62.bin
+#split	0x000FE662,0x000FE68C,Sound\SFX\63.bin
+#split	0x000FE68C,0x000FE6AB,Sound\SFX\64.bin
+#split	0x000FE6AB,0x000FE6E1,Sound\SFX\65.bin
+#split	0x000FE6E1,0x000FE730,Sound\SFX\66.bin
+#split	0x000FE730,0x000FE75C,Sound\SFX\67.bin
+#split	0x000FE75C,0x000FE7B0,Sound\SFX\68.bin
+#split	0x000FE7B0,0x000FE7DD,Sound\SFX\69.bin
+#split	0x000FE7DD,0x000FE811,Sound\SFX\6A.bin
+#split	0x000FE811,0x000FE823,Sound\SFX\6B.bin
+#split	0x000FE823,0x000FE833,Sound\SFX\6C.bin
+#split	0x000FE833,0x000FE852,Sound\SFX\6D.bin
+#split	0x000FE852,0x000FE886,Sound\SFX\6E.bin
+#split	0x000FE886,0x000FE896,Sound\SFX\6F.bin
+#split	0x000FE896,0x000FE8E0,Sound\SFX\70.bin
+#split	0x000FE8E0,0x000FE8EA,Sound\SFX\71.bin
+#split	0x000FE8EA,0x000FE917,Sound\SFX\72.bin
+#split	0x000FE917,0x000FE94B,Sound\SFX\73.bin
+#split	0x000FE94B,0x000FE978,Sound\SFX\74.bin
+#split	0x000FE978,0x000FE9A7,Sound\SFX\75.bin
+#split	0x000FE9A7,0x000FE9D1,Sound\SFX\76.bin
+#split	0x000FE9D1,0x000FEA1B,Sound\SFX\77.bin
+#split	0x000FEA1B,0x000FEA48,Sound\SFX\78.bin
+#split	0x000FEA48,0x000FEA93,Sound\SFX\79.bin
+#split	0x000FEA93,0x000FEAC7,Sound\SFX\7A.bin
+#split	0x000FEAC7,0x000FEAF7,Sound\SFX\7B.bin
+#split	0x000FEAF7,0x000FEB28,Sound\SFX\7C.bin
+#split	0x000FEB28,0x000FEB55,Sound\SFX\7D.bin
+#split	0x000FEB55,0x000FEB6D,Sound\SFX\7E.bin
+#split	0x000FEB6D,0x000FEB8B,Sound\SFX\7F.bin
+#split	0x000FEB8B,0x000FEBBA,Sound\SFX\80.bin
+#split	0x000FEBBA,0x000FEC05,Sound\SFX\81.bin
+#split	0x000FEC05,0x000FEC32,Sound\SFX\82.bin
+#split	0x000FEC32,0x000FEC7E,Sound\SFX\83.bin
+#split	0x000FEC7E,0x000FECAB,Sound\SFX\84.bin
+#split	0x000FECAB,0x000FECD8,Sound\SFX\85.bin
+#split	0x000FECD8,0x000FED05,Sound\SFX\86.bin
+#split	0x000FED05,0x000FED3B,Sound\SFX\87.bin
+#split	0x000FED3B,0x000FED68,Sound\SFX\88.bin
+#split	0x000FED68,0x000FED75,Sound\SFX\89.bin
+#split	0x000FED75,0x000FEDA9,Sound\SFX\8A.bin
+#split	0x000FEDA9,0x000FEDDF,Sound\SFX\8B.bin
+#split	0x000FEDDF,0x000FEE10,Sound\SFX\8C.bin
+#split	0x000FEE10,0x000FEE2A,Sound\SFX\8D.bin
+#split	0x000FEE2A,0x000FEE5B,Sound\SFX\8E.bin
+#split	0x000FEE5B,0x000FEE91,Sound\SFX\8F.bin
+#split	0x000FEE91,0x000FEEC3,Sound\SFX\90.bin
+#split	0x000FEEC3,0x000FEEF9,Sound\SFX\91.bin
+#split	0x000FEEF9,0x000FEF2D,Sound\SFX\92.bin
+#split	0x000FEF2D,0x000FEF77,Sound\SFX\93.bin
+#split	0x000FEF77,0x000FEFA6,Sound\SFX\94.bin
+#split	0x000FEFA6,0x000FEFD5,Sound\SFX\95.bin
+#split	0x000FEFD5,0x000FF009,Sound\SFX\96.bin
+#split	0x000FF009,0x000FF01C,Sound\SFX\97.bin
+#split	0x000FF01C,0x000FF068,Sound\SFX\98.bin
+#split	0x000FF068,0x000FF090,Sound\SFX\99.bin
+#split	0x000FF090,0x000FF0AF,Sound\SFX\9A.bin
+#split	0x000FF0AF,0x000FF114,Sound\SFX\9B.bin
+#split	0x000FF114,0x000FF14B,Sound\SFX\9C.bin
+#split	0x000FF14B,0x000FF17F,Sound\SFX\9D.bin
+#split	0x000FF17F,0x000FF1C0,Sound\SFX\9E.bin
+#split	0x000FF1C0,0x000FF1FC,Sound\SFX\9F.bin
+#split	0x000FF1FC,0x000FF214,Sound\SFX\A0.bin
+#split	0x000FF214,0x000FF23C,Sound\SFX\A1.bin
+#split	0x000FF23C,0x000FF274,Sound\SFX\A2.bin
+#split	0x000FF274,0x000FF2A1,Sound\SFX\A3.bin
+#split	0x000FF2A1,0x000FF2CE,Sound\SFX\A4.bin
+#split	0x000FF2CE,0x000FF2FB,Sound\SFX\A5.bin
+#split	0x000FF2FB,0x000FF313,Sound\SFX\A6.bin
+#split	0x000FF313,0x000FF33B,Sound\SFX\A7.bin
+#split	0x000FF33B,0x000FF365,Sound\SFX\A8.bin
+#split	0x000FF365,0x000FF38F,Sound\SFX\A9.bin
+#split	0x000FF38F,0x000FF3EA,Sound\SFX\AA.bin
+#split	0x000FF3EA,0x000FF42A,Sound\SFX\AB.bin
+#split	0x000FF42A,0x000FF49C,Sound\SFX\AC.bin
+#split	0x000FF49C,0x000FF4AB,Sound\SFX\AD.bin
+#split	0x000FF4AB,0x000FF4DA,Sound\SFX\AE.bin
+#split	0x000FF4DA,0x000FF507,Sound\SFX\AF.bin
+#split	0x000FF507,0x000FF582,Sound\SFX\B0.bin
+#split	0x000FF582,0x000FF5D7,Sound\SFX\B1.bin
+#split	0x000FF5D7,0x000FF603,Sound\SFX\B2.bin
+#split	0x000FF603,0x000FF67D,Sound\SFX\B3.bin
+#split	0x000FF67D,0x000FF6AA,Sound\SFX\B4.bin
+#split	0x000FF6AA,0x000FF6D2,Sound\SFX\B5.bin
+#split	0x000FF6D2,0x000FF713,Sound\SFX\B6.bin
+#split	0x000FF713,0x000FF745,Sound\SFX\B7.bin
+#split	0x000FF745,0x000FF76C,Sound\SFX\B8.bin
+#split	0x000FF76C,0x000FF794,Sound\SFX\B9.bin
+#split	0x000FF794,0x000FF7BE,Sound\SFX\BA.bin
+#split	0x000FF7BE,0x000FF7CE,Sound\SFX\BB.bin
+#split	0x000FF7CE,0x000FF7F9,Sound\SFX\BC.bin
+#split	0x000FF7F9,0x000FF837,Sound\SFX\BD.bin
+#split	0x000FF837,0x000FF86A,Sound\SFX\BE.bin
+#split	0x000FF86A,0x000FF89C,Sound\SFX\BF.bin
+#split	0x000FF89C,0x000FF8D1,Sound\SFX\C0.bin
+#split	0x000FF8D1,0x000FF907,Sound\SFX\C1.bin
+#split	0x000FF907,0x000FF91E,Sound\SFX\C2.bin
+#split	0x000FF91E,0x000FF94E,Sound\SFX\C3.bin
+#split	0x000FF94E,0x000FF97E,Sound\SFX\C4.bin
+#split	0x000FF97E,0x000FF9B7,Sound\SFX\C5.bin
+#split	0x000FF9B7,0x000FF9F2,Sound\SFX\C6.bin
+#split	0x000FF9F2,0x000FFA21,Sound\SFX\C7.bin
+#split	0x000FFA21,0x000FFA2B,Sound\SFX\C8.bin
+#split	0x000FFA2B,0x000FFA66,Sound\SFX\C9.bin
+#split	0x000FFA66,0x000FFA9C,Sound\SFX\CA.bin
+#split	0x000FFA9C,0x000FFAD7,Sound\SFX\CB.bin
+#split	0x000FFAD7,0x000FFB12,Sound\SFX\CC.bin
+#split	0x000FFB12,0x000FFB45,Sound\SFX\CD.bin
+#split	0x000FFB45,0x000FFB60,Sound\SFX\CE.bin
+#split	0x000FFB60,0x000FFB6A,Sound\SFX\CF.bin
+#split	0x000FFB6A,0x000FFBA1,Sound\SFX\D0.bin
+#split	0x000FFBA1,0x000FFBBE,Sound\SFX\D1.bin
+#split	0x000FFBBE,0x000FFBF4,Sound\SFX\D2.bin
+#split	0x000FFBF4,0x000FFC2D,Sound\SFX\D3.bin
+#split	0x000FFC2D,0x000FFC64,Sound\SFX\D4.bin
+#split	0x000FFC64,0x000FFC9D,Sound\SFX\D5.bin
+#split	0x000FFC9D,0x000FFCCE,Sound\SFX\D6.bin
+#split	0x000FFCCE,0x000FFCFF,Sound\SFX\D7.bin
+#split	0x000FFCFF,0x000FFD32,Sound\SFX\D8.bin
+#split	0x000FFD32,0x000FFD62,Sound\SFX\D9.bin
+#split	0x000FFD62,0x000FFD94,Sound\SFX\DA.bin
+#split	0x000FFD94,0x000FFDA9,Sound\SFX\DB.bin
+
+/* General sound */
+#split	0x000F6960,0x000F7760,Sound\Z80 Sound Driver.bin
+#split	0x000F7760,0x000F7DF0,Sound\Z80 Sound Driver 2.bin
+#split	0x000F8000,0x000FDE2F,Sound\Sega PCM.bin
+
+/* DAC data */
+#split	0x000F01D7,0x000F04A6,Sound\DAC\86.bin
+#split	0x000F04A6,0x000F0C24,Sound\DAC\81.bin
+#split	0x000F0C24,0x000F1091,Sound\DAC\82-85.bin
+#split	0x000F1091,0x000F19EC,Sound\DAC\94-97.bin
+#split	0x000F19EC,0x000F200E,Sound\DAC\90-93.bin
+#split	0x000F200E,0x000F3235,Sound\DAC\88.bin
+#split	0x000F3235,0x000F3395,Sound\DAC\8A-8B.bin
+#split	0x000F3395,0x000F33F5,Sound\DAC\8C.bin
+#split	0x000F33F5,0x000F387C,Sound\DAC\8D-8E.bin
+#split	0x000F387C,0x000F3F98,Sound\DAC\87.bin
+#split	0x000F3F98,0x000F4487,Sound\DAC\8F.bin
+#split	0x000F4487,0x000F4E84,Sound\DAC\89.bin
+#split	0x000F4E84,0x000F5AEC,Sound\DAC\98-9A.bin
+#split	0x000F5AEC,0x000F610C,Sound\DAC\9B.bin
+#split	0x000F610C,0x000F6954,Sound\DAC\B2-B3.bin
+
+/* Demo data */
+#split	0x0015FC12,0x0015FC82,Levels\MHZ\Demodata\1.bin
+#split	0x0015FC82,0x0015FD10,Levels\FBZ\Demodata\1.bin
+#split	0x0015FD10,0x0015FD6C,Levels\SOZ\Demodata\1.bin
+#split	0x0015FD6C,0x0015FDDC,General\Special Stage\Demodata\1.bin
+
+/* 16x16 block mappings (Kosinski-compressed) */
+#split	0x00194400,0x00195040,Levels\FBZ\Blocks\Primary.bin
+#split	0x0019A312,0x0019ABF2,Levels\MHZ\Blocks\Primary.bin
+#split	0x0019DE94,0x0019E714,Levels\MHZ\Blocks\Secondary.bin
+#split	0x001A1B36,0x001A1EB6,Levels\MHZ\Blocks\Custom.bin
+#split	0x001A3568,0x001A4198,Levels\SOZ\Blocks\Primary.bin
+#split	0x001AA1DA,0x001AA36A,Levels\SOZ\Blocks\Act 1 Secondary.bin
+#split	0x001AD05C,0x001AD24C,Levels\SOZ\Blocks\Act 1 Custom.bin
+#split	0x001AD68E,0x001AD81E,Levels\SOZ\Blocks\Act 2 Secondary.bin
+#split	0x001B0720,0x001B0860,Levels\SOZ\Blocks\Act 2 Custom.bin
+#split	0x001B0FC2,0x001B1102,Levels\LRZ\Blocks\Primary.bin
+#split	0x001B1B14,0x001B28F4,Levels\LRZ\Blocks\Act 1 Secondary.bin
+#split	0x001B8A96,0x001B97D6,Levels\LRZ\Blocks\Act 2 Secondary.bin
+#split	0x001BECF8,0x001BEE58,Levels\HPZ\Blocks\Primary.bin
+#split	0x001BFCCA,0x001C051A,Levels\LRZ\Blocks\Act 3 Secondary.bin
+#split	0x001C30FC,0x001C3F2C,Levels\HPZ\Blocks\Secondary.bin
+#split	0x001C8A7E,0x001C8AFE,Levels\SSZ\Blocks\Act 1 Primary.bin
+#split	0x001C8E50,0x001C9C50,Levels\SSZ\Blocks\Act 1 Secondary.bin
+#split	0x001CE312,0x001CE832,Levels\SSZ\Blocks\Act 1 Custom.bin
+#split	0x001CF2D4,0x001CFB44,Levels\SSZ\Blocks\Act 2.bin
+#split	0x001D1DD6,0x001D2CE6,Levels\DEZ\Blocks\Primary.bin
+#split	0x001D7628,0x001D77D8,Levels\DEZ\Blocks\Act 1 Secondary.bin
+#split	0x001D7E3A,0x001D7FCA,Levels\DEZ\Blocks\Act 2 Secondary.bin
+#split	0x001D899C,0x001D93FC,Levels\DEZ\Blocks\Act 3.bin
+#split	0x001DC8BE,0x001DCD4E,Levels\DDZ\Blocks\Primary.bin
+#split	0x001DE770,0x001DEB40,Levels\Pachinko\Blocks\Primary.bin
+#split	0x001E01B2,0x001E0AF2,Levels\Slots\Blocks\Primary.bin
+
+/* 128x128 block mappings (Kosinski-compressed) */
+#split	0x001974A2,0x0019A312,Levels\FBZ\Chunks\Primary.bin
+#split	0x0019D044,0x0019DE94,Levels\MHZ\Chunks\Primary.bin
+#split	0x0019F8A6,0x001A1B36,Levels\MHZ\Chunks\Secondary.bin
+#split	0x001A30E8,0x001A3568,Levels\MHZ\Chunks\Custom.bin
+#split	0x001A773A,0x001AA1DA,Levels\SOZ\Chunks\Primary.bin
+#split	0x001B1AA4,0x001B1B14,Levels\LRZ\Chunks\Primary.bin
+#split	0x001B5CD6,0x001B8A96,Levels\LRZ\Chunks\Act 1 Secondary.bin
+#split	0x001BC738,0x001BECF8,Levels\LRZ\Chunks\Act 2 Secondary.bin
+#split	0x001BFBEA,0x001BFCCA,Levels\HPZ\Chunks\Primary.bin
+#split	0x001C290C,0x001C30FC,Levels\LRZ\Chunks\Act 3 Secondary.bin
+#split	0x001C71FE,0x001C8A7E,Levels\HPZ\Chunks\Secondary.bin
+#split	0x001C8E00,0x001C8E50,Levels\SSZ\Chunks\Act 1 Primary.bin
+#split	0x001CBDA2,0x001CE312,Levels\SSZ\Chunks\Act 1 Secondary.bin
+#split	0x001CEFE4,0x001CF2D4,Levels\SSZ\Chunks\Act 1 Custom.bin
+#split	0x001D17A6,0x001D1DD6,Levels\SSZ\Chunks\Act 2.bin
+#split	0x001D5068,0x001D7628,Levels\DEZ\Chunks\Primary.bin
+#split	0x001DC24E,0x001DC8BE,Levels\DEZ\Chunks\Act 3.bin
+#split	0x001DE530,0x001DE770,Levels\DDZ\Chunks\Primary.bin
+#split	0x001DFE92,0x001E01B2,Levels\Pachinko\Chunks\Primary.bin
+#split	0x001E36C4,0x001E3BB4,Levels\Slots\Chunks\Primary.bin
+
+/* Enigma Compressed plane mappings */
+#split	0x000AEDB0,0x000AEED0,General\Special Stage\Enigma Map\BG.bin
+#split	0x000AEF54,0x000B07B8,General\Special Stage\Enigma Map\Layout.bin
+#split	0x000CAB54,0x000CAD00,General\Sprites\S2Menu\2P Options Enigma.bin
+#split	0x000CBA68,0x000CBB32,General\Title\Enigma Map\SK SEGA.bin
+#split	0x000CBB32,0x000CBCE0,General\Title\Enigma Map\SK SonicKnux Frame 1.bin
+#split	0x000CBCE0,0x000CBF3E,General\Title\Enigma Map\SK SonicKnux Frame 2.bin
+#split	0x000CBF3E,0x000CC1C4,General\Title\Enigma Map\SK SonicKnux Frame 3.bin
+#split	0x000CC1C4,0x000CC3AA,General\Title\Enigma Map\SK SonicKnux Frame 4.bin
+#split	0x000CC3AA,0x000CC6A0,General\Title\Enigma Map\SK Background.bin
+#split	0x00187CB0,0x00187D1C,General\Blue Sphere\Enigma Map\Title FG.bin
+#split	0x00189C4E,0x00189C7C,General\Blue Sphere\Enigma Map\Title BG.bin
+
+/* Slots Bonus */
+#split	0x001E4080,0x001E4084,Levels\Slots\SSLayout\Bonus Player Start.bin
+#split	0x001E4084,0x001E4484,Levels\Slots\SSLayout\Bonus Layout.bin
+
+/* Object positions */
+#split	0x000DF3FE,0x000DF7B2,Levels\Misc\S2K Object Pos\EHZ 1.bin
+#split	0x000DF7B2,0x000DFBD2,Levels\Misc\S2K Object Pos\EHZ 2.bin
+#split	0x000DFBD2,0x000E005E,Levels\Misc\S2K Object Pos\MTZ 1.bin
+#split	0x000E005E,0x000E05A4,Levels\Misc\S2K Object Pos\MTZ 2.bin
+#split	0x000E05A4,0x000E0C10,Levels\Misc\S2K Object Pos\MTZ 3.bin
+#split	0x000E0C10,0x000E1012,Levels\Misc\S2K Object Pos\WFZ.bin
+#split	0x000E1018,0x000E1396,Levels\Misc\S2K Object Pos\HTZ 1.bin
+#split	0x000E1396,0x000E1A4A,Levels\Misc\S2K Object Pos\HTZ 2.bin
+#split	0x000E1A4A,0x000E1F18,Levels\Misc\S2K Object Pos\OOZ 1.bin
+#split	0x000E1F18,0x000E23DA,Levels\Misc\S2K Object Pos\OOZ 2.bin
+#split	0x000E23DA,0x000E26F2,Levels\Misc\S2K Object Pos\MCZ 1.bin
+#split	0x000E26F2,0x000E2A88,Levels\Misc\S2K Object Pos\MCZ 2.bin
+#split	0x000E2A88,0x000E2EFC,Levels\Misc\S2K Object Pos\CPZ 1.bin
+#split	0x000E2EFC,0x000E34D8,Levels\Misc\S2K Object Pos\CPZ 2.bin
+#split	0x000E34D8,0x000E398E,Levels\Misc\S2K Object Pos\ARZ 1.bin
+#split	0x000E398E,0x000E40AE,Levels\Misc\S2K Object Pos\ARZ 2.bin
+#split	0x001E44DA,0x001E4876,Levels\AIZ\Object Pos\1.bin
+#split	0x001E4876,0x001E5A16,Levels\AIZ\Object Pos\2.bin
+#split	0x001E6090,0x001E6990,Levels\HCZ\Object Pos\1.bin
+#split	0x001E6990,0x001E758A,Levels\HCZ\Object Pos\2.bin
+#split	0x001E8088,0x001E8B38,Levels\MGZ\Object Pos\1.bin
+#split	0x001E932C,0x001E9B36,Levels\MGZ\Object Pos\2.bin
+#split	0x001EA0C2,0x001EAC38,Levels\CNZ\Object Pos\1.bin
+#split	0x001EAC38,0x001EBCD6,Levels\CNZ\Object Pos\2.bin
+#split	0x001EC5DC,0x001ECFBA,Levels\FBZ\Object Pos\1.bin
+#split	0x001ECFBA,0x001EDA10,Levels\FBZ\Object Pos\2.bin
+#split	0x001EE3CA,0x001EE9A6,Levels\ICZ\Object Pos\1.bin
+#split	0x001EE9A6,0x001EF204,Levels\ICZ\Object Pos\2.bin
+#split	0x001EFC42,0x001F065C,Levels\LBZ\Object Pos\1.bin
+#split	0x001F065C,0x001F11D8,Levels\LBZ\Object Pos\2.bin
+#split	0x001F2296,0x001F306A,Levels\MHZ\Object Pos\1.bin
+#split	0x001F306A,0x001F3D6C,Levels\MHZ\Object Pos\2.bin
+#split	0x001F4866,0x001F5676,Levels\SOZ\Object Pos\1.bin
+#split	0x001F5676,0x001F61F8,Levels\SOZ\Object Pos\2.bin
+#split	0x001F6E50,0x001F7C9C,Levels\LRZ\Object Pos\1.bin
+#split	0x001F7C9C,0x001F874C,Levels\LRZ\Object Pos\2.bin
+#split	0x001F90EE,0x001F95F2,Levels\SSZ\Object Pos\1.bin
+#split	0x001F95F2,0x001F9616,Levels\SSZ\Object Pos\2.bin
+#split	0x001F98F4,0x001FA188,Levels\DEZ\Object Pos\1.bin
+#split	0x001FA188,0x001FAD22,Levels\DEZ\Object Pos\2.bin
+#split	0x001FB6FA,0x001FC22E,Levels\DDZ\Object Pos\1.bin
+#split	0x001FC22E,0x001FC234,Levels\DDZ\Object Pos\2.bin
+#split	0x001FC54E,0x001FC554,Levels\SSZ\Object Pos\Ending.bin
+#split	0x001FC560,0x001FC596,Levels\ALZ\Object Pos\1.bin
+#split	0x001FC5A2,0x001FC602,Levels\BPZ\Object Pos\1.bin
+#split	0x001FC60E,0x001FC67A,Levels\DPZ\Object Pos\1.bin
+#split	0x001FC686,0x001FC6E6,Levels\CGZ\Object Pos\1.bin
+#split	0x001FC6F2,0x001FC752,Levels\EMZ\Object Pos\1.bin
+#split	0x001FC75E,0x001FC81E,Levels\Gumball\Object Pos\1.bin
+#split	0x001FC82A,0x001FCA86,Levels\Pachinko\Object Pos\1.bin
+#split	0x001FCB90,0x001FCB96,Levels\Slots\Object Pos\1.bin
+#split	0x001FCBA2,0x001FCC7A,Levels\LRZ\Object Pos\3.bin
+#split	0x001FCC7A,0x001FCD82,Levels\HPZ\Object Pos\1.bin
+#split	0x001FCEE8,0x001FCEEE,Levels\DEZ\Object Pos\3.bin
+#split	0x001FCEEE,0x001FCF24,Levels\HPZ\Object Pos\Mini.bin
+
+/* Ring positions */
+#split	0x001E5A16,0x001E5BBC,Levels\AIZ\Ring Pos\1.bin
+#split	0x001E5BBC,0x001E608A,Levels\AIZ\Ring Pos\2.bin
+#split	0x001E758A,0x001E7C70,Levels\HCZ\Ring Pos\1.bin
+#split	0x001E7C70,0x001E8082,Levels\HCZ\Ring Pos\2.bin
+#split	0x001E8B38,0x001E9326,Levels\MGZ\Ring Pos\1.bin
+#split	0x001E9B36,0x001EA0BC,Levels\MGZ\Ring Pos\2.bin
+#split	0x001EBCD6,0x001EC1BC,Levels\CNZ\Ring Pos\1.bin
+#split	0x001EC1BC,0x001EC5D6,Levels\CNZ\Ring Pos\2.bin
+#split	0x001EDA10,0x001EDEC2,Levels\FBZ\Ring Pos\1.bin
+#split	0x001EDEC2,0x001EE2D4,Levels\FBZ\Ring Pos\2.bin
+#split	0x001EF204,0x001EF4BA,Levels\ICZ\Ring Pos\1.bin
+#split	0x001EF4BA,0x001EFC3C,Levels\ICZ\Ring Pos\2.bin
+#split	0x001F11D8,0x001F1676,Levels\LBZ\Ring Pos\1.bin
+#split	0x001F1676,0x001F1CE0,Levels\LBZ\Ring Pos\2.bin
+#split	0x001F3D6C,0x001F4312,Levels\MHZ\Ring Pos\1.bin
+#split	0x001F4312,0x001F4860,Levels\MHZ\Ring Pos\2.bin
+#split	0x001F61F8,0x001F67FA,Levels\SOZ\Ring Pos\1.bin
+#split	0x001F67FA,0x001F6C70,Levels\SOZ\Ring Pos\2.bin
+#split	0x001F874C,0x001F8C7E,Levels\LRZ\Ring Pos\1.bin
+#split	0x001F8C7E,0x001F90E8,Levels\LRZ\Ring Pos\2.bin
+#split	0x001F9616,0x001F98E8,Levels\SSZ\Ring Pos\1.bin
+#split	0x001F98E8,0x001F98EE,Levels\SSZ\Ring Pos\2.bin
+#split	0x001FAD22,0x001FB180,Levels\DEZ\Ring Pos\1.bin
+#split	0x001FB180,0x001FB49E,Levels\DEZ\Ring Pos\2.bin
+#split	0x001FC234,0x001FC542,Levels\DDZ\Ring Pos\1.bin
+#split	0x001FC542,0x001FC548,Levels\DDZ\Ring Pos\2.bin
+#split	0x001FC554,0x001FC55A,Levels\SSZ\Ring Pos\Ending.bin
+#split	0x001FC596,0x001FC59C,Levels\ALZ\Ring Pos\1.bin
+#split	0x001FC602,0x001FC608,Levels\BPZ\Ring Pos\1.bin
+#split	0x001FC67A,0x001FC680,Levels\DPZ\Ring Pos\1.bin
+#split	0x001FC6E6,0x001FC6EC,Levels\CGZ\Ring Pos\1.bin
+#split	0x001FC752,0x001FC758,Levels\EMZ\Ring Pos\1.bin
+#split	0x001FC81E,0x001FC824,Levels\Gumball\Ring Pos\1.bin
+#split	0x001FCA86,0x001FCB8A,Levels\Pachinko\Ring Pos\1.bin
+#split	0x001FCB96,0x001FCB9C,Levels\Slots\Ring Pos\1.bin
+#split	0x001FCD82,0x001FCE58,Levels\LRZ\Ring Pos\3.bin
+#split	0x001FCE58,0x001FCEE8,Levels\HPZ\Ring Pos\1.bin
+#split	0x001FCF24,0x001FCF2A,Levels\DEZ\Ring Pos\3.bin
+
+/* Start Positions*/
+#split	0x001E3C18,0x001E3C1C,Levels\AIZ\Start Location\Sonic\1.bin
+#split	0x001E3C1C,0x001E3C20,Levels\AIZ\Start Location\Sonic\2.bin
+#split	0x001E3C20,0x001E3C24,Levels\HCZ\Start Location\Sonic\1.bin
+#split	0x001E3C24,0x001E3C28,Levels\HCZ\Start Location\Sonic\2.bin
+#split	0x001E3C28,0x001E3C2C,Levels\MGZ\Start Location\Sonic\1.bin
+#split	0x001E3C2C,0x001E3C30,Levels\MGZ\Start Location\Sonic\2.bin
+#split	0x001E3C30,0x001E3C34,Levels\CNZ\Start Location\Sonic\1.bin
+#split	0x001E3C34,0x001E3C38,Levels\CNZ\Start Location\Sonic\2.bin
+#split	0x001E3C38,0x001E3C3C,Levels\FBZ\Start Location\Sonic\1.bin
+#split	0x001E3C3C,0x001E3C40,Levels\FBZ\Start Location\Sonic\2.bin
+#split	0x001E3C40,0x001E3C44,Levels\ICZ\Start Location\Sonic\1.bin
+#split	0x001E3C44,0x001E3C48,Levels\ICZ\Start Location\Sonic\2.bin
+#split	0x001E3C48,0x001E3C4C,Levels\LBZ\Start Location\Sonic\1.bin
+#split	0x001E3C4C,0x001E3C50,Levels\LBZ\Start Location\Sonic\2.bin
+#split	0x001E3C50,0x001E3C54,Levels\MHZ\Start Location\Sonic\1.bin
+#split	0x001E3C54,0x001E3C58,Levels\MHZ\Start Location\Sonic\2.bin
+#split	0x001E3C58,0x001E3C5C,Levels\SOZ\Start Location\Sonic\1.bin
+#split	0x001E3C5C,0x001E3C60,Levels\SOZ\Start Location\Sonic\2.bin
+#split	0x001E3C60,0x001E3C64,Levels\LRZ\Start Location\Sonic\1.bin
+#split	0x001E3C64,0x001E3C68,Levels\LRZ\Start Location\Sonic\2.bin
+#split	0x001E3C68,0x001E3C6C,Levels\SSZ\Start Location\Sonic\1.bin
+#split	0x001E3C6C,0x001E3C70,Levels\SSZ\Start Location\Sonic\2.bin
+#split	0x001E3C70,0x001E3C74,Levels\DEZ\Start Location\Sonic\1.bin
+#split	0x001E3C74,0x001E3C78,Levels\DEZ\Start Location\Sonic\2.bin
+#split	0x001E3C78,0x001E3C7C,Levels\DDZ\Start Location\Sonic\1.bin
+#split	0x001E3C7C,0x001E3C80,Levels\DDZ\Start Location\Sonic\2.bin
+#split	0x001E3C80,0x001E3C84,Levels\AIZ\Start Location\Sonic\Intro.bin
+#split	0x001E3C84,0x001E3C88,Levels\SSZ\Start Location\Sonic\Ending.bin
+#split	0x001E3C88,0x001E3C8C,Levels\ALZ\Start Location\Sonic\1.bin
+#split	0x001E3C8C,0x001E3C90,Levels\ALZ\Start Location\Sonic\2.bin
+#split	0x001E3C90,0x001E3C94,Levels\BPZ\Start Location\Sonic\1.bin
+#split	0x001E3C94,0x001E3C98,Levels\BPZ\Start Location\Sonic\2.bin
+#split	0x001E3C98,0x001E3C9C,Levels\DPZ\Start Location\Sonic\1.bin
+#split	0x001E3C9C,0x001E3CA0,Levels\DPZ\Start Location\Sonic\2.bin
+#split	0x001E3CA0,0x001E3CA4,Levels\CGZ\Start Location\Sonic\1.bin
+#split	0x001E3CA4,0x001E3CA8,Levels\CGZ\Start Location\Sonic\2.bin
+#split	0x001E3CA8,0x001E3CAC,Levels\EMZ\Start Location\Sonic\1.bin
+#split	0x001E3CAC,0x001E3CB0,Levels\EMZ\Start Location\Sonic\2.bin
+#split	0x001E3CB0,0x001E3CB4,Levels\Gumball\Start Location\Sonic\1.bin
+#split	0x001E3CB4,0x001E3CB8,Levels\Gumball\Start Location\Sonic\2.bin
+#split	0x001E3CB8,0x001E3CBC,Levels\Pachinko\Start Location\Sonic\1.bin
+#split	0x001E3CBC,0x001E3CC0,Levels\Pachinko\Start Location\Sonic\2.bin
+#split	0x001E3CC0,0x001E3CC4,Levels\Slots\Start Location\Sonic\1.bin
+#split	0x001E3CC4,0x001E3CC8,Levels\Slots\Start Location\Sonic\2.bin
+#split	0x001E3CC8,0x001E3CCC,Levels\LRZ\Start Location\Sonic\Boss.bin
+#split	0x001E3CCC,0x001E3CD0,Levels\HPZ\Start Location\Sonic\1.bin
+#split	0x001E3CD0,0x001E3CD4,Levels\DEZ\Start Location\Sonic\Boss.bin
+#split	0x001E3CD4,0x001E3CD8,Levels\HPZ\Start Location\Sonic\Special Stage.bin
+
+#split	0x001E3CD8,0x001E3CDC,Levels\AIZ\Start Location\Knuckles\1.bin
+#split	0x001E3CDC,0x001E3CE0,Levels\AIZ\Start Location\Knuckles\2.bin
+#split	0x001E3CE0,0x001E3CE4,Levels\HCZ\Start Location\Knuckles\1.bin
+#split	0x001E3CE4,0x001E3CE8,Levels\HCZ\Start Location\Knuckles\2.bin
+#split	0x001E3CE8,0x001E3CEC,Levels\MGZ\Start Location\Knuckles\1.bin
+#split	0x001E3CEC,0x001E3CF0,Levels\MGZ\Start Location\Knuckles\2.bin
+#split	0x001E3CF0,0x001E3CF4,Levels\CNZ\Start Location\Knuckles\1.bin
+#split	0x001E3CF4,0x001E3CF8,Levels\CNZ\Start Location\Knuckles\2.bin
+#split	0x001E3CF8,0x001E3CFC,Levels\FBZ\Start Location\Knuckles\1.bin
+#split	0x001E3CFC,0x001E3D00,Levels\FBZ\Start Location\Knuckles\2.bin
+#split	0x001E3D00,0x001E3D04,Levels\ICZ\Start Location\Knuckles\1.bin
+#split	0x001E3D04,0x001E3D08,Levels\ICZ\Start Location\Knuckles\2.bin
+#split	0x001E3D08,0x001E3D0C,Levels\LBZ\Start Location\Knuckles\1.bin
+#split	0x001E3D0C,0x001E3D10,Levels\LBZ\Start Location\Knuckles\2.bin
+#split	0x001E3D10,0x001E3D14,Levels\MHZ\Start Location\Knuckles\1.bin
+#split	0x001E3D14,0x001E3D18,Levels\MHZ\Start Location\Knuckles\2.bin
+#split	0x001E3D18,0x001E3D1C,Levels\SOZ\Start Location\Knuckles\1.bin
+#split	0x001E3D1C,0x001E3D20,Levels\SOZ\Start Location\Knuckles\2.bin
+#split	0x001E3D20,0x001E3D24,Levels\LRZ\Start Location\Knuckles\1.bin
+#split	0x001E3D24,0x001E3D28,Levels\LRZ\Start Location\Knuckles\2.bin
+#split	0x001E3D28,0x001E3D2C,Levels\SSZ\Start Location\Knuckles\1.bin
+#split	0x001E3D2C,0x001E3D30,Levels\SSZ\Start Location\Knuckles\2.bin
+#split	0x001E3D30,0x001E3D34,Levels\DEZ\Start Location\Knuckles\1.bin
+#split	0x001E3D34,0x001E3D38,Levels\DEZ\Start Location\Knuckles\2.bin
+#split	0x001E3D38,0x001E3D3C,Levels\DDZ\Start Location\Knuckles\1.bin
+#split	0x001E3D3C,0x001E3D40,Levels\DDZ\Start Location\Knuckles\2.bin
+#split	0x001E3D40,0x001E3D44,Levels\AIZ\Start Location\Knuckles\Intro.bin
+#split	0x001E3D44,0x001E3D48,Levels\SSZ\Start Location\Knuckles\Ending.bin
+#split	0x001E3D48,0x001E3D4C,Levels\ALZ\Start Location\Knuckles\1.bin
+#split	0x001E3D4C,0x001E3D50,Levels\ALZ\Start Location\Knuckles\2.bin
+#split	0x001E3D50,0x001E3D54,Levels\BPZ\Start Location\Knuckles\1.bin
+#split	0x001E3D54,0x001E3D58,Levels\BPZ\Start Location\Knuckles\2.bin
+#split	0x001E3D58,0x001E3D5C,Levels\DPZ\Start Location\Knuckles\1.bin
+#split	0x001E3D5C,0x001E3D60,Levels\DPZ\Start Location\Knuckles\2.bin
+#split	0x001E3D60,0x001E3D64,Levels\CGZ\Start Location\Knuckles\1.bin
+#split	0x001E3D64,0x001E3D68,Levels\CGZ\Start Location\Knuckles\2.bin
+#split	0x001E3D68,0x001E3D6C,Levels\EMZ\Start Location\Knuckles\1.bin
+#split	0x001E3D6C,0x001E3D70,Levels\EMZ\Start Location\Knuckles\2.bin
+#split	0x001E3D70,0x001E3D74,Levels\Gumball\Start Location\Knuckles\1.bin
+#split	0x001E3D74,0x001E3D78,Levels\Gumball\Start Location\Knuckles\2.bin
+#split	0x001E3D78,0x001E3D7C,Levels\Pachinko\Start Location\Knuckles\1.bin
+#split	0x001E3D7C,0x001E3D80,Levels\Pachinko\Start Location\Knuckles\2.bin
+#split	0x001E3D80,0x001E3D84,Levels\Slots\Start Location\Knuckles\1.bin
+#split	0x001E3D84,0x001E3D88,Levels\Slots\Start Location\Knuckles\2.bin
+#split	0x001E3D88,0x001E3D8C,Levels\LRZ\Start Location\Knuckles\Boss.bin
+#split	0x001E3D8C,0x001E3D90,Levels\HPZ\Start Location\Knuckles\1.bin
+#split	0x001E3D90,0x001E3D94,Levels\DEZ\Start Location\Knuckles\Boss.bin
+#split	0x001E3D94,0x001E3D98,Levels\HPZ\Start Location\Knuckles\Special Stage.bin
+
+/* Collision */
+#split	0x000981C0,0x000987C0,Levels\FBZ\Collision\1.bin
+#split	0x000987C0,0x00098DC0,Levels\MHZ\Collision\1.bin
+#split	0x00098DC0,0x000993C0,Levels\Misc\Unknown Collision.bin
+#split	0x000993C0,0x000999C0,Levels\SOZ\Collision\1.bin
+#split	0x000999C0,0x00099FC0,Levels\LRZ\Collision\1.bin
+#split	0x00099FC0,0x0009A5C0,Levels\LRZ\Collision\2.bin
+#split	0x0009A5C0,0x0009ABC0,Levels\SSZ\Collision\1.bin
+#split	0x0009ABC0,0x0009B1C0,Levels\SSZ\Collision\2.bin
+#split	0x0009B1C0,0x0009B7C0,Levels\DEZ\Collision\1.bin
+#split	0x0009B7C0,0x0009BDC0,Levels\DDZ\Collision\1.bin
+#split	0x0009BDC0,0x0009C3C0,Levels\Pachinko\Collision\1.bin
+#split	0x0009C3C0,0x0009C9C0,Levels\Slots\Collision\1.bin
+#split	0x0009C9C0,0x0009CFC0,Levels\LRZ\Collision\3.bin
+#split	0x0009CFC0,0x0009D5C0,Levels\HPZ\Collision\1.bin
+
+#split	0x00096000,0x00096100,Levels\Misc\angles.bin
+#split	0x00096100,0x00097100,Levels\Misc\Height Maps.bin
+#split	0x00097100,0x00098100,Levels\Misc\Height Maps Rotated.bin

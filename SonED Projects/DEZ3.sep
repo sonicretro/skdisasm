@@ -1,0 +1,65 @@
+Type: Level
+
+Zone ID:   17
+Act ID:     0
+
+Object Def: objdef\skobj
+Object Palette: objdef\skobj1.pcx
+
+8x8 Compression:      5
+Num 8x8 Pages:        1
+8x8 Tiles Page 0:     ..\Levels\DEZ\Tiles\Final Boss Act.bin
+
+16x16 Compression:    1
+Num 16x16 Pages:      1
+Page0 8x8 Page:       0
+16x16 Tiles Page 0:   ..\Levels\DEZ\Blocks\Act 3.bin
+
+Metatile Size:        128
+128x128 Compression:  1
+Num 128x128 Pages:    1
+Page0 16x16 Page:     0
+128x128 Tiles Page 0: ..\Levels\DEZ\Chunks\Act 3.bin
+
+Layout Format:        2
+Layout Compression:   0
+BG 128x128 Page:      0
+Level Layout:         ..\Levels\DEZ\Layout\3.bin
+
+Objects Format:       4
+Objects:              ..\Levels\DEZ\Object Pos\3.bin
+Rings Format:         2
+Objects:              ..\Levels\DEZ\Ring Pos\3.bin
+Misc Format:          0
+Num Start Positions:  2
+Start Position 0:     ..\Levels\DEZ\Start Location\Sonic\Boss.bin
+Start Position 1:     ..\Levels\DEZ\Start Location\Knuckles\Boss.bin
+
+Palettes-
+
+Number of files: 2
+
+  Palette 0-
+
+   Start index:        0
+   Number of entries: 16
+   File:              ..\General\Sprites\Sonic\Palettes\SonicAndTails.bin
+
+  Palette 1-
+
+   Start index:       16
+   Number of entries: 48
+   File:              ..\Levels\DEZ\Palettes\Boss.bin
+
+Collision Map Format:    0
+Collision Array:         ..\Levels\Misc\Height Maps.bin
+Rotated Collision Array: ..\Levels\Misc\Height Maps Rotated.bin
+Angle Array:             ..\Levels\Misc\Angles.bin
+
+Collision Index Format:      3
+Collision Index Compression: 0
+Collision Index: ..\Levels\DEZ\Collision\1.bin
+
+Game Name: Sonic 3
+
+-EOF-
