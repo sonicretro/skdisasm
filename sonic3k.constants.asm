@@ -74,6 +74,20 @@ lrb_solid_bit =		$47 ; byte ; the bit to check for left/right/bottom solidity (e
 ; property of all objects:
 object_size =		$4A ; the size of an object's status table entry
 next_object =		object_size
+; ---------------------------------------------------------------------------
+; unknown or inconsistently used offsets that are not applicable to sonic/tails:
+objoff_12 =		2+x_pos 
+objoff_16 =		2+y_pos
+objoff_1C =		$1C
+objoff_1D =		$1D
+objoff_27 =		$27
+objoff_2E =		$2E
+objoff_2F =		$2F
+objoff_30 =		$30 
+ enum   objoff_31=$31,objoff_32=$32,objoff_33=$33,objoff_34=$34,objoff_35=$35,objoff_36=$36,objoff_37=$37
+ enum 	objoff_38=$38,objoff_39=$39,objoff_3A=$3A,objoff_3B=$3B,objoff_3C=$3C,objoff_3D=$3D,objoff_3E=$3E
+ enum 	objoff_3F=$3F,objoff_40=$40,objoff_41=$41,objoff_42=$42,objoff_43=$43,objoff_44=$44,objoff_45=$45
+ enum 	objoff_46=$46,objoff_47=$47,objoff_48=$48,objoff_49=$49
 
 ; ---------------------------------------------------------------------------
 ; Controller Buttons
