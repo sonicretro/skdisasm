@@ -39,6 +39,7 @@ ros_addr =		$3C ; word ; the RAM address whose bit to clear when an object is de
 routine_secondary =	$3C ; byte ; used by monitors for this purpose at least
 vram_art =      $40 ; word ; address of art in VRAM (same as art_tile * $20)
 parent =		$42 ; word ; address of the object that owns or spawned this one, if applicable
+parent2 =		$48 ; word ; several objects use this instead
 respawn_addr =		$48 ; word ; the address of this object's entry in the respawn table
 ; ---------------------------------------------------------------------------
 ; conventions specific to Sonic/Tails/Knuckles:
