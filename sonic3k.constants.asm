@@ -278,6 +278,7 @@ Target_water_palette =		ramaddr( $FFFFF000 ) ; $80 bytes ; used by palette fadin
 Water_palette =			ramaddr( $FFFFF080 ) ; $80 bytes ; this is what actually gets displayed
 Water_palette_line_2 =		ramaddr( $FFFFF0A0 ) ; $20 bytes
 Water_palette_line_3 =		ramaddr( $FFFFF0C0 ) ; $20 bytes
+Water_palette_line_4 =		ramaddr( $FFFFF0E0 ) ; $20 bytes
 
 Plane_buffer =			ramaddr( $FFFFF100 ) ; $480 bytes ; used by level drawing routines
 VRAM_buffer =			ramaddr( $FFFFF580 ) ; $80 bytes ; used to temporarily hold data while it is being transferred from one VRAM location to another
