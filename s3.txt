@@ -441,4 +441,4 @@
 #split	0x000F684A,0x000F6E08,sound\DAC\BD.bin
 #split	0x000F6E08,0x000F7518,sound\DAC\BE.bin
 #split	0x000F7518,0x000F76F4,sound\DAC\BF.bin
-#split	0x000F76F4,0x000F7F2A,sound\DAC\C0.bin
+#split	0x000F76F4,0x000F7F2A,sound\DAC\C0.bin
