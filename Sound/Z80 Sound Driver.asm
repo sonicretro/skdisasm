@@ -4521,7 +4521,7 @@ Snd_ICZ2:			binclude	"Sound\Music\ICZ2.bin"
 Snd_ICZ1:			binclude	"Sound\Music\ICZ1.bin"
 Snd_LBZ2:			binclude	"Sound\Music\LBZ2.bin"
 Snd_LBZ1:			binclude	"Sound\Music\LBZ1.bin"
-		org		Snd_Bank3_Start+$4104
+		org		soundBankStart+$4104
 Snd_SKCredits:		binclude 	"Sound\Music\Credits.bin"
 Snd_GameOver:		binclude	"Sound\Music\Game Over.bin"
 Snd_Continue:		binclude	"Sound\Music\Continue.bin"
@@ -4537,17 +4537,17 @@ Snd_PresSega:		binclude	"Sound\Music\Game Complete.bin"
 ; Music Bank 4
 ; ---------------------------------------------------------------------------
 Snd_Bank4_Start:	startBank
-		org		Snd_Bank4_Start+$AE8
+		org		soundBankStart+$AE8
 Snd_GumBonus:		binclude	"Sound\Music\Gum Ball Machine.bin"
-		org		Snd_Bank4_Start+$19F7
+		org		soundBankStart+$19F7
 Snd_ALZ:			binclude	"Sound\Music\Azure Lake.bin"
 Snd_BPZ:			binclude	"Sound\Music\Balloon Park.bin"
 Snd_DPZ:			binclude	"Sound\Music\Desert Palace.bin"
 Snd_CGZ:			binclude	"Sound\Music\Chrome Gadget.bin"
 Snd_EMZ:			binclude	"Sound\Music\Endless Mine.bin"
-		org		Snd_Bank4_Start+$6587
+		org		soundBankStart+$6587
 Snd_S3Credits:		binclude	"Sound\Music\Sonic 3 Credits.bin"
-		org		Snd_Bank4_Start+$75E4
+		org		soundBankStart+$75E4
 Snd_2PMenu:			binclude	"Sound\Music\Competition Menu.bin"	
 Snd_Drown:			binclude	"Sound\Music\Countdown.bin"
 
