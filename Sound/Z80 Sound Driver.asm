@@ -14,7 +14,17 @@ z80_SoundDriver:
 		CPU Z80
 		listing off
 
+MusID__First	= 01h
+MusID_1UP		= 29h
+MusID__End		= 33h
+SndID__First	= MusID__End
+MusID_SKCredits = 0DCh
+SndID__End		= 0E0h
+FadeID__First	= 0E1h
+FadeID__End		= 0E6h
+SndID_Sega      = 0FFh
 ; ---------------------------------------------------------------------------
+z80_stack =     2000h
 ; equates: standard (for Genesis games) addresses in the memory map
 zYM2612_A0 =	4000h
 zYM2612_D0 =	4001h
@@ -25,11 +35,111 @@ zPSG =			7F11h
 z68kMemory =	8000h
 ; Variables passed from the 68k:
 palFlag =		1C02h
+unk_1C04 =		1C04h
+unk_1C05 =		1C05h
+unk_1C06 =		1C06h
+unk_1C07 =		1C07h
 tempoMod =		1C08h
+unk_1C09 =		1C09h
 playSlot0 =		1C0Ah	; Play_Sound
 playSlot1 =		1C0Bh	; Play_Sound_2
 playSlot2 =		1C0Ch	; Play_Sound_2
+unk_1C0D =		1C0Dh
+unk_1C0E =		1C0Eh
+unk_1C0F =		1C0Fh
 pauseFlag =		1C10h
+unk_1C11 =		1C11h
+unk_1C12 =		1C12h
+unk_1C13 =		1C13h
+unk_1C15 =		1C15h
+unk_1C16 =		1C16h
+unk_1C17 =		1C17h
+unk_1C18 =		1C18h
+unk_1C19 =		1C19h
+unk_1C21 =		1C21h
+unk_1C24 =		1C24h
+unk_1C25 =		1C25h
+unk_1C26 =		1C26h
+unk_1C27 =		1C27h
+unk_1C28 =		1C28h
+unk_1C29 =		1C29h
+unk_1C2A =		1C2Ah
+unk_1C2C =		1C2Ch
+unk_1C2D =		1C2Dh
+unk_1C2E =		1C2Eh
+unk_1C2F =		1C2Fh
+unk_1C30 =		1C30h
+unk_1C31 =		1C31h
+unk_1C32 =		1C32h
+unk_1C33 =		1C33h
+unk_1C35 =		1C35h
+unk_1C37 =		1C37h
+unk_1C39 =		1C39h
+unk_1C3B =		1C3Bh
+unk_1C3E =		1C3Eh
+PlaySegaPCMFlag =		1C3Fh
+unk_1C40 =		1C40h
+unk_1C42 =		1C42h
+unk_1C4B =		1C4Bh
+unk_1C70 =		1C70h
+unk_1CD0 =		1CD0h
+unk_1D00 =		1D00h
+unk_1D30 =		1D30h
+unk_1D60 =		1D60h
+unk_1D90 =		1D90h
+unk_1DC0 =		1DC0h
+unk_1DF0 =		1DF0h
+unk_1E20 =		1E20h
+unk_1E50 =		1E50h
+unk_1E80 =		1E80h
+unk_1EB0 =		1EB0h
+unk_1EE0 =		1EE0h
+unk_1F10 =		1F10h
+unk_1F40 =		1F40h
+
+bankswitch1 macro
+		ld	hl, zBankRegister
+		ld	(hl), a
+		rept 7
+			rrca
+			ld	(hl), a
+		endm
+		xor	a
+		ld	(hl), a
+    endm
+
+bankswitch2 macro
+		ld	hl, zBankRegister
+		ld	(hl), a
+		rept 7
+			rra
+			ld	(hl), a
+		endm
+		xor	a
+		ld	(hl), a
+    endm
+
+bankswitch3 macro addr
+		ld	hl, zBankRegister
+		ld	a, (addr)
+		ld	(hl), a
+		rept 7
+			rra
+			ld	(hl), a
+		endm
+		xor	a
+		ld	(hl), a
+    endm
+
+bankswitch4 macro
+		ld	b, 8
+-
+		ld	(zBankRegister), a
+		rrca
+		djnz	-
+		xor	a
+		ld	(zBankRegister), a
+    endm
 
 ; function to turn a 68k address into a word the Z80 can use to access it
 zmake68kPtr function addr,z68kMemory+(addr&7FFFh)
@@ -51,44 +161,70 @@ zmake68kBank function addr,(((addr&3F8000h)/z68kMemory))
 
 ; =============== S U B	R O U T	I N E =======================================
 
+; Gets the correct pointer to pointer table for the data type in question
+; (music, sfx, voices, etc.).
+;
+; Input:  c    ID for data type.
+; Output: hl   Master pointer table for	index
+;         af'  Trashed
+;         b    Trashed
 
-sub_8:
-		ld	hl, (word_15)
-		ld	b, 0
-		add	hl, bc
-		ex	af, af'
-		ld	a, (hl)
+; sub_8
+GetPointerTable:
+		ld	hl, (ptrMasterIndex)		; Read pointer to (pointer to pointer table) table
+		ld	b, 0						; b = 0
+		add	hl, bc						; Add offset into pointer table
+		ex	af, af'						; Back up af
+		ld	a, (hl)						; Read low byte of pointer into a
 		inc	hl
-		ld	h, (hl)
-		ld	l, a
-		ex	af, af'
+		ld	h, (hl)						; Read high byte of pointer into h
+		ld	l, a						; Put low byte of pointer into l
+		ex	af, af'						; Restore af
 		ret
-; End of function sub_8
+; End of function GetPointerTable
 
 ; ---------------------------------------------------------------------------
-word_15:
+;word_15
+ptrMasterIndex:
 		dw		z80_SoundDriverPointers
 		db		0
 
 ; =============== S U B	R O U T	I N E =======================================
 
+; Reads	an offset into a pointer table and returns dereferenced pointer.
+;
+;
+; Input:  a    Index into pointer table
+;	      hl   Pointer to pointer table
+; Output: hl   Selected	pointer	in pointer table
+;         bc   Trashed
 
-sub_18:
-		ld	c, a
-		ld	b, 0
-		add	hl, bc
-		add	hl, bc
+;sub_18
+PointerTableOffset:
+		ld	c, a						; c = index into pointer table
+		ld	b, 0						; b = 0
+		add	hl, bc						; hl += bc
+		add	hl, bc						; hl += bc
 		nop
 		nop
 		nop
+; End of function PointerTableOffset
 
-loc_20:
-		ld	a, (hl)
+; =============== S U B	R O U T	I N E =======================================
+
+; Dereferences a pointer to another pointer.
+;
+; Input:  hl	Pointer	to pointer
+; output: hl	Equal to pointer that was being	pointed	to by hl
+
+;loc_20
+ReadPointer:
+		ld	a, (hl)						; Read low byte of pointer into a
 		inc	hl
-		ld	h, (hl)
-		ld	l, a
+		ld	h, (hl)						; Read high byte of pointer into h
+		ld	l, a						; Put low byte of pointer into l
 		ret
-; End of function sub_18
+; End of function PointerTableOffset
 
 ; ---------------------------------------------------------------------------
 		db    0
@@ -111,6 +247,8 @@ loc_20:
 		db    0
 		db    0
 ; ---------------------------------------------------------------------------
+; Apparently unused bank switching routine
+;sub_38
 		di
 		push	af
 		push	iy
@@ -143,24 +281,7 @@ loc_5D:
 		ld	hl, DAC_Banks ; '÷'
 		add	hl, bc
 		ld	a, (hl)
-		ld	hl, zBankRegister
-		ld	(hl), a
-		rrca
-		ld	(hl), a
-		rrca
-		ld	(hl), a
-		rrca
-		ld	(hl), a
-		rrca
-		ld	(hl), a
-		rrca
-		ld	(hl), a
-		rrca
-		ld	(hl), a
-		rrca
-		ld	(hl), a
-		xor	a
-		ld	(hl), a
+		bankswitch1
 		exx
 		pop	iy
 		pop	af
@@ -169,23 +290,22 @@ loc_5D:
 ; ---------------------------------------------------------------------------
 
 loc_85:
-		ld	sp, 2000h
-		ld	c, 0
-
-loc_8A:
-		ld	b, 0
-
-loc_8C:
-		djnz	$
+		ld	sp, z80_stack			    ; set the stack pointer to 0x2000
+		; The following instruction block keeps the z80 in a tight loop.
+		ld	c, 0						; c = 0
+-
+		ld	b, 0						; b = 0
+		djnz	$						; Loop in this instruction, decrementing b each iteration, until b = 0
 		dec	c
-		jr	z, loc_8A
+		jr	z, -						; Loop if c = 0
+		
 		call	sub_944
 		ld	a, 1Dh
 		ld	(1C3Eh), a
 		xor	a
 		ld	(1C27h), a
 		ld	(1C30h), a
-		ld	(1C3Fh), a
+		ld	(PlaySegaPCMFlag), a
 		ld	(1C28h), a
 		ld	a, 5
 		ld	(1C04h), a
@@ -196,47 +316,56 @@ loc_8C:
 
 
 sub_AF:
-
-; FUNCTION CHUNK AT 00CB SIZE 00000002 BYTES
-
-		bit	7, (ix+1)
-		ret	nz
-		bit	2, (ix+0)
+		bit	7, (ix+1)					; Is this a PSG track?
+		ret	nz							; Is so, quit
+		bit	2, (ix+0)					; 
 		ret	nz
 		add	a, (ix+1)
-		bit	2, (ix+1)
-		jr	nz, loc_CB
+		bit	2, (ix+1)					; Is this the DAC channel or FM3 or FM4 or FM5?
+		jr	nz, zWriteFM1_reduced		; If yes, write reg (reduced)/data pair to FM1;
+										; otherwise, write reg/data pair as is to FM0.
 ; End of function sub_AF
 
 
 ; =============== S U B	R O U T	I N E =======================================
 
+; Writes a reg/data pair to FM0
+;
+; Input:  a    Value for register
+;         c    Value for data
 
-sub_C2:
+;sub_C2
+zWriteFM0:
 		ld	(zYM2612_A0), a
 		nop
 		ld	a, c
 		ld	(zYM2612_D0), a
 		ret
-; End of function sub_C2
+; End of function zWriteFM0
 
 ; ---------------------------------------------------------------------------
 ; START	OF FUNCTION CHUNK FOR sub_AF
 
-loc_CB:
-		sub	4
+;loc_CB
+zWriteFM1_reduced:
+		sub	4									; a -= 4
 ; END OF FUNCTION CHUNK	FOR sub_AF
 
 ; =============== S U B	R O U T	I N E =======================================
 
+; Writes a reg/data pair to FM1
+;
+; Input:  a    Value for register
+;         c    Value for data
 
-sub_CD:
+;sub_CD
+zWriteFM1:
 		ld	(zYM2612_A1), a
 		nop
 		ld	a, c
 		ld	(zYM2612_D1), a
 		ret
-; End of function sub_CD
+; End of function zWriteFM1
 
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
@@ -313,24 +442,7 @@ loc_149:
 
 loc_168:
 		ld	a, (1C3Eh)
-		ld	hl, zBankRegister
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		xor	a
-		ld	(hl), a
+		bankswitch2
 		xor	a
 		ld	(1C19h), a
 		ld	a, (1C16h)
@@ -352,24 +464,7 @@ sub_19E:
 		ld	a, 1
 		ld	(1C19h), a
 		ld	a, zmake68kBank(SndBank)
-		ld	hl, zBankRegister
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		xor	a
-		ld	(hl), a
+		bankswitch2
 		ld	ix, 1DF0h
 		ld	b, 7
 
@@ -481,11 +576,11 @@ loc_250:
 		add	hl, bc
 		push	af
 		ld	c, h
-		call	sub_C2
+		call	zWriteFM0
 		pop	af
 		sub	4
 		ld	c, l
-		call	sub_C2
+		call	zWriteFM0
 		pop	hl
 		pop	bc
 		djnz	loc_250
@@ -538,7 +633,7 @@ loc_2A6:
 		add	a, (ix+5)
 		ld	hl, loc_AA5
 		push	af
-		rst	18h
+		rst	PointerTableOffset
 		pop	af
 		bit	7, (ix+1)
 		jr	nz, loc_2CE
@@ -562,7 +657,7 @@ loc_2BC:
 loc_2C5:
 		add	a, e
 		ld	hl, 0B4Dh
-		rst	18h
+		rst	PointerTableOffset
 		ex	af, af'
 		or	h
 		ld	h, a
@@ -675,10 +770,10 @@ loc_342:
 		and	6
 		ret	nz
 		ld	a, (ix+1)
-		or	0F0h ; ''
+		or	0F0h
 		ld	c, a
-		ld	a, 28h ; '('
-		call	sub_C2
+		ld	a, 28h
+		call	zWriteFM0
 		ret
 ; END OF FUNCTION CHUNK	FOR sub_1E9
 
@@ -699,8 +794,8 @@ loc_361:
 ; START	OF FUNCTION CHUNK FOR sub_9F6
 
 loc_367:
-		ld	a, 28h ; '('
-		call	sub_C2
+		ld	a, 28h
+		call	zWriteFM0
 		ret
 ; END OF FUNCTION CHUNK	FOR sub_9F6
 
@@ -714,8 +809,8 @@ sub_36D:
 		ret	m
 		dec	a
 		ld	c, 0Ah
-		rst	8
-		rst	18h
+		rst	GetPointerTable
+		rst	PointerTableOffset
 		call	sub_103A
 		ld	h, (ix+1Dh)
 		ld	l, (ix+1Ch)
@@ -823,8 +918,8 @@ loc_41A:
 		dec	a
 		ex	de, hl
 		ld	c, 8
-		rst	8
-		rst	18h
+		rst	GetPointerTable
+		rst	PointerTableOffset
 		jr	loc_425
 ; ---------------------------------------------------------------------------
 
@@ -1022,38 +1117,39 @@ loc_4E2:
 ; FF = SEGA Scream
 
 ; TypeCheck:
-sub_4FB:
-		cp	0DCh
-		jp	z, loc_552							; Check if sound to play is DC, Music
-		cp	0FFh
-		jp	z, loc_A16							; Check if sound to play is FF, SEEEEEGAAAAA!
-		cp	33h
-		jp	c, loc_558							; Check if sound to play is lower than 33, Music
-		cp	0E0h
-		jp	c, loc_6A9							; Check if sound to play is lower than E0, Sound effects
-		cp	0E1h
-		jp	c, sub_944							; Check if sound to play is lower than E1, Nothing
-		cp	0E6h
-		jp	nc, sub_944							; Check if sound to play is higher than E6 or equal, Nothing
-		sub	0E1h								; If none of the checks passed, do fade effects.
-		ld	hl, loc_524
-		rst	18h
+;sub_4FB
+zPlaySoundByIndex:
+		cp	MusID_SKCredits						; Is this the credits music?
+		jp	z, zPlayMusicCredits				; Branch if yes
+		cp	SndID_Sega							; Is this the SEGA sound?
+		jp	z, zPlaySegaSound					; Branch if yes
+		cp	MusID__End							; Is this a music?
+		jp	c, zPlayMusic						; Branch if yes
+		cp	SndID__End							; Is this a sound effect?
+		jp	c, loc_6A9							; Branch if yes
+		cp	FadeID__First						; Is it before the first fade effect?
+		jp	c, sub_944							; Branch if yes
+		cp	FadeID__End							; Is this after the last fade effect?
+		jp	nc, sub_944							; Branch if yes
+		sub	FadeID__First						; If none of the checks passed, do fade effects.
+		ld	hl, Off_Special
+		rst	PointerTableOffset
 		xor	a
 		ld	(1C18h), a
 		jp	(hl)
-; End of function sub_4FB
+; End of function zPlaySoundByIndex
 ; ---------------------------------------------------------------------------
 
-loc_524:
-		ld	e, h
-		ex	af, af'
-		ld	b, h
-		add	hl, bc
-		cp	h
-		add	hl, bc
-		ld	l, 5
-		ld	e, h
-		ex	af, af'
+;loc_524
+Off_Special:
+		dw	sub_85C
+		dw	sub_944
+		dw	sub_9BC
+		dw	sub_52E
+		dw	sub_85C
+; ---------------------------------------------------------------------------
+
+sub_52E:
 		ld	ix, 1DF0h
 		ld	b, 7
 		ld	a, 1
@@ -1084,20 +1180,22 @@ sub_54D:
 ; End of function sub_54D
 
 ; ---------------------------------------------------------------------------
-; START	OF FUNCTION CHUNK FOR sub_4FB
+; START	OF FUNCTION CHUNK FOR zPlaySoundByIndex
 
-loc_552:
-		ld	a, 32h ; '2'
-		push	af
-		jp	loc_5DB
+;loc_552
+zPlayMusicCredits:
+		ld	a, 32h						; Credits music is the last entry on the music table
+		push	af						; Save af
+		jp	loc_5DB						; Continue as music
 ; ---------------------------------------------------------------------------
 
-loc_558:
-		sub	1
-		ret	m
-		push	af
-		cp	29h ; ')'
-		jp	nz, loc_5DB
+;loc_558
+zPlayMusic:
+		sub	1							; Remap index from 1h-32h to 0h-31h (see also credits music, above)
+		ret	m							; Return if negative (id = 0)
+		push	af						; Save af
+		cp	MusID_1UP					; Is it the 1-up music?
+		jp	nz, loc_5DB					; Branch if not
 		ld	a, (1C29h)
 		or	a
 		jp	z, loc_580
@@ -1115,8 +1213,8 @@ loc_558:
 
 loc_580:
 		ld	a, (1C16h)
-		cp	29h ; ')'
-		jp	z, loc_5DE
+		cp	MusID_1UP					; Is it the 1-up music?
+		jp	z, loc_5DE					; Branch if yes
 		xor	a
 		ld	(playSlot0), a
 		ld	(playSlot1), a
@@ -1140,12 +1238,12 @@ loc_580:
 
 loc_5BE:
 		ld	a, (hl)
-		and	7Fh ; ''
+		and	7Fh
 		set	2, (hl)
 		ld	(hl), a
 		add	hl, de
 		djnz	loc_5BE
-		ld	a, 29h ; ')'
+		ld	a, 29h
 		ld	(1C16h), a
 		ld	a, (1C24h)
 		ld	(1C2Ch), a
@@ -1171,24 +1269,7 @@ loc_5DE:
 loc_5EB:
 		ld	a, (z80_MusicBanks)
 		ld	(1C3Eh), a
-		ld	hl, zBankRegister
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		xor	a
-		ld	(hl), a
+		bankswitch2
 		ld	a, 0B6h	; '∂'
 		ld	(zYM2612_A1), a
 		nop
@@ -1196,11 +1277,11 @@ loc_5EB:
 		ld	(zYM2612_D1), a
 		pop	af
 		ld	c, 4
-		rst	8
-		rst	18h
+		rst	GetPointerTable
+		rst	PointerTableOffset
 		push	hl
 		push	hl
-		rst	20h
+		rst	ReadPointer
 		ld	(1C37h), hl
 		pop	hl
 		pop	iy
@@ -1210,7 +1291,7 @@ loc_5EB:
 		ld	de, 6
 		add	hl, de
 		ld	(1C33h), hl
-		ld	hl, loc_695
+		ld	hl, zFMDACPSGInitBytes
 		ld	(1C35h), hl
 		ld	de, 1C40h
 		ld	b, (iy+2)
@@ -1257,7 +1338,7 @@ loc_672:
 		call	loc_7CC
 		pop	bc
 		djnz	loc_672
-; END OF FUNCTION CHUNK	FOR sub_4FB
+; END OF FUNCTION CHUNK	FOR zPlaySoundByIndex
 
 ; =============== S U B	R O U T	I N E =======================================
 
@@ -1269,29 +1350,18 @@ sub_690:
 ; End of function sub_690
 
 ; ---------------------------------------------------------------------------
-loc_695:
-		db  80h	; Ä
-		db    6
-		db  80h	; Ä
-		db    0
-		db  80h	; Ä
-		db    1
-		db  80h	; Ä
-		db    2
-		db  80h	; Ä
-		db    4
-		db  80h	; Ä
-		db    5
-		db  80h	; Ä
-		db    6
-		db  80h	; Ä
-		db  80h	; Ä
-		db  80h	; Ä
-		db 0A0h	; †
-		db  80h	; Ä
-		db 0C0h	; ¿
+;loc_695
+; FM/DAC/PSG channel assignment bits
+; The first byte in every pair (always 80h) is unknow at this time (FIXME).
+; The second byte in every pair goes as follows:
+; The first is for DAC; then 0, 1, 2 then 4, 5, 6 for the FM channels (the missing 3
+; is the gap between FM0 and FM1 for YM2612 port writes); then comes the default
+; values for PSG tracks.
+zFMDACPSGInitBytes:
+		db   80h,   6, 80h,   0, 80h,   1, 80h,   2, 80h,   4, 80h,   5, 80h,   6
+		db   80h, 80h, 80h,0A0h, 80h,0C0h
 ; ---------------------------------------------------------------------------
-; START	OF FUNCTION CHUNK FOR sub_4FB
+; START	OF FUNCTION CHUNK FOR zPlaySoundByIndex
 
 loc_6A9:
 		sub	33h ; '3'
@@ -1304,24 +1374,7 @@ loc_6A9:
 loc_6B7:
 		ex	af, af'
 		ld	a, zmake68kBank(SndBank)
-		ld	hl, zBankRegister
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		xor	a
-		ld	(hl), a
+		bankswitch2
 		xor	a
 		ld	c, 6
 		ld	(1C19h), a
@@ -1337,10 +1390,10 @@ loc_6B7:
 		jp	nz, loc_6FB
 		ld	a, 80h ; 'Ä'
 		ld	(1C26h), a
-		rst	8
+		rst	GetPointerTable
 		pop	af
 		ld	c, a
-		rst	18h
+		rst	PointerTableOffset
 		inc	hl
 		inc	hl
 		inc	hl
@@ -1364,10 +1417,10 @@ loc_706:
 		pop	af
 
 loc_70C:
-		rst	8
-		rst	18h
+		rst	GetPointerTable
+		rst	PointerTableOffset
 		push	hl
-		rst	20h
+		rst	ReadPointer
 		ld	(1C39h), hl
 		xor	a
 		ld	(1C15h), a
@@ -1437,7 +1490,7 @@ loc_77C:
 		pop	bc
 		djnz	loc_72C
 		jp	sub_690
-; END OF FUNCTION CHUNK	FOR sub_4FB
+; END OF FUNCTION CHUNK	FOR zPlaySoundByIndex
 
 ; =============== S U B	R O U T	I N E =======================================
 
@@ -1456,7 +1509,7 @@ loc_79B:				; CODE XREF: sub_78F+2j
 		ld	a, 1Fh
 		call	sub_1075
 		ld	a, 0FFh
-		ld	(7F11h), a
+		ld	(zPSG), a
 		ld	a, c
 		srl	a
 		srl	a
@@ -1470,12 +1523,12 @@ loc_7B2:
 		ld	(1C32h), a
 		push	af
 		ld	hl, 7DFh
-		rst	18h
+		rst	PointerTableOffset
 		push	hl
 		pop	ix
 		pop	af
 		ld	hl, 7EFh
-		rst	18h
+		rst	PointerTableOffset
 		ret
 ; End of function sub_78F
 
@@ -1608,19 +1661,12 @@ loc_854:
 ; End of function sub_7FF
 
 ; ---------------------------------------------------------------------------
-		db  3Eh	; >
-		db  28h	; (
-		db  32h	; 2
-		db  0Dh
-		db  1Ch
-		db  3Eh	; >
-		db    6
-		db  32h	; 2
-		db  0Fh
-		db  1Ch
-		db  32h	; 2
-		db  0Eh
-		db  1Ch
+sub_85C:
+		ld	a, 28h
+		ld	(1C0Dh),a
+		ld	a, 6
+		ld  (1C0Fh), a
+		ld  (1C0Eh), a
 
 ; =============== S U B	R O U T	I N E =======================================
 
@@ -1660,24 +1706,7 @@ loc_88E:
 		ld	(1C0Dh), a
 		jp	z, sub_944
 		ld	a, (1C3Eh)
-		ld	hl, zBankRegister
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		xor	a
-		ld	(hl), a
+		bankswitch2
 		ld	ix, 1C40h
 		ld	b, 6
 
@@ -1713,24 +1742,7 @@ sub_8DF:				; CODE XREF: sub_11B+Cp
 		or	a
 		ret	z
 		ld	a, (1C3Eh)
-		ld	hl, zBankRegister
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		xor	a
-		ld	(hl), a
+		bankswitch2
 		ld	a, (1C0Eh)
 		dec	a
 		ld	(1C0Eh), a
@@ -1772,38 +1784,41 @@ loc_933:				; CODE XREF: sub_8DF+5Aj
 
 ; Blank slot?
 sub_944:
-		ld	hl, 1C0Dh
-		ld	de, 1C0Eh
-		ld	bc, 3C6h
-		ld	(hl), 0
-		ldir
-		xor	a
-		ld	(tempoMod), a
-		ld	ix, loc_695
-		ld	b, 6
+		; The following block sets to zero the z80 RAM from 1C0Dh to 1FD4h
+		ld	hl, unk_1C0D				; Starting source address for copy
+		ld	de, unk_1C0E				; Starting destination address for copy
+		ld	bc, 3C6h					; Length of copy
+		ld	(hl), 0						; Initial value of zero
+		ldir							; while (--0x3c6) *de++ = *hl++
 
-loc_95B:
-		push	bc
+		xor	a							; a = 0
+		ld	(tempoMod), a				; Set tempoMod to zero too
+		
+		ld	ix, zFMDACPSGInitBytes		; Initialization data for channels
+		ld	b, 6						; 
+
+-		push	bc						; Save bc for loop
 		call	sub_9F6
 		call	sub_986
-		inc	ix
-		inc	ix
-		pop	bc
-		djnz	loc_95B
+		inc	ix							; Go to next channel byte
+		inc	ix							; But skip the 80h
+		pop	bc							; Restore bc for loop counter
+		djnz	-						; Loop while b > 0
+		
 		ld	b, 7
 		xor	a
-		ld	(1C0Dh), a
+		ld	(unk_1C0D), a
 		call	sub_9BC
 		ld	c, 0
-		ld	a, 2Bh ; '+'
-		call	sub_C2
+		ld	a, 2Bh
+		call	zWriteFM0
 
 loc_979:
 		xor	a
 		ld	(1C12h), a
 		ld	c, a
-		ld	a, 27h ; '''
-		call	sub_C2
+		ld	a, 27h
+		call	zWriteFM0
 		jp	sub_690
 ; End of function sub_944
 
@@ -1812,7 +1827,7 @@ loc_979:
 
 
 sub_986:
-		ld	a, 90h ; 'ê'
+		ld	a, 90h
 		ld	c, 0
 		jp	sub_A0A
 ; End of function sub_986
@@ -1825,31 +1840,31 @@ loc_98D:				; CODE XREF: sub_7FF+Ej
 		push	bc
 		push	af
 		ld	b, 3
-		ld	a, 0B4h	; '¥'
+		ld	a, 0B4h
 		ld	c, 0
 
 loc_998:				; CODE XREF: sub_7FF+19Fj
 		push	af
-		call	sub_C2
+		call	zWriteFM0
 		pop	af
 		inc	a
 		djnz	loc_998
 		ld	b, 2
-		ld	a, 0B4h	; '¥'
+		ld	a, 0B4h
 
 loc_9A4:				; CODE XREF: sub_7FF+1ABj
 		push	af
-		call	sub_CD
+		call	zWriteFM1
 		pop	af
 		inc	a
 		djnz	loc_9A4
 		ld	c, 0
 		ld	b, 6
-		ld	a, 28h ; '('
+		ld	a, 28h
 
 loc_9B2:				; CODE XREF: sub_7FF+1B9j
 		push	af
-		call	sub_C2
+		call	zWriteFM0
 		inc	c
 		pop	af
 		djnz	loc_9B2
@@ -1866,7 +1881,7 @@ sub_9BC:
 		ld	a, 9Fh ; 'ü'
 
 loc_9C1:
-		ld	(7F11h), a
+		ld	(zPSG), a
 		add	a, 20h ; ' '
 		djnz	loc_9C1
 		pop	bc
@@ -1944,27 +1959,27 @@ sub_A06:
 
 
 sub_A0A:
-		ld	b, 4
+		ld	b, 4						; Loop 4 times
 
-loc_A0C:
-		push	af
+-		push	af						; Save af
 		call	sub_AF
-		pop	af
-		add	a, 4
-		djnz	loc_A0C
+		pop	af							; Restore af
+		add	a, 4						; a += 4
+		djnz	-						; Loop
 		ret
 ; End of function sub_A0A
 
 ; ---------------------------------------------------------------------------
-; START	OF FUNCTION CHUNK FOR sub_4FB
+; START	OF FUNCTION CHUNK FOR zPlaySoundByIndex
 
-loc_A16:
-		call	sub_944
+;loc_A16
+zPlaySegaSound:
+		call	sub_944					; Fade music before playing the sound
 		ld	a, 1
-		ld	(1C3Fh), a
-		pop	hl
+		ld	(PlaySegaPCMFlag), a		; Set flag to play SEGA sound
+		pop	hl							; Restore hl
 		ret
-; END OF FUNCTION CHUNK	FOR sub_4FB
+; END OF FUNCTION CHUNK	FOR zPlaySoundByIndex
 
 ; =============== S U B	R O U T	I N E =======================================
 
@@ -1980,24 +1995,7 @@ sub_A20:
 		ld	(1C37h), hl
 		ld	a, (1C2Dh)
 		ld	(1C3Eh), a
-		ld	hl, zBankRegister
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		xor	a
-		ld	(hl), a
+		bankswitch2
 		ld	hl, 1DF0h
 		ld	de, 1C40h
 		ld	bc, 1B0h
@@ -2318,7 +2316,7 @@ loc_BF0:
 		push	hl
 		sub	0E0h ; '‡'
 		ld	hl, loc_BFD
-		rst	18h
+		rst	PointerTableOffset
 		ld	a, (de)
 		jp	(hl)
 ; End of function sub_B98
@@ -2561,14 +2559,14 @@ loc_D17:				; CODE XREF: ROM:0C95j	ROM:0D12j
 ; ---------------------------------------------------------------------------
 
 loc_D1B:				; DATA XREF: ROM:0C17o
-		sub	40h ; '@'
+		sub	40h
 		ld	(ix+5),	a
 		ret
 ; ---------------------------------------------------------------------------
 
 loc_D21:				; DATA XREF: ROM:0C19o
 		call	sub_D28
-		call	sub_C2
+		call	zWriteFM0
 		ret
 
 ; =============== S U B	R O U T	I N E =======================================
@@ -2605,9 +2603,9 @@ sub_D44:				; CODE XREF: sub_54D+88Ap
 		ld	a, (ix+0Fh)
 		sub	81h ; 'Å'
 		ld	c, 4
-		rst	8
-		rst	18h
-		rst	20h
+		rst	GetPointerTable
+		rst	PointerTableOffset
+		rst	ReadPointer
 		ld	a, (ix+8)
 		and	7Fh ; ''
 		ld	b, a
@@ -2704,47 +2702,12 @@ loc_DD0:				; CODE XREF: sub_54D+874j
 loc_DDC:				; CODE XREF: sub_54D+887j
 		ld	b, a
 		push	hl
-		ld	hl, zBankRegister
-		ld	a, (1C3Eh)
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		xor	a
-		ld	(hl), a
+		bankswitch3 1C3Eh
 		pop	hl
 		call	loc_492
 		call	sub_4B9
 		ld	a, zmake68kBank(SndBank)
-		ld	hl, zBankRegister
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		rra
-		ld	(hl), a
-		xor	a
-		ld	(hl), a
+		bankswitch2
 		ld	a, (ix+18h)
 		or	a
 		jp	p, loc_E22
@@ -2767,7 +2730,7 @@ loc_E27:				; CODE XREF: sub_54D+867j
 		ld	a, (ix+1Ah)
 		or	a
 		jp	p, loc_E37
-		ld	(7F11h), a
+		ld	(zPSG), a
 
 loc_E37:				; CODE XREF: sub_54D+8E4j
 		jr	loc_E22
@@ -2778,7 +2741,7 @@ loc_E39:				; DATA XREF: ROM:0C23o
 		bit	2, (ix+1)
 		ret	nz
 		ld	a, 0DFh	; 'ﬂ'
-		ld	(7F11h), a
+		ld	(zPSG), a
 		ld	a, (de)
 		ld	(ix+1Ah), a
 		set	0, (ix+0)
@@ -2788,7 +2751,7 @@ loc_E39:				; DATA XREF: ROM:0C23o
 		ld	a, 0FFh
 
 loc_E54:				; CODE XREF: ROM:0E4Cj
-		ld	(7F11h), a
+		ld	(zPSG), a
 		ret
 ; ---------------------------------------------------------------------------
 
@@ -2946,8 +2909,8 @@ loc_EF9:				; CODE XREF: ROM:0F0Bj
 sub_F11:				; CODE XREF: sub_54D:loc_DCDp
 		ld	(1C12h), a
 		ld	c, a
-		ld	a, 27h ; '''
-		call	sub_C2
+		ld	a, 27h
+		call	zWriteFM0
 		ret
 ; End of function sub_F11
 
@@ -2972,7 +2935,7 @@ loc_F1F:
 
 loc_F2F:
 		ld	hl, loc_C3D
-		rst	18h
+		rst	PointerTableOffset
 		inc	de
 		ld	a, (de)
 		jp	(hl)
@@ -2985,7 +2948,7 @@ loc_F36:
 
 loc_F3A:
 		push	ix
-		call	sub_4FB
+		call	zPlaySoundByIndex
 		pop	ix
 		ret
 ; ---------------------------------------------------------------------------
@@ -3123,7 +3086,7 @@ loc_FE2:
 		ld	a, l
 		and	0Fh
 		or	c
-		ld	(7F11h), a
+		ld	(zPSG), a
 		ld	a, l
 		and	0F0h ; ''
 		or	h
@@ -3131,15 +3094,15 @@ loc_FE2:
 		rrca
 		rrca
 		rrca
-		ld	(7F11h), a
+		ld	(zPSG), a
 		ld	a, (ix+8)
 		or	a
 		ld	c, 0
 		jr	z, loc_1013
 		dec	a
 		ld	c, 0Ah
-		rst	8
-		rst	18h
+		rst	GetPointerTable
+		rst	PointerTableOffset
 		call	sub_103A
 		ld	c, a
 
@@ -3157,13 +3120,13 @@ loc_1022:
 		add	a, 10h
 		bit	0, (ix+0)
 		jr	nz, loc_1031
-		ld	(7F11h), a
+		ld	(zPSG), a
 		ret
 ; ---------------------------------------------------------------------------
 
 loc_1031:
 		add	a, 20h ; ' '
-		ld	(7F11h), a
+		ld	(zPSG), a
 		ret
 ; END OF FUNCTION CHUNK	FOR sub_1E9
 ; ---------------------------------------------------------------------------
@@ -3240,11 +3203,11 @@ sub_1075:
 		add	a, (ix+1)
 		or	a
 		ret	p
-		ld	(7F11h), a
+		ld	(zPSG), a
 		bit	0, (ix+0)
 		ret	z
 		ld	a, 0FFh
-		ld	(7F11h), a
+		ld	(zPSG), a
 		ret
 ; End of function sub_1075
 
@@ -3252,22 +3215,22 @@ sub_1075:
 
 loc_108A:
 		di
-		ld	a, 2Bh ; '+'
+		ld	a, 2Bh
 		ld	c, 0
-		call	sub_C2
+		call	zWriteFM0
 
 loc_1092:
 		ei
-		ld	a, (1C3Fh)
+		ld	a, (PlaySegaPCMFlag)
 		or	a
 		jp	nz, loc_1126
 		ld	a, (1C30h)
 		or	a
 		jr	z, loc_1092
-		ld	a, 2Bh ; '+'
-		ld	c, 80h ; 'Ä'
+		ld	a, 2Bh
+		ld	c, 80h
 		di
-		call	sub_C2
+		call	zWriteFM0
 		ei
 		ld	iy, DecTable
 		ld	hl, 1C30h
@@ -3275,7 +3238,7 @@ loc_1092:
 		dec	a
 		set	7, (hl)
 		ld	hl, 8000h
-		rst	18h
+		rst	PointerTableOffset
 		ld	c, 80h ; 'Ä'
 		ld	a, (hl)
 		ld	(byte_10CB), a
@@ -3382,21 +3345,14 @@ DecTable:
 loc_1126:
 		di
 		xor	a
-		ld	(1C3Fh), a
+		ld	(PlaySegaPCMFlag), a
 		ld	a, 2Bh ; '+'
 		ld	(zYM2612_A0), a
 		nop
 		ld	a, 80h ; 'Ä'
 		ld	(zYM2612_D0), a
 		ld	a, zmake68kBank(SndBank)
-		ld	b, 8
-
-loc_113A:
-		ld	(zBankRegister), a
-		rrca
-		djnz	loc_113A
-		xor	a
-		ld	(zBankRegister), a
+		bankswitch4
 		ld	hl, 8000h
 		ld	de, 5E2Fh
 		ld	a, 2Ah ; '*'
