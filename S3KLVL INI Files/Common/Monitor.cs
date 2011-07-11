@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
-using Extensions;
 using SonicRetro.S2LVL;
 
 namespace S3KObjectDefinitions.Common
 {
     class Monitor : ObjectDefinition
     {
-        private string[] labels = { "word_1DBC2", "word_1DBD0", "word_1DBDE", "word_1DBEC", "word_1DBFA", "word_1DC08", "word_1DC16", "word_1DC24", "word_1DC32", "word_1DC40", "word_1DC4E" };
         private Point offset;
         private BitmapBits img;
         private int imgw, imgh;
@@ -24,14 +22,14 @@ namespace S3KObjectDefinitions.Common
             tmpartfile.AddRange(new byte[0x6200 - tmpartfile.Count]);
             tmpartfile.AddRange(ObjectHelper.OpenArtFile("../General/Sprites/HUD Icon/Sonic life icon.bin", Compression.CompressionType.Nemesis));
             byte[] artfile = tmpartfile.ToArray();
-            img = ObjectHelper.MapASMToBmp(artfile, "../General/Sprites/Monitors/Map - Monitor.asm", "word_1DBBA", 0, out offset);
+            img = ObjectHelper.MapASMToBmp(artfile, "../General/Sprites/Monitors/Map - Monitor.asm", 0, 0, out offset);
             imgw = img.Width;
             imgh = img.Height;
             Point off;
             BitmapBits im;
-            for (int i = 0; i < labels.Length; i++)
+            for (int i = 0; i < 11; i++)
             {
-                im = ObjectHelper.MapASMToBmp(artfile, "../General/Sprites/Monitors/Map - Monitor.asm", labels[i], 0, out off);
+                im = ObjectHelper.MapASMToBmp(artfile, "../General/Sprites/Monitors/Map - Monitor.asm", i + 1, 0, out off);
                 imgs.Add(im);
                 offsets.Add(off);
                 imgws.Add(im.Width);

@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
-using Extensions;
 using SonicRetro.S2LVL;
 
 namespace S3KObjectDefinitions.Common
 {
     class PathSwapper : ObjectDefinition
     {
-        private string[] labels = { "word_1D06A", "word_1D084", "word_1D09E", "word_1D09E", "word_1D0B8", "word_1D0D2", "word_1D0EC", "word_1D0EC" };
         private Point offset;
         private BitmapBits img;
         private int imgw, imgh;
@@ -22,14 +20,14 @@ namespace S3KObjectDefinitions.Common
         public override void Init(Dictionary<string, string> data)
         {
             byte[] artfile = ObjectHelper.OpenArtFile("../General/Sprites/Ring/Ring.bin", Compression.CompressionType.Nemesis);
-            img = ObjectHelper.MapASMToBmp(artfile, "../General/Sprites/Level Misc/Map - Path Swap.asm", labels[0], 1, out offset);
+            img = ObjectHelper.MapASMToBmp(artfile, "../General/Sprites/Level Misc/Map - Path Swap.asm", 0, 1, out offset);
             imgw = img.Width;
             imgh = img.Height;
             Point off;
             BitmapBits im;
             for (int i = 0; i < 8; i++)
             {
-                im = ObjectHelper.MapASMToBmp(artfile, "../General/Sprites/Level Misc/Map - Path Swap.asm", labels[i], 1, out off);
+                im = ObjectHelper.MapASMToBmp(artfile, "../General/Sprites/Level Misc/Map - Path Swap.asm", i, 1, out off);
                 imgs.Add(im);
                 offsets.Add(off);
                 imgws.Add(im.Width);
