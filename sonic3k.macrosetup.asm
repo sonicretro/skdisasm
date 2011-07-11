@@ -2,13 +2,24 @@
 	listing off	; we don't need to generate anything for a listing file
 	supmode on	; we don't need warnings about privileged instructions
 
+notZ80 function cpu,(cpu<>128)&&(cpu<>32988)
 
 ; make org safer (impossible to overwrite previously assembled bytes)
 org macro address
-	if address < *
-		error "too much stuff before org $\{address} ($\{(*-address)} bytes)"
+	if notZ80(MOMCPU)
+		if address < *
+			error "too much stuff before org $\{address} ($\{(*-address)} bytes)"
+		else
+			!org address
+		endif
 	else
-		!org address
+		if address < $
+			error "too much stuff before org 0\{address}h (0\{($-address)}h bytes)"
+		else
+			while address > $
+				db 0
+			endm
+		endif
 	endif
     endm
 
@@ -29,7 +40,11 @@ diff := diff - 1024
 
 ; define the cnop pseudo-instruction
 cnop macro offset,alignment
-	org (*-1+(alignment)-((*-1+(-(offset)))#(alignment)))
+	if notZ80(MOMCPU)
+		org (*-1+(alignment)-((*-1+(-(offset)))#(alignment)))
+	else
+		org ($-1+(alignment)-(($-1+(-(offset)))#(alignment)))
+	endif
     endm
 
 ; define an alternate cnop that fills the extra space with 0s instead of FFs
