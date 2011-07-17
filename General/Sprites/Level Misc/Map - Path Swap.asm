@@ -1,4 +1,4 @@
-		dc.w word_1D06A-Map_PathSwap
+Map_PathSwap:	dc.w word_1D06A-Map_PathSwap
 		dc.w word_1D084-Map_PathSwap
 		dc.w word_1D09E-Map_PathSwap
 		dc.w word_1D09E-Map_PathSwap
