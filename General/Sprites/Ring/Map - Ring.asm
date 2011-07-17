@@ -1,4 +1,4 @@
-Map_Ring:	dc.w word_1A9AC-Map_Ring
+		dc.w word_1A9AC-Map_Ring
 		dc.w word_1A9B4-Map_Ring
 		dc.w word_1A9BC-Map_Ring
 		dc.w word_1A9C4-Map_Ring

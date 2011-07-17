@@ -1,4 +1,4 @@
-Ani_Monitor:	dc.w byte_1DB50-Ani_Monitor
+		dc.w byte_1DB50-Ani_Monitor
 		dc.w byte_1DB54-Ani_Monitor
 		dc.w byte_1DB5C-Ani_Monitor
 		dc.w byte_1DB64-Ani_Monitor

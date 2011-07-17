@@ -1,4 +1,4 @@
-Map_Monitor:	dc.w word_1DBBA-Map_Monitor
+		dc.w word_1DBBA-Map_Monitor
 		dc.w word_1DBC2-Map_Monitor
 		dc.w word_1DBD0-Map_Monitor
 		dc.w word_1DBDE-Map_Monitor

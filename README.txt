@@ -60,15 +60,6 @@ And finally, data expressly used for the Sonic 3 Lock-on functionality is includ
 Please explore each folder to learn where everything is and how data is organized.
 
 =========================================================
-REGARDING BUILDING THE DISASSEMBLY
-=========================================================
-The disassembly comes distributed with all relevant ASM files. Binary data, however, must be split from the original commercial
-Sonic and Knuckles and Sonic 3 roms. They should be placed in the root folder and named sk.bin and s3.bin respectively, after 
-which the batch file splits3k.bat should be run. If all goes well, then it should be possible to run BuildSK.bat to create a new
-rom file from the disassembly. If Sonic and Knuckles was built alone, AppendS3.bat could also be used to place S3.bin at the 
-end of the rom to create a complete Sonic 3 and Knuckles modified rom. Or...
-
-=========================================================
 REGARDING THE ASSEMBLY MACRO SONIC3_COMPLETE
 =========================================================
 At the start of the ASM file is the macro Sonic3_Complete, which is set to 1 by default. When set to 0, the assembly will build a
@@ -77,6 +68,22 @@ purpose. Setting it to 1, however, will change the assembly process, incorporati
 rom to create a complete Sonic 3 and Knuckles rom without filler. This macro also enables certain minor changes to the code
 to better facilitate changes to the game, and also enables the recompilation of all sound driver-related data. If your goal is to
 heavily modify Sonic 3 and Knuckles, then keeping the macro Sonic3_Complete at 1 is the recommended choice.
+
+=========================================================
+REGARDING BUILDING THE DISASSEMBLY
+=========================================================
+The 'BuildScripts' directory contains two sets of build scripts - the windows batch files (*.bat), and the python scripts (*.py).
+The .bat ones are the simplest to use but will only work on windows. The python scripts are cross platform (windows and mac) but
+require python to be installed.
+
+Batch files: (double click to run)
+buildSK.bat          - builds a byte-perfect copy of the Sonic And Knuckles rom in the base dir.
+buildS3Complete.bat  - builds a combined Sonic 3 And Knuckles rom (using the SONIC3_COMPLETE macro detailed above).
+
+Python files: (run with 'python nameOfScript')
+buildSK.py             - builds a byte-perfect copy of the Sonic And Knuckles rom in the base dir. Output and errors go in the 'Builds' sub dir.
+buildS3Complete.py     - builds a combined Sonic 3 And Knuckles rom (using the SONIC3_COMPLETE macro detailed above). Output and errors go in the 'Builds' sub dir.
+buildAndVerify.py      - builds both a S&K rom and a S3 Complete rom, then verifies that the S&K rom is byte identical to the original rom. Output and errors go in the 'Builds' sub dir.
 
 =========================================================
 REGARDING EDITING WITH SONED2
