@@ -608,7 +608,7 @@ zUpdateSFXTracks:
 ; ---------------------------------------------------------------------------
 +
 		dec	a								; Decrement timeout...
-		ld	(zSpeedupTimeout), a			; ... then stove new value
+		ld	(zSpeedupTimeout), a			; ... then store new value
 		ret
 ; End of function zUpdateSFXTracks
 
@@ -776,7 +776,7 @@ zGetNextNote_cont:
 
 -		ex	af, af'							; Exchange af with af'
 		sub	e								; Subtract 1 octave from the note
-		jr	c, +							; If this is zero or less, we are done
+		jr	c, +							; If this is less than zero, we are done
 		ex	af, af'							; Exchange af with af'
 		add	a, d							; One octave up
 		jr	-								; Loop
@@ -2250,21 +2250,25 @@ zFadeInToPrevious:
 ; ---------------------------------------------------------------------------
 ;loc_AA5
 zPSGFrequencies:
+		; This table starts with 12 notes not in S1 or S2:
 		dw 3FFh, 3FFh, 3FFh, 3FFh, 3FFh, 3FFh, 3FFh, 3FFh
-		dw 3FFh, 3F7h, 3BEh, 388h, 356h, 326h, 2F9h, 2CEh
-		dw 2A5h, 280h, 25Ch, 23Ah, 21Ah, 1FBh, 1DFh, 1C4h
-		dw 1ABh, 193h, 17Dh, 167h, 153h, 140h, 12Eh, 11Dh
-		dw 10Dh, 0FEh, 0EFh, 0E2h, 0D6h, 0C9h, 0BEh, 0B4h
-		dw 0A9h, 0A0h, 097h, 08Fh, 087h, 07Fh, 078h, 071h
-		dw 06Bh, 065h, 05Fh, 05Ah, 055h, 050h, 04Bh, 047h
-		dw 043h, 040h, 03Ch, 039h, 036h, 033h, 030h, 02Dh
-		dw 02Bh, 028h, 026h, 024h, 022h, 020h, 01Fh, 01Dh
-		dw 01Bh, 01Ah, 018h, 017h, 016h, 015h, 013h, 012h
-		dw 011h, 010h, 000h, 000h
+		dw 3FFh, 3F7h, 3BEh, 388h
+		; The following notes are present on S1 and S2 too:
+		dw 356h, 326h, 2F9h, 2CEh, 2A5h, 280h, 25Ch, 23Ah
+		dw 21Ah, 1FBh, 1DFh, 1C4h, 1ABh, 193h, 17Dh, 167h
+		dw 153h, 140h, 12Eh, 11Dh, 10Dh, 0FEh, 0EFh, 0E2h
+		dw 0D6h, 0C9h, 0BEh, 0B4h, 0A9h, 0A0h, 097h, 08Fh
+		dw 087h, 07Fh, 078h, 071h, 06Bh, 065h, 05Fh, 05Ah
+		dw 055h, 050h, 04Bh, 047h, 043h, 040h, 03Ch, 039h
+		dw 036h, 033h, 030h, 02Dh, 02Bh, 028h, 026h, 024h
+		dw 022h, 020h, 01Fh, 01Dh, 01Bh, 01Ah, 018h, 017h
+		dw 016h, 015h, 013h, 012h, 011h
+		; 1 more note not on S1 or S2 (one of the zeroes is):
+		dw 010h, 000h, 000h
+		; Then, it falls through to the 12 base notes from FM octaves.
 ;loc_B4D
 zFMFrequencies:
-		dw 284h, 2ABh, 2D3h, 2FEh, 32Dh, 35Ch
-		dw 38Fh, 3C5h, 3FFh, 43Ch, 47Ch, 4C0h
+		dw 284h,2ABh,2D3h,2FEh,32Dh,35Ch,38Fh,3C5h,3FFh,43Ch,47Ch,4C0h
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; MUSIC BANKS
@@ -3603,7 +3607,7 @@ loc_10F9:
 		jp	zPlayDigitalAudio				; Loop
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
-; JMan2050's DAC decode lookup table (The lossy compression found in Sonic 1)
+; JMan2050's DAC decode lookup table
 ; ===========================================================================
 DecTable:
 		db	   0,  1,   2,   4,   8,  10h,  20h,  40h
