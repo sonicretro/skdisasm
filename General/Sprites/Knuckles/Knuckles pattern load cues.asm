@@ -1,5 +1,5 @@
 ; Knuckles pattern load cues
-PLC_14BD0A		dc.w word_14BF00-PLC_14BD0A; 0
+PLC_14BD0A:		dc.w word_14BF00-PLC_14BD0A; 0
 		dc.w word_14BF02-PLC_14BD0A; 1
 		dc.w word_14BF0C-PLC_14BD0A; 2
 		dc.w word_14BF14-PLC_14BD0A; 3
