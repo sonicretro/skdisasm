@@ -63,6 +63,9 @@ def build(targetName, def0, def1):
 	
 	assembleProcess = subprocess.Popen(assembleCommand, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	output, errors = assembleProcess.communicate()
+	errorsFile = open(errorsPath, "w")
+	errorsFile.write(errors)
+	errorsFile.close()
 	outputFile = open(outputPath, "w")
 	outputFile.write(output)
 	outputFile.close()
@@ -127,6 +130,10 @@ def run(build3k, buildSK, verifySK):
 	# Navigate to base dir
 	os.chdir("..");
 	
+	if platform.system() == "Windows":
+		os.environ["AS_MSGPATH"] = "AS/Win32";
+		os.environ["USEANSI"] = "n";
+	
 	# Create build dir
 	makeDir("Build");
 	
@@ -136,11 +143,11 @@ def run(build3k, buildSK, verifySK):
 	
 	# Build S&K rom
 	if buildSK:
-		build("sk", "-D", "Sonic3_Complete=0");
+		build("skbuilt", "-D", "Sonic3_Complete=0");
 	
 	# Compare the newly built s&k rom with the actual rom to make sure it's byte-identical
 	if verifySK:
-		compare("sk.bin", "Build Scripts/sk.bin");
+		compare("skbuilt.bin", "Build Scripts/sk.bin");
 	
 	print("Finished!");
 	
