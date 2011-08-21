@@ -1,3 +1,4 @@
+Map_PachinkoItemOrb:
 		dc.w word_4A29E-Map_PachinkoItemOrb
 		dc.w word_4A2A6-Map_PachinkoItemOrb
 		dc.w word_4A2AE-Map_PachinkoItemOrb

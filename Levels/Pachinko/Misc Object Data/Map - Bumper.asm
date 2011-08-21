@@ -1,3 +1,4 @@
+Map_PachinkoBumper:
 		dc.w	word_330A6-Map_PachinkoBumper
 		dc.w word_330AE-Map_PachinkoBumper
 word_330A6:	dc.w 1			; DATA XREF: ROM:000330A2o
