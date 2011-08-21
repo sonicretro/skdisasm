@@ -19,19 +19,22 @@ namespace S3KObjectDefinitions.Common
 
         public override void Init(Dictionary<string, string> data)
         {
-            byte[] artfile = ObjectHelper.OpenArtFile("../General/Sprites/Ring/Ring.bin", Compression.CompressionType.Nemesis);
-            img = ObjectHelper.MapASMToBmp(artfile, "../General/Sprites/Level Misc/Map - Path Swap.asm", 0, 1, out offset);
+            List<byte> tmpartfile = new List<byte>();
+            tmpartfile.AddRange(ObjectHelper.OpenArtFile("Common/pathswapper-art.bin", Compression.CompressionType.Nemesis));
+            byte[] artfile1 = tmpartfile.ToArray();
+            img = ObjectHelper.MapASMToBmp(artfile1, "../General/Sprites/Level Misc/Map - Path Swap.asm", 0, 1, out offset);
             imgw = img.Width;
             imgh = img.Height;
             Point off;
             BitmapBits im;
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 32; i++)
             {
-                im = ObjectHelper.MapASMToBmp(artfile, "../General/Sprites/Level Misc/Map - Path Swap.asm", i, 1, out off);
+	            byte[] artfile = tmpartfile.GetRange((i&0x18) << 5,256).ToArray();
+                im = ObjectHelper.MapASMToBmp(artfile, "../General/Sprites/Level Misc/Map - Path Swap.asm", i&7, 0, out off);
                 imgs.Add(im);
-                offsets.Add(off);
-                imgws.Add(im.Width);
-                imghs.Add(im.Height);
+	            offsets.Add(off);
+	            imgws.Add(im.Width);
+	            imghs.Add(im.Height);
             }
         }
 
@@ -68,20 +71,28 @@ namespace S3KObjectDefinitions.Common
 
         public override BitmapBits Image(byte subtype)
         {
-            return imgs[subtype & 7];
+            return imgs[subtype & 0x1F];
         }
 
         public override Rectangle Bounds(Point loc, byte subtype)
         {
-            return new Rectangle(loc.X + offsets[subtype & 7].X, loc.Y + offsets[subtype & 7].Y, imgws[subtype & 7], imghs[subtype & 7]);
+            if ((subtype & 7) == 7)
+            {
+	            return new Rectangle(loc.X + offsets[subtype & 0x1F].X - imgws[subtype & 0x1F] / 2, loc.Y + offsets[subtype & 0x1F].Y, 2 * imgws[subtype & 0x1F], imghs[subtype & 0x1F]);
+            }
+            else if ((subtype & 7) == 3)
+            {
+	            return new Rectangle(loc.X + offsets[subtype & 0x1F].X, loc.Y + offsets[subtype & 0x1F].Y - imghs[subtype & 0x1F] / 2, imgws[subtype & 0x1F], 2 * imghs[subtype & 0x1F]);
+            }
+            else
+	            return new Rectangle(loc.X + offsets[subtype & 0x1F].X, loc.Y + offsets[subtype & 0x1F].Y, imgws[subtype & 0x1F], imghs[subtype & 0x1F]);
         }
 
         public override void Draw(BitmapBits bmp, Point loc, byte subtype, bool XFlip, bool YFlip, bool includeDebug)
         {
             if (!includeDebug) return;
-            BitmapBits bits = new BitmapBits(imgs[subtype & 7]);
-            bits.Flip(XFlip, YFlip);
-            bmp.DrawBitmapComposited(bits, new Point(loc.X + offsets[subtype & 7].X, loc.Y + offsets[subtype & 7].Y));
+            BitmapBits bits = new BitmapBits(imgs[subtype & 0x1F]);
+            bmp.DrawBitmapComposited(bits, new Point(loc.X + offsets[subtype & 0x1F].X, loc.Y + offsets[subtype & 0x1F].Y));
         }
 
         public override Type ObjectType
@@ -97,6 +108,19 @@ namespace S3KObjectDefinitions.Common
     {
         public PathSwapperS3KObjectEntry() : base() { }
         public PathSwapperS3KObjectEntry(byte[] file, int address) : base(file, address) { }
+
+        [DisplayName("Priority only")]
+        public override bool XFlip
+        {	
+        	get
+        	{
+        		return base.XFlip;
+        	}
+        	set
+        	{
+        		base.XFlip = value;
+        	}
+        }
 
         [DisplayName("Size")]
         public byte size
@@ -115,7 +139,7 @@ namespace S3KObjectDefinitions.Common
         {
             get
             {
-                return (SubType & 4) == 4 ? Direction.Horizontal : Direction.Vertical;
+                return (SubType & 4) != 0 ? Direction.Horizontal : Direction.Vertical;
             }
             set
             {
@@ -124,54 +148,67 @@ namespace S3KObjectDefinitions.Common
         }
 
         [DisplayName("Right/Down Path")]
-        public byte RDPath
+        public bool RDPath
         {
             get
             {
-                return (byte)((SubType & 8) == 8 ? 1 : 0);
+                return (bool)((SubType & 8) != 0 ? true : false);
             }
             set
             {
-                SubType = (byte)((SubType & ~8) | ((value & 1) * 8));
+                SubType = (byte)((SubType & ~8) | (value == true ? 8 : 0));
             }
         }
 
         [DisplayName("Left/Up Path")]
-        public byte LUPath
+        public bool LUPath
         {
             get
             {
-                return (byte)((SubType & 16) == 16 ? 1 : 0);
+                return (bool)((SubType & 16) != 0 ? true : false);
             }
             set
             {
-                SubType = (byte)((SubType & ~16) | ((value & 1) * 16));
+                SubType = (byte)((SubType & ~16) | (value == true ? 16 : 0));
             }
         }
 
-        [DisplayName("Right/Down Plane")]
-        public byte RDPlane
+        [DisplayName("Right/Down Priority")]
+        public bool RDPriority
         {
             get
             {
-                return (byte)((SubType & 32) == 32 ? 1 : 0);
+                return (bool)((SubType & 32) != 0 ? true : false);
             }
             set
             {
-                SubType = (byte)((SubType & ~32) | ((value & 1) * 32));
+                SubType = (byte)((SubType & ~32) | (value == true ? 32 : 0));
             }
         }
 
-        [DisplayName("Left/Up Plane")]
-        public byte LUPlane
+        [DisplayName("Left/Up Priority")]
+        public bool LUPriority
         {
             get
             {
-                return (byte)((SubType & 64) == 64 ? 1 : 0);
+                return (bool)((SubType & 64) != 0 ? true : false);
             }
             set
             {
-                SubType = (byte)((SubType & ~64) | ((value & 1) * 64));
+                SubType = (byte)((SubType & ~64) | (value == true ? 64 : 0));
+            }
+        }
+
+        [DisplayName("Ground only")]
+        public bool GroundOnly
+        {
+            get
+            {
+                return (bool)((SubType & 128) != 0 ? true : false);
+            }
+            set
+            {
+                SubType = (byte)((SubType & ~128) | (value == true ? 128 : 0));
             }
         }
     }
