@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using SonicRetro.SonLVL;
@@ -79,7 +80,7 @@ namespace S3KObjectDefinitions.Common
                 case 10:
                     return "Broken";
                 default:
-                    return string.Empty;
+                    return "Invalid";
             }
         }
 
@@ -116,5 +117,42 @@ namespace S3KObjectDefinitions.Common
             bits.Flip(XFlip, YFlip);
             bmp.DrawBitmapComposited(bits, new Point(loc.X + offsets[subtype].X, loc.Y + offsets[subtype].Y));
         }
+
+        public override Type ObjectType { get { return typeof(MonitorS3KObjectEntry); } }
+    }
+
+    public class MonitorS3KObjectEntry : S3KObjectEntry
+    {
+        public MonitorS3KObjectEntry() : base() { }
+        public MonitorS3KObjectEntry(byte[] file, int address) : base(file, address) { }
+
+        public MonitorType Contents
+        {
+            get
+            {
+                if (SubType > 10) return MonitorType.Invalid;
+                return (MonitorType)SubType;
+            }
+            set
+            {
+                SubType = (byte)value;
+            }
+        }
+    }
+
+    public enum MonitorType
+    {
+        Static,
+        OneUp,
+        Eggman,
+        Rings,
+        Shoes,
+        FireShield,
+        LightningShield,
+        WaterShield,
+        Invincibility,
+        S,
+        Broken,
+        Invalid
     }
 }

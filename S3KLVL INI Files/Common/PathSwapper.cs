@@ -31,7 +31,7 @@ namespace S3KObjectDefinitions.Common
             Size delta;
             for (int i = 0; i < 32; i++)
             {
-                byte[] artfile = tmpartfile.GetRange(((i & 0x1C) << 5),128).ToArray()
+                byte[] artfile = tmpartfile.GetRange(((i & 0x1C) << 5), 128).ToArray();
                 BitmapBits tempim = ObjectHelper.MapASMToBmp(artfile, "../General/Sprites/Level Misc/Map - Path Swap.asm", (i & 4), 0, out off);
                 if ((i & 4) != 0)
                 {
@@ -154,7 +154,7 @@ namespace S3KObjectDefinitions.Common
             }
             set
             {
-                SubType = (byte)((SubType & ~4) | (value  == Direction.Horizontal ? 4 : 0));
+                SubType = (byte)((SubType & ~4) | (value == Direction.Horizontal ? 4 : 0));
             }
         }
 
