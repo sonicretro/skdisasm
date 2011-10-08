@@ -1,4 +1,7 @@
+@echo off
 cd ..
-BuildScripts/split.exe BuildScripts/sk.bin BuildScripts/sk.txt
-BuildScripts/split.exe BuildScripts/s3.bin BuildScripts/s3.txt
+echo Splitting Sonic ^& Knuckles...
+"Build Scripts/split.exe" "Build Scripts/sk.bin" "Build Scripts/sk.txt"
+echo Splitting Sonic the Hedgehog 3...
+"Build Scripts/split.exe" "Build Scripts/s3.bin" "Build Scripts/s3.txt"
 pause
