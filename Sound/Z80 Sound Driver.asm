@@ -12,18 +12,8 @@
 ; ===========================================================================
 
 ; Set this to 1 to fix some bugs in the driver.
-SonicDriverVer          =  5
-fix_sndbugs				=  1
-; Set the following to non-zero to use all S2 DAC samples, or to zero otherwise.
-; The S1 samples are a subset of this.
-use_s2_samples			=  1
-; Set the following to non-zero to use all S3D DAC samples, or to zero
-; otherwise. Most of the S3D samples are also present in S3/S&K, but
-; there are two samples specific to S3D.
-use_s3d_samples			=  1
-; Set the following to non-zero to use all S3 and S&K DAC samples,
-; or to zero otherwise.
-use_s3_samples			=  1
+SonicDriverVer          =  3
+fix_sndbugs				=  0
 
 z80_SoundDriver:
 		!org	0							; z80 Align, handled by the build process
@@ -527,40 +517,24 @@ zWriteFMII:
 ; sample being played -- the code still results in a valid bank switch, and
 ; does not need to worry about special cases.
 DAC_Banks:
-; Set to zero to not use S3/S&K DAC samples:
-		db		zmake68kBank(DacBank1)
-	if (use_s3_samples<>0)||(use_s3d_samples<>0)
-		db		zmake68kBank(DAC_81_Data)            ,zmake68kBank(DAC_82_83_84_85_Data)   ,zmake68kBank(DAC_82_83_84_85_Data)   ,zmake68kBank(DAC_82_83_84_85_Data)
-		db		zmake68kBank(DAC_82_83_84_85_Data)   ,zmake68kBank(DAC_86_Data)            ,zmake68kBank(DAC_87_Data)            ,zmake68kBank(DAC_88_Data)
-		db		zmake68kBank(DAC_89_Data)            ,zmake68kBank(DAC_8A_8B_Data)         ,zmake68kBank(DAC_8A_8B_Data)         ,zmake68kBank(DAC_8C_Data)
-		db		zmake68kBank(DAC_8D_8E_Data)         ,zmake68kBank(DAC_8D_8E_Data)         ,zmake68kBank(DAC_8F_Data)            ,zmake68kBank(DAC_90_91_92_93_Data)
-		db		zmake68kBank(DAC_90_91_92_93_Data)   ,zmake68kBank(DAC_90_91_92_93_Data)   ,zmake68kBank(DAC_90_91_92_93_Data)   ,zmake68kBank(DAC_94_95_96_97_Data)
-		db		zmake68kBank(DAC_94_95_96_97_Data)   ,zmake68kBank(DAC_94_95_96_97_Data)   ,zmake68kBank(DAC_94_95_96_97_Data)   ,zmake68kBank(DAC_98_99_9A_Data)
-		db		zmake68kBank(DAC_98_99_9A_Data)      ,zmake68kBank(DAC_98_99_9A_Data)      ,zmake68kBank(DAC_9B_Data)            ,zmake68kBank(DAC_9C_Data)
-		db		zmake68kBank(DAC_9D_Data)            ,zmake68kBank(DAC_9E_Data)
-	endif
-	if (use_s3_samples<>0)
-		db		zmake68kBank(DAC_9F_Data)            ,zmake68kBank(DAC_A0_Data)            ,zmake68kBank(DAC_A1_Data)            ,zmake68kBank(DAC_A2_Data)
-		db		zmake68kBank(DAC_A3_Data)            ,zmake68kBank(DAC_A4_Data)            ,zmake68kBank(DAC_A5_Data)            ,zmake68kBank(DAC_A6_Data)
-		db		zmake68kBank(DAC_A7_Data)            ,zmake68kBank(DAC_A8_Data)            ,zmake68kBank(DAC_A9_Data)            ,zmake68kBank(DAC_AA_Data)
-		db		zmake68kBank(DAC_AB_Data)            ,zmake68kBank(DAC_AC_Data)            ,zmake68kBank(DAC_AD_AE_Data)         ,zmake68kBank(DAC_AD_AE_Data)
-		db		zmake68kBank(DAC_AF_B0_Data)         ,zmake68kBank(DAC_AF_B0_Data)         ,zmake68kBank(DAC_B1_Data)            ,zmake68kBank(DAC_B2_B3_Data)
-		db		zmake68kBank(DAC_B2_B3_Data)         ,zmake68kBank(DAC_B4_C1_C2_C3_C4_Data),zmake68kBank(DAC_B5_Data)            ,zmake68kBank(DAC_B6_Data)
-		db		zmake68kBank(DAC_B7_Data)            ,zmake68kBank(DAC_B8_B9_Data)         ,zmake68kBank(DAC_B8_B9_Data)         ,zmake68kBank(DAC_BA_Data)
-		db		zmake68kBank(DAC_BB_Data)            ,zmake68kBank(DAC_BC_Data)            ,zmake68kBank(DAC_BD_Data)            ,zmake68kBank(DAC_BE_Data)
-		db		zmake68kBank(DAC_BF_Data)            ,zmake68kBank(DAC_C0_Data)            ,zmake68kBank(DAC_B4_C1_C2_C3_C4_Data),zmake68kBank(DAC_B4_C1_C2_C3_C4_Data)
-		db		zmake68kBank(DAC_B4_C1_C2_C3_C4_Data),zmake68kBank(DAC_B4_C1_C2_C3_C4_Data)
-	endif
-	if (use_s2_samples<>0)
-		db		zmake68kBank(DAC_C5_Data)            ,zmake68kBank(DAC_C6_Data)            ,zmake68kBank(DAC_C7_Data)            ,zmake68kBank(DAC_C8_Data)
-		db		zmake68kBank(DAC_C9_CC_CD_CE_CF_Data),zmake68kBank(DAC_CA_D0_D1_D2_Data)   ,zmake68kBank(DAC_CB_D3_D4_D5_Data)   ,zmake68kBank(DAC_C9_CC_CD_CE_CF_Data)
-		db		zmake68kBank(DAC_C9_CC_CD_CE_CF_Data),zmake68kBank(DAC_C9_CC_CD_CE_CF_Data),zmake68kBank(DAC_C9_CC_CD_CE_CF_Data),zmake68kBank(DAC_CA_D0_D1_D2_Data)
-		db		zmake68kBank(DAC_CA_D0_D1_D2_Data)   ,zmake68kBank(DAC_CA_D0_D1_D2_Data)   ,zmake68kBank(DAC_CB_D3_D4_D5_Data)   ,zmake68kBank(DAC_CB_D3_D4_D5_Data)
-		db		zmake68kBank(DAC_CB_D3_D4_D5_Data)
-	endif
-	if (use_s3d_samples<>0)
-		db		zmake68kBank(DAC_D6_Data)            ,zmake68kBank(DAC_D7_Data)
-	endif
+		db		zmake68kBank(DacBank1)               ,zmake68kBank(DAC_81_Data)            ,zmake68kBank(DAC_82_83_84_85_Data)   ,zmake68kBank(DAC_82_83_84_85_Data)
+		db		zmake68kBank(DAC_82_83_84_85_Data)   ,zmake68kBank(DAC_82_83_84_85_Data)   ,zmake68kBank(DAC_86_Data)            ,zmake68kBank(DAC_87_Data)
+		db		zmake68kBank(DAC_88_Data)            ,zmake68kBank(DAC_89_Data)            ,zmake68kBank(DAC_8A_8B_Data)         ,zmake68kBank(DAC_8A_8B_Data)
+		db		zmake68kBank(DAC_8C_Data)            ,zmake68kBank(DAC_8D_8E_Data)         ,zmake68kBank(DAC_8D_8E_Data)         ,zmake68kBank(DAC_8F_Data)
+		db		zmake68kBank(DAC_90_91_92_93_Data)   ,zmake68kBank(DAC_90_91_92_93_Data)   ,zmake68kBank(DAC_90_91_92_93_Data)   ,zmake68kBank(DAC_90_91_92_93_Data)
+		db		zmake68kBank(DAC_94_95_96_97_Data)   ,zmake68kBank(DAC_94_95_96_97_Data)   ,zmake68kBank(DAC_94_95_96_97_Data)   ,zmake68kBank(DAC_94_95_96_97_Data)
+		db		zmake68kBank(DAC_98_99_9A_Data)      ,zmake68kBank(DAC_98_99_9A_Data)      ,zmake68kBank(DAC_98_99_9A_Data)      ,zmake68kBank(DAC_9B_Data)
+		db		zmake68kBank(DAC_9C_Data)            ,zmake68kBank(DAC_9D_Data)            ,zmake68kBank(DAC_9E_Data)            ,zmake68kBank(DAC_9F_Data)
+		db		zmake68kBank(DAC_A0_Data)            ,zmake68kBank(DAC_A1_Data)            ,zmake68kBank(DAC_A2_Data)            ,zmake68kBank(DAC_A3_Data)
+		db		zmake68kBank(DAC_A4_Data)            ,zmake68kBank(DAC_A5_Data)            ,zmake68kBank(DAC_A6_Data)            ,zmake68kBank(DAC_A7_Data)
+		db		zmake68kBank(DAC_A8_Data)            ,zmake68kBank(DAC_A9_Data)            ,zmake68kBank(DAC_AA_Data)            ,zmake68kBank(DAC_AB_Data)
+		db		zmake68kBank(DAC_AC_Data)            ,zmake68kBank(DAC_AD_AE_Data)         ,zmake68kBank(DAC_AD_AE_Data)         ,zmake68kBank(DAC_AF_B0_Data)
+		db		zmake68kBank(DAC_AF_B0_Data)         ,zmake68kBank(DAC_B1_Data)            ,zmake68kBank(DAC_B2_B3_Data)         ,zmake68kBank(DAC_B2_B3_Data)
+		db		zmake68kBank(DAC_B4_C1_C2_C3_C4_Data),zmake68kBank(DAC_B5_Data)            ,zmake68kBank(DAC_B6_Data)            ,zmake68kBank(DAC_B7_Data)
+		db		zmake68kBank(DAC_B8_B9_Data)         ,zmake68kBank(DAC_B8_B9_Data)         ,zmake68kBank(DAC_BA_Data)            ,zmake68kBank(DAC_BB_Data)
+		db		zmake68kBank(DAC_BC_Data)            ,zmake68kBank(DAC_BD_Data)            ,zmake68kBank(DAC_BE_Data)            ,zmake68kBank(DAC_BF_Data)
+		db		zmake68kBank(DAC_C0_Data)            ,zmake68kBank(DAC_B4_C1_C2_C3_C4_Data),zmake68kBank(DAC_B4_C1_C2_C3_C4_Data),zmake68kBank(DAC_B4_C1_C2_C3_C4_Data)
+		db		zmake68kBank(DAC_B4_C1_C2_C3_C4_Data)
 
 ; =============== S U B	R O U T	I N E =======================================
 ;
@@ -815,7 +789,7 @@ zGetNextNote_cont:
 		jp	p, zStoreDuration				; Branch if yes
 		sub	81h								; Make the note into a 0-based index
 		jp	p, +							; Branch if it is a note and not a rest
-		call	zKillTrack					; Put track at rest
+		call	zRestTrack					; Put track at rest
 		jr	zGetNoteDuration
 ; ---------------------------------------------------------------------------
 +
@@ -2588,9 +2562,6 @@ zExtraCoordFlagSwitchTable:
 		dw cfSetSSGEG						; 0FFh 05h
 		dw cfFMFlutter						; 0FFh 06h
 		dw cfResetSpindashRev				; 0FFh 07h
-		dw cfChanSetTempoDivider			; 0FFh 08h
-		dw cfChanFMCommand					; 0FFh 09h
-		dw cfNoteFillSet					; 0FFh 0Ah
 
 ; =============== S U B	R O U T	I N E =======================================
 ; Sets a new DAC sample for play.
@@ -2808,13 +2779,6 @@ cfPreventAttack:
 ;loc_CE1
 cfNoteFill:
 		call	zComputeNoteDuration		; Multiply note fill by tempo divider
-
-; =============== S U B	R O U T	I N E =======================================
-; Sets the note fill.
-;
-; Has one parameter byte, the new note fill. This value is stored as is.
-;
-cfNoteFillSet:
 		ld	(ix+zTrackNoteFillTimeout), a	; Store result into note fill timeout
 		ld	(ix+zTrackNoteFillMaster), a	; Store master copy of note fill
 		ret
@@ -3589,29 +3553,6 @@ cfResetSpindashRev:
 		ret
 
 ; =============== S U B	R O U T	I N E =======================================
-; Sets tempo divider of a single track.
-;
-; Has one parameter, the new tempo divider.
-;
-cfChanSetTempoDivider:
-		ld	(ix+zTrackTempoDivider), a		; Set tempo divider for this track
-		ret
-
-; =============== S U B	R O U T	I N E =======================================
-; Sends an FM command to the YM2612. The command is sent to the adequate part
-; for the current track, so it is only appropriate for those registers that
-; affect specific channels.
-;
-; Has 2 parameter bytes: a 1-byte register selector and a 1-byte register data.
-;
-;loc_D21
-cfChanFMCommand:
-		call	zGetFMParams				; Get parameters for FM command
-		call	zWriteFMIorII				; Send it to YM2612
-		ret
-; End of function cfChanFMCommand
-
-; =============== S U B	R O U T	I N E =======================================
 ; Updates a PSG track.
 ;
 ; Input:   ix    Pointer to track RAM
@@ -3758,17 +3699,15 @@ zDoFlutterAdvance:
 ; =============== S U B	R O U T	I N E =======================================
 ;
 ;sub_106C
-zKillTrack:
+zRestTrack:
+		set	4, (ix+zTrackPlaybackControl)	; Set 'track is resting' bit
+		bit	2, (ix+zTrackPlaybackControl)	; Is SFX overriding this track?
+		ret	nz								; Return if so
 	if fix_sndbugs
 		xor	a
 		ld	(ix+zTrackFreqLow), a			; Clear low byte of frequency
 		ld	(ix+zTrackFreqHigh), a			; Clear high byte of frequency
 	endif
-
-zRestTrack:
-		set	4, (ix+zTrackPlaybackControl)	; Set 'track is resting' bit
-		bit	2, (ix+zTrackPlaybackControl)	; Is SFX overriding this track?
-		ret	nz								; Return if so
 ; End of function zRestTrack
 
 
@@ -3941,26 +3880,6 @@ zPlaySEGAPCM:
 +		jp	zPlayDigitalAudio				; Go back to normal DAC code
 ; ---------------------------------------------------------------------------
 			; db    0
-PSGTone_2D:     db	  0,   0,   0,   0,   0,   0,   1,   1,   1,   1,   1,   2,   2,   2,   2,   2
-                db	  3,   3,   3,   4,   4,   4,   5,   5,   5,   6,   7, 81h
-PSGTone_2E:     db	  0,   0,   0,   0,   0,   1,   1,   1,   1,   1,   2,   2,   2,   2,   2,   2
-                db	  3,   3,   3,   3,   3,   4,   4,   4,   4,   4,   5,   5,   5,   5,   5,   6
-                db	  6,   6,   6,   6,   7,   7,   7, 81h
-PSGTone_2F:     db	  0,   1,   2,   3,   4,   5,   6,   7,   8,   9, 0Ah, 0Bh, 0Ch, 0Dh, 0Eh, 0Fh, 83h
-PSGTone_30:     db	  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   1,   1,   1,   1,   1,   1
-                db	  1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1
-                db	  1,   1,   1,   1,   1,   1,   1,   1,   2,   2,   2,   2,   2,   2,   2,   2
-                db	  2,   2,   3,   3,   3,   3,   3,   3,   3,   3,   3,   3,   4, 81h
-PSGTone_31:     db	  4,   4,   4,   3,   3,   3,   2,   2,   2,   1,   1,   1,   1,   1,   1,   1
-                db	  2,   2,   2,   2,   2,   3,   3,   3,   3,   3,   4, 81h
-PSGTone_32:     db	  4,   4,   3,   3,   2,   2,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1
-                db	  1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   2,   2,   2,   2,   2,   2
-                db	  2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   3,   3
-                db	  3,   3,   3,   3,   3,   3,   3,   3,   3,   3,   3,   3,   3,   3,   3,   3
-                db	  3,   3,   4,   4,   4,   4,   4,   4,   4,   4,   4,   4,   4,   4,   4,   4
-                db	  4,   4,   4,   4,   4,   4,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5
-                db	  5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   6,   6,   6,   6,   6,   6
-                db	  6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   7, 81h
 
 	if $ > 1300h
 		fatal "Your Z80 code won't fit before its tables. It's \{$-1300h}h bytes past the start of music data \{1300h}h"
@@ -4021,14 +3940,10 @@ z80_PSGTonePointers:
 		dw		PSGTone_12,PSGTone_13,PSGTone_14,PSGTone_15,PSGTone_16,PSGTone_17
 		dw		PSGTone_18,PSGTone_19,PSGTone_1A,PSGTone_1B,PSGTone_1C,PSGTone_1D
 		dw		PSGTone_1E,PSGTone_1F,PSGTone_20,PSGTone_21,PSGTone_22,PSGTone_23
-		dw		PSGTone_24,PSGTone_25,PSGTone_26,PSGTone_27,PSGTone_28,PSGTone_29
-		dw		PSGTone_2A,PSGTone_2B,PSGTone_2C,PSGTone_2D,PSGTone_2E,PSGTone_2F
-		dw		PSGTone_30,PSGTone_31,PSGTone_32,PSGTone_33
+		dw		PSGTone_24,PSGTone_25,PSGTone_26
 
 PSGTone_00:		db    2, 83h
-PSGTone_01:
-PSGTone_0E:
-PSGTone_28:		db    0,   2,   4,   6,   8, 10h, 83h
+PSGTone_01:		db    0,   2,   4,   6,   8, 10h, 83h
 PSGTone_02:		db    2,   1,   0,   0,   1,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2
                 db    2,   3,   3,   3,   4,   4,   4,   5, 81h
 PSGTone_03:		db    0,   0,   2,   3,   4,   4,   5,   5,   5,   6,   6, 81h
@@ -4044,6 +3959,7 @@ PSGTone_0A:		db  10h, 20h, 30h, 40h, 30h, 20h, 10h,   0,0F0h, 80h
 PSGTone_0B:		db    0,   0,   1,   1,   3,   3,   4,   5, 83h
 PSGTone_0C:		db    0, 81h
 PSGTone_0D:		db    2, 83h
+PSGTone_0E:		db    0,   2,   4,   6,   8, 10h, 83h
 PSGTone_0F:		db    9,   9,   9,   8,   8,   8,   7,   7,   7,   6,   6,   6,   5,   5,   5,   4
                 db    4,   4,   3,   3,   3,   2,   2,   2,   1,   1,   1,   0,   0,   0, 81h
 PSGTone_10:		db    1,   1,   1,   0,   0,   0, 81h
@@ -4055,7 +3971,8 @@ PSGTone_14:		db    0,   0,   0,   2,   3,   3,   4,   5,   6,   7,   8,   9, 0Ah
 PSGTone_15:		db    3,   2,   1,   1,   0,   0,   1,   2,   3,   4, 81h
 PSGTone_16:		db    1,   0,   0,   0,   0,   1,   1,   1,   2,   2,   2,   3,   3,   3,   3,   4
                 db    4,   4,   5,   5, 81h
-PSGTone_17:		db  10h, 20h, 30h, 40h, 30h, 20h, 10h,   0, 80h
+PSGTone_17:		db  10h, 20h, 30h, 40h, 30h, 20h, 10h,   0, 10h, 20h, 30h, 40h, 30h, 20h, 10h,   0
+                db  10h, 20h, 30h, 40h, 30h, 20h, 10h,   0, 80h
 PSGTone_18:		db    0,   0,   1,   1,   3,   3,   4,   5, 83h
 PSGTone_19:		db    0,   2,   4,   6,   8, 16h, 83h
 PSGTone_1A:		db    0,   0,   1,   1,   3,   3,   4,   5, 83h
@@ -4082,15 +3999,6 @@ PSGTone_25:		db    0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   1,   1,   1
                 db    8,   8,   8,   8,   8,   8,   8,   8,   8,   8,   9,   9,   9,   9,   9,   9
                 db    9,   9, 83h
 PSGTone_26:		db    0,   2,   2,   2,   3,   3,   3,   4,   4,   4,   5,   5, 83h
-PSGTone_27:     db	  0,   0,   0,   1,   1,   1,   2,   2,   2,   3,   3,   3,   4,   4,   4,   5
-                db	  5,   5,   6,   6,   6,   7, 81h
-PSGTone_29:     db	  0,   0,   1,   1,   2,   2,   3,   3,   4,   4,   5,   5,   6,   6,   7,   7, 81h
-PSGTone_2A:     db	  0,   0,   2,   3,   4,   4,   5,   5,   5,   6, 81h
-PSGTone_2C:     db	  3,   3,   3,   2,   2,   2,   2,   1,   1,   1,   0,   0,   0,   0, 81h
-PSGTone_2B:     db	  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   1,   1
-                db	  1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   2,   2,   2,   2
-                db	  2,   2,   2,   2,   3,   3,   3,   3,   3,   3,   3,   3,   4, 81h
-PSGTone_33:     db	0Eh, 0Dh, 0Ch, 0Bh, 0Ah,   9,   8,   7,   6,   5,   4,   3,   2,   1,   0, 81h
 
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
@@ -4178,6 +4086,9 @@ z80_SFXPointers:
 ; ===========================================================================
 ; PSG Universial Voice Bank
 ; ===========================================================================
+	if $ <> 17D8h
+		fatal "The universal voice bank is not in a location where music can find it; any song using it will fail."
+	endif
 
 z80_UniVoiceBank:
 	; Synth Bass 2
@@ -4347,9 +4258,42 @@ DAC_Setup macro rate,dacptr
 	dc.w	dacptr_Ptr
     endm
 
-; Macro for printing the DAC master table
-DAC_Master_Table macro
-	if (use_s3_samples<>0)||(use_s3d_samples<>0)
+; A "null" DAC sample.
+DAC_Invalid:
+DAC_Invalid_Len := 0
+DAC_Invalid_Ptr := 0
+DAC_Invalid_Bank := 0
+
+; Setup a null entry for a DAC sample.
+DAC_Null_Setup macro rate,dacptr
+	dc.b	rate
+	dc.w 	$0000,$0000
+    endm
+
+; Setup a chain-linked invalid entry for a DAC sample.
+; The sample's length is correctly stored for the sample,
+; while the pointer (usually) goes towards the DAC pointer
+; entry of another DAC sample setup.
+DAC_Null_Chain macro rate,dacptr,linkptr
+	dc.b	rate
+	dc.w 	dacptr_Len,k68z80Pointer(linkptr+3-soundBankStart)
+    endm
+
+; ---------------------------------------------------------------------------
+; ===========================================================================
+; Playlist
+; ===========================================================================
+LevelMusic_Playlist:
+		binclude "Sound/Music/Music playlist.bin"
+; ---------------------------------------------------------------------------
+; ===========================================================================
+; DAC Banks
+; ===========================================================================
+; DAC Bank 1
+; ---------------------------------------------------------------------------
+DacBank1:			startBank
+
+DAC_Offsets:
 		offsetBankTableEntry.w	DAC_81_Setup
 		offsetBankTableEntry.w	DAC_82_Setup
 		offsetBankTableEntry.w	DAC_83_Setup
@@ -4381,8 +4325,6 @@ DAC_Master_Table macro
 		offsetBankTableEntry.w	DAC_9C_Setup
 		offsetBankTableEntry.w	DAC_9D_Setup
 		offsetBankTableEntry.w	DAC_9E_Setup
-	endif
-	if (use_s3_samples<>0)
 		offsetBankTableEntry.w	DAC_9F_Setup
 
 		offsetBankTableEntry.w	DAC_A0_Setup
@@ -4424,33 +4366,7 @@ DAC_Master_Table macro
 		offsetBankTableEntry.w	DAC_C2_Setup
 		offsetBankTableEntry.w	DAC_C3_Setup
 		offsetBankTableEntry.w	DAC_C4_Setup
-	endif
-	if (use_s2_samples<>0)
-		offsetBankTableEntry.w	DAC_C5_Setup
-		offsetBankTableEntry.w	DAC_C6_Setup
-		offsetBankTableEntry.w	DAC_C7_Setup
-		offsetBankTableEntry.w	DAC_C8_Setup
-		offsetBankTableEntry.w	DAC_C9_Setup
-		offsetBankTableEntry.w	DAC_CA_Setup
-		offsetBankTableEntry.w	DAC_CB_Setup
-		offsetBankTableEntry.w	DAC_CC_Setup
-		offsetBankTableEntry.w	DAC_CD_Setup
-		offsetBankTableEntry.w	DAC_CE_Setup
-		offsetBankTableEntry.w	DAC_CF_Setup
 
-		offsetBankTableEntry.w	DAC_D0_Setup
-		offsetBankTableEntry.w	DAC_D1_Setup
-		offsetBankTableEntry.w	DAC_D2_Setup
-		offsetBankTableEntry.w	DAC_D3_Setup
-		offsetBankTableEntry.w	DAC_D4_Setup
-		offsetBankTableEntry.w	DAC_D5_Setup
-	endif
-	if (use_s3d_samples<>0)
-		offsetBankTableEntry.w	DAC_D6_Setup
-		offsetBankTableEntry.w	DAC_D7_Setup
-	endif
-
-	if (use_s3_samples<>0)||(use_s3d_samples<>0)
 DAC_81_Setup:			DAC_Setup $04,DAC_81_Data
 DAC_82_Setup:			DAC_Setup $0E,DAC_82_83_84_85_Data
 DAC_83_Setup:			DAC_Setup $14,DAC_82_83_84_85_Data
@@ -4478,8 +4394,6 @@ DAC_98_Setup:			DAC_Setup $0B,DAC_98_99_9A_Data
 DAC_99_Setup:			DAC_Setup $13,DAC_98_99_9A_Data
 DAC_9A_Setup:			DAC_Setup $16,DAC_98_99_9A_Data
 DAC_9B_Setup:			DAC_Setup $0C,DAC_9B_Data
-	endif
-	if (use_s3_samples<>0)
 DAC_A2_Setup:			DAC_Setup $0A,DAC_A2_Data
 DAC_A3_Setup:			DAC_Setup $18,DAC_A3_Data
 DAC_A4_Setup:			DAC_Setup $18,DAC_A4_Data
@@ -4514,58 +4428,13 @@ DAC_C1_Setup:			DAC_Setup $0F,DAC_B4_C1_C2_C3_C4_Data
 DAC_C2_Setup:			DAC_Setup $11,DAC_B4_C1_C2_C3_C4_Data
 DAC_C3_Setup:			DAC_Setup $12,DAC_B4_C1_C2_C3_C4_Data
 DAC_C4_Setup:			DAC_Setup $0B,DAC_B4_C1_C2_C3_C4_Data
-	endif
-	if (use_s3_samples<>0)||(use_s3d_samples<>0)
 DAC_9C_Setup:			DAC_Setup $0A,DAC_9C_Data
 DAC_9D_Setup:			DAC_Setup $18,DAC_9D_Data
 DAC_9E_Setup:			DAC_Setup $18,DAC_9E_Data
-	endif
-	if (use_s3_samples<>0)
 DAC_9F_Setup:			DAC_Setup $0C,DAC_9F_Data
 DAC_A0_Setup:			DAC_Setup $0C,DAC_A0_Data
 DAC_A1_Setup:			DAC_Setup $0A,DAC_A1_Data
-	endif
-	if (use_s2_samples<>0)
-DAC_C5_Setup:			DAC_Setup $17,DAC_C5_Data
-DAC_C6_Setup:			DAC_Setup $01,DAC_C6_Data
-DAC_C7_Setup:			DAC_Setup $06,DAC_C7_Data
-DAC_C8_Setup:			DAC_Setup $08,DAC_C8_Data
-DAC_C9_Setup:			DAC_Setup $1B,DAC_C9_CC_CD_CE_CF_Data
-DAC_CA_Setup:			DAC_Setup $0A,DAC_CA_D0_D1_D2_Data
-DAC_CB_Setup:			DAC_Setup $1B,DAC_CB_D3_D4_D5_Data
-DAC_CC_Setup:			DAC_Setup $12,DAC_C9_CC_CD_CE_CF_Data
-DAC_CD_Setup:			DAC_Setup $15,DAC_C9_CC_CD_CE_CF_Data
-DAC_CE_Setup:			DAC_Setup $1C,DAC_C9_CC_CD_CE_CF_Data
-DAC_CF_Setup:			DAC_Setup $1D,DAC_C9_CC_CD_CE_CF_Data
-DAC_D0_Setup:			DAC_Setup $02,DAC_CA_D0_D1_D2_Data
-DAC_D1_Setup:			DAC_Setup $05,DAC_CA_D0_D1_D2_Data
-DAC_D2_Setup:			DAC_Setup $08,DAC_CA_D0_D1_D2_Data
-DAC_D3_Setup:			DAC_Setup $08,DAC_CB_D3_D4_D5_Data
-DAC_D4_Setup:			DAC_Setup $0B,DAC_CB_D3_D4_D5_Data
-DAC_D5_Setup:			DAC_Setup $12,DAC_CB_D3_D4_D5_Data
-	endif
-	if (use_s3d_samples<>0)
-DAC_D6_Setup:			DAC_Setup $01,DAC_D6_Data
-DAC_D7_Setup:			DAC_Setup $12,DAC_D7_Data
-	endif
-	endm
 ; ---------------------------------------------------------------------------
-; ===========================================================================
-; Playlist
-; ===========================================================================
-LevelMusic_Playlist:
-		binclude "Sound/Music/Music playlist.bin"
-; ---------------------------------------------------------------------------
-; ===========================================================================
-; DAC Banks
-; ===========================================================================
-
-	if (use_s3_samples<>0)||(use_s3d_samples<>0)
-; ---------------------------------------------------------------------------
-; DAC Bank 1
-; ---------------------------------------------------------------------------
-DacBank1:			startBank
-	DAC_Master_Table
 
 DAC_86_Data:			DACBINCLUDE "Sound/DAC/86.bin"
 DAC_81_Data:			DACBINCLUDE "Sound/DAC/81.bin"
@@ -4581,9 +4450,6 @@ DAC_8F_Data:			DACBINCLUDE "Sound/DAC/8F.bin"
 DAC_89_Data:			DACBINCLUDE "Sound/DAC/89.bin"
 DAC_98_99_9A_Data:		DACBINCLUDE "Sound/DAC/98-9A.bin"
 DAC_9B_Data:			DACBINCLUDE "Sound/DAC/9B.bin"
-	endif
-
-	if (use_s3_samples<>0)
 DAC_B2_B3_Data:			DACBINCLUDE "Sound/DAC/B2-B3.bin"
 
 	finishBank
@@ -4592,16 +4458,151 @@ DAC_B2_B3_Data:			DACBINCLUDE "Sound/DAC/B2-B3.bin"
 ; Dac Bank 2
 ; ---------------------------------------------------------------------------
 DacBank2:			startBank
-	DAC_Master_Table
-	endif
+		offsetBankTableEntry.w	DAC_81_Setup2
+		offsetBankTableEntry.w	DAC_82_Setup2
+		offsetBankTableEntry.w	DAC_83_Setup2
+		offsetBankTableEntry.w	DAC_84_Setup2
+		offsetBankTableEntry.w	DAC_85_Setup2
+		offsetBankTableEntry.w	DAC_86_Setup2
+		offsetBankTableEntry.w	DAC_87_Setup2
+		offsetBankTableEntry.w	DAC_88_Setup2
+		offsetBankTableEntry.w	DAC_89_Setup2
+		offsetBankTableEntry.w	DAC_8A_Setup2
+		offsetBankTableEntry.w	DAC_8B_Setup2
+		offsetBankTableEntry.w	DAC_8C_Setup2
+		offsetBankTableEntry.w	DAC_8D_Setup2
+		offsetBankTableEntry.w	DAC_8E_Setup2
+		offsetBankTableEntry.w	DAC_8F_Setup2
+		
+		offsetBankTableEntry.w	DAC_90_Setup2
+		offsetBankTableEntry.w	DAC_91_Setup2
+		offsetBankTableEntry.w	DAC_92_Setup2
+		offsetBankTableEntry.w	DAC_93_Setup2
+		offsetBankTableEntry.w	DAC_94_Setup2
+		offsetBankTableEntry.w	DAC_95_Setup2
+		offsetBankTableEntry.w	DAC_96_Setup2
+		offsetBankTableEntry.w	DAC_97_Setup2
+		offsetBankTableEntry.w	DAC_98_Setup2
+		offsetBankTableEntry.w	DAC_99_Setup2
+		offsetBankTableEntry.w	DAC_9A_Setup2
+		offsetBankTableEntry.w	DAC_9B_Setup2
+		offsetBankTableEntry.w	DAC_9C_Setup2
+		offsetBankTableEntry.w	DAC_9D_Setup2
+		offsetBankTableEntry.w	DAC_9E_Setup2
+		offsetBankTableEntry.w	DAC_9F_Setup2
 
-	if (use_s3_samples<>0)||(use_s3d_samples<>0)
+		offsetBankTableEntry.w	DAC_A0_Setup2
+		offsetBankTableEntry.w	DAC_A1_Setup2
+		offsetBankTableEntry.w	DAC_A2_Setup2
+		offsetBankTableEntry.w	DAC_A3_Setup2
+		offsetBankTableEntry.w	DAC_A4_Setup2
+		offsetBankTableEntry.w	DAC_A5_Setup2
+		offsetBankTableEntry.w	DAC_A6_Setup2
+		offsetBankTableEntry.w	DAC_A7_Setup2
+		offsetBankTableEntry.w	DAC_A8_Setup2
+		offsetBankTableEntry.w	DAC_A9_Setup2
+		offsetBankTableEntry.w	DAC_AA_Setup2
+		offsetBankTableEntry.w	DAC_AB_Setup2
+		offsetBankTableEntry.w	DAC_AC_Setup2
+		offsetBankTableEntry.w	DAC_AD_Setup2
+		offsetBankTableEntry.w	DAC_AE_Setup2
+		offsetBankTableEntry.w	DAC_AF_Setup2
+		
+		offsetBankTableEntry.w	DAC_B0_Setup2
+		offsetBankTableEntry.w	DAC_B1_Setup2
+		offsetBankTableEntry.w	DAC_B2_Setup2
+		offsetBankTableEntry.w	DAC_B3_Setup2
+		offsetBankTableEntry.w	DAC_B4_Setup2
+		offsetBankTableEntry.w	DAC_B5_Setup2
+		offsetBankTableEntry.w	DAC_B6_Setup2
+		offsetBankTableEntry.w	DAC_B7_Setup2
+		offsetBankTableEntry.w	DAC_B8_B9_Setup2
+		offsetBankTableEntry.w	DAC_B8_B9_Setup2
+		offsetBankTableEntry.w	DAC_BA_Setup2
+		offsetBankTableEntry.w	DAC_BB_Setup2
+		offsetBankTableEntry.w	DAC_BC_Setup2
+		offsetBankTableEntry.w	DAC_BD_Setup2
+		offsetBankTableEntry.w	DAC_BE_Setup2
+		offsetBankTableEntry.w	DAC_BF_Setup2
+
+		offsetBankTableEntry.w	DAC_C0_Setup2
+		offsetBankTableEntry.w	DAC_C1_Setup2
+		offsetBankTableEntry.w	DAC_C2_Setup2
+		offsetBankTableEntry.w	DAC_C3_Setup2
+		offsetBankTableEntry.w	DAC_C4_Setup2
+
+DAC_81_Setup2:			DAC_Null_Setup $04,DAC_81_Data
+DAC_82_Setup2:			DAC_Null_Setup $0E,DAC_82_83_84_85_Data
+DAC_83_Setup2:			DAC_Null_Chain $14,DAC_Invalid,DAC_82_Setup2
+DAC_84_Setup2:			DAC_Null_Chain $1A,DAC_Invalid,DAC_83_Setup2
+DAC_85_Setup2:			DAC_Null_Chain $20,DAC_Invalid,DAC_84_Setup2
+DAC_86_Setup2:			DAC_Null_Setup $04,DAC_86_Data
+DAC_87_Setup2:			DAC_Null_Setup $04,DAC_87_Data
+DAC_88_Setup2:			DAC_Null_Setup $06,DAC_88_Data
+DAC_89_Setup2:			DAC_Null_Setup $0A,DAC_89_Data
+DAC_8A_Setup2:			DAC_Null_Setup $14,DAC_8A_8B_Data
+DAC_8B_Setup2:			DAC_Null_Chain $1B,DAC_Invalid,DAC_8A_Setup2
+DAC_8C_Setup2:			DAC_Null_Setup $08,DAC_8C_Data
+DAC_8D_Setup2:			DAC_Null_Setup $0B,DAC_8D_8E_Data
+DAC_8E_Setup2:			DAC_Null_Chain $11,DAC_Invalid,DAC_8D_Setup2
+DAC_8F_Setup2:			DAC_Null_Setup $08,DAC_8F_Data
+DAC_90_Setup2:			DAC_Null_Setup $03,DAC_90_91_92_93_Data
+DAC_91_Setup2:			DAC_Null_Chain $07,DAC_Invalid,DAC_90_Setup2
+DAC_92_Setup2:			DAC_Null_Chain $0A,DAC_Invalid,DAC_91_Setup2
+DAC_93_Setup2:			DAC_Null_Chain $0E,DAC_Invalid,DAC_92_Setup2
+DAC_94_Setup2:			DAC_Null_Setup $06,DAC_94_95_96_97_Data
+DAC_95_Setup2:			DAC_Null_Chain $0A,DAC_Invalid,DAC_94_Setup2
+DAC_96_Setup2:			DAC_Null_Chain $0D,DAC_Invalid,DAC_95_Setup2
+DAC_97_Setup2:			DAC_Null_Chain $12,DAC_Invalid,DAC_96_Setup2
+DAC_98_Setup2:			DAC_Null_Setup $0B,DAC_98_99_9A_Data
+DAC_99_Setup2:			DAC_Null_Chain $13,DAC_Invalid,DAC_98_Setup2
+DAC_9A_Setup2:			DAC_Null_Chain $16,DAC_Invalid,DAC_99_Setup2
+DAC_9B_Setup2:			DAC_Null_Chain $0C,DAC_9B_Data,Bank2_Filler-3
+DAC_A2_Setup2:			DAC_Setup $0A,DAC_A2_Data
+DAC_A3_Setup2:			DAC_Setup $18,DAC_A3_Data
+DAC_A4_Setup2:			DAC_Setup $18,DAC_A4_Data
+DAC_A5_Setup2:			DAC_Setup $0C,DAC_A5_Data
+DAC_A6_Setup2:			DAC_Setup $09,DAC_A6_Data
+DAC_A7_Setup2:			DAC_Setup $18,DAC_A7_Data
+DAC_A8_Setup2:			DAC_Setup $18,DAC_A8_Data
+DAC_A9_Setup2:			DAC_Setup $0C,DAC_A9_Data
+DAC_AA_Setup2:			DAC_Setup $0A,DAC_AA_Data
+DAC_AB_Setup2:			DAC_Null_Setup $0D,DAC_AB_Data
+DAC_AC_Setup2:			DAC_Null_Setup $06,DAC_AC_Data
+DAC_AD_Setup2:			DAC_Null_Setup $10,DAC_AD_AE_Data
+DAC_AE_Setup2:			DAC_Null_Chain $18,DAC_Invalid,DAC_AD_Setup2
+DAC_AF_Setup2:			DAC_Null_Setup $09,DAC_AF_B0_Data
+DAC_B0_Setup2:			DAC_Null_Chain $12,DAC_Invalid,DAC_AF_Setup2
+DAC_B1_Setup2:			DAC_Null_Setup $18,DAC_B1_Data
+DAC_B2_Setup2:			DAC_Null_Setup $16,DAC_B2_B3_Data
+DAC_B3_Setup2:			DAC_Null_Chain $20,DAC_Invalid,DAC_B2_Setup2
+DAC_B4_Setup2:			DAC_Null_Setup $0C,DAC_B4_C1_C2_C3_C4_Data
+DAC_B5_Setup2:			DAC_Null_Setup $0C,DAC_B5_Data
+DAC_B6_Setup2:			DAC_Null_Setup $0C,DAC_B6_Data
+DAC_B7_Setup2:			DAC_Null_Setup $18,DAC_B7_Data
+DAC_B8_B9_Setup2:		DAC_Null_Setup $0C,DAC_B8_B9_Data
+DAC_BA_Setup2:			DAC_Null_Setup $18,DAC_BA_Data
+DAC_BB_Setup2:			DAC_Null_Setup $18,DAC_BB_Data
+DAC_BC_Setup2:			DAC_Null_Setup $18,DAC_BC_Data
+DAC_BD_Setup2:			DAC_Null_Setup $0C,DAC_BD_Data
+DAC_BE_Setup2:			DAC_Null_Setup $0C,DAC_BE_Data
+DAC_BF_Setup2:			DAC_Null_Setup $1C,DAC_BF_Data
+DAC_C0_Setup2:			DAC_Null_Setup $0B,DAC_C0_Data
+DAC_C1_Setup2:			DAC_Null_Chain $0F,DAC_Invalid,DAC_B4_Setup2
+DAC_C2_Setup2:			DAC_Null_Chain $11,DAC_Invalid,DAC_C1_Setup2
+DAC_C3_Setup2:			DAC_Null_Chain $12,DAC_Invalid,DAC_C2_Setup2
+DAC_C4_Setup2:			DAC_Null_Chain $0B,DAC_Invalid,DAC_C3_Setup2
+DAC_9C_Setup2:			DAC_Setup $0A,DAC_9C_Data
+DAC_9D_Setup2:			DAC_Setup $18,DAC_9D_Data
+DAC_9E_Setup2:			DAC_Setup $18,DAC_9E_Data
+DAC_9F_Setup2:			DAC_Setup $0C,DAC_9F_Data
+DAC_A0_Setup2:			DAC_Setup $0C,DAC_A0_Data
+DAC_A1_Setup2:			DAC_Setup $0A,DAC_A1_Data
+
+Bank2_Filler:			cnop 	$7F7,soundBankStart
 DAC_9C_Data:			DACBINCLUDE "Sound/DAC/9C.bin"
 DAC_9D_Data:			DACBINCLUDE "Sound/DAC/9D.bin"
 DAC_9E_Data:			DACBINCLUDE "Sound/DAC/9E.bin"
-	endif
-
-	if (use_s3_samples<>0)
 DAC_9F_Data:			DACBINCLUDE "Sound/DAC/9F.bin"
 DAC_A0_Data:			DACBINCLUDE "Sound/DAC/A0.bin"
 DAC_A1_Data:			DACBINCLUDE "Sound/DAC/A1.bin"
@@ -4621,13 +4622,154 @@ DAC_AA_Data:			DACBINCLUDE "Sound/DAC/AA.bin"
 ; Dac Bank 3
 ; ---------------------------------------------------------------------------
 DacBank3:			startBank
-	DAC_Master_Table
+		offsetBankTableEntry.w	DAC_81_Setup3
+		offsetBankTableEntry.w	DAC_82_Setup3
+		offsetBankTableEntry.w	DAC_83_Setup3
+		offsetBankTableEntry.w	DAC_84_Setup3
+		offsetBankTableEntry.w	DAC_85_Setup3
+		offsetBankTableEntry.w	DAC_86_Setup3
+		offsetBankTableEntry.w	DAC_87_Setup3
+		offsetBankTableEntry.w	DAC_88_Setup3
+		offsetBankTableEntry.w	DAC_89_Setup3
+		offsetBankTableEntry.w	DAC_8A_Setup3
+		offsetBankTableEntry.w	DAC_8B_Setup3
+		offsetBankTableEntry.w	DAC_8C_Setup3
+		offsetBankTableEntry.w	DAC_8D_Setup3
+		offsetBankTableEntry.w	DAC_8E_Setup3
+		offsetBankTableEntry.w	DAC_8F_Setup3
+		
+		offsetBankTableEntry.w	DAC_90_Setup3
+		offsetBankTableEntry.w	DAC_91_Setup3
+		offsetBankTableEntry.w	DAC_92_Setup3
+		offsetBankTableEntry.w	DAC_93_Setup3
+		offsetBankTableEntry.w	DAC_94_Setup3
+		offsetBankTableEntry.w	DAC_95_Setup3
+		offsetBankTableEntry.w	DAC_96_Setup3
+		offsetBankTableEntry.w	DAC_97_Setup3
+		offsetBankTableEntry.w	DAC_98_Setup3
+		offsetBankTableEntry.w	DAC_99_Setup3
+		offsetBankTableEntry.w	DAC_9A_Setup3
+		offsetBankTableEntry.w	DAC_9B_Setup3
+		offsetBankTableEntry.w	DAC_9C_Setup3
+		offsetBankTableEntry.w	DAC_9D_Setup3
+		offsetBankTableEntry.w	DAC_9E_Setup3
+		offsetBankTableEntry.w	DAC_9F_Setup3
+
+		offsetBankTableEntry.w	DAC_A0_Setup3
+		offsetBankTableEntry.w	DAC_A1_Setup3
+		offsetBankTableEntry.w	DAC_A2_Setup3
+		offsetBankTableEntry.w	DAC_A3_Setup3
+		offsetBankTableEntry.w	DAC_A4_Setup3
+		offsetBankTableEntry.w	DAC_A5_Setup3
+		offsetBankTableEntry.w	DAC_A6_Setup3
+		offsetBankTableEntry.w	DAC_A7_Setup3
+		offsetBankTableEntry.w	DAC_A8_Setup3
+		offsetBankTableEntry.w	DAC_A9_Setup3
+		offsetBankTableEntry.w	DAC_AA_Setup3
+		offsetBankTableEntry.w	DAC_AB_Setup3
+		offsetBankTableEntry.w	DAC_AC_Setup3
+		offsetBankTableEntry.w	DAC_AD_Setup3
+		offsetBankTableEntry.w	DAC_AE_Setup3
+		offsetBankTableEntry.w	DAC_AF_Setup3
+		
+		offsetBankTableEntry.w	DAC_B0_Setup3
+		offsetBankTableEntry.w	DAC_B1_Setup3
+		offsetBankTableEntry.w	DAC_B2_Setup3
+		offsetBankTableEntry.w	DAC_B3_Setup3
+		offsetBankTableEntry.w	DAC_B4_Setup3
+		offsetBankTableEntry.w	DAC_B5_Setup3
+		offsetBankTableEntry.w	DAC_B6_Setup3
+		offsetBankTableEntry.w	DAC_B7_Setup3
+		offsetBankTableEntry.w	DAC_B8_B9_Setup3
+		offsetBankTableEntry.w	DAC_B8_B9_Setup3
+		offsetBankTableEntry.w	DAC_BA_Setup3
+		offsetBankTableEntry.w	DAC_BB_Setup3
+		offsetBankTableEntry.w	DAC_BC_Setup3
+		offsetBankTableEntry.w	DAC_BD_Setup3
+		offsetBankTableEntry.w	DAC_BE_Setup3
+		offsetBankTableEntry.w	DAC_BF_Setup3
+
+		offsetBankTableEntry.w	DAC_C0_Setup3
+		offsetBankTableEntry.w	DAC_C1_Setup3
+		offsetBankTableEntry.w	DAC_C2_Setup3
+		offsetBankTableEntry.w	DAC_C3_Setup3
+		offsetBankTableEntry.w	DAC_C4_Setup3
+
+DAC_81_Setup3:			DAC_Null_Setup $04,DAC_81_Data
+DAC_82_Setup3:			DAC_Null_Setup $0E,DAC_82_83_84_85_Data
+DAC_83_Setup3:			DAC_Null_Chain $14,DAC_Invalid,DAC_82_Setup3
+DAC_84_Setup3:			DAC_Null_Chain $1A,DAC_Invalid,DAC_83_Setup3
+DAC_85_Setup3:			DAC_Null_Chain $20,DAC_Invalid,DAC_84_Setup3
+DAC_86_Setup3:			DAC_Null_Setup $04,DAC_86_Data
+DAC_87_Setup3:			DAC_Null_Setup $04,DAC_87_Data
+DAC_88_Setup3:			DAC_Null_Setup $06,DAC_88_Data
+DAC_89_Setup3:			DAC_Null_Setup $0A,DAC_89_Data
+DAC_8A_Setup3:			DAC_Null_Setup $14,DAC_8A_8B_Data
+DAC_8B_Setup3:			DAC_Null_Chain $1B,DAC_Invalid,DAC_8A_Setup3
+DAC_8C_Setup3:			DAC_Null_Setup $08,DAC_8C_Data
+DAC_8D_Setup3:			DAC_Null_Setup $0B,DAC_8D_8E_Data
+DAC_8E_Setup3:			DAC_Null_Chain $11,DAC_Invalid,DAC_8D_Setup3
+DAC_8F_Setup3:			DAC_Null_Setup $08,DAC_8F_Data
+DAC_90_Setup3:			DAC_Null_Setup $03,DAC_90_91_92_93_Data
+DAC_91_Setup3:			DAC_Null_Chain $07,DAC_Invalid,DAC_90_Setup3
+DAC_92_Setup3:			DAC_Null_Chain $0A,DAC_Invalid,DAC_91_Setup3
+DAC_93_Setup3:			DAC_Null_Chain $0E,DAC_Invalid,DAC_92_Setup3
+DAC_94_Setup3:			DAC_Null_Setup $06,DAC_94_95_96_97_Data
+DAC_95_Setup3:			DAC_Null_Chain $0A,DAC_Invalid,DAC_94_Setup3
+DAC_96_Setup3:			DAC_Null_Chain $0D,DAC_Invalid,DAC_95_Setup3
+DAC_97_Setup3:			DAC_Null_Chain $12,DAC_Invalid,DAC_96_Setup3
+DAC_98_Setup3:			DAC_Null_Setup $0B,DAC_98_99_9A_Data
+DAC_99_Setup3:			DAC_Null_Chain $13,DAC_Invalid,DAC_98_Setup3
+DAC_9A_Setup3:			DAC_Null_Chain $16,DAC_Invalid,DAC_99_Setup3
+DAC_9B_Setup3:			DAC_Null_Setup $0C,DAC_9B_Data
+DAC_A2_Setup3:			DAC_Null_Setup $0A,DAC_A2_Data
+DAC_A3_Setup3:			DAC_Null_Setup $18,DAC_A3_Data
+DAC_A4_Setup3:			DAC_Null_Setup $18,DAC_A4_Data
+DAC_A5_Setup3:			DAC_Null_Setup $0C,DAC_A5_Data
+DAC_A6_Setup3:			DAC_Null_Setup $09,DAC_A6_Data
+DAC_A7_Setup3:			DAC_Null_Setup $18,DAC_A7_Data
+DAC_A8_Setup3:			DAC_Null_Setup $18,DAC_A8_Data
+DAC_A9_Setup3:			DAC_Null_Setup $0C,DAC_A9_Data
+DAC_AA_Setup3:			DAC_Null_Setup $0A,DAC_AA_Data
+DAC_AB_Setup3:			DAC_Setup $0D,DAC_AB_Data
+DAC_AC_Setup3:			DAC_Setup $06,DAC_AC_Data
+DAC_AD_Setup3:			DAC_Setup $10,DAC_AD_AE_Data
+DAC_AE_Setup3:			DAC_Setup $18,DAC_AD_AE_Data
+DAC_AF_Setup3:			DAC_Setup $09,DAC_AF_B0_Data
+DAC_B0_Setup3:			DAC_Setup $12,DAC_AF_B0_Data
+DAC_B1_Setup3:			DAC_Setup $18,DAC_B1_Data
+DAC_B2_Setup3:			DAC_Null_Chain $16,DAC_B2_B3_Data,Bank3_Filler2-3
+DAC_B3_Setup3:			DAC_Null_Chain $20,DAC_B2_B3_Data,Bank3_Filler2-3
+DAC_B4_Setup3:			DAC_Setup $0C,DAC_B4_C1_C2_C3_C4_Data
+DAC_B5_Setup3:			DAC_Setup $0C,DAC_B5_Data
+DAC_B6_Setup3:			DAC_Setup $0C,DAC_B6_Data
+DAC_B7_Setup3:			DAC_Setup $18,DAC_B7_Data
+DAC_B8_B9_Setup3:		DAC_Setup $0C,DAC_B8_B9_Data
+DAC_BA_Setup3:			DAC_Setup $18,DAC_BA_Data
+DAC_BB_Setup3:			DAC_Setup $18,DAC_BB_Data
+DAC_BC_Setup3:			DAC_Setup $18,DAC_BC_Data
+DAC_BD_Setup3:			DAC_Setup $0C,DAC_BD_Data
+DAC_BE_Setup3:			DAC_Setup $0C,DAC_BE_Data
+DAC_BF_Setup3:			DAC_Setup $1C,DAC_BF_Data
+DAC_C0_Setup3:			DAC_Setup $0B,DAC_C0_Data
+DAC_C1_Setup3:			DAC_Setup $0F,DAC_B4_C1_C2_C3_C4_Data
+DAC_C2_Setup3:			DAC_Setup $11,DAC_B4_C1_C2_C3_C4_Data
+DAC_C3_Setup3:			DAC_Setup $12,DAC_B4_C1_C2_C3_C4_Data
+DAC_C4_Setup3:			DAC_Setup $0B,DAC_B4_C1_C2_C3_C4_Data
+DAC_9C_Setup3:			DAC_Null_Setup $0A,DAC_9C_Data
+DAC_9D_Setup3:			DAC_Null_Setup $18,DAC_9D_Data
+DAC_9E_Setup3:			DAC_Null_Setup $18,DAC_9E_Data
+DAC_9F_Setup3:			DAC_Null_Setup $0C,DAC_9F_Data
+DAC_A0_Setup3:			DAC_Null_Setup $0C,DAC_A0_Data
+DAC_A1_Setup3:			DAC_Null_Setup $0A,DAC_A1_Data
 
 DAC_AB_Data:			DACBINCLUDE "Sound/DAC/AB.bin"
 DAC_AC_Data:			DACBINCLUDE "Sound/DAC/AC.bin"
 DAC_AD_AE_Data:			DACBINCLUDE "Sound/DAC/AD-AE.bin"
 DAC_AF_B0_Data:			DACBINCLUDE "Sound/DAC/AF-B0.bin"
+Bank3_Filler1:			cnop 	$28E0,soundBankStart
 DAC_B1_Data:			DACBINCLUDE "Sound/DAC/B1.bin"
+Bank3_Filler2:			cnop 	$3CAD,soundBankStart
 DAC_B4_C1_C2_C3_C4_Data:DACBINCLUDE "Sound/DAC/B4C1-C4.bin"
 DAC_B5_Data:			DACBINCLUDE "Sound/DAC/B5.bin"
 DAC_B6_Data:			DACBINCLUDE "Sound/DAC/B6.bin"
@@ -4642,33 +4784,7 @@ DAC_BF_Data:			DACBINCLUDE "Sound/DAC/BF.bin"
 DAC_C0_Data:			DACBINCLUDE "Sound/DAC/C0.bin"
 
 	finishBank
-	endif
 
-	if (use_s2_samples<>0)||(use_s3d_samples<>0)
-; ---------------------------------------------------------------------------
-; Dac Bank 4
-; ---------------------------------------------------------------------------
-DacBank4:			startBank
-	DAC_Master_Table
-	if (use_s2_samples<>0)
-DAC_C5_Data:			DACBINCLUDE "Sound/DAC/C5.bin"
-DAC_C6_Data:			DACBINCLUDE "Sound/DAC/C6.bin"
-DAC_C7_Data:			DACBINCLUDE "Sound/DAC/C7.bin"
-DAC_C8_Data:			DACBINCLUDE "Sound/DAC/C8.bin"
-DAC_C9_CC_CD_CE_CF_Data:DACBINCLUDE "Sound/DAC/C9CC-CF.bin"
-DAC_CA_D0_D1_D2_Data:	DACBINCLUDE "Sound/DAC/CAD0-D2.bin"
-DAC_CB_D3_D4_D5_Data:	DACBINCLUDE "Sound/DAC/CBD3-D5.bin"
-	endif
-
-	if (use_s3d_samples<>0)
-DAC_D6_Data:			DACBINCLUDE "Sound/DAC/D6.bin"
-DAC_D7_Data:			DACBINCLUDE "Sound/DAC/D7.bin"
-	endif
-
-	finishBank
-	endif
-
-; ---------------------------------------------------------------------------
 	include "Sound/_smps2asm_inc.asm"
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
@@ -4905,6 +5021,7 @@ Snd_ICZ2:			include	"Sound/Music/ICZ2.asm"
 Snd_ICZ1:			include	"Sound/Music/ICZ1.asm"
 Snd_LBZ2:			include	"Sound/Music/LBZ2.asm"
 Snd_LBZ1:			include	"Sound/Music/LBZ1.asm"
+		org		soundBankStart+$4104
 Snd_SKCredits:		include	"Sound/Music/Credits.asm"
 Snd_GameOver:		include	"Sound/Music/Game Over.asm"
 Snd_Continue:		include	"Sound/Music/Continue.asm"
@@ -4920,35 +5037,18 @@ Snd_PresSega:		include	"Sound/Music/Game Complete.asm"
 ; Music Bank 4
 ; ---------------------------------------------------------------------------
 Snd_Bank4_Start:	startBank
+		org		soundBankStart+$AE8
 Snd_GumBonus:		include	"Sound/Music/Gum Ball Machine.asm"
+		org		soundBankStart+$19F7
 Snd_ALZ:			include	"Sound/Music/Azure Lake.asm"
 Snd_BPZ:			include	"Sound/Music/Balloon Park.asm"
 Snd_DPZ:			include	"Sound/Music/Desert Palace.asm"
 Snd_CGZ:			include	"Sound/Music/Chrome Gadget.asm"
 Snd_EMZ:			include	"Sound/Music/Endless Mine.asm"
+		org		soundBankStart+$6587
 Snd_S3Credits:		include	"Sound/Music/Sonic 3 Credits.asm"
+		org		soundBankStart+$75E4
 Snd_2PMenu:			include	"Sound/Music/Competition Menu.asm"	
 Snd_Drown:			include	"Sound/Music/Countdown.asm"
 
 	finishBank
-
-	shared Snd_FBZ1,Snd_FBZ2,Snd_MHZ1,Snd_MHZ2,Snd_SOZ1,Snd_SOZ2,Snd_LRZ1
-	shared Snd_LRZ2,Snd_SSZ,Snd_DEZ1,Snd_DEZ2,Snd_Minib_SK,Snd_Boss,Snd_DDZ
-	shared Snd_PachBonus,Snd_SpecialS,Snd_SlotBonus,Snd_Knux,Snd_Title,Snd_1UP
-	shared Snd_Emerald,Snd_AIZ1,Snd_AIZ2,Snd_HCZ1,Snd_HCZ2,Snd_MGZ1,Snd_MGZ2
-	shared Snd_CNZ2,Snd_CNZ1,Snd_ICZ2,Snd_ICZ1,Snd_LBZ2,Snd_LBZ1,Snd_SKCredits
-	shared Snd_GameOver,Snd_Continue,Snd_Results,Snd_Invic,Snd_Menu,Snd_FinalBoss
-	shared Snd_PresSega,Snd_GumBonus,Snd_ALZ,Snd_BPZ,Snd_DPZ,Snd_CGZ,Snd_EMZ
-	shared Snd_S3Credits,Snd_2PMenu,Snd_Drown
-	shared                            Sound_33,Sound_34,Sound_35,Sound_36,Sound_37,Sound_38,Sound_39,Sound_3A,Sound_3B,Sound_3C,Sound_3D,Sound_3E,Sound_3F
-	shared Sound_40,Sound_41,Sound_42,Sound_43,Sound_44,Sound_45,Sound_46,Sound_47,Sound_48,Sound_49,Sound_4A,Sound_4B,Sound_4C,Sound_4D,Sound_4E,Sound_4F
-	shared Sound_50,Sound_51,Sound_52,Sound_53,Sound_54,Sound_55,Sound_56,Sound_57,Sound_58,Sound_59,Sound_5A,Sound_5B,Sound_5C,Sound_5D,Sound_5E,Sound_5F
-	shared Sound_60,Sound_61,Sound_62,Sound_63,Sound_64,Sound_65,Sound_66,Sound_67,Sound_68,Sound_69,Sound_6A,Sound_6B,Sound_6C,Sound_6D,Sound_6E,Sound_6F
-	shared Sound_70,Sound_71,Sound_72,Sound_73,Sound_74,Sound_75,Sound_76,Sound_77,Sound_78,Sound_79,Sound_7A,Sound_7B,Sound_7C,Sound_7D,Sound_7E,Sound_7F
-	shared Sound_80,Sound_81,Sound_82,Sound_83,Sound_84,Sound_85,Sound_86,Sound_87,Sound_88,Sound_89,Sound_8A,Sound_8B,Sound_8C,Sound_8D,Sound_8E,Sound_8F
-	shared Sound_90,Sound_91,Sound_92,Sound_93,Sound_94,Sound_95,Sound_96,Sound_97,Sound_98,Sound_99,Sound_9A,Sound_9B,Sound_9C,Sound_9D,Sound_9E,Sound_9F
-	shared Sound_A0,Sound_A1,Sound_A2,Sound_A3,Sound_A4,Sound_A5,Sound_A6,Sound_A7,Sound_A8,Sound_A9,Sound_AA,Sound_AB,Sound_AC,Sound_AD,Sound_AE,Sound_AF
-	shared Sound_B0,Sound_B1,Sound_B2,Sound_B3,Sound_B4,Sound_B5,Sound_B6,Sound_B7,Sound_B8,Sound_B9,Sound_BA,Sound_BB,Sound_BC,Sound_BD,Sound_BE,Sound_BF
-	shared Sound_C0,Sound_C1,Sound_C2,Sound_C3,Sound_C4,Sound_C5,Sound_C6,Sound_C7,Sound_C8,Sound_C9,Sound_CA,Sound_CB,Sound_CC,Sound_CD,Sound_CE,Sound_CF
-	shared Sound_D0,Sound_D1,Sound_D2,Sound_D3,Sound_D4,Sound_D5,Sound_D6,Sound_D7,Sound_D8,Sound_D9,Sound_DA,Sound_DB
-
