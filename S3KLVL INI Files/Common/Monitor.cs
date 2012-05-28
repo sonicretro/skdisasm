@@ -2,40 +2,25 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
-using SonicRetro.SonLVL;
+using SonicRetro.SonLVL.API;
 
 namespace S3KObjectDefinitions.Common
 {
     class Monitor : ObjectDefinition
     {
-        private Point offset;
-        private BitmapBits img;
-        private int imgw, imgh;
-        private List<Point> offsets = new List<Point>();
-        private List<BitmapBits> imgs = new List<BitmapBits>();
-        private List<int> imgws = new List<int>();
-        private List<int> imghs = new List<int>();
+        private Sprite img;
+        private List<Sprite> imgs = new List<Sprite>();
 
-        public override void Init(Dictionary<string, string> data)
+        public override void Init(ObjectData data)
         {
             List<byte> tmpartfile = new List<byte>();
             tmpartfile.AddRange(ObjectHelper.OpenArtFile("../General/Sprites/Monitors/Monitors.bin", Compression.CompressionType.Nemesis));
             tmpartfile.AddRange(new byte[0x6200 - tmpartfile.Count]);
             tmpartfile.AddRange(ObjectHelper.OpenArtFile("../General/Sprites/HUD Icon/Sonic life icon.bin", Compression.CompressionType.Nemesis));
             byte[] artfile = tmpartfile.ToArray();
-            img = ObjectHelper.MapASMToBmp(artfile, "../General/Sprites/Monitors/Map - Monitor.asm", 0, 0, out offset);
-            imgw = img.Width;
-            imgh = img.Height;
-            Point off;
-            BitmapBits im;
+            img = ObjectHelper.MapASMToBmp(artfile, "../General/Sprites/Monitors/Map - Monitor.asm", 0, 0);
             for (int i = 0; i < 11; i++)
-            {
-                im = ObjectHelper.MapASMToBmp(artfile, "../General/Sprites/Monitors/Map - Monitor.asm", i + 1, 0, out off);
-                imgs.Add(im);
-                offsets.Add(off);
-                imgws.Add(im.Width);
-                imghs.Add(im.Height);
-            }
+                imgs.Add(ObjectHelper.MapASMToBmp(artfile, "../General/Sprites/Monitors/Map - Monitor.asm", i + 1, 0));
         }
 
         public override ReadOnlyCollection<byte> Subtypes()
@@ -84,38 +69,34 @@ namespace S3KObjectDefinitions.Common
             }
         }
 
-        public override string FullName(byte subtype)
-        {
-            return SubtypeName(subtype) + " " + Name();
-        }
-
         public override BitmapBits Image()
         {
-            return img;
+            return img.Image;
         }
 
         public override BitmapBits Image(byte subtype)
         {
             if (subtype <= 10)
-                return imgs[subtype];
+                return imgs[subtype].Image;
             else
-                return img;
+                return img.Image;
         }
 
-        public override Rectangle Bounds(Point loc, byte subtype)
+        public override Rectangle Bounds(ObjectEntry obj, Point camera)
         {
-            if (subtype <= 10)
-                return new Rectangle(loc.X + offsets[subtype].X, loc.Y + offsets[subtype].Y, imgws[subtype], imghs[subtype]);
+            if (obj.SubType <= 10)
+                return new Rectangle(obj.X + imgs[obj.SubType].X - camera.X, obj.Y + imgs[obj.SubType].Y - camera.Y, imgs[obj.SubType].Width, imgs[obj.SubType].Height);
             else
-                return new Rectangle(loc.X + offset.X, loc.Y + offset.Y, imgw, imgh);
+                return new Rectangle(obj.X + img.X - camera.X, obj.Y + img.Y - camera.Y, img.Width, img.Height);
         }
 
-        public override void Draw(BitmapBits bmp, Point loc, byte subtype, bool XFlip, bool YFlip, bool includeDebug)
+        public override Sprite GetSprite(ObjectEntry obj)
         {
+            byte subtype = obj.SubType;
             if (subtype > 10) subtype = 0;
-            BitmapBits bits = new BitmapBits(imgs[subtype]);
-            bits.Flip(XFlip, YFlip);
-            bmp.DrawBitmapComposited(bits, new Point(loc.X + offsets[subtype].X, loc.Y + offsets[subtype].Y));
+            BitmapBits bits = new BitmapBits(imgs[subtype].Image);
+            bits.Flip(obj.XFlip, obj.YFlip);
+            return new Sprite(bits, new Point(imgs[subtype].X + obj.X, imgs[subtype].Y + obj.Y));
         }
 
         public override Type ObjectType { get { return typeof(MonitorS3KObjectEntry); } }
