@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Namespace="S3KObjectDefinitions.Common" TypeName="Monitor" Language="cs" Name="Monitor" Image="static">
+  <Images>
+    <ImageFromMappings id="static">
+      <ArtFile filename="../General/Sprites/Monitors/Monitors.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Monitors/Map - Monitor.asm" frame="1" startpal="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="sonic">
+      <ArtFile filename="../General/Sprites/Monitors/Monitors.bin" />
+      <ArtFile filename="../General/Sprites/HUD Icon/Sonic life icon.bin" offset="25088" />
+      <MapFile type="ASM" filename="../General/Sprites/Monitors/Map - Monitor.asm" frame="2" startpal="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="eggman">
+      <ArtFile filename="../General/Sprites/Monitors/Monitors.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Monitors/Map - Monitor.asm" frame="3" startpal="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="rings">
+      <ArtFile filename="../General/Sprites/Monitors/Monitors.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Monitors/Map - Monitor.asm" frame="4" startpal="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="shoes">
+      <ArtFile filename="../General/Sprites/Monitors/Monitors.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Monitors/Map - Monitor.asm" frame="5" startpal="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="fire">
+      <ArtFile filename="../General/Sprites/Monitors/Monitors.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Monitors/Map - Monitor.asm" frame="6" startpal="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="lightning">
+      <ArtFile filename="../General/Sprites/Monitors/Monitors.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Monitors/Map - Monitor.asm" frame="7" startpal="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="water">
+      <ArtFile filename="../General/Sprites/Monitors/Monitors.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Monitors/Map - Monitor.asm" frame="8" startpal="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="invincibility">
+      <ArtFile filename="../General/Sprites/Monitors/Monitors.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Monitors/Map - Monitor.asm" frame="9" startpal="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="s">
+      <ArtFile filename="../General/Sprites/Monitors/Monitors.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Monitors/Map - Monitor.asm" frame="10" startpal="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="broken">
+      <ArtFile filename="../General/Sprites/Monitors/Monitors.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Monitors/Map - Monitor.asm" frame="11" startpal="0" />
+    </ImageFromMappings>
+  </Images>
+  <Subtypes>
+    <Subtype id="00" name="Static" image="static" />
+    <Subtype id="01" name="1-up" image="sonic" />
+    <Subtype id="02" name="Eggman" image="eggman" />
+    <Subtype id="03" name="Rings" image="rings" />
+    <Subtype id="04" name="Shoes" image="shoes" />
+    <Subtype id="05" name="Fire Shield" image="fire" />
+    <Subtype id="06" name="Lightning Shield" image="lightning" />
+    <Subtype id="07" name="Water Shield" image="water" />
+    <Subtype id="08" name="Invincibility" image="invincibility" />
+    <Subtype id="09" name="S" image="s" />
+    <Subtype id="0A" name="Broken" image="broken" />
+  </Subtypes>
+  <Properties>
+    <BitsProperty name="Contents" type="MonitorType" startbit="0" length="4" />
+  </Properties>
+  <Enums>
+    <Enum name="MonitorType">
+      <EnumMember name="Static" />
+      <EnumMember name="1-up" />
+      <EnumMember name="Eggman" />
+      <EnumMember name="Rings" />
+      <EnumMember name="Shoes" />
+      <EnumMember name="Fire Shield" />
+      <EnumMember name="Lightning Shield" />
+      <EnumMember name="Water Shield" />
+      <EnumMember name="Invincibility" />
+      <EnumMember name="S" />
+      <EnumMember name="Broken" />
+    </Enum>
+  </Enums>
+</ObjDef>
