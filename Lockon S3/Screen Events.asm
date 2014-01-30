@@ -1735,7 +1735,7 @@ AIZ1_IntroDrawArray:     dc.w  $3E0,  $10,  $10,  $10,  $10,  $10,  $10,  $10,  
 AIZ1_IntroDeformArray:     dc.w  $3E0,    4,    4,    4,    4,    4,    4,    4,    4,    4,    4,    4,    4,    4,    4,    4
 		dc.w     4,    4,    4,    4,    4,    4,    4,    4,    4,    4,    4,    4,    4,    4,    4,    4
 		dc.w     4,    4,    4,    4,$7FFF
-AIZ1_DrawArray:     dc.w  $220,$7FFF
+AIZ1_BGDrawArray:     dc.w  $220,$7FFF
 AIZ1_DeformArray:     dc.w   $D0,  $20,  $30,  $30,  $10,  $10,  $10,$800D,   $F,    6,   $E,  $50,  $20,$7FFF
 AIZ_FlameVScroll:     dc.b   0,$FF,$FE,$FB,$F8,$F6,$F3,$F2,$F1,$F2,$F3,$F6,$F9,$FB,$FE,$FF ;
 ; ---------------------------------------------------------------------------

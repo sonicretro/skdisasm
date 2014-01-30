@@ -11,6 +11,7 @@
 ; Constants
 ; ===========================================================================
 
+		save
 ; Set this to 1 to fix some bugs in the driver.
 fix_sndbugs				=  0
 
@@ -154,13 +155,12 @@ zTracksSFXEnd			=	zTracksSFXStart+7*zTrackSz
 ; 	0 (01h)		Noise channel (PSG) or FM3 special mode (FM)
 ; 	1 (02h)		Do not attack next note
 ; 	2 (04h)		SFX is overriding this track
-; 	3 (08h)		'Alternate SMPS mode' flag
+; 	3 (08h)		'Alternate frequency mode' flag
 ; 	4 (10h)		'Track is resting' flag
-; 	5 (20h)		Unknown/unused
+; 	5 (20h)		'Pitch slide' flag (unused)
 ; 	6 (40h)		'Sustain frequency' flag -- prevents frequency from changing again for the lifetime of the track
 ; 	7 (80h)		Track is playing
 zTrackPlaybackControl	=  0
-; Track data (each song track)
 ; Voice control bits:
 ; 	0-1    		FM channel assignment bits (00 = FM1 or FM4, 01 = FM2 or FM5, 10 = FM3 or FM6/DAC, 11 = invalid)
 ; 	2 (04h)		For FM/DAC channels, selects if reg/data writes are bound for part II (set) or part I (unset)
@@ -404,7 +404,6 @@ zVInt:	rsttarget
 		ld	a, 5							; Set it back to 5...
 		ld	(zPalDblUpdCounter), a			; ... and save it
 		jp	-								; Go again
-
 +
 		dec	a								; Decrease PAL double-update timeout counter
 		ld	(zPalDblUpdCounter), a			; Store it
@@ -428,8 +427,8 @@ zInitAudioDriver:
 		ld	sp, z80_stack			    ; set the stack pointer to 0x2000 (end of z80 RAM)
 			; The following instruction block keeps the z80 in a tight loop.
 		ld	c, 0							; c = 0
--
-		ld	b, 0							; b = 0
+
+-		ld	b, 0							; b = 0
 		djnz	$							; Loop in this instruction, decrementing b each iteration, until b = 0
 		dec	c								; c--
 		jr	z, -							; Loop if c = 0
@@ -4207,10 +4206,8 @@ z80_SoundDriverPointersEnd:
 ; ===========================================================================
 ; END OF SOUND DRIVER
 ; ===========================================================================
-		cpu 68000
+		restore
 		padding off
-		listing off
-		supmode on
 		
 		;!org		z80_SoundDriver+z80_SoundDriverPointersEnd-(z80_SoundDriverPointers-z80_SoundDriverEnd)      ; Fix alignment after sound driver
 		!org		z80_SoundDriver+Size_of_Snd_driver_guess

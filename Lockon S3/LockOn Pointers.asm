@@ -225,7 +225,7 @@ AIZ1_FireRise:	ds.b $28
 AIZTrans_WavyFlame:	ds.b $7C
 AIZ1_IntroDrawArray:	ds.b $14
 AIZ1_IntroDeformArray:	ds.b $4A
-AIZ1_DrawArray:	ds.b $3D2
+AIZ1_BGDrawArray:	ds.b $3D2
 AIZ2_Deform:	ds.b $5A
 AIZ2_ApplyDeform:	ds.b $9DA
 Pal_AIZBattleship:	ds.b $20
