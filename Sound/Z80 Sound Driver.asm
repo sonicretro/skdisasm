@@ -482,14 +482,12 @@ zWriteFMI:
 		ld	(zYM2612_D0), a					; Send data to register
 		ret
 ; End of function zWriteFMI
-
 ; ---------------------------------------------------------------------------
-; START	OF FUNCTION CHUNK FOR zWriteFMIorII
 
 ;loc_CB
 zWriteFMII_reduced:
 		sub	4								; Strip 'bound to part II regs' bit
-; END OF FUNCTION CHUNK	FOR zWriteFMIorII
+; ---------------------------------------------------------------------------
 
 ; =============== S U B	R O U T	I N E =======================================
 ;
@@ -690,8 +688,12 @@ zFMSendFreq:
 		call	zWriteFMIorII				; Send it to YM2612
 		ld	a, 0A0h							; Command to update frequency LSB
 		ld	c, l							; Low byte of frequency
+	if fix_sndbugs
+		jp	zWriteFMIorII					; Send it to YM2612
+	else
 		call	zWriteFMIorII				; Send it to YM2612
 		ret
+	endif
 ; ---------------------------------------------------------------------------
 +
 		ld	a, (ix+zTrackVoiceControl)		; a = voice control byte
@@ -742,15 +744,14 @@ zSpecialFreqCommands_End
 
 ; =============== S U B	R O U T	I N E =======================================
 ;
-	if fix_sndbugs
 zGetSpecialFM3DataPointer:
+	if fix_sndbugs
 		ld	de,zSpecFM3Freqs				; de = pointer to saved FM3 frequency shifts
 		ld	a, (zUpdatingSFX)				; Get flag
 		or	a								; Is this a SFX track?
 		ret	z								; Return if not
 		ld	de,zSpecFM3FreqsSFX				; de = pointer to saved FM3 frequency shifts
 	endif
-znullsub_A:
 		ret
 ; End of function nullsub_A
 
@@ -781,13 +782,13 @@ zGetNextNote_cont:
 		ex	af, af'							; Save af
 		call	zKeyOffIfActive				; Kill note
 		ex	af, af'							; Restore af
-		bit	3, (ix+zTrackPlaybackControl)	; Is alternate SMPS mode flag set?
-		jp	nz, zAlternateSMPS				; Branch if yes
+		bit	3, (ix+zTrackPlaybackControl)	; Is alternate frequency mode flag set?
+		jp	nz, zAltFreqMode				; Branch if yes
 		or	a								; Is this a duration?
 		jp	p, zStoreDuration				; Branch if yes
 		sub	81h								; Make the note into a 0-based index
 		jp	p, +							; Branch if it is a note and not a rest
-		call	zKillTrack					; Put track at rest
+		call	zRestTrack					; Put track at rest
 		jr	zGetNoteDuration
 ; ---------------------------------------------------------------------------
 +
@@ -838,16 +839,19 @@ zGetNoteDuration:
 		ld	(ix+zTrackDurationTimeout), a	; Set it as next timeout duration
 		jr	zFinishTrackUpdate
 ; ---------------------------------------------------------------------------
+zApplyPitchSlide:
 	if fix_sndbugs=0
-		; Unused/dead code:
-		ld	a, (de)
-		inc	de
-		ld	(ix+zTrackUnk11h),a
-		jr	loc_306
+		; Unused/dead code in S3/S&K/S3D; this is code for pitch slides
+		; in the Battletoads sound driver.
+		ld	a, (de)							; Get new pitch slide value from track
+		inc	de								; Advance pointer
+		ld	(ix+zTrackUnk11h), a			; Store pitch slide
+		jr	zGetRawDuration
 	endif
 ; ---------------------------------------------------------------------------
 ;loc_2E8
-zAlternateSMPS:
+;zAlternateSMPS
+zAltFreqMode:
 		; Setting bit 3 on zTrackPlaybackControl puts the song in a weird mode.
 		;
 		; This weird mode has literal frequencies and durations on the track.
@@ -879,10 +883,11 @@ zAlternateSMPS:
 +
 		ld	(ix+zTrackFreqLow), l			; Store low byte of note frequency
 		ld	(ix+zTrackFreqHigh), h			; Store high byte of note frequency
-		ld	a, (de)							; Get another byte from the track
+		ld	a, (de)							; Get pitch slide value from the track
 		inc	de								; Advance to next byte in track
-		ld	(ix+zTrackUnk11h), a			; Store unknown byte to otherwise unused location
-loc_306:
+		ld	(ix+zTrackUnk11h), a			; Store pitch slide
+;loc_306
+zGetRawDuration:
 		ld	a, (de)							; Get raw duration from track
 
 ;loc_307
@@ -947,7 +952,6 @@ zTrackRunTimer:
 ; End of function zTrackRunTimer
 
 ; ---------------------------------------------------------------------------
-; START	OF FUNCTION CHUNK FOR zUpdateFMorPSGTrack
 ;loc_342
 zFMNoteOn:
 		ld	a, (ix+zTrackFreqLow)			; Get low byte of note frequency
@@ -964,9 +968,13 @@ zFMNoteOn:
 		or	0F0h							; We want only the FM channel assignment bits
 		ld	c, a							; Key on for all operators
 		ld	a, 28h							; Select key on/of register
+	if fix_sndbugs
+		jp	zWriteFMI						; Send command to YM2612
+	else
 		call	zWriteFMI					; Send command to YM2612
 		ret
-; END OF FUNCTION CHUNK	FOR zUpdateFMorPSGTrack
+	endif
+; ---------------------------------------------------------------------------
 
 ; =============== S U B	R O U T	I N E =======================================
 ; Writes reg/data pair to register 28h (key on/off) if track active
@@ -1002,8 +1010,12 @@ zKeyOff:
 ;loc_367
 zKeyOnOff:
 		ld	a, 28h							; Write to KEY ON/OFF port
+	if fix_sndbugs
+		jp	zWriteFMI						; Send it
+	else
 		call	zWriteFMI					; Send it
 		ret
+	endif
 ; End of function zKeyOnOff
 
 ; =============== S U B	R O U T	I N E =======================================
@@ -1159,8 +1171,17 @@ zDoFrequencyFlutter_cont:
 		push	hl							; Save hl
 		ld	c, (ix+zTrackFreqFlutterIndex)	; c = frequency flutter index
 		ld	b, 0							; b = 0
-		add	hl, bc							; hl += bc
+		add	hl, bc							; Offset into frequency flutter
+	if fix_sndbugs
+		; Fix based on similar code from Space Harrier II's sound driver.
+		; This fixes both "DANGER!" bugs below. This is better than the
+		; previous fix, which was based on Ristar's driver.
+		ld	c, l
+		ld	b, h
+		ld	a, (bc)							; a = new frequency flutter value
+	else
 		ld	a, (hl)							; a = new frequency flutter value
+	endif
 		pop	hl								; Restore hl
 		bit	7, a							; Is frequency flutter negative?
 		jp	z, zlocPositiveFlutterMod			; Branch if not
@@ -1179,19 +1200,10 @@ zDoFrequencyFlutter_cont:
 ;loc_449
 zlocChangeFlutterIndex:
 		inc	bc								; Increment bc
-	if fix_sndbugs
-		; Fix based on similar code from Ristar's sound driver.
-		push	hl							; Save hl
-		add	hl, bc							; hl += bc
-		ld	a, (hl)							; a = new frequency flutter index
-		pop	hl								; Restore hl
-	else
 		; DANGER! Uses bc as a pointer, getting bytes from code region.
 		; This happens for several frequency flutters, so you should avoid them
 		; unless you enable the driver bug fixes.
-
 		ld	a, (bc)							; Use it as a pointer??? Getting bytes from code region?
-	endif
 		jr	zFreqFlutterSetIndex			; Set position to nonsensical value
 ; ---------------------------------------------------------------------------
 ;loc_44D
@@ -1202,19 +1214,10 @@ zlocResetFlutterMod:
 ;loc_450
 zlocFlutterIncMultiplier:
 		inc	bc								; Increment bc
-	if fix_sndbugs
-		; Fix based on similar code from Ristar's sound driver.
-		push	hl							; Save hl
-		add	hl, bc							; hl += bc
-		ld	a, (hl)							; a = what to add to flutter sensibility value
-		pop	hl								; Restore hl
-	else
 		; DANGER! Uses bc as a pointer, getting bytes from code region.
 		; Luckily, this does not happen for any of the existing frequency
-		; flutter.
-
+		; flutters.
 		ld	a, (bc)							; Use it as a pointer??? Getting bytes from code region?
-	endif
 		add	a, (ix+zTrackFreqFlutterSens)	; Add flutter sensibility to a...
 		ld	(ix+zTrackFreqFlutterSens), a	; ... then store new value
 		inc	(ix+zTrackFreqFlutterIndex)		; Advance flutter modulation...
@@ -1254,7 +1257,11 @@ zUpdateFreq:
 		ld	a, (ix+zTrackFreqDisplacement)	; a = frequency displacement
 		or	a								; Is a negative?
 		jp	p, +							; Branch if not
+	if fix_sndbugs
+		dec	b								; b = -1, faster and smaller
+	else
 		ld	b, 0FFh							; b = -1
+	endif
 +
 		ld	c, a							; bc = sign extension of frequency displacement
 		add	hl, bc							; Add to frequency
@@ -1349,7 +1356,7 @@ zSendFMInstrument:
 -		call	zSendFMInstrData			; Send FM instrument data
 		djnz	-							; Loop
 
-		; Now for rate scaking/attack rate. The attack rate must be 1Fh if using
+		; Now for rate scaling/attack rate. The attack rate must be 1Fh if using
 		; SSG-EG, which is the reason for the split.
 		ld	b, zFMInstrumentAMD1RTable-zFMInstrumentRSARTable	; Number of commands to issue
 
@@ -1392,8 +1399,12 @@ zSendFMInstrData:
 		inc	de								; Advance pointer
 		ld	c, (hl)							; Get value from instrument RAM
 		inc	hl								; Advance pointer
+	if fix_sndbugs
+		jp	zWriteFMIorII					; Write track data
+	else
 		call	zWriteFMIorII				; Write track data
 		ret
+	endif
 ; End of function zSendFMInstrData
 
 	if fix_sndbugs
@@ -1407,8 +1418,7 @@ zSendFMInstrDataRSAR:
 		ld	c, a							; c = RS/AR for operator
 		ld	a, (de)							; Get register output
 		inc	de								; Advance pointer
-		call	zWriteFMIorII				; Write track data
-		ret
+		jp	zWriteFMIorII					; Write track data
 	endif
 
 ; =============== S U B	R O U T	I N E =======================================
@@ -1427,7 +1437,6 @@ zCycleSoundQueue:
 		ld	a, (zNextSound)					; a = next sound to play
 ; End of function zCycleSoundQueue
 
-; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; Type Check
 ; ===========================================================================
@@ -1481,8 +1490,12 @@ zStopSFX:
 		add	ix, de							; ix = pointer to next track
 		pop	bc								; Restore bc
 		djnz	-							; Loop for each track
+	if fix_sndbugs
+		jp	zClearNextSound
+	else
 		call	zClearNextSound
 		ret
+	endif
 
 ; =============== S U B	R O U T	I N E =======================================
 ; Writes hl to stack twice and stops track, silencing it. The two hl pushes
@@ -1494,8 +1507,8 @@ zSilenceStopTrack:
 		push	hl							; ... twice
 		jp	cfSilenceStopTrack				; Silence FM channel and stop track
 ; End of function zSilenceStopTrack
-
 ; ---------------------------------------------------------------------------
+
 ;loc_552
 zPlayMusicCredits:
 		ld	a, 32h							; Credits music is the last entry on the music table
@@ -1573,7 +1586,7 @@ zBGMLoad:
 		pop	af								; Restore af
 		push	af							; Then save it back again
 		ld	hl, z80_MusicBanks				; hl = table of music banks
-			; The following block adds the music index to the table address as a 16-bit offset
+		; The following block adds the music index to the table address as a 16-bit offset
 		add	a, l							; a += l
 		ld	l, a							; l = low byte of offset into music entry
 		adc	a, h							; a += h, plus 1 if a + l overflowed the 8-bit register
@@ -1660,7 +1673,6 @@ zClearNextSound:
 		ld	(zNextSound), a
 		ret
 ; End of function zClearNextSound
-
 ; ---------------------------------------------------------------------------
 ;loc_695
 ; FM/DAC channel assignment bits
@@ -1768,12 +1780,14 @@ zSFXTrackInitLoop:
 		jr	z, +							; Branch if not (hint: it was cleared just below the bank switch above so... always)
 
 		; Effectively dead code.
-		; SPECULATION: It is possible that this was meant for GHZ-like waterfall
-		; effects which were subsequently scrapped.
-		; If this speculation is true, then it is likely that, after the call to
+		; Analysis of the Battletoads sound driver confirms previous speculation:
+		; this code was meant for GHZ-like waterfall effects which were subsequently
+		; scrapped in favor of the continuous SFX system.
+		; If this system were to be reimplemented, then, after the call to
 		; zGetSFXChannelPointers, we would have:
 		; * ix = pointer to the overriding SFX track data in RAM;
 		; * iy = pointer to the special SFX track data in RAM.
+		; * hl = pointer to the overriden music track data in RAM;
 		; This code would then ensure that de points to the correct RAM area for
 		; the writes below.
 		pop		hl							; hl = pointer to SFX track data in RAM
@@ -1798,21 +1812,27 @@ zSFXTrackInitLoop:
 		call	zInitFMDACTrack				; Init the remainder of the track RAM
 
 	if fix_sndbugs=0
-		; SPECULATION: The code until the '+' label below was likely related to
-		; GHZ-like waterfall effects which were subsequently scrapped.
-		; If this speculation is true, then we would have at this point:
+		; Analysis of the Battletoads sound driver confirms previous speculation:
+		; this code was meant for GHZ-like waterfall effects which were subsequently
+		; scrapped in favor of the continuous SFX system.
+		; If this system were to be reimplemented, then, after the call to
+		; zGetSFXChannelPointers, we would have:
 		; * ix = pointer to the overriding SFX track data in RAM;
 		; * iy = pointer to the special SFX track data in RAM.
+		; * hl = pointer to the overriden music track data in RAM;
 		; The code would then be checking to see if the corresponding SFX track
 		; was playing, make sure the tracks refer to the same FM/PSG channel
 		; then, if needed, mark the special SFX track as being overridden by the
 		; SFX so as to not abruptly end the SFX.
+		; With the system unimplemented, iy points to the current SFX track data,
+		; meaning that the second branch is never taken, resulting in an attempted
+		; write to ROM.
 		bit	7, (ix+zTrackPlaybackControl)	; Is the 'playing' bit set for this track?
 		jr	z, +							; Branch if not (all SFX define it as 80h, so... never)
 		ld	a, (ix+zTrackVoiceControl)		; Grab the voice control byte
-		cp	(iy+zTrackVoiceControl)			; Is this equal to the one for this track? (hint: should be, we copied it above...)
-		jr	nz, +							; Branch if not (hint: never...)
-		set	2, (iy+zTrackPlaybackControl)	; Set bit 2 of playback control ('SFX is overriding this track') -- on *ROM*???
+		cp	(iy+zTrackVoiceControl)			; Is this equal to the one for the corresponding special SFX track?
+		jr	nz, +							; Branch if not
+		set	2, (iy+zTrackPlaybackControl)	; Set bit 2 of playback control ('SFX is overriding this track')
 +
 	endif
 
@@ -1824,16 +1844,19 @@ zSFXTrackInitLoop:
 		or	a								; Are we updating SFX?
 		jr	z, +							; Branch if not (hint: it was cleared just below the bank switch above so... always)
 
-		; Effectively dead code.
-		; SPECULATION: It is possible that this was meant for GHZ-like waterfall
-		; effects which were subsequently scrapped.
-		; If this speculation is true, then at this point we would have:
+		; Analysis of the Battletoads sound driver confirms previous speculation:
+		; this code was meant for GHZ-like waterfall effects which were subsequently
+		; scrapped in favor of the continuous SFX system.
+		; If this system were to be reimplemented, then, after the call to
+		; zGetSFXChannelPointers, we would have:
 		; * ix = pointer to the overriding SFX track data in RAM;
 		; * iy = pointer to the special SFX track data in RAM.
+		; * hl = pointer to the overriden music track data in RAM;
 		; This code would then make ix point to the correct track data for the
 		; function calls below.
+		; Without it implemented, iy points to the current SFX track data.
 		push	iy							; Save iy
-		pop		ix							; ix = pointer to SFX data
+		pop		ix							; ix = pointer to special SFX data
 +
 	endif
 
@@ -1917,7 +1940,6 @@ zZeroFillTrackRAM:
 		ex	de, hl							; Exchange the contents of de and hl
 		ret
 ; End of function zInitFMDACTrack
-
 ; ---------------------------------------------------------------------------
 ;zloc_7DF
 zSFXChannelData:
@@ -2298,7 +2320,7 @@ zFillSoundQueue:
 ;         c     Damaged
 ;sub_9F6
 zFMSilenceChannel:
-		call	zSetFMMinD1LRR
+		call	zSetMaxRelRate
 		ld	a, 40h							; Set total level...
 		ld	c, 7Fh							; ... to minimum envelope amplitude...
 		call	zFMOperatorWriteLoop		; ... for all operators of this track's channel
@@ -2316,10 +2338,11 @@ zFMSilenceChannel:
 ;         b     Damaged
 ;         c     Damaged
 ;sub_A06
-zSetFMMinD1LRR:
+;zSetFMMinD1LRR
+zSetMaxRelRate:
 		ld	a, 80h							; Set D1L to minimum and RR to maximum...
 		ld	c, 0FFh							; ... for all operators on this track's channel (fall through)
-; End of function zSetFMMinD1LRR
+; End of function zSetMaxRelRate
 
 
 ; =============== S U B	R O U T	I N E =======================================
@@ -2340,7 +2363,6 @@ zFMOperatorWriteLoop:
 		djnz	-							; Loop
 		ret
 ; End of function zFMOperatorWriteLoop
-
 ; ---------------------------------------------------------------------------
 ;loc_A16
 zPlaySegaSound:
@@ -2403,7 +2425,6 @@ zFadeInToPrevious:
 		ld	(zFadeDelay), a					; Set fade delay
 		ret
 ; End of function zFadeInToPrevious
-
 ; ---------------------------------------------------------------------------
 ;loc_AA5
 zPSGFrequencies:
@@ -2510,7 +2531,6 @@ zHandleCoordFlag:
 		ld	a, (de)							; a = coordination flag parameter
 		jp	(hl)							; Indirect jump to coordination flag handler
 ; End of function zUpdateDACTrack
-
 ; ---------------------------------------------------------------------------
 loc_BF9:
 		inc	de								; Advance to next byte in track
@@ -2547,7 +2567,7 @@ zCoordFlagSwitchTable:
 		dw cfDisableModulation				; 0FAh
 		dw cfAddKey							; 0FBh
 		dw cfLoopContinuousSFX				; 0FCh
-		dw cfToggleAlternateSMPS			; 0FDh
+		dw cfToggleAltFreqMode				; 0FDh
 		dw cfFM3SpecialMode					; 0FEh
 		dw cfMetaCF							; 0FFh
 ;loc_C3D
@@ -2560,7 +2580,6 @@ zExtraCoordFlagSwitchTable:
 		dw cfSetSSGEG						; 0FFh 05h
 		dw cfFMFlutter						; 0FFh 06h
 		dw cfResetSpindashRev				; 0FFh 07h
-
 ; =============== S U B	R O U T	I N E =======================================
 ; Sets a new DAC sample for play.
 ;
@@ -2582,6 +2601,8 @@ cfPlayDACSample:
 ;sub_C51
 cfPanningAMSFMS:
 		ld	c, 3Fh							; Mask for all but panning
+
+zDoChangePan:
 		ld	a, (ix+zTrackAMSFMSPan)			; Get current AMS/FMS/panning
 		and	c								; Mask out L+R
 		push	de							; Store de
@@ -2594,7 +2615,6 @@ cfPanningAMSFMS:
 		pop	de								; Restore de
 		ret
 ; End of function cfPanningAMSFMS
-
 
 ; =============== S U B	R O U T	I N E =======================================
 ; Performs an escalating transposition ("revving") of the track.
@@ -2855,8 +2875,12 @@ cfSetKey:
 ;loc_D21
 cfSendFMI:
 		call	zGetFMParams				; Get parameters for FM command
+	if fix_sndbugs
+		jp	zWriteFMI						; Send it to YM2612
+	else
 		call	zWriteFMI					; Send it to YM2612
 		ret
+	endif
 
 ;loc_D28
 zGetFMParams:
@@ -2889,7 +2913,7 @@ zGetFMParams:
 cfSetVoice:
 		bit	7, (ix+zTrackVoiceControl)		; Is this a PSG track?
 		jr	nz, zSetVoicePSG				; Branch if yes
-		call	zSetFMMinD1LRR				; Set minimum D1L/RR for channel
+		call	zSetMaxRelRate				; Set minimum D1L/RR for channel
 		ld	a, (de)							; Get voice index
 		ld	(ix+zTrackVoiceIndex), a		; Store to track RAM
 		or	a								; Is it negative?
@@ -2926,7 +2950,6 @@ zSetVoiceUpload:
 		pop	de								; Restore de
 		ret
 ; End of function cfSetVoice
-
 ; ---------------------------------------------------------------------------
 ;loc_D64:
 zSetVoicePSG:
@@ -3253,20 +3276,21 @@ cfLoopContinuousSFX:
 		jp	cfJumpTo						; Jump to target address
 
 ; =============== S U B	R O U T	I N E =======================================
-; Toggles alternate SMPS mode according to parameter.
+; Toggles alternate frequency mode according to parameter.
 ;
-; Has a single byte parameter: is 1, enables alternate SMPS mode, otherwise
+; Has a single byte parameter: is 1, enables alternate frequency mode, otherwise
 ; disables it.
 ;
 ;loc_EDA
-cfToggleAlternateSMPS:
+;cfToggleAlternateSMPS
+cfToggleAltFreqMode:
 		cp	1								; Is parameter equal to 1?
 		jr	nz, +							; Branch if not
-		set	3, (ix+zTrackPlaybackControl)	; Start alternate SMPS mode for track
+		set	3, (ix+zTrackPlaybackControl)	; Start alternate frequency mode for track
 		ret
 ; ---------------------------------------------------------------------------
 +
-		res	3, (ix+zTrackPlaybackControl)	; Stop alternate SMPS mode for track
+		res	3, (ix+zTrackPlaybackControl)	; Stop alternate frequency mode for track
 		ret
 
 ; =============== S U B	R O U T	I N E =======================================
@@ -3285,11 +3309,7 @@ cfFM3SpecialMode:
 		jr	nz, zTrackSkip3bytes			; Branch if not
 		set	0, (ix+zTrackPlaybackControl)	; Put FM3 in special mode
 		ex	de, hl							; Exchange de and hl
-	if fix_sndbugs
 		call	zGetSpecialFM3DataPointer	; de = pointer to saved FM3 frequency shifts
-	else
-		call	znullsub_A					; Do nothing (this was likely supposed to set de to a sensible value)
-	endif
 		ld	b, 4							; Loop counter: 4 parameter bytes
 
 		; DANGER! The following code will trash the Z80 code due to failed
@@ -3327,8 +3347,12 @@ zWriteFM3Settings:
 		ld	(zFM3Settings), a				; Save FM3 settings
 		ld	c, a							; c = FM3 settings
 		ld	a, 27h							; Write data to FM3 settigns register
+	if fix_sndbugs
+		jp	zWriteFMI						; Do it
+	else
 		call	zWriteFMI					; Do it
 		ret
+	endif
 ; End of function zWriteFM3Settings
 
 ; =============== S U B	R O U T	I N E =======================================
@@ -3500,9 +3524,7 @@ zSendSSGEGData:
 		inc	de								; Advance pointer
 		ld	c, a							; c = data to send
 		ld	a, (hl)							; a = register to send to
-		inc	hl								; Advance pointer
 	if fix_sndbugs
-		push	af							; Save af
 		call	zWriteFMIorII				; Send data to correct channel
 		ex	(sp), hl						; Save hl, hl = pointer to RS/AR data (see line marked (**) above)
 		ld	a, (hl)							; a = RS/AR value for operator
@@ -3510,9 +3532,10 @@ zSendSSGEGData:
 		ex	(sp), hl						; Save hl, hl = pointer to registers for SSG-EG data
 		or	1Fh								; Set AR to maximum, but keep RS intact
 		ld	c, a							; c = RS/AR
-		pop	af								; Restore af
+		ld	a, (hl)							; a = register to send to
 		sub	40h								; Convert into command to set RS/AR
 	endif
+		inc	hl								; Advance pointer
 		call	zWriteFMIorII				; Send data to correct channel
 		djnz	-							; Loop for all registers
 	if fix_sndbugs
@@ -3621,7 +3644,6 @@ zUpdatePSGTrack:
 		ld	(zPSG), a						; Set noise channel volume
 		ret
 ; ---------------------------------------------------------------------------
-; START	OF FUNCTION CHUNK FOR zDoFlutter
 ;loc_1037
 zDoFlutterSetValue:
 		ld	(ix+zTrackVolFlutter), a		; Set new value for PSG flutter index and fall through
@@ -3640,7 +3662,16 @@ zDoFlutter:
 		ld	c, (ix+zTrackVolFlutter)		; Get current PSG flutter index
 		ld	b, 0							; b = 0
 		add	hl, bc							; Offset into PSG flutter
+	if fix_sndbugs
+		; Fix based on similar code from Space Harrier II's sound driver.
+		; This fixes the "DANGER!" bug below. This is better than the
+		; previous fix, which was based on Ristar's driver.
+		ld	c, l
+		ld	b, h
+		ld	a, (bc)							; a = PSG flutter value
+	else
 		ld	a, (hl)							; a = PSG flutter value
+	endif
 		pop	hl								; Restore hl
 		bit	7, a							; Is it a terminator?
 		jr	z, zDoFlutterAdvance			; Branch if not
@@ -3652,22 +3683,13 @@ zDoFlutter:
 		jr	z, zDoFlutterReset				; Branch if yes
 		
 		inc	bc								; Increment flutter index
-	if fix_sndbugs
-		; Fix based on similar code from Ristar's sound driver.
-		push	hl							; Save hl
-		add	hl, bc							; Offset into PSG flutter
-		ld	a, (hl)							; a = new PSG flutter value
-		pop	hl								; Restore hl
-	else
 		; DANGER! Will read data from code segment and use it as if it were valid!
 		; In order to get here, the flutter value would have to be:
 		; (1) negative;
 		; (2) not 80h, 81h or 83h.
 		; As it stands, none of the entries in the flutter tables will allow
 		; this code to execute.
-
 		ld	a, (bc)							; Get value from wherever the hell bc is pointing to
-	endif
 		jr	zDoFlutterSetValue				; Use this as new flutter index
 ; ---------------------------------------------------------------------------
 ;loc_1057
@@ -3697,13 +3719,6 @@ zDoFlutterAdvance:
 ; =============== S U B	R O U T	I N E =======================================
 ;
 ;sub_106C
-zKillTrack:
-	if fix_sndbugs
-		xor	a
-		ld	(ix+zTrackFreqLow), a			; Clear low byte of frequency
-		ld	(ix+zTrackFreqHigh), a			; Clear high byte of frequency
-	endif
-
 zRestTrack:
 		set	4, (ix+zTrackPlaybackControl)	; Set 'track is resting' bit
 		bit	2, (ix+zTrackPlaybackControl)	; Is SFX overriding this track?
