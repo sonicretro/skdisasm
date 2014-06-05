@@ -93,3 +93,7 @@ z80_ptr function x,(x)<<8&$FF00|(x)>>8&$7F|$80
 rom_ptr_z80 macro addr
 	dc.w z80_ptr(addr)
     endm
+
+; macros to convert from tile index to art tiles, block mapping or VRAM address.
+make_art_tile function addr,pal,pri,((pri&1)<<15)|((pal&3)<<13)|(addr&tile_mask)
+tiles_to_bytes function addr,((addr&$7FF)<<5)

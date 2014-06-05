@@ -113,6 +113,32 @@ button_A_mask:			EQU	1<<button_A	; $40
 button_start_mask:		EQU	1<<button_start	; $80
 
 ; ---------------------------------------------------------------------------
+; Player Status Variables
+Status_Facing       = 0
+Status_InAir        = 1
+Status_Roll         = 2
+Status_OnObj        = 3
+Status_RollJump     = 4
+Status_Push         = 5
+Status_Underwater   = 6
+
+; ---------------------------------------------------------------------------
+; Player status_secondary variables
+Status_Shield       = 0
+Status_Invincible   = 1
+Status_SpeedShoes   = 2
+
+Status_FireShield   = 4
+Status_LtngShield   = 5
+Status_BublShield   = 6
+
+; ---------------------------------------------------------------------------
+; Elemental Shield DPLC variables
+LastLoadedDPLC      = $34
+Art_Address         = $38
+DPLC_Address        = $3C
+
+; ---------------------------------------------------------------------------
 ; Address equates
 ; ---------------------------------------------------------------------------
 
@@ -321,10 +347,16 @@ Water_level =			ramaddr( $FFFFF646 ) ; word ; keeps fluctuating
 Mean_water_level =		ramaddr( $FFFFF648 ) ; word ; the steady central value of the water level
 Target_water_level =		ramaddr( $FFFFF64A ) ; word
 Water_speed =			ramaddr( $FFFFF64C ) ; byte ; this is added to or subtracted from Mean_water_level every frame till it reaches Target_water_level
+Water_entered_counter =		ramaddr( $FFFFF64D ) ; byte ; incremented when entering and exiting water, read by the the floating AIZ spike log, cleared on level initialisation and dynamic events of certain levels
 Water_full_screen_flag =	ramaddr( $FFFFF64E ) ; byte ; set if water covers the entire screen (i.e. the underwater pallete should be DMAed during V-int rather than the normal palette)
 Do_Updates_in_H_int =		ramaddr( $FFFFF64F ) ; byte ; if this is set Do_Updates will be called from H-int instead of V-int
+Palette_frame =			ramaddr( $FFFFF65C ) ; word
+Palette_timer = 		ramaddr( $FFFFF65E ) ; byte
+Super_Hyper_palette_status =	ramaddr( $FFFFF65F ) ; byte ; appears to be a flag for the palette's current status: '0' for 'off', '1' for 'fading', -1 for 'fading done'
 Hyper_Sonic_flash_timer =	ramaddr( $FFFFF666 ) ; byte ; used for Hyper Sonic's double jump move
 Super_Tails_flag =		ramaddr( $FFFFF667 ) ; byte
+Palette_frame_Tails =		ramaddr( $FFFFF668 ) ; byte ; Tails would use Palette_frame and Palette_timer, but they're reserved for his Super Flickies
+Palette_timer_Tails =		ramaddr( $FFFFF669 ) ; byte
 Ctrl_2_logical =		ramaddr( $FFFFF66A ) ; word ; both held and pressed
 Ctrl_2_held_logical =		ramaddr( $FFFFF66A ) ; byte
 Ctrl_2_pressed_logical =	ramaddr( $FFFFF66B ) ; byte
@@ -356,6 +388,8 @@ Ctrl_1_pressed_title =		ramaddr( $FFFFF749 ) ; byte
 Sonic_Knux_top_speed =		ramaddr( $FFFFF760 ) ; word
 Sonic_Knux_acceleration =	ramaddr( $FFFFF762 ) ; word
 Sonic_Knux_deceleration =	ramaddr( $FFFFF764 ) ; word
+Primary_Angle =			ramaddr( $FFFFF768 ) ; byte
+Secondary_Angle =		ramaddr( $FFFFF76A ) ; byte
 Object_load_routine =		ramaddr( $FFFFF76C ) ; byte ; routine counter for the object loading manager
 Camera_X_pos_coarse =		ramaddr( $FFFFF76E ) ; word ; rounded down to the nearest chunk boundary (128th pixel)
 Camera_Y_pos_coarse =		ramaddr( $FFFFF770 ) ; word ; rounded down to the nearest chunk boundary (128th pixel)
@@ -368,6 +402,7 @@ Boss_flag =			ramaddr( $FFFFF7AA ) ; byte ; set if a boss fight is going on
 Primary_collision_addr =	ramaddr( $FFFFF7B4 ) ; long
 Secondary_collision_addr =	ramaddr( $FFFFF7B8 ) ; long
 Reverse_gravity_flag =		ramaddr( $FFFFF7C6 ) ; byte
+WindTunnel_flag =		ramaddr( $FFFFF7C8 ) ; byte
 Ctrl_1_locked =			ramaddr( $FFFFF7CA ) ; byte
 Ctrl_2_locked =			ramaddr( $FFFFF7CB ) ; byte
 Chain_bonus_counter =		ramaddr( $FFFFF7D0 ) ; word
@@ -522,3 +557,33 @@ V_int_addr =			ramaddr( $FFFFFFF2 ) ; long
 H_int_jump =			ramaddr( $FFFFFFF6 ) ; 6 bytes ; contains an instruction to jump to the H-int handler
 H_int_addr =			ramaddr( $FFFFFFF8 ) ; long
 Checksum_string =		ramaddr( $FFFFFFFC ) ; long ; set to 'SM&K' once the checksum routine has run
+
+; ---------------------------------------------------------------------------
+; Art tile stuff
+high_priority       =      (1<<15)
+tile_mask           =      $07FF
+drawing_mask        =      $7FFF
+
+; ---------------------------------------------------------------------------
+; VRAM and tile art base addresses.
+; Menu background.
+ArtTile_ArtKos_S3MenuBG               = $0001
+
+; Competition mode.
+ArtTile_ArtKos_Competition_LevSel     = $029F
+ArtTile_ArtKos_Competition_ModeSel    = $034A
+ArtTile_ArtKos_Competition_Results    = $034A
+ArtTile_ArtKos_Competition_CharSel    = $05C9
+
+; Save screen.
+ArtTile_ArtKos_Save_Misc              = $029F
+ArtTile_ArtKos_Save_Extra             = $0454
+
+; ---------------------------------------------------------------------------
+; Universal locations.
+
+; Universal (used on all standard levels).
+ArtTile_ArtUnc_Sonic                  = $0680
+ArtTile_ArtUnc_Shield                 = $079C
+ArtTile_ArtUnc_Shield_Sparks          = $07BB
+ArtTile_ArtUnc_Tails_Tails            = $06B0
