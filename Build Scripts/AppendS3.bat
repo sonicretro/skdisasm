@@ -2,13 +2,13 @@
 
 pushd %~dp0\..
 
-IF EXIST s3kbuilt.bin del s3kbuilt.bin
+IF EXIST sonic3k.bin del sonic3k.bin
 IF NOT EXIST skbuilt.bin goto LABLSKMISS
 IF NOT EXIST "Build Scripts\s3.bin" goto LABLS3MISS
 
-type skbuilt.bin >> s3kbuilt.bin
-type "Build Scripts\s3.bin" >> s3kbuilt.bin
-echo s3kbuilt.bin produced
+type skbuilt.bin >> sonic3k.bin
+type "Build Scripts\s3.bin" >> sonic3k.bin
+echo sonic3k.bin produced
 pause
 goto LABLEXIT
 
