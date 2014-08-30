@@ -2,13 +2,13 @@
 
 pushd %~dp0\..
 
-REM // make sure we can write to the file skbuilt.bin
-REM // also make a backup to skbuilt.prev.bin
-IF NOT EXIST skbuilt.bin goto LABLNOCOPY
-IF EXIST skbuilt.prev.bin del skbuilt.prev.bin
-IF EXIST skbuilt.prev.bin goto LABLNOCOPY
-move /Y skbuilt.bin skbuilt.prev.bin
-IF EXIST skbuilt.bin goto LABLERROR2
+REM // make sure we can write to the file sonic3k.bin
+REM // also make a backup to sonic3k.prev.bin
+IF NOT EXIST sonic3k.bin goto LABLNOCOPY
+IF EXIST sonic3k.prev.bin del sonic3k.prev.bin
+IF EXIST sonic3k.prev.bin goto LABLNOCOPY
+move /Y sonic3k.bin sonic3k.prev.bin
+IF EXIST sonic3k.bin goto LABLERROR2
 
 :LABLNOCOPY
 REM // delete some intermediate assembler output just in case
@@ -48,7 +48,7 @@ pause
 goto LABLEXIT
 
 :LABLERROR2
-echo Failed to build because write access to skbuilt.bin was denied.
+echo Failed to build because write access to sonic3k.bin was denied.
 pause
 goto LABLEXIT
 
