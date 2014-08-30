@@ -32,11 +32,11 @@ REM // if there were errors, a log file is produced
 IF "%1"=="-logerrors" ( IF EXIST sonic3k.log goto LABLERROR3 )
 
 REM // combine the assembler output into a rom
-IF EXIST sonic3k.p "AS/Win32/s3p2bin" sonic3k.p s3k.bin sonic3k.h
+IF EXIST sonic3k.p "AS/Win32/s3p2bin" sonic3k.p sonic3k.bin sonic3k.h
 
 REM // done -- pause if we seem to have failed, then exit
 IF NOT EXIST sonic3k.p goto LABLPAUSE
-IF EXIST s3k.bin exit /b
+IF EXIST sonic3k.bin exit /b
 :LABLPAUSE
 
 pause
