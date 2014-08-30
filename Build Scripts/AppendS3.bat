@@ -1,6 +1,6 @@
 @ECHO OFF
 
-cd ..
+pushd %~dp0\..
 
 IF EXIST s3kbuilt.bin del s3kbuilt.bin
 IF NOT EXIST skbuilt.bin goto LABLSKMISS
@@ -10,14 +10,17 @@ type skbuilt.bin >> s3kbuilt.bin
 type "Build Scripts\s3.bin" >> s3kbuilt.bin
 echo s3kbuilt.bin produced
 pause
+goto LABLEXIT
 
-exit /b
 :LABLSKMISS
 ECHO skbuilt.bin is missing
 pause
-exit /b
+goto LABLEXIT
 
 :LABLS3MISS
 echo s3.bin is missing
 pause
+
+:LABLEXIT
+popd
 exit /b

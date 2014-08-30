@@ -1,6 +1,6 @@
 @ECHO OFF
 
-cd ..
+pushd %~dp0\..
 
 REM // make sure we can write to the file skbuilt.bin
 REM // also make a backup to skbuilt.prev.bin
@@ -9,8 +9,8 @@ IF EXIST skbuilt.prev.bin del skbuilt.prev.bin
 IF EXIST skbuilt.prev.bin goto LABLNOCOPY
 move /Y skbuilt.bin skbuilt.prev.bin
 IF EXIST skbuilt.bin goto LABLERROR2
-:LABLNOCOPY
 
+:LABLNOCOPY
 REM // delete some intermediate assembler output just in case
 IF EXIST sonic3k.p del sonic3k.p
 IF EXIST sonic3k.p goto LABLERROR1
@@ -36,26 +36,21 @@ IF EXIST sonic3k.p "AS/Win32/s3p2bin" sonic3k.p skbuilt.bin sonic3k.h
 
 REM // done -- pause if we seem to have failed, then exit
 IF NOT EXIST sonic3k.p goto LABLPAUSE
-IF EXIST skbuilt.bin exit /b
+IF EXIST skbuilt.bin goto LABLEXIT
+
 :LABLPAUSE
-
 pause
-
-
-exit /b
+goto LABLEXIT
 
 :LABLERROR1
 echo Failed to build because write access to sonic3k.p was denied.
 pause
-
-
-exit /b
+goto LABLEXIT
 
 :LABLERROR2
 echo Failed to build because write access to skbuilt.bin was denied.
 pause
-
-exit /b
+goto LABLEXIT
 
 :LABLERROR3
 REM // display a noticeable message
@@ -68,3 +63,6 @@ echo ***************************************************************************
 echo.
 pause
 
+:LABLEXIT
+popd
+exit /b
