@@ -22,17 +22,17 @@ REM // run the assembler
 REM // -xx shows the most detailed error output
 REM // -q makes AS shut up
 REM // -A gives us a small speedup
-set AS_MSGPATH=AS/Win32
+set AS_MSGPATH=AS\Win32
 set USEANSI=n
 
 REM // allow the user to choose to output error messages to file by supplying the -logerrors parameter
-IF "%1"=="-logerrors" ( "AS/Win32/asw.exe" -xx -q -c -D Sonic3_Complete=1 -E -A sonic3k.asm ) ELSE "AS/Win32/asw.exe" -xx -q -c -D Sonic3_Complete=1 -A sonic3k.asm
+IF "%1"=="-logerrors" ( "AS\Win32\asw.exe" -xx -q -c -D Sonic3_Complete=1 -E -A sonic3k.asm ) ELSE "AS\Win32\asw.exe" -xx -q -c -D Sonic3_Complete=1 -A sonic3k.asm
 
 REM // if there were errors, a log file is produced
 IF "%1"=="-logerrors" ( IF EXIST sonic3k.log goto LABLERROR3 )
 
 REM // combine the assembler output into a rom
-IF EXIST sonic3k.p "AS/Win32/s3p2bin" sonic3k.p sonic3k.bin sonic3k.h
+IF EXIST sonic3k.p "AS\Win32\s3p2bin" sonic3k.p sonic3k.bin sonic3k.h
 
 REM // done -- pause if we seem to have failed, then exit
 IF NOT EXIST sonic3k.p goto LABLPAUSE
