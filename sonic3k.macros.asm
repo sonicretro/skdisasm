@@ -100,5 +100,8 @@ tiles_to_bytes function addr,((addr&$7FF)<<5)
 
 ; macro for generating level select strings
 levselstr macro str
+	save
+	codepage	LEVELSELECT
 	dc.b strlen(str)-1, str
+	restore
     endm
