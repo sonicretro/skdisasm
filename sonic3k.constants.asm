@@ -588,3 +588,18 @@ ArtTile_ArtUnc_Tails_Tails            = $06B0
 ArtTile_ArtNem_Ring                   = $06BC
 ArtTile_ArtUnc_Shield                 = $079C
 ArtTile_ArtUnc_Shield_Sparks          = $07BB
+
+; Codepage for level select
+
+	save
+	codepage LEVELSELECT
+	CHARSET '0','9', 16
+	CHARSET 'A','Z', 30
+	CHARSET 'a','z', 30
+	CHARSET '*', 26
+	CHARSET '©', 27
+	CHARSET ':', 28
+	CHARSET '.', 29
+	CHARSET ' ',  0
+	restore
+

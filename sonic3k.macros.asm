@@ -97,3 +97,11 @@ rom_ptr_z80 macro addr
 ; macros to convert from tile index to art tiles, block mapping or VRAM address.
 make_art_tile function addr,pal,pri,((pri&1)<<15)|((pal&3)<<13)|(addr&tile_mask)
 tiles_to_bytes function addr,((addr&$7FF)<<5)
+
+; macro for generating level select strings
+levselstr macro str
+	save
+	codepage	LEVELSELECT
+	dc.b strlen(str)-1, str
+	restore
+    endm

@@ -406,7 +406,7 @@
 /* DAC samples */
 
 /**Bank 1**/
-#split	0x000E8000,0x000E81D7,sound\DAC\S3DAC header 1.bin
+/* #split	0x000E8000,0x000E81D7,sound\DAC\S3DAC header 1.bin */
 #split	0x000E87F7,0x000E8B29,sound\DAC\9C.bin
 #split	0x000E8B29,0x000E8D72,sound\DAC\9D.bin
 #split	0x000E8D72,0x000E8FF2,sound\DAC\9E.bin
@@ -423,7 +423,7 @@
 #split	0x000EEC1B,0x000EF66A,sound\DAC\A9.bin
 #split	0x000EF66A,0x000EFCF8,sound\DAC\AA.bin
 /**Bank 2**/
-#split	0x000F0000,0x000F01D7,sound\DAC\S3DAC header 2.bin
+/* #split	0x000F0000,0x000F01D7,sound\DAC\S3DAC header 2.bin */
 #split	0x000F01D7,0x000F0ADB,sound\DAC\AB.bin
 #split	0x000F0ADB,0x000F105C,sound\DAC\AC.bin
 #split	0x000F105C,0x000F1218,sound\DAC\AD-AE.bin
