@@ -5,3 +5,6 @@ skbuilt.bin
 skbuilt.prev.bin
 sonic3k.bin
 sonic3k.prev.bin
+Build/skbuiltBinaryOutput.txt
+Build/skbuiltErrors.txt
+Build/skbuiltOutput.txt
