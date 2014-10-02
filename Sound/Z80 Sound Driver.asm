@@ -18,7 +18,7 @@ fix_sndbugs				=  0
 z80_SoundDriver:
 		!org	0							; z80 Align, handled by the build process
 		CPU Z80
-		listing off
+		listing purecode
 
 MusID__First			= 01h
 MusID_1UP				= 2Ah
