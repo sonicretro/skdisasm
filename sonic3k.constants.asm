@@ -39,6 +39,9 @@ ros_addr =		$3C ; word ; the RAM address whose bit to clear when an object is de
 routine_secondary =	$3C ; byte ; used by monitors for this purpose at least
 vram_art =      $40 ; word ; address of art in VRAM (same as art_tile * $20)
 parent =		$42 ; word ; address of the object that owns or spawned this one, if applicable
+child_dx = 		$42 ; byte ; X offset of child relative to parent
+child_dy = 		$43 ; byte ; Y offset of child relative to parent
+parent3 = 		$46 ; word ; parent of child objects
 parent2 =		$48 ; word ; several objects use this instead
 respawn_addr =		$48 ; word ; the address of this object's entry in the respawn table
 ; ---------------------------------------------------------------------------
@@ -71,6 +74,34 @@ default_y_radius =	$44 ; byte ; default value of y_radius
 default_x_radius =	$45 ; byte ; default value of x_radius
 top_solid_bit =		$46 ; byte ; the bit to check for top solidity (either $C or $E)
 lrb_solid_bit =		$47 ; byte ; the bit to check for left/right/bottom solidity (either $D or $F)
+; ---------------------------------------------------------------------------
+; when childsprites are activated (i.e. bit #6 of render_flags set)
+mainspr_childsprites 	= $16	; amount of child sprites
+sub2_x_pos		= $18	;x_vel
+sub2_y_pos		= $1A	;y_vel
+sub2_mapframe		= $1D
+sub3_x_pos		= $1E	;y_radius
+sub3_y_pos		= $20	;anim
+sub3_mapframe		= $23	;anim_frame
+sub4_x_pos		= $24	;anim_frame_timer
+sub4_y_pos		= $26	;angle
+sub4_mapframe		= $29	;collision_property
+sub5_x_pos		= $2A	;status
+sub5_y_pos		= $2C	;subtype
+sub5_mapframe		= $2F
+sub6_x_pos		= $30
+sub6_y_pos		= $32
+sub6_mapframe		= $35
+sub7_x_pos		= $36
+sub7_y_pos		= $38
+sub7_mapframe		= $3B
+sub8_x_pos		= $3C
+sub8_y_pos		= $3E
+sub8_mapframe		= $41
+sub9_x_pos		= $42
+sub9_y_pos		= $44
+sub9_mapframe		= $47
+next_subspr		= $6
 ; ---------------------------------------------------------------------------
 ; property of all objects:
 object_size =		$4A ; the size of an object's status table entry
