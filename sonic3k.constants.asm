@@ -33,6 +33,7 @@ x_pixel =		x_pos ; word ; x-coordinate for objects using screen positioning
 y_pixel =		y_pos ; word ; y-coordinate for objects using screen positioning
 collision_flags =	$28 ; byte ; TT SSSSSS ; TT = collision type, SSSSSS = size
 collision_property =	$29 ; byte ; usage varies, bosses use it as a hit counter
+shield_reaction =	$2B ; byte ; bit 3 = bounces off shield, bit 4 = negated by fire shield, bit 5 = negated by lightning shield, bit 6 = negated by bubble shield 
 subtype =		$2C ; byte
 ros_bit =		$3B ; byte ; the bit to be cleared when an object is destroyed if the ROS flag is set
 ros_addr =		$3C ; word ; the RAM address whose bit to clear when an object is destroyed if the ROS flag is set
@@ -74,6 +75,9 @@ default_y_radius =	$44 ; byte ; default value of y_radius
 default_x_radius =	$45 ; byte ; default value of x_radius
 top_solid_bit =		$46 ; byte ; the bit to check for top solidity (either $C or $E)
 lrb_solid_bit =		$47 ; byte ; the bit to check for left/right/bottom solidity (either $D or $F)
+; ---------------------------------------------------------------------------
+; conventions followed by some/most bosses:
+boss_hitcount2 =	$29
 ; ---------------------------------------------------------------------------
 ; when childsprites are activated (i.e. bit #6 of render_flags set)
 mainspr_childsprites 	= $16	; amount of child sprites
