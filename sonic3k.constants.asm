@@ -125,6 +125,26 @@ objoff_30 =		$30
  enum 	objoff_3F=$3F,objoff_40=$40,objoff_41=$41,objoff_42=$42,objoff_43=$43,objoff_44=$44,objoff_45=$45
  enum 	objoff_46=$46,objoff_47=$47,objoff_48=$48,objoff_49=$49
 
+ ; ---------------------------------------------------------------------------
+; Bits 3-6 of an object's status after a SolidObject call is a
+; bitfield with the following meaning:
+p1_standing_bit   = 3
+p2_standing_bit   = p1_standing_bit + 1
+
+p1_standing       = 1<<p1_standing_bit
+p2_standing       = 1<<p2_standing_bit
+
+pushing_bit_delta = 2
+p1_pushing_bit    = p1_standing_bit + pushing_bit_delta
+p2_pushing_bit    = p1_pushing_bit + 1
+
+p1_pushing        = 1<<p1_pushing_bit
+p2_pushing        = 1<<p2_pushing_bit
+
+
+standing_mask     = p1_standing|p2_standing
+pushing_mask      = p1_pushing|p2_pushing
+
 ; ---------------------------------------------------------------------------
 ; Controller Buttons
 ;
@@ -618,6 +638,7 @@ ArtTile_ArtKos_Save_Extra             = $0454
 ; Universal locations.
 
 ; Universal (used on all standard levels).
+ArtTile_ArtNem_Powerups               = $04C4
 ArtTile_ArtUnc_Sonic                  = $0680
 ArtTile_ArtUnc_Tails_Tails            = $06B0
 ArtTile_ArtNem_Ring                   = $06BC
@@ -637,4 +658,3 @@ ArtTile_ArtUnc_Shield_Sparks          = $07BB
 	CHARSET '.', 29
 	CHARSET ' ',  0
 	restore
-
