@@ -317,7 +317,11 @@ zmake68kBank function addr,(((addr&3F8000h)/zROMWindow))
 ; sub_8
 	align	8
 GetPointerTable:	rsttarget
+	if fix_sndbugs
+		ld	hl,z80_SoundDriverPointers		; Load pointer table
+	else
 		ld	hl, (ptrMasterIndex)			; Read pointer to (pointer to pointer table) table
+	endif
 		ld	b, 0							; b = 0
 		add	hl, bc							; Add offset into pointer table
 		ex	af, af'							; Back up af
@@ -330,9 +334,11 @@ GetPointerTable:	rsttarget
 ; End of function GetPointerTable
 
 ; ---------------------------------------------------------------------------
+	if fix_sndbugs=0
 ;word_15
 ptrMasterIndex:
 		dw		z80_SoundDriverPointers
+	endif
 
 ; =============== S U B	R O U T	I N E =======================================
 ;
@@ -351,9 +357,13 @@ PointerTableOffset:	rsttarget
 		ld	b, 0							; b = 0
 		add	hl, bc							; hl += bc
 		add	hl, bc							; hl += bc
+	if fix_sndbugs
+		jp	ReadPointer						; 10 clock cycles, 3 bytes
+	else
+		nop								; 12 clock cycles, 3 bytes
 		nop
 		nop
-		nop
+	endif
 ; End of function PointerTableOffset
 
 ; =============== S U B	R O U T	I N E =======================================
@@ -1464,8 +1474,10 @@ zPlaySoundByIndex:
 		sub	FadeID__First					; If none of the checks passed, do fade effects.
 		ld	hl, zFadeEffects				; hl = switch table pointer
 		rst	PointerTableOffset				; Get address of function that handles the fade effect
+	if fix_sndbugs=0
 		xor	a								; Set a = 0
 		ld	(unk_1C18), a					; Set otherwise unused value to zero
+	endif
 		jp	(hl)							; Handle fade effect
 ; End of function zPlaySoundByIndex
 ; ---------------------------------------------------------------------------
@@ -1565,8 +1577,13 @@ zPlayMusic:
 
 -		ld	a, (hl)							; Get playback control byte for song
 		and	7Fh								; Strip the 'playing' bit
+	if fix_sndbugs
+		set	2, a							; Set bit 2 (SFX overriding)
+		ld	(hl), a							; And save it all
+	else
 		set	2, (hl)							; Set bit 2 (SFX overriding)
 		ld	(hl), a							; But then overwrite the whole thing...
+	endif
 		add	hl, de							; Advance to next track
 		djnz	-							; Loop for all tracks
 
@@ -1593,9 +1610,13 @@ zBGMLoad:
 		adc	a, h							; a += h, plus 1 if a + l overflowed the 8-bit register
 		sub	l								; Now, a = high byte of offset into music entry
 		ld	h, a							; hl is the offset to the music bank
+	if fix_sndbugs
+		ld	a, (hl)							; Get bank for the song to play
+	else
 		ld	(loc_5EB+1), hl					; Store into next instruction (self-modifying code)
 loc_5EB:
 		ld	a, (z80_MusicBanks)				; self-modified code; a is set to correct bank for the song to play
+	endif
 		ld	(zSongBank), a					; Save the song's bank...
 		bankswitch2							; ... then bank switch to it
 		ld	a, 0B6h							; Set Panning / AMS / FMS
@@ -1752,8 +1773,10 @@ zPlaySound:
 		push	hl							; Save hl
 		rst	ReadPointer						; hl = voice table pointer
 		ld	(zSFXVoiceTblPtr), hl			; Save to RAM
+	if fix_sndbugs=0
 		xor	a								; a = 0
 		ld	(unk_1C15), a					; Set otherwise unused location to zero
+	endif
 		pop	hl								; hl = pointer to SFX data
 		push	hl							; Save it again
 		pop	iy								; iy = pointer to SFX data
@@ -1883,10 +1906,14 @@ zGetSFXChannelPointers:
 		jr	++
 ; ---------------------------------------------------------------------------
 +
+	if fix_sndbugs
+		call	zSilencePSGChannel			; Silence channel at ix
+	else
 		ld	a, 1Fh							; a = 1Fh (redundant, as this is the first instruction of the function)
 		call	zSilencePSGChannel			; Silence channel at ix
 		ld	a, 0FFh							; Command to silence PSG3/Noise channel (zSilencePSGChannel should do it...)
 		ld	(zPSG), a						; Silence it (zSilencePSGChannel should do it...)
+	endif
 		ld	a, c							; a = channel identifier
 			; The next 5 shifts are so that we can convert it to a table index
 		srl	a
@@ -2130,12 +2157,19 @@ zDoMusicFadeIn:
 		ld	ix, zSongFM1					; ix = start of FM1 RAM
 		ld	de, zTrackSz					; Spacing between tracks
 
--		ld	a, (ix+zTrackVolume)			; Get track volume
+-
+	if fix_sndbugs
+		bit	2, (ix+zTrackPlaybackControl)	; Is 'SFX is overriding' bit set?
+		jr	nz, .next_track
+	endif
+		ld	a, (ix+zTrackVolume)			; Get track volume
 		dec	a								; Increase it
 		ld	(ix+zTrackVolume), a			; Then store it back
 		push	bc							; Save bc
 		call	zSendTL						; Send new volume
 		pop	bc								; Restore bc
+
+.next_track:
 		add	ix, de							; Advance to next track
 		djnz	-							; Loop for all tracks
 
@@ -2164,7 +2198,11 @@ zMusicFade:
 		; The following block sets to zero the z80 RAM from 1C0Dh to 1FD4h
 		ld	hl, zFadeOutTimeout				; Starting source address for copy
 		ld	de, zFadeDelay					; Starting destination address for copy
-		ld	bc, 3C6h						; Length of copy
+	if fix_sndbugs
+		ld	bc, zTracksSaveEnd-zFadeDelay	; Length of copy
+	else
+		ld	bc, zTracksSaveEnd-zFadeDelay+34h	; Length of copy
+	endif
 		ld	(hl), 0							; Initial value of zero
 		ldir								; while (--0x3c6) *de++ = *hl++
 
@@ -2182,7 +2220,9 @@ zMusicFade:
 		pop	bc								; Restore bc for loop counter
 		djnz	-							; Loop while b > 0
 
+	if fix_sndbugs=0
 		ld	b, 7							; Unused
+	endif
 		xor	a								; a = 0
 		ld	(zFadeOutTimeout), a			; Set fade timeout to zero... again
 		call	zPSGSilenceAll				; Silence PSG
@@ -2218,7 +2258,9 @@ zFMClearSSGEGOps:
 ; Pauses all audio.
 ;loc_98D
 zPauseAudio:
+	if fix_sndbugs=0
 		call	zPSGSilenceAll				; Redundant, as function falls-through to it anyway
+	endif
 		push	bc							; Save bc
 		push	af							; Save af
 		ld	b, 3							; FM1/FM2/FM3
@@ -2373,6 +2415,15 @@ zPlaySegaSound:
 		call	zMusicFade					; Fade music before playing the sound
 		ld	a, 1							; a = 1
 		ld	(PlaySegaPCMFlag), a			; Set flag to play SEGA sound
+	if fix_sndbugs
+		xor	a								; a = 0
+		ld	(zMusicNumber), a				; Clear M68K input queue...
+		ld	(zSFXNumber0), a				; ... including SFX slot 0...
+		ld	(zSFXNumber1), a				; ... and SFX slot 1
+		ld	(zSoundQueue0), a				; Also clear music queue entry 0...
+		ld	(zSoundQueue1), a				; ... and entry 1...
+		ld	(zSoundQueue2), a				; ... and entry 2
+	endif
 		pop	hl								; Don't return to caller of zCycleSoundQueue
 		ret
 
@@ -3013,8 +3064,10 @@ cfSetModulation:
 ;loc_D87
 cfStopTrack:
 		res	7, (ix+zTrackPlaybackControl)	; Clear 'track playing' flag
+	if fix_sndbugs=0
 		ld	a, 1Fh							; a = 1Fh
 		ld	(unk_1C15), a					; Set otherwise unused location to 1Fh
+	endif
 		call	zKeyOffIfActive				; Send key off for track channel
 		ld	c, (ix+zTrackVoiceControl)		; c = voice control bits
 		push	ix							; Save track pointer
@@ -3022,8 +3075,10 @@ cfStopTrack:
 		ld	a, (zUpdatingSFX)				; Get flag
 		or	a								; Are we updating SFX?
 		jp	z, zStopCleanExit				; Exit if not
+	if fix_sndbugs=0
 		xor	a								; a = 0
 		ld	(unk_1C18), a					; Set otherwise unused value to zero
+	endif
 		push	hl							; Save hl
 		ld	hl, (zVoiceTblPtr)				; hl = pointer to voice table
 		pop	ix								; ix = overridden track's pointer
