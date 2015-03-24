@@ -11,15 +11,15 @@
 ; Constants
 ; ===========================================================================
 
-		save
 ; Set this to 1 to fix some bugs in the driver.
 fix_sndbugs				=  0
 
 z80_SoundDriver:
+		save
 		!org	0							; z80 Align, handled by the build process
 		CPU Z80
 		listing purecode
-
+; ---------------------------------------------------------------------------
 MusID__First			= 01h
 MusID_1UP				= 2Ah
 MusID_Emerald			= 2Bh
@@ -35,8 +35,8 @@ FadeID__End				= 0E6h
 SndID_StopSega			= 0FEh
 SndID_Sega				= 0FFh
 ; ---------------------------------------------------------------------------
-NoteRest            	= 080h
-FirstCoordFlag      	= 0E0h
+NoteRest				= 080h
+FirstCoordFlag			= 0E0h
 ; ---------------------------------------------------------------------------
 zID_MusicPointers0 = 0
 zID_UniVoiceBank = 2
@@ -432,7 +432,7 @@ zInitAudioDriver:
 		djnz	$							; Loop in this instruction, decrementing b each iteration, until b = 0
 		dec	c								; c--
 		jr	z, -							; Loop if c = 0
-		
+
 		call	zMusicFade					; Stop all music
 		ld	a, zmake68kBank(DacBank2)		; Set song bank to second DAC bank (default value)
 		ld	(zSongBank), a					; Store it
@@ -612,7 +612,7 @@ zUpdateSFXTracks:
 		add	ix, de							; Advance to next track
 		pop	bc								; Restore bc
 		djnz	-							; Loop for all tracks
-		
+
 		ld	a, (zTempoSpeedup)				; Get tempo speed-up value
 		or	a								; Is music sped up?
 		ret	z								; Return if not
@@ -662,6 +662,7 @@ zUpdateFMorPSGTrack:
 		bit	6, (ix+zTrackPlaybackControl)	; Is 'sustain frequency' bit set?
 		ret	nz								; Return if yes
 		call	zDoModulation				; Apply modulation then fall through
+		; Fall through to next function
 ; End of function zUpdateFMorPSGTrack
 
 
@@ -1568,7 +1569,7 @@ zPlayMusic:
 		ld	(hl), a							; But then overwrite the whole thing...
 		add	hl, de							; Advance to next track
 		djnz	-							; Loop for all tracks
-		
+
 		ld	a, MusID_1UP-1					; a = 1-up id-1
 		ld	(zFadeToPrevFlag), a			; Set fade-to-prev flag to it
 		ld	a, (zCurrentTempo)				; Get current tempo
@@ -1640,7 +1641,7 @@ loc_5EB:
 		call	zInitFMDACTrack				; Init the remainder of the track RAM
 		pop	bc								; Restore bc
 		djnz	-							; Loop for all tracks (stored in b)
-		
+
 		ld	a, (iy+3)						; Get number of PSG tracks
 		or	a								; Do we have any PSG channels?
 		jp	z, zClearNextSound				; Branch if not
@@ -1773,7 +1774,7 @@ zSFXTrackInitLoop:
 		call	zGetSFXChannelPointers		; Get track pointers for track RAM (ix) and overridden song track (hl)
 		set	2, (hl)							; Set 'SFX is overriding this track' bit
 		push	ix							; Save pointer to SFX track data in RAM
-		
+
 	if fix_sndbugs=0
 		ld	a, (zUpdatingSFX)				; Get flag
 		or	a								; Are we updating SFX?
@@ -1903,6 +1904,8 @@ zGetSFXChannelPointers:
 		push	hl							; Save hl
 		pop	ix								; ix = track RAM
 		pop	af								; Restore af
+		; This is where there is code in other drivers to load the special SFX
+		; channel pointers to iy
 		ld	hl, zSFXOverriddenChannel		; Pointer table for the overridden music track
 		rst	PointerTableOffset				; hl = RAM destination to mark as overridden
 		ret
@@ -2030,6 +2033,7 @@ zPauseUnpause:
 		ld	de, zTrackSz					; Spacing between tracks
 		add	ix, de							; Go to next track
 		djnz	-							; Loop for all tracks
+
 		ret
 ; End of function zPauseUnpause
 
@@ -2134,7 +2138,7 @@ zDoMusicFadeIn:
 		pop	bc								; Restore bc
 		add	ix, de							; Advance to next track
 		djnz	-							; Loop for all tracks
-		
+
 		ld	a, (zFadeInTimeout)				; Get fading timeout
 		dec	a								; Decrement it
 		ld	(zFadeInTimeout), a				; Then store it back
@@ -2146,7 +2150,7 @@ zDoMusicFadeIn:
 -		res	2, (ix+zTrackPlaybackControl)	; Clear 'SFX is overriding' bit
 		add	ix, de							; Advance to next track
 		djnz	-							; Loop for all tracks
-		
+
 		ld	ix, zTracksStart				; ix = start of DAC/FM6 RAM
 		res	2, (ix+zTrackPlaybackControl)	; Clear 'SFX is overriding' bit
 		ret
@@ -2166,7 +2170,7 @@ zMusicFade:
 
 		xor	a								; a = 0
 		ld	(zTempoSpeedup), a				; Fade in normal speed
-		
+
 		ld	ix, zFMDACInitBytes				; Initialization data for channels
 		ld	b, (zSongPSG1-zSongFM6_DAC)/zTrackSz	; Number of FM channels
 
@@ -2177,7 +2181,7 @@ zMusicFade:
 		inc	ix								; But skip the 80h
 		pop	bc								; Restore bc for loop counter
 		djnz	-							; Loop while b > 0
-		
+
 		ld	b, 7							; Unused
 		xor	a								; a = 0
 		ld	(zFadeOutTimeout), a			; Set fade timeout to zero... again
@@ -2369,7 +2373,7 @@ zPlaySegaSound:
 		call	zMusicFade					; Fade music before playing the sound
 		ld	a, 1							; a = 1
 		ld	(PlaySegaPCMFlag), a			; Set flag to play SEGA sound
-		pop	hl								; Restore hl
+		pop	hl								; Don't return to caller of zCycleSoundQueue
 		ret
 
 ; =============== S U B	R O U T	I N E =======================================
@@ -3399,6 +3403,9 @@ cfSetTempo:
 ;
 ; Has one parameter byte, the ID of what is to be played.
 ;
+; DO NOT USE THIS TO PLAY THE SEGA PCM! It tampers with the stack pointer, and
+; will wreak havok with the track update.
+;
 ;loc_F3A:
 cfPlaySoundByIndex:
 		push	ix							; Save track pointer
@@ -3681,7 +3688,7 @@ zDoFlutter:
 		jr	z, zDoFlutterRest				; Branch if yes
 		cp	80h								; Is it a command to reset flutter?
 		jr	z, zDoFlutterReset				; Branch if yes
-		
+
 		inc	bc								; Increment flutter index
 		; DANGER! Will read data from code segment and use it as if it were valid!
 		; In order to get here, the flutter value would have to be:
@@ -3894,7 +3901,6 @@ zPlaySEGAPCM:
 
 +		jp	zPlayDigitalAudio				; Go back to normal DAC code
 ; ---------------------------------------------------------------------------
-			; db    0
 
 	if $ > 1300h
 		fatal "Your Z80 code won't fit before its tables. It's \{$-1300h}h bytes past the start of music data \{1300h}h"
@@ -3909,13 +3915,13 @@ Z80_Snd_Driver2:
 ; ===========================================================================
 
 z80_SoundDriverPointers:
-		dw	z80_MusicPointers
-		dw	z80_UniVoiceBank
+		dw	z80_MusicPointers				; This would be the priority array in other drivers
+		dw	z80_UniVoiceBank				; In other drivers, this is a pointer to special SFX table instead
 		dw	z80_MusicPointers
 		dw  z80_SFXPointers
 		dw  z80_FreqFlutterPointers
 		dw  z80_PSGTonePointers
-		dw  33h
+		dw  33h								; This is the song limit; it is never used in any driver
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; Frequency Flutter Pointers
@@ -3931,17 +3937,17 @@ z80_FreqFlutterPointers:
 		dw	FreqFlutter6
 		dw	FreqFlutter7
 
-FreqFlutter1:   db    0
-FreqFlutter0:   db    1,   2,   1,   0,0FFh,0FEh,0FDh,0FCh,0FDh,0FEh,0FFh, 83h
-FreqFlutter2:   db    0,   0,   0,   0, 13h, 26h, 39h, 4Ch, 5Fh, 72h, 7Fh, 72h, 83h
-FreqFlutter3:   db    1,   2,   3,   2,   1,   0,0FFh,0FEh,0FDh,0FEh,0FFh,   0, 82h,   0
-FreqFlutter4:   db    0,   0,   1,   3,   1,   0,0FFh,0FDh,0FFh,   0, 82h,   2
-FreqFlutter5:   db    0,   0,   0,   0,   0, 0Ah, 14h, 1Eh, 14h, 0Ah,   0,0F6h,0ECh,0E2h,0ECh,0F6h
-                db  82h,   4
-FreqFlutter6:   db    0,   0,   0,   0, 16h, 2Ch, 42h, 2Ch, 16h,   0,0EAh,0D4h,0BEh,0D4h,0EAh, 82h
-                db    3
-FreqFlutter7:   db    1,   2,   3,   4,   3,   2,   1,   0,0FFh,0FEh,0FDh,0FCh,0FDh,0FEh,0FFh,   0
-                db  82h,   1
+FreqFlutter1:	db    0
+FreqFlutter0:	db    1,   2,   1,   0,0FFh,0FEh,0FDh,0FCh,0FDh,0FEh,0FFh, 83h
+FreqFlutter2:	db    0,   0,   0,   0, 13h, 26h, 39h, 4Ch, 5Fh, 72h, 7Fh, 72h, 83h
+FreqFlutter3:	db    1,   2,   3,   2,   1,   0,0FFh,0FEh,0FDh,0FEh,0FFh,   0, 82h,   0
+FreqFlutter4:	db    0,   0,   1,   3,   1,   0,0FFh,0FDh,0FFh,   0, 82h,   2
+FreqFlutter5:	db    0,   0,   0,   0,   0, 0Ah, 14h, 1Eh, 14h, 0Ah,   0,0F6h,0ECh,0E2h,0ECh,0F6h
+		db  82h,   4
+FreqFlutter6:	db    0,   0,   0,   0, 16h, 2Ch, 42h, 2Ch, 16h,   0,0EAh,0D4h,0BEh,0D4h,0EAh, 82h
+		db    3
+FreqFlutter7:	db    1,   2,   3,   4,   3,   2,   1,   0,0FFh,0FEh,0FDh,0FCh,0FDh,0FEh,0FFh,   0
+		db  82h,   1
 
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
@@ -3957,63 +3963,63 @@ z80_PSGTonePointers:
 		dw		PSGTone_1E,PSGTone_1F,PSGTone_20,PSGTone_21,PSGTone_22,PSGTone_23
 		dw		PSGTone_24,PSGTone_25,PSGTone_26
 
-PSGTone_00:		db    2, 83h
-PSGTone_01:		db    0,   2,   4,   6,   8, 10h, 83h
-PSGTone_02:		db    2,   1,   0,   0,   1,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2
-                db    2,   3,   3,   3,   4,   4,   4,   5, 81h
-PSGTone_03:		db    0,   0,   2,   3,   4,   4,   5,   5,   5,   6,   6, 81h
-PSGTone_04:		db    3,   0,   1,   1,   1,   2,   3,   4,   4,   5, 81h
-PSGTone_05:		db    0,   0,   1,   1,   2,   3,   4,   5,   5,   6,   8,   7,   7,   6, 81h
-PSGTone_06:		db    1, 0Ch,   3, 0Fh,   2,   7,   3, 0Fh, 80h
-PSGTone_07:		db    0,   0,   0,   2,   3,   3,   4,   5,   6,   7,   8,   9, 0Ah, 0Bh, 0Eh, 0Fh
-                db  83h
-PSGTone_08:		db    3,   2,   1,   1,   0,   0,   1,   2,   3,   4, 81h
-PSGTone_09:		db    1,   0,   0,   0,   0,   1,   1,   1,   2,   2,   2,   3,   3,   3,   3,   4
-                db    4,   4,   5,   5, 81h
-PSGTone_0A:		db  10h, 20h, 30h, 40h, 30h, 20h, 10h,   0,0F0h, 80h
-PSGTone_0B:		db    0,   0,   1,   1,   3,   3,   4,   5, 83h
-PSGTone_0C:		db    0, 81h
-PSGTone_0D:		db    2, 83h
-PSGTone_0E:		db    0,   2,   4,   6,   8, 10h, 83h
-PSGTone_0F:		db    9,   9,   9,   8,   8,   8,   7,   7,   7,   6,   6,   6,   5,   5,   5,   4
-                db    4,   4,   3,   3,   3,   2,   2,   2,   1,   1,   1,   0,   0,   0, 81h
-PSGTone_10:		db    1,   1,   1,   0,   0,   0, 81h
-PSGTone_11:		db    3,   0,   1,   1,   1,   2,   3,   4,   4,   5, 81h
-PSGTone_12:		db    0,   0,   1,   1,   2,   3,   4,   5,   5,   6,   8,   7,   7,   6, 81h
-PSGTone_13:		db  0Ah,   5,   0,   4,   8, 83h
-PSGTone_14:		db    0,   0,   0,   2,   3,   3,   4,   5,   6,   7,   8,   9, 0Ah, 0Bh, 0Eh, 0Fh
-                db  83h
-PSGTone_15:		db    3,   2,   1,   1,   0,   0,   1,   2,   3,   4, 81h
-PSGTone_16:		db    1,   0,   0,   0,   0,   1,   1,   1,   2,   2,   2,   3,   3,   3,   3,   4
-                db    4,   4,   5,   5, 81h
-PSGTone_17:		db  10h, 20h, 30h, 40h, 30h, 20h, 10h,   0, 10h, 20h, 30h, 40h, 30h, 20h, 10h,   0
-                db  10h, 20h, 30h, 40h, 30h, 20h, 10h,   0, 80h
-PSGTone_18:		db    0,   0,   1,   1,   3,   3,   4,   5, 83h
-PSGTone_19:		db    0,   2,   4,   6,   8, 16h, 83h
-PSGTone_1A:		db    0,   0,   1,   1,   3,   3,   4,   5, 83h
-PSGTone_1B:		db    4,   4,   4,   4,   3,   3,   3,   3,   2,   2,   2,   2,   1,   1,   1,   1
-                db  83h
-PSGTone_1C:		db    0,   0,   0,   0,   1,   1,   1,   1,   2,   2,   2,   2,   3,   3,   3,   3
-                db    4,   4,   4,   4,   5,   5,   5,   5,   6,   6,   6,   6,   7,   7,   7,   7
-                db    8,   8,   8,   8,   9,   9,   9,   9, 0Ah, 0Ah, 0Ah, 0Ah, 81h
-PSGTone_1D:		db    0, 0Ah, 83h
-PSGTone_1E:		db    0,   2,   4, 81h
-PSGTone_1F:		db  30h, 20h, 10h,   0,   0,   0,   0,   0,   8, 10h, 20h, 30h, 81h
-PSGTone_20:		db    0,   4,   4,   4,   4,   4,   4,   4,   4,   4,   4,   6,   6,   6,   8,   8
-                db  0Ah, 83h
-PSGTone_21:		db    0,   2,   3,   4,   6,   7, 81h
-PSGTone_22:		db    2,   1,   0,   0,   0,   2,   4,   7, 81h
-PSGTone_23:		db  0Fh,   1,   5, 83h
-PSGTone_24:		db    8,   6,   2,   3,   4,   5,   6,   7,   8,   9, 0Ah, 0Bh, 0Ch, 0Dh, 0Eh, 0Fh
-                db  10h, 83h
-PSGTone_25:		db    0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   1,   1,   1,   1,   1,   1
-                db    1,   1,   1,   1,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   3,   3
-                db    3,   3,   3,   3,   3,   3,   3,   3,   4,   4,   4,   4,   4,   4,   4,   4
-                db    4,   4,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   6,   6,   6,   6
-                db    6,   6,   6,   6,   6,   6,   7,   7,   7,   7,   7,   7,   7,   7,   7,   7
-                db    8,   8,   8,   8,   8,   8,   8,   8,   8,   8,   9,   9,   9,   9,   9,   9
-                db    9,   9, 83h
-PSGTone_26:		db    0,   2,   2,   2,   3,   3,   3,   4,   4,   4,   5,   5, 83h
+PSGTone_00:	db    2, 83h
+PSGTone_01:	db    0,   2,   4,   6,   8, 10h, 83h
+PSGTone_02:	db    2,   1,   0,   0,   1,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2
+			db    2,   3,   3,   3,   4,   4,   4,   5, 81h
+PSGTone_03:	db    0,   0,   2,   3,   4,   4,   5,   5,   5,   6,   6, 81h
+PSGTone_04:	db    3,   0,   1,   1,   1,   2,   3,   4,   4,   5, 81h
+PSGTone_05:	db    0,   0,   1,   1,   2,   3,   4,   5,   5,   6,   8,   7,   7,   6, 81h
+PSGTone_06:	db    1, 0Ch,   3, 0Fh,   2,   7,   3, 0Fh, 80h
+PSGTone_07:	db    0,   0,   0,   2,   3,   3,   4,   5,   6,   7,   8,   9, 0Ah, 0Bh, 0Eh, 0Fh
+			db  83h
+PSGTone_08:	db    3,   2,   1,   1,   0,   0,   1,   2,   3,   4, 81h
+PSGTone_09:	db    1,   0,   0,   0,   0,   1,   1,   1,   2,   2,   2,   3,   3,   3,   3,   4
+			db    4,   4,   5,   5, 81h
+PSGTone_0A:	db  10h, 20h, 30h, 40h, 30h, 20h, 10h,   0,0F0h, 80h
+PSGTone_0B:	db    0,   0,   1,   1,   3,   3,   4,   5, 83h
+PSGTone_0C:	db    0, 81h
+PSGTone_0D:	db    2, 83h
+PSGTone_0E:	db    0,   2,   4,   6,   8, 10h, 83h
+PSGTone_0F:	db    9,   9,   9,   8,   8,   8,   7,   7,   7,   6,   6,   6,   5,   5,   5,   4
+			db    4,   4,   3,   3,   3,   2,   2,   2,   1,   1,   1,   0,   0,   0, 81h
+PSGTone_10:	db    1,   1,   1,   0,   0,   0, 81h
+PSGTone_11:	db    3,   0,   1,   1,   1,   2,   3,   4,   4,   5, 81h
+PSGTone_12:	db    0,   0,   1,   1,   2,   3,   4,   5,   5,   6,   8,   7,   7,   6, 81h
+PSGTone_13:	db  0Ah,   5,   0,   4,   8, 83h
+PSGTone_14:	db    0,   0,   0,   2,   3,   3,   4,   5,   6,   7,   8,   9, 0Ah, 0Bh, 0Eh, 0Fh
+			db  83h
+PSGTone_15:	db    3,   2,   1,   1,   0,   0,   1,   2,   3,   4, 81h
+PSGTone_16:	db    1,   0,   0,   0,   0,   1,   1,   1,   2,   2,   2,   3,   3,   3,   3,   4
+			db    4,   4,   5,   5, 81h
+PSGTone_17:	db  10h, 20h, 30h, 40h, 30h, 20h, 10h,   0, 10h, 20h, 30h, 40h, 30h, 20h, 10h,   0
+			db  10h, 20h, 30h, 40h, 30h, 20h, 10h,   0, 80h
+PSGTone_18:	db    0,   0,   1,   1,   3,   3,   4,   5, 83h
+PSGTone_19:	db    0,   2,   4,   6,   8, 16h, 83h
+PSGTone_1A:	db    0,   0,   1,   1,   3,   3,   4,   5, 83h
+PSGTone_1B:	db    4,   4,   4,   4,   3,   3,   3,   3,   2,   2,   2,   2,   1,   1,   1,   1
+			db  83h
+PSGTone_1C:	db    0,   0,   0,   0,   1,   1,   1,   1,   2,   2,   2,   2,   3,   3,   3,   3
+			db    4,   4,   4,   4,   5,   5,   5,   5,   6,   6,   6,   6,   7,   7,   7,   7
+			db    8,   8,   8,   8,   9,   9,   9,   9, 0Ah, 0Ah, 0Ah, 0Ah, 81h
+PSGTone_1D:	db    0, 0Ah, 83h
+PSGTone_1E:	db    0,   2,   4, 81h
+PSGTone_1F:	db  30h, 20h, 10h,   0,   0,   0,   0,   0,   8, 10h, 20h, 30h, 81h
+PSGTone_20:	db    0,   4,   4,   4,   4,   4,   4,   4,   4,   4,   4,   6,   6,   6,   8,   8
+			db  0Ah, 83h
+PSGTone_21:	db    0,   2,   3,   4,   6,   7, 81h
+PSGTone_22:	db    2,   1,   0,   0,   0,   2,   4,   7, 81h
+PSGTone_23:	db  0Fh,   1,   5, 83h
+PSGTone_24:	db    8,   6,   2,   3,   4,   5,   6,   7,   8,   9, 0Ah, 0Bh, 0Ch, 0Dh, 0Eh, 0Fh
+			db  10h, 83h
+PSGTone_25:	db    0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   1,   1,   1,   1,   1,   1
+			db    1,   1,   1,   1,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   3,   3
+			db    3,   3,   3,   3,   3,   3,   3,   3,   4,   4,   4,   4,   4,   4,   4,   4
+			db    4,   4,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   6,   6,   6,   6
+			db    6,   6,   6,   6,   6,   6,   7,   7,   7,   7,   7,   7,   7,   7,   7,   7
+			db    8,   8,   8,   8,   8,   8,   8,   8,   8,   8,   9,   9,   9,   9,   9,   9
+			db    9,   9, 83h
+PSGTone_26:	db    0,   2,   2,   2,   3,   3,   3,   4,   4,   4,   5,   5, 83h
 
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
@@ -4099,7 +4105,7 @@ z80_SFXPointers:
 		dw	zmake68kPtr(Sound_DB),zmake68kPtr(Sound_DB),zmake68kPtr(Sound_DB),zmake68kPtr(Sound_DB)
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
-; PSG Universial Voice Bank
+; FM Universial Voice Bank
 ; ===========================================================================
 	if $ <> 17D8h
 		fatal "The universal voice bank is not in a location where music can find it; any song using it will fail."
@@ -4107,7 +4113,7 @@ z80_SFXPointers:
 
 z80_UniVoiceBank:
 	; Synth Bass 2
-		db  3Ch,   1,   0,   0,   0, 1Fh, 1Fh, 15h, 1Fh, 11h, 0Dh, 12h,   5
+	    db  3Ch,   1,   0,   0,   0, 1Fh, 1Fh, 15h, 1Fh, 11h, 0Dh, 12h,   5
 		db         7,   4,   9,   2, 55h, 3Ah, 25h, 1Ah, 1Ah, 80h,   7, 80h				; 0
 	; Trumpet 1
 	    db  3Dh,   1,   1,   1,   1, 94h, 19h, 19h, 19h, 0Fh, 0Dh, 0Dh, 0Dh
@@ -4223,8 +4229,6 @@ z80_SoundDriverPointersEnd:
 ; ===========================================================================
 		restore
 		padding off
-		
-		;!org		z80_SoundDriver+z80_SoundDriverPointersEnd-(z80_SoundDriverPointers-z80_SoundDriverEnd)      ; Fix alignment after sound driver
 		!org		z80_SoundDriver+Size_of_Snd_driver_guess
 
 Z80_Snd_Driver_End:
@@ -4235,7 +4239,7 @@ k68z80Pointer function addr,((((addr&$7FFF)+$8000)<<8)&$FF00)+(((addr&$7FFF)+$80
 little_endian function x,(x)<<8&$FF00|(x)>>8&$FF
 
 startBank macro {INTLABEL}
-	align 	$8000
+	align	$8000
 __LABEL__ label *
 soundBankStart := __LABEL__
     endm
@@ -4267,7 +4271,7 @@ __LABEL___Bank := soundBankStart
 ; Setup macro for DAC samples.
 DAC_Setup macro rate,dacptr
 	dc.b	rate
-	dc.w 	dacptr_Len
+	dc.w	dacptr_Len
 	dc.w	dacptr_Ptr
     endm
 
@@ -4322,7 +4326,7 @@ DAC_Offsets:
 		offsetBankTableEntry.w	DAC_8D_Setup
 		offsetBankTableEntry.w	DAC_8E_Setup
 		offsetBankTableEntry.w	DAC_8F_Setup
-		
+
 		offsetBankTableEntry.w	DAC_90_Setup
 		offsetBankTableEntry.w	DAC_91_Setup
 		offsetBankTableEntry.w	DAC_92_Setup
@@ -4356,7 +4360,7 @@ DAC_Offsets:
 		offsetBankTableEntry.w	DAC_AD_Setup
 		offsetBankTableEntry.w	DAC_AE_Setup
 		offsetBankTableEntry.w	DAC_AF_Setup
-		
+
 		offsetBankTableEntry.w	DAC_B0_Setup
 		offsetBankTableEntry.w	DAC_B1_Setup
 		offsetBankTableEntry.w	DAC_B2_Setup
@@ -4486,7 +4490,7 @@ DacBank2:			startBank
 		offsetBankTableEntry.w	DAC_8D_Setup2
 		offsetBankTableEntry.w	DAC_8E_Setup2
 		offsetBankTableEntry.w	DAC_8F_Setup2
-		
+
 		offsetBankTableEntry.w	DAC_90_Setup2
 		offsetBankTableEntry.w	DAC_91_Setup2
 		offsetBankTableEntry.w	DAC_92_Setup2
@@ -4520,7 +4524,7 @@ DacBank2:			startBank
 		offsetBankTableEntry.w	DAC_AD_Setup2
 		offsetBankTableEntry.w	DAC_AE_Setup2
 		offsetBankTableEntry.w	DAC_AF_Setup2
-		
+
 		offsetBankTableEntry.w	DAC_B0_Setup2
 		offsetBankTableEntry.w	DAC_B1_Setup2
 		offsetBankTableEntry.w	DAC_B2_Setup2
@@ -4650,7 +4654,7 @@ DacBank3:			startBank
 		offsetBankTableEntry.w	DAC_8D_Setup3
 		offsetBankTableEntry.w	DAC_8E_Setup3
 		offsetBankTableEntry.w	DAC_8F_Setup3
-		
+
 		offsetBankTableEntry.w	DAC_90_Setup3
 		offsetBankTableEntry.w	DAC_91_Setup3
 		offsetBankTableEntry.w	DAC_92_Setup3
@@ -4684,7 +4688,7 @@ DacBank3:			startBank
 		offsetBankTableEntry.w	DAC_AD_Setup3
 		offsetBankTableEntry.w	DAC_AE_Setup3
 		offsetBankTableEntry.w	DAC_AF_Setup3
-		
+
 		offsetBankTableEntry.w	DAC_B0_Setup3
 		offsetBankTableEntry.w	DAC_B1_Setup3
 		offsetBankTableEntry.w	DAC_B2_Setup3
