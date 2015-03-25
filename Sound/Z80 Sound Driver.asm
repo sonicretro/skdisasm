@@ -401,9 +401,9 @@ ReadPointer:	rsttarget
 ; End of function PointerTableOffset
 
 ; ---------------------------------------------------------------------------
-		db    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+; There is room for two more 'rsttarget's here
 ; ---------------------------------------------------------------------------
-	align	8
+	align	38h
 ; =============== S U B	R O U T	I N E =======================================
 ;
 ; This subroutine is called every V-Int. After it is processed, the z80
