@@ -1178,6 +1178,8 @@ zDoModulation:
 		push	hl							; Save hl
 		ld	l, (ix+zTrack.ModulationValLow)	; l = low byte of accumulated modulation
 		ld	h, (ix+zTrack.ModulationValHigh)	; h = high byte of accumulated modulation
+		; In non-Type 2 DAC versions of SMPS Z80, the following four instructions were below the 'jr nz'
+		; which could lead to a bug where iy isn't initialised, but still used as a pointer.
 		ld	e, (ix+zTrack.ModulationPtrLow)	; e = low byte of modulation data pointer
 		ld	d, (ix+zTrack.ModulationPtrHigh)	; d = high byte of modulation data pointer
 		push	de							; Save de
