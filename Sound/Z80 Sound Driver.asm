@@ -2242,10 +2242,6 @@ zDoMusicFadeIn:
 
 .fm_loop:
 	if fix_sndbugs
-		bit	2, (ix+zTrack.PlaybackControl)	; Is 'SFX is overriding' bit set?
-		jr	nz, .next_track
-	endif
-	if fix_sndbugs
 		dec	(ix+zTrack.Volume)			; Increase track volume
 	else
 		ld	a, (ix+zTrack.Volume)			; Get track volume
@@ -2256,7 +2252,6 @@ zDoMusicFadeIn:
 		call	zSendTL						; Send new volume
 		pop	bc								; Restore bc
 
-.next_track:
 		add	ix, de							; Advance to next track
 		djnz	.fm_loop					; Loop for all tracks
 
