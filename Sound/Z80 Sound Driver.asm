@@ -228,12 +228,19 @@ SndID_Sega				= 0FFh
 NoteRest				= 080h
 FirstCoordFlag			= 0E0h
 ; ---------------------------------------------------------------------------
+	if fix_sndbugs
+zID_MusicPointers4 = 0
+zID_SFXPointers = 2
+zID_ModEnvPointers = 4
+zID_VolEnvPointers = 6
+	else
 zID_MusicPointers0 = 0
 zID_UniVoiceBank = 2
 zID_MusicPointers4 = 4
 zID_SFXPointers = 6
 zID_ModEnvPointers = 8
 zID_VolEnvPointers = 0Ah
+	endif
 ; ---------------------------------------------------------------------------
 
 ; ===========================================================================
@@ -310,7 +317,9 @@ zmake68kBank function addr,(((addr&3F8000h)/zROMWindow))
 		im	1								; set interrupt mode 1
 		jp	zInitAudioDriver
 ; ---------------------------------------------------------------------------
+	if fix_sndbugs=0
 		db 0F2h								; Filler; broken jp p,loc?
+	endif
 
 ; =============== S U B	R O U T	I N E =======================================
 ;
@@ -411,8 +420,10 @@ zVInt:	rsttarget
 		exx									; Save bc,de,hl
 
 .doupdate:
+	if fix_sndbugs=0
 		ld	a, r							; Get memory refresh register
 		ld	(unk_1C17), a					; Save it
+	endif
 		call	zUpdateEverything			; Update all tracks
 		ld	a, (zPalFlag)					; Get PAL flag
 		or	a								; Is it set?
@@ -663,7 +674,11 @@ zTrackUpdLoop:
 zUpdateFMorPSGTrack:
 		bit	7, (ix+zTrack.VoiceControl)		; Is this a PSG channel?
 		jp	nz, zUpdatePSGTrack				; Branch if yes
+	if fix_sndbugs
+		dec	(ix+zTrack.DurationTimeout)	; Run note timer
+	else
 		call	zTrackRunTimer				; Run note timer
+	endif
 		jr	nz, .note_going					; Branch if note hasn't expired yet
 		call	zGetNextNote				; Get next note for FM track
 		bit	4, (ix+zTrack.PlaybackControl)	; Is track resting?
@@ -978,12 +993,14 @@ zComputeNoteDuration:
 ; Input:   ix   Track data
 ; Output:  a    New duration
 ;sub_33A
+	if fix_sndbugs=0
 zTrackRunTimer:
 		ld	a, (ix+zTrack.DurationTimeout)	; Get track duration timeout
 		dec	a								; Decrement it...
 		ld	(ix+zTrack.DurationTimeout), a	; ... and save new value
 		ret
 ; End of function zTrackRunTimer
+	endif
 
 ; ---------------------------------------------------------------------------
 ;loc_342
@@ -1619,12 +1636,12 @@ zPlayMusic:
 		ld	b, (zTracksSaveEnd-zTracksSaveStart)/zTrack.len	; Number of tracks
 
 .loop:
+	if fix_sndbugs
+		res	7, (hl)							; Strip the 'playing' bit
+		set	2, (hl)							; Set bit 2 (SFX overriding)
+	else
 		ld	a, (hl)							; Get playback control byte for song
 		and	7Fh								; Strip the 'playing' bit
-	if fix_sndbugs
-		set	2, a							; Set bit 2 (SFX overriding)
-		ld	(hl), a							; And save it all
-	else
 		set	2, (hl)							; Set bit 2 (SFX overriding)
 		ld	(hl), a							; But then overwrite the whole thing...
 	endif
@@ -1788,7 +1805,9 @@ zPlaySound_Bankswitch:
 		ld	(zContinousSFXFlag), a			; Flag continuous SFX as being extended
 		rst	GetPointerTable					; hl = pointer to SFX data table
 		pop	af								; Restore af
+	if fix_sndbugs=0
 		ld	c, a							; c = SFX index; redundant, as PointerTableOffset does it already
+	endif
 		rst	PointerTableOffset				; hl = pointer to SFX data
 		inc	hl								; Skip low byte of voice pointer
 		inc	hl								; Skip high byte of voice pointer
@@ -2159,9 +2178,14 @@ zDoMusicFadeOut:
 .timer_expired:
 		ld	a, (zFadeDelay)					; Get fade delay
 		ld	(zFadeDelayTimeout), a			; Restore counter to initial value
+	if fix_sndbugs
+		ld	hl, zFadeOutTimeout			; (hl) = fade timeout
+		dec	(hl)								; Decrement it
+	else
 		ld	a, (zFadeOutTimeout)			; a = fade timeout
 		dec	a								; Decrement it
 		ld	(zFadeOutTimeout), a			; Then store it back
+	endif
 		jp	z, zMusicFade					; Stop all music if it is zero
 		ld	a, (zSongBank)					; a = current music bank ID
 		bankswitch2							; Bank switch to music bank
@@ -2201,9 +2225,14 @@ zDoMusicFadeIn:
 		ret	z								; Return if not
 		ld	a, (zSongBank)					; Get current music bank
 		bankswitch2							; Bank switch to music
+	if fix_sndbugs
+		ld	hl, zFadeDelay					; Get fade delay
+		dec	(hl)								; Decrement it
+	else
 		ld	a, (zFadeDelay)					; Get fade delay
 		dec	a								; Decrement it
 		ld	(zFadeDelay), a					; Store it back
+	endif
 		ret	nz								; Branch if it is not yet zero
 		ld	a, (zFadeDelayTimeout)			; Get current fade delay timeout
 		ld	(zFadeDelay), a					; Reset to starting fade delay
@@ -2216,9 +2245,13 @@ zDoMusicFadeIn:
 		bit	2, (ix+zTrack.PlaybackControl)	; Is 'SFX is overriding' bit set?
 		jr	nz, .next_track
 	endif
+	if fix_sndbugs
+		dec	(ix+zTrack.Volume)			; Increase track volume
+	else
 		ld	a, (ix+zTrack.Volume)			; Get track volume
 		dec	a								; Increase it
 		ld	(ix+zTrack.Volume), a			; Then store it back
+	endif
 		push	bc							; Save bc
 		call	zSendTL						; Send new volume
 		pop	bc								; Restore bc
@@ -2227,9 +2260,14 @@ zDoMusicFadeIn:
 		add	ix, de							; Advance to next track
 		djnz	.fm_loop					; Loop for all tracks
 
+	if fix_sndbugs
+		ld	hl, zFadeInTimeout				; Get fading timeout
+		dec	(hl)								; Decrement it
+	else
 		ld	a, (zFadeInTimeout)				; Get fading timeout
 		dec	a								; Decrement it
 		ld	(zFadeInTimeout), a				; Then store it back
+	endif
 		ret	nz								; Return if still fading
 		ld	b, (zTracksEnd-zSongPSG1)/zTrack.len	; Number of PSG tracks
 		ld	ix, zSongPSG1					; ix = start of PSG RAM
@@ -2509,9 +2547,15 @@ zFadeInToPrevious:
 		ld	de, zTracksStart				; Start of track data
 		ld	bc, zTracksSaveEnd-zTracksSaveStart	; Number of bytes to copy
 		ldir								; while (bc-- > 0) *de++ = *hl++;
+	if fix_sndbugs
+		ld	hl, zSongFM6_DAC+zTrack.PlaybackControl
+		set	7, (hl)
+		set	2, (hl)
+	else
 		ld	a, (zSongFM6_DAC+zTrack.PlaybackControl)				; a = FM6/DAC track playback control
 		or	84h								; Set 'track is playing' and 'track is resting' flags
 		ld	(zSongFM6_DAC+zTrack.PlaybackControl), a				; Set new value
+	endif
 		ld	ix, zSongFM1					; ix = pointer to FM1 track RAM
 		ld	b, (zTracksEnd-zSongFM1)/zTrack.len	; Number of FM+PSG tracks
 
@@ -2587,7 +2631,11 @@ z80_MusicBanks:
 ;
 ;sub_B98
 zUpdateDACTrack:
+	if fix_sndbugs
+		dec	(ix+zTrack.DurationTimeout)	; Advance track duration timer
+	else
 		call	zTrackRunTimer				; Advance track duration timer
+	endif
 		ret	nz								; Branch if note is still going
 		ld	e, (ix+zTrack.DataPointerLow)	; e = low byte of track data pointer
 		ld	d, (ix+zTrack.DataPointerHigh)	; d = high byte of track data pointer
@@ -3405,9 +3453,14 @@ cfLoopContinuousSFX:
 		ret
 ; ---------------------------------------------------------------------------
 .run_counter:
+	if fix_sndbugs
+		ld	hl, zContSFXLoopCnt			; Get number loops to perform
+		dec	(hl)								; Decrement it...
+	else
 		ld	a, (zContSFXLoopCnt)			; Get number loops to perform
 		dec	a								; Decrement it...
 		ld	(zContSFXLoopCnt), a			; ... and store it back
+	endif
 		jp	nz, cfJumpTo					; If result is non-zero, jump to target address
 		xor	a								; a = 0
 		ld	(zContinousSFXFlag), a			; Clear continous sound effect flag
@@ -3727,7 +3780,11 @@ cfResetSpindashRev:
 ;
 ;loc_FC4
 zUpdatePSGTrack:
+	if fix_sndbugs
+		dec	(ix+zTrack.DurationTimeout)	; Run note timer
+	else
 		call	zTrackRunTimer				; Run note timer
+	endif
 		jr	nz, .note_going					; Branch if note hasn't expired yet
 		call	zGetNextNote				; Get next note for PSG track
 		bit	4, (ix+zTrack.PlaybackControl)	; Is track resting?
@@ -4066,6 +4123,12 @@ Z80_Snd_Driver2:
 ; ===========================================================================
 
 z80_SoundDriverPointers:
+	if fix_sndbugs
+		dw	z80_MusicPointers
+		dw  z80_SFXPointers
+		dw  z80_ModEnvPointers
+		dw  z80_VolEnvPointers
+	else
 		dw	z80_MusicPointers				; This would be the priority array in other drivers
 		dw	z80_UniVoiceBank				; In other drivers, this is a pointer to special SFX table instead
 		dw	z80_MusicPointers
@@ -4073,6 +4136,7 @@ z80_SoundDriverPointers:
 		dw  z80_ModEnvPointers
 		dw  z80_VolEnvPointers
 		dw  33h								; This is the song limit; it is never used in any driver
+	endif
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; Modulation Envelope Pointers
@@ -4258,6 +4322,7 @@ z80_SFXPointers:
 ; ===========================================================================
 ; FM Universial Voice Bank
 ; ===========================================================================
+	align 17D8h
 	if $ <> 17D8h
 		fatal "The universal voice bank is not in a location where music can find it; any song using it will fail."
 	endif
