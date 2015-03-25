@@ -2168,7 +2168,7 @@ zMusicFade:
 		ld	(zTempoSpeedup), a				; Fade in normal speed
 		
 		ld	ix, zFMDACInitBytes				; Initialization data for channels
-		ld	b, (zSongPSG2-zSongFM1)/zTrackSz	; Number of channels
+		ld	b, (zSongPSG1-zSongFM6_DAC)/zTrackSz	; Number of FM channels
 
 -		push	bc							; Save bc for loop
 		call	zFMSilenceChannel			; Silence track's channel
