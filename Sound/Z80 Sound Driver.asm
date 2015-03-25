@@ -4393,15 +4393,16 @@ startBank macro {INTLABEL}
 	align	$8000
 __LABEL__ label *
 soundBankStart := __LABEL__
+soundBankName := "__LABEL__"
     endm
 
 DebugSoundbanks := 0
 
 finishBank macro
 	if * > soundBankStart + $8000
-		fatal "soundBank must fit in $8000 bytes but was $\{*-soundBankStart}. Try moving something to the other bank."
+		fatal "soundBank \{soundBankName} must fit in $8000 bytes but was $\{*-soundBankStart}. Try moving something to the other bank."
 	elseif (DebugSoundbanks<>0)&&(MOMPASS=1)
-		message "soundBank has $\{$8000+soundBankStart-*} bytes free at end."
+		message "soundBank \{soundBankName} has $\{$8000+soundBankStart-*} bytes free at end."
 	endif
     endm
 
