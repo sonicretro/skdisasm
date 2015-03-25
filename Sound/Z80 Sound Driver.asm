@@ -798,7 +798,7 @@ zGetSpecialFM3DataPointer:
 		ld	de,zSpecFM3FreqsSFX				; de = pointer to saved FM3 frequency shifts
 	endif
 		ret
-; End of function nullsub_A
+; End of function zGetSpecialFM3DataPointer
 
 
 ; =============== S U B	R O U T	I N E =======================================
