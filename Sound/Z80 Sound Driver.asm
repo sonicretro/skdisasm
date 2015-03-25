@@ -677,7 +677,7 @@ zUpdateFMorPSGTrack:
 .note_going:
 		bit	4, (ix+zTrack.PlaybackControl)	; Is track resting?
 		ret	nz								; Return if yes
-		call	zDoFMFlutter				; Do FM flutter for track
+		call	zDoFMVolEnv					; Do FM volume envelope effects for track
 		ld	a, (ix+zTrack.NoteFillTimeout)	; Get note fill timeout
 		or	a								; Is timeout either not running or expired?
 		jr	z, .keep_going					; Branch if yes
@@ -1053,7 +1053,7 @@ zKeyOnOff:
 ; End of function zKeyOnOff
 
 ; =============== S U B	R O U T	I N E =======================================
-; Performs flutter in FM channels.
+; Performs volume envelope effects in FM channels.
 ;
 ; Input:   ix    Pointer to track RAM
 ; Output:  a     Trashed
@@ -1062,30 +1062,31 @@ zKeyOnOff:
 ;          hl    Trashed
 ;
 ;sub_36D
-zDoFMFlutter:
-		ld	a, (ix+zTrack.FMVolEnv)			; Get FM flutter value
+;zDoFMFlutter
+zDoFMVolEnv:
+		ld	a, (ix+zTrack.FMVolEnv)			; Get FM volume envelope
 		or	a								; Is it zero?
 		ret	z								; Return if yes
 		ret	m								; Return if it is actually the custom SSG-EG flag
 		dec	a								; Make a into an index
-		ld	c, zID_VolEnvPointers			; Value for PSG tone pointer table
-		rst	GetPointerTable					; hl = pointer to PSG flutter table
-		rst	PointerTableOffset				; hl = pointer to PSG flutter for track
-		call	zDoFlutter					; a = new flutter value
+		ld	c, zID_VolEnvPointers			; Value for volume envelope pointer table
+		rst	GetPointerTable					; hl = pointer to volume envelope table
+		rst	PointerTableOffset				; hl = pointer to volume envelope for track
+		call	zDoVolEnv					; a = new volume envelope
 		ld	h, (ix+zTrack.TLPtrHigh)			; h = high byte ot TL data pointer
 		ld	l, (ix+zTrack.TLPtrLow)			; l = low byte ot TL data pointer
 		ld	de, zFMInstrumentTLTable		; de = pointer to FM TL register table
 		ld	b, zFMInstrumentTLTable_End-zFMInstrumentTLTable	; Number of entries
-		ld	c, (ix+zTrack.FMVolEnvMask)		; c = flutter bitmask
+		ld	c, (ix+zTrack.FMVolEnvMask)		; c = envelope bitmask
 
 .loop:
 		push	af							; Save af
 		sra	c								; Divide c by 2
 		push	bc							; Save bc
 		jr	nc, .skip_reg					; Branch if c bit shifted was zero
-		add	a, (hl)							; Add TL value to flutter value
+		add	a, (hl)							; Add TL value to volume envelope
 		and	7Fh								; Strip sign bit
-		ld	c, a							; c = TL + flutter
+		ld	c, a							; c = TL + volume envelope
 		ld	a, (de)							; a = YM2612 register
 		call	zWriteFMIorII				; Send TL data to YM2612
 
@@ -1096,7 +1097,7 @@ zDoFMFlutter:
 		pop	af								; Restore af
 		djnz	.loop						; Loop for all registers
 		ret
-; End of function zDoFMFlutter
+; End of function zDoFMVolEnv
 
 ; =============== S U B	R O U T	I N E =======================================
 ; Initializes normal modulation.
@@ -1144,7 +1145,7 @@ zPrepareModulation:
 ;          iy    Pointer to modulation data in track RAM
 ;          bc    Unmodulated note frequency
 ;
-;    If modulation control is nonzero and not 80h (frequency flutter):
+;    If modulation control is nonzero and not 80h (modulation envelope effects):
 ;
 ;
 ;sub_3C9
@@ -1153,7 +1154,7 @@ zDoModulation:
 		or	a								; Is modulation active?
 		ret	z								; Return if not
 		cp	80h								; Is modulation control 80h?
-		jr	nz, zDoFrequencyFlutter			; Branch if not
+		jr	nz, zDoModEnvelope				; Branch if not
 		dec	(ix+zTrack.ModulationWait)		; Decrement modulation wait
 		ret	nz								; Return if nonzero
 		inc	(ix+zTrack.ModulationWait)		; Increase it back to 1 for next frame
@@ -1191,91 +1192,98 @@ zDoModulation:
 		ret
 ; ---------------------------------------------------------------------------
 ;loc_41A
-zDoFrequencyFlutter:
+;zDoFrequencyFlutter
+zDoModEnvelope:
 		dec	a								; Convert into pointer table index
 		ex	de, hl							; Exchange de and hl; de = note frequency
-		ld	c, zID_ModEnvPointers		; Value for frequency flutter pointer table
-		rst	GetPointerTable					; hl = pointer to frequency flutter pointer table
-		rst	PointerTableOffset				; hl = frequency flutter pointer for modulation control byte
-		jr	zDoFrequencyFlutter_cont
+		ld	c, zID_ModEnvPointers			; Value for modulation envelope pointer table
+		rst	GetPointerTable					; hl = pointer to modulation envelope pointer table
+		rst	PointerTableOffset				; hl = modulation envelope pointer for modulation control byte
+		jr	zDoModEnvelope_cont
 ; ---------------------------------------------------------------------------
-
-zFreqFlutterSetIndex:
-		ld	(ix+zTrack.ModEnvIndex), a	; Set new frequency flutter index
+;zFreqFlutterSetIndex
+zModEnvSetIndex:
+		ld	(ix+zTrack.ModEnvIndex), a		; Set new modulation envelope index
 
 ;loc_425
-zDoFrequencyFlutter_cont:
+;zDoFrequencyFlutter_cont
+zDoModEnvelope_cont:
 		push	hl							; Save hl
-		ld	c, (ix+zTrack.ModEnvIndex)	; c = frequency flutter index
+		ld	c, (ix+zTrack.ModEnvIndex)		; c = modulation envelope index
 		ld	b, 0							; b = 0
-		add	hl, bc							; Offset into frequency flutter
+		add	hl, bc							; Offset into modulation envelope table
 	if fix_sndbugs
 		; Fix based on similar code from Space Harrier II's sound driver.
 		; This fixes both "DANGER!" bugs below. This is better than the
 		; previous fix, which was based on Ristar's driver.
 		ld	c, l
 		ld	b, h
-		ld	a, (bc)							; a = new frequency flutter value
+		ld	a, (bc)							; a = new modulation envelope value
 	else
-		ld	a, (hl)							; a = new frequency flutter value
+		ld	a, (hl)							; a = new modulation envelope value
 	endif
 		pop	hl								; Restore hl
-		bit	7, a							; Is frequency flutter negative?
-		jp	z, zlocPositiveFlutterMod			; Branch if not
+		bit	7, a							; Is modulation envelope negative?
+		jp	z, zlocPositiveModEnvMod		; Branch if not
 		cp	82h								; Is it 82h?
-		jr	z, zlocChangeFlutterIndex		; Branch if yes
+		jr	z, zlocChangeModEnvIndex		; Branch if yes
 		cp	80h								; Is it 80h?
-		jr	z, zlocResetFlutterMod			; Branch if yes
+		jr	z, zlocResetModEnvMod			; Branch if yes
 		cp	84h								; Is it 84h?
-		jr	z, zlocFlutterIncMultiplier		; Branch if yes
+		jr	z, zlocModEnvIncMultiplier		; Branch if yes
 		ld	h, 0FFh							; h = 0FFh
-		jr	nc, zlocApplyFlutterMod			; Branch if more than 84h
+		jr	nc, zlocApplyModEnvMod			; Branch if more than 84h
 		set	6, (ix+zTrack.PlaybackControl)	; Set 'sustain frequency' bit
 		pop	hl								; Tamper with return location so as to not return to caller
 		ret
 ; ---------------------------------------------------------------------------
 ;loc_449
-zlocChangeFlutterIndex:
+;zlocChangeFlutterIndex
+zlocChangeModEnvIndex:
 		inc	bc								; Increment bc
 		; DANGER! Uses bc as a pointer, getting bytes from code region.
 		; This happens for several frequency flutters, so you should avoid them
 		; unless you enable the driver bug fixes.
 		ld	a, (bc)							; Use it as a pointer??? Getting bytes from code region?
-		jr	zFreqFlutterSetIndex			; Set position to nonsensical value
+		jr	zModEnvSetIndex					; Set position to nonsensical value
 ; ---------------------------------------------------------------------------
 ;loc_44D
-zlocResetFlutterMod:
+;zlocResetFlutterMod
+zlocResetModEnvMod:
 		xor	a								; a = 0
-		jr	zFreqFlutterSetIndex			; Reset position for frequency flutter
+		jr	zModEnvSetIndex					; Reset position for modulation envelope
 ; ---------------------------------------------------------------------------
 ;loc_450
-zlocFlutterIncMultiplier:
+;zlocFlutterIncMultiplier
+zlocModEnvIncMultiplier:
 		inc	bc								; Increment bc
 		; DANGER! Uses bc as a pointer, getting bytes from code region.
 		; Luckily, this does not happen for any of the existing frequency
 		; flutters.
 		ld	a, (bc)							; Use it as a pointer??? Getting bytes from code region?
-		add	a, (ix+zTrack.ModEnvSens)	; Add flutter sensibility to a...
-		ld	(ix+zTrack.ModEnvSens), a	; ... then store new value
-		inc	(ix+zTrack.ModEnvIndex)		; Advance flutter modulation...
-		inc	(ix+zTrack.ModEnvIndex)		; ... twice.
-		jr	zDoFrequencyFlutter_cont
+		add	a, (ix+zTrack.ModEnvSens)		; Add envelope sensibility to a...
+		ld	(ix+zTrack.ModEnvSens), a		; ... then store new value
+		inc	(ix+zTrack.ModEnvIndex)			; Advance envelope modulation...
+		inc	(ix+zTrack.ModEnvIndex)			; ... twice.
+		jr	zDoModEnvelope_cont
 ; ---------------------------------------------------------------------------
 ;loc_460
-zlocPositiveFlutterMod:
+;zlocPositiveFlutterMod
+zlocPositiveModEnvMod:
 		ld	h, 0							; h = 0
 
 ;loc_462
-zlocApplyFlutterMod:
+;zlocApplyFlutterMod
+zlocApplyModEnvMod:
 		ld	l, a							; hl = sign extension of modulation value
-		ld	b, (ix+zTrack.ModEnvSens)	; Fetch flutter sensibility
+		ld	b, (ix+zTrack.ModEnvSens)		; Fetch envelope sensibility
 		inc	b								; Increment it (minimum 1)
 		ex	de, hl							; Swap hl and de; hl = note frequency
 
 .loop:
 		add	hl, de							; hl += de
-		djnz	.loop							; Make hl = note frequency + b * de
-		inc	(ix+zTrack.ModEnvIndex)		; Advance frequency flutter
+		djnz	.loop						; Make hl = note frequency + b * de
+		inc	(ix+zTrack.ModEnvIndex)			; Advance modulation envelope
 		ret
 ; End of function zDoModulation
 
@@ -1288,6 +1296,7 @@ zlocApplyFlutterMod:
 ;          bc    Damaged
 ;
 ;sub_46F
+;zDoPitchSlide
 zUpdateFreq:
 		ld	h, (ix+zTrack.FreqHigh)			; h = high byte of note frequency
 		ld	l, (ix+zTrack.FreqLow)			; l = low byte of note frequency
@@ -2672,7 +2681,7 @@ zCoordFlagSwitchTable:
 		dw cfStopTrack						; 0F2h
 		dw cfSetPSGNoise					; 0F3h
 		dw cfSetModulation					; 0F4h
-		dw cfSetPSGTone						; 0F5h
+		dw cfSetPSGVolEnv					; 0F5h
 		dw cfJumpTo							; 0F6h
 		dw cfRepeatAtPos					; 0F7h
 		dw cfJumpToGosub					; 0F8h
@@ -2691,7 +2700,7 @@ zExtraCoordFlagSwitchTable:
 		dw cfCopyData						; 0FFh 03h
 		dw cfSetTempoDivider				; 0FFh 04h
 		dw cfSetSSGEG						; 0FFh 05h
-		dw cfFMFlutter						; 0FFh 06h
+		dw cfFMVolEnv						; 0FFh 06h
 		dw cfResetSpindashRev				; 0FFh 07h
 ; =============== S U B	R O U T	I N E =======================================
 ; Sets a new DAC sample for play.
@@ -2959,7 +2968,7 @@ cfChangePSGVolume:
 		bit	7, (ix+zTrack.VoiceControl)		; Is this a PSG channel?
 		ret	z								; Return if not
 		res	4, (ix+zTrack.PlaybackControl)	; Clear 'track is resting' flag
-		dec	(ix+zTrack.VolEnv)			; Decrement flutter index
+		dec	(ix+zTrack.VolEnv)				; Decrement envelope index
 		add	a, (ix+zTrack.Volume)			; Add track's current volume
 		cp	0Fh								; Is it 0Fh or more?
 		jp	c, zStoreTrackVolume			; Branch if not
@@ -3255,7 +3264,8 @@ cfSetPSGNoise:
 ; Has one parameter byte, the new PSG tone to use.
 ;
 ;loc_E58
-cfSetPSGTone:
+;cfSetPSGTone
+cfSetPSGVolEnv:
 		bit	7, (ix+zTrack.VoiceControl)		; Is this a PSG track?
 		ret	z								; Return if not
 
@@ -3682,19 +3692,20 @@ zSendSSGEGData:
 ; End of function zSendSSGEGData
 
 ; =============== S U B	R O U T	I N E =======================================
-; Starts or controls FM flutter, according to the parameters.
+; Starts or controls FM volume envelope effects, according to the parameters.
 ;
-; Has two parameter bytes: the first is a (1-based) index into the PSG flutter
-; table indicating how the flutter should go, while the second is a bitmask
+; Has two parameter bytes: the first is a (1-based) index into the PSG envelope
+; table indicating how the envelope should go, while the second is a bitmask
 ; indicating which operators should be affected (in the form %00004231) for
 ; the current channel.
 ;
 ;loc_FB5
-cfFMFlutter:
-		ld	(ix+zTrack.FMVolEnv), a			; Store flutter index
+;cfFMFlutter
+cfFMVolEnv:
+		ld	(ix+zTrack.FMVolEnv), a			; Store envelope index
 		inc	de								; Advance track pointer
-		ld	a, (de)							; Get flutter mask
-		ld	(ix+zTrack.FMVolEnvMask), a		; Store flutter bitmask
+		ld	a, (de)							; Get envelope mask
+		ld	(ix+zTrack.FMVolEnvMask), a		; Store envelope bitmask
 		ret
 
 ; =============== S U B	R O U T	I N E =======================================
@@ -3755,17 +3766,17 @@ zUpdatePSGTrack:
 		ld	c, 0							; c = 0
 		jr	z, .no_volenv					; Branch if no PSG tone
 		dec	a								; Make it into a 0-based index
-		ld	c, zID_VolEnvPointers			; Value for PSG tone pointer table
-		rst	GetPointerTable					; hl = pointer to PSG flutter table
-		rst	PointerTableOffset				; hl = pointer to PSG flutter for track
-		call	zDoFlutter					; Get new flutter value
-		ld	c, a							; c = new flutter value
+		ld	c, zID_VolEnvPointers			; Value for volume envelope pointer table
+		rst	GetPointerTable					; hl = pointer to volume envelope table
+		rst	PointerTableOffset				; hl = pointer to volume envelope for track
+		call	zDoVolEnv					; Get new volume envelope
+		ld	c, a							; c = new volume envelope
 
 .no_volenv:
 		bit	4, (ix+zTrack.PlaybackControl)	; Is track resting?
 		ret	nz								; Return if yes
 		ld	a, (ix+zTrack.Volume)			; Get track volume
-		add	a, c							; Add flutter to it
+		add	a, c							; Add volume envelope to it
 		bit	4, a							; Is bit 4 set?
 		jr	z, .no_underflow				; Branch if not
 		ld	a, 0Fh							; Set silence on PSG track
@@ -3784,44 +3795,46 @@ zUpdatePSGTrack:
 		ret
 ; ---------------------------------------------------------------------------
 ;loc_1037
-zDoFlutterSetValue:
+;zDoFlutterSetValue
+zDoVolEnvSetValue:
 		ld	(ix+zTrack.VolEnv), a			; Set new value for PSG envelope index and fall through
 
 ; =============== S U B	R O U T	I N E =======================================
-; Get next PSG flutter value.
+; Get next PSG volume envelope value.
 ;
 ; Input:   ix    Pointer to track RAM
-;          hl    Pointer to current PSG flutter
-; Output:  a     New flutter value
+;          hl    Pointer to current PSG volume envelope
+; Output:  a     New volume envelope value
 ;          bc    Trashed
 ;
 ;sub_103A
-zDoFlutter:
+;zDoFlutter
+zDoVolEnv:
 		push	hl							; Save hl
 		ld	c, (ix+zTrack.VolEnv)			; Get current PSG envelope index
 		ld	b, 0							; b = 0
-		add	hl, bc							; Offset into PSG flutter
+		add	hl, bc							; Offset into PSG envelope table
 	if fix_sndbugs
 		; Fix based on similar code from Space Harrier II's sound driver.
 		; This fixes the "DANGER!" bug below. This is better than the
 		; previous fix, which was based on Ristar's driver.
 		ld	c, l
 		ld	b, h
-		ld	a, (bc)							; a = PSG flutter value
+		ld	a, (bc)							; a = PSG volume envelope
 	else
 		ld	a, (hl)							; a = PSG flutter value
 	endif
 		pop	hl								; Restore hl
 		bit	7, a							; Is it a terminator?
-		jr	z, zDoFlutterAdvance			; Branch if not
+		jr	z, zDoVolEnvAdvance				; Branch if not
 		cp	83h								; Is it a command to put PSG channel to rest?
-		jr	z, zDoFlutterFullRest			; Branch if yes
+		jr	z, zDoVolEnvFullRest			; Branch if yes
 		cp	81h								; Is it a command to set rest flag on PSG channel?
-		jr	z, zDoFlutterRest				; Branch if yes
-		cp	80h								; Is it a command to reset flutter?
-		jr	z, zDoFlutterReset				; Branch if yes
+		jr	z, zDoVolEnvRest				; Branch if yes
+		cp	80h								; Is it a command to reset envelope?
+		jr	z, zDoVolEnvReset				; Branch if yes
 
-		inc	bc								; Increment flutter index
+		inc	bc								; Increment envelope index
 		; DANGER! Will read data from code segment and use it as if it were valid!
 		; In order to get here, the flutter value would have to be:
 		; (1) negative;
@@ -3829,30 +3842,34 @@ zDoFlutter:
 		; As it stands, none of the entries in the flutter tables will allow
 		; this code to execute.
 		ld	a, (bc)							; Get value from wherever the hell bc is pointing to
-		jr	zDoFlutterSetValue				; Use this as new flutter index
+		jr	zDoVolEnvSetValue				; Use this as new envelope index
 ; ---------------------------------------------------------------------------
 ;loc_1057
-zDoFlutterFullRest:
+;zDoFlutterFullRest
+zDoVolEnvFullRest:
 		set	4, (ix+zTrack.PlaybackControl)	; Set 'track is resting' bit
 		pop	hl								; Pop return value from stack (causes a 'ret' to return to caller of zUpdatePSGTrack)
 		jp	zRestTrack						; Put track at rest
 ; ---------------------------------------------------------------------------
 ;loc_105F
-zDoFlutterReset:
+;zDoFlutterReset
+zDoVolEnvReset:
 		xor	a								; a = 0
-		jr	zDoFlutterSetValue
+		jr	zDoVolEnvSetValue
 ; ---------------------------------------------------------------------------
 ;loc_1062
-zDoFlutterRest:
+;zDoFlutterRest
+zDoVolEnvRest:
 		pop	hl								; Pop return value from stack (causes a 'ret' to return to caller of zUpdatePSGTrack)
 		set	4, (ix+zTrack.PlaybackControl)	; Set 'track is resting' bit
 		ret									; Do NOT silence PSG channel
 ; ---------------------------------------------------------------------------
 ;loc_1068
-zDoFlutterAdvance:
+;zDoFlutterAdvance
+zDoVolEnvAdvance:
 		inc	(ix+zTrack.VolEnv)				; Advance envelope
 		ret
-; End of function zDoFlutter
+; End of function zDoVolEnv
 
 
 ; =============== S U B	R O U T	I N E =======================================
@@ -4053,107 +4070,107 @@ z80_SoundDriverPointers:
 		dw	z80_UniVoiceBank				; In other drivers, this is a pointer to special SFX table instead
 		dw	z80_MusicPointers
 		dw  z80_SFXPointers
-		dw  z80_FreqFlutterPointers
-		dw  z80_PSGTonePointers
+		dw  z80_ModEnvPointers
+		dw  z80_VolEnvPointers
 		dw  33h								; This is the song limit; it is never used in any driver
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
-; Frequency Flutter Pointers
+; Modulation Envelope Pointers
 ; ===========================================================================
+;z80_FreqFlutterPointers
+z80_ModEnvPointers:
+		dw	ModEnv_00
+		dw	ModEnv_01
+		dw	ModEnv_02
+		dw	ModEnv_03
+		dw	ModEnv_04
+		dw	ModEnv_05
+		dw	ModEnv_06
+		dw	ModEnv_07
 
-z80_FreqFlutterPointers:
-		dw	FreqFlutter0
-		dw	FreqFlutter1
-		dw	FreqFlutter2
-		dw	FreqFlutter3
-		dw	FreqFlutter4
-		dw	FreqFlutter5
-		dw	FreqFlutter6
-		dw	FreqFlutter7
-
-FreqFlutter1:	db    0
-FreqFlutter0:	db    1,   2,   1,   0,0FFh,0FEh,0FDh,0FCh,0FDh,0FEh,0FFh, 83h
-FreqFlutter2:	db    0,   0,   0,   0, 13h, 26h, 39h, 4Ch, 5Fh, 72h, 7Fh, 72h, 83h
-FreqFlutter3:	db    1,   2,   3,   2,   1,   0,0FFh,0FEh,0FDh,0FEh,0FFh,   0, 82h,   0
-FreqFlutter4:	db    0,   0,   1,   3,   1,   0,0FFh,0FDh,0FFh,   0, 82h,   2
-FreqFlutter5:	db    0,   0,   0,   0,   0, 0Ah, 14h, 1Eh, 14h, 0Ah,   0,0F6h,0ECh,0E2h,0ECh,0F6h
-		db  82h,   4
-FreqFlutter6:	db    0,   0,   0,   0, 16h, 2Ch, 42h, 2Ch, 16h,   0,0EAh,0D4h,0BEh,0D4h,0EAh, 82h
-		db    3
-FreqFlutter7:	db    1,   2,   3,   4,   3,   2,   1,   0,0FFh,0FEh,0FDh,0FCh,0FDh,0FEh,0FFh,   0
-		db  82h,   1
+ModEnv_01:	db    0
+ModEnv_00:	db    1,   2,   1,   0,0FFh,0FEh,0FDh,0FCh,0FDh,0FEh,0FFh, 83h
+ModEnv_02:	db    0,   0,   0,   0, 13h, 26h, 39h, 4Ch, 5Fh, 72h, 7Fh, 72h, 83h
+ModEnv_03:	db    1,   2,   3,   2,   1,   0,0FFh,0FEh,0FDh,0FEh,0FFh,   0, 82h,   0
+ModEnv_04:	db    0,   0,   1,   3,   1,   0,0FFh,0FDh,0FFh,   0, 82h,   2
+ModEnv_05:	db    0,   0,   0,   0,   0, 0Ah, 14h, 1Eh, 14h, 0Ah,   0,0F6h,0ECh,0E2h,0ECh,0F6h
+        	db  82h,   4
+ModEnv_06:	db    0,   0,   0,   0, 16h, 2Ch, 42h, 2Ch, 16h,   0,0EAh,0D4h,0BEh,0D4h,0EAh, 82h
+        	db    3
+ModEnv_07:	db    1,   2,   3,   4,   3,   2,   1,   0,0FFh,0FEh,0FDh,0FCh,0FDh,0FEh,0FFh,   0
+        	db  82h,   1
 
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
-; PSG Tone Pointers
+; Volume Envelope Pointers
 ; ===========================================================================
+;z80_PSGTonePointers
+z80_VolEnvPointers:
+		dw		VolEnv_00,VolEnv_01,VolEnv_02,VolEnv_03,VolEnv_04,VolEnv_05
+		dw		VolEnv_06,VolEnv_07,VolEnv_08,VolEnv_09,VolEnv_0A,VolEnv_0B
+		dw		VolEnv_0C,VolEnv_0D,VolEnv_0E,VolEnv_0F,VolEnv_10,VolEnv_11
+		dw		VolEnv_12,VolEnv_13,VolEnv_14,VolEnv_15,VolEnv_16,VolEnv_17
+		dw		VolEnv_18,VolEnv_19,VolEnv_1A,VolEnv_1B,VolEnv_1C,VolEnv_1D
+		dw		VolEnv_1E,VolEnv_1F,VolEnv_20,VolEnv_21,VolEnv_22,VolEnv_23
+		dw		VolEnv_24,VolEnv_25,VolEnv_26
 
-z80_PSGTonePointers:
-		dw		PSGTone_00,PSGTone_01,PSGTone_02,PSGTone_03,PSGTone_04,PSGTone_05
-		dw		PSGTone_06,PSGTone_07,PSGTone_08,PSGTone_09,PSGTone_0A,PSGTone_0B
-		dw		PSGTone_0C,PSGTone_0D,PSGTone_0E,PSGTone_0F,PSGTone_10,PSGTone_11
-		dw		PSGTone_12,PSGTone_13,PSGTone_14,PSGTone_15,PSGTone_16,PSGTone_17
-		dw		PSGTone_18,PSGTone_19,PSGTone_1A,PSGTone_1B,PSGTone_1C,PSGTone_1D
-		dw		PSGTone_1E,PSGTone_1F,PSGTone_20,PSGTone_21,PSGTone_22,PSGTone_23
-		dw		PSGTone_24,PSGTone_25,PSGTone_26
-
-PSGTone_00:	db    2, 83h
-PSGTone_01:	db    0,   2,   4,   6,   8, 10h, 83h
-PSGTone_02:	db    2,   1,   0,   0,   1,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2
+VolEnv_00:	db    2, 83h
+VolEnv_01:	db    0,   2,   4,   6,   8, 10h, 83h
+VolEnv_02:	db    2,   1,   0,   0,   1,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2
 			db    2,   3,   3,   3,   4,   4,   4,   5, 81h
-PSGTone_03:	db    0,   0,   2,   3,   4,   4,   5,   5,   5,   6,   6, 81h
-PSGTone_04:	db    3,   0,   1,   1,   1,   2,   3,   4,   4,   5, 81h
-PSGTone_05:	db    0,   0,   1,   1,   2,   3,   4,   5,   5,   6,   8,   7,   7,   6, 81h
-PSGTone_06:	db    1, 0Ch,   3, 0Fh,   2,   7,   3, 0Fh, 80h
-PSGTone_07:	db    0,   0,   0,   2,   3,   3,   4,   5,   6,   7,   8,   9, 0Ah, 0Bh, 0Eh, 0Fh
+VolEnv_03:	db    0,   0,   2,   3,   4,   4,   5,   5,   5,   6,   6, 81h
+VolEnv_04:	db    3,   0,   1,   1,   1,   2,   3,   4,   4,   5, 81h
+VolEnv_05:	db    0,   0,   1,   1,   2,   3,   4,   5,   5,   6,   8,   7,   7,   6, 81h
+VolEnv_06:	db    1, 0Ch,   3, 0Fh,   2,   7,   3, 0Fh, 80h
+VolEnv_07:	db    0,   0,   0,   2,   3,   3,   4,   5,   6,   7,   8,   9, 0Ah, 0Bh, 0Eh, 0Fh
 			db  83h
-PSGTone_08:	db    3,   2,   1,   1,   0,   0,   1,   2,   3,   4, 81h
-PSGTone_09:	db    1,   0,   0,   0,   0,   1,   1,   1,   2,   2,   2,   3,   3,   3,   3,   4
+VolEnv_08:	db    3,   2,   1,   1,   0,   0,   1,   2,   3,   4, 81h
+VolEnv_09:	db    1,   0,   0,   0,   0,   1,   1,   1,   2,   2,   2,   3,   3,   3,   3,   4
 			db    4,   4,   5,   5, 81h
-PSGTone_0A:	db  10h, 20h, 30h, 40h, 30h, 20h, 10h,   0,0F0h, 80h
-PSGTone_0B:	db    0,   0,   1,   1,   3,   3,   4,   5, 83h
-PSGTone_0C:	db    0, 81h
-PSGTone_0D:	db    2, 83h
-PSGTone_0E:	db    0,   2,   4,   6,   8, 10h, 83h
-PSGTone_0F:	db    9,   9,   9,   8,   8,   8,   7,   7,   7,   6,   6,   6,   5,   5,   5,   4
+VolEnv_0A:	db  10h, 20h, 30h, 40h, 30h, 20h, 10h,   0,0F0h, 80h
+VolEnv_0B:	db    0,   0,   1,   1,   3,   3,   4,   5, 83h
+VolEnv_0C:	db    0, 81h
+VolEnv_0D:	db    2, 83h
+VolEnv_0E:	db    0,   2,   4,   6,   8, 10h, 83h
+VolEnv_0F:	db    9,   9,   9,   8,   8,   8,   7,   7,   7,   6,   6,   6,   5,   5,   5,   4
 			db    4,   4,   3,   3,   3,   2,   2,   2,   1,   1,   1,   0,   0,   0, 81h
-PSGTone_10:	db    1,   1,   1,   0,   0,   0, 81h
-PSGTone_11:	db    3,   0,   1,   1,   1,   2,   3,   4,   4,   5, 81h
-PSGTone_12:	db    0,   0,   1,   1,   2,   3,   4,   5,   5,   6,   8,   7,   7,   6, 81h
-PSGTone_13:	db  0Ah,   5,   0,   4,   8, 83h
-PSGTone_14:	db    0,   0,   0,   2,   3,   3,   4,   5,   6,   7,   8,   9, 0Ah, 0Bh, 0Eh, 0Fh
+VolEnv_10:	db    1,   1,   1,   0,   0,   0, 81h
+VolEnv_11:	db    3,   0,   1,   1,   1,   2,   3,   4,   4,   5, 81h
+VolEnv_12:	db    0,   0,   1,   1,   2,   3,   4,   5,   5,   6,   8,   7,   7,   6, 81h
+VolEnv_13:	db  0Ah,   5,   0,   4,   8, 83h
+VolEnv_14:	db    0,   0,   0,   2,   3,   3,   4,   5,   6,   7,   8,   9, 0Ah, 0Bh, 0Eh, 0Fh
 			db  83h
-PSGTone_15:	db    3,   2,   1,   1,   0,   0,   1,   2,   3,   4, 81h
-PSGTone_16:	db    1,   0,   0,   0,   0,   1,   1,   1,   2,   2,   2,   3,   3,   3,   3,   4
+VolEnv_15:	db    3,   2,   1,   1,   0,   0,   1,   2,   3,   4, 81h
+VolEnv_16:	db    1,   0,   0,   0,   0,   1,   1,   1,   2,   2,   2,   3,   3,   3,   3,   4
 			db    4,   4,   5,   5, 81h
-PSGTone_17:	db  10h, 20h, 30h, 40h, 30h, 20h, 10h,   0, 10h, 20h, 30h, 40h, 30h, 20h, 10h,   0
+VolEnv_17:	db  10h, 20h, 30h, 40h, 30h, 20h, 10h,   0, 10h, 20h, 30h, 40h, 30h, 20h, 10h,   0
 			db  10h, 20h, 30h, 40h, 30h, 20h, 10h,   0, 80h
-PSGTone_18:	db    0,   0,   1,   1,   3,   3,   4,   5, 83h
-PSGTone_19:	db    0,   2,   4,   6,   8, 16h, 83h
-PSGTone_1A:	db    0,   0,   1,   1,   3,   3,   4,   5, 83h
-PSGTone_1B:	db    4,   4,   4,   4,   3,   3,   3,   3,   2,   2,   2,   2,   1,   1,   1,   1
+VolEnv_18:	db    0,   0,   1,   1,   3,   3,   4,   5, 83h
+VolEnv_19:	db    0,   2,   4,   6,   8, 16h, 83h
+VolEnv_1A:	db    0,   0,   1,   1,   3,   3,   4,   5, 83h
+VolEnv_1B:	db    4,   4,   4,   4,   3,   3,   3,   3,   2,   2,   2,   2,   1,   1,   1,   1
 			db  83h
-PSGTone_1C:	db    0,   0,   0,   0,   1,   1,   1,   1,   2,   2,   2,   2,   3,   3,   3,   3
+VolEnv_1C:	db    0,   0,   0,   0,   1,   1,   1,   1,   2,   2,   2,   2,   3,   3,   3,   3
 			db    4,   4,   4,   4,   5,   5,   5,   5,   6,   6,   6,   6,   7,   7,   7,   7
 			db    8,   8,   8,   8,   9,   9,   9,   9, 0Ah, 0Ah, 0Ah, 0Ah, 81h
-PSGTone_1D:	db    0, 0Ah, 83h
-PSGTone_1E:	db    0,   2,   4, 81h
-PSGTone_1F:	db  30h, 20h, 10h,   0,   0,   0,   0,   0,   8, 10h, 20h, 30h, 81h
-PSGTone_20:	db    0,   4,   4,   4,   4,   4,   4,   4,   4,   4,   4,   6,   6,   6,   8,   8
+VolEnv_1D:	db    0, 0Ah, 83h
+VolEnv_1E:	db    0,   2,   4, 81h
+VolEnv_1F:	db  30h, 20h, 10h,   0,   0,   0,   0,   0,   8, 10h, 20h, 30h, 81h
+VolEnv_20:	db    0,   4,   4,   4,   4,   4,   4,   4,   4,   4,   4,   6,   6,   6,   8,   8
 			db  0Ah, 83h
-PSGTone_21:	db    0,   2,   3,   4,   6,   7, 81h
-PSGTone_22:	db    2,   1,   0,   0,   0,   2,   4,   7, 81h
-PSGTone_23:	db  0Fh,   1,   5, 83h
-PSGTone_24:	db    8,   6,   2,   3,   4,   5,   6,   7,   8,   9, 0Ah, 0Bh, 0Ch, 0Dh, 0Eh, 0Fh
+VolEnv_21:	db    0,   2,   3,   4,   6,   7, 81h
+VolEnv_22:	db    2,   1,   0,   0,   0,   2,   4,   7, 81h
+VolEnv_23:	db  0Fh,   1,   5, 83h
+VolEnv_24:	db    8,   6,   2,   3,   4,   5,   6,   7,   8,   9, 0Ah, 0Bh, 0Ch, 0Dh, 0Eh, 0Fh
 			db  10h, 83h
-PSGTone_25:	db    0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   1,   1,   1,   1,   1,   1
+VolEnv_25:	db    0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   1,   1,   1,   1,   1,   1
 			db    1,   1,   1,   1,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   3,   3
 			db    3,   3,   3,   3,   3,   3,   3,   3,   4,   4,   4,   4,   4,   4,   4,   4
 			db    4,   4,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   6,   6,   6,   6
 			db    6,   6,   6,   6,   6,   6,   7,   7,   7,   7,   7,   7,   7,   7,   7,   7
 			db    8,   8,   8,   8,   8,   8,   8,   8,   8,   8,   9,   9,   9,   9,   9,   9
 			db    9,   9, 83h
-PSGTone_26:	db    0,   2,   2,   2,   3,   3,   3,   4,   4,   4,   5,   5, 83h
+VolEnv_26:	db    0,   2,   2,   2,   3,   3,   3,   4,   4,   4,   5,   5, 83h
 
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
