@@ -984,7 +984,7 @@ zFinishTrackUpdate:
 ;sub_330
 zComputeNoteDuration:
 		ld	b, (ix+zTrack.TempoDivider)		; Get tempo divider for this track
-		dec	b								; Make it into a loop conuter
+		dec	b								; Make it into a loop counter
 		ret	z								; Return if it was 1
 		ld	c, a							; c = a
 
@@ -3016,11 +3016,11 @@ cfNoteFill:
 cfConditionalJump:
 		inc	de								; Advance track pointer
 		add	a, zTrack.LoopCounters			; Add offset into loop counters
-		ld	c, a							; c = offset of current loop conuter
+		ld	c, a							; c = offset of current loop counter
 		ld	b, 0							; bc = sign-extended offset to current loop counter
 		push	ix							; Save track RAM pointer
 		pop	hl								; hl = pointer to track RAM
-		add	hl, bc							; hl = pointer in RAM to current loop conuter
+		add	hl, bc							; hl = pointer in RAM to current loop counter
 		ld	a, (hl)							; a = value of current loop counter
 		dec	a								; Decrement loop counter (note: value is not saved!)
 		jp	z, .do_jump						; Branch if result is zero
@@ -3373,11 +3373,11 @@ cfJumpTo:
 cfRepeatAtPos:
 		inc	de								; Advance track pointer
 		add	a, zTrack.LoopCounters			; Add offset into loop counters
-		ld	c, a							; c = offset of current loop conuter
+		ld	c, a							; c = offset of current loop counter
 		ld	b, 0							; bc = sign-extended offset to current loop counter
 		push	ix							; Save track RAM pointer
 		pop	hl								; hl = pointer to track RAM
-		add	hl, bc							; hl = pointer in RAM to current loop conuter
+		add	hl, bc							; hl = pointer in RAM to current loop counter
 		ld	a, (hl)							; a = value of current loop counter
 		or	a								; Is loop counter zero?
 		jr	nz, .run_counter				; Branch if not
@@ -3461,7 +3461,7 @@ cfAddKey:
 
 ; =============== S U B	R O U T	I N E =======================================
 ; If a continuous SFX is playing, it will continue playing from target address.
-; A loop conuter is decremented (it is initialized to number of SFX tracks)
+; A loop counter is decremented (it is initialized to number of SFX tracks)
 ; for continuous SFX; if the result is zero, the continuous SFX will be flagged
 ; to stop.
 ; Non-continuous SFX do not loop.
