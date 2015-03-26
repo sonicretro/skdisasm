@@ -229,17 +229,18 @@ NoteRest				= 080h
 FirstCoordFlag			= 0E0h
 ; ---------------------------------------------------------------------------
 	if fix_sndbugs
-zID_MusicPointers4 = 0
+zID_MusicPointers = 0
 zID_SFXPointers = 2
 zID_ModEnvPointers = 4
 zID_VolEnvPointers = 6
 	else
-zID_MusicPointers0 = 0
+zID_PriorityList = 0	; Earlier drives had this; unused
 zID_UniVoiceBank = 2
-zID_MusicPointers4 = 4
+zID_MusicPointers = 4
 zID_SFXPointers = 6
 zID_ModEnvPointers = 8
 zID_VolEnvPointers = 0Ah
+zID_SongLimit = 0Ch		; Earlier drives had this; unused
 	endif
 ; ---------------------------------------------------------------------------
 
@@ -675,7 +676,7 @@ zUpdateFMorPSGTrack:
 		bit	7, (ix+zTrack.VoiceControl)		; Is this a PSG channel?
 		jp	nz, zUpdatePSGTrack				; Branch if yes
 	if fix_sndbugs
-		dec	(ix+zTrack.DurationTimeout)	; Run note timer
+		dec	(ix+zTrack.DurationTimeout)		; Run note timer
 	else
 		call	zTrackRunTimer				; Run note timer
 	endif
@@ -891,7 +892,7 @@ zApplyPitchSlide:
 		; in the Battletoads sound driver.
 		ld	a, (de)							; Get new pitch slide value from track
 		inc	de								; Advance pointer
-		ld	(ix+zTrack.Unk11h), a	; Store pitch slide
+		ld	(ix+zTrack.Unk11h), a			; Store pitch slide
 		jr	zGetRawDuration
 	endif
 ; ---------------------------------------------------------------------------
@@ -919,6 +920,12 @@ zAltFreqMode:
 		or	h								; Is hl nonzero?
 		jr	z, .got_zero					; Branch if not
 		ld	a, (ix+zTrack.KeyOffset)		; a = key displacement
+	if fix_sndbugs
+		ld	c, a							; bc = sign extension of key displacement
+		rla									; Carry contains sign of key displacement
+		sbc	a, a							; a = 0 or -1 if carry is 0 or 1
+		ld	b, a							; bc = sign extension of key displacement
+	else
 		ld	b, 0							; b = 0
 		or	a								; Is a negative?
 		jp	p, .did_sign_extend				; Branch if not
@@ -926,6 +933,7 @@ zAltFreqMode:
 
 .did_sign_extend:
 		ld	c, a							; bc = sign extension of key displacement
+	endif
 		add	hl, bc							; hl += key displacement
 
 .got_zero:
@@ -933,7 +941,7 @@ zAltFreqMode:
 		ld	(ix+zTrack.FreqHigh), h			; Store high byte of note frequency
 		ld	a, (de)							; Get pitch slide value from the track
 		inc	de								; Advance to next byte in track
-		ld	(ix+zTrack.Unk11h), a	; Store pitch slide
+		ld	(ix+zTrack.Unk11h), a			; Store pitch slide
 ;loc_306
 zGetRawDuration:
 		ld	a, (de)							; Get raw duration from track
@@ -1010,7 +1018,7 @@ zFMNoteOn:
 		ret	z								; Return if yes
 		ld	a, (ix+zTrack.PlaybackControl)	; Get playback control byte for track
 	if fix_sndbugs
-		and	14h								; Is either bit 4 ("track at rest") or 2 ("SFX overriding this track") set?
+		and	16h								; Is either bit 4 ("track at rest") or 2 ("SFX overriding this track") or bit 1 ("do not attack next note") set?
 	else
 		and	6								; Is either bit 1 ("do not attack next note") or 2 ("SFX overriding this track") set?
 	endif
@@ -1062,6 +1070,7 @@ zKeyOff:
 zKeyOnOff:
 		ld	a, 28h							; Write to KEY ON/OFF port
 	if fix_sndbugs
+		res	6, (ix+zTrack.PlaybackControl)	; From Dyna Brothers 2, but in a better place; clear flag to sustain frequency
 		jp	zWriteFMI						; Send it
 	else
 		call	zWriteFMI					; Send it
@@ -1190,9 +1199,14 @@ zDoModulation:
 		ld	(ix+zTrack.ModulationSpeed), a	; Reset modulation speed timeout
 		ld	a, (ix+zTrack.ModulationDelta)	; Get modulation delta per step
 		ld	c, a							; c = modulation delta per step
+	if fix_sndbugs
+		rla									; Carry contains sign of delta
+		sbc	a, a							; a = 0 or -1 if carry is 0 or 1
+	else
 		and	80h								; Get only sign bit
 		rlca								; Shift it into bit 0
 		neg									; Negate (so it is either 0 or -1)
+	endif
 		ld	b, a							; bc = sign extension of delta
 		add	hl, bc							; hl += bc
 		ld	(ix+zTrack.ModulationValLow), l	; Store low byte of accumulated modulation
@@ -1319,17 +1333,21 @@ zlocApplyModEnvMod:
 zUpdateFreq:
 		ld	h, (ix+zTrack.FreqHigh)			; h = high byte of note frequency
 		ld	l, (ix+zTrack.FreqLow)			; l = low byte of note frequency
+	if fix_sndbugs
+		ld	a, (ix+zTrack.FreqDisplacement)	; a = frequency displacement
+		ld	c, a							; bc = sign extension of frequency displacement
+		rla									; Carry contains sign of frequency displacement
+		sbc	a, a							; a = 0 or -1 if carry is 0 or 1
+		ld	b, a							; bc = sign extension of frequency displacement
+	else
 		ld	b, 0							; b = 0
 		ld	a, (ix+zTrack.FreqDisplacement)	; a = frequency displacement
 		or	a								; Is a negative?
 		jp	p, .did_sign_extend				; Branch if not
-	if fix_sndbugs
-		dec	b								; b = -1, faster and smaller
-	else
 		ld	b, 0FFh							; b = -1
-	endif
 
 .did_sign_extend:
+	endif
 		ld	c, a							; bc = sign extension of frequency displacement
 		add	hl, bc							; Add to frequency
 		ret
@@ -1639,8 +1657,10 @@ zPlayMusic:
 
 .loop:
 	if fix_sndbugs
-		res	7, (hl)							; Strip the 'playing' bit
-		set	2, (hl)							; Set bit 2 (SFX overriding)
+		ld	a, (hl)							; Get playback control byte for song
+		and	7Fh								; Strip the 'playing' bit
+		or	4								; Set bit 2 (SFX overriding)
+		ld	(hl), a							; And save it all
 	else
 		ld	a, (hl)							; Get playback control byte for song
 		and	7Fh								; Strip the 'playing' bit
@@ -1688,7 +1708,7 @@ loc_5EB:
 		ld	a, 0C0h							; default Panning / AMS / FMS settings (only stereo L/R enabled)
 		ld	(zYM2612_D1), a					; Write to YM2612 data register
 		pop	af								; Restore af
-		ld	c, zID_MusicPointers4			; c = 4 (music pointer table)
+		ld	c, zID_MusicPointers			; c = 4 (music pointer table)
 		rst	GetPointerTable					; hl = pointer table for music pointers
 		rst	PointerTableOffset				; hl = pointer to song data
 		push	hl							; Save hl...
@@ -1975,19 +1995,25 @@ zGetSFXChannelPointers:
 .is_psg:
 	if fix_sndbugs
 		call	zSilencePSGChannel			; Silence channel at ix
+		ld	a, c							; a = channel identifier
+		; Shift high 3 bits to low bits so that we can convert it to a table index
+		rlca
+		rlca
+		rlca
+		and	7
 	else
 		ld	a, 1Fh							; a = 1Fh (redundant, as this is the first instruction of the function)
 		call	zSilencePSGChannel			; Silence channel at ix
 		ld	a, 0FFh							; Command to silence PSG3/Noise channel (zSilencePSGChannel should do it...)
 		ld	(zPSG), a						; Silence it (zSilencePSGChannel should do it...)
-	endif
 		ld	a, c							; a = channel identifier
-			; The next 5 shifts are so that we can convert it to a table index
+		; The next 5 shifts are so that we can convert it to a table index
 		srl	a
 		srl	a
 		srl	a
 		srl	a
 		srl	a
+	endif
 		add	a, 2							; Compensate for subtration below
 
 .get_ptrs:
@@ -2002,8 +2028,12 @@ zGetSFXChannelPointers:
 		; This is where there is code in other drivers to load the special SFX
 		; channel pointers to iy
 		ld	hl, zSFXOverriddenChannel		; Pointer table for the overridden music track
+	if fix_sndbugs
+		jp	PointerTableOffset				; hl = RAM destination to mark as overridden
+	else
 		rst	PointerTableOffset				; hl = RAM destination to mark as overridden
 		ret
+	endif
 ; End of function zGetSFXChannelPointers
 
 
@@ -2181,8 +2211,8 @@ zDoMusicFadeOut:
 		ld	a, (zFadeDelay)					; Get fade delay
 		ld	(zFadeDelayTimeout), a			; Restore counter to initial value
 	if fix_sndbugs
-		ld	hl, zFadeOutTimeout			; (hl) = fade timeout
-		dec	(hl)								; Decrement it
+		ld	hl, zFadeOutTimeout				; (hl) = fade timeout
+		dec	(hl)							; Decrement it
 	else
 		ld	a, (zFadeOutTimeout)			; a = fade timeout
 		dec	a								; Decrement it
@@ -2229,7 +2259,7 @@ zDoMusicFadeIn:
 		bankswitch2							; Bank switch to music
 	if fix_sndbugs
 		ld	hl, zFadeDelay					; Get fade delay
-		dec	(hl)								; Decrement it
+		dec	(hl)							; Decrement it
 	else
 		ld	a, (zFadeDelay)					; Get fade delay
 		dec	a								; Decrement it
@@ -2244,7 +2274,7 @@ zDoMusicFadeIn:
 
 .fm_loop:
 	if fix_sndbugs
-		dec	(ix+zTrack.Volume)			; Increase track volume
+		dec	(ix+zTrack.Volume)				; Increase track volume
 	else
 		ld	a, (ix+zTrack.Volume)			; Get track volume
 		dec	a								; Increase it
@@ -2253,13 +2283,12 @@ zDoMusicFadeIn:
 		push	bc							; Save bc
 		call	zSendTL						; Send new volume
 		pop	bc								; Restore bc
-
 		add	ix, de							; Advance to next track
 		djnz	.fm_loop					; Loop for all tracks
 
 	if fix_sndbugs
 		ld	hl, zFadeInTimeout				; Get fading timeout
-		dec	(hl)								; Decrement it
+		dec	(hl)							; Decrement it
 	else
 		ld	a, (zFadeInTimeout)				; Get fading timeout
 		dec	a								; Decrement it
@@ -2546,8 +2575,9 @@ zFadeInToPrevious:
 		ldir								; while (bc-- > 0) *de++ = *hl++;
 	if fix_sndbugs
 		ld	hl, zSongFM6_DAC+zTrack.PlaybackControl
-		set	7, (hl)
-		set	2, (hl)
+		ld	a, 84h							; a = 'track is playing' and 'track is resting' flags
+		or	(hl)							; Add in track playback control bits
+		ld	(hl), a							; Save everything
 	else
 		ld	a, (zSongFM6_DAC+zTrack.PlaybackControl)				; a = FM6/DAC track playback control
 		or	84h								; Set 'track is playing' and 'track is resting' flags
@@ -2629,7 +2659,7 @@ z80_MusicBanks:
 ;sub_B98
 zUpdateDACTrack:
 	if fix_sndbugs
-		dec	(ix+zTrack.DurationTimeout)	; Advance track duration timer
+		dec	(ix+zTrack.DurationTimeout)		; Advance track duration timer
 	else
 		call	zTrackRunTimer				; Advance track duration timer
 	endif
@@ -3101,7 +3131,7 @@ zSetVoiceUploadAlter:
 		push	de							; Save de
 		ld	a, (ix+zTrack.VoiceSongID)		; Get saved song ID for instrument data
 		sub	81h								; Convert it to a zero-based index
-		ld	c, zID_MusicPointers4			; Value for music pointer table
+		ld	c, zID_MusicPointers			; Value for music pointer table
 		rst	GetPointerTable					; hl = pointer to music pointer table
 		rst	PointerTableOffset				; hl = pointer to music data
 		rst	ReadPointer						; hl = pointer to music voice data
@@ -3451,8 +3481,8 @@ cfLoopContinuousSFX:
 ; ---------------------------------------------------------------------------
 .run_counter:
 	if fix_sndbugs
-		ld	hl, zContSFXLoopCnt			; Get number loops to perform
-		dec	(hl)								; Decrement it...
+		ld	hl, zContSFXLoopCnt				; Get number loops to perform
+		dec	(hl)							; Decrement it...
 	else
 		ld	a, (zContSFXLoopCnt)			; Get number loops to perform
 		dec	a								; Decrement it...
@@ -3778,7 +3808,7 @@ cfResetSpindashRev:
 ;loc_FC4
 zUpdatePSGTrack:
 	if fix_sndbugs
-		dec	(ix+zTrack.DurationTimeout)	; Run note timer
+		dec	(ix+zTrack.DurationTimeout)		; Run note timer
 	else
 		call	zTrackRunTimer				; Run note timer
 	endif
@@ -3965,14 +3995,14 @@ zPlayDigitalAudio:
 		ld	c, 0							; Value to disable DAC
 		call	zWriteFMI					; Send YM2612 command
 
-loc_1092:
+.dac_idle_loop:
 		ei									; Enable interrupts
 		ld	a, (PlaySegaPCMFlag)			; a = play SEGA PCM flag
 		or	a								; Is SEGA sound being played?
 		jp	nz, zPlaySEGAPCM				; Branch if yes
 		ld	a, (zDACIndex)					; a = DAC index/flag
 		or	a								; Is DAC channel being used?
-		jr	z, loc_1092						; Loop if not
+		jr	z, .dac_idle_loop				; Loop if not
 		ld	a, 2Bh							; DAC enable/disable register
 		ld	c, 80h							; Value to enable DAC
 		di									; Disable interrupts
@@ -3987,8 +4017,8 @@ loc_1092:
 		rst	PointerTableOffset				; hl = pointer to DAC data
 		ld	c, 80h							; c is an accumulator below; this initializes it to 80h
 		ld	a, (hl)							; a = DAC rate
-		ld	(loc_10CA+1), a					; Store into following instruction (self-modifying code)
-		ld	(loc_10E7+1), a					; Store into following instruction (self-modifying code)
+		ld	(.sample1_rate+1), a			; Store into following instruction (self-modifying code)
+		ld	(.sample2_rate+1), a			; Store into following instruction (self-modifying code)
 		inc	hl								; hl = pointer to low byte of DAC sample's length
 		ld	e, (hl)							; e = low byte of DAC sample's length
 		inc	hl								; hl = pointer to high byte of DAC sample's length
@@ -4000,8 +4030,9 @@ loc_1092:
 		ld	l, a							; l = low byte of DAC sample's in-bank location
 		; hl is now pointer to DAC data, while de is the DAC sample's length
 
-loc_10CA:
-		ld	b,0Ah							; self-modified code; b is set to DAC rate
+.dac_playback_loop:
+.sample1_rate:
+		ld	b, 0Ah							; self-modified code; b is set to DAC rate
 		ei									; Enable interrupts
 		djnz	$							; Loop in this instruction, decrementing b each iteration, until b = 0
 
@@ -4015,14 +4046,16 @@ loc_10CA:
 		rlca
 		rlca
 		and	0Fh								; Get only low nibble (which was the high nibble originally)
-		ld	(loc_10E0+2), a					; Store into following instruction (self-modifying code)
+		ld	(.sample1_index+2), a			; Store into following instruction (self-modifying code)
 		ld	a, c							; a = c
-loc_10E0:
+
+.sample1_index:
 		add	a, (iy+0)						; Self-modified code: the index offset is not zero, but what was set above
 		ld	(zYM2612_D0), a					; Send byte to DAC
-		ld	c,a								; Set c to the new value of a
-loc_10E7:
-		ld	b,0Ah							; self-modified code; b is set to DAC rate
+		ld	c, a							; Set c to the new value of a
+
+.sample2_rate:
+		ld	b, 0Ah							; self-modified code; b is set to DAC rate
 		ei									; Enable interrupts
 		djnz	$							; Loop in this instruction, decrementing b each iteration, until b = 0
 
@@ -4031,22 +4064,23 @@ loc_10E7:
 		ld	(zYM2612_A0), a					; Send to YM2612
 		ld	a, (hl)							; a = next byte of DAC sample
 		and	0Fh								; Want only the low nibble
-		ld	(loc_10F9+2), a					; Store into following instruction (self-modifying code)
+		ld	(.sample2_index+2), a			; Store into following instruction (self-modifying code)
 		ld	a, c							; a = c
-loc_10F9:
+
+.sample2_index:
 		add	a, (iy+0)						; Self-modified code: the index offset is not zero, but what was set above
 		ld	(zYM2612_D0), a					; Send byte to DAC
 		ei									; Enable interrupts
 		ld	c, a							; Set c to the new value of a
 		ld	a, (zDACIndex)					; a = DAC index/flag
 		or	a								; Is playing flag set?
-		jp	p, loc_1092						; Branch if not
+		jp	p, .dac_idle_loop				; Branch if not
 
 		inc	hl								; Advance to next sample byte
 		dec	de								; Mark one byte as being done
 		ld	a, d							; a = d
 		or	e								; Is length zero?
-		jp	nz, loc_10CA					; Loop if not
+		jp	nz, .dac_playback_loop			; Loop if not
 
 		xor	a								; a = 0
 		ld	(zDACIndex),a					; Mark DAC as being idle
