@@ -1349,8 +1349,8 @@ zUpdateFreq:
 		ld	b, 0FFh							; b = -1
 
 .did_sign_extend:
-	endif
 		ld	c, a							; bc = sign extension of frequency displacement
+	endif
 		add	hl, bc							; Add to frequency
 		ret
 ; End of function zUpdateFreq
