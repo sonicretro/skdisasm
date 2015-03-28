@@ -882,8 +882,10 @@ zGetNoteDuration:
 		ld	a, (de)							; Get duration from the track
 		or	a								; Is it an actual duration?
 		jp	p, zGotNoteDuration				; Branch if yes
-		ld	a, (ix+zTrack.SavedDuration)	; Get saved duration
-		ld	(ix+zTrack.DurationTimeout), a	; Set it as next timeout duration
+	if fix_sndbugs=0
+		ld	a, (ix+zTrack.SavedDuration)	; Get saved duration (zFinishTrackUpdate should do it...)
+		ld	(ix+zTrack.DurationTimeout), a	; Set it as next timeout duration (zFinishTrackUpdate should do it...)
+	endif
 		jr	zFinishTrackUpdate
 ; ---------------------------------------------------------------------------
 zApplyPitchSlide:
@@ -2702,8 +2704,10 @@ zUpdateDACTrack_GetDuration:
 		or	a								; Is it a duration?
 		jp	p, zStoreDuration				; Branch if yes
 		dec	de								; Put the byte back to the stream
-		ld	a, (ix+zTrack.SavedDuration)	; Reuse last duration
-		ld	(ix+zTrack.DurationTimeout), a	; Set new duration timeout
+	if fix_sndbugs=0
+		ld	a, (ix+zTrack.SavedDuration)	; Reuse last duration (zFinishTrackUpdate should do it...)
+		ld	(ix+zTrack.DurationTimeout), a	; Set new duration timeout (zFinishTrackUpdate should do it...)
+	endif
 		jp	zFinishTrackUpdate
 ; ---------------------------------------------------------------------------
 ;loc_BE3
