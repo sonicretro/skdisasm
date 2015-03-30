@@ -15,13 +15,8 @@ elif platform.system() == "Darwin": # Osx
 	s3p2binBinary = "AS/Osx/s3p2bin";
 	
 elif platform.system() == "Linux":
-	# You'll need to find a linux version of the tools and set their file paths here
-	# Source code for AS: http://john.ccac.rwth-aachen.de:8000/ftp/as/source/c_version/asl-current.tar.gz
-
-	# asBinary = "AS/linux/asl";
-	# s3p2binBinary = "AS/linux/s3p2bin";
-	# os.environ["AS_MSGPATH"] = "AS/linux/msg"
-	print("Linux not configured")
+	asBinary = "AS/Linux/asl";
+	s3p2binBinary = "AS/Linux/s3p2bin";
 	
 else:
 	print("Unknown platform")
