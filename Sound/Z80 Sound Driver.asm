@@ -5062,7 +5062,7 @@ SndBank:			startBank
 
 SEGA_PCM:	binclude "Sound/Sega PCM.bin"
 SEGA_PCM_End
-		even
+		align 2
 Sound_33:	binclude "Sound/SFX/33.bin"
 Sound_34:	binclude "Sound/SFX/34.bin"
 Sound_35:	binclude "Sound/SFX/35.bin"

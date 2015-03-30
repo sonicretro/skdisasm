@@ -64,7 +64,7 @@ align0 macro alignment
 
 ; define the even pseudo-instruction
 even macro
-	align 2
+	align0 2
     endm
 
 ; define a trace macro
