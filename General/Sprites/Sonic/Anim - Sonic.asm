@@ -111,7 +111,8 @@ byte_12C1C:	dc.b	3, $CF,	$C8, $C9, $CA, $CB, $FE,   4
 byte_12C24:	dc.b	9,   8,	  9, $FF
 byte_12C28:	dc.b	3,   7,	$FD,   0
 byte_12C2C:	dc.b   $B, $90,	$91, $92, $91, $FF
-byte_12C32:	dc.b   $B, $90,	$91, $92, $91, $FD,   0,   0
+byte_12C32:	dc.b   $B, $90,	$91, $92, $91, $FD,   0
+	even
 AniSuperSonic:
 AniSuperSonic_:	dc.w byte_12C7A-AniSuperSonic_
 
@@ -159,3 +160,4 @@ byte_12C98:	dc.b	7, $BA,	$BB, $FF
 byte_12C9C:	dc.b	9, $A1,	$A2, $A3, $FF
 byte_12CA1:	dc.b	5, $9B,	$FF
 byte_12CA4:	dc.b	2, $D2,	$D2, $D3, $D3, $D4, $D5, $D6, $D5, $D6,	$D5, $D6, $D5, $D6, $FD,   0
+	even

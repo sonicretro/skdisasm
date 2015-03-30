@@ -25,3 +25,4 @@ AniTails_Tail09:dc.b	9, $1E,	$1F, $20, $21, $FF
 AniTails_Tail0A:dc.b	9, $29,	$2A, $2B, $2C, $FF 
 AniTails_Tail0B:dc.b	1, $27,	$28, $FF 
 AniTails_Tail0C:dc.b	0, $27,	$28, $FF 
+	even

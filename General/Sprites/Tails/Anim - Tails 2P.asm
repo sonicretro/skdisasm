@@ -65,3 +65,4 @@ byte_16012:	dc.b	3, $1B,	$FF
 byte_16015:	dc.b	3, $1B,	$FF	
 byte_16018:	dc.b  $FF,  $D,	 $E, $FF, $FF, $FF 
 byte_1601E:	dc.b	1, $2C,	$2D, $FF 
+	even

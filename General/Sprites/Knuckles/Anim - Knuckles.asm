@@ -82,4 +82,5 @@ byte_180E3:	dc.b	7, $CA,	$CB, $FE,   1
 byte_180E8:	dc.b   $F, $CD,	$FD,   0
 byte_180EC:	dc.b   $F, $9C,	$FD,   0
 byte_180F0:	dc.b	7, $B1,	$B3, $B3, $B3, $B3, $B3, $B3, $B2, $B3,	$B4, $B3, $FE,	 4
-byte_180FE:	dc.b	2, $EB,	$EB, $EC, $ED, $EC, $ED, $EC, $ED, $EC,	$ED, $EC, $ED, $FD,   0,   0
+byte_180FE:	dc.b	2, $EB,	$EB, $EC, $ED, $EC, $ED, $EC, $ED, $EC,	$ED, $EC, $ED, $FD,   0
+	even

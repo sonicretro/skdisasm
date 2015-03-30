@@ -99,4 +99,4 @@ AniTails26:	dc.b	3, $BD,	$BE, $BF, $C0, $C1, $FF
 AniTails27:	dc.b	4, $CF,	$D0, $FF 
 AniTails28:	dc.b   $B, $C2,	$CD, $CE, $FF 
 AniTails29:	dc.b	2, $EB,	$EB, $EC, $ED, $EC, $ED, $EC, $ED, $EC,	$ED, $EC, $ED, $FD,   0
-					
+	even

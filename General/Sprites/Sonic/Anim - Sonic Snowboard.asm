@@ -11,3 +11,4 @@ byte_3948E:	dc.b	7,   6,	  6,   6,   6,	 6,   6,   6,	7,   8,	  7, $FF
 					
 byte_3949A:	dc.b  $1F,  $B,	$FF	
 byte_3949D:	dc.b  $1F,  $C,	$FF	
+	even
