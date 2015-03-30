@@ -55,7 +55,7 @@ def build(targetName, def0, def1):
 	delete(binaryOutputPath);
 	delete("sonic3k.p");
 	
-	assembleCommand = [asBinary, "-x", "-xx", "-n", "-c", "-E", errorsPath, "-A", "-L"];
+	assembleCommand = [asBinary, "-x", "-xx", "-n", "-c", "-A", "-L"];
 	
 	assembleCommand.append(def0);
 	assembleCommand.append(def1);
