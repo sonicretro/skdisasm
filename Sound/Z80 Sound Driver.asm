@@ -3479,7 +3479,9 @@ cfLoopContinuousSFX:
 		jp	z, .run_counter					; Branch if yes
 		xor	a								; a = 0
 		ld	(zContinousSFX), a				; Clear last continuous SFX played
-		ld	(zContinousSFXFlag), a			; Clear continous sound effect flag
+	if fix_sndbugs=0
+		ld	(zContinousSFXFlag), a			; Clear continous sound effect flag (redundant; zContinousSFXFlag will always be 0 at this point)
+	endif
 		inc	de								; Skip a byte
 		ret
 ; ---------------------------------------------------------------------------
