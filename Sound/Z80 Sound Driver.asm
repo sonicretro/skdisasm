@@ -2498,7 +2498,7 @@ zFMSilenceChannel:
 		ld	c, 7Fh							; ... to minimum envelope amplitude...
 		call	zFMOperatorWriteLoop		; ... for all operators of this track's channel
 		ld	c, (ix+zTrack.VoiceControl)		; Send key off
-		jp	zKeyOnOff
+		jp	zKeyOnOff						; This does not safeguard against PSG tracks, making cfSilenceStopTrack dangerous (and zStopSFX even more so)
 ; End of function zFMSilenceChannel
 
 
@@ -2879,7 +2879,12 @@ cfFadeInToPrevious:
 ;
 ;loc_C7F
 cfSilenceStopTrack:
+	if fix_sndbugs
+		bit	7, (ix+zTrack.VoiceControl)		; Is this a PSG track?
+		call	z, zFMSilenceChannel		; If so, don't mess with the YM2612
+	else
 		call	zFMSilenceChannel
+	endif
 		jp	cfStopTrack
 ; End of function cfSilenceStopTrack
 
