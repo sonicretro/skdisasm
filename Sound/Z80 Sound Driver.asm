@@ -459,7 +459,7 @@ zVInt:	rsttarget
 ; ---------------------------------------------------------------------------
 ;loc_85
 zInitAudioDriver:
-		ld	sp, z80_stack			    ; set the stack pointer to 0x2000 (end of z80 RAM)
+		ld	sp, z80_stack					; set the stack pointer to 0x2000 (end of z80 RAM)
 			; The following instruction block keeps the z80 in a tight loop.
 		ld	c, 0							; c = 0
 
@@ -2178,8 +2178,8 @@ zFadeOutMusic:
 		ld	a, 28h							; a = 28h
 		ld	(zFadeOutTimeout), a			; Set fade timeout to this (start fading out music)
 		ld	a, 6							; a = 6
-		ld  (zFadeDelayTimeout), a			; Set fade delay timeout
-		ld  (zFadeDelay), a					; Set fade delay and fall through
+		ld	(zFadeDelayTimeout), a			; Set fade delay timeout
+		ld	(zFadeDelay), a					; Set fade delay and fall through
 
 ; =============== S U B	R O U T	I N E =======================================
 ; Halts FM6/DAC, PSG1, PSG2, PSG3.
@@ -4169,17 +4169,17 @@ Z80_Snd_Driver2:
 z80_SoundDriverPointers:
 	if fix_sndbugs
 		dw	z80_MusicPointers
-		dw  z80_SFXPointers
-		dw  z80_ModEnvPointers
-		dw  z80_VolEnvPointers
+		dw	z80_SFXPointers
+		dw	z80_ModEnvPointers
+		dw	z80_VolEnvPointers
 	else
 		dw	z80_MusicPointers				; This would be the priority array in other drivers
 		dw	z80_UniVoiceBank				; In other drivers, this is a pointer to special SFX table instead
 		dw	z80_MusicPointers
-		dw  z80_SFXPointers
-		dw  z80_ModEnvPointers
-		dw  z80_VolEnvPointers
-		dw  33h								; This is the song limit; it is never used in any driver
+		dw	z80_SFXPointers
+		dw	z80_ModEnvPointers
+		dw	z80_VolEnvPointers
+		dw	33h								; This is the song limit; it is never used in any driver
 	endif
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
