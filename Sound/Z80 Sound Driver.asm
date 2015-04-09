@@ -794,11 +794,11 @@ zSpecialFreqCommands_End
 ;
 zGetSpecialFM3DataPointer:
 	if fix_sndbugs
-		ld	de,zSpecFM3Freqs				; de = pointer to saved FM3 frequency shifts
+		ld	de, zSpecFM3Freqs				; de = pointer to saved FM3 frequency shifts
 		ld	a, (zUpdatingSFX)				; Get flag
 		or	a								; Is this a SFX track?
 		ret	z								; Return if not
-		ld	de,zSpecFM3FreqsSFX				; de = pointer to saved FM3 frequency shifts
+		ld	de, zSpecFM3FreqsSFX				; de = pointer to saved FM3 frequency shifts
 	endif
 		ret
 ; End of function zGetSpecialFM3DataPointer
@@ -2176,7 +2176,7 @@ zPauseUnpause:
 ;sub_85C
 zFadeOutMusic:
 		ld	a, 28h							; a = 28h
-		ld	(zFadeOutTimeout),a				; Set fade timeout to this (start fading out music)
+		ld	(zFadeOutTimeout), a			; Set fade timeout to this (start fading out music)
 		ld	a, 6							; a = 6
 		ld  (zFadeDelayTimeout), a			; Set fade delay timeout
 		ld  (zFadeDelay), a					; Set fade delay and fall through
@@ -4096,7 +4096,7 @@ zPlayDigitalAudio:
 		jp	nz, .dac_playback_loop			; Loop if not
 
 		xor	a								; a = 0
-		ld	(zDACIndex),a					; Mark DAC as being idle
+		ld	(zDACIndex), a					; Mark DAC as being idle
 		jp	zPlayDigitalAudio				; Loop
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
