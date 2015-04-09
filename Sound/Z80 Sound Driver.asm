@@ -166,7 +166,7 @@ PlaySegaPCMFlag:	ds.b 1
 ; Now starts song and SFX z80 RAM
 ; Max number of music channels: 6 FM + 3 PSG or 1 DAC + 5 FM + 3 PSG
 zTracksStart:
-zSongFM6_DAC:		zTrack
+zSongFM6_DAC:	zTrack
 zSongFM1:		zTrack
 zSongFM2:		zTrack
 zSongFM3:		zTrack
@@ -179,23 +179,25 @@ zTracksEnd:
 ; This is RAM for backup of songs (when 1-up jingle is playing)
 ; and for SFX channels. Note these two overlap.
 ; Max number of SFX channels: 4 FM + 3 PSG
-zTracksSaveStart:
 zTracksSFXStart:
-zSaveSongDAC:
 zSFX_FM3:		zTrack
-zSaveSongFM1:
 zSFX_FM4:		zTrack
-zSaveSongFM2:
 zSFX_FM5:		zTrack
-zSaveSongFM3:
 zSFX_FM6:		zTrack
-zSaveSongFM4:
 zSFX_PSG1:		zTrack
-zSaveSongFM5:
 zSFX_PSG2:		zTrack
-zSaveSongPSG1:
 zSFX_PSG3:		zTrack
 zTracksSFXEnd:
+
+		phase zTracksSFXStart
+zTracksSaveStart:
+zSaveSongDAC:	zTrack
+zSaveSongFM1:	zTrack
+zSaveSongFM2:	zTrack
+zSaveSongFM3:	zTrack
+zSaveSongFM4:	zTrack
+zSaveSongFM5:	zTrack
+zSaveSongPSG1:	zTrack
 zSaveSongPSG2:	zTrack
 zSaveSongPSG3:	zTrack
 zTracksSaveEnd:
