@@ -966,7 +966,7 @@ zFinishTrackUpdate:
 		ld	a, (ix+zTrack.SavedDuration)	; Get current saved duration
 		ld	(ix+zTrack.DurationTimeout), a	; Set it as duration timeout
 		bit	1, (ix+zTrack.PlaybackControl)	; Is 'do not attack next note' flag set?
-		ret	nz								; Branch of yes
+		ret	nz								; Return if yes
 		xor	a								; Clear a
 		ld	(ix+zTrack.ModulationSpeed), a	; Clear modulation speed
 		ld	(ix+zTrack.ModulationValLow), a	; Clear low byte of accumulated modulation
@@ -2269,7 +2269,7 @@ zDoMusicFadeIn:
 		dec	a								; Decrement it
 		ld	(zFadeDelay), a					; Store it back
 	endif
-		ret	nz								; Branch if it is not yet zero
+		ret	nz								; Return if it is not yet zero
 		ld	a, (zFadeDelayTimeout)			; Get current fade delay timeout
 		ld	(zFadeDelay), a					; Reset to starting fade delay
 		ld	b, (zSongPSG1-zSongFM1)/zTrack.len	; Number of FM tracks
@@ -2667,7 +2667,7 @@ zUpdateDACTrack:
 	else
 		call	zTrackRunTimer				; Advance track duration timer
 	endif
-		ret	nz								; Branch if note is still going
+		ret	nz								; Return if note is still going
 		ld	e, (ix+zTrack.DataPointerLow)	; e = low byte of track data pointer
 		ld	d, (ix+zTrack.DataPointerHigh)	; d = high byte of track data pointer
 
@@ -3986,7 +3986,7 @@ zSilencePSGChannel:
 		ld	a, 1Fh							; Set volume to zero on PSG channel
 		add	a, (ix+zTrack.VoiceControl)		; Add in the PSG channel selector
 		or	a								; Is it an actual PSG channel?
-		ret	p								; Branch if not
+		ret	p								; Return if not
 		ld	(zPSG), a						; Silence this channel
 		bit	0, (ix+zTrack.PlaybackControl)	; Is this a noise channel?
 		ret	z								; Return if not
