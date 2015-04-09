@@ -2578,14 +2578,14 @@ zFadeInToPrevious:
 		ld	bc, zTracksSaveEnd-zTracksSaveStart	; Number of bytes to copy
 		ldir								; while (bc-- > 0) *de++ = *hl++;
 	if fix_sndbugs
-		ld	hl, zSongFM6_DAC+zTrack.PlaybackControl
+		ld	hl, zSongFM6_DAC.PlaybackControl
 		ld	a, 84h							; a = 'track is playing' and 'track is resting' flags
 		or	(hl)							; Add in track playback control bits
 		ld	(hl), a							; Save everything
 	else
-		ld	a, (zSongFM6_DAC+zTrack.PlaybackControl)				; a = FM6/DAC track playback control
+		ld	a, (zSongFM6_DAC.PlaybackControl) ; a = FM6/DAC track playback control
 		or	84h								; Set 'track is playing' and 'track is resting' flags
-		ld	(zSongFM6_DAC+zTrack.PlaybackControl), a				; Set new value
+		ld	(zSongFM6_DAC.PlaybackControl), a ; Set new value
 	endif
 		ld	ix, zSongFM1					; ix = pointer to FM1 track RAM
 		ld	b, (zTracksEnd-zSongFM1)/zTrack.len	; Number of FM+PSG tracks
