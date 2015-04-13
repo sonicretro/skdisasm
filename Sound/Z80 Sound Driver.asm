@@ -943,9 +943,13 @@ zAltFreqMode:
 .got_zero:
 		ld	(ix+zTrack.FreqLow), l			; Store low byte of note frequency
 		ld	(ix+zTrack.FreqHigh), h			; Store high byte of note frequency
+	if fix_sndbugs
+		inc	de								; Skip the useless pitch slide byte
+	else
 		ld	a, (de)							; Get pitch slide value from the track
 		inc	de								; Advance to next byte in track
 		ld	(ix+zTrack.Unk11h), a			; Store pitch slide
+	endif
 ;loc_306
 zGetRawDuration:
 		ld	a, (de)							; Get raw duration from track
@@ -1792,13 +1796,23 @@ zClearNextSound:
 ; The first is for DAC; then 0, 1, 2 then 4, 5, 6 for the FM channels (the missing 3
 ; is the gap between part I and part II for YM2612 port writes).
 zFMDACInitBytes:
-		db   80h,   6, 80h,   0, 80h,   1, 80h,   2, 80h,   4, 80h,   5, 80h,   6
+		db   80h,   6
+		db   80h,   0
+		db   80h,   1
+		db   80h,   2
+		db   80h,   4
+		db   80h,   5
+	if fix_sndbugs=0
+		db   80h,   6	; FM6 music track (does not exist in this driver)
+	endif
 ;loc_6A3
 ; Default values for PSG tracks
 ; The first byte in every pair (always 80h) is default value for playback control bits.
 ; The second byte in every pair is the default values for PSG tracks.
 zPSGInitBytes:
-		db   80h, 80h, 80h, 0A0h, 80h, 0C0h
+		db   80h, 80h
+		db   80h, 0A0h
+		db   80h, 0C0h
 ; ---------------------------------------------------------------------------
 ;loc_6A9
 zPlaySound_CheckRing:
@@ -2543,8 +2557,6 @@ zFMOperatorWriteLoop:
 ;loc_A16
 zPlaySegaSound:
 		call	zMusicFade					; Fade music before playing the sound
-		ld	a, 1							; a = 1
-		ld	(PlaySegaPCMFlag), a			; Set flag to play SEGA sound
 	if fix_sndbugs
 		xor	a								; a = 0
 		ld	(zMusicNumber), a				; Clear M68K input queue...
@@ -2553,7 +2565,11 @@ zPlaySegaSound:
 		ld	(zSoundQueue0), a				; Also clear music queue entry 0...
 		ld	(zSoundQueue1), a				; ... and entry 1...
 		ld	(zSoundQueue2), a				; ... and entry 2
+		inc	a							; a = 1
+	else
+		ld	a, 1							; a = 1
 	endif
+		ld	(PlaySegaPCMFlag), a			; Set flag to play SEGA sound
 		pop	hl								; Don't return to caller of zCycleSoundQueue
 		ret
 
@@ -3515,8 +3531,13 @@ cfLoopContinuousSFX:
 ;loc_EDA
 ;cfToggleAlternateSMPS
 cfToggleAltFreqMode:
+	if fix_sndbugs
+		or	a								; Is parameter equal to 0?
+		jr	z, .stop_altfreq_mode			; Branch if so
+	else
 		cp	1								; Is parameter equal to 1?
 		jr	nz, .stop_altfreq_mode			; Branch if not
+	endif
 		set	3, (ix+zTrack.PlaybackControl)	; Start alternate frequency mode for track
 		ret
 ; ---------------------------------------------------------------------------
