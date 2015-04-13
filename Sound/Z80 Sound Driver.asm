@@ -6,7 +6,7 @@
 ; ===========================================================================
 ; Disassembled by MarkeyJester
 ; Routines, pointers and stuff by Linncaki
-; Throroungly commented and improved (including optional bugfixes) by Flamewing
+; Thoroughly commented and improved (including optional bugfixes) by Flamewing
 ; ===========================================================================
 ; Constants
 ; ===========================================================================
@@ -236,13 +236,13 @@ zID_SFXPointers = 2
 zID_ModEnvPointers = 4
 zID_VolEnvPointers = 6
 	else
-zID_PriorityList = 0	; Earlier drives had this; unused
+zID_PriorityList = 0	; Earlier drivers had this; unused
 zID_UniVoiceBank = 2
 zID_MusicPointers = 4
 zID_SFXPointers = 6
 zID_ModEnvPointers = 8
 zID_VolEnvPointers = 0Ah
-zID_SongLimit = 0Ch		; Earlier drives had this; unused
+zID_SongLimit = 0Ch		; Earlier drivers had this; unused
 	endif
 ; ---------------------------------------------------------------------------
 
