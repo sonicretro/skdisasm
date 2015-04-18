@@ -410,7 +410,7 @@ ReadPointer:	rsttarget
 ; =============== S U B	R O U T	I N E =======================================
 ;
 ; This subroutine is called every V-Int. After it is processed, the z80
-; returns to the digital audio loop to comtinue playing DAC samples.
+; returns to the digital audio loop to continue playing DAC samples.
 ;
 ; If the SEGA PCM is being played, it disables interrupts -- this means that
 ; this procedure will NOT be called while the SEGA PCM is playing.
@@ -689,7 +689,7 @@ zUpdateFMorPSGTrack:
 		call	zPrepareModulation			; Initialize modulation
 		call	zUpdateFreq					; Add frequency displacement to frequency
 		call	zDoModulation				; Apply modulation
-		call	zFMSendFreq					; Send frequancy to YM2612
+		call	zFMSendFreq					; Send frequency to YM2612
 		jp	zFMNoteOn						; Note on on all operators
 ; ---------------------------------------------------------------------------
 .note_going:
@@ -1107,8 +1107,8 @@ zDoFMVolEnv:
 		rst	GetPointerTable					; hl = pointer to volume envelope table
 		rst	PointerTableOffset				; hl = pointer to volume envelope for track
 		call	zDoVolEnv					; a = new volume envelope
-		ld	h, (ix+zTrack.TLPtrHigh)			; h = high byte ot TL data pointer
-		ld	l, (ix+zTrack.TLPtrLow)			; l = low byte ot TL data pointer
+		ld	h, (ix+zTrack.TLPtrHigh)			; h = high byte to TL data pointer
+		ld	l, (ix+zTrack.TLPtrLow)			; l = low byte to TL data pointer
 		ld	de, zFMInstrumentTLTable		; de = pointer to FM TL register table
 		ld	b, zFMInstrumentTLTable_End-zFMInstrumentTLTable	; Number of entries
 		ld	c, (ix+zTrack.FMVolEnvMask)		; c = envelope bitmask
@@ -1396,10 +1396,10 @@ zFMInstrumentOperatorTable:
 		db  34h								; Detune/multiple operator 2
 		db  3Ch								; Detune/multiple operator 4
 zFMInstrumentRSARTable:
-		db  50h								; Rate scalling/attack rate operator 1
-		db  58h								; Rate scalling/attack rate operator 3
-		db  54h								; Rate scalling/attack rate operator 2
-		db  5Ch								; Rate scalling/attack rate operator 4
+		db  50h								; Rate scaling/attack rate operator 1
+		db  58h								; Rate scaling/attack rate operator 3
+		db  54h								; Rate scaling/attack rate operator 2
+		db  5Ch								; Rate scaling/attack rate operator 4
 zFMInstrumentAMD1RTable:
 		db  60h								; Amplitude modulation/first decay rate operator 1
 		db  68h								; Amplitude modulation/first decay rate operator 3
@@ -1750,7 +1750,7 @@ loc_5EB:
 		ldi									; *de++ = *hl++ (copy track address high byte)
 		ldi									; *de++ = *hl++ (default key offset)
 		ldi									; *de++ = *hl++ (track default volume)
-		ld	(zSongPosition), hl				; Store current potition in BGM data
+		ld	(zSongPosition), hl				; Store current position in BGM data
 		call	zInitFMDACTrack				; Init the remainder of the track RAM
 		pop	bc								; Restore bc
 		djnz	.fm_dac_loop				; Loop for all tracks (stored in b)
@@ -1775,7 +1775,7 @@ loc_5EB:
 		ld	hl, (zSongPosition)				; Load current position in BGM data
 		ld	bc, 6							; Copy 6 bytes
 		ldir								; while (bc-- > 0) *de++ = *hl++; (copy track address, default key offset, default volume, modulation control, default PSG tone)
-		ld	(zSongPosition), hl				; Store current potition in BGM data
+		ld	(zSongPosition), hl				; Store current position in BGM data
 		call	zZeroFillTrackRAM			; Init the remainder of the track RAM
 		pop	bc								; Restore bc
 		djnz	.psg_loop					; Loop for all tracks (stored in b)
@@ -1916,7 +1916,7 @@ zSFXTrackInitLoop:
 		; zGetSFXChannelPointers, we would have:
 		; * ix = pointer to the overriding SFX track data in RAM;
 		; * iy = pointer to the special SFX track data in RAM.
-		; * hl = pointer to the overriden music track data in RAM;
+		; * hl = pointer to the overridden music track data in RAM;
 		; This code would then ensure that de points to the correct RAM area for
 		; the writes below.
 		pop		hl							; hl = pointer to SFX track data in RAM
@@ -1948,7 +1948,7 @@ zSFXTrackInitLoop:
 		; zGetSFXChannelPointers, we would have:
 		; * ix = pointer to the overriding SFX track data in RAM;
 		; * iy = pointer to the special SFX track data in RAM.
-		; * hl = pointer to the overriden music track data in RAM;
+		; * hl = pointer to the overridden music track data in RAM;
 		; The code would then be checking to see if the corresponding SFX track
 		; was playing, make sure the tracks refer to the same FM/PSG channel
 		; then, if needed, mark the special SFX track as being overridden by the
@@ -2032,7 +2032,7 @@ zGetSFXChannelPointers:
 		srl	a
 		srl	a
 	endif
-		add	a, 2							; Compensate for subtration below
+		add	a, 2							; Compensate for subtraction below
 
 .get_ptrs:
 		sub	2								; Start table at FM3
@@ -2917,7 +2917,7 @@ cfSilenceStopTrack:
 ;
 ; For FM tracks, this is a 7-bit value from 0 (lowest volume) to 127 (highest
 ; volume). The value is XOR'ed with 7Fh before being sent, then stripped of the
-; sign bit. The volume change takes effect immediatelly.
+; sign bit. The volume change takes effect immediately.
 ;
 ; For PSG tracks, this is a 4-bit value ranging from 8 (lowest volume) to 78h
 ; (highest volume). The value is shifted 3 bits to the right, XOR'ed with 0Fh
@@ -3117,7 +3117,7 @@ cfSendFMI:
 ;loc_D28
 zGetFMParams:
 		ex	de, hl							; Exchange de and hl
-		ld	a, (hl)							; Get YM2612 regigter selector
+		ld	a, (hl)							; Get YM2612 register selector
 		inc	hl								; Advance pointer
 		ld	c, (hl)							; Get YM2612 register data
 		ex	de, hl							; Exchange back de and hl
@@ -3507,7 +3507,7 @@ cfLoopContinuousSFX:
 		xor	a								; a = 0
 		ld	(zContinousSFX), a				; Clear last continuous SFX played
 	if fix_sndbugs=0
-		ld	(zContinousSFXFlag), a			; Clear continous sound effect flag (redundant; zContinousSFXFlag will always be 0 at this point)
+		ld	(zContinousSFXFlag), a			; Clear continuous sound effect flag (redundant; zContinousSFXFlag will always be 0 at this point)
 	endif
 		inc	de								; Skip a byte
 		ret
@@ -3523,7 +3523,7 @@ cfLoopContinuousSFX:
 	endif
 		jp	nz, cfJumpTo					; If result is non-zero, jump to target address
 		xor	a								; a = 0
-		ld	(zContinousSFXFlag), a			; Clear continous sound effect flag
+		ld	(zContinousSFXFlag), a			; Clear continuous sound effect flag
 		jp	cfJumpTo						; Jump to target address
 
 ; =============== S U B	R O U T	I N E =======================================
@@ -3605,7 +3605,7 @@ zWriteFM3Settings:
 		ld	(zFM3Settings), a				; Save FM3 settings
 	endif
 		ld	c, a							; c = FM3 settings
-		ld	a, 27h							; Write data to FM3 settigns register
+		ld	a, 27h							; Write data to FM3 settings register
 	if fix_sndbugs
 		jp	zWriteFMI						; Do it
 	else
@@ -3623,7 +3623,7 @@ zTrackSkip3bytes:
 		ret
 ; ---------------------------------------------------------------------------
 ; Frequency shift data used in cfFM3SpecialMode, above. That function, as well
-; as zFMSendFreq, use invalid addresses for read and write (respectivelly), so
+; as zFMSendFreq, use invalid addresses for read and write (respectively), so
 ; that this data is improperly used.
 ;loc_F1F
 zFM3FreqShiftTable:
