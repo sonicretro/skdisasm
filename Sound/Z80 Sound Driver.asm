@@ -132,7 +132,7 @@ zFadeDelay:			ds.b 1
 zFadeDelayTimeout:	ds.b 1
 zPauseFlag:			ds.b 1
 zHaltFlag:			ds.b 1
-zFM3Settings:		ds.b 1
+zFM3Settings:		ds.b 1	; Set twice, never read (is read in Z80 Type 1 for YM timer-related purposes)
 zTempoAccumulator:	ds.b 1
 					ds.b 1	; unused
 unk_1C15			ds.b 1	; Set twice, never read
@@ -2370,9 +2370,13 @@ zMusicFade:
 
 ;loc_979
 zFM3NormalMode:
-		xor	a								; a = 0
+	if fix_sndbugs
+		ld	c, 0							; FM3 mode: normal mode
+	else
+		xor	a								; a = 0 (is 0Fh in Z80 Type 1)
 		ld	(zFM3Settings), a				; Save FM3 settings
 		ld	c, a							; FM3 mode: normal mode
+	endif
 		ld	a, 27h							; FM3 special settings
 		call	zWriteFMI					; Set it
 		jp	zClearNextSound
@@ -3597,7 +3601,9 @@ cfFM3SpecialMode:
 ; Output:  c    Damaged
 ;sub_F11
 zWriteFM3Settings:
+	if fix_sndbugs=0
 		ld	(zFM3Settings), a				; Save FM3 settings
+	endif
 		ld	c, a							; c = FM3 settings
 		ld	a, 27h							; Write data to FM3 settigns register
 	if fix_sndbugs
