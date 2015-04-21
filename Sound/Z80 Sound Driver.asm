@@ -142,8 +142,8 @@ unk_1C18:			ds.b 1	; Set twice, never read
 zUpdatingSFX:		ds.b 1
 					ds.b $A	; unused
 zCurrentTempo:		ds.b 1
-zContinousSFX:		ds.b 1
-zContinousSFXFlag:	ds.b 1
+zContinuousSFX:		ds.b 1
+zContinuousSFXFlag:	ds.b 1
 zSpindashRev:		ds.b 1
 zRingSpeaker:		ds.b 1
 zFadeInTimeout:		ds.b 1
@@ -1838,11 +1838,11 @@ zPlaySound_Bankswitch:
 		jp	c, zPlaySound_Normal			; Branch if yes
 		push	af							; Save af
 		ld	b, a							; b = sound index
-		ld	a, (zContinousSFX)				; Load last continuous SFX played
+		ld	a, (zContinuousSFX)				; Load last continuous SFX played
 		sub	b								; Is this the same continuous sound that was playing?
 		jp	nz, zPlaySound_NotCont			; Branch if not
 		ld	a, 80h							; a = 80h
-		ld	(zContinousSFXFlag), a			; Flag continuous SFX as being extended
+		ld	(zContinuousSFXFlag), a			; Flag continuous SFX as being extended
 		rst	GetPointerTable					; hl = pointer to SFX data table
 		pop	af								; Restore af
 	if fix_sndbugs=0
@@ -1859,9 +1859,9 @@ zPlaySound_Bankswitch:
 ;loc_6FB
 zPlaySound_NotCont:
 		xor	a								; a = 0
-		ld	(zContinousSFXFlag), a			; Clear continue continuous SFX flag
+		ld	(zContinuousSFXFlag), a			; Clear continue continuous SFX flag
 		pop	af								; Restore af
-		ld	(zContinousSFX), a				; Store SFX index
+		ld	(zContinuousSFX), a				; Store SFX index
 		jp	zPlaySound
 ; ---------------------------------------------------------------------------
 ;loc_706
@@ -3501,13 +3501,13 @@ cfAddKey:
 ;
 ;loc_EB8
 cfLoopContinuousSFX:
-		ld	a, (zContinousSFXFlag)			; Get 'continuous sound effect' flag
+		ld	a, (zContinuousSFXFlag)			; Get 'continuous sound effect' flag
 		cp	80h								; Is it equal to 80h?
 		jp	z, .run_counter					; Branch if yes
 		xor	a								; a = 0
-		ld	(zContinousSFX), a				; Clear last continuous SFX played
+		ld	(zContinuousSFX), a				; Clear last continuous SFX played
 	if fix_sndbugs=0
-		ld	(zContinousSFXFlag), a			; Clear continuous sound effect flag (redundant; zContinousSFXFlag will always be 0 at this point)
+		ld	(zContinuousSFXFlag), a			; Clear continuous sound effect flag (redundant; zContinuousSFXFlag will always be 0 at this point)
 	endif
 		inc	de								; Skip a byte
 		ret
@@ -3523,7 +3523,7 @@ cfLoopContinuousSFX:
 	endif
 		jp	nz, cfJumpTo					; If result is non-zero, jump to target address
 		xor	a								; a = 0
-		ld	(zContinousSFXFlag), a			; Clear continuous sound effect flag
+		ld	(zContinuousSFXFlag), a			; Clear continuous sound effect flag
 		jp	cfJumpTo						; Jump to target address
 
 ; =============== S U B	R O U T	I N E =======================================
