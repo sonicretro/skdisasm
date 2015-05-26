@@ -1,37 +1,13 @@
-		dc.w $C
-		dc.l Obj_Ring
-		dc.l Map_Ring
-		dc.w $A6BC
-		dc.l Obj_Monitor
-		dc.l Map_Monitor+$6000000
-		dc.w $4C4
-		dc.l Obj_PathSwap+$1000000
-		dc.l Map_PathSwap+$9000000
-		dc.w $26BC
-		dc.l Obj_PathSwap+$5000000
-		dc.l Map_PathSwap+$D000000
-		dc.w $26BC
-		dc.l Obj_Spring
-		dc.l Map_Spring-$7F000000
-		dc.w $4A4
-		dc.l Obj_Spring+$3000000
-		dc.l Map_Spring-$70000000
-		dc.w $4B4
-		dc.l Obj_Spring+$6000000
-		dc.l Map_Spring-$60000000
-		dc.w $4A4
-		dc.l Obj_Spikes
-		dc.l Map_Spikes
-		dc.w $49C
-		dc.l Obj_DDZMissile+$E000000
-		dc.l Map_DDZMissileAsteroid
-		dc.w $42DB
-		dc.l Obj_DDZAsteroid+$26000000
-		dc.l Map_DDZMissileAsteroid+$2000000
-		dc.w $22DB
-		dc.l Obj_DDZAsteroid+$27000000
-		dc.l Map_DDZMissileAsteroid+$12000000
-		dc.w $22DB
-		dc.l Obj_DDZAsteroid+$28000000
-		dc.l Map_DDZMissileAsteroid+$22000000
-		dc.w $22DB
+	;          Object		Mappings		Subtype Frame Arttile
+	dbglistobj Obj_Ring,		Map_Ring,		   0,   0, make_art_tile($6BC,1,1)
+	dbglistobj Obj_Monitor,		Map_Monitor,		   6,   0, make_art_tile($4C4,0,0)
+	dbglistobj Obj_PathSwap,	Map_PathSwap,		   9,   1, make_art_tile($6BC,1,0)
+	dbglistobj Obj_PathSwap,	Map_PathSwap,		  $D,   5, make_art_tile($6BC,1,0)
+	dbglistobj Obj_Spring,		Map_Spring,		 $81,   0, make_art_tile($4A4,0,0)
+	dbglistobj Obj_Spring,		Map_Spring,		 $90,   3, make_art_tile($4B4,0,0)
+	dbglistobj Obj_Spring,		Map_Spring,		 $A0,   6, make_art_tile($4A4,0,0)
+	dbglistobj Obj_Spikes,		Map_Spikes,		   0,   0, make_art_tile($49C,0,0)
+	dbglistobj Obj_DDZMissile,	Map_DDZMissileAsteroid,	   0,  $E, make_art_tile($2DB,2,0)
+	dbglistobj Obj_DDZAsteroid,	Map_DDZMissileAsteroid,	   2, $26, make_art_tile($2DB,1,0)
+	dbglistobj Obj_DDZAsteroid,	Map_DDZMissileAsteroid,	 $12, $27, make_art_tile($2DB,1,0)
+	dbglistobj Obj_DDZAsteroid,	Map_DDZMissileAsteroid,	 $22, $28, make_art_tile($2DB,1,0)

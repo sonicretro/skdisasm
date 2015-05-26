@@ -1,88 +1,30 @@
-		dc.w $1D
-		dc.l Obj_Ring
-		dc.l Map_Ring
-		dc.w $A6BC
-		dc.l Obj_Monitor
-		dc.l Map_Monitor+$6000000
-		dc.w $4C4
-		dc.l Obj_PathSwap+$1000000
-		dc.l Map_PathSwap+$9000000
-		dc.w $26BC
-		dc.l Obj_PathSwap+$5000000
-		dc.l Map_PathSwap+$D000000
-		dc.w $26BC
-		dc.l Obj_Spring
-		dc.l Map_Spring-$7F000000
-		dc.w $4A4
-		dc.l Obj_Spring+$3000000
-		dc.l Map_Spring-$70000000
-		dc.w $4B4
-		dc.l Obj_Spring+$6000000
-		dc.l Map_Spring-$60000000
-		dc.w $4A4
-		dc.l Obj_Spikes
-		dc.l Map_Spikes
-		dc.w $49C
-		dc.l Obj_AIZLRZEMZRock
-		dc.l Map_AIZRock+$4000000
-		dc.w $2333
-		dc.l Obj_AIZLRZEMZRock+$1000000
-		dc.l Map_AIZRock+$13000000
-		dc.w $2333
-		dc.l Obj_AIZLRZEMZRock+$2000000
-		dc.l Map_AIZRock+$23000000
-		dc.w $2333
-		dc.l Obj_CollapsingPlatform
-		dc.l Map_AIZCollapsingPlatform
-		dc.w $4001
-		dc.l Obj_AIZRideVine+$21000000
-		dc.l Map_AIZMHZRideVine+$8000000
-		dc.w $41B
-		dc.l Obj_AIZGiantRideVine+$21000000
-		dc.l Map_AIZMHZRideVine+$F000000
-		dc.w $41B
-		dc.l Obj_AIZFallingLog
-		dc.l Map_AIZFallingLog+$7000000
-		dc.w $43CF
-		dc.l Obj_RhinoBot
-		dc.l Map_RhinoBot
-		dc.w $2500
-		dc.l Obj_Tulipon
-		dc.l Map_Tulipon
-		dc.w $252A
-		dc.l Obj_MonkeyDude
-		dc.l Map_MonkeyDude+$10000000
-		dc.w $2548
-		dc.l Obj_StarPost
-		dc.l Map_StarPost+$1000000
-		dc.w $5EC
-		dc.l Obj_Bubbler+$13000000
-		dc.l Map_Bubbler-$7F000000
-		dc.w $845C
-		dc.l Obj_CorkFloor
-		dc.l Map_AIZCorkFloor
-		dc.w $4001
-		dc.l Obj_AIZForegroundPlant
-		dc.l Map_AIZForegroundPlant
-		dc.w $C333
-		dc.l Obj_AIZForegroundPlant+$1000000
-		dc.l Map_AIZForegroundPlant+$11000000
-		dc.w $C333
-		dc.l Obj_AIZForegroundPlant
-		dc.l Map_AIZForegroundPlant+$20000000
-		dc.w $C333
-		dc.l Obj_AIZForegroundPlant+$1000000
-		dc.l Map_AIZForegroundPlant+$31000000
-		dc.w $C333
-		dc.l Obj_AIZForegroundPlant
-		dc.l Map_AIZForegroundPlant+$40000000
-		dc.w $C333
-		dc.l Obj_AIZForegroundPlant+$1000000
-		dc.l Map_AIZForegroundPlant+$51000000
-		dc.w $C333
-		dc.l Obj_AIZForegroundPlant
-		dc.l Map_AIZForegroundPlant+$60000000
-		dc.w $C333
-		dc.l Obj_FloatingPlatform
-		dc.l Map_AIZFloatingPlatform+$20000000
-		dc.w $43F7
+	;          Object			Mappings			Subtype Frame Arttile
+	dbglistobj Obj_Ring,			Map_Ring,			   0,   0, make_art_tile($6BC,1,1)
+	dbglistobj Obj_Monitor,			Map_Monitor,			   6,   0, make_art_tile($4C4,0,0)
+	dbglistobj Obj_PathSwap,		Map_PathSwap,			   9,   1, make_art_tile($6BC,1,0)
+	dbglistobj Obj_PathSwap,		Map_PathSwap,			  $D,   5, make_art_tile($6BC,1,0)
+	dbglistobj Obj_Spring,			Map_Spring,			 $81,   0, make_art_tile($4A4,0,0)
+	dbglistobj Obj_Spring,			Map_Spring,			 $90,   3, make_art_tile($4B4,0,0)
+	dbglistobj Obj_Spring,			Map_Spring,			 $A0,   6, make_art_tile($4A4,0,0)
+	dbglistobj Obj_Spikes,			Map_Spikes,			   0,   0, make_art_tile($49C,0,0)
+	dbglistobj Obj_AIZLRZEMZRock,		Map_AIZRock,			   4,   0, make_art_tile($333,1,0)
+	dbglistobj Obj_AIZLRZEMZRock,		Map_AIZRock,			 $13,   1, make_art_tile($333,1,0)
+	dbglistobj Obj_AIZLRZEMZRock,		Map_AIZRock,			 $23,   2, make_art_tile($333,1,0)
+	dbglistobj Obj_CollapsingPlatform,	Map_AIZCollapsingPlatform,	   0,   0, make_art_tile($001,2,0)
+	dbglistobj Obj_AIZRideVine,		Map_AIZMHZRideVine,		   8, $21, make_art_tile($41B,0,0)
+	dbglistobj Obj_AIZGiantRideVine,	Map_AIZMHZRideVine,		  $F, $21, make_art_tile($41B,0,0)
+	dbglistobj Obj_AIZFallingLog,		Map_AIZFallingLog,		   7,   0, make_art_tile($3CF,2,0)
+	dbglistobj Obj_RhinoBot,		Map_RhinoBot,			   0,   0, make_art_tile($500,1,0)
+	dbglistobj Obj_Tulipon,			Map_Tulipon,			   0,   0, make_art_tile($52A,1,0)
+	dbglistobj Obj_MonkeyDude,		Map_MonkeyDude,			 $10,   0, make_art_tile($548,1,0)
+	dbglistobj Obj_StarPost,		Map_StarPost,			   1,   0, make_art_tile($5EC,0,0)
+	dbglistobj Obj_Bubbler,			Map_Bubbler,			 $81, $13, make_art_tile($45C,0,1)
+	dbglistobj Obj_CorkFloor,		Map_AIZCorkFloor,		   0,   0, make_art_tile($001,2,0)
+	dbglistobj Obj_AIZForegroundPlant,	Map_AIZForegroundPlant,		   0,   0, make_art_tile($333,2,1)
+	dbglistobj Obj_AIZForegroundPlant,	Map_AIZForegroundPlant,		 $11,   1, make_art_tile($333,2,1)
+	dbglistobj Obj_AIZForegroundPlant,	Map_AIZForegroundPlant,		 $20,   0, make_art_tile($333,2,1)
+	dbglistobj Obj_AIZForegroundPlant,	Map_AIZForegroundPlant,		 $31,   1, make_art_tile($333,2,1)
+	dbglistobj Obj_AIZForegroundPlant,	Map_AIZForegroundPlant,		 $40,   0, make_art_tile($333,2,1)
+	dbglistobj Obj_AIZForegroundPlant,	Map_AIZForegroundPlant,		 $51,   1, make_art_tile($333,2,1)
+	dbglistobj Obj_AIZForegroundPlant,	Map_AIZForegroundPlant,		 $60,   0, make_art_tile($333,2,1)
+	dbglistobj Obj_FloatingPlatform,	Map_AIZFloatingPlatform,	 $20,   0, make_art_tile($3F7,2,0)

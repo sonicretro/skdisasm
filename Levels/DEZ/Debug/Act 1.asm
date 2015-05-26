@@ -1,94 +1,32 @@
-		dc.w $1F
-		dc.l Obj_Ring
-		dc.l Map_Ring
-		dc.w $A6BC
-		dc.l Obj_Monitor
-		dc.l Map_Monitor+$6000000
-		dc.w $4C4
-		dc.l Obj_PathSwap+$1000000
-		dc.l Map_PathSwap+$9000000
-		dc.w $26BC
-		dc.l Obj_PathSwap+$5000000
-		dc.l Map_PathSwap+$D000000
-		dc.w $26BC
-		dc.l Obj_Spring
-		dc.l Map_Spring-$7F000000
-		dc.w $4A4
-		dc.l Obj_Spring+$3000000
-		dc.l Map_Spring-$70000000
-		dc.w $4B4
-		dc.l Obj_Spring+$6000000
-		dc.l Map_Spring-$60000000
-		dc.w $4A4
-		dc.l Obj_Spikes
-		dc.l Map_Spikes
-		dc.w $49C
-		dc.l Obj_Spikebonker
-		dc.l Map_Spikebonker+$20000000
-		dc.w $500
-		dc.l Obj_Chainspike
-		dc.l Map_Chainspike
-		dc.w $542
-		dc.l Obj_TiltingBridge
-		dc.l Map_TiltingBridge
-		dc.w $234D
-		dc.l Obj_DEZHangCarrier
-		dc.l Map_DEZHangCarrier+$8000000
-		dc.w $235D
-		dc.l Obj_FBZDEZPlayerLauncher+$1000000
-		dc.l Map_FBZDEZPlayerLauncher
-		dc.w $22FC
-		dc.l Obj_Door+$2000000
-		dc.l Map_HCZCNZDEZDoor+$2000000
-		dc.w $236B
-		dc.l Obj_DEZTorpedoLauncher
-		dc.l Map_TorpedoLauncher+$10000000
-		dc.w $373
-		dc.l Obj_DEZLiftPad+$2000000
-		dc.l Map_DEZLiftPad+$7000000
-		dc.w $2302
-		dc.l Obj_DEZLiftPad+$2000000
-		dc.l Map_DEZLiftPad+$27000000
-		dc.w $2302
-		dc.l Obj_DEZLightning+$4000000
-		dc.l Map_DEZLightning-$4C000000
-		dc.w $379
-		dc.l Obj_DEZConveyorPad
-		dc.l Map_DEZConveyorPad
-		dc.w $2408
-		dc.l Obj_DEZConveyorPad+$4000000
-		dc.l Map_DEZConveyorPad+$28000000
-		dc.w $2408
-		dc.l Obj_DEZEnergyBridge
-		dc.l Map_DEZEnergyBridge
-		dc.w $23FF
-		dc.l Obj_StillSprite+$30000000
-		dc.l Map_StillSprites+$30000000
-		dc.w $23FF
-		dc.l Obj_StillSprite+$31000000
-		dc.l Map_StillSprites+$31000000
-		dc.w $23FF
-		dc.l Obj_StillSprite+$32000000
-		dc.l Map_StillSprites+$32000000
-		dc.w $2385
-		dc.l Obj_DEZTunnelLauncher+$2000000
-		dc.l Map_DEZTunnelLauncher
-		dc.w $385
-		dc.l Obj_DEZStaircase
-		dc.l Map_TiltingBridge
-		dc.w $2480
-		dc.l Obj_DEZStaircase
-		dc.l Map_TiltingBridge+$4000000
-		dc.w $2480
-		dc.l Obj_DEZGravitySwitch
-		dc.l Map_DEZGravitySwitch
-		dc.w $2490
-		dc.l Obj_DEZHoverMachine
-		dc.l Map_DEZHoverMachine
-		dc.w $230D
-		dc.l Obj_DEZBumperWall
-		dc.l Map_DEZBumperWall
-		dc.w $232D
-		dc.l Obj_DEZGravityPuzzle
-		dc.l Map_DEZGravityPuzzle
-		dc.w $232D
+	;          Object			Mappings		Subtype Frame Arttile
+	dbglistobj Obj_Ring,			Map_Ring,		   0,   0, make_art_tile($6BC,1,1)
+	dbglistobj Obj_Monitor,			Map_Monitor,		   6,   0, make_art_tile($4C4,0,0)
+	dbglistobj Obj_PathSwap,		Map_PathSwap,		   9,   1, make_art_tile($6BC,1,0)
+	dbglistobj Obj_PathSwap,		Map_PathSwap,		  $D,   5, make_art_tile($6BC,1,0)
+	dbglistobj Obj_Spring,			Map_Spring,		 $81,   0, make_art_tile($4A4,0,0)
+	dbglistobj Obj_Spring,			Map_Spring,		 $90,   3, make_art_tile($4B4,0,0)
+	dbglistobj Obj_Spring,			Map_Spring,		 $A0,   6, make_art_tile($4A4,0,0)
+	dbglistobj Obj_Spikes,			Map_Spikes,		   0,   0, make_art_tile($49C,0,0)
+	dbglistobj Obj_Spikebonker,		Map_Spikebonker,	 $20,   0, make_art_tile($500,0,0)
+	dbglistobj Obj_Chainspike,		Map_Chainspike,		   0,   0, make_art_tile($542,0,0)
+	dbglistobj Obj_TiltingBridge,		Map_TiltingBridge,	   0,   0, make_art_tile($34D,1,0)
+	dbglistobj Obj_DEZHangCarrier,		Map_DEZHangCarrier,	   8,   0, make_art_tile($35D,1,0)
+	dbglistobj Obj_FBZDEZPlayerLauncher,	Map_FBZDEZPlayerLauncher,  0,   1, make_art_tile($2FC,1,0)
+	dbglistobj Obj_Door,			Map_HCZCNZDEZDoor,	   2,   2, make_art_tile($36B,1,0)
+	dbglistobj Obj_DEZTorpedoLauncher,	Map_TorpedoLauncher,	 $10,   0, make_art_tile($373,0,0)
+	dbglistobj Obj_DEZLiftPad,		Map_DEZLiftPad,		   7,   2, make_art_tile($302,1,0)
+	dbglistobj Obj_DEZLiftPad,		Map_DEZLiftPad,		 $27,   2, make_art_tile($302,1,0)
+	dbglistobj Obj_DEZLightning,		Map_DEZLightning,	 $B4,   4, make_art_tile($379,0,0)
+	dbglistobj Obj_DEZConveyorPad,		Map_DEZConveyorPad,	   0,   0, make_art_tile($408,1,0)
+	dbglistobj Obj_DEZConveyorPad,		Map_DEZConveyorPad,	 $28,   4, make_art_tile($408,1,0)
+	dbglistobj Obj_DEZEnergyBridge,		Map_DEZEnergyBridge,	   0,   0, make_art_tile($3FF,1,0)
+	dbglistobj Obj_StillSprite,		Map_StillSprites,	 $30, $30, make_art_tile($3FF,1,0)
+	dbglistobj Obj_StillSprite,		Map_StillSprites,	 $31, $31, make_art_tile($3FF,1,0)
+	dbglistobj Obj_StillSprite,		Map_StillSprites,	 $32, $32, make_art_tile($385,1,0)
+	dbglistobj Obj_DEZTunnelLauncher,	Map_DEZTunnelLauncher,	   0,   2, make_art_tile($385,0,0)
+	dbglistobj Obj_DEZStaircase,		Map_TiltingBridge,	   0,   0, make_art_tile($480,1,0)
+	dbglistobj Obj_DEZStaircase,		Map_TiltingBridge,	   4,   0, make_art_tile($480,1,0)
+	dbglistobj Obj_DEZGravitySwitch,	Map_DEZGravitySwitch,	   0,   0, make_art_tile($490,1,0)
+	dbglistobj Obj_DEZHoverMachine,		Map_DEZHoverMachine,	   0,   0, make_art_tile($30D,1,0)
+	dbglistobj Obj_DEZBumperWall,		Map_DEZBumperWall,	   0,   0, make_art_tile($32D,1,0)
+	dbglistobj Obj_DEZGravityPuzzle,	Map_DEZGravityPuzzle,	   0,   0, make_art_tile($32D,1,0)

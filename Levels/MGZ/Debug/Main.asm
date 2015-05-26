@@ -1,109 +1,37 @@
-		dc.w $24
-		dc.l Obj_Ring
-		dc.l Map_Ring
-		dc.w $A6BC
-		dc.l Obj_Monitor
-		dc.l Map_Monitor+$6000000
-		dc.w $4C4
-		dc.l Obj_PathSwap+$1000000
-		dc.l Map_PathSwap+$9000000
-		dc.w $26BC
-		dc.l Obj_PathSwap+$5000000
-		dc.l Map_PathSwap+$D000000
-		dc.w $26BC
-		dc.l Obj_Spring
-		dc.l Map_Spring-$80000000
-		dc.w $4A4
-		dc.l Obj_Spring+$3000000
-		dc.l Map_Spring-$70000000
-		dc.w $4B4
-		dc.l Obj_Spring+$6000000
-		dc.l Map_Spring-$60000000
-		dc.w $4A4
-		dc.l Obj_Spring+$7000000
-		dc.l Map_Spring+$30000000
-		dc.w $478
-		dc.l Obj_Spring+$A000000
-		dc.l Map_Spring+$40000000
-		dc.w $478
-		dc.l Obj_Spikes
-		dc.l Map_Spikes
-		dc.w $49C
-		dc.l Obj_Spikes+$4000000
-		dc.l Map_Spikes+$40000000
-		dc.w $494
-		dc.l Obj_MGZMiniBoss
-		dc.l Map_MGZMiniBoss
-		dc.w $254F
-		dc.l Obj_BubblesBadnik
-		dc.l Map_BubblesBadnik
-		dc.w $2500
-		dc.l Obj_Spiker
-		dc.l Map_Spiker
-		dc.w $2530
-		dc.l Obj_Mantis
-		dc.l Map_Mantis
-		dc.w $254F
-		dc.l Obj_StillSprite+$B000000
-		dc.l Map_StillSprites+$B000000
-		dc.w $4451
-		dc.l Obj_StillSprite+$C000000
-		dc.l Map_StillSprites+$C000000
-		dc.w $4451
-		dc.l Obj_StillSprite+$D000000
-		dc.l Map_StillSprites+$D000000
-		dc.w $4451
-		dc.l Obj_StillSprite+$E000000
-		dc.l Map_StillSprites+$E000000
-		dc.w $4451
-		dc.l Obj_CollapsingBridge
-		dc.l Map_MGZCollapsingBridge+$8000000
-		dc.w $4001
-		dc.l Obj_CollapsingBridge+$3000000
-		dc.l Map_MGZCollapsingBridge+$18000000
-		dc.w $4001
-		dc.l Obj_CollapsingBridge+$6000000
-		dc.l Map_MGZCollapsingBridge+$28000000
-		dc.w $4001
-		dc.l Obj_BreakableWall
-		dc.l Map_MGZBreakableWall
-		dc.w $4001
-		dc.l Obj_FloatingPlatform
-		dc.l Map_MGZFloatingPlatform+$4000000
-		dc.w $4001
-		dc.l Obj_MGZLBZSmashingPillar
-		dc.l Map_MGZSmashingPillar+$A000000
-		dc.w $4001
-		dc.l Obj_MGZSwingingPlatform+$1000000
-		dc.l Map_MGZSwingingPlatform
-		dc.w $435F
-		dc.l Obj_MGZSwingingSpikeBall+$1000000
-		dc.l Map_MGZSwingingSpikeBall
-		dc.w $235F
-		dc.l Obj_MGZSwingingSpikeBall+$2000000
-		dc.l Map_MGZSwingingSpikeBall+$1000000
-		dc.w $235F
-		dc.l Obj_MGZHeadTrigger+$6000000
-		dc.l Map_MGZHeadTrigger
-		dc.w $A3FF
-		dc.l Obj_MGZMovingSpikePlatform
-		dc.l Map_MGZMovingSpikePlatform
-		dc.w $4001
-		dc.l Obj_MGZTriggerPlatform+$1000000
-		dc.l Map_MGZTriggerPlatform+$11000000
-		dc.w $4001
-		dc.l Obj_MGZDashTrigger
-		dc.l Map_MGZDashTrigger+$1000000
-		dc.w $235F
-		dc.l Obj_MGZPulley
-		dc.l Map_MGZPulley+$20000000
-		dc.w $235F
-		dc.l Obj_MGZTopPlatform
-		dc.l Map_MGZTopPlatform
-		dc.w $235F
-		dc.l Obj_MGZTopLauncher+$2000000
-		dc.l Map_MGZTopPlatform
-		dc.w $43FF
-		dc.l Obj_StarPost
-		dc.l Map_StarPost+$1000000
-		dc.w $5EC
+	;          Object			Mappings			Subtype Frame Arttile
+	dbglistobj Obj_Ring,			Map_Ring,			   0,   0, make_art_tile($6BC,1,1)
+	dbglistobj Obj_Monitor,			Map_Monitor,			   6,   0, make_art_tile($4C4,0,0)
+	dbglistobj Obj_PathSwap,		Map_PathSwap,			   9,   1, make_art_tile($6BC,1,0)
+	dbglistobj Obj_PathSwap,		Map_PathSwap,			  $D,   5, make_art_tile($6BC,1,0)
+	dbglistobj Obj_Spring,			Map_Spring,			 $80,   0, make_art_tile($4A4,0,0)
+	dbglistobj Obj_Spring,			Map_Spring,			 $90,   3, make_art_tile($4B4,0,0)
+	dbglistobj Obj_Spring,			Map_Spring,			 $A0,   6, make_art_tile($4A4,0,0)
+	dbglistobj Obj_Spring,			Map_Spring,			 $30,   7, make_art_tile($478,0,0)
+	dbglistobj Obj_Spring,			Map_Spring,			 $40,  $A, make_art_tile($478,0,0)
+	dbglistobj Obj_Spikes,			Map_Spikes,			   0,   0, make_art_tile($49C,0,0)
+	dbglistobj Obj_Spikes,			Map_Spikes,			 $40,   4, make_art_tile($494,0,0)
+	dbglistobj Obj_MGZMiniBoss,		Map_MGZMiniBoss,		   0,   0, make_art_tile($54F,1,0)
+	dbglistobj Obj_BubblesBadnik,		Map_BubblesBadnik,		   0,   0, make_art_tile($500,1,0)
+	dbglistobj Obj_Spiker,			Map_Spiker,			   0,   0, make_art_tile($530,1,0)
+	dbglistobj Obj_Mantis,			Map_Mantis,			   0,   0, make_art_tile($54F,1,0)
+	dbglistobj Obj_StillSprite,		Map_StillSprites,		  $B,  $B, make_art_tile($451,2,0)
+	dbglistobj Obj_StillSprite,		Map_StillSprites,		  $C,  $C, make_art_tile($451,2,0)
+	dbglistobj Obj_StillSprite,		Map_StillSprites,		  $D,  $D, make_art_tile($451,2,0)
+	dbglistobj Obj_StillSprite,		Map_StillSprites,		  $E,  $E, make_art_tile($451,2,0)
+	dbglistobj Obj_CollapsingBridge,	Map_MGZCollapsingBridge,	   8,   0, make_art_tile($001,2,0)
+	dbglistobj Obj_CollapsingBridge,	Map_MGZCollapsingBridge,	 $18,   3, make_art_tile($001,2,0)
+	dbglistobj Obj_CollapsingBridge,	Map_MGZCollapsingBridge,	 $28,   6, make_art_tile($001,2,0)
+	dbglistobj Obj_BreakableWall,		Map_MGZBreakableWall,		   0,   0, make_art_tile($001,2,0)
+	dbglistobj Obj_FloatingPlatform,	Map_MGZFloatingPlatform,	   4,   0, make_art_tile($001,2,0)
+	dbglistobj Obj_MGZLBZSmashingPillar,	Map_MGZSmashingPillar,		  $A,   0, make_art_tile($001,2,0)
+	dbglistobj Obj_MGZSwingingPlatform,	Map_MGZSwingingPlatform,	   0,   1, make_art_tile($35F,2,0)
+	dbglistobj Obj_MGZSwingingSpikeBall,	Map_MGZSwingingSpikeBall,	   0,   1, make_art_tile($35F,1,0)
+	dbglistobj Obj_MGZSwingingSpikeBall,	Map_MGZSwingingSpikeBall,	   1,   2, make_art_tile($35F,1,0)
+	dbglistobj Obj_MGZHeadTrigger,		Map_MGZHeadTrigger,		   0,   6, make_art_tile($3FF,1,1)
+	dbglistobj Obj_MGZMovingSpikePlatform,	Map_MGZMovingSpikePlatform,	   0,   0, make_art_tile($001,2,0)
+	dbglistobj Obj_MGZTriggerPlatform,	Map_MGZTriggerPlatform,		 $11,   1, make_art_tile($001,2,0)
+	dbglistobj Obj_MGZDashTrigger,		Map_MGZDashTrigger,		   1,   0, make_art_tile($35F,1,0)
+	dbglistobj Obj_MGZPulley,		Map_MGZPulley,			 $20,   0, make_art_tile($35F,1,0)
+	dbglistobj Obj_MGZTopPlatform,		Map_MGZTopPlatform,		   0,   0, make_art_tile($35F,1,0)
+	dbglistobj Obj_MGZTopLauncher,		Map_MGZTopPlatform,		   0,   2, make_art_tile($3FF,2,0)
+	dbglistobj Obj_StarPost,		Map_StarPost,			   1,   0, make_art_tile($5EC,0,0)

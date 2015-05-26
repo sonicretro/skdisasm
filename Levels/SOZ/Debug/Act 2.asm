@@ -1,112 +1,38 @@
-		dc.w $25
-		dc.l Obj_Ring
-		dc.l Map_Ring
-		dc.w $A6BC
-		dc.l Obj_Monitor
-		dc.l Map_Monitor+$6000000
-		dc.w $4C4
-		dc.l Obj_PathSwap+$1000000
-		dc.l Map_PathSwap+$9000000
-		dc.w $26BC
-		dc.l Obj_PathSwap+$5000000
-		dc.l Map_PathSwap+$D000000
-		dc.w $26BC
-		dc.l Obj_Spring
-		dc.l Map_Spring-$7F000000
-		dc.w $4A4
-		dc.l Obj_Spring+$3000000
-		dc.l Map_Spring-$70000000
-		dc.w $4B4
-		dc.l Obj_Spring+$6000000
-		dc.l Map_Spring-$60000000
-		dc.w $4A4
-		dc.l Obj_Spikes
-		dc.l Map_Spikes
-		dc.w $49C
-		dc.l Obj_Skorp
-		dc.l Map_Skorp+$40000000
-		dc.w $2536
-		dc.l Obj_Sandworm
-		dc.l Map_Sandworm
-		dc.w $2557
-		dc.l Obj_Rockn
-		dc.l Map_Rockn
-		dc.w $2500
-		dc.l Obj_StillSprite+$2E000000
-		dc.l Map_StillSprites+$2E000000
-		dc.w $C001
-		dc.l Obj_SOZPushableRock
-		dc.l Map_SOZPushableRock
-		dc.w $4455
-		dc.l Obj_AnimatedStillSprite+$E000000
-		dc.l Map_AnimatedStillSprites+$4000000
-		dc.w $440F
-		dc.l Obj_AnimatedStillSprite+$12000000
-		dc.l Map_AnimatedStillSprites+$5000000
-		dc.w $440F
-		dc.l Obj_AnimatedStillSprite+$16000000
-		dc.l Map_AnimatedStillSprites+$6000000
-		dc.w $440F
-		dc.l Obj_AnimatedStillSprite+$1A000000
-		dc.l Map_AnimatedStillSprites+$7000000
-		dc.w $440F
-		dc.l Obj_SOZSpringVine
-		dc.l Map_SOZSpringVine
-		dc.w $43C9
-		dc.l Obj_SOZRisingSandWall
-		dc.l Map_SOZRisingSandWall+$60000000
-		dc.w $4432
-		dc.l Obj_SOZFloatingPillar
-		dc.l Map_SOZFloatingPillar+$4000000
-		dc.w $4001
-		dc.l Obj_SOZFloatingPillar+$1000000
-		dc.l Map_SOZFloatingPillar+$15000000
-		dc.w $4001
-		dc.l Obj_SOZFloatingPillar+$2000000
-		dc.l Map_SOZFloatingPillar+$26000000
-		dc.w $4001
-		dc.l Obj_SOZSwingingPlatform+$2000000
-		dc.l Map_SOZSwingingPlatform+$5000000
-		dc.w $4001
-		dc.l Obj_SOZSwingingPlatform+$2000000
-		dc.l Map_SOZSwingingPlatform+$14000000
-		dc.w $4001
-		dc.l Obj_SOZBreakableSandRock
-		dc.l Map_SOZBreakableSandRock
-		dc.w $43D9
-		dc.l Obj_SOZPushSwitch+$1000000
-		dc.l Map_SOZPushSwitch
-		dc.w $4455
-		dc.l Obj_SOZDoor
-		dc.l Map_SOZDoor
-		dc.w $4455
-		dc.l Obj_SOZDoor+$1000000
-		dc.l Map_SOZDoor+$10000000
-		dc.w $4455
-		dc.l Obj_SOZRapelWire+$20000000
-		dc.l Map_SOZRapelWire+$2000000
-		dc.w $4411
-		dc.l Obj_SOZSolidSprites
-		dc.l Map_SOZSolidSprites
-		dc.w $4001
-		dc.l Obj_SOZSolidSprites+$1000000
-		dc.l Map_SOZSolidSprites+$1000000
-		dc.w $4001
-		dc.l Obj_CollapsingBridge
-		dc.l Map_SOZCollapsingBridge
-		dc.w $4001
-		dc.l Obj_SOZLightSwitch+$7000000
-		dc.l Map_SOZLightSwitch+$4000000
-		dc.w $3AF
-		dc.l Obj_SOZSandCork
-		dc.l Map_SOZSandCork+$20000000
-		dc.w $43BD
-		dc.l Obj_StillSprite+$2F000000
-		dc.l Map_StillSprites+$2F000000
-		dc.w $3AF
-		dc.l Obj_BreakableWall
-		dc.l Map_CNZSOZBreakableWall
-		dc.w $448C
-		dc.l Obj_BreakableWall+$4000000
-		dc.l Map_CNZSOZBreakableWall+$4000000
-		dc.w $448C
+	;          Object			Mappings			Subtype Frame Arttile
+	dbglistobj Obj_Ring,			Map_Ring,			   0,   0, make_art_tile($6BC,1,1)
+	dbglistobj Obj_Monitor,			Map_Monitor,			   6,   0, make_art_tile($4C4,0,0)
+	dbglistobj Obj_PathSwap,		Map_PathSwap,			   9,   1, make_art_tile($6BC,1,0)
+	dbglistobj Obj_PathSwap,		Map_PathSwap,			  $D,   5, make_art_tile($6BC,1,0)
+	dbglistobj Obj_Spring,			Map_Spring,			 $81,   0, make_art_tile($4A4,0,0)
+	dbglistobj Obj_Spring,			Map_Spring,			 $90,   3, make_art_tile($4B4,0,0)
+	dbglistobj Obj_Spring,			Map_Spring,			 $A0,   6, make_art_tile($4A4,0,0)
+	dbglistobj Obj_Spikes,			Map_Spikes,			   0,   0, make_art_tile($49C,0,0)
+	dbglistobj Obj_Skorp,			Map_Skorp,			 $40,   0, make_art_tile($536,1,0)
+	dbglistobj Obj_Sandworm,		Map_Sandworm,			   0,   0, make_art_tile($557,1,0)
+	dbglistobj Obj_Rockn,			Map_Rockn,			   0,   0, make_art_tile($500,1,0)
+	dbglistobj Obj_StillSprite,		Map_StillSprites,		 $2E, $2E, make_art_tile($001,2,1)
+	dbglistobj Obj_SOZPushableRock,		Map_SOZPushableRock,		   0,   0, make_art_tile($455,2,0)
+	dbglistobj Obj_AnimatedStillSprite,	Map_AnimatedStillSprites,	   4,  $E, make_art_tile($40F,2,0)
+	dbglistobj Obj_AnimatedStillSprite,	Map_AnimatedStillSprites,	   5, $12, make_art_tile($40F,2,0)
+	dbglistobj Obj_AnimatedStillSprite,	Map_AnimatedStillSprites,	   6, $16, make_art_tile($40F,2,0)
+	dbglistobj Obj_AnimatedStillSprite,	Map_AnimatedStillSprites,	   7, $1A, make_art_tile($40F,2,0)
+	dbglistobj Obj_SOZSpringVine,		Map_SOZSpringVine,		   0,   0, make_art_tile($3C9,2,0)
+	dbglistobj Obj_SOZRisingSandWall,	Map_SOZRisingSandWall,		 $60,   0, make_art_tile($432,2,0)
+	dbglistobj Obj_SOZFloatingPillar,	Map_SOZFloatingPillar,		   4,   0, make_art_tile($001,2,0)
+	dbglistobj Obj_SOZFloatingPillar,	Map_SOZFloatingPillar,		 $15,   1, make_art_tile($001,2,0)
+	dbglistobj Obj_SOZFloatingPillar,	Map_SOZFloatingPillar,		 $26,   2, make_art_tile($001,2,0)
+	dbglistobj Obj_SOZSwingingPlatform,	Map_SOZSwingingPlatform,	   5,   2, make_art_tile($001,2,0)
+	dbglistobj Obj_SOZSwingingPlatform,	Map_SOZSwingingPlatform,	 $14,   2, make_art_tile($001,2,0)
+	dbglistobj Obj_SOZBreakableSandRock,	Map_SOZBreakableSandRock,	   0,   0, make_art_tile($3D9,2,0)
+	dbglistobj Obj_SOZPushSwitch,		Map_SOZPushSwitch,		   0,   1, make_art_tile($455,2,0)
+	dbglistobj Obj_SOZDoor,			Map_SOZDoor,			   0,   0, make_art_tile($455,2,0)
+	dbglistobj Obj_SOZDoor,			Map_SOZDoor,			 $10,   1, make_art_tile($455,2,0)
+	dbglistobj Obj_SOZRapelWire,		Map_SOZRapelWire,		   2, $20, make_art_tile($411,2,0)
+	dbglistobj Obj_SOZSolidSprites,		Map_SOZSolidSprites,		   0,   0, make_art_tile($001,2,0)
+	dbglistobj Obj_SOZSolidSprites,		Map_SOZSolidSprites,		   1,   1, make_art_tile($001,2,0)
+	dbglistobj Obj_CollapsingBridge,	Map_SOZCollapsingBridge,	   0,   0, make_art_tile($001,2,0)
+	dbglistobj Obj_SOZLightSwitch,		Map_SOZLightSwitch,		   4,   7, make_art_tile($3AF,0,0)
+	dbglistobj Obj_SOZSandCork,		Map_SOZSandCork,		 $20,   0, make_art_tile($3BD,2,0)
+	dbglistobj Obj_StillSprite,		Map_StillSprites,		 $2F, $2F, make_art_tile($3AF,0,0)
+	dbglistobj Obj_BreakableWall,		Map_CNZSOZBreakableWall,	   0,   0, make_art_tile($48C,2,0)
+	dbglistobj Obj_BreakableWall,		Map_CNZSOZBreakableWall,	   4,   4, make_art_tile($48C,2,0)

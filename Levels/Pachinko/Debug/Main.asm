@@ -1,28 +1,10 @@
-		dc.w 9
-		dc.l Obj_Ring
-		dc.l Map_Ring
-		dc.w $A6BC
-		dc.l Obj_Bumper
-		dc.l Map_PachinkoBumper
-		dc.w $62CD
-		dc.l Obj_PachinkoTriangleBumper+$1000000
-		dc.l Map_PachinkoTriangleBumper
-		dc.w $E2EB
-		dc.l Obj_PachinkoFlipper+$4000000
-		dc.l Map_PachinkoFlipper
-		dc.w $832F
-		dc.l Obj_PachinkoEnergyTrap
-		dc.l Map_PachinkoEnergyTrap
-		dc.w $2352
-		dc.l Obj_Pachinko_Platform
-		dc.l Map_PachinkoPlatform
-		dc.w $2358
-		dc.l Obj_PachinkoInvisibleUnknown
-		dc.l Map_PachinkoInvisibleUnknown
-		dc.w $E364
-		dc.l Obj_GumballItem
-		dc.l Map_PachinkoFItem
-		dc.w $6378
-		dc.l Obj_PachinkoItemOrb
-		dc.l Map_PachinkoItemOrb
-		dc.w $E364
+	;          Object				Mappings			Subtype Frame Arttile
+	dbglistobj Obj_Ring,				Map_Ring,			   0,   0, make_art_tile($6BC,1,1)
+	dbglistobj Obj_Bumper,				Map_PachinkoBumper,		   0,   0, make_art_tile($2CD,3,0)
+	dbglistobj Obj_PachinkoTriangleBumper,		Map_PachinkoTriangleBumper,	   0,   1, make_art_tile($2EB,3,1)
+	dbglistobj Obj_PachinkoFlipper,			Map_PachinkoFlipper,		   0,   4, make_art_tile($32F,0,1)
+	dbglistobj Obj_PachinkoEnergyTrap,		Map_PachinkoEnergyTrap,		   0,   0, make_art_tile($352,1,0)
+	dbglistobj Obj_Pachinko_Platform,		Map_PachinkoPlatform,		   0,   0, make_art_tile($358,1,0)
+	dbglistobj Obj_PachinkoInvisibleUnknown,	Map_PachinkoInvisibleUnknown,	   0,   0, make_art_tile($364,3,1)
+	dbglistobj Obj_GumballItem,			Map_PachinkoFItem,		   0,   0, make_art_tile($378,3,0)
+	dbglistobj Obj_PachinkoItemOrb,			Map_PachinkoItemOrb,		   0,   0, make_art_tile($364,3,1)

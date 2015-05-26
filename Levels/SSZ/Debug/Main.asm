@@ -1,67 +1,23 @@
-		dc.w $16
-		dc.l Obj_Ring
-		dc.l Map_Ring
-		dc.w $A6BC
-		dc.l Obj_Monitor
-		dc.l Map_Monitor+$6000000
-		dc.w $4C4
-		dc.l Obj_PathSwap+$1000000
-		dc.l Map_PathSwap+$9000000
-		dc.w $26BC
-		dc.l Obj_PathSwap+$5000000
-		dc.l Map_PathSwap+$D000000
-		dc.w $26BC
-		dc.l Obj_Spring
-		dc.l Map_Spring-$7F000000
-		dc.w $4A4
-		dc.l Obj_Spring+$3000000
-		dc.l Map_Spring-$70000000
-		dc.w $4B4
-		dc.l Obj_Spring+$6000000
-		dc.l Map_Spring-$60000000
-		dc.w $4A4
-		dc.l Obj_Spikes
-		dc.l Map_Spikes
-		dc.w $49C
-		dc.l Obj_SSZFloatingPlatform+$1000000
-		dc.l Map_SSZFloatingPlatform
-		dc.w $C2D4
-		dc.l Obj_SSZCollapsingColumn+$2000000
-		dc.l Map_SSZFloatingPlatform
-		dc.w $E2E4
-		dc.l Obj_SSZCollapsingBridge
-		dc.l Map_SSZCollapsingBridge
-		dc.w $C2F4
-		dc.l Obj_SSZCollapsingBridgeDiagonal+$3000000
-		dc.l Map_SSZCollapsingBridge
-		dc.w $C2F4
-		dc.l Obj_SSZBouncyCloud
-		dc.l Map_SSZBouncyCloud
-		dc.w $E3D6
-		dc.l Obj_SSZElevatorBar
-		dc.l Map_SSZElevatorBar
-		dc.w $4348
-		dc.l Obj_SSZHPZTeleporter
-		dc.l Map_SSZHPZTeleporter
-		dc.w $35C
-		dc.l Obj_SSZRotatingPlatform
-		dc.l Map_SSZRotatingPlatform
-		dc.w $437E
-		dc.l Obj_SSZSwingingCarrier+$1000000
-		dc.l Map_SSZElevatorBar
-		dc.w $4348
-		dc.l Obj_SSZSwingingCarrier+$4000000
-		dc.l Map_SSZElevatorBar-$80000000
-		dc.w $4348
-		dc.l Obj_SSZRetractingSpring+$3000000
-		dc.l Map_SSZRetractingSpring
-		dc.w $3A2
-		dc.l Obj_EggRobo
-		dc.l Map_EggRobo
-		dc.w $500
-		dc.l Obj_EggRobo
-		dc.l Map_EggRobo+$2000000
-		dc.w $500
-		dc.l Obj_EggRobo
-		dc.l Map_EggRobo+$4000000
-		dc.w $500
+	;          Object				Mappings		Subtype Frame Arttile
+	dbglistobj Obj_Ring,				Map_Ring,		   0,   0, make_art_tile($6BC,1,1)
+	dbglistobj Obj_Monitor,				Map_Monitor,		   6,   0, make_art_tile($4C4,0,0)
+	dbglistobj Obj_PathSwap,			Map_PathSwap,		   9,   1, make_art_tile($6BC,1,0)
+	dbglistobj Obj_PathSwap,			Map_PathSwap,		  $D,   5, make_art_tile($6BC,1,0)
+	dbglistobj Obj_Spring,				Map_Spring,		 $81,   0, make_art_tile($4A4,0,0)
+	dbglistobj Obj_Spring,				Map_Spring,		 $90,   3, make_art_tile($4B4,0,0)
+	dbglistobj Obj_Spring,				Map_Spring,		 $A0,   6, make_art_tile($4A4,0,0)
+	dbglistobj Obj_Spikes,				Map_Spikes,		   0,   0, make_art_tile($49C,0,0)
+	dbglistobj Obj_SSZFloatingPlatform,		Map_SSZFloatingPlatform,   0,   1, make_art_tile($2D4,2,1)
+	dbglistobj Obj_SSZCollapsingColumn,		Map_SSZFloatingPlatform,   0,   2, make_art_tile($2E4,3,1)
+	dbglistobj Obj_SSZCollapsingBridge,		Map_SSZCollapsingBridge,   0,   0, make_art_tile($2F4,2,1)
+	dbglistobj Obj_SSZCollapsingBridgeDiagonal,	Map_SSZCollapsingBridge,   0,   3, make_art_tile($2F4,2,1)
+	dbglistobj Obj_SSZBouncyCloud,			Map_SSZBouncyCloud,	   0,   0, make_art_tile($3D6,3,1)
+	dbglistobj Obj_SSZElevatorBar,			Map_SSZElevatorBar,	   0,   0, make_art_tile($348,2,0)
+	dbglistobj Obj_SSZHPZTeleporter,		Map_SSZHPZTeleporter,	   0,   0, make_art_tile($35C,0,0)
+	dbglistobj Obj_SSZRotatingPlatform,		Map_SSZRotatingPlatform,   0,   0, make_art_tile($37E,2,0)
+	dbglistobj Obj_SSZSwingingCarrier,		Map_SSZElevatorBar,	   0,   1, make_art_tile($348,2,0)
+	dbglistobj Obj_SSZSwingingCarrier,		Map_SSZElevatorBar,	 $80,   4, make_art_tile($348,2,0)
+	dbglistobj Obj_SSZRetractingSpring,		Map_SSZRetractingSpring,   0,   3, make_art_tile($3A2,0,0)
+	dbglistobj Obj_EggRobo,				Map_EggRobo,		   0,   0, make_art_tile($500,0,0)
+	dbglistobj Obj_EggRobo,				Map_EggRobo,		   2,   0, make_art_tile($500,0,0)
+	dbglistobj Obj_EggRobo,				Map_EggRobo,		   4,   0, make_art_tile($500,0,0)

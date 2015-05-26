@@ -1,103 +1,35 @@
-		dc.w $22
-		dc.l Obj_Ring
-		dc.l Map_Ring
-		dc.w $A6BC
-		dc.l Obj_Monitor
-		dc.l Map_Monitor+$6000000
-		dc.w $4C4
-		dc.l Obj_PathSwap+$1000000
-		dc.l Map_PathSwap+$9000000
-		dc.w $26BC
-		dc.l Obj_PathSwap+$5000000
-		dc.l Map_PathSwap+$D000000
-		dc.w $26BC
-		dc.l Obj_Spring
-		dc.l Map_Spring-$7F000000
-		dc.w $4A4
-		dc.l Obj_Spring+$3000000
-		dc.l Map_Spring-$70000000
-		dc.w $4B4
-		dc.l Obj_Spring+$6000000
-		dc.l Map_Spring-$60000000
-		dc.w $4A4
-		dc.l Obj_Spring+$7000000
-		dc.l Map_Spring+$30000000
-		dc.w $478
-		dc.l Obj_Spring+$A000000
-		dc.l Map_Spring+$40000000
-		dc.w $478
-		dc.l Obj_Spikes
-		dc.l Map_Spikes
-		dc.w $49C
-		dc.l Obj_Spikes+$4000000
-		dc.l Map_Spikes+$40000000
-		dc.w $494
-		dc.l Obj_Dragonfly
-		dc.l Map_Dragonfly
-		dc.w $2538
-		dc.l Obj_Butterdroid
-		dc.l Map_Butterdroid
-		dc.w $2514
-		dc.l Obj_Mushmeanie
-		dc.l Map_Mushmeanie
-		dc.w $456D
-		dc.l Obj_Madmole
-		dc.l Map_Madmole
-		dc.w $545
-		dc.l Obj_Cluckoid
-		dc.l Map_Cluckoid
-		dc.w $2500
-		dc.l Obj_MHZMushroomCap
-		dc.l Map_MHZMushroomCap
-		dc.w $4369
-		dc.l Obj_MHZPulleyLift+$4000000
-		dc.l Map_MHZPulleyLift+$8000000
-		dc.w $424
-		dc.l Obj_MHZCurledVine
-		dc.l Map_MHZCurledVine
-		dc.w $4353
-		dc.l Obj_MHZStickyVine
-		dc.l Map_MHZStickyVine
-		dc.w $440A
-		dc.l Obj_MHZSwingBarHorizontal
-		dc.l Map_MHZSwingBarHorizontal
-		dc.w $3F3
-		dc.l Obj_MHZSwingBarVertical
-		dc.l Map_MHZSwingBarVertical
-		dc.w $3F3
-		dc.l Obj_MHZMushroomPlatform
-		dc.l Map_MHZMushroomPlatform
-		dc.w $43CD
-		dc.l Obj_MHZMushroomParachute
-		dc.l Map_MHZMushroomParachute
-		dc.w $43CD
-		dc.l Obj_MHZMushroomCatapult
-		dc.l Map_MHZMushroomCatapult
-		dc.w $43CD
-		dc.l Obj_StillSprite+$18000000
-		dc.l Map_StillSprites+$18000000
-		dc.w $C357
-		dc.l Obj_StillSprite+$19000000
-		dc.l Map_StillSprites+$19000000
-		dc.w $C357
-		dc.l Obj_StillSprite+$1A000000
-		dc.l Map_StillSprites+$1A000000
-		dc.w $C357
-		dc.l Obj_StillSprite+$1B000000
-		dc.l Map_StillSprites+$1B000000
-		dc.w $E40E
-		dc.l Obj_StillSprite+$1C000000
-		dc.l Map_StillSprites+$1C000000
-		dc.w $E40E
-		dc.l Obj_StillSprite+$1D000000
-		dc.l Map_StillSprites+$1D000000
-		dc.w $441E
-		dc.l Obj_StillSprite+$1E000000
-		dc.l Map_StillSprites+$1E000000
-		dc.w $347
-		dc.l Obj_BreakableWall
-		dc.l Map_MHZBreakableWall
-		dc.w $434B
-		dc.l Obj_MHZSwingVine+$23000000
-		dc.l Map_AIZMHZRideVine
-		dc.w $455
+	;          Object			Mappings			Subtype Frame Arttile
+	dbglistobj Obj_Ring,			Map_Ring,			   0,   0, make_art_tile($6BC,1,1)
+	dbglistobj Obj_Monitor,			Map_Monitor,			   6,   0, make_art_tile($4C4,0,0)
+	dbglistobj Obj_PathSwap,		Map_PathSwap,			   9,   1, make_art_tile($6BC,1,0)
+	dbglistobj Obj_PathSwap,		Map_PathSwap,			  $D,   5, make_art_tile($6BC,1,0)
+	dbglistobj Obj_Spring,			Map_Spring,			 $81,   0, make_art_tile($4A4,0,0)
+	dbglistobj Obj_Spring,			Map_Spring,			 $90,   3, make_art_tile($4B4,0,0)
+	dbglistobj Obj_Spring,			Map_Spring,			 $A0,   6, make_art_tile($4A4,0,0)
+	dbglistobj Obj_Spring,			Map_Spring,			 $30,   7, make_art_tile($478,0,0)
+	dbglistobj Obj_Spring,			Map_Spring,			 $40,  $A, make_art_tile($478,0,0)
+	dbglistobj Obj_Spikes,			Map_Spikes,			   0,   0, make_art_tile($49C,0,0)
+	dbglistobj Obj_Spikes,			Map_Spikes,			 $40,   4, make_art_tile($494,0,0)
+	dbglistobj Obj_Dragonfly,		Map_Dragonfly,			   0,   0, make_art_tile($538,1,0)
+	dbglistobj Obj_Butterdroid,		Map_Butterdroid,		   0,   0, make_art_tile($514,1,0)
+	dbglistobj Obj_Mushmeanie,		Map_Mushmeanie,			   0,   0, make_art_tile($56D,2,0)
+	dbglistobj Obj_Madmole,			Map_Madmole,			   0,   0, make_art_tile($545,0,0)
+	dbglistobj Obj_Cluckoid,		Map_Cluckoid,			   0,   0, make_art_tile($500,1,0)
+	dbglistobj Obj_MHZMushroomCap,		Map_MHZMushroomCap,		   0,   0, make_art_tile($369,2,0)
+	dbglistobj Obj_MHZPulleyLift,		Map_MHZPulleyLift,		   8,   4, make_art_tile($424,0,0)
+	dbglistobj Obj_MHZCurledVine,		Map_MHZCurledVine,		   0,   0, make_art_tile($353,2,0)
+	dbglistobj Obj_MHZStickyVine,		Map_MHZStickyVine,		   0,   0, make_art_tile($40A,2,0)
+	dbglistobj Obj_MHZSwingBarHorizontal,	Map_MHZSwingBarHorizontal,	   0,   0, make_art_tile($3F3,0,0)
+	dbglistobj Obj_MHZSwingBarVertical,	Map_MHZSwingBarVertical,	   0,   0, make_art_tile($3F3,0,0)
+	dbglistobj Obj_MHZMushroomPlatform,	Map_MHZMushroomPlatform,	   0,   0, make_art_tile($3CD,2,0)
+	dbglistobj Obj_MHZMushroomParachute,	Map_MHZMushroomParachute,	   0,   0, make_art_tile($3CD,2,0)
+	dbglistobj Obj_MHZMushroomCatapult,	Map_MHZMushroomCatapult,	   0,   0, make_art_tile($3CD,2,0)
+	dbglistobj Obj_StillSprite,		Map_StillSprites,		 $18, $18, make_art_tile($357,2,1)
+	dbglistobj Obj_StillSprite,		Map_StillSprites,		 $19, $19, make_art_tile($357,2,1)
+	dbglistobj Obj_StillSprite,		Map_StillSprites,		 $1A, $1A, make_art_tile($357,2,1)
+	dbglistobj Obj_StillSprite,		Map_StillSprites,		 $1B, $1B, make_art_tile($40E,3,1)
+	dbglistobj Obj_StillSprite,		Map_StillSprites,		 $1C, $1C, make_art_tile($40E,3,1)
+	dbglistobj Obj_StillSprite,		Map_StillSprites,		 $1D, $1D, make_art_tile($41E,2,0)
+	dbglistobj Obj_StillSprite,		Map_StillSprites,		 $1E, $1E, make_art_tile($347,0,0)
+	dbglistobj Obj_BreakableWall,		Map_MHZBreakableWall,		   0,   0, make_art_tile($34B,2,0)
+	dbglistobj Obj_MHZSwingVine,		Map_AIZMHZRideVine,		   0, $23, make_art_tile($455,0,0)

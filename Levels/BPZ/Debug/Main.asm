@@ -1,64 +1,22 @@
-		dc.w $15
-		dc.l Obj_Ring
-		dc.l Map_Ring
-		dc.w $E3D2
-		dc.l Obj_2PItem
-		dc.l Map_2PItem
-		dc.w $3C6
-		dc.l Obj_PathSwap+$1000000
-		dc.l Map_PathSwap+$9000000
-		dc.w $63D2
-		dc.l Obj_PathSwap+$5000000
-		dc.l Map_PathSwap+$D000000
-		dc.w $63D2
-		dc.l Obj_Spring
-		dc.l Map_2PSpring-$7F000000
-		dc.w $391
-		dc.l Obj_Spring+$3000000
-		dc.l Map_2PSpring-$70000000
-		dc.w $3AD
-		dc.l Obj_Spring+$6000000
-		dc.l Map_2PSpring-$60000000
-		dc.w $391
-		dc.l Obj_Spikes
-		dc.l Map_2PSpikes
-		dc.w $391
-		dc.l Obj_2PRetractingSpring
-		dc.l Map_2PSpring
-		dc.w $391
-		dc.l Obj_2PRetractingSpring+$3000000
-		dc.l Map_2PSpring+$10000000
-		dc.w $3AD
-		dc.l Obj_2PRetractingSpring+$6000000
-		dc.l Map_2PSpring+$20000000
-		dc.w $391
-		dc.l Obj_2PRetractingSpring+$3000000
-		dc.l Map_2PSpring+$30000000
-		dc.w $3AD
-		dc.l Obj_2PRetractingSpring
-		dc.l Map_2PSpring+$40000000
-		dc.w $391
-		dc.l Obj_2PRetractingSpring+$6000000
-		dc.l Map_2PSpring+$50000000
-		dc.w $391
-		dc.l Obj_2PRetractingSpring
-		dc.l Map_2PSpring-$20000000
-		dc.w $391
-		dc.l Obj_2PRetractingSpring+$6000000
-		dc.l Map_2PSpring-$10000000
-		dc.w $391
-		dc.l Obj_Button+$2000000
-		dc.l Map_2PButton
-		dc.w $3AD
-		dc.l Obj_Bumper
-		dc.l Map_2PBumper
-		dc.w $2300
-		dc.l Obj_BPZElephantBlock
-		dc.l Map_BPZElephantBlock
-		dc.w $300
-		dc.l Obj_BPZBalloon
-		dc.l Map_BPZBalloon
-		dc.w $6300
-		dc.l Obj_2PGoalMarker
-		dc.l Map_2PGoalMarker
-		dc.w $6BC
+	;          Object			Mappings		Subtype Frame Arttile
+	dbglistobj Obj_Ring,			Map_Ring,		   0,   0, make_art_tile($3D2,3,1)
+	dbglistobj Obj_2PItem,			Map_2PItem,		   0,   0, make_art_tile($3C6,0,0)
+	dbglistobj Obj_PathSwap,		Map_PathSwap,		   9,   1, make_art_tile($3D2,3,0)
+	dbglistobj Obj_PathSwap,		Map_PathSwap,		  $D,   5, make_art_tile($3D2,3,0)
+	dbglistobj Obj_Spring,			Map_2PSpring,		 $81,   0, make_art_tile($391,0,0)
+	dbglistobj Obj_Spring,			Map_2PSpring,		 $90,   3, make_art_tile($3AD,0,0)
+	dbglistobj Obj_Spring,			Map_2PSpring,		 $A0,   6, make_art_tile($391,0,0)
+	dbglistobj Obj_Spikes,			Map_2PSpikes,		   0,   0, make_art_tile($391,0,0)
+	dbglistobj Obj_2PRetractingSpring,	Map_2PSpring,		   0,   0, make_art_tile($391,0,0)
+	dbglistobj Obj_2PRetractingSpring,	Map_2PSpring,		 $10,   3, make_art_tile($3AD,0,0)
+	dbglistobj Obj_2PRetractingSpring,	Map_2PSpring,		 $20,   6, make_art_tile($391,0,0)
+	dbglistobj Obj_2PRetractingSpring,	Map_2PSpring,		 $30,   3, make_art_tile($3AD,0,0)
+	dbglistobj Obj_2PRetractingSpring,	Map_2PSpring,		 $40,   0, make_art_tile($391,0,0)
+	dbglistobj Obj_2PRetractingSpring,	Map_2PSpring,		 $50,   6, make_art_tile($391,0,0)
+	dbglistobj Obj_2PRetractingSpring,	Map_2PSpring,		 $E0,   0, make_art_tile($391,0,0)
+	dbglistobj Obj_2PRetractingSpring,	Map_2PSpring,		 $F0,   6, make_art_tile($391,0,0)
+	dbglistobj Obj_Button,			Map_2PButton,		   0,   2, make_art_tile($3AD,0,0)
+	dbglistobj Obj_Bumper,			Map_2PBumper,		   0,   0, make_art_tile($300,1,0)
+	dbglistobj Obj_BPZElephantBlock,	Map_BPZElephantBlock,	   0,   0, make_art_tile($300,0,0)
+	dbglistobj Obj_BPZBalloon,		Map_BPZBalloon,		   0,   0, make_art_tile($300,3,0)
+	dbglistobj Obj_2PGoalMarker,		Map_2PGoalMarker,	   0,   0, make_art_tile($6BC,0,0)

@@ -1,109 +1,37 @@
-		dc.w $24
-		dc.l Obj_Ring
-		dc.l Map_Ring
-		dc.w $A6BC
-		dc.l Obj_Monitor
-		dc.l Map_Monitor+$6000000
-		dc.w $4C4
-		dc.l Obj_PathSwap+$1000000
-		dc.l Map_PathSwap+$9000000
-		dc.w $26BC
-		dc.l Obj_PathSwap+$5000000
-		dc.l Map_PathSwap+$D000000
-		dc.w $26BC
-		dc.l Obj_Spring
-		dc.l Map_Spring-$7F000000
-		dc.w $4A4
-		dc.l Obj_Spring+$3000000
-		dc.l Map_Spring-$70000000
-		dc.w $4B4
-		dc.l Obj_Spring+$6000000
-		dc.l Map_Spring-$60000000
-		dc.w $4A4
-		dc.l Obj_Spikes
-		dc.l Map_Spikes
-		dc.w $49C
-		dc.l Obj_Spikes+$4000000
-		dc.l Map_Spikes+$40000000
-		dc.w $494
-		dc.l Obj_Clamer
-		dc.l Map_Clamer
-		dc.w $2500
-		dc.l Obj_CNZBlastoid
-		dc.l Map_CNZBlastoid
-		dc.w $2524
-		dc.l Obj_Batbot
-		dc.l Map_Batbot
-		dc.w $2552
-		dc.l Obj_Door+$1000000
-		dc.l Map_HCZCNZDEZDoor+$1000000
-		dc.w $4416
-		dc.l Obj_Bumper
-		dc.l Map_Bumper
-		dc.w $4364
-		dc.l Obj_CNZCannon+$9000000
-		dc.l Map_CNZCannon
-		dc.w $4374
-		dc.l Obj_CNZRisingPlatform
-		dc.l Map_CNZRisingPlatform
-		dc.w $43BE
-		dc.l Obj_CNZTrapDoor
-		dc.l Map_CNZTrapDoor
-		dc.w $43F0
-		dc.l Obj_CNZLightBulb
-		dc.l Map_CNZLightBulb
-		dc.w $4404
-		dc.l Obj_CNZHoverFan
-		dc.l Map_CNZHoverFan-$80000000
-		dc.w $43E8
-		dc.l Obj_CNZCylinder
-		dc.l Map_CNZCylinder
-		dc.w $438E
-		dc.l Obj_Door
-		dc.l Map_CNZDoorHorizontal-$80000000
-		dc.w $4416
-		dc.l Obj_Bumper
-		dc.l Map_Bumper-$80000000
-		dc.w $4364
-		dc.l Obj_Bumper
-		dc.l Map_Bumper+$2B000000
-		dc.w $4364
-		dc.l Obj_Bumper
-		dc.l Map_Bumper-$2B000000
-		dc.w $4364
-		dc.l Obj_CNZBalloon
-		dc.l Map_CNZBalloon
-		dc.w $351
-		dc.l Obj_CNZBalloon+$5000000
-		dc.l Map_CNZBalloon+$1000000
-		dc.w $351
-		dc.l Obj_CNZBalloon+$A000000
-		dc.l Map_CNZBalloon+$2000000
-		dc.w $351
-		dc.l Obj_CNZBalloon+$F000000
-		dc.l Map_CNZBalloon+$3000000
-		dc.w $351
-		dc.l Obj_CNZBalloon+$14000000
-		dc.l Map_CNZBalloon+$4000000
-		dc.w $351
-		dc.l Obj_Button+$2000000
-		dc.l Map_CNZButton
-		dc.w $441A
-		dc.l Obj_BreakableWall
-		dc.l Map_CNZSOZBreakableWall
-		dc.w $4420
-		dc.l Obj_BreakableWall+$2000000
-		dc.l Map_CNZSOZBreakableWall+$2000000
-		dc.w $4420
-		dc.l Obj_CNZBarberPoleSprite
-		dc.l Map_Ring
-		dc.w $86BC
-		dc.l Obj_Bubbler+$13000000
-		dc.l Map_Bubbler-$7F000000
-		dc.w $845C
-		dc.l Obj_CorkFloor
-		dc.l Map_CNZCorkFloor+$1000000
-		dc.w $4430
-		dc.l Obj_CNZCylinder
-		dc.l Map_CNZCylinder+$49000000
-		dc.w $438E
+	;          Object			Mappings		Subtype Frame Arttile
+	dbglistobj Obj_Ring,			Map_Ring,		   0,   0, make_art_tile($6BC,1,1)
+	dbglistobj Obj_Monitor,			Map_Monitor,		   6,   0, make_art_tile($4C4,0,0)
+	dbglistobj Obj_PathSwap,		Map_PathSwap,		   9,   1, make_art_tile($6BC,1,0)
+	dbglistobj Obj_PathSwap,		Map_PathSwap,		  $D,   5, make_art_tile($6BC,1,0)
+	dbglistobj Obj_Spring,			Map_Spring,		 $81,   0, make_art_tile($4A4,0,0)
+	dbglistobj Obj_Spring,			Map_Spring,		 $90,   3, make_art_tile($4B4,0,0)
+	dbglistobj Obj_Spring,			Map_Spring,		 $A0,   6, make_art_tile($4A4,0,0)
+	dbglistobj Obj_Spikes,			Map_Spikes,		   0,   0, make_art_tile($49C,0,0)
+	dbglistobj Obj_Spikes,			Map_Spikes,		 $40,   4, make_art_tile($494,0,0)
+	dbglistobj Obj_Clamer,			Map_Clamer,		   0,   0, make_art_tile($500,1,0)
+	dbglistobj Obj_CNZBlastoid,		Map_CNZBlastoid,	   0,   0, make_art_tile($524,1,0)
+	dbglistobj Obj_Batbot,			Map_Batbot,		   0,   0, make_art_tile($552,1,0)
+	dbglistobj Obj_Door,			Map_HCZCNZDEZDoor,	   1,   1, make_art_tile($416,2,0)
+	dbglistobj Obj_Bumper,			Map_Bumper,		   0,   0, make_art_tile($364,2,0)
+	dbglistobj Obj_CNZCannon,		Map_CNZCannon,		   0,   9, make_art_tile($374,2,0)
+	dbglistobj Obj_CNZRisingPlatform,	Map_CNZRisingPlatform,	   0,   0, make_art_tile($3BE,2,0)
+	dbglistobj Obj_CNZTrapDoor,		Map_CNZTrapDoor,	   0,   0, make_art_tile($3F0,2,0)
+	dbglistobj Obj_CNZLightBulb,		Map_CNZLightBulb,	   0,   0, make_art_tile($404,2,0)
+	dbglistobj Obj_CNZHoverFan,		Map_CNZHoverFan,	 $80,   0, make_art_tile($3E8,2,0)
+	dbglistobj Obj_CNZCylinder,		Map_CNZCylinder,	   0,   0, make_art_tile($38E,2,0)
+	dbglistobj Obj_Door,			Map_CNZDoorHorizontal,	 $80,   0, make_art_tile($416,2,0)
+	dbglistobj Obj_Bumper,			Map_Bumper,		 $80,   0, make_art_tile($364,2,0)
+	dbglistobj Obj_Bumper,			Map_Bumper,		 $2B,   0, make_art_tile($364,2,0)
+	dbglistobj Obj_Bumper,			Map_Bumper,		 $D5,   0, make_art_tile($364,2,0)
+	dbglistobj Obj_CNZBalloon,		Map_CNZBalloon,		   0,   0, make_art_tile($351,0,0)
+	dbglistobj Obj_CNZBalloon,		Map_CNZBalloon,		   1,   5, make_art_tile($351,0,0)
+	dbglistobj Obj_CNZBalloon,		Map_CNZBalloon,		   2,  $A, make_art_tile($351,0,0)
+	dbglistobj Obj_CNZBalloon,		Map_CNZBalloon,		   3,  $F, make_art_tile($351,0,0)
+	dbglistobj Obj_CNZBalloon,		Map_CNZBalloon,		   4, $14, make_art_tile($351,0,0)
+	dbglistobj Obj_Button,			Map_CNZButton,		   0,   2, make_art_tile($41A,2,0)
+	dbglistobj Obj_BreakableWall,		Map_CNZSOZBreakableWall,   0,   0, make_art_tile($420,2,0)
+	dbglistobj Obj_BreakableWall,		Map_CNZSOZBreakableWall,   2,   2, make_art_tile($420,2,0)
+	dbglistobj Obj_CNZBarberPoleSprite,	Map_Ring,		   0,   0, make_art_tile($6BC,0,1)
+	dbglistobj Obj_Bubbler,			Map_Bubbler,		 $81, $13, make_art_tile($45C,0,1)
+	dbglistobj Obj_CorkFloor,		Map_CNZCorkFloor,	   1,   0, make_art_tile($430,2,0)
+	dbglistobj Obj_CNZCylinder,		Map_CNZCylinder,	 $49,   0, make_art_tile($38E,2,0)

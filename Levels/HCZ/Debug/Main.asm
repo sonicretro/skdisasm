@@ -1,163 +1,55 @@
-		dc.w $36
-		dc.l Obj_Ring
-		dc.l Map_Ring
-		dc.w $A6BC
-		dc.l Obj_Monitor
-		dc.l Map_Monitor+$6000000
-		dc.w $4C4
-		dc.l Obj_PathSwap+$1000000
-		dc.l Map_PathSwap+$9000000
-		dc.w $26BC
-		dc.l Obj_PathSwap+$5000000
-		dc.l Map_PathSwap+$D000000
-		dc.w $26BC
-		dc.l Obj_Spring
-		dc.l Map_Spring-$7F000000
-		dc.w $4A4
-		dc.l Obj_Spring+$3000000
-		dc.l Map_Spring-$70000000
-		dc.w $4B4
-		dc.l Obj_Spring+$6000000
-		dc.l Map_Spring-$60000000
-		dc.w $4A4
-		dc.l Obj_Spikes
-		dc.l Map_Spikes
-		dc.w $49C
-		dc.l Obj_Blastoid
-		dc.l Map_Blastoid
-		dc.w $2539
-		dc.l Obj_Poindexter
-		dc.l Map_Poindexter+$20000000
-		dc.w $2559
-		dc.l Obj_Buggernaut
-		dc.l Map_Buggernaut
-		dc.w $244C
-		dc.l Obj_MegaChomper
-		dc.l Map_MegaChomper
-		dc.w $254D
-		dc.l Obj_TurboSpiker
-		dc.l Map_TurboSpiker
-		dc.w $2500
-		dc.l Obj_Jawz
-		dc.l Map_Jawz
-		dc.w $2539
-		dc.l Obj_Button+$2000000
-		dc.l Map_Button2+$20000000
-		dc.w $2426
-		dc.l Obj_BreakableBar
-		dc.l Map_BreakableBar
-		dc.w $43CA
-		dc.l Obj_BreakableBar+$4000000
-		dc.l Map_BreakableBar-$80000000
-		dc.w $43CA
-		dc.l Obj_HCZCGZFan
-		dc.l Map_HCZFan+$16000000
-		dc.w $240B
-		dc.l Obj_HCZCGZFan+$1000000
-		dc.l Map_HCZFan+$4C000000
-		dc.w $240B
-		dc.l Obj_HCZLargeFan
-		dc.l Map_HCZLargeFan
-		dc.w $2500
-		dc.l Obj_HCZHandLauncher
-		dc.l Map_HCZHandLauncher
-		dc.w $23E4
-		dc.l Obj_HCZWaterWall
-		dc.l Map_HCZWaterWall
-		dc.w $4500
-		dc.l Obj_HCZWaterWall+$1000000
-		dc.l Map_HCZWaterWall+$1000000
-		dc.w $4500
-		dc.l Obj_HCZCGZFan+$1000000
-		dc.l Map_HCZFan-$4000000
-		dc.w $240B
-		dc.l Obj_Door
-		dc.l Map_HCZCNZDEZDoor
-		dc.w $43D4
-		dc.l Obj_HCZConveryorSpike
-		dc.l Map_HCZConveyorSpike
-		dc.w $243E
-		dc.l Obj_HCZBlock
-		dc.l Map_HCZBlock
-		dc.w $43D4
-		dc.l Obj_CollapsingBridge
-		dc.l Map_HCZCollapsingBridge+$8000000
-		dc.w $C001
-		dc.l Obj_CollapsingBridge+$3000000
-		dc.l Map_HCZCollapsingBridge+$18000000
-		dc.w $C001
-		dc.l Obj_CollapsingBridge+$6000000
-		dc.l Map_HCZCollapsingBridge+$28000000
-		dc.w $C001
-		dc.l Obj_CollapsingBridge+$9000000
-		dc.l Map_HCZCollapsingBridge+$38000000
-		dc.w $C001
-		dc.l Obj_StillSprite+$6000000
-		dc.l Map_StillSprites+$6000000
-		dc.w $C001
-		dc.l Obj_StillSprite+$7000000
-		dc.l Map_StillSprites+$7000000
-		dc.w $C001
-		dc.l Obj_StillSprite+$8000000
-		dc.l Map_StillSprites+$8000000
-		dc.w $4001
-		dc.l Obj_StillSprite+$9000000
-		dc.l Map_StillSprites+$9000000
-		dc.w $C001
-		dc.l Obj_StillSprite+$A000000
-		dc.l Map_StillSprites+$A000000
-		dc.w $C001
-		dc.l Obj_Bubbler+$13000000
-		dc.l Map_Bubbler-$7F000000
-		dc.w $845C
-		dc.l Obj_FloatingPlatform
-		dc.l Map_HCZFloatingPlatform+$14000000
-		dc.w $441D
-		dc.l Obj_HCZSnakeBlocks+$1000000
-		dc.l Map_HCZFloatingPlatform
-		dc.w $28
-		dc.l Obj_FloatingPlatform
-		dc.l Map_HCZFloatingPlatform+$17000000
-		dc.w $441D
-		dc.l Obj_HCZSpinningColumn
-		dc.l Map_HCZSpinningColumn+$1000000
-		dc.w $4040
-		dc.l Obj_HCZSpinningColumn
-		dc.l Map_HCZSpinningColumn+$2000000
-		dc.w $4040
-		dc.l Obj_StillSprite+$F000000
-		dc.l Map_StillSprites+$F000000
-		dc.w $C368
-		dc.l Obj_StillSprite+$10000000
-		dc.l Map_StillSprites+$10000000
-		dc.w $C379
-		dc.l Obj_StillSprite+$11000000
-		dc.l Map_StillSprites+$11000000
-		dc.w $C399
-		dc.l Obj_StillSprite+$12000000
-		dc.l Map_StillSprites+$12000000
-		dc.w $C3A4
-		dc.l Obj_WaterDrop
-		dc.l Map_HCZWaterDrop+$40000000
-		dc.w $235C
-		dc.l Obj_HCZWaterSplash
-		dc.l Map_HCZWaterSplash
-		dc.w $43B2
-		dc.l Obj_StillSprite+$13000000
-		dc.l Map_StillSprites+$13000000
-		dc.w $4038
-		dc.l Obj_TensionBridge
-		dc.l Map_TensionBridge-$70000000
-		dc.w $4038
-		dc.l Obj_InvisibleHurtBlockHorizontal
-		dc.l Map_InvisibleBlock
-		dc.w $86BC
-		dc.l Obj_InvisibleHurtBlockVertical
-		dc.l Map_InvisibleBlock
-		dc.w $86BC
-		dc.l Obj_BreakableWall
-		dc.l Map_HCZBreakableWall
-		dc.w $6001
-		dc.l Obj_BreakableWall+$2000000
-		dc.l Map_HCZBreakableWall+$2000000
-		dc.w $4350
+	;          Object				Mappings			Subtype Frame Arttile
+	dbglistobj Obj_Ring,				Map_Ring,			   0,   0, make_art_tile($6BC,1,1)
+	dbglistobj Obj_Monitor,				Map_Monitor,			   6,   0, make_art_tile($4C4,0,0)
+	dbglistobj Obj_PathSwap,			Map_PathSwap,			   9,   1, make_art_tile($6BC,1,0)
+	dbglistobj Obj_PathSwap,			Map_PathSwap,			  $D,   5, make_art_tile($6BC,1,0)
+	dbglistobj Obj_Spring,				Map_Spring,			 $81,   0, make_art_tile($4A4,0,0)
+	dbglistobj Obj_Spring,				Map_Spring,			 $90,   3, make_art_tile($4B4,0,0)
+	dbglistobj Obj_Spring,				Map_Spring,			 $A0,   6, make_art_tile($4A4,0,0)
+	dbglistobj Obj_Spikes,				Map_Spikes,			   0,   0, make_art_tile($49C,0,0)
+	dbglistobj Obj_Blastoid,			Map_Blastoid,			   0,   0, make_art_tile($539,1,0)
+	dbglistobj Obj_Poindexter,			Map_Poindexter,			 $20,   0, make_art_tile($559,1,0)
+	dbglistobj Obj_Buggernaut,			Map_Buggernaut,			   0,   0, make_art_tile($44C,1,0)
+	dbglistobj Obj_MegaChomper,			Map_MegaChomper,		   0,   0, make_art_tile($54D,1,0)
+	dbglistobj Obj_TurboSpiker,			Map_TurboSpiker,		   0,   0, make_art_tile($500,1,0)
+	dbglistobj Obj_Jawz,				Map_Jawz,			   0,   0, make_art_tile($539,1,0)
+	dbglistobj Obj_Button,				Map_Button2,			 $20,   2, make_art_tile($426,1,0)
+	dbglistobj Obj_BreakableBar,			Map_BreakableBar,		   0,   0, make_art_tile($3CA,2,0)
+	dbglistobj Obj_BreakableBar,			Map_BreakableBar,		 $80,   4, make_art_tile($3CA,2,0)
+	dbglistobj Obj_HCZCGZFan,			Map_HCZFan,			 $16,   0, make_art_tile($40B,1,0)
+	dbglistobj Obj_HCZCGZFan,			Map_HCZFan,			 $4C,   1, make_art_tile($40B,1,0)
+	dbglistobj Obj_HCZLargeFan,			Map_HCZLargeFan,		   0,   0, make_art_tile($500,1,0)
+	dbglistobj Obj_HCZHandLauncher,			Map_HCZHandLauncher,		   0,   0, make_art_tile($3E4,1,0)
+	dbglistobj Obj_HCZWaterWall,			Map_HCZWaterWall,		   0,   0, make_art_tile($500,2,0)
+	dbglistobj Obj_HCZWaterWall,			Map_HCZWaterWall,		   1,   1, make_art_tile($500,2,0)
+	dbglistobj Obj_HCZCGZFan,			Map_HCZFan,			 $FC,   1, make_art_tile($40B,1,0)
+	dbglistobj Obj_Door,				Map_HCZCNZDEZDoor,		   0,   0, make_art_tile($3D4,2,0)
+	dbglistobj Obj_HCZConveryorSpike,		Map_HCZConveyorSpike,		   0,   0, make_art_tile($43E,1,0)
+	dbglistobj Obj_HCZBlock,			Map_HCZBlock,			   0,   0, make_art_tile($3D4,2,0)
+	dbglistobj Obj_CollapsingBridge,		Map_HCZCollapsingBridge,	   8,   0, make_art_tile($001,2,1)
+	dbglistobj Obj_CollapsingBridge,		Map_HCZCollapsingBridge,	 $18,   3, make_art_tile($001,2,1)
+	dbglistobj Obj_CollapsingBridge,		Map_HCZCollapsingBridge,	 $28,   6, make_art_tile($001,2,1)
+	dbglistobj Obj_CollapsingBridge,		Map_HCZCollapsingBridge,	 $38,   9, make_art_tile($001,2,1)
+	dbglistobj Obj_StillSprite,			Map_StillSprites,		   6,   6, make_art_tile($001,2,1)
+	dbglistobj Obj_StillSprite,			Map_StillSprites,		   7,   7, make_art_tile($001,2,1)
+	dbglistobj Obj_StillSprite,			Map_StillSprites,		   8,   8, make_art_tile($001,2,0)
+	dbglistobj Obj_StillSprite,			Map_StillSprites,		   9,   9, make_art_tile($001,2,1)
+	dbglistobj Obj_StillSprite,			Map_StillSprites,		  $A,  $A, make_art_tile($001,2,1)
+	dbglistobj Obj_Bubbler,				Map_Bubbler,			 $81, $13, make_art_tile($45C,0,1)
+	dbglistobj Obj_FloatingPlatform,		Map_HCZFloatingPlatform,	 $14,   0, make_art_tile($41D,2,0)
+	dbglistobj Obj_HCZSnakeBlocks,			Map_HCZFloatingPlatform,	   0,   1, make_art_tile($028,0,0)
+	dbglistobj Obj_FloatingPlatform,		Map_HCZFloatingPlatform,	 $17,   0, make_art_tile($41D,2,0)
+	dbglistobj Obj_HCZSpinningColumn,		Map_HCZSpinningColumn,		   1,   0, make_art_tile($040,2,0)
+	dbglistobj Obj_HCZSpinningColumn,		Map_HCZSpinningColumn,		   2,   0, make_art_tile($040,2,0)
+	dbglistobj Obj_StillSprite,			Map_StillSprites,		  $F,  $F, make_art_tile($368,2,1)
+	dbglistobj Obj_StillSprite,			Map_StillSprites,		 $10, $10, make_art_tile($379,2,1)
+	dbglistobj Obj_StillSprite,			Map_StillSprites,		 $11, $11, make_art_tile($399,2,1)
+	dbglistobj Obj_StillSprite,			Map_StillSprites,		 $12, $12, make_art_tile($3A4,2,1)
+	dbglistobj Obj_WaterDrop,			Map_HCZWaterDrop,		 $40,   0, make_art_tile($35C,1,0)
+	dbglistobj Obj_HCZWaterSplash,			Map_HCZWaterSplash,		   0,   0, make_art_tile($3B2,2,0)
+	dbglistobj Obj_StillSprite,			Map_StillSprites,		 $13, $13, make_art_tile($038,2,0)
+	dbglistobj Obj_TensionBridge,			Map_TensionBridge,		 $90,   0, make_art_tile($038,2,0)
+	dbglistobj Obj_InvisibleHurtBlockHorizontal,	Map_InvisibleBlock,		   0,   0, make_art_tile($6BC,0,1)
+	dbglistobj Obj_InvisibleHurtBlockVertical,	Map_InvisibleBlock,		   0,   0, make_art_tile($6BC,0,1)
+	dbglistobj Obj_BreakableWall,			Map_HCZBreakableWall,		   0,   0, make_art_tile($001,3,0)
+	dbglistobj Obj_BreakableWall,			Map_HCZBreakableWall,		   2,   2, make_art_tile($350,2,0)

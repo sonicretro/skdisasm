@@ -1,103 +1,35 @@
-		dc.w $22
-		dc.l Obj_Ring
-		dc.l Map_Ring
-		dc.w $A6BC
-		dc.l Obj_Monitor
-		dc.l Map_Monitor+$6000000
-		dc.w $4C4
-		dc.l Obj_PathSwap+$1000000
-		dc.l Map_PathSwap+$9000000
-		dc.w $26BC
-		dc.l Obj_PathSwap+$5000000
-		dc.l Map_PathSwap+$D000000
-		dc.w $26BC
-		dc.l Obj_Spring
-		dc.l Map_Spring-$7F000000
-		dc.w $4A4
-		dc.l Obj_Spring+$3000000
-		dc.l Map_Spring-$70000000
-		dc.w $4B4
-		dc.l Obj_Spring+$6000000
-		dc.l Map_Spring-$60000000
-		dc.w $4A4
-		dc.l Obj_Spikes
-		dc.l Map_Spikes
-		dc.w $49C
-		dc.l Obj_Penguinator
-		dc.l Map_Penguinator+$20000000
-		dc.w $2500
-		dc.l Obj_StarPointer
-		dc.l Map_StarPointer
-		dc.w $2548
-		dc.l Obj_ICZPathFollowPlatform
-		dc.l Map_ICZPlatforms
-		dc.w $43B6
-		dc.l Obj_ICZPathFollowPlatform
-		dc.l Map_ICZPlatforms+$2000000
-		dc.w $43B6
-		dc.l Obj_ICZBreakableWall+$6000000
-		dc.l Map_ICZWallAndColumn
-		dc.w $4001
-		dc.l Obj_ICZCrushingColumn+$2000000
-		dc.l Map_ICZWallAndColumn+$1000000
-		dc.w $4001
-		dc.l Obj_ICZCrushingColumn+$2000000
-		dc.l Map_ICZWallAndColumn+$2000000
-		dc.w $4001
-		dc.l Obj_ICZCrushingColumn+$2000000
-		dc.l Map_ICZWallAndColumn+$3000000
-		dc.w $4001
-		dc.l Obj_ICZCrushingColumn+$2000000
-		dc.l Map_ICZWallAndColumn+$4000000
-		dc.w $4001
-		dc.l Obj_ICZFreezer+$6000000
-		dc.l Map_ICZPlatforms
-		dc.w $23B6
-		dc.l Obj_ICZSegmentColumn+$A000000
-		dc.l Map_ICZWallAndColumn
-		dc.w $4001
-		dc.l Obj_ICZSegmentColumn+$A000000
-		dc.l Map_ICZWallAndColumn+$2000000
-		dc.w $4001
-		dc.l Obj_ICZSwingingPlatform+$7000000
-		dc.l Map_ICZPlatforms
-		dc.w $23B6
-		dc.l Obj_ICZSwingingPlatform+$7000000
-		dc.l Map_ICZPlatforms+$2000000
-		dc.w $23B6
-		dc.l Obj_ICZStalagtite+$7000000
-		dc.l Map_ICZWallAndColumn
-		dc.w $4001
-		dc.l Obj_ICZIceSpikes+$5000000
-		dc.l Map_ICZWallAndColumn
-		dc.w $4001
-		dc.l Obj_ICZIceSpikes+$5000000
-		dc.l Map_ICZWallAndColumn+$2000000
-		dc.w $4001
-		dc.l Obj_ICZIceCube+$3000000
-		dc.l Map_ICZPlatforms
-		dc.w $43B6
-		dc.l Obj_ICZHarmfulIce+$5000000
-		dc.l Map_ICZPlatforms
-		dc.w $43B6
-		dc.l Obj_ICZHarmfulIce+$4000000
-		dc.l Map_ICZPlatforms+$2000000
-		dc.w $43B6
-		dc.l Obj_CollapsingPlatform
-		dc.l Map_ICZCollapsingBridge
-		dc.w $4001
-		dc.l Obj_CollapsingBridge+$3000000
-		dc.l Map_ICZCollapsingBridge-$80000000
-		dc.w $4001
-		dc.l Obj_CorkFloor
-		dc.l Map_ICZCorkFloor
-		dc.w $4001
-		dc.l Obj_CorkFloor+$A000000
-		dc.l Map_ICZCorkFloor+$1A000000
-		dc.w $43B6
-		dc.l Obj_TensionBridge
-		dc.l Map_ICZTensionBridge+$10000000
-		dc.w $43B6
-		dc.l Obj_Button+$2000000
-		dc.l Map_Button+$10000000
-		dc.w $456
+	;          Object			Mappings		Subtype Frame Arttile
+	dbglistobj Obj_Ring,			Map_Ring,		   0,   0, make_art_tile($6BC,1,1)
+	dbglistobj Obj_Monitor,			Map_Monitor,		   6,   0, make_art_tile($4C4,0,0)
+	dbglistobj Obj_PathSwap,		Map_PathSwap,		   9,   1, make_art_tile($6BC,1,0)
+	dbglistobj Obj_PathSwap,		Map_PathSwap,		  $D,   5, make_art_tile($6BC,1,0)
+	dbglistobj Obj_Spring,			Map_Spring,		 $81,   0, make_art_tile($4A4,0,0)
+	dbglistobj Obj_Spring,			Map_Spring,		 $90,   3, make_art_tile($4B4,0,0)
+	dbglistobj Obj_Spring,			Map_Spring,		 $A0,   6, make_art_tile($4A4,0,0)
+	dbglistobj Obj_Spikes,			Map_Spikes,		   0,   0, make_art_tile($49C,0,0)
+	dbglistobj Obj_Penguinator,		Map_Penguinator,	 $20,   0, make_art_tile($500,1,0)
+	dbglistobj Obj_StarPointer,		Map_StarPointer,	   0,   0, make_art_tile($548,1,0)
+	dbglistobj Obj_ICZPathFollowPlatform,	Map_ICZPlatforms,	   0,   0, make_art_tile($3B6,2,0)
+	dbglistobj Obj_ICZPathFollowPlatform,	Map_ICZPlatforms,	   2,   0, make_art_tile($3B6,2,0)
+	dbglistobj Obj_ICZBreakableWall,	Map_ICZWallAndColumn,	   0,   6, make_art_tile($001,2,0)
+	dbglistobj Obj_ICZCrushingColumn,	Map_ICZWallAndColumn,	   1,   2, make_art_tile($001,2,0)
+	dbglistobj Obj_ICZCrushingColumn,	Map_ICZWallAndColumn,	   2,   2, make_art_tile($001,2,0)
+	dbglistobj Obj_ICZCrushingColumn,	Map_ICZWallAndColumn,	   3,   2, make_art_tile($001,2,0)
+	dbglistobj Obj_ICZCrushingColumn,	Map_ICZWallAndColumn,	   4,   2, make_art_tile($001,2,0)
+	dbglistobj Obj_ICZFreezer,		Map_ICZPlatforms,	   0,   6, make_art_tile($3B6,1,0)
+	dbglistobj Obj_ICZSegmentColumn,	Map_ICZWallAndColumn,	   0,  $A, make_art_tile($001,2,0)
+	dbglistobj Obj_ICZSegmentColumn,	Map_ICZWallAndColumn,	   2,  $A, make_art_tile($001,2,0)
+	dbglistobj Obj_ICZSwingingPlatform,	Map_ICZPlatforms,	   0,   7, make_art_tile($3B6,1,0)
+	dbglistobj Obj_ICZSwingingPlatform,	Map_ICZPlatforms,	   2,   7, make_art_tile($3B6,1,0)
+	dbglistobj Obj_ICZStalagtite,		Map_ICZWallAndColumn,	   0,   7, make_art_tile($001,2,0)
+	dbglistobj Obj_ICZIceSpikes,		Map_ICZWallAndColumn,	   0,   5, make_art_tile($001,2,0)
+	dbglistobj Obj_ICZIceSpikes,		Map_ICZWallAndColumn,	   2,   5, make_art_tile($001,2,0)
+	dbglistobj Obj_ICZIceCube,		Map_ICZPlatforms,	   0,   3, make_art_tile($3B6,2,0)
+	dbglistobj Obj_ICZHarmfulIce,		Map_ICZPlatforms,	   0,   5, make_art_tile($3B6,2,0)
+	dbglistobj Obj_ICZHarmfulIce,		Map_ICZPlatforms,	   2,   4, make_art_tile($3B6,2,0)
+	dbglistobj Obj_CollapsingPlatform,	Map_ICZCollapsingBridge,   0,   0, make_art_tile($001,2,0)
+	dbglistobj Obj_CollapsingBridge,	Map_ICZCollapsingBridge, $80,   3, make_art_tile($001,2,0)
+	dbglistobj Obj_CorkFloor,		Map_ICZCorkFloor,	   0,   0, make_art_tile($001,2,0)
+	dbglistobj Obj_CorkFloor,		Map_ICZCorkFloor,	 $1A,  $A, make_art_tile($3B6,2,0)
+	dbglistobj Obj_TensionBridge,		Map_ICZTensionBridge,	 $10,   0, make_art_tile($3B6,2,0)
+	dbglistobj Obj_Button,			Map_Button,		 $10,   2, make_art_tile($456,0,0)
