@@ -147,6 +147,7 @@ def run(build3k, buildSK, verifySK):
 	# Compare the newly built s&k rom with the actual rom to make sure it's byte-identical
 	if verifySK:
 		compare("skbuilt.bin", "Build Scripts/sk.bin");
+		raw_input("Press any key to exit")
 	
 	print("Finished!");
 	
