@@ -418,14 +418,95 @@ ArtUnc_SplashDrown:ds.b	$274C
 ArtNem_Title_SonicSprites:	ds.b $C58		
 DemoDat_AIZ:	ds.b $780		
 DemoDat_HCZ:	ds.b $780		
-DemoDat_MGZ:	ds.b $2275C		
-byte_2E8C80:	ds.b $114		
-byte_2E8D94:	ds.b $249C		
-byte_2EB230:	ds.b $24		
-byte_2EB254:	ds.b $98A		
-byte_2EBBDE:	ds.b $16E		
-byte_2EBD4C:	ds.b $142B4		
-S2KStartup:	ds.b $200E0			
+DemoDat_MGZ:	ds.b $1ADC
+
+Snd_AIZ1:	ds.b $1B6D
+Snd_AIZ2:	ds.b $154F
+Snd_HCZ1:	ds.b $100A
+Snd_HCZ2:	ds.b $129E
+Snd_MGZ1:	ds.b $617
+Snd_MGZ2:	ds.b $42E
+Snd_CNZ2:	ds.b $6E6
+Snd_CNZ1:	ds.b $1B71
+Snd_ICZ2:	ds.b $6AA
+Snd_ICZ1:	ds.b $71E
+Snd_LBZ2:	ds.b $57D
+Snd_LBZ1:	ds.b $77A3
+Snd_GumBonus:	ds.b $F0F
+Snd_ALZ:	ds.b $B06
+Snd_BPZ:	ds.b $BEF
+Snd_DPZ:	ds.b $1238
+Snd_CGZ:	ds.b $1723
+Snd_EMZ:	ds.b $B40
+Snd_S3Credits:	ds.b $105D
+Snd_2PMenu:	ds.b $4DA
+Snd_Drown:	ds.b $8D39
+
+DacBank2:
+; Special BINCLUDE wrapper function
+DSDACBINCLUDE macro size,{INTLABEL}
+__LABEL__ label *
+	ds.b size
+__LABEL___Len  := little_endian(*-__LABEL__)
+__LABEL___Ptr  := k68z80Pointer(__LABEL__-DacBank2)
+__LABEL___Bank := DacBank2
+    endm
+
+		ds.b	$7F7
+
+DAC_9C_Data:			DSDACBINCLUDE $332
+DAC_9D_Data:			DSDACBINCLUDE $249
+DAC_9E_Data:			DSDACBINCLUDE $280
+DAC_9F_Data:			DSDACBINCLUDE $12A5
+DAC_A0_Data:			DSDACBINCLUDE $DBA
+DAC_A1_Data:			DSDACBINCLUDE $BA8
+DAC_A2_Data:			DSDACBINCLUDE $D58
+DAC_A3_Data:			DSDACBINCLUDE $29E
+DAC_A4_Data:			DSDACBINCLUDE $28A
+DAC_A5_Data:			DSDACBINCLUDE $C60
+DAC_A6_Data:			DSDACBINCLUDE $6D6
+DAC_A7_Data:			DSDACBINCLUDE $6F2
+DAC_A8_Data:			DSDACBINCLUDE $37A
+DAC_A9_Data:			DSDACBINCLUDE $A4F
+DAC_AA_Data:			DSDACBINCLUDE $68E
+
+		ds.b $4DF
+
+DAC_AB_Data:			DSDACBINCLUDE $904
+DAC_AC_Data:			DSDACBINCLUDE $581
+DAC_AD_AE_Data:			DSDACBINCLUDE $1BC
+DAC_AF_B0_Data:			DSDACBINCLUDE $36C
+
+		ds.b $135C
+
+DAC_B1_Data:			DSDACBINCLUDE $B85
+
+		ds.b $848
+
+DAC_B4_C1_C2_C3_C4_Data:	DSDACBINCLUDE $5FD
+DAC_B5_Data:			DSDACBINCLUDE $640
+DAC_B6_Data:			DSDACBINCLUDE $555
+DAC_B7_Data:			DSDACBINCLUDE $4B1
+DAC_B8_B9_Data:			DSDACBINCLUDE $63A
+DAC_BA_Data:			DSDACBINCLUDE $4B3
+DAC_BB_Data:			DSDACBINCLUDE $1B6
+DAC_BC_Data:			DSDACBINCLUDE $8B7
+DAC_BD_Data:			DSDACBINCLUDE $5BE
+DAC_BE_Data:			DSDACBINCLUDE $710
+DAC_BF_Data:			DSDACBINCLUDE $1DC
+DAC_C0_Data:			DSDACBINCLUDE $836
+
+		ds.b $279BF
+
+; KiS2
+;byte_2E8C80:	ds.b $114		
+;byte_2E8D94:	ds.b $249C		
+;byte_2EB230:	ds.b $24		
+;byte_2EB254:	ds.b $98A		
+;byte_2EBBDE:	ds.b $16E		
+;byte_2EBD4C:	ds.b $142B4		
+;S2KStartup:	ds.b $200E0
+			
 ArtUnc_Tails:	ds.b $16540		
 ArtUnc_Tails_Tail:ds.b $1160	
 ArtUnc_Sonic2P:	ds.b $30C0		
