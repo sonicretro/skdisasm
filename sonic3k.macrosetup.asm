@@ -7,10 +7,16 @@ notZ80 function cpu,(cpu<>128)&&(cpu<>32988)
 ; make org safer (impossible to overwrite previously assembled bytes)
 org macro address
 	if notZ80(MOMCPU)
-		if address < *
-			error "too much stuff before org $\{address} ($\{(*-address)} bytes)"
+diff := address - *
+		if diff < 0
+			error "too much stuff before org $\{address} ($\{(-diff)} bytes)"
 		else
-			!org address
+			while diff > 1024
+				; AS can only generate 1 kb of code on a single line
+				dc.b [1024]$FF
+diff := diff - 1024
+			endm
+			dc.b [diff]$FF
 		endif
 	else
 		if address < $
