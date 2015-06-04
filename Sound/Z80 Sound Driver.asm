@@ -84,7 +84,7 @@ DAC_Null_Chain macro rate,dacptr,linkptr
 ; Music Bank 1
 ; ---------------------------------------------------------------------------
 Snd_Bank1_Start:
-	org $E4104
+	org $E4104	; aligned to end of bank
 Snd_SKCredits:		binclude 	"Sound/Music/Credits.bin"
 Snd_GameOver:		binclude	"Sound/Music/Game Over.bin"
 Snd_Continue:		binclude	"Sound/Music/Continue.bin"
@@ -292,7 +292,7 @@ DAC_B2_B3_Data:			DACBINCLUDE "Sound/DAC/B2-B3.bin"
 
 	finishBank
 
-	dc.b $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
+		align $10
 
 z80_SoundDriverStart:
 
@@ -4474,7 +4474,7 @@ z80_SoundDriverEnd:
 		padding off
 		!org		z80_SoundDriver+Size_of_Snd_driver_guess
 
-		dc.b	0,0,0,0
+		align0 $10
 
 Z80_Snd_Driver2:
 ; ---------------------------------------------------------------------------
@@ -4814,7 +4814,7 @@ z80_SoundDriverPointersEnd:
 
 Z80_Snd_Driver_End:
 
-	dc.b	0,0,0,0,0
+		align0 $10
 
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
