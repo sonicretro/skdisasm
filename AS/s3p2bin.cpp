@@ -212,7 +212,7 @@ bool buildRom(FILE* from, FILE* to)
 			start = lastStart + lastLength;
 			z80Start = start;
 			int srcStart = ftell(from);
-			compressedLength += KComp3(from, to, 8192, 256, srcStart, length, false);
+			compressedLength = KComp3(from, to, 8192, 256, srcStart, length, false);
 			fseek(from, srcStart + length, SEEK_SET);
 			lastStart = start;
 			lastLength = length;
@@ -225,9 +225,7 @@ bool buildRom(FILE* from, FILE* to)
 			// Saxman compressed Z80 segment
 			start = lastStart + lastLength;
 			int srcStart = ftell(from);
-			int temp;
-			temp = KComp3(from, to, 8192, 256, srcStart, length, false);
-			compressedLength += temp;
+			compressedLength = KComp3(from, to, 8192, 256, srcStart, length, false);
 			fseek(from, srcStart + length, SEEK_SET);
 			lastSegmentCompressed = true;
 			start = z80Start + compressedLength;
@@ -243,12 +241,17 @@ bool buildRom(FILE* from, FILE* to)
 		{
 			if(start+3 < ftell(to)) // 3 bytes of leeway for instruction patching
 				printf("\nWarning: overlapping allocation detected! $%X < $%X", start, ftell(to));
+			if(start < ftell(to))
+			{
+				printf("\nERROR: Compressed sound driver might not fit.\nPlease increase your value of Size_of_Snd_driver_guess to at least $%X and try again.", compressedLength);
+				return false;
+			}
 		}
 		else
 		{
 			if(start < ftell(to))
 			{
-				printf("\nERROR: Compressed sound driver might not fit.\nPlease increase your value of Size_of_Snd_driver_guess to at least $%X and try again.", compressedLength);
+				printf("\nERROR: Compressed sound driver might not fit.\nPlease increase your value of Size_of_Snd_driver2_guess to at least $%X and try again.", compressedLength);
 				return false;
 			}
 		}
