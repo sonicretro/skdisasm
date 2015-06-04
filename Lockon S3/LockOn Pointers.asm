@@ -287,7 +287,7 @@ Map_S3EndingGraphics:	ds.b $1D6
 ArtNem_S3EndingGraphics:	ds.b $1C978			
 SStageLayoutPtrs:ds.b $ED28
 HCZ_WaterlineScroll_Data:ds.b $2460			
-LBZ_WaterlineScroll_Data:ds.b $5301			
+LBZ_WaterlineScroll_Data:ds.b $5300			
 
 Solid_AIZ1:	ds.b $C00				
 Solid_AIZ2:	ds.b $C00				
@@ -305,7 +305,7 @@ Solid_BPZ:	ds.b $C00
 Solid_DPZ:	ds.b $C00				
 Solid_CGZ:	ds.b $C00				
 Solid_EMZ:	ds.b $C00				
-Solid_Gumball_Special:ds.b $CBF		
+Solid_Gumball_Special:ds.b $CC0		
 Layout_AIZ1:	ds.b $84C			
 Layout_AIZ2:	ds.b $D66			
 Layout_HCZ1:	ds.b $B28			
