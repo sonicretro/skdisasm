@@ -208,7 +208,7 @@ bool buildRom(FILE* from, FILE* to)
 
 		if(cpuType == 0x51 && start == 0) // 0x51 is the type for Z80 family (0x01 is for 68000)
 		{
-			// Saxman compressed Z80 segment
+			// Kosinski-compressed Z80 segment
 			start = lastStart + lastLength;
 			z80Start = start;
 			int srcStart = ftell(from);
@@ -222,7 +222,7 @@ bool buildRom(FILE* from, FILE* to)
 
 		if(cpuType == 0x51 && start == 0x1300) // 0x51 is the type for Z80 family (0x01 is for 68000)
 		{
-			// Saxman compressed Z80 segment
+			// Kosinski-compressed Z80 segment
 			start = lastStart + lastLength;
 			int srcStart = ftell(from);
 			compressedLength = KComp3(from, to, 8192, 256, srcStart, length, false);
