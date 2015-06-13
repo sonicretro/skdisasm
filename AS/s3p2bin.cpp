@@ -93,7 +93,7 @@ bool buildRom(FILE* from, FILE* to)
 	if(fgetc(from) != 0x89) printf("\nWarning: First byte of a .p file should be $89");
 	if(fgetc(from) != 0x14) printf("\nWarning: Second byte of a .p file should be $14");
 	
-	int cpuType = 0, segmentType = 0, granularity = 0, lastType = 0;
+	int cpuType = 0, segmentType = 0, granularity = 0;
 	signed long start = 0, lastStart = 0, z80Start = 0;
 	unsigned short length = 0, lastLength = 0, z80Length = 0;
 	static const int scratchSize = 4096;
@@ -216,7 +216,6 @@ bool buildRom(FILE* from, FILE* to)
 			fseek(from, srcStart + length, SEEK_SET);
 			lastStart = start;
 			lastLength = length;
-			lastType = cpuType;
 			continue;
 		}
 
@@ -230,11 +229,6 @@ bool buildRom(FILE* from, FILE* to)
 			lastSegmentCompressed = true;
 			start = z80Start + compressedLength;
 			continue;
-		}
-		else if(lastType == 0x51 && lastStart == 0)
-		{
-			printf("\nERROR: Second segment of sound driver at $1300 MUST follow directly after the first.");
-			return false;
 		}
 
 		if(!lastSegmentCompressed)
@@ -258,7 +252,6 @@ bool buildRom(FILE* from, FILE* to)
 
 		lastStart = start;
 		lastLength = length;
-		lastType = cpuType;
 		lastSegmentCompressed = false;
 
 
