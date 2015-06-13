@@ -2263,7 +2263,7 @@ zSFXTrackInitLoop:
 		; zGetSFXChannelPointers, we would have:
 		; * ix = pointer to the overriding SFX track data in RAM;
 		; * iy = pointer to the special SFX track data in RAM.
-		; * hl = pointer to the overriden music track data in RAM;
+		; * hl = pointer to the overridden music track data in RAM;
 		; This code would then make ix point to the correct track data for the
 		; function calls below.
 		; Without it implemented, iy points to the current SFX track data.
@@ -4685,7 +4685,7 @@ z80_SFXPointers:
 		dw	zmake68kPtr(Sound_DB),zmake68kPtr(Sound_DB),zmake68kPtr(Sound_DB),zmake68kPtr(Sound_DB)
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
-; FM Universial Voice Bank
+; FM Universal Voice Bank
 ; ===========================================================================
 	align 17D8h
 	if $ <> 17D8h
@@ -4771,7 +4771,7 @@ z80_UniVoiceBank:
 	; Synth Brass 2
 	    db  3Ah, 31h, 37h, 31h, 31h, 8Dh, 8Dh, 8Eh, 53h, 0Eh, 0Eh, 0Eh,   3
 		db         0,   0,   0,   0, 1Fh,0FFh, 1Fh, 0Fh, 17h, 28h, 26h, 80h				; 625
-	; Harpischord
+	; Harpsichord
 	    db  3Bh, 3Ah, 31h, 71h, 74h,0DFh, 1Fh, 1Fh,0DFh,   0, 0Ah, 0Ah,   5
 		db         0,   5,   5,   3, 0Fh, 5Fh, 1Fh, 5Fh, 32h, 1Eh, 0Fh, 80h				; 650
 	; Metallic Bass
