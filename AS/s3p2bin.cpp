@@ -209,6 +209,8 @@ bool buildRom(FILE* from, FILE* to)
 		if(cpuType == 0x51 && start == 0) // 0x51 is the type for Z80 family (0x01 is for 68000)
 		{
 			// Kosinski-compressed Z80 segment
+			z80Start = start;
+			start = lastStart + lastLength;
 			int srcStart = ftell(from);
 			compressedLength = KComp3(from, to, 8192, 256, srcStart, length, false);
 			fseek(from, srcStart + length, SEEK_SET);
@@ -222,6 +224,8 @@ bool buildRom(FILE* from, FILE* to)
 		if(cpuType == 0x51 && start == 0x1300) // 0x51 is the type for Z80 family (0x01 is for 68000)
 		{
 			// Kosinski-compressed Z80 segment
+			z80Start = start;
+			start = lastStart + lastLength;
 			int srcStart = ftell(from);
 			compressedLength = KComp3(from, to, 8192, 256, srcStart, length, false);
 			fseek(from, srcStart + length, SEEK_SET);
@@ -241,9 +245,9 @@ bool buildRom(FILE* from, FILE* to)
 		{
 			if(start < ftell(to))
 			{
-				if (lastStart == 0) // Sound driver part 1
+				if (z80Start == 0) // Sound driver part 1
 					printf("\nERROR: Compressed sound driver might not fit.\nPlease increase your value of Size_of_Snd_driver_guess to at least $%X and try again.", compressedLength);
-				else // if (lastStart == 0x1300) // Sound driver part 2
+				else // if (z80Start == 0x1300) // Sound driver part 2
 					printf("\nERROR: Compressed sound driver might not fit.\nPlease increase your value of Size_of_Snd_driver2_guess to at least $%X and try again.", compressedLength);
 				return false;
 			}
