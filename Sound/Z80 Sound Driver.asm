@@ -81,10 +81,12 @@ DAC_Null_Chain macro rate,dacptr,linkptr
 ; ===========================================================================
 ; Music Banks
 ; ===========================================================================
+	cnop -Size_of_Snd_Bank1, $8000	; aligned to end of bank
+
+; ---------------------------------------------------------------------------
 ; Music Bank 1
 ; ---------------------------------------------------------------------------
 Snd_Bank1_Start:
-	org $E4104	; aligned to end of bank
 Snd_SKCredits:		binclude 	"Sound/Music/Credits.bin"
 Snd_GameOver:		binclude	"Sound/Music/Game Over.bin"
 Snd_Continue:		binclude	"Sound/Music/Continue.bin"
@@ -94,6 +96,14 @@ Snd_Menu:			binclude	"Sound/Music/Menu.bin"
 Snd_FinalBoss:		binclude	"Sound/Music/Final Boss.bin"
 Snd_PresSega:		binclude	"Sound/Music/Game Complete.bin"
 
+Snd_Bank1_End
+
+	if Snd_Bank1_End - Snd_Bank1_Start > $8000
+		fatal "Snd_Bank1_Start must fit within $8000 bytes, but was $\{Snd_Bank1_End-Snd_Bank1_Start }. Try moving something to the other bank."
+	endif
+	if Snd_Bank1_End - Snd_Bank1_Start > Size_of_Snd_Bank1
+		fatal "Size_of_Snd_Bank1 = $\{Size_of_Snd_Bank1}, but you have $\{Snd_Bank1_End-Snd_Bank1_Start} bytes of music."
+	endif
 
 ; ---------------------------------------------------------------------------
 ; Music Bank 2
