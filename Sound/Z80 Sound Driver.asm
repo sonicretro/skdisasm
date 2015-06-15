@@ -2286,7 +2286,12 @@ zSFXTrackInitLoop:
 		ld	(ix+zTrack.VoicesLow), l		; Low byte of voice pointer
 		ld	(ix+zTrack.VoicesHigh), h		; High byte of voice pointer
 		call	zKeyOffIfActive				; Kill channel notes
-		call	zFMClearSSGEGOps			; Clear SSG-EG operators for track's channels
+	if fix_sndbugs
+		bit	7, (ix+zTrack.VoiceControl)		; Is this an FM track?
+		call	z, zFMClearSSGEGOps			; If so, clear SSG-EG operators for track's channels
+	else
+		call	zFMClearSSGEGOps			; Clear SSG-EG operators for track's channels (even on PSG tracks!!!)
+	endif
 		pop		hl							; Restore hl
 		pop		bc							; Restore bc
 		djnz	zSFXTrackInitLoop			; Loop for all SFX tracks
