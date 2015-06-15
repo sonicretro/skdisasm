@@ -385,6 +385,7 @@ zTrack STRUCT DOTS
 zTrack ENDSTRUCT
 ; ---------------------------------------------------------------------------
 z80_stack				=	$2000
+z80_stack_end				=	z80_stack-$60
 ; equates: standard (for Genesis games) addresses in the memory map
 zYM2612_A0				=	$4000
 zYM2612_D0				=	$4001
@@ -493,8 +494,8 @@ zSaveSongPSG1:	zTrack
 zSaveSongPSG2:	zTrack
 zSaveSongPSG3:	zTrack
 zTracksSaveEnd:
-	if * > $1FA0	; Don't declare more space than the RAM can contain!
-		fatal "The RAM variable declarations are too large by $\{$} bytes."
+	if * > z80_stack_end	; Don't declare more space than the RAM can contain!
+		fatal "The RAM variable declarations are too large. It's \{*-z80_stack_end}h bytes past the start of the bottom of the stack, at \{z80_stack_end}h."
 	endif
 		dephase
 ; ---------------------------------------------------------------------------
@@ -4810,7 +4811,7 @@ z80_UniVoiceBank:
 		db         7,   6,   6,   8, 20h, 10h, 10h,0F8h, 19h, 37h, 13h, 80h				; 850
 
 	if $ > zDataStart
-		fatal "Your Z80 tables won't fit before its variables. It's \{$-zDataStart}h bytes past the start of the bottom of the stack, at \{zDataStart}h"
+		fatal "Your Z80 tables won't fit before its variables. It's \{$-zDataStart}h bytes past the start of the variables, at \{zDataStart}h"
 	endif
 
 z80_SoundDriverPointersEnd:
