@@ -465,6 +465,7 @@ Time_bonus_countdown =		ramaddr( $FFFFF7D2 ) ; word ; used on the results screen
 Ring_bonus_countdown =		ramaddr( $FFFFF7D4 ) ; word ; used on the results screen
 Camera_X_pos_coarse_back =	ramaddr( $FFFFF7DA ) ; word ; Camera_X_pos_coarse - $80
 Level_trigger_array =		ramaddr( $FFFFF7E0 ) ; $10 bytes ; used by buttons, etc.
+Anim_Counters =			ramaddr( $FFFFF7F0 ) ; $10 bytes ; each word stores data on animated level art, including duration and current frame
 
 Sprite_table_buffer =		ramaddr( $FFFFF800 ) ; $280 bytes
 DMA_queue =			ramaddr( $FFFFFB00 ) ; $FC bytes ; stores all the VDP commands necessary to initiate a DMA transfer
