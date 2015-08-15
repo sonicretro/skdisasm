@@ -616,12 +616,20 @@ Checksum_string =		ramaddr( $FFFFFFFC ) ; long ; set to 'SM&K' once the checksum
 
 ; ---------------------------------------------------------------------------
 ; Art tile stuff
+palette_line_0      =      (0<<13)
+palette_line_1      =      (1<<13)
+palette_line_2      =      (2<<13)
+palette_line_3      =      (3<<13)
 high_priority       =      (1<<15)
 tile_mask           =      $07FF
 drawing_mask        =      $7FFF
 
 ; ---------------------------------------------------------------------------
 ; VRAM and tile art base addresses.
+; VRAM Reserved regions.
+VRAM_Plane_A_Name_Table               = $C000	; Extends until $CFFF
+VRAM_Plane_B_Name_Table               = $E000	; Extends until $EFFF
+
 ; Menu background.
 ArtTile_ArtKos_S3MenuBG               = $0001
 
