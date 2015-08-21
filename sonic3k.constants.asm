@@ -415,6 +415,7 @@ Palette_timer_Tails =		ramaddr( $FFFFF669 ) ; byte
 Ctrl_2_logical =		ramaddr( $FFFFF66A ) ; word ; both held and pressed
 Ctrl_2_held_logical =		ramaddr( $FFFFF66A ) ; byte
 Ctrl_2_pressed_logical =	ramaddr( $FFFFF66B ) ; byte
+Super_Hyper_frame_count =	ramaddr( $FFFFF670 ) ; word
 Scroll_force_positions =	ramaddr( $FFFFF676 ) ; byte ; if this is set scrolling will be based on the two variables below rather than the player's actual position
 Scroll_forced_X_pos =		ramaddr( $FFFFF678 ) ; word
 Scroll_forced_Y_pos =		ramaddr( $FFFFF67C ) ; word
