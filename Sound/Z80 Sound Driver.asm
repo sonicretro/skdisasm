@@ -2321,8 +2321,10 @@ zGetSFXChannelPointers:
 	else
 		ld	a, 1Fh							; a = 1Fh (redundant, as this is the first instruction of the function)
 		call	zSilencePSGChannel			; Silence channel at ix
-		ld	a, 0FFh							; Command to silence PSG3/Noise channel (zSilencePSGChannel should do it...)
-		ld	(zPSG), a						; Silence it (zSilencePSGChannel should do it...)
+		; The next two lines are here because zSilencePSGChannel does not do
+		; its job correctly. See the note there.
+		ld	a, 0FFh							; Command to silence Noise channel
+		ld	(zPSG), a						; Silence it
 		ld	a, c							; a = channel identifier
 		; The next 5 shifts are so that we can convert it to a table index
 		srl	a
@@ -4314,9 +4316,17 @@ zSilencePSGChannel:
 		or	a								; Is it an actual PSG channel?
 		ret	p								; Return if not
 		ld	(zPSG), a						; Silence this channel
+	if fix_sndbugs
+		cp	0DFh							; Was this PSG3?
+		ret	nz								; Return if not
+	else
+		; This does not work as intended: since this function is called when
+		; a new channel is starting, this bit will almost inevitably be 0
+		; and the noise channel will not be silenced.
 		bit	0, (ix+zTrack.PlaybackControl)	; Is this a noise channel?
 		ret	z								; Return if not
-		ld	a, 0FFh							; Command to silence PSG3/Noise channel
+	endif
+		ld	a, 0FFh							; Command to silence Noise channel
 		ld	(zPSG), a						; Do it
 		ret
 ; End of function zSilencePSGChannel
