@@ -131,3 +131,12 @@ start:
 	dc.b numentries, numvramtiles
 zoneanimcount := zoneanimcount + 1
     endm
+
+tribyte macro val
+	if "val"<>""
+		dc.b (val >> 16)&$FF,(val>>8)&$FF,val&$FF
+		shift
+		tribyte ALLARGS
+	endif
+    endm
+
