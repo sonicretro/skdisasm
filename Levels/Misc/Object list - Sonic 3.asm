@@ -1,7 +1,7 @@
 		dc.l Obj_Ring		; 0
 		dc.l Obj_Monitor	; 1
 		dc.l Obj_PathSwap	; 2
-		dc.l Obj_03_1		; 3
+		dc.l Obj_AIZHollowTree	; 3
 		dc.l Obj_CollapsingPlatform; 4
 		dc.l Obj_AIZLRZEMZRock	; 5
 		dc.l Obj_AIZRideVine	; 6
