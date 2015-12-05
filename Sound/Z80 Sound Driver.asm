@@ -329,7 +329,7 @@ zTrack STRUCT DOTS
 	TempoDivider:		ds.b 1	; S&K: 2
 	DataPointerLow:		ds.b 1	; S&K: 3
 	DataPointerHigh:	ds.b 1	; S&K: 4
-	KeyOffset:			ds.b 1	; S&K: 5
+	Transpose:			ds.b 1	; S&K: 5
 	Volume:				ds.b 1	; S&K: 6
 	ModulationCtrl:		ds.b 1	; S&K: 7		; Modulation is on if nonzero. If only bit 7 is set, then it is normal modulation; otherwise, this-1 is index on modulation envelope pointer table
 	VoiceIndex:			ds.b 1	; S&K: 8		; FM instrument/PSG voice
@@ -344,7 +344,7 @@ zTrack STRUCT DOTS
 	; ---------------------------------
 	FreqHigh:			ds.b 1	; S&K: 0Eh		; For FM/PSG channels
 	VoiceSongID:		ds.b 1	; S&K: 0Fh		; For using voices from a different song
-	FreqDisplacement:	ds.b 1	; S&K: 10h	; In S&K, some places used 11h instead of 10h
+	Detune:			ds.b 1	; S&K: 10h	; In S&K, some places used 11h instead of 10h
 	Unk11h:			ds.b 1	; S&K: 11h
 					ds.b 5	; S&K: 12h-16h	; Unused
 	VolEnv:				ds.b 1	; S&K: 17h		; Used for dynamic volume adjustments
@@ -1134,7 +1134,7 @@ zGetNextNote_cont:
 		jr	zGetNoteDuration
 ; ---------------------------------------------------------------------------
 .got_note:
-		add	a, (ix+zTrack.KeyOffset)		; Add in key displacement
+		add	a, (ix+zTrack.Transpose)		; Add in transposition
 		ld	hl, zPSGFrequencies				; PSG frequency lookup table
 		push	af							; Save af
 		rst	PointerTableOffset				; hl = frequency value for note
@@ -1217,7 +1217,7 @@ zAltFreqMode:
 		ld	l, a							; l = last byte read from track
 		or	h								; Is hl nonzero?
 		jr	z, .got_zero					; Branch if not
-		ld	a, (ix+zTrack.KeyOffset)		; a = key displacement
+		ld	a, (ix+zTrack.Transpose)		; a = transposition
 	if fix_sndbugs
 		ld	c, a							; bc = sign extension of key displacement
 		rla									; Carry contains sign of key displacement
@@ -1636,14 +1636,14 @@ zUpdateFreq:
 		ld	h, (ix+zTrack.FreqHigh)			; h = high byte of note frequency
 		ld	l, (ix+zTrack.FreqLow)			; l = low byte of note frequency
 	if fix_sndbugs
-		ld	a, (ix+zTrack.FreqDisplacement)	; a = frequency displacement
+		ld	a, (ix+zTrack.Detune)			; a = detune
 		ld	c, a							; bc = sign extension of frequency displacement
 		rla									; Carry contains sign of frequency displacement
 		sbc	a, a							; a = 0 or -1 if carry is 0 or 1
 		ld	b, a							; bc = sign extension of frequency displacement
 	else
 		ld	b, 0							; b = 0
-		ld	a, (ix+zTrack.FreqDisplacement)	; a = frequency displacement
+		ld	a, (ix+zTrack.Detune)			; a = detune
 		or	a								; Is a negative?
 		jp	p, .did_sign_extend				; Branch if not
 		ld	b, 0FFh							; b = -1
@@ -3063,7 +3063,7 @@ loc_BF9:
 ;loc_BFD
 zCoordFlagSwitchTable:
 		dw cfPanningAMSFMS					; 0E0h
-		dw cfAlterNoteFreq					; 0E1h
+		dw cfDetune							; 0E1h
 		dw cfFadeInToPrevious				; 0E2h
 		dw cfSilenceStopTrack				; 0E3h
 		dw cfSetVolume						; 0E4h
@@ -3089,7 +3089,7 @@ zCoordFlagSwitchTable:
 		dw cfJumpToGosub					; 0F8h
 		dw cfJumpReturn						; 0F9h
 		dw cfDisableModulation				; 0FAh
-		dw cfAddKey							; 0FBh
+		dw cfChangeTransposition			; 0FBh
 		dw cfLoopContinuousSFX				; 0FCh
 		dw cfToggleAltFreqMode				; 0FDh
 		dw cfFM3SpecialMode					; 0FEh
@@ -3155,8 +3155,8 @@ zDoChangePan:
 cfSpindashRev:
 		ld	hl, zSpindashRev				; hl = pointer to escalating transposition
 		ld	a, (hl)							; a = value of escalating transposition
-		add	a, (ix+zTrack.KeyOffset)		; Add in current track key offset
-		ld	(ix+zTrack.KeyOffset), a		; Store result as new track key offset
+		add	a, (ix+zTrack.Transpose)		; Add in current track transposition
+		ld	(ix+zTrack.Transpose), a		; Store result as new track transposition
 		cp	10h								; Is the current transposition 10h?
 		jp	z, .skip_rev					; Branch if yes
 		inc	(hl)							; Otherwise, increase escalating transposition
@@ -3173,11 +3173,11 @@ cfSpindashRev:
 ;
 ; Has one parameter byte, the new frequency displacement.
 ;
-;sub_C77
-cfAlterNoteFreq:
-		ld	(ix+zTrack.FreqDisplacement), a	; Set frequency displacement
+;sub_C77 cfAlterNoteFreq
+cfDetune:
+		ld	(ix+zTrack.Detune), a	; Set detune
 		ret
-; End of function cfAlterNoteFreq
+; End of function cfDetune
 
 
 ; =============== S U B	R O U T	I N E =======================================
@@ -3395,7 +3395,7 @@ zStoreTrackVolume:
 ;loc_D1B
 cfSetKey:
 		sub	40h								; Subtract 40h from key displacement
-		ld	(ix+zTrack.KeyOffset), a		; Store result as new key displacement
+		ld	(ix+zTrack.Transpose), a		; Store result as new transposition
 		ret
 
 ; =============== S U B	R O U T	I N E =======================================
@@ -3785,10 +3785,10 @@ cfDisableModulation:
 ;
 ; Has one parameter byte, the change in channel key displacement.
 ;
-;loc_EB1
-cfAddKey:
-		add	a, (ix+zTrack.KeyOffset)		; Add current key displacement to parameter
-		ld	(ix+zTrack.KeyOffset), a		; Store result as new key displacement
+;loc_EB1 cfAddKey
+cfChangeTransposition:
+		add	a, (ix+zTrack.Transpose)		; Add current transposition to parameter
+		ld	(ix+zTrack.Transpose), a		; Store result as new transposition
 		ret
 
 ; =============== S U B	R O U T	I N E =======================================
