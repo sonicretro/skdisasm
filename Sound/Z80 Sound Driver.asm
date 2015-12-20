@@ -4210,6 +4210,13 @@ zUpdatePSGTrack:
 		or	(ix+zTrack.VoiceControl)		; Mask in the PSG channel bits
 		add	a, 10h							; Flag to latch volume
 		bit	0, (ix+zTrack.PlaybackControl)	; Is this a noise channel?
+	if fix_sndbugs
+		jr	z, .not_noise					; Branch if not
+		add	a, 20h							; Change to noise channel
+.not_noise:
+		ld	(zPSG), a						; Set noise channel volume
+		ret
+	else
 		jr	nz, .set_noise					; Branch if yes
 		ld	(zPSG), a						; Set PSG volume
 		ret
@@ -4218,6 +4225,7 @@ zUpdatePSGTrack:
 		add	a, 20h							; Change to noise channel
 		ld	(zPSG), a						; Set noise channel volume
 		ret
+	endif
 ; ---------------------------------------------------------------------------
 ;loc_1037
 ;zDoFlutterSetValue
