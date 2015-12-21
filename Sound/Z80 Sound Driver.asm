@@ -4280,7 +4280,9 @@ zDoVolEnv:
 ;loc_1057
 ;zDoFlutterFullRest
 zDoVolEnvFullRest:
-		set	4, (ix+zTrack.PlaybackControl)	; Set 'track is resting' bit
+	if fix_sndbugs=0
+		set	4, (ix+zTrack.PlaybackControl)	; Set 'track is resting' bit (zRestTrack already does this)
+	endif
 		pop	hl								; Pop return value from stack (causes a 'ret' to return to caller of zUpdatePSGTrack)
 		jp	zRestTrack						; Put track at rest
 ; ---------------------------------------------------------------------------
