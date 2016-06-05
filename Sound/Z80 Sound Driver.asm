@@ -3266,6 +3266,9 @@ cfChangeVolume2:
 ;
 ;loc_CA3
 cfChangeVolume:
+		; S2 places this check further down (and S1 lacks it altogether),
+		; allowing PSG channels to change their volume. This means the
+		; likes of S2's SFX $F0 will sound different in this driver
 		bit	7, (ix+zTrack.VoiceControl)		; Is this a PSG track?
 		ret	nz								; Return if yes
 		add	a, (ix+zTrack.Volume)			; Add in track's current volume
