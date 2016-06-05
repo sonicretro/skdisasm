@@ -875,12 +875,12 @@ zUpdateMusic:
 		call	zDoMusicFadeOut				; Check if music should be faded out and fade if needed
 		call	zDoMusicFadeIn				; Check if music should be faded in and fade if needed
 		ld	a, (zFadeToPrevFlag)			; Get fade-to-prev flag
-		cp	MusID_1UP-1						; Is it still 1-Up?
+		cp	MusID_1UP-MusID__First						; Is it still 1-Up?
 		jr	nz, .check_fade_in				; Branch if not
 		ld	a, (zMusicNumber)				; Get next music to play
 		cp	MusID_1UP						; Is it another 1-Up?
 		jr	z, .clr_queue					; Branch if yes
-		cp	MusID__End-1					; Is it music (except credits song)?
+		cp	MusID__End-MusID__First					; Is it music (except credits song)?
 		jr	c, .clr_sfx						; Branch if not
 
 .clr_queue:
@@ -1913,10 +1913,10 @@ zPlayMusicCredits:
 
 ;loc_558
 zPlayMusic:
-		sub	1								; Remap index from 1h-32h to 0h-31h (see also credits music, above)
+		sub	MusID__First								; Remap index from 1h-32h to 0h-31h (see also credits music, above)
 		ret	m								; Return if negative (id = 0)
 		push	af							; Save af
-		cp	MusID_1UP-1						; Is it the 1-up music?
+		cp	MusID_1UP-MusID__First						; Is it the 1-up music?
 		jp	nz, zPlayMusic_DoFade			; Branch if not
 		ld	a, (zFadeInTimeout)				; Fading timeout
 		or	a								; Is music being faded?
@@ -1934,7 +1934,7 @@ zPlayMusic:
 ; ---------------------------------------------------------------------------
 .no_fade:
 		ld	a, (zFadeToPrevFlag)			; Get fade-to-prev flag
-		cp	MusID_1UP-1						; Was it triggered by the 1-up song?
+		cp	MusID_1UP-MusID__First						; Was it triggered by the 1-up song?
 		jp	z, zBGMLoad						; Branch if yes
 		xor	a								; a = 0
 		ld	(zMusicNumber), a				; Clear M68K input queue...
@@ -1972,7 +1972,7 @@ zPlayMusic:
 		add	hl, de							; Advance to next track
 		djnz	.loop						; Loop for all tracks
 
-		ld	a, MusID_1UP-1					; a = 1-up id-1
+		ld	a, MusID_1UP-MusID__First					; a = 1-up id-1
 		ld	(zFadeToPrevFlag), a			; Set fade-to-prev flag to it
 		ld	a, (zCurrentTempo)				; Get current tempo
 		ld	(zCurrentTempoSave), a			; Save it
