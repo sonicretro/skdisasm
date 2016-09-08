@@ -1,6 +1,6 @@
 @ECHO OFF
 
-pushd %~dp0\..
+pushd "%~dp0\.."
 
 IF EXIST sonic3k.bin del sonic3k.bin
 IF NOT EXIST skbuilt.bin goto LABLSKMISS

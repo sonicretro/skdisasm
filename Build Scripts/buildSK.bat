@@ -1,6 +1,6 @@
 @ECHO OFF
 
-pushd %~dp0\..
+pushd "%~dp0\.."
 
 REM // make sure we can write to the file skbuilt.bin
 REM // also make a backup to skbuilt.prev.bin
