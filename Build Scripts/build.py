@@ -13,6 +13,9 @@ s3_usa_size = 2097152
 sk_hash = "6e12e6b33c26ebfcd0be433251d21cf6284eafe9f71b027bda3767ae59affec1"
 sk_size = 2097152
 
+# Verbose errors?
+verbose_errors = False
+
 # Paths to build tools, depending on OS
 
 if platform.system() == "Windows":
@@ -76,7 +79,16 @@ def build(targetName, def0, def1):
 	outputFile.write(output)
 	outputFile.close()
 	if assembleProcess.returncode != 0:
-		print("  ERROR: Assembler returned " + str(assembleProcess.returncode))
+		if verbose_errors == True:
+			# Print all errors.
+			print(errors)
+			# Print last 7 lines of stdout.
+			outputlines = output.splitlines();
+			for i in range(len(outputlines)-7, len(outputlines)):
+				if i >= 0:
+					print(outputlines[i])
+			print("")
+		print("  ERROR: Assembler returned " + str(assembleProcess.returncode) + ".")
 		return assembleProcess.returncode
 
 	# Create binary
@@ -93,7 +105,9 @@ def build(targetName, def0, def1):
 	outputFile.write(output)
 	outputFile.close()
 	if binaryProcess.returncode != 0:
-		print("  ERROR: s3p2bin returned " + str(binaryProcess.returncode))
+		if verbose_errors == True:
+			print(errors)
+		print("  ERROR: s3p2bin returned " + str(binaryProcess.returncode)) + "."
 		return binaryProcess.returncode
 
 	print("  Removing temporary files");
@@ -102,9 +116,7 @@ def build(targetName, def0, def1):
 	delete("sonic3k.p");
 	delete("sonic3k.h");
 
-	# Return True on success, False on error.
-	if len(errors) > 0:
-		return False
+	# Assembly was successful.
 	return True
 
 def check_hash(filePath, sha256_hash, filesize):
@@ -178,6 +190,7 @@ def usage():
 	print("")
 	print("Options:")
 	print("  -usage    Show command line usage.")
+	print("  -verbose  Verbose error output.")
 	print("")
 	print("Valid targets:")
 	print("  3K        Sonic 3 & Knuckles")
@@ -209,6 +222,8 @@ if __name__ == "__main__":
 		elif param == "-usage":
 			usage()
 			sys.exit(0)
+		elif param == "-verbose":
+			verbose_errors = True
 		else:
 			print("Unrecognized option: " + sys.argv[i])
 			usage()
