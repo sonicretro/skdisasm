@@ -207,6 +207,9 @@ if __name__ == "__main__":
 		usage()
 		sys.exit(1)
 
+	# Create build dir
+	makeDir("Build");
+
 	if build3K == True:
 		print("")
 		ret = build("sonic3k", "-D", "Sonic3_Complete=1")
