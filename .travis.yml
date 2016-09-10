@@ -1,0 +1,10 @@
+# M68K isn't directly supported, so just use C.
+language: c
+
+script:
+  - cd "Build Scripts" && python build.py s3
+  - cd "Build Scripts" && python build.py sk
+  - cd "Build Scripts" && python build.py verify
+
+notifications:
+  irc: "ircs://irc.badnik.zone:6697/#repo"
