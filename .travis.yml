@@ -2,8 +2,8 @@
 language: c
 
 script:
-  - cd "${TRAVIS_BUILD_DIR}/Build Scripts" && python build.py s3
-  - cd "${TRAVIS_BUILD_DIR}/Build Scripts" && python build.py sk
+  - cd "${TRAVIS_BUILD_DIR}/Build Scripts" && python build.py 3K
+  - cd "${TRAVIS_BUILD_DIR}/Build Scripts" && python build.py SK
   - cd "${TRAVIS_BUILD_DIR}/Build Scripts" && python build.py verify
 
 notifications:
