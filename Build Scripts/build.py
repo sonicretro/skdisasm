@@ -1,6 +1,8 @@
+#!/usr/bin/env python
 
 import os
 import platform
+import sys
 from subprocess import call
 import subprocess
 
@@ -20,6 +22,7 @@ elif platform.system() == "Linux":
 
 else:
 	print("Unknown platform")
+	sys.exit(1)
 
 def delete(path):
 	if os.path.isfile(path):
@@ -65,6 +68,9 @@ def build(targetName, def0, def1):
 	outputFile = open(outputPath, "wb")
 	outputFile.write(output)
 	outputFile.close()
+	if assembleProcess.returncode != 0:
+		print("  ERROR: Assembler returned " + str(assembleProcess.returncode))
+		return assembleProcess.returncode
 
 	# Create binary
 
@@ -79,12 +85,20 @@ def build(targetName, def0, def1):
 	outputFile = open(binaryOutputPath, "wb")
 	outputFile.write(output)
 	outputFile.close()
+	if binaryProcess.returncode != 0:
+		print("  ERROR: s3p2bin returned " + str(binaryProcess.returncode))
+		return binaryProcess.returncode
 
 	print("  Removing temporary files");
 
 	# delete working files
 	delete("sonic3k.p");
 	delete("sonic3k.h");
+
+	# Return True on success, False on error.
+	if len(errors) > 0:
+		return False
+	return True
 
 def compare(filePath1, filePath2):
 
@@ -145,3 +159,71 @@ def run(build3k, buildSK, verifySK):
 		raw_input("Press any key to exit")
 
 	print("Finished!");
+
+def usage():
+	print("Syntax: " + sys.argv[0] + " [targets]")
+	print("")
+	print("Options:")
+	print("  -usage    Show command line usage.")
+	print("")
+	print("Valid targets:")
+	print("  3K        Sonic 3 & Knuckles")
+	print("  SK        Sonic & Knuckles")
+	print("  verify    Compare built Sonic & Knuckles to original")
+
+# Main program.
+# NOTE: This file is included by buildS3Complete.py and buildSK.py, so we
+# have to check if this is the main program for compatibility purposes.
+if __name__ == "__main__":
+	sys.dont_write_bytecode = True
+	print("Sonic & Knuckles disassembly build script")
+	os.chdir("..")
+
+	# Options.
+	build3K = False
+	buildSK = False
+	verifySK = False
+
+	# Parse command line parameters.
+	for i in range(1, len(sys.argv)):
+		param = sys.argv[i].lower()
+		if param == "3k":
+			build3K = True
+		elif param == "sk":
+			buildSK = True
+		elif param == "verify":
+			verifySK = True
+		elif param == "-usage":
+			usage()
+			sys.exit(0)
+		else:
+			print("Unrecognized option: " + sys.argv[i])
+			usage()
+			sys.exit(1)
+
+	if build3K == False and buildSK == False and verifySK == False:
+		print("No target(s) specified.")
+		print("")
+		usage()
+		sys.exit(1)
+
+	if build3K == True:
+		print("")
+		ret = build("sonic3k", "-D", "Sonic3_Complete=1")
+		if ret == False:
+			sys.exit(1)
+
+	if buildSK == True:
+		print("")
+		ret = build("skbuilt", "-D", "Sonic3_Complete=0")
+		if ret == False:
+			sys.exit(1)
+
+	if verifySK == True:
+		print("")
+		ret = compare("skbuilt.bin", "Build Scripts/sk.bin");
+		if ret == False:
+			sys.exit(1)
+
+	# All tasks completed.
+	sys.exit(0)
