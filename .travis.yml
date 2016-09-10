@@ -2,9 +2,9 @@
 language: c
 
 script:
-  - cd "Build Scripts" && python build.py s3
-  - cd "Build Scripts" && python build.py sk
-  - cd "Build Scripts" && python build.py verify
+  - cd "${TRAVIS_BUILD_DIR}/Build Scripts" && python build.py s3
+  - cd "${TRAVIS_BUILD_DIR}/Build Scripts" && python build.py sk
+  - cd "${TRAVIS_BUILD_DIR}/Build Scripts" && python build.py verify
 
 notifications:
   irc: "ircs://irc.badnik.zone:6697/#repo"
