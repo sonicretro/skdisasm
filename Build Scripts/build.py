@@ -3,8 +3,15 @@
 import os
 import platform
 import sys
+import hashlib
 from subprocess import call
 import subprocess
+
+# Expected SHA-256 hashes and file sizes.
+s3_usa_hash = "d6404843c5ba32486f4c8c744acb7e1932069376960d886b1de37969787d3f9c"
+s3_usa_size = 2097152
+sk_hash = "6e12e6b33c26ebfcd0be433251d21cf6284eafe9f71b027bda3767ae59affec1"
+sk_size = 2097152
 
 # Paths to build tools, depending on OS
 
@@ -100,41 +107,44 @@ def build(targetName, def0, def1):
 		return False
 	return True
 
-def compare(filePath1, filePath2):
+def check_hash(filePath, sha256_hash, filesize):
+	"""Check the SHA-256 hash of the specified file.
 
-	print("  Comparing '"+filePath1+"' with '"+filePath2+"'");
+	Parameters:
+	- filePath: File to check.
+	- sha256_hash: Expected SHA-256 hash.
+	- filesize: Expected file size.
+	"""
 
-	size1 = os.stat(filePath1).st_size;
-	size2 = os.stat(filePath2).st_size;
-
-	if size1 != size2:
-		print("  Different file sizes!");
+	print("  Checking '" + filePath + "'");
+	actual_size = os.stat(filePath).st_size;
+	if (actual_size != filesize):
+		print("  File size is incorrect.")
+		print("  - Expected: " + str(filesize))
+		print("  - Actual:   " + str(actual_size))
 		return False;
 
-	file1 = open(filePath1, "rb");
-	file2 = open(filePath2, "rb");
+	fileToCheck = open(filePath, "rb");
 	try:
+		hashobj = hashlib.sha256();
 		while True:
-			buf1 = file1.read(4096)
-			if buf1 == "":
-				break
-			buf2 = file2.read(4096)
-			if buf2 == "":
+			buf = fileToCheck.read(4096)
+			if buf == "":
 				break
 
-			if len(buf1) != len(buf2):
-				print("  Files are different!")
-				return False
-
-			if buf1 != buf2:
-				print("  Files are different!")
-				return False
+			hashobj.update(buf);
 	finally:
-		file1.close()
-		file2.close()
+		fileToCheck.close()
 
-	print("  s&k rom verified ok");
-	return True;
+	# Check the SHA-256 hash.
+	if (hashobj.hexdigest() != sha256_hash):
+		print("  SHA-256 hash of file is incorrect.")
+		print("  - Expected: " + sha256_hash)
+		print("  - Actual:   " + hashobj.hexdigest())
+		return False
+
+	print("  s&k rom verified ok")
+	return True
 
 def run(build3k, buildSK, verifySK):
 
@@ -158,7 +168,7 @@ def run(build3k, buildSK, verifySK):
 
 	# Compare the newly built s&k rom with the actual rom to make sure it's byte-identical
 	if verifySK:
-		compare("skbuilt.bin", "Build Scripts/sk.bin");
+		check_hash("skbuilt.bin", sk_hash, sk_size);
 		raw_input("Press any key to exit")
 
 	print("Finished!");
@@ -227,7 +237,7 @@ if __name__ == "__main__":
 
 	if verifySK == True:
 		print("")
-		ret = compare("skbuilt.bin", "Build Scripts/sk.bin");
+		ret = check_hash("skbuilt.bin", sk_hash, sk_size);
 		if ret == False:
 			sys.exit(1)
 
