@@ -115,17 +115,20 @@ def compare(filePath1, filePath2):
 	file2 = open(filePath2, "rb");
 	try:
 		while True:
-			byte1 = file1.read(1);
-			if byte1 == "":
-				break;
-			byte2 = file2.read(1);
+			buf1 = file1.read(4096)
+			if buf1 == "":
+				break
+			buf2 = file2.read(4096)
+			if buf2 == "":
+				break
 
-			if byte2 == "":
-				break;
+			if len(buf1) != len(buf2):
+				print("  Files are different!")
+				return False
 
-			if byte1 != byte2:
-				print("  Files are different!");
-				return False;
+			if buf1 != buf2:
+				print("  Files are different!")
+				return False
 	finally:
 		file1.close()
 		file2.close()
