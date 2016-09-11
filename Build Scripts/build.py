@@ -1,8 +1,20 @@
+#!/usr/bin/env python
 
 import os
 import platform
+import sys
+import hashlib
 from subprocess import call
 import subprocess
+
+# Expected SHA-256 hashes and file sizes.
+s3_usa_hash = "d6404843c5ba32486f4c8c744acb7e1932069376960d886b1de37969787d3f9c"
+s3_usa_size = 2097152
+sk_hash = "6e12e6b33c26ebfcd0be433251d21cf6284eafe9f71b027bda3767ae59affec1"
+sk_size = 2097152
+
+# Verbose errors?
+verbose_errors = False
 
 # Paths to build tools, depending on OS
 
@@ -20,6 +32,7 @@ elif platform.system() == "Linux":
 
 else:
 	print("Unknown platform")
+	sys.exit(1)
 
 def delete(path):
 	if os.path.isfile(path):
@@ -65,6 +78,18 @@ def build(targetName, def0, def1):
 	outputFile = open(outputPath, "wb")
 	outputFile.write(output)
 	outputFile.close()
+	if assembleProcess.returncode != 0:
+		if verbose_errors == True:
+			# Print all errors.
+			print(errors)
+			# Print last 7 lines of stdout.
+			outputlines = output.splitlines();
+			for i in range(len(outputlines)-7, len(outputlines)):
+				if i >= 0:
+					print(outputlines[i])
+			print("")
+		print("  ERROR: Assembler returned " + str(assembleProcess.returncode) + ".")
+		return assembleProcess.returncode
 
 	# Create binary
 
@@ -79,6 +104,11 @@ def build(targetName, def0, def1):
 	outputFile = open(binaryOutputPath, "wb")
 	outputFile.write(output)
 	outputFile.close()
+	if binaryProcess.returncode != 0:
+		if verbose_errors == True:
+			print(errors)
+		print("  ERROR: s3p2bin returned " + str(binaryProcess.returncode)) + "."
+		return binaryProcess.returncode
 
 	print("  Removing temporary files");
 
@@ -86,38 +116,47 @@ def build(targetName, def0, def1):
 	delete("sonic3k.p");
 	delete("sonic3k.h");
 
-def compare(filePath1, filePath2):
+	# Assembly was successful.
+	return True
 
-	print("  Comparing '"+filePath1+"' with '"+filePath2+"'");
+def check_hash(filePath, sha256_hash, filesize):
+	"""Check the SHA-256 hash of the specified file.
 
-	size1 = os.stat(filePath1).st_size;
-	size2 = os.stat(filePath2).st_size;
+	Parameters:
+	- filePath: File to check.
+	- sha256_hash: Expected SHA-256 hash.
+	- filesize: Expected file size.
+	"""
 
-	if size1 != size2:
-		print("  Different file sizes!");
+	print("  Checking '" + filePath + "'");
+	actual_size = os.stat(filePath).st_size;
+	if (actual_size != filesize):
+		print("  File size is incorrect.")
+		print("  - Expected: " + str(filesize))
+		print("  - Actual:   " + str(actual_size))
 		return False;
 
-	file1 = open(filePath1, "rb");
-	file2 = open(filePath2, "rb");
+	fileToCheck = open(filePath, "rb");
 	try:
+		hashobj = hashlib.sha256();
 		while True:
-			byte1 = file1.read(1);
-			if byte1 == "":
-				break;
-			byte2 = file2.read(1);
+			buf = fileToCheck.read(4096)
+			if buf == "":
+				break
 
-			if byte2 == "":
-				break;
-
-			if byte1 != byte2:
-				print("  Files are different!");
-				return False;
+			hashobj.update(buf);
 	finally:
-		file1.close()
-		file2.close()
+		fileToCheck.close()
 
-	print("  s&k rom verified ok");
-	return True;
+	# Check the SHA-256 hash.
+	if (hashobj.hexdigest() != sha256_hash):
+		print("  SHA-256 hash of file is incorrect.")
+		print("  - Expected: " + sha256_hash)
+		print("  - Actual:   " + hashobj.hexdigest())
+		return False
+
+	print("  s&k rom verified ok")
+	return True
 
 def run(build3k, buildSK, verifySK):
 
@@ -141,7 +180,81 @@ def run(build3k, buildSK, verifySK):
 
 	# Compare the newly built s&k rom with the actual rom to make sure it's byte-identical
 	if verifySK:
-		compare("skbuilt.bin", "Build Scripts/sk.bin");
+		check_hash("skbuilt.bin", sk_hash, sk_size);
 		raw_input("Press any key to exit")
 
 	print("Finished!");
+
+def usage():
+	print("Syntax: " + sys.argv[0] + " [targets]")
+	print("")
+	print("Options:")
+	print("  -usage    Show command line usage.")
+	print("  -verbose  Verbose error output.")
+	print("")
+	print("Valid targets:")
+	print("  3K        Sonic 3 & Knuckles")
+	print("  SK        Sonic & Knuckles")
+	print("  verify    Compare built Sonic & Knuckles to original")
+
+# Main program.
+# NOTE: This file is included by buildS3Complete.py and buildSK.py, so we
+# have to check if this is the main program for compatibility purposes.
+if __name__ == "__main__":
+	sys.dont_write_bytecode = True
+	print("Sonic & Knuckles disassembly build script")
+	os.chdir("..")
+
+	# Options.
+	build3K = False
+	buildSK = False
+	verifySK = False
+
+	# Parse command line parameters.
+	for i in range(1, len(sys.argv)):
+		param = sys.argv[i].lower()
+		if param == "3k":
+			build3K = True
+		elif param == "sk":
+			buildSK = True
+		elif param == "verify":
+			verifySK = True
+		elif param == "-usage":
+			usage()
+			sys.exit(0)
+		elif param == "-verbose":
+			verbose_errors = True
+		else:
+			print("Unrecognized option: " + sys.argv[i])
+			usage()
+			sys.exit(1)
+
+	if build3K == False and buildSK == False and verifySK == False:
+		print("No target(s) specified.")
+		print("")
+		usage()
+		sys.exit(1)
+
+	# Create build dir
+	makeDir("Build");
+
+	if build3K == True:
+		print("")
+		ret = build("sonic3k", "-D", "Sonic3_Complete=1")
+		if ret == False:
+			sys.exit(1)
+
+	if buildSK == True:
+		print("")
+		ret = build("skbuilt", "-D", "Sonic3_Complete=0")
+		if ret == False:
+			sys.exit(1)
+
+	if verifySK == True:
+		print("")
+		ret = check_hash("skbuilt.bin", sk_hash, sk_size);
+		if ret == False:
+			sys.exit(1)
+
+	# All tasks completed.
+	sys.exit(0)

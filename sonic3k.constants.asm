@@ -666,7 +666,7 @@ ArtTile_ArtUnc_Shield_Sparks          = $07BB
 	CHARSET 'A','Z', 30
 	CHARSET 'a','z', 30
 	CHARSET '*', 26
-	CHARSET '©', 27
+	CHARSET $A9, 27	; 'Â©'
 	CHARSET ':', 28
 	CHARSET '.', 29
 	CHARSET ' ',  0
