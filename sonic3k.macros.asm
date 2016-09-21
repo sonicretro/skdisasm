@@ -22,8 +22,8 @@ dma68kToVDP macro source,dest,length,type
 	move.l	#(($9600|((((source)>>1)&$FF00)>>8))<<16)|($9500|(((source)>>1)&$FF)),(a5)
 	move.w	#$9700|(((((source)>>1)&$FF0000)>>16)&$7F),(a5)
 	move.w	#((vdpComm(dest,type,DMA)>>16)&$FFFF),(a5)
-	move.w	#(vdpComm(dest,type,DMA)&$FFFF),($FFFFF640).w
-	move.w	($FFFFF640).w,(a5)
+	move.w	#(vdpComm(dest,type,DMA)&$FFFF),(DMA_trigger_word).w
+	move.w	(DMA_trigger_word).w,(a5)
     endm
 
 ; tells the VDP to fill a region of VRAM with a certain byte
