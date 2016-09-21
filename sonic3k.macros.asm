@@ -24,6 +24,18 @@ dma68kToVDP macro source,dest,length,type
 	move.w	#((vdpComm(dest,type,DMA)>>16)&$FFFF),(a5)
 	move.w	#(vdpComm(dest,type,DMA)&$FFFF),(DMA_trigger_word).w
 	move.w	(DMA_trigger_word).w,(a5)
+	; From '  § 7  DMA TRANSFER' of https://emu-docs.org/Genesis/sega2f.htm:
+	;
+	; "In the case of ROM to VRAM transfers,
+	; a hardware feature causes occasional failure of DMA unless the
+	; following two conditions are observed:
+	;
+	; --The destination address write (to address $C00004) must be a word
+	;   write.
+	;
+	; --The final write must use the work RAM.
+	;   There are two ways to accomplish this, by copying the DMA program
+	;   into RAM or by doing a final "move.w ram address $C00004""
     endm
 
 ; tells the VDP to fill a region of VRAM with a certain byte
