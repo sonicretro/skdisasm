@@ -305,8 +305,6 @@ DAC_B2_B3_Data:			DACBINCLUDE "Sound/DAC/B2-B3.bin"
 
 		align $10
 
-z80_SoundDriverStart:
-
 ; ---------------------------------------------------------------------------
 zTrack STRUCT DOTS
 	; Playback control bits:
@@ -397,12 +395,16 @@ zPSG					=	$7F11
 zROMWindow				=	$8000
 ; ---------------------------------------------------------------------------
 ; z80 RAM:
+
+zVariables STRUCT NOEXTNAMES
 	if fix_sndbugs
-zDataStart				=	$1BF0
+	!org $1BF0
 	else
-zDataStart				=	$1C00	
+	!org $1C00
 	endif
-		phase zDataStart
+
+zDataStart:
+
 	if fix_sndbugs
 zSpecFM3Freqs				ds.b 8
 zSpecFM3FreqsSFX			ds.b 8
@@ -420,7 +422,6 @@ zNextSound:			ds.b 1
 zMusicNumber:		ds.b 1	; Play_Sound
 zSFXNumber0:		ds.b 1	; Play_Sound_2
 zSFXNumber1:		ds.b 1	; Play_Sound_2
-	shared zMusicNumber,zSFXNumber0,zSFXNumber1
 zFadeOutTimeout:	ds.b 1
 zFadeDelay:			ds.b 1
 zFadeDelayTimeout:	ds.b 1
@@ -483,7 +484,7 @@ zSFX_PSG2:		zTrack
 zSFX_PSG3:		zTrack
 zTracksSFXEnd:
 
-		phase zTracksSFXStart
+		!org zTracksSFXStart
 zTracksSaveStart:
 zSaveSongDAC:	zTrack
 zSaveSongFM1:	zTrack
@@ -498,10 +499,10 @@ zTracksSaveEnd:
 	if * > z80_stack_end	; Don't declare more space than the RAM can contain!
 		fatal "The RAM variable declarations are too large. It's \{*-z80_stack_end}h bytes past the start of the bottom of the stack, at \{z80_stack_end}h."
 	endif
-		dephase
+zVariables	ENDSTRUCT
 ; ---------------------------------------------------------------------------
-		!org z80_SoundDriverStart
-z80_SoundDriver:
+; z80_SoundDriver:
+Z80_SoundDriver:
 		save
 		!org	0							; z80 Align, handled by the build process
 		CPU Z80
@@ -4512,11 +4513,12 @@ z80_SoundDriverEnd:
 
 		restore
 		padding off
-		!org		z80_SoundDriver+Size_of_Snd_driver_guess
+		!org		Z80_SoundDriver+Size_of_Snd_driver_guess
 
 		align0 $10
 
-Z80_Snd_Driver2:
+; Z80_Snd_Driver2:
+Z80_SoundDriverData:
 ; ---------------------------------------------------------------------------
 		save
 		CPU Z80
@@ -4843,16 +4845,13 @@ z80_UniVoiceBank:
 		fatal "Your Z80 tables won't fit before its variables. It's \{$-zDataStart}h bytes past the start of the variables, at \{zDataStart}h"
 	endif
 
-z80_SoundDriverPointersEnd:
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; END OF SOUND DRIVER
 ; ===========================================================================
 		restore
 		padding off
-		!org		Z80_Snd_Driver2+Size_of_Snd_driver2_guess
-
-Z80_Snd_Driver_End:
+		!org		Z80_SoundDriverData+Size_of_Snd_driver2_guess
 
 		align0 $10
 
