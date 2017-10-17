@@ -501,7 +501,8 @@ zTracksSaveEnd:
 		dephase
 ; ---------------------------------------------------------------------------
 		!org z80_SoundDriverStart
-z80_SoundDriver:
+; z80_SoundDriver:
+Z80_SoundDriver:
 		save
 		!org	0							; z80 Align, handled by the build process
 		CPU Z80
@@ -4508,15 +4509,15 @@ zPlaySEGAPCM:
 	if $ > 1300h
 		fatal "Your Z80 code won't fit before its tables. It's \{$-1300h}h bytes past the start of music data \{1300h}h"
 	endif
-z80_SoundDriverEnd:
 
 		restore
 		padding off
-		!org		z80_SoundDriver+Size_of_Snd_driver_guess
+		!org		Z80_SoundDriver+Size_of_Snd_driver_guess
 
 		align0 $10
 
-Z80_Snd_Driver2:
+; Z80_Snd_Driver2:
+Z80_SoundDriverData:
 ; ---------------------------------------------------------------------------
 		save
 		CPU Z80
@@ -4843,16 +4844,13 @@ z80_UniVoiceBank:
 		fatal "Your Z80 tables won't fit before its variables. It's \{$-zDataStart}h bytes past the start of the variables, at \{zDataStart}h"
 	endif
 
-z80_SoundDriverPointersEnd:
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; END OF SOUND DRIVER
 ; ===========================================================================
 		restore
 		padding off
-		!org		Z80_Snd_Driver2+Size_of_Snd_driver2_guess
-
-Z80_Snd_Driver_End:
+		!org		Z80_SoundDriverData+Size_of_Snd_driver2_guess
 
 		align0 $10
 
