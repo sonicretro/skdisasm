@@ -1501,7 +1501,7 @@ MGZ2_8x8_Secondary_KosM:		binclude "Levels/MGZ/Tiles/Act 2 Secondary.bin"
 	even
 MGZ2_128x128_Secondary_Kos:		binclude "Levels/MGZ/Chunks/Act 2 Secondary.bin"
 	even
-MGZ2_QuakeChunks:		binclude "Levels/MGZ/Chunks/Act 2 Quake.bin"
+MGZ2_QuakeChunks:		binclude "Levels/MGZ/Misc/Act 2 Quake Chunks.bin"
 	even
 
 CNZ_16x16_Kos:		binclude "Levels/CNZ/Blocks/Primary.bin"
