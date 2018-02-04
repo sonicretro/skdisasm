@@ -20,11 +20,9 @@ Page1 8x8 Page:       0
 
 Metatile Size:        128
 128x128 Compression:  1
-Num 128x128 Pages:    2
+Num 128x128 Pages:    1
 Page0 16x16 Page:     0
 128x128 Tiles Page 0: ..\Levels\MGZ\Chunks\Primary.bin
-Page1 16x16 Page:     0
-128x128 Tiles Page 1: ..\Levels\MGZ\Chunks\Act 2 Quake.bin
 
 Layout Format:        2
 Layout Compression:   0

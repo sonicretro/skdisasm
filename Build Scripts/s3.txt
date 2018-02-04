@@ -13,6 +13,7 @@
 #split	0x00144E80,0x00144F48,Levels\ICZ\Misc\ICZ Snowboard Slope 1.bin
 #split	0x00144F48,0x00145010,Levels\ICZ\Misc\ICZ Snowboard Slope 2.bin
 #split	0x0016C572,0x0016D572,Levels\MGZ\Misc\MGZ End Boss Scaled.bin
+#split	0x001CBBB4,0x001CCC34,Levels\MGZ\Misc\Act 2 Quake Chunks.bin
 
 /* Demo data */
 #split	0x000C5624,0x000C5DA4,Levels\AIZ\Demodata\1.bin
@@ -347,7 +348,6 @@
 #split	0x001C6460,0x001C8760,Levels\MGZ\Chunks\Primary.bin
 #split	0x001C9452,0x001C9CD2,Levels\MGZ\Chunks\Act 1 Secondary.bin
 #split	0x001CB1C4,0x001CBBB4,Levels\MGZ\Chunks\Act 2 Secondary.bin
-#split	0x001CBBB4,0x001CCC34,Levels\MGZ\Chunks\Act 2 Quake.bin
 #split	0x001D0E96,0x001D3FB6,Levels\CNZ\Chunks\Primary.bin
 #split	0x001D56A8,0x001D5958,Levels\ICZ\Chunks\Primary.bin
 #split	0x001D844A,0x001DA26A,Levels\ICZ\Chunks\Act 1 Secondary.bin
