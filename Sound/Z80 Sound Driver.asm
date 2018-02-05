@@ -770,7 +770,7 @@ zInitAudioDriver:
 		dec	c								; c--
 		jr	z, .loop						; Loop if c = 0
 
-		call	zMusicFade					; Stop all music
+		call	zStopAllSound					; Stop all music
 		ld	a, zmake68kBank(Snd_Bank2_Start)		; Set song bank to second music bank (default value)
 		ld	(zSongBank), a					; Store it
 		xor	a								; a = 0
@@ -1856,9 +1856,9 @@ zPlaySoundByIndex:
 		cp	SndID__End						; Is this a sound effect?
 		jp	c, zPlaySound_CheckRing			; Branch if yes
 		cp	FadeID__First					; Is it before the first fade effect?
-		jp	c, zMusicFade					; Branch if yes
+		jp	c, zStopAllSound					; Branch if yes
 		cp	FadeID__End						; Is this after the last fade effect?
-		jp	nc, zMusicFade					; Branch if yes
+		jp	nc, zStopAllSound					; Branch if yes
 		sub	FadeID__First					; If none of the checks passed, do fade effects.
 		ld	hl, zFadeEffects				; hl = switch table pointer
 		rst	PointerTableOffset				; Get address of function that handles the fade effect
@@ -1872,7 +1872,7 @@ zPlaySoundByIndex:
 ;loc_524
 zFadeEffects:
 		dw	zFadeOutMusic					; E1h
-		dw	zMusicFade						; E2h
+		dw	zStopAllSound						; E2h
 		dw	zPSGSilenceAll					; E3h
 		dw	zStopSFX						; E4h
 		dw	zFadeOutMusic					; E5h
@@ -1989,7 +1989,7 @@ zPlayMusic:
 ; ---------------------------------------------------------------------------
 
 zPlayMusic_DoFade:
-		call	zMusicFade					; Stop all music
+		call	zStopAllSound					; Stop all music
 
 ;loc_5DE
 zBGMLoad:
@@ -2438,7 +2438,7 @@ zPauseUnpause:
 		ld	(hl), a							; Clear pause flag
 		ld	a, (zFadeOutTimeout)			; Get fade timeout
 		or	a								; Is it zero?
-		jp	nz, zMusicFade					; Stop all music if not
+		jp	nz, zStopAllSound					; Stop all music if not
 		ld	ix, zSongFM1					; Start with FM1 track
 	if fix_sndbugs
 		ld	b, (zSongPSG1-zSongFM1)/zTrack.len	; Number of FM tracks
@@ -2544,7 +2544,7 @@ zDoMusicFadeOut:
 		dec	a								; Decrement it
 		ld	(zFadeOutTimeout), a			; Then store it back
 	endif
-		jp	z, zMusicFade					; Stop all music if it is zero
+		jp	z, zStopAllSound					; Stop all music if it is zero
 		ld	a, (zSongBank)					; a = current music bank ID
 		bankswitch2							; Bank switch to music bank
 		ld	ix, zTracksStart				; ix = pointer to track RAM
@@ -2638,8 +2638,8 @@ zDoMusicFadeIn:
 
 ; =============== S U B	R O U T	I N E =======================================
 ; Wipes music data and fades all FM, PSG and DAC channels.
-;sub_944
-zMusicFade:
+;sub_944 zMusicFade
+zStopAllSound:
 		; The following block sets to zero the z80 RAM from 1C0Dh to 1FD4h
 		ld	hl, zTempVariablesStart				; Starting source address for copy
 		ld	de, zTempVariablesStart+1					; Starting destination address for copy
@@ -2701,7 +2701,7 @@ zFM3NormalMode:
 		ld	a, 27h							; FM3 special settings
 		call	zWriteFMI					; Set it
 		jp	zClearNextSound
-; End of function zMusicFade
+; End of function zStopAllSound
 
 ; =============== S U B	R O U T	I N E =======================================
 ; Sets the SSG-EG registers (90h+) for all operators on this track to 0.
@@ -2881,7 +2881,7 @@ zFMOperatorWriteLoop:
 ; ---------------------------------------------------------------------------
 ;loc_A16
 zPlaySegaSound:
-		call	zMusicFade					; Fade music before playing the sound
+		call	zStopAllSound					; Fade music before playing the sound
 	if fix_sndbugs
 		xor	a								; a = 0
 		ld	(zMusicNumber), a				; Clear M68K input queue...
