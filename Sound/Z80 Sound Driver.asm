@@ -421,6 +421,9 @@ zMusicNumber:		ds.b 1	; Play_Sound
 zSFXNumber0:		ds.b 1	; Play_Sound_2
 zSFXNumber1:		ds.b 1	; Play_Sound_2
 	shared zMusicNumber,zSFXNumber0,zSFXNumber1
+
+zTempVariablesStart:
+
 zFadeOutTimeout:	ds.b 1
 zFadeDelay:			ds.b 1
 zFadeDelayTimeout:	ds.b 1
@@ -495,6 +498,8 @@ zSaveSongPSG1:	zTrack
 zSaveSongPSG2:	zTrack
 zSaveSongPSG3:	zTrack
 zTracksSaveEnd:
+
+zTempVariablesEnd:
 	if * > z80_stack_end	; Don't declare more space than the RAM can contain!
 		fatal "The RAM variable declarations are too large. It's \{*-z80_stack_end}h bytes past the start of the bottom of the stack, at \{z80_stack_end}h."
 	endif
@@ -2636,12 +2641,12 @@ zDoMusicFadeIn:
 ;sub_944
 zMusicFade:
 		; The following block sets to zero the z80 RAM from 1C0Dh to 1FD4h
-		ld	hl, zFadeOutTimeout				; Starting source address for copy
-		ld	de, zFadeDelay					; Starting destination address for copy
+		ld	hl, zTempVariablesStart				; Starting source address for copy
+		ld	de, zTempVariablesStart+1					; Starting destination address for copy
 	if fix_sndbugs
-		ld	bc, zTracksSaveEnd-zFadeDelay	; Length of copy
+		ld	bc, zTempVariablesEnd-zTempVariablesStart-1	; Length of copy
 	else
-		ld	bc, zTracksSaveEnd-zFadeDelay+34h	; Length of copy
+		ld	bc, zTempVariablesEnd-zTempVariablesStart-1+34h	; Length of copy
 	endif
 		ld	(hl), 0							; Initial value of zero
 		ldir								; while (--length) *de++ = *hl++
@@ -2650,11 +2655,24 @@ zMusicFade:
 		ld	(zTempoSpeedup), a				; Fade in normal speed
 
 		ld	ix, zFMDACInitBytes				; Initialization data for channels
-		ld	b, (zSongPSG1-zSongFM6_DAC)/zTrack.len	; Number of FM channels
+		ld	b, 6	; Number of FM channels
 
 .loop:
 		push	bc							; Save bc for loop
+
+	if fix_sndbugs=0
 		call	zFMSilenceChannel			; Silence track's channel
+	else
+		; Inline it because zKeyOnOff tries to write to ix+0, which we don't want
+		call	zSetMaxRelRate
+		ld	a, 40h							; Set total level...
+		ld	c, 7Fh							; ... to minimum envelope amplitude...
+		call	zFMOperatorWriteLoop		; ... for all operators of this track's channel
+		ld	a, 28h							; Write to KEY ON/OFF port
+		ld	c, (ix+zTrack.VoiceControl)		; Send key off
+		call	zWriteFMI						; Send it
+	endif
+
 		call	zFMClearSSGEGOps			; Clears the SSG-EG operators for this channel
 		inc	ix								; Go to next channel byte
 		inc	ix								; But skip the 80h
@@ -2663,9 +2681,9 @@ zMusicFade:
 
 	if fix_sndbugs=0
 		ld	b, 7							; Unused
-	endif
 		xor	a								; a = 0
 		ld	(zFadeOutTimeout), a			; Set fade timeout to zero... again
+	endif
 		call	zPSGSilenceAll				; Silence PSG
 		ld	c, 0							; Write a zero...
 		ld	a, 2Bh							; ... to DAC enable register
@@ -2750,7 +2768,7 @@ zPauseAudio:
 ;sub_9BC
 zPSGSilenceAll:
 		push	bc							; Save bc
-		ld	b, (zTracksEnd-zSongPSG1)/zTrack.len+1	; Loop 4 times: 3 PSG channels + noise channel
+		ld	b, 4	; Loop 4 times: 3 PSG channels + noise channel
 		ld	a, 9Fh							; Command to silence PSG1
 
 .loop:
