@@ -2327,6 +2327,7 @@ zGetSFXChannelPointers:
 		rlca
 		rlca
 		and	7
+		add	a, 3							; Compensate for subtraction below
 	else
 		ld	a, 1Fh							; a = 1Fh (redundant, as this is the first instruction of the function)
 		call	zSilencePSGChannel			; Silence channel at ix
@@ -2341,8 +2342,8 @@ zGetSFXChannelPointers:
 		srl	a
 		srl	a
 		srl	a
+		add	a, 2							; Compensate for subtraction below
 	endif
-		add	a, 3							; Compensate for subtraction below
 
 .get_ptrs:
 		sub	2								; Start table at FM3
