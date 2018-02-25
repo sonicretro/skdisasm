@@ -2311,9 +2311,11 @@ zGetSFXChannelPointers:
 		bit	7, c							; Is this a PSG track?
 		jr	nz, .is_psg						; Branch if yes
 		ld	a, c							; a = c
+	if fix_sndbugs=0
 		bit	2, a							; Is this FM4, FM5 or FM6?
 		jr	z, .get_ptrs					; Branch if not
 		dec	a								; Remove gap between FM3 and FM4+
+	endif
 		jr	.get_ptrs
 ; ---------------------------------------------------------------------------
 .is_psg:
@@ -2340,7 +2342,7 @@ zGetSFXChannelPointers:
 		srl	a
 		srl	a
 	endif
-		add	a, 2							; Compensate for subtraction below
+		add	a, 3							; Compensate for subtraction below
 
 .get_ptrs:
 		sub	2								; Start table at FM3
@@ -2399,6 +2401,9 @@ zZeroFillTrackRAM:
 ;zloc_7DF
 zSFXChannelData:
 		dw  zSFX_FM3						; FM3
+	if fix_sndbugs
+		dw  0000h	; Ironically, this filler is smaller than the code made to avoid it
+	endif
 		dw  zSFX_FM4						; FM4
 		dw  zSFX_FM5						; FM5
 		dw  zSFX_FM6						; FM6 or DAC
@@ -2409,6 +2414,9 @@ zSFXChannelData:
 ;zloc_7EF
 zSFXOverriddenChannel:
 		dw  zSongFM3						; FM3
+	if fix_sndbugs
+		dw  0000h
+	endif
 		dw  zSongFM4						; FM4
 		dw  zSongFM5						; FM5
 		dw  zSongFM6_DAC					; FM6 or DAC
