@@ -300,7 +300,7 @@
 #split	0x001D64C8,0x001D844A,Levels\ICZ\Tiles\Act 1 Secondary.bin
 #split	0x001DAF0A,0x001DCFBC,Levels\ICZ\Tiles\Act 2 Secondary.bin
 #split	0x001DFABC,0x001E120E,Levels\LBZ\Tiles\Primary.bin
-#split	0x001E120E,0x001E2FA0,Levels\LBZ\Tiles\Act 1 Secondary.bin
+#split	0x001E120E,0x001E2E40,Levels\LBZ\Tiles\Act 1 Secondary.bin
 #split	0x001E77D0,0x001E8F72,Levels\LBZ\Tiles\Act 2 Secondary.bin
 #split	0x001E8F72,0x001EAF04,Levels\LBZ\Tiles\Act 2 Death Egg.bin
 #split	0x001EEB84,0x001F1936,Levels\ALZ\Tiles\Primary.bin
@@ -360,7 +360,7 @@
 #split	0x001F743A,0x001F7A6A,Levels\DPZ\Chunks\Primary.bin
 #split	0x001FA75C,0x001FAC1C,Levels\CGZ\Chunks\Primary.bin
 #split	0x001FE2FE,0x001FEA0E,Levels\EMZ\Chunks\Primary.bin
-#split	0x001FFB80,0x00200000,Levels\Gumball\Chunks\Primary.bin
+#split	0x001FFB80,0x001FFF20,Levels\Gumball\Chunks\Primary.bin
 
 /* Level Layouts */
 #split	0x00081420,0x00081C6C,Levels\AIZ\Layout\1.bin

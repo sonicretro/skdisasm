@@ -366,7 +366,7 @@
 #split	0x001927FE,0x00192AEE,General\Sprites\Level Misc\SpikesSprings.bin
 #split	0x00192AEE,0x00192D2A,General\Sprites\Ring\Ring.bin
 #split	0x00192D2A,0x00192F6E,General\Sprites\Enemy Misc\Enemy points.bin
-#split	0x00192F6E,0x001931D6,General\Sprites\Animals\Bunny.bin
+#split	0x00192F6E,0x001931D6,General\Sprites\Animals\Seal.bin
 #split	0x001931D6,0x00193308,General\Sprites\Animals\Blue Flicky.bin
 #split	0x00193308,0x00193456,General\Sprites\Animals\Chicken.bin
 #split	0x00193456,0x001935A8,General\Sprites\Animals\Penguin.bin
@@ -504,9 +504,11 @@
 #split	0x0019E714,0x0019F8A6,Levels\MHZ\Tiles\Secondary.bin
 #split	0x001A1EB6,0x001A30E8,Levels\MHZ\Tiles\Custom.bin
 #split	0x001A4198,0x001A773A,Levels\SOZ\Tiles\Primary.bin
-#split	0x001AA36A,0x001AD05C,Levels\SOZ\Tiles\Act 1 Secondary.bin
+#split	0x001AA36A,0x001AA98C,Levels\SOZ\Tiles\Act 1 Secondary.bin
+#split	0x001AA98C,0x001AD05C,Levels\SOZ\Chunks\Unused.bin
 #split	0x001AD24C,0x001AD68E,Levels\SOZ\Tiles\Act 1 Custom.bin
-#split	0x001AD81E,0x001B0720,Levels\SOZ\Tiles\Act 2 Secondary.bin
+#split	0x001AD81E,0x001AE030,Levels\SOZ\Tiles\Act 2 Secondary.bin
+#split	0x001AE030,0x001B0720,Levels\SOZ\Chunks\Unused2.bin
 #split	0x001B0860,0x001B0FC2,Levels\SOZ\Tiles\Act 2 Custom.bin
 #split	0x001B1102,0x001B1AA4,Levels\LRZ\Tiles\Primary.bin
 #split	0x001B28F4,0x001B5CD6,Levels\LRZ\Tiles\Act 1 Secondary.bin
@@ -729,8 +731,8 @@
 #split	0x000FFD94,0x000FFDA9,Sound\SFX\DB.bin
 
 /* General sound */
-#split	0x000F6960,0x000F7760,Sound\Z80 Sound Driver.bin
-#split	0x000F7760,0x000F7DF0,Sound\Z80 Sound Driver 2.bin
+/*#split	0x000F6960,0x000F7760,Sound\Z80 Sound Driver.bin*/
+/*#split	0x000F7760,0x000F7DF0,Sound\Z80 Sound Driver 2.bin*/
 #split	0x000F8000,0x000FDE2F,Sound\Sega PCM.bin
 
 /* DAC data */
@@ -824,22 +826,23 @@
 #split	0x001E4084,0x001E4484,Levels\Slots\SSLayout\Bonus Layout.bin
 
 /* Object positions */
-#split	0x000DF3FE,0x000DF7B2,Levels\Misc\S2K Object Pos\EHZ 1.bin
-#split	0x000DF7B2,0x000DFBD2,Levels\Misc\S2K Object Pos\EHZ 2.bin
-#split	0x000DFBD2,0x000E005E,Levels\Misc\S2K Object Pos\MTZ 1.bin
-#split	0x000E005E,0x000E05A4,Levels\Misc\S2K Object Pos\MTZ 2.bin
-#split	0x000E05A4,0x000E0C10,Levels\Misc\S2K Object Pos\MTZ 3.bin
-#split	0x000E0C10,0x000E1012,Levels\Misc\S2K Object Pos\WFZ.bin
-#split	0x000E1018,0x000E1396,Levels\Misc\S2K Object Pos\HTZ 1.bin
-#split	0x000E1396,0x000E1A4A,Levels\Misc\S2K Object Pos\HTZ 2.bin
-#split	0x000E1A4A,0x000E1F18,Levels\Misc\S2K Object Pos\OOZ 1.bin
-#split	0x000E1F18,0x000E23DA,Levels\Misc\S2K Object Pos\OOZ 2.bin
-#split	0x000E23DA,0x000E26F2,Levels\Misc\S2K Object Pos\MCZ 1.bin
-#split	0x000E26F2,0x000E2A88,Levels\Misc\S2K Object Pos\MCZ 2.bin
-#split	0x000E2A88,0x000E2EFC,Levels\Misc\S2K Object Pos\CPZ 1.bin
-#split	0x000E2EFC,0x000E34D8,Levels\Misc\S2K Object Pos\CPZ 2.bin
-#split	0x000E34D8,0x000E398E,Levels\Misc\S2K Object Pos\ARZ 1.bin
-#split	0x000E398E,0x000E40AE,Levels\Misc\S2K Object Pos\ARZ 2.bin
+#split	0x000DF3FE,0x000DF7B2,Levels\Misc\S2K Object Pos\EHZ_1.bin
+#split	0x000DF7B2,0x000DFBD2,Levels\Misc\S2K Object Pos\EHZ_2.bin
+#split	0x000DFBD2,0x000E005E,Levels\Misc\S2K Object Pos\MTZ_1.bin
+#split	0x000E005E,0x000E05A4,Levels\Misc\S2K Object Pos\MTZ_2.bin
+#split	0x000E05A4,0x000E0C10,Levels\Misc\S2K Object Pos\MTZ_3.bin
+#split	0x000E0C10,0x000E1012,Levels\Misc\S2K Object Pos\WFZ_1.bin
+#split	0x000E1012,0x000E1018,Levels\Misc\S2K Object Pos\WFZ_2.bin
+#split	0x000E1018,0x000E1396,Levels\Misc\S2K Object Pos\HTZ_1.bin
+#split	0x000E1396,0x000E1A4A,Levels\Misc\S2K Object Pos\HTZ_2.bin
+#split	0x000E1A4A,0x000E1F18,Levels\Misc\S2K Object Pos\OOZ_1.bin
+#split	0x000E1F18,0x000E23DA,Levels\Misc\S2K Object Pos\OOZ_2.bin
+#split	0x000E23DA,0x000E26F2,Levels\Misc\S2K Object Pos\MCZ_1.bin
+#split	0x000E26F2,0x000E2A88,Levels\Misc\S2K Object Pos\MCZ_2.bin
+#split	0x000E2A88,0x000E2EFC,Levels\Misc\S2K Object Pos\CPZ_1.bin
+#split	0x000E2EFC,0x000E34D8,Levels\Misc\S2K Object Pos\CPZ_2.bin
+#split	0x000E34D8,0x000E398E,Levels\Misc\S2K Object Pos\ARZ_1.bin
+#split	0x000E398E,0x000E40AE,Levels\Misc\S2K Object Pos\ARZ_2.bin
 #split	0x001E44DA,0x001E4876,Levels\AIZ\Object Pos\1.bin
 #split	0x001E4876,0x001E5A16,Levels\AIZ\Object Pos\2.bin
 #split	0x001E6090,0x001E6990,Levels\HCZ\Object Pos\1.bin
