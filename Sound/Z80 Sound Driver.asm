@@ -814,7 +814,7 @@ zWriteFMIorII:
 ;sub_C2
 zWriteFMI:
 		ld	(zYM2612_A0), a					; Select YM2612 register
-	if fix_sndbugs
+	if fix_sndbugs=0
 		; Pointless, since there's no need to delay between writing to the address port and the data port
 		nop									; Wait
 	endif
@@ -839,7 +839,7 @@ zWriteFMII_reduced:
 ;sub_CD
 zWriteFMII:
 		ld	(zYM2612_A1), a					; Select YM2612 register
-	if fix_sndbugs
+	if fix_sndbugs=0
 		; Pointless, since there's no need to delay between writing to the address port and the data port
 		nop									; Wait
 	endif
