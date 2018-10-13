@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Foreground Plant" Image="img0">
+  <Images>
+    <ImageFromMappings id="img0" priority="true">
+      <ArtFile filename="../Levels/AIZ/Nemesis Art/Misc Art 1.bin" />
+      <MapFile type="ASM" filename="../Levels/AIZ/Misc Object Data/Map - Foreground Plant.asm" frame="0" startpal="2" />
+    </ImageFromMappings>
+    <ImageFromMappings id="img1" priority="true">
+      <ArtFile filename="../Levels/AIZ/Nemesis Art/Misc Art 1.bin" />
+      <MapFile type="ASM" filename="../Levels/AIZ/Misc Object Data/Map - Foreground Plant.asm" frame="1" startpal="2" />
+    </ImageFromMappings>
+  </Images>
+  <Properties>
+    <BitsProperty name="Sprite" type="Sprite" startbit="0" length="4" description="The object's appearance." />
+    <BitsProperty name="Scroll Rate" type="Rate" startbit="4" length="4" description="The object's scrolling speed relative to the camera." />
+  </Properties>
+  <Enums>
+    <Enum name="Sprite">
+      <EnumMember name="Flowers" />
+      <EnumMember name="No flowers" />
+    </Enum>
+    <Enum name="Rate">
+      <EnumMember name="Same rate" />
+      <EnumMember name="1/16 speed" />
+      <EnumMember name="1/8 speed" />
+      <EnumMember name="1/4 speed" />
+      <EnumMember name="1/2 speed" />
+      <EnumMember name="2x speed" />
+      <EnumMember name="4x speed" />
+    </Enum>
+  </Enums>
+  <Display>
+    <DisplayOption>
+      <Condition property="Sprite" value="Flowers" />
+      <ImageRef image="img0" />
+    </DisplayOption>
+    <DisplayOption>
+      <Condition property="Sprite" value="No flowers" />
+      <ImageRef image="img1" />
+    </DisplayOption>
+  </Display>
+</ObjDef>

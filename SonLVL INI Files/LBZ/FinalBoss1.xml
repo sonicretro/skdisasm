@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Boss (Knuckles)" Depth="6">
+  <Images>
+    <ImageFromMappings id="main">
+      <ArtFile filename="../Levels/LBZ/Nemesis Art/Final Boss 1.bin" />
+      <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Final Boss 1.asm" frame="0" startpal="6" />
+    </ImageFromMappings>
+    <ImageFromMappings id="rockets">
+      <ArtFile filename="../Levels/LBZ/Nemesis Art/Final Boss 1.bin" />
+      <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Final Boss 1.asm" frame="1" startpal="6" />
+    </ImageFromMappings>
+    <ImageFromMappings id="cockpit">
+      <ArtFile filename="../Levels/LBZ/Nemesis Art/Final Boss 1.bin" />
+      <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Final Boss 1.asm" frame="2" startpal="6" />
+    </ImageFromMappings>
+    <ImageFromMappings id="gun">
+      <ArtFile filename="../Levels/LBZ/Nemesis Art/Final Boss 1.bin" />
+      <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Final Boss 1.asm" frame="4" startpal="6" />
+    </ImageFromMappings>
+    <ImageFromMappings id="fire">
+      <ArtFile filename="../Levels/LBZ/Nemesis Art/Final Boss 1.bin" />
+      <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Final Boss 1.asm" frame="10" />
+    </ImageFromMappings>
+    <ImageFromMappings id="head">
+      <ArtFile filename="../General/Sprites/Robotnik/Ship.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Robotnik Ship.asm" frame="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="ship">
+      <ArtFile filename="../General/Sprites/Robotnik/Ship.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Robotnik Ship.asm" frame="12" />
+    </ImageFromMappings>
+  </Images>
+  <DefaultImage>
+      <ImageRef image="cockpit" />
+      <ImageRef image="main">
+        <Offset Y="28" />
+      </ImageRef>
+  </DefaultImage>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="cockpit" />
+      <ImageRef image="main">
+        <Offset Y="28" />
+      </ImageRef>
+      <ImageRef image="main">
+        <Offset Y="68" />
+      </ImageRef>
+      <ImageRef image="rockets">
+        <Offset Y="112" />
+      </ImageRef>
+      <ImageRef image="fire">
+        <Offset X="-20" Y="160" />
+      </ImageRef>
+      <ImageRef image="fire">
+        <Offset X="20" Y="160" />
+      </ImageRef>
+      <ImageRef image="gun">
+        <Offset X="-36" Y="20" />
+      </ImageRef>
+      <ImageRef image="gun" xflip="ReverseFlip">
+        <Offset X="-36" Y="20" />
+      </ImageRef>
+      <ImageRef image="gun">
+        <Offset X="-36" Y="60" />
+      </ImageRef>
+      <ImageRef image="gun" xflip="ReverseFlip">
+        <Offset X="-36" Y="60" />
+      </ImageRef>
+      <ImageRef image="head">
+        <Offset Y="-8" />
+      </ImageRef>
+      <ImageRef image="ship">
+        <Offset Y="20" />
+      </ImageRef>
+    </DisplayOption>
+  </Display>
+</ObjDef>

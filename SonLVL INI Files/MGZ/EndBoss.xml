@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Boss" Image="main" Depth="6">
+  <Images>
+    <ImageFromMappings id="main">
+      <ArtFile filename="../Levels/MGZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/MGZ/Misc Object Data/Map - End Boss.asm" frame="0" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="divot">
+      <ArtFile filename="../Levels/MGZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/MGZ/Misc Object Data/Map - End Boss.asm" frame="1" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="shaft">
+      <ArtFile filename="../Levels/MGZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/MGZ/Misc Object Data/Map - End Boss.asm" frame="4" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="rocket">
+      <ArtFile filename="../Levels/MGZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/MGZ/Misc Object Data/Map - End Boss.asm" frame="6" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="drill">
+      <ArtFile filename="../Levels/MGZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/MGZ/Misc Object Data/Map - End Boss.asm" frame="15" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="fire">
+      <ArtFile filename="../Levels/MGZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/MGZ/Misc Object Data/Map - End Boss.asm" frame="25" />
+    </ImageFromMappings>
+    <ImageFromMappings id="head">
+      <ArtFile filename="../General/Sprites/Robotnik/Ship.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Robotnik Ship.asm" frame="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="ship">
+      <ArtFile filename="../General/Sprites/Robotnik/Ship.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Robotnik Ship.asm" frame="9" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="drill">
+        <Offset X="20" Y="-52" />
+      </ImageRef>
+      <ImageRef image="shaft">
+        <Offset X="20" Y="-20" />
+      </ImageRef>
+      <ImageRef image="rocket">
+        <Offset X="-12" Y="24" />
+      </ImageRef>
+      <ImageRef image="fire">
+        <Offset X="-12" Y="40" />
+      </ImageRef>
+      <ImageRef image="main" />
+      <ImageRef image="divot">
+        <Offset X="-20" Y="15" />
+      </ImageRef>
+      <ImageRef image="rocket">
+        <Offset X="8" Y="24" />
+      </ImageRef>
+      <ImageRef image="fire">
+        <Offset X="8" Y="40" />
+      </ImageRef>
+      <ImageRef image="head">
+        <Offset X="-6" Y="-24" />
+      </ImageRef>
+      <ImageRef image="ship">
+        <Offset X="-6" Y="4" />
+      </ImageRef>
+    </DisplayOption>
+  </Display>
+</ObjDef>

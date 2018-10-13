@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Boss" Image="main" Depth="5">
+  <Images>
+    <ImageFromMappings id="main">
+      <ArtFile filename="../Levels/LBZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - End Boss.asm" frame="0" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="screw1">
+      <ArtFile filename="../Levels/LBZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - End Boss.asm" frame="2" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="screw2">
+      <ArtFile filename="../Levels/LBZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - End Boss.asm" frame="3" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="screw3">
+      <ArtFile filename="../Levels/LBZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - End Boss.asm" frame="4" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="head">
+      <ArtFile filename="../General/Sprites/Robotnik/Ship.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Robotnik Ship.asm" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="head">
+        <Offset Y="-8" />
+      </ImageRef>
+      <ImageRef image="main" />
+      <ImageRef image="screw1">
+        <Offset X="-24" Y="56" />
+      </ImageRef>
+      <ImageRef image="screw2">
+        <Offset X="24" Y="56" />
+      </ImageRef>
+      <ImageRef image="screw3">
+        <Offset Y="56" />
+      </ImageRef>
+    </DisplayOption>
+  </Display>
+</ObjDef>

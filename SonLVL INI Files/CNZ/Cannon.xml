@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Cannon" Image="base" Depth="5">
+  <Images>
+    <ImageFromMappings id="chamber">
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/Misc Art.bin" offset="-1120" />
+      <ArtFile filename="../General/Sprites/CNZ Cannon/CNZ Cannon.bin" compression="Uncompressed" offset="6784" />
+      <MapFile type="ASM" filename="../General/Sprites/CNZ Cannon/Map - CNZ Cannon.asm" frame="4" startpal="2" />
+    </ImageFromMappings>
+    <ImageFromMappings id="base">
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/Misc Art.bin" offset="-1120" />
+      <MapFile type="ASM" filename="../General/Sprites/CNZ Cannon/Map - CNZ Cannon.asm" frame="9" startpal="2" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="chamber" />
+      <ImageRef image="base" />
+    </DisplayOption>
+  </Display>
+</ObjDef>

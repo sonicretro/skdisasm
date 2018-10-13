@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Star Post" Image="img" Depth="5">
+  <Images>
+    <ImageFromMappings id="img">
+      <ArtFile filename="../General/Sprites/Enemy Misc/Enemy points.bin" offset="-256" />
+      <MapFile type="ASM" filename="../General/Sprites/Starpost/Map - Starpost.asm" />
+    </ImageFromMappings>
+  </Images>
+  <Properties>
+    <BitsProperty name="Star Post ID" type="int" startbit="0" length="7" description="Any star posts with a lower ID will automatically activate." />
+  </Properties>
+</ObjDef>

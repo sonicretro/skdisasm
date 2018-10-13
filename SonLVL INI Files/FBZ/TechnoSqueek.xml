@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="TechnoSqueek" Image="horz" Depth="5">
+  <Images>
+    <ImageFromMappings id="horz" priority="true">
+      <ArtFile filename="../General/Sprites/Technosqueek/Technosqueek.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Technosqueek/Map - Technosqueek.asm" frame="0" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="horztail" priority="true">
+      <ArtFile filename="../General/Sprites/Technosqueek/Technosqueek.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Technosqueek/Map - Technosqueek.asm" frame="2" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="vert" priority="true">
+      <ArtFile filename="../General/Sprites/Technosqueek/Technosqueek.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Technosqueek/Map - Technosqueek.asm" frame="5" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="verttail" priority="true">
+      <ArtFile filename="../General/Sprites/Technosqueek/Technosqueek.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Technosqueek/Map - Technosqueek.asm" frame="7" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+  <Subtypes>
+    <Subtype id="00" name="Floor" image="horz" />
+    <Subtype id="02" name="Ceiling">
+      <ImageRef image="horz" yflip="ReverseFlip" />
+    </Subtype>
+    <Subtype id="04" name="Wall" image="vert" />
+  </Subtypes>
+  <Display>
+    <DisplayOption>
+      <Condition property="SubType" value="4" />
+      <ImageRef image="vert" yflip="AlwaysFlip"/>
+      <ImageRef image="verttail" yflip="AlwaysFlip" >
+        <Offset X="-4" Y="20" />
+      </ImageRef>
+    </DisplayOption>
+    <DisplayOption>
+      <Condition property="SubType" value="2" />
+      <ImageRef image="horz" xflip="AlwaysFlip" yflip="AlwaysFlip"/>
+      <ImageRef image="horztail" xflip="AlwaysFlip" yflip="AlwaysFlip" >
+        <Offset X="20" Y="4" />
+      </ImageRef>
+    </DisplayOption>
+    <DisplayOption>
+      <ImageRef image="horz" xflip="AlwaysFlip"/>
+      <ImageRef image="horztail" xflip="AlwaysFlip" >
+        <Offset X="20" Y="4" />
+      </ImageRef>
+    </DisplayOption>
+  </Display>
+</ObjDef>

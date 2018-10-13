@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Mushroom Cap" Image="darklow">
+  <Images>
+    <ImageFromMappings id="darkhigh" priority="true">
+      <ArtFile filename="../Levels/MHZ/Nemesis Art/Misc Art.bin" offset="-1088" />
+      <MapFile type="ASM" filename="../Levels/MHZ/Misc Object Data/Map - Mushroom Cap.asm" frame="0" startpal="2" />
+    </ImageFromMappings>
+    <ImageFromMappings id="darklow">
+      <ArtFile filename="../Levels/MHZ/Nemesis Art/Misc Art.bin" offset="-1088" />
+      <MapFile type="ASM" filename="../Levels/MHZ/Misc Object Data/Map - Mushroom Cap.asm" frame="0" startpal="2" />
+    </ImageFromMappings>
+    <ImageFromMappings id="lighthigh" priority="true">
+      <ArtFile filename="../Levels/MHZ/Nemesis Art/Misc Art.bin" offset="-2624" />
+      <MapFile type="ASM" filename="../Levels/MHZ/Misc Object Data/Map - Mushroom Cap.asm" frame="0" startpal="2" />
+    </ImageFromMappings>
+    <ImageFromMappings id="lightlow">
+      <ArtFile filename="../Levels/MHZ/Nemesis Art/Misc Art.bin" offset="-2624" />
+      <MapFile type="ASM" filename="../Levels/MHZ/Misc Object Data/Map - Mushroom Cap.asm" frame="0" startpal="2" />
+    </ImageFromMappings>
+  </Images>
+  <Properties>
+    <BitsProperty name="Coloration" type="MushroomColoration" startbit="0" length="1" />
+    <BitsProperty name="PlanePriority" displayname="Plane Priority" type="MushroomPlanePriority" startbit="6" length="1" />
+    <BitsProperty name="SpritePriority" displayname="Sprite Priority" type="MushroomSpritePriority" startbit="7" length="1" />
+  </Properties>
+  <Enums>
+    <Enum name="MushroomColoration">
+      <EnumMember name="Dark-Spotted" />
+      <EnumMember name="Light-Spotted" />
+    </Enum>
+    <Enum name="MushroomPlanePriority">
+      <EnumMember name="High" />
+      <EnumMember name="Low" />
+    </Enum>
+    <Enum name="MushroomSpritePriority">
+      <EnumMember name="High" />
+      <EnumMember name="Low" />
+    </Enum>
+  </Enums>
+  <Display>
+    <DisplayOption depth="1">
+      <Condition property="Coloration" value="Dark-Spotted" />
+      <Condition property="PlanePriority" value="High" />
+      <Condition property="SpritePriority" value="High" />
+      <ImageRef image="darkhigh" />
+    </DisplayOption>
+    <DisplayOption depth="6">
+      <Condition property="Coloration" value="Dark-Spotted" />
+      <Condition property="PlanePriority" value="High" />
+      <Condition property="SpritePriority" value="Low" />
+      <ImageRef image="darkhigh" />
+    </DisplayOption>
+    <DisplayOption depth="1">
+      <Condition property="Coloration" value="Dark-Spotted" />
+      <Condition property="PlanePriority" value="Low" />
+      <Condition property="SpritePriority" value="High" />
+      <ImageRef image="darklow" />
+    </DisplayOption>
+    <DisplayOption depth="6">
+      <Condition property="Coloration" value="Dark-Spotted" />
+      <Condition property="PlanePriority" value="Low" />
+      <Condition property="SpritePriority" value="Low" />
+      <ImageRef image="darklow" />
+    </DisplayOption>
+    <DisplayOption depth="1">
+      <Condition property="Coloration" value="Light-Spotted" />
+      <Condition property="PlanePriority" value="High" />
+      <Condition property="SpritePriority" value="High" />
+      <ImageRef image="lighthigh" />
+    </DisplayOption>
+    <DisplayOption depth="6">
+      <Condition property="Coloration" value="Light-Spotted" />
+      <Condition property="PlanePriority" value="High" />
+      <Condition property="SpritePriority" value="Low" />
+      <ImageRef image="lighthigh" />
+    </DisplayOption>
+    <DisplayOption depth="1">
+      <Condition property="Coloration" value="Light-Spotted" />
+      <Condition property="PlanePriority" value="Low" />
+      <Condition property="SpritePriority" value="High" />
+      <ImageRef image="lightlow" />
+    </DisplayOption>
+    <DisplayOption depth="6">
+      <Condition property="Coloration" value="Light-Spotted" />
+      <Condition property="PlanePriority" value="Low" />
+      <Condition property="SpritePriority" value="Low" />
+      <ImageRef image="lightlow" />
+    </DisplayOption>
+  </Display>
+</ObjDef>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Player Launcher" Image="img" Depth="1">
+  <Images>
+    <ImageFromMappings id="img">
+      <ArtFile filename="../Levels/LBZ/Nemesis Art/Misc Art.bin" />
+      <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Player Launcher.asm" startpal="2" />
+    </ImageFromMappings>
+  </Images>
+  <Properties>
+    <BitsProperty name="Force" type="SpringColor" startbit="1" length="1" description="The spring's initial force." />
+  </Properties>
+  <Enums>
+    <Enum name="SpringColor">
+      <EnumMember name="Red" />
+      <EnumMember name="Yellow" />
+    </Enum>
+  </Enums>
+</ObjDef>

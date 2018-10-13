@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Hand Launcher" Image="hand" Depth="4">
+  <Images>
+    <ImageFromMappings id="base">
+      <ArtFile filename="../Levels/HCZ/Nemesis Art/Misc Art.bin" offset="-832" />
+      <MapFile type="ASM" filename="../Levels/HCZ/Misc Object Data/Map - Hand Launcher.asm" frame="0" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="hand">
+      <ArtFile filename="../Levels/HCZ/Nemesis Art/Misc Art.bin" offset="-832" />
+      <MapFile type="ASM" filename="../Levels/HCZ/Misc Object Data/Map - Hand Launcher.asm" frame="6" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="base" />
+      <ImageRef image="hand" />
+    </DisplayOption>
+  </Display>
+</ObjDef>

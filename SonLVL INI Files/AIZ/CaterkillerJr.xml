@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Catakiller, Jr." Image="head" Depth="5">
+  <Images>
+    <ImageFromMappings id="head" priority="true">
+      <ArtFile filename="../General/Sprites/Caterkiller Jr/Caterkiller Jr.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Caterkiller Jr/Map - Caterkiller Jr.asm" frame="0" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="torso" priority="true">
+      <ArtFile filename="../General/Sprites/Caterkiller Jr/Caterkiller Jr.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Caterkiller Jr/Map - Caterkiller Jr.asm" frame="1" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="abdomen" priority="true">
+      <ArtFile filename="../General/Sprites/Caterkiller Jr/Caterkiller Jr.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Caterkiller Jr/Map - Caterkiller Jr.asm" frame="2" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="tail" priority="true">
+      <ArtFile filename="../General/Sprites/Monkey Dude/Monkey Dude.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Monkey Dude/Map - Monkey Dude.asm" frame="3" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="attack" priority="true">
+      <ArtFile filename="../General/Sprites/Caterkiller Jr/Caterkiller Jr.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Caterkiller Jr/Map - Caterkiller Jr.asm" frame="3" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="tail">
+        <Offset X="64" />
+      </ImageRef>
+      <ImageRef image="tail">
+        <Offset X="56" Y="3" />
+      </ImageRef>
+      <ImageRef image="abdomen">
+        <Offset X="48" Y="4" />
+      </ImageRef>
+      <ImageRef image="torso">
+        <Offset X="36" />
+      </ImageRef>
+      <ImageRef image="torso">
+        <Offset X="24" Y="-4" />
+      </ImageRef>
+      <ImageRef image="torso">
+        <Offset X="12" Y="-3" />
+      </ImageRef>
+      <ImageRef image="attack">
+        <Offset X="12" Y="-3" />
+      </ImageRef>
+      <ImageRef image="head" />
+    </DisplayOption>
+  </Display>
+</ObjDef>

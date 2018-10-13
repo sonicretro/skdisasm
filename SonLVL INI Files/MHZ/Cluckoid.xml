@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Cluckoid" Image="main" Depth="5">
+  <Images>
+    <ImageFromMappings id="main">
+      <ArtFile filename="../General/Sprites/Cluckoid/Cluckoid.bin" compression="Uncompressed" />
+      <MapFile type="ASM" filename="../General/Sprites/Cluckoid/Map - Cluckoid.asm" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="arrow">
+      <ArtFile filename="../General/Sprites/Cluckoid/Cluckoid Arrow.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Cluckoid/Map - Cluckoid Arrow.asm" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="main" />
+      <ImageRef image="arrow">
+        <Offset Y="28" />
+      </ImageRef>
+    </DisplayOption>
+  </Display>
+</ObjDef>

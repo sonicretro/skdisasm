@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Retracting Spring" Depth="4" DefaultSubtype="B0">
+  <Images>
+    <ImageFromMappings id="horzred">
+      <ArtFile filename="../General/2P Zone/Nemesis Art/Misc Art 1.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - 2P Spring.asm" label="word_2394A" />
+    </ImageFromMappings>
+    <ImageFromMappings id="horzblock">
+      <ArtFile filename="../General/2P Zone/Nemesis Art/Misc Art 1.bin" offset="896" />
+      <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - 2P Retracting Spring.asm" label="word_23F5C" />
+    </ImageFromMappings>
+    <ImageFromMappings id="vertyel">
+      <ArtFile filename="../General/2P Zone/Nemesis Art/Misc Art 2.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - 2P Spring.asm" label="word_23920" />
+    </ImageFromMappings>
+    <ImageFromMappings id="vertblock">
+      <ArtFile filename="../General/2P Zone/Nemesis Art/Misc Art 2.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - 2P Retracting Spring.asm" label="word_23F64" />
+    </ImageFromMappings>
+  </Images>
+  <ImageSets>
+    <ImageSet id="horzimg">
+      <ImageRef image="horzred" />
+      <ImageRef image="horzblock">
+        <Offset X="-12" />
+      </ImageRef>
+    </ImageSet>
+    <ImageSet id="vertimg">
+      <ImageRef image="vertyel" />
+      <ImageRef image="vertblock">
+        <Offset Y="12" />
+      </ImageRef>
+    </ImageSet>
+  </ImageSets>
+  <Subtypes>
+    <Subtype id="B0" name="Red Horizontal">
+      <ImageSetRef set="horzimg" />
+    </Subtype>
+    <Subtype id="E0" name="Yellow Vertical">
+      <ImageSetRef set="vertimg" />
+    </Subtype>
+  </Subtypes>
+  <Properties>
+    <BitsProperty name="Trigger ID" type="int" startbit="0" length="4" description="The level trigger array flag monitored by this object." />
+    <BitsProperty name="Spring Type" type="int" startbit="4" length="4" description="The parameters of the underlying spring object." />
+  </Properties>
+</ObjDef>

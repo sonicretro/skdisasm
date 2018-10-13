@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Cutscene Button" Image="img">
+  <Images>
+    <ImageFromMappings id="img" priority="true">
+      <ArtFile filename="../General/Sprites/Buttons/Gray Button.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Buttons/Map - Button.asm" frame="2" />
+    </ImageFromMappings>
+  </Images>
+  <Subtypes>
+    <Subtype id="00" name="Angel Island 2" image="img" />
+    <Subtype id="02" name="Hydrocity 2" image="img" />
+    <Subtype id="04" name="Carnival Night 2A" image="img" />
+    <Subtype id="08" name="Carnival Night 2B" image="img" />
+  </Subtypes>
+</ObjDef>

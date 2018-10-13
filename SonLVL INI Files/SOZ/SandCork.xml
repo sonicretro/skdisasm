@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Sand Cork" Image="img" Depth="5">
+  <Images>
+    <ImageFromMappings id="img">
+      <ArtFile filename="../Levels/SOZ/Nemesis Art/Act 2 Extra Art.bin" offset="-448" />
+      <MapFile type="ASM" filename="../Levels/SOZ/Misc Object Data/Map - Sand Cork.asm" startpal="2" />
+    </ImageFromMappings>
+  </Images>
+  <Properties>
+    <BitsProperty name="Height" type="int" startbit="0" length="6" description="How far the sand stream will fall before stopping." />
+    <BitsProperty name="Sand Type" type="Type" startbit="7" length="1" description="The background event flag set by this object." />
+  </Properties>
+  <Enums>
+    <Enum name="Type">
+      <EnumMember name="Rising Sand" />
+      <EnumMember name="End Puzzle" />
+    </Enum>
+  </Enums>
+</ObjDef>
