@@ -826,8 +826,8 @@ ArtKosM_ICZTitleCard:ds.b $D2
 ArtKosM_LBZTitleCard:ds.b $152		
 ArtKosM_ALZTitleCard:ds.b $1B2		
 ArtKosM_BPZTitleCard:ds.b $222		
-ArtKosM_DPZTitleCard:ds.b $242		
-ArtKosM_CGZTitleCard:ds.b $202		
+ArtKosM_CGZTitleCard:ds.b $242		
+ArtKosM_DPZTitleCard:ds.b $202		
 ArtKosM_EMZTitleCard:ds.b $344		
 Pal_SaveMenuBG:ds.b $20					
 Pal_CompetitionMenuBG:	ds.b $20		
