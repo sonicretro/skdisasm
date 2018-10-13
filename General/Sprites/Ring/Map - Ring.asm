@@ -1,12 +1,12 @@
-Map_Ring:	dc.w word_1A9AC-Map_Ring
-		dc.w word_1A9B4-Map_Ring
-		dc.w word_1A9BC-Map_Ring
-		dc.w word_1A9C4-Map_Ring
-		dc.w word_1A9CC-Map_Ring
-		dc.w word_1A9D4-Map_Ring
-		dc.w word_1A9DC-Map_Ring
-		dc.w word_1A9E4-Map_Ring
-		dc.w word_1A9EC-Map_Ring
+Map_Ring_:	dc.w word_1A9AC-Map_Ring_
+		dc.w word_1A9B4-Map_Ring_
+		dc.w word_1A9BC-Map_Ring_
+		dc.w word_1A9C4-Map_Ring_
+		dc.w word_1A9CC-Map_Ring_
+		dc.w word_1A9D4-Map_Ring_
+		dc.w word_1A9DC-Map_Ring_
+		dc.w word_1A9E4-Map_Ring_
+		dc.w word_1A9EC-Map_Ring_
 word_1A9AC:	dc.w 1			; DATA XREF: ROM:0001A99Ao
 		dc.b  $F8,   5,	  0,   0, $FF, $F8
 word_1A9B4:	dc.w 1			; DATA XREF: ROM:0001A99Ao

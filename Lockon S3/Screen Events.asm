@@ -1947,79 +1947,17 @@ AIZMakeTreeScript:     dc.w	0, $280
 		dc.w  $557, $280
 		dc.w $FFFF
 ; ---------------------------------------------------------------------------
-Map_AIZShipPropeller:dc.w word_23C18A-Map_AIZShipPropeller
-		dc.w word_23C192-Map_AIZShipPropeller
-		dc.w word_23C19A-Map_AIZShipPropeller
-		dc.w word_23C1A2-Map_AIZShipPropeller
-word_23C18A:     dc.w 1
-		dc.b $F0,  3,$A0,  0,$FF,$FC
-word_23C192:     dc.w 1
-		dc.b $F4,  2,$A0,  4,$FF,$FC
-word_23C19A:     dc.w 1
-		dc.b $FC,  0,$A0,  7,$FF,$FC
-word_23C1A2:     dc.w 1
-		dc.b $F4,  2,$B0,  4,$FF,$FC
-; ---------------------------------------------------------------------------
-Ani_AIZShipPropeller:dc.w byte_23C1AC-Ani_AIZShipPropeller
-byte_23C1AC:     dc.b   2,  0,  1,  2,  3,$FF
-; ---------------------------------------------------------------------------
-Map_AIZ2BombExplode:dc.w word_23C1CA-Map_AIZ2BombExplode
-		dc.w word_23C1D2-Map_AIZ2BombExplode
-		dc.w word_23C1DA-Map_AIZ2BombExplode
-		dc.w word_23C1E2-Map_AIZ2BombExplode
-		dc.w word_23C1EA-Map_AIZ2BombExplode
-		dc.w word_23C1F2-Map_AIZ2BombExplode
-		dc.w word_23C1FA-Map_AIZ2BombExplode
-		dc.w word_23C202-Map_AIZ2BombExplode
-		dc.w word_23C20A-Map_AIZ2BombExplode
-		dc.w word_23C212-Map_AIZ2BombExplode
-		dc.w word_23C21A-Map_AIZ2BombExplode
-		dc.w word_23C222-Map_AIZ2BombExplode
-word_23C1CA:     dc.w 1
-		dc.b $F0, $B,$20,  8,$FF,$F4
-word_23C1D2:     dc.w 1
-		dc.b $FC, $E,  0,$14,$FF,$F0
-word_23C1DA:     dc.w 1
-		dc.b $F4, $F,  0,$20,$FF,$F0
-word_23C1E2:     dc.w 1
-		dc.b $F4, $F,  0,$30,$FF,$F0
-word_23C1EA:     dc.w 1
-		dc.b $F4, $E,  0,$40,$FF,$F0
-word_23C1F2:     dc.w 1
-		dc.b $F4, $E,  0,$4C,$FF,$F0
-word_23C1FA:     dc.w 1
-		dc.b   0,  5,  0,$58,$FF,$F8
-word_23C202:     dc.w 1
-		dc.b $FC, $A,  0,$5C,$FF,$F4
-word_23C20A:     dc.w 1
-		dc.b $FC, $A,  0,$65,$FF,$F4
-word_23C212:     dc.w 1
-		dc.b $FC, $A,  0,$6E,$FF,$F4
-word_23C21A:     dc.w 1
-		dc.b $FC, $A,  0,$77,$FF,$F4
-word_23C222:     dc.w 1
-		dc.b $FC,  9,  0,$80,$FF,$F4
-; ---------------------------------------------------------------------------
-Ani_AIZ2BombExplode:dc.w byte_23C22E-Ani_AIZ2BombExplode
-		dc.w byte_23C23A-Ani_AIZ2BombExplode
-byte_23C22E:     dc.b   1,  3,  2,  4,  3,  5,  4,  5,  5,  5,$FC,  0
-byte_23C23A:     dc.b   6,  2,  7,  3,  8,  4,  9,  5, $A,  5, $B,  5,$FC,  0
-; ---------------------------------------------------------------------------
-Map_AIZ2BGTree: dc.w word_23C24A-Map_AIZ2BGTree
-word_23C24A:     dc.w 4
-		dc.b $C0,  7,$40,  0,  0,  0
-		dc.b $E0,  7,$40,  0,  0,  0
-		dc.b   0,  7,$40,  0,  0,  0
-		dc.b $20,  7,$40,  0,  0,  0
-; ---------------------------------------------------------------------------
-Map_AIZ2BossSmall:dc.w word_23C266-Map_AIZ2BossSmall
-word_23C266:     dc.w 6
-		dc.b $E4, $E,$20,$86,$FF,$F0
-		dc.b $F4,  0,$20,$92,$FF,$E8
-		dc.b $F4,  0,$20,$93,  0,$10
-		dc.b $FC, $E,$20,$94,$FF,$E0
-		dc.b $FC, $E,$20,$A0,  0,  0
-		dc.b $14, $C,$20,$AC,$FF,$F0
+Map_AIZShipPropeller:include "Levels/AIZ/Misc Object Data/Map - Act 2 Ship Propeller.asm"
+
+Ani_AIZShipPropeller:include "Levels/AIZ/Misc Object Data/Anim - Act 2 Ship Propeller.asm"
+
+Map_AIZ2BombExplode:include "Levels/AIZ/Misc Object Data/Map - Act 2 Bomb Explosion.asm"
+
+Ani_AIZ2BombExplode:include "Levels/AIZ/Misc Object Data/Anim - Act 2 Bomb Explosion.asm"
+
+Map_AIZ2BGTree: include "Levels/AIZ/Misc Object Data/Map - Act 2 Background Tree.asm"
+
+Map_AIZ2BossSmall:include "Levels/AIZ/Misc Object Data/Map - Act 2 Boss Small.asm"
 ; ---------------------------------------------------------------------------
 HCZ1_BGDeformArray:	dc.w $40
 		dc.w 8
