@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Diagonal Bridge" Image="img" Depth="3">
+  <Images>
+    <ImageFromMappings id="img" priority="true">
+      <ArtFile filename="../Levels/SSZ/Nemesis Art/Misc.bin" offset="-1024" />
+      <MapFile type="ASM" filename="../Levels/SSZ/Misc Object Data/Map - Collapsing Bridge.asm" startpal="2" frame="3" />
+    </ImageFromMappings>
+  </Images>
+  <Properties>
+    <BitsProperty name="Collapsing" type="bool" startbit="7" length="1" description="If set, the object will fall once the player steps on it." />
+  </Properties>
+</ObjDef>

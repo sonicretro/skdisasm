@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Toxomister" Depth="5">
+  <Images>
+    <ImageFromMappings id="pole" priority="true">
+      <ArtFile filename="../General/Sprites/Toxomister/Toxomister.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Toxomister/Map - Toxomister.asm" startpal="1" frame="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="head" priority="true">
+      <ArtFile filename="../General/Sprites/Toxomister/Toxomister.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Toxomister/Map - Toxomister.asm" startpal="1" frame="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="mist1" priority="true">
+      <ArtFile filename="../General/Sprites/Toxomister/Toxomister.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Toxomister/Map - Toxomister.asm" startpal="1" frame="4" />
+    </ImageFromMappings>
+    <ImageFromMappings id="mist2" priority="true">
+      <ArtFile filename="../General/Sprites/Toxomister/Toxomister.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Toxomister/Map - Toxomister.asm" startpal="1" frame="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="mist3" priority="true">
+      <ArtFile filename="../General/Sprites/Toxomister/Toxomister.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Toxomister/Map - Toxomister.asm" startpal="1" frame="6" />
+    </ImageFromMappings>
+    <ImageFromMappings id="mist4" priority="true">
+      <ArtFile filename="../General/Sprites/Toxomister/Toxomister.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Toxomister/Map - Toxomister.asm" startpal="1" frame="7" />
+    </ImageFromMappings>
+  </Images>
+  <DefaultImage>
+    <ImageRef image="pole">
+      <Offset Y="24" />
+    </ImageRef>
+    <ImageRef image="head" />
+    <ImageRef image="mist4" yflip="NeverFlip">
+      <Offset X="-8" Y="12" />
+    </ImageRef>
+    <ImageRef image="mist3" yflip="NeverFlip">
+      <Offset X="-16" Y="12" />
+    </ImageRef>
+    <ImageRef image="mist2" yflip="NeverFlip">
+      <Offset X="-12" Y="4" />
+    </ImageRef>
+    <ImageRef image="mist1" yflip="NeverFlip">
+      <Offset X="-4" Y="4" />
+    </ImageRef>
+    <ImageRef image="mist2" yflip="NeverFlip">
+      <Offset X="-20" Y="4" />
+    </ImageRef>
+    <ImageRef image="mist3" yflip="NeverFlip">
+      <Offset X="0" Y="12" />
+    </ImageRef>
+    <ImageRef image="mist4" yflip="NeverFlip">
+      <Offset X="-24" Y="12" />
+    </ImageRef>
+  </DefaultImage>
+</ObjDef>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Fireworm" Depth="4">
+  <Images>
+    <ImageFromMappings id="hole" priority="true">
+      <ArtFile filename="../General/Sprites/Fireworm/Fireworm Segments.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Fireworm/Map - Fireworm Segments.asm" startpal="3" frame="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="main" priority="true">
+      <ArtFile filename="../General/Sprites/Fireworm/Fireworm Segments.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Fireworm/Map - Fireworm Segments.asm" startpal="1" frame="3" />
+    </ImageFromMappings>
+    <ImageFromMappings id="fire1" priority="true">
+      <ArtFile filename="../General/Sprites/Fireworm/Fireworm Segments.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Fireworm/Map - Fireworm Segments.asm" startpal="1" frame="4" />
+    </ImageFromMappings>
+    <ImageFromMappings id="fire2" priority="true">
+      <ArtFile filename="../General/Sprites/Fireworm/Fireworm Segments.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Fireworm/Map - Fireworm Segments.asm" startpal="1" frame="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="fire3" priority="true">
+      <ArtFile filename="../General/Sprites/Fireworm/Fireworm Segments.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Fireworm/Map - Fireworm Segments.asm" startpal="1" frame="6" />
+    </ImageFromMappings>
+    <ImageFromMappings id="head" priority="true">
+      <ArtFile filename="../General/Sprites/Fireworm/Fireworm.bin" compression="Uncompressed" offset="-608" />
+      <MapFile type="ASM" filename="../General/Sprites/Fireworm/Map - Fireworm.asm" startpal="1" frame="3" />
+    </ImageFromMappings>
+  </Images>
+  <DefaultImage>
+    <ImageRef image="hole" />
+    <ImageRef image="main">
+      <Offset X="-5" Y="-8" />
+    </ImageRef>
+    <ImageRef image="main">
+      <Offset X="-16" Y="-5" />
+    </ImageRef>
+    <ImageRef image="main">
+      <Offset X="-27" Y="-6" />
+    </ImageRef>
+    <ImageRef image="main">
+      <Offset X="-38" Y="-10" />
+    </ImageRef>
+    <ImageRef image="fire1">
+      <Offset X="-5" Y="-22" />
+    </ImageRef>
+    <ImageRef image="fire2">
+      <Offset X="-16" Y="-19" />
+    </ImageRef>
+    <ImageRef image="fire3">
+      <Offset X="-27" Y="-20" />
+    </ImageRef>
+    <ImageRef image="head">
+      <Offset X="-50" Y="-12" />
+    </ImageRef>
+  </DefaultImage>
+</ObjDef>

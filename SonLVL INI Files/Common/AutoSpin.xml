@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Auto Spin" Image="vert1" Depth="5" Debug="true">
+  <Images>
+    <ImageFromMappings id="vert1">
+      <ArtFile filename="../General/Sprites/Ring/Ring.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - Path Swap.asm" frame="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="vert2">
+      <ArtFile filename="../General/Sprites/Ring/Ring.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - Path Swap.asm" frame="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="vert3">
+      <ArtFile filename="../General/Sprites/Ring/Ring.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - Path Swap.asm" frame="2" />
+    </ImageFromMappings>
+    <ImageFromMappings id="vert4">
+      <ArtFile filename="../General/Sprites/Ring/Ring.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - Path Swap.asm" frame="3" />
+    </ImageFromMappings>
+    <ImageFromMappings id="horiz1">
+      <ArtFile filename="../General/Sprites/Ring/Ring.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - Path Swap.asm" frame="4" />
+    </ImageFromMappings>
+    <ImageFromMappings id="horiz2">
+      <ArtFile filename="../General/Sprites/Ring/Ring.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - Path Swap.asm" frame="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="horiz3">
+      <ArtFile filename="../General/Sprites/Ring/Ring.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - Path Swap.asm" frame="6" />
+    </ImageFromMappings>
+    <ImageFromMappings id="horiz4">
+      <ArtFile filename="../General/Sprites/Ring/Ring.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - Path Swap.asm" frame="7" />
+    </ImageFromMappings>
+  </Images>
+  <Subtypes>
+    <Subtype id="00" name="Vertical" image="vert1" />
+    <Subtype id="04" name="Horizontal" image="horiz1" />
+    <Subtype id="80" name="Vertical (control lock)" image="vert1" />
+    <Subtype id="84" name="Horizontal (control lock)" image="horiz1" />
+  </Subtypes>
+  <Properties>
+    <BitsProperty name="Size" type="int" startbit="0" length="2" description="The object's length." />
+    <BitsProperty name="Direction" type="Direction" startbit="2" length="1" description="The object's orientation." />
+    <BitsProperty name="No spin lock" type="bool" startbit="4" length="1" description="If set, the player will not be locked into spin mode." />
+    <BitsProperty name="Ground only" type="bool" startbit="5" length="1" description="If set, the player will only enter spin mode if grounded." />
+    <BitsProperty name="Snap to wall" type="bool" startbit="6" length="1" description="If set, the player will snap to the wall of a vertical chute." />
+    <BitsProperty name="Lock controls" type="bool" startbit="7" length="1" description="If set, the player will keep accelerating in spin mode." />
+  </Properties>
+  <Enums>
+    <Enum name="Direction">
+      <EnumMember name="Vertical" />
+      <EnumMember name="Horizontal" />
+    </Enum>
+  </Enums>
+  <Display>
+    <DisplayOption>
+      <Condition property="Size" value="0" />
+      <Condition property="Direction" value="Vertical" />
+      <ImageRef image="vert1" />
+    </DisplayOption>
+    <DisplayOption>
+      <Condition property="Size" value="1" />
+      <Condition property="Direction" value="Vertical" />
+      <ImageRef image="vert2" />
+    </DisplayOption>
+    <DisplayOption>
+      <Condition property="Size" value="2" />
+      <Condition property="Direction" value="Vertical" />
+      <ImageRef image="vert3" />
+    </DisplayOption>
+    <DisplayOption>
+      <Condition property="Size" value="3" />
+      <Condition property="Direction" value="Vertical" />
+      <ImageRef image="vert4" />
+    </DisplayOption>
+    <DisplayOption>
+      <Condition property="Size" value="0" />
+      <Condition property="Direction" value="Horizontal" />
+      <ImageRef image="horiz1" />
+    </DisplayOption>
+    <DisplayOption>
+      <Condition property="Size" value="1" />
+      <Condition property="Direction" value="Horizontal" />
+      <ImageRef image="horiz2" />
+    </DisplayOption>
+    <DisplayOption>
+      <Condition property="Size" value="2" />
+      <Condition property="Direction" value="Horizontal" />
+      <ImageRef image="horiz3" />
+    </DisplayOption>
+    <DisplayOption>
+      <Condition property="Size" value="3" />
+      <Condition property="Direction" value="Horizontal" />
+      <ImageRef image="horiz4" />
+    </DisplayOption>
+  </Display>
+</ObjDef>

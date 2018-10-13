@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Harmful Ice" Image="img5" Depth="5">
+  <Images>
+    <ImageFromMappings id="img4">
+      <ArtFile filename="../Levels/ICZ/Nemesis Art/Misc Art 1.bin" />
+      <MapFile type="ASM" filename="../Levels/ICZ/Misc Object Data/Map - Platforms.asm" frame="4" startpal="2" />
+    </ImageFromMappings>
+    <ImageFromMappings id="img5">
+      <ArtFile filename="../Levels/ICZ/Nemesis Art/Misc Art 1.bin" />
+      <MapFile type="ASM" filename="../Levels/ICZ/Misc Object Data/Map - Platforms.asm" frame="5" startpal="2" />
+    </ImageFromMappings>
+  </Images>
+  <Subtypes>
+    <Subtype id="00" name="Wall Spike" image="img5" />
+    <Subtype id="02" name="Breakable" image="img4" />
+  </Subtypes>
+  <Display>
+    <DisplayOption>
+      <Condition property="SubType" value="0" />
+      <ImageRef image="img5" />
+    </DisplayOption>
+    <DisplayOption>
+      <ImageRef image="img4" />
+    </DisplayOption>
+  </Display>
+</ObjDef>

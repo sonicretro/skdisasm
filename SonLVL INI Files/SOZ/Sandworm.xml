@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Sandworm" Image="head" Depth="5">
+  <Images>
+    <ImageFromMappings id="head">
+      <ArtFile filename="../General/Sprites/Sandworm/Sandworm.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Sandworm/Map - Sandworm.asm" startpal="1" frame="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="main">
+      <ArtFile filename="../General/Sprites/Sandworm/Sandworm.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Sandworm/Map - Sandworm.asm" startpal="1" frame="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="sand">
+      <ArtFile filename="../General/Sprites/Sandworm/Sandworm.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Sandworm/Map - Sandworm.asm" startpal="2" frame="4" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="main">
+        <Offset X="12" Y="3" />
+      </ImageRef>
+      <ImageRef image="main">
+        <Offset X="0" Y="3" />
+      </ImageRef>
+      <ImageRef image="main">
+        <Offset X="-12" Y="3" />
+      </ImageRef>
+      <ImageRef image="main">
+        <Offset X="-24" Y="3" />
+      </ImageRef>
+      <ImageRef image="main">
+        <Offset X="-36" Y="3" />
+      </ImageRef>
+      <ImageRef image="head">
+        <Offset X="-48" />
+      </ImageRef>
+      <ImageRef image="sand">
+        <Offset X="-48" Y="-9" />
+      </ImageRef>
+      <ImageRef image="sand">
+        <Offset X="-40" Y="-13" />
+      </ImageRef>
+      <ImageRef image="sand">
+        <Offset X="-32" Y="-16" />
+      </ImageRef>
+      <ImageRef image="sand">
+        <Offset X="-24" Y="-14" />
+      </ImageRef>
+      <ImageRef image="sand">
+        <Offset X="-16" Y="-12" />
+      </ImageRef>
+      <ImageRef image="sand">
+        <Offset X="-8" Y="-10" />
+      </ImageRef>
+      <ImageRef image="sand">
+        <Offset X="0" Y="-8" />
+      </ImageRef>
+    </DisplayOption>
+  </Display>
+</ObjDef>

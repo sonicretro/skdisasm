@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Dripper" Image="img0" Depth="5">
+  <Images>
+    <ImageFromMappings id="img0">
+      <ArtFile filename="../Levels/EMZ/Nemesis Art/Misc Art.bin" />
+      <MapFile type="ASM" filename="../Levels/EMZ/Misc Object Data/Map - Dripper.asm" frame="0" startpal="3" />
+    </ImageFromMappings>
+    <ImageFromMappings id="img1" priority="true">
+      <ArtFile filename="../Levels/EMZ/Nemesis Art/Misc Art.bin" />
+      <MapFile type="ASM" filename="../Levels/EMZ/Misc Object Data/Map - Dripper.asm" frame="3" startpal="2" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <Condition property="XFlip" value="true" />
+      <ImageRef image="img1" />
+    </DisplayOption>
+  </Display>
+</ObjDef>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Turbo Spiker" Image="main" Depth="5">
+  <Images>
+    <ImageFromMappings id="main">
+      <ArtFile filename="../General/Sprites/Turbo Spiker/Turbo Spiker.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Turbo Spiker/Map - Turbo Spiker.asm" frame="0" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="shell">
+      <ArtFile filename="../General/Sprites/Turbo Spiker/Turbo Spiker.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Turbo Spiker/Map - Turbo Spiker.asm" frame="3" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="waterfall">
+      <ArtFile filename="LevelArt" offset="-32" />
+      <MapFile type="ASM" filename="../General/Sprites/Turbo Spiker/Map - Turbo Spiker Hidden.asm" startpal="2" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <Condition property="YFlip" value="true" />
+      <ImageRef image="shell" yflip="NeverFlip" >
+        <Offset X="4" />
+      </ImageRef>
+      <ImageRef image="main" yflip="NeverFlip" />
+      <ImageRef image="waterfall" yflip="NeverFlip" />
+    </DisplayOption>
+    <DisplayOption>
+      <ImageRef image="shell">
+        <Offset X="4" />
+      </ImageRef>
+      <ImageRef image="main" />
+    </DisplayOption>
+  </Display>
+</ObjDef>

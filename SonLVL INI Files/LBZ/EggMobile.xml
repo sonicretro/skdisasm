@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Egg Mobile" Image="ship" Depth="2">
+  <Images>
+    <ImageFromMappings id="head">
+      <ArtFile filename="../General/Sprites/Robotnik/Ship.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Robotnik Ship.asm" frame="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="ship">
+      <ArtFile filename="../General/Sprites/Robotnik/Ship.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Robotnik Ship.asm" frame="10" />
+    </ImageFromMappings>
+    <ImageFromMappings id="box1">
+      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss Box.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Miniboss Box.asm" frame="0" startpal="2" />
+    </ImageFromMappings>
+    <ImageFromMappings id="box2">
+      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss Box.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Miniboss Box.asm" frame="3" startpal="2" />
+    </ImageFromMappings>
+    <ImageFromMappings id="box3">
+      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss Box.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Miniboss Box.asm" frame="6" startpal="2" />
+    </ImageFromMappings>
+    <ImageFromMappings id="box4">
+      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss Box.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Miniboss Box.asm" frame="9" startpal="2" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="head">
+        <Offset Y="-28" />
+      </ImageRef>
+      <ImageRef image="ship" />
+      <ImageRef image="box1">
+        <Offset X="-12" Y="36" />
+      </ImageRef>
+      <ImageRef image="box1" xflip="ReverseFlip" yflip="ReverseFlip">
+        <Offset X="-12" Y="-68" />
+      </ImageRef>
+      <ImageRef image="box2">
+        <Offset X="20" Y="40" />
+      </ImageRef>
+      <ImageRef image="box2" xflip="ReverseFlip" yflip="ReverseFlip">
+        <Offset X="20" Y="-64" />
+      </ImageRef>
+      <ImageRef image="box3">
+        <Offset X="-16" Y="52" />
+      </ImageRef>
+      <ImageRef image="box3">
+        <Offset X="16" Y="52" />
+      </ImageRef>
+      <ImageRef image="box4">
+        <Offset Y="32" />
+      </ImageRef>
+      <ImageRef image="box4">
+        <Offset Y="40" />
+      </ImageRef>
+      <ImageRef image="box4">
+        <Offset Y="64" />
+      </ImageRef>
+      <ImageRef image="box4">
+        <Offset Y="72" />
+      </ImageRef>
+    </DisplayOption>
+  </Display>
+</ObjDef>

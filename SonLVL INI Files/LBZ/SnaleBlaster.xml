@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Snale Blaster" Image="main" Depth="4">
+  <Images>
+    <ImageFromMappings id="main">
+      <ArtFile filename="../General/Sprites/Snail Blaster/Snail Blaster.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Snail Blaster/Map - Snail Blaster.asm" frame="4" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="lid">
+      <ArtFile filename="../General/Sprites/Snail Blaster/Snail Blaster.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Snail Blaster/Map - Snail Blaster.asm" frame="5" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="main" />
+      <ImageRef image="lid">
+        <Offset X="-8" Y="4" />
+      </ImageRef>
+    </DisplayOption>
+  </Display>
+</ObjDef>

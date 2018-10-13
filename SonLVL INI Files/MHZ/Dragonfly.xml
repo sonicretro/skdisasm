@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Dragonfly" Image="main" Depth="5">
+  <Images>
+    <ImageFromMappings id="main" priority="true">
+      <ArtFile filename="../General/Sprites/Dragonfly/Dragonfly.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Dragonfly.asm" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="torso" priority="true">
+      <ArtFile filename="../General/Sprites/Dragonfly/Dragonfly.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Dragonfly.asm" startpal="1" frame="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="tail" priority="true">
+      <ArtFile filename="../General/Sprites/Dragonfly/Dragonfly.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Dragonfly.asm" startpal="1" frame="6" />
+    </ImageFromMappings>
+    <ImageFromMappings id="wings" priority="true">
+      <ArtFile filename="../General/Sprites/Dragonfly/Dragonfly.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Dragonfly.asm" startpal="1" frame="7" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="tail" yflip="ReverseFlip">
+        <Offset Y="42" />
+      </ImageRef>
+      <ImageRef image="torso" yflip="ReverseFlip">
+        <Offset Y="37" />
+      </ImageRef>
+      <ImageRef image="torso" yflip="ReverseFlip">
+        <Offset Y="32" />
+      </ImageRef>
+      <ImageRef image="torso" yflip="ReverseFlip">
+        <Offset Y="27" />
+      </ImageRef>
+      <ImageRef image="torso" yflip="ReverseFlip">
+        <Offset Y="22" />
+      </ImageRef>
+      <ImageRef image="torso" yflip="ReverseFlip">
+        <Offset Y="17" />
+      </ImageRef>
+      <ImageRef image="torso" yflip="ReverseFlip">
+        <Offset Y="12" />
+      </ImageRef>
+      <ImageRef image="main" />
+      <ImageRef image="wings" />
+    </DisplayOption>
+  </Display>
+</ObjDef>

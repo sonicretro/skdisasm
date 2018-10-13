@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Mushroom Platform" Image="image" Depth="5">
+  <Images>
+    <ImageFromMappings id="image">
+      <ArtFile filename="../Levels/MHZ/Nemesis Art/Misc Art.bin" offset="-4288" />
+      <MapFile type="ASM" filename="../Levels/MHZ/Misc Object Data/Map - Mushroom Platform.asm" startpal="2" />
+    </ImageFromMappings>
+  </Images>
+  <Properties>
+    <BitsProperty name="Collapsing" type="bool" startbit="0" length="8" description="If set, the object will fall once the player steps on it." />
+  </Properties>
+</ObjDef>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Miniboss" Image="main" Depth="4">
+  <Images>
+    <ImageFromMappings id="main" priority="true">
+      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Miniboss.asm" frame="0" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="left" priority="true">
+      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Miniboss.asm" frame="1" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="right" priority="true">
+      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Miniboss.asm" frame="2" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="down" priority="true">
+      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Miniboss.asm" frame="3" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="arm" priority="true">
+      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Miniboss.asm" frame="5" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="small" priority="true">
+      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Miniboss.asm" frame="6" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="big" priority="true">
+      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Miniboss.asm" frame="7" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="eyes" priority="true">
+      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Miniboss.asm" frame="8" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="button">
+      <ArtFile filename="../Levels/FBZ/Nemesis Art/Egg Capsule.bin" offset="27552" />
+      <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Egg Capsule.asm" frame="5" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="arm">
+        <Offset X="-40" Y="-26" />
+      </ImageRef>
+      <ImageRef image="small">
+        <Offset X="-52" Y="-38" />
+      </ImageRef>
+      <ImageRef image="small">
+        <Offset X="-64" Y="-50" />
+      </ImageRef>
+      <ImageRef image="small">
+        <Offset X="-76" Y="-62" />
+      </ImageRef>
+      <ImageRef image="small">
+        <Offset X="-88" Y="-74" />
+      </ImageRef>
+      <ImageRef image="big">
+        <Offset X="-100" Y="-86" />
+      </ImageRef>
+      <ImageRef image="arm" xflip="ReverseFlip">
+        <Offset X="-40" Y="-26" />
+      </ImageRef>
+      <ImageRef image="small">
+        <Offset X="52" Y="-38" />
+      </ImageRef>
+      <ImageRef image="small">
+        <Offset X="64" Y="-50" />
+      </ImageRef>
+      <ImageRef image="small">
+        <Offset X="76" Y="-62" />
+      </ImageRef>
+      <ImageRef image="small">
+        <Offset X="88" Y="-74" />
+      </ImageRef>
+      <ImageRef image="big">
+        <Offset X="100" Y="-86" />
+      </ImageRef>
+      <ImageRef image="button">
+        <Offset Y="-36" />
+      </ImageRef>
+      <ImageRef image="main" />
+      <ImageRef image="left">
+        <Offset X="-24" Y="-8" />
+      </ImageRef>
+      <ImageRef image="right">
+        <Offset X="24" Y="-8" />
+      </ImageRef>
+      <ImageRef image="down">
+        <Offset Y="8" />
+      </ImageRef>
+      <ImageRef image="eyes">
+        <Offset Y="-8" />
+      </ImageRef>
+    </DisplayOption>
+  </Display>
+</ObjDef>

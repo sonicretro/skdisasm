@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Penguinator" Image="low" Depth="5">
+  <Images>
+    <ImageFromMappings id="low">
+      <ArtFile filename="../General/Sprites/Penguinator/Penguinator.bin" compression="Uncompressed" />
+      <MapFile type="ASM" filename="../General/Sprites/Penguinator/Map - Penguinator.asm" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="high" priority="true">
+      <ArtFile filename="../General/Sprites/Penguinator/Penguinator.bin" compression="Uncompressed" />
+      <MapFile type="ASM" filename="../General/Sprites/Penguinator/Map - Penguinator.asm" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <Condition property="YFlip" value="true" />
+      <ImageRef image="high" yflip="NeverFlip" />
+    </DisplayOption>
+  </Display>
+</ObjDef>

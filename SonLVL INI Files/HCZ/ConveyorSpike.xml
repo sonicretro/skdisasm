@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Conveyor Belt Spike" Image="img" Depth="5">
+  <Images>
+    <ImageFromMappings id="img">
+      <ArtFile filename="../Levels/HCZ/Nemesis Art/Spike Ball.bin" />
+      <MapFile type="ASM" filename="../Levels/HCZ/Misc Object Data/Map - Conveyor Spike.asm" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+  <Properties>
+    <BitsProperty name="Belt ID" type="int" startbit="0" length="4" description="The ID of the conveyor belt the object will travel along."/>
+  </Properties>
+  <Display>
+    <DisplayOption>
+      <Condition property="XFlip" value="true" />
+      <Condition property="YFlip" value="true" />
+      <ImageRef image="img">
+        <Offset Y="-24" />
+      </ImageRef>
+    </DisplayOption>
+    <DisplayOption>
+      <Condition property="XFlip" value="true" />
+      <Condition property="YFlip" value="false" />
+      <ImageRef image="img">
+        <Offset Y="24" />
+      </ImageRef>
+    </DisplayOption>
+    <DisplayOption>
+      <Condition property="XFlip" value="false" />
+      <Condition property="YFlip" value="true" />
+      <ImageRef image="img">
+        <Offset Y="24" />
+      </ImageRef>
+    </DisplayOption>
+    <DisplayOption>
+      <ImageRef image="img">
+        <Offset Y="-24" />
+      </ImageRef>
+    </DisplayOption>
+  </Display>
+</ObjDef>

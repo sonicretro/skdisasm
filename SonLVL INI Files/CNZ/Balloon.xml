@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Balloon" Depth="5">
+  <Images>
+    <ImageFromMappings id="player">
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/Misc Art.bin" />
+      <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - Balloon.asm" frame="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="blue">
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/Misc Art.bin" />
+      <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - Balloon.asm" frame="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="yellow">
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/Misc Art.bin" />
+      <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - Balloon.asm" frame="10" />
+    </ImageFromMappings>
+    <ImageFromMappings id="black">
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/Misc Art.bin" />
+      <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - Balloon.asm" frame="15" />
+    </ImageFromMappings>
+    <ImageFromMappings id="red">
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/Misc Art.bin" />
+      <ArtFile filename="../Levels/CNZ/KosinskiM Art/Balloon.bin" compression="KosinskiM" offset="17504" />
+      <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - Balloon.asm" frame="20" />
+    </ImageFromMappings>
+  </Images>
+  <Subtypes>
+    <Subtype id="00" name="Default" image="player" />
+    <Subtype id="01" name="Blue" image="blue" />
+    <Subtype id="02" name="Yellow" image="yellow" />
+    <Subtype id="03" name="Black" image="black" />
+    <Subtype id="04" name="Red" image="red" />
+  </Subtypes>
+  <Properties>
+    <BitsProperty name="Color" type="Color" startbit="0" length="3" description="The object's appearance." />
+    <BitsProperty name="Bubble" type="bool" startbit="7" length="1" description="If set, the object will make an air bubble when destroyed." />
+  </Properties>
+  <Enums>
+    <Enum name="Color">
+      <EnumMember name="Player" />
+      <EnumMember name="Blue" />
+      <EnumMember name="Yellow" />
+      <EnumMember name="Black" />
+      <EnumMember name="Red" />
+    </Enum>
+  </Enums>
+  <Display>
+    <DisplayOption>
+      <Condition property="Color" value="Player" />
+      <ImageRef image="player" />
+    </DisplayOption>
+    <DisplayOption>
+      <Condition property="Color" value="Blue" />
+      <ImageRef image="blue" />
+    </DisplayOption>
+    <DisplayOption>
+      <Condition property="Color" value="Yellow" />
+      <ImageRef image="yellow" />
+    </DisplayOption>
+    <DisplayOption>
+      <Condition property="Color" value="Black" />
+      <ImageRef image="black" />
+    </DisplayOption>
+    <DisplayOption>
+      <Condition property="Color" value="Red" />
+      <ImageRef image="red" />
+    </DisplayOption>
+  </Display>
+</ObjDef>

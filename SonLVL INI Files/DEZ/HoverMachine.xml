@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Hover Machine" Image="main" Depth="5">
+  <Images>
+    <ImageFromMappings id="main">
+      <ArtFile filename="../Levels/DEZ/Nemesis Art/Miniboss.bin" offset="-544" />
+      <MapFile type="ASM" filename="../Levels/DEZ/Misc Object Data/Map - Hover Machine.asm" frame="0" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="orb">
+      <ArtFile filename="../Levels/DEZ/Nemesis Art/Miniboss.bin" offset="-544" />
+      <MapFile type="ASM" filename="../Levels/DEZ/Misc Object Data/Map - Hover Machine.asm" frame="2" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="main" />
+      <ImageRef image="orb" xflip="NeverFlip">
+        <Offset X="32" />
+      </ImageRef>
+    </DisplayOption>
+  </Display>
+</ObjDef>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Flame Thrower" Image="thrower" Depth="4">
+  <Images>
+    <ImageFromMappings id="thrower">
+      <ArtFile filename="../Levels/LBZ/Nemesis Art/Misc Art.bin" offset="736" />
+      <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Flame Thrower.asm" frame="0" startpal="2" />
+    </ImageFromMappings>
+    <ImageFromMappings id="flame">
+      <ArtFile filename="../Levels/LBZ/Nemesis Art/Misc Art.bin" offset="736" />
+      <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Flame Thrower.asm" frame="3" startpal="2" />
+    </ImageFromMappings>
+  </Images>
+  <Properties>
+    <BitsProperty name="Offset" type="int" startbit="0" length="8" description="The starting point of the object's on/off cycle." />
+  </Properties>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="flame">
+        <Offset X="64" />
+      </ImageRef>
+      <ImageRef image="thrower" />
+    </DisplayOption>
+  </Display>
+</ObjDef>

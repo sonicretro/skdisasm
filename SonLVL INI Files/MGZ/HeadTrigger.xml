@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Relief" Image="main" Depth="5">
+  <Images>
+    <ImageFromMappings id="eye" priority="true">
+      <ArtFile filename="../Levels/MGZ/Nemesis Art/Misc Art 2.bin" />
+      <MapFile type="ASM" filename="../Levels/MGZ/Misc Object Data/Map - Head Trigger.asm" frame="2" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="main" priority="true">
+      <ArtFile filename="../Levels/MGZ/Nemesis Art/Misc Art 2.bin" />
+      <MapFile type="ASM" filename="../Levels/MGZ/Misc Object Data/Map - Head Trigger.asm" frame="6" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+  <Properties>
+    <BitsProperty name="Trigger ID" type="int" startbit="0" length="4" description="The level trigger array flag set by this object." />
+  </Properties>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="main" />
+      <ImageRef image="eye" />
+    </DisplayOption>
+  </Display>
+</ObjDef>

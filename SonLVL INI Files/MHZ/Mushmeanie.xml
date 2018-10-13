@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Mushmeanie" Image="cap" Depth="5">
+  <Images>
+    <ImageFromMappings id="cap">
+      <ArtFile filename="../General/Sprites/Mushmeanie/Mushmeanie.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Mushmeanie/Map - Mushmeanie.asm" startpal="2" />
+    </ImageFromMappings>
+    <ImageFromMappings id="main">
+      <ArtFile filename="../General/Sprites/Mushmeanie/Mushmeanie.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Mushmeanie/Map - Mushmeanie.asm" startpal="1" frame="1" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="main" />
+      <ImageRef image="cap" />
+    </DisplayOption>
+  </Display>
+</ObjDef>

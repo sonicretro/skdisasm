@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Intro Tunnel" Image="tunnel" Depth="1">
+  <Images>
+    <ImageFromMappings id="tunnel">
+      <ArtFile filename="../Levels/HCZ/Nemesis Art/Water Rush.bin" />
+      <MapFile type="ASM" filename="../Levels/HCZ/Misc Object Data/Map - Water Rush.asm" frame="2" startpal="2" />
+    </ImageFromMappings>
+    <ImageFromMappings id="block">
+      <ArtFile filename="../Levels/HCZ/Nemesis Art/Misc Art.bin" offset="-320" />
+      <MapFile type="ASM" filename="../Levels/HCZ/Misc Object Data/Map - Water Rush Block.asm" frame="1" startpal="2" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="tunnel" />
+      <ImageRef image="block">
+        <Offset X="-48" />
+      </ImageRef>
+    </DisplayOption>
+  </Display>
+</ObjDef>

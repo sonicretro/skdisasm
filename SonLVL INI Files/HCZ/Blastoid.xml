@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Blastoid" Image="img" Depth="5">
+  <Images>
+    <ImageFromMappings id="img" priority="true">
+      <ArtFile filename="../General/Sprites/Blastoid/Blastoid.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Blastoid/Map - Blastoid.asm" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+  <Properties>
+    <BitsProperty name="Trigger ID" type="int" startbit="0" length="4" description="The level trigger array flag set by this object." />
+  </Properties>
+</ObjDef>
