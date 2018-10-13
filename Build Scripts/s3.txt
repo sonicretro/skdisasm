@@ -233,8 +233,8 @@
 #split	0x0019C5B4,0x0019C706,Levels\LBZ\KosinskiM Art\Title Card.bin
 #split	0x0019C706,0x0019C8B8,Levels\ALZ\KosinskiM Art\Title Card.bin
 #split	0x0019C8B8,0x0019CADA,Levels\BPZ\KosinskiM Art\Title Card.bin
-#split	0x0019CADA,0x0019CD1C,Levels\DPZ\KosinskiM Art\Title Card.bin
-#split	0x0019CD1C,0x0019CF1E,Levels\CGZ\KosinskiM Art\Title Card.bin
+#split	0x0019CADA,0x0019CD1C,Levels\CGZ\KosinskiM Art\Title Card.bin
+#split	0x0019CD1C,0x0019CF1E,Levels\DPZ\KosinskiM Art\Title Card.bin
 #split	0x0019CF1E,0x0019D100,Levels\EMZ\KosinskiM Art\Title Card.bin
 
 /* Music */

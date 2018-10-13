@@ -962,9 +962,9 @@ ArtKosM_ALZTitleCard:		binclude "Levels/ALZ/KosinskiM Art/Title Card.bin"
 	even
 ArtKosM_BPZTitleCard:		binclude "Levels/BPZ/KosinskiM Art/Title Card.bin"
 	even
-ArtKosM_DPZTitleCard:		binclude "Levels/DPZ/KosinskiM Art/Title Card.bin"
-	even
 ArtKosM_CGZTitleCard:		binclude "Levels/CGZ/KosinskiM Art/Title Card.bin"
+	even
+ArtKosM_DPZTitleCard:		binclude "Levels/DPZ/KosinskiM Art/Title Card.bin"
 	even
 ArtKosM_EMZTitleCard:		binclude "Levels/EMZ/KosinskiM Art/Title Card.bin"
 	even
