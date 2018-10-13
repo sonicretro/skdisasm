@@ -8,9 +8,10 @@
 #split	0x00002040,0x00002142,Levels\Misc\arctan.bin
 #split	0x00005F82,0x00005FB2,Sound\Music\Music playlist.bin
 #split	0x00006D2C,0x00006D6C,Levels\Misc\StartingWaterHeights.bin
+#split	0x0001CBBE,0x0001CCAE,Levels\LRZ\Misc\Rock Sprite Attribute Data.bin
 #split	0x000B2E36,0x000B6946,General\Special Stage\Layout\Perspective Maps.bin
-#split	0x000CAD00,0x000CB81A,Levels\LRZ\Misc\Act 1 Rock Placement.bin
-#split	0x000CB81A,0x000CB860,Levels\LRZ\Misc\Act 2 Rock Placement.bin
+#split	0x000CAD06,0x000CB81A,Levels\LRZ\Misc\Act 1 Rock Placement.bin
+#split	0x000CB820,0x000CB860,Levels\LRZ\Misc\Act 2 Rock Placement.bin
 #split	0x0017B6E0,0x0017C6E0,General\Sprites\Robotnik\Egg Robo Fly Scaled.bin
 #split	0x001FCF2A,0x001FD5CA,General\Special Stage\Layout\SK Set 1.bin
 #split	0x001FD5CA,0x001FF41A,General\Special Stage\Layout\SK Set 2.bin
