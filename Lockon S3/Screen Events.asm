@@ -1,3 +1,4 @@
+
 S3_VInt_DrawLevel:
 		lea     (VDP_data_port).l,a6
 		lea     (Plane_buffer).w,a0
@@ -33,7 +34,6 @@ loc_239640:
 loc_239654:
 		move.w  #$8F02,4(a6)
 		rts
-
 ; ---------------------------------------------------------------------------
 
 sub_23965C:
@@ -74,6 +74,7 @@ loc_23969A:
 locret_2396B4:
 		rts
 ; ---------------------------------------------------------------------------
+
 sub_239822:
 		move.w  (a6),d0
 		andi.w  #$FFF0,d0
@@ -100,7 +101,6 @@ loc_239842:
 		beq.w   locret_23996C
 		addi.w  #$10,d0
 
-; ---------------------------------------------------------------------------
 S3_SetUp_ColumnDraw:
 		move.w  d1,d2
 		andi.w  #$70,d2
@@ -169,8 +169,6 @@ loc_2398B2:
 		add.w   d5,d5
 		adda.w  d5,a0
 
-
-
 ; =============== S U B R O U T I N E =======================================
 
 
@@ -221,8 +219,6 @@ loc_239964:
 locret_23996C:
 		rts
 
-
-
 ; =============== S U B R O U T I N E =======================================
 
 
@@ -272,6 +268,7 @@ loc_2399B0:
 		bra.s   S3_Setup_TileRowDraw
 ; ---------------------------------------------------------------------------
 		nop
+
 S3_Setup_TileRowDraw:
 		asr.w   #4,d1
 		move.w  d1,d2
@@ -337,8 +334,6 @@ loc_239A68:
 		add.w   d5,d5
 		adda.w  d5,a0
 
-; ---------------------------------------------------------------------------
-
 sub_239AA8:
 		move.w  (a5,d2.w),d3
 		move.w  d3,d4
@@ -376,6 +371,7 @@ loc_239AF6:
 locret_239AFC:
 		rts
 ; ---------------------------------------------------------------------------
+
 S3_GetLevelAddrChunk:
 		move.w  d0,d3
 		asr.w   #5,d3
@@ -392,8 +388,8 @@ S3_GetChunk:
 		add.w   d4,d3
 		movea.l d3,a5
 		rts
-
 ; ---------------------------------------------------------------------------
+
 sub_239B20:
 		asr.w   #3,d1
 		move.w  d1,d2
@@ -425,6 +421,7 @@ loc_239B40:
 		adda.w  d5,a0
 		jsr     S3_GetLevelAddrChunk(pc)
 		bra.w   sub_239AA8
+
 ; =============== S U B R O U T I N E =======================================
 
 
@@ -440,8 +437,8 @@ loc_239B62:
 		addi.w  #$10,d0
 		dbf     d2,loc_239B62
 		rts
-
 ; ---------------------------------------------------------------------------
+
 S3_RefreshPlaneDirectVScroll:
 		move.w  (a4)+,d2
 		moveq   #$1F,d3
@@ -487,6 +484,7 @@ S3_DrawTilesVDeform:
 		bra.s   loc_239D58
 ; ---------------------------------------------------------------------------
 		nop
+
 loc_239D58:
 		move.w  d6,d1
 
@@ -551,8 +549,6 @@ sub_239DBC:
 		bsr.s   sub_239DC6
 		addi.w  #$140,d0
 
-
-
 ; =============== S U B R O U T I N E =======================================
 
 
@@ -608,7 +604,6 @@ loc_239E80:
 
 S3_ApplyDeformation:
 		move.w  #$DF,d1
-
 
 sub_239E90:
 		lea     (H_scroll_buffer).w,a1
@@ -705,7 +700,6 @@ loc_239F0C:
 
 locret_239F16:
 		rts
-
 ; ---------------------------------------------------------------------------
 
 S3_ApplyFGAndBGDeformation:
@@ -815,6 +809,7 @@ loc_239FB0:
 		swap    d7
 		rts
 ; ---------------------------------------------------------------------------
+
 S3_Apply_FGVScroll:
 		lea     ($FFFFEEEA).w,a1
 		move.w  (Camera_Y_pos_BG_copy).w,d1
@@ -862,8 +857,8 @@ loc_239FE6:
 
 locret_23A000:
 		rts
-
 ; ---------------------------------------------------------------------------
+
 S3Reset_TileOffsetPositionActual:
 		move.w  (Camera_X_pos_copy).w,d0
 		move.w  d0,d1
@@ -873,8 +868,6 @@ S3Reset_TileOffsetPositionActual:
 		and.w   (Camera_Y_pos_mask).w,d0
 		move.w  d0,(Camera_Y_pos_rounded).w
 		rts
-
-
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -889,7 +882,6 @@ S3Reset_TileOffsetPositionEff:
 		and.w   (Camera_Y_pos_mask).w,d0
 		move.w  d0,(Camera_Y_pos_BG_rounded).w
 		rts
-
 ; ---------------------------------------------------------------------------
 
 sub_23A03C:
@@ -907,7 +899,6 @@ loc_23A04A:
 		move.w  d0,(V_scroll_value_BG_P2).w
 		rts
 ; ---------------------------------------------------------------------------
-
 
 sub_23A080:
 		move.w  (a1),d1
@@ -932,8 +923,8 @@ loc_23A094:
 loc_23A09A:
 		add.w   d0,(a1)+
 		rts
-
 ; ---------------------------------------------------------------------------
+
 Comp_ScreenInit:
 		jsr     sub_23A03C(pc)
 		move.w  (Camera_X_pos_copy).w,d0
@@ -1042,27 +1033,19 @@ ALZ_BackgroundEvent:
 		jsr     ALZ_Deformation(pc)
 		lea     ALZ_BGDeformArray(pc),a4
 		bra.s   loc_23A764
-
 ; ---------------------------------------------------------------------------
-
 
 BPZ_BackgroundEvent:
 		jsr     BPZ_Deformation(pc)
 		lea     BPZ_DeformArray(pc),a4
 		bra.s   loc_23A764
-
-
 ; ---------------------------------------------------------------------------
-
 
 CGZ_BackgroundEvent:
 		jsr     CGZ_Deformation(pc)
 		lea     CGZ_DeformArray(pc),a4
 		bra.s   loc_23A764
-
-
 ; ---------------------------------------------------------------------------
-
 
 EMZ_BackgroundEvent:
 		jsr     EMZ_Deformation(pc)
@@ -1084,7 +1067,6 @@ loc_23A764:
 		moveq   #$73,d1
 		jsr     TwoP_ApplyDeformation(pc)
 		jmp     loc_23A04A(pc)
-
 ; ---------------------------------------------------------------------------
 
 DPZ_BackgroundEvent:
@@ -1099,11 +1081,7 @@ DPZ_BackgroundEvent:
 		moveq   #$1C,d2
 		bsr.s   sub_23A7BA
 		jmp     loc_23A04A(pc)
-
-
-
 ; ---------------------------------------------------------------------------
-
 
 sub_23A7BA:
 		neg.w   d0
@@ -1136,10 +1114,7 @@ ALZ_Deformation:
 		lea     ($FFFFA900).w,a1
 		move.w  ($FFFFEEBA).w,d0
 		bra.s   sub_23A81E
-
-
 ; ---------------------------------------------------------------------------
-
 
 sub_23A808:
 		subi.w  #$148,d0
@@ -1151,10 +1126,7 @@ sub_23A808:
 		swap    d0
 		addi.w  #$48,d0
 		rts
-
-
 ; ---------------------------------------------------------------------------
-
 
 sub_23A81E:
 		swap    d0
@@ -1208,10 +1180,7 @@ loc_23A882:
 		move.w  d2,(a5)+
 		dbf     d1,loc_23A882
 		rts
-
-
 ; ---------------------------------------------------------------------------
-
 
 BPZ_Deformation:
 		move.w  (Camera_Y_pos_copy).w,d0
@@ -1227,19 +1196,12 @@ BPZ_Deformation:
 		move.w  ($FFFFEEBA).w,d0
 		bsr.s   sub_23A8C2
 
-
-; ---------------------------------------------------------------------------
-
-
 sub_23A8B6:
 		subi.w  #$2C8,d0
 		asr.w   #1,d0
 		addi.w  #$90,d0
 		rts
-
-
 ; ---------------------------------------------------------------------------
-
 
 sub_23A8C2:
 		swap    d0
@@ -1256,10 +1218,7 @@ loc_23A8CE:
 		sub.l   d1,d0
 		dbf     d2,loc_23A8CE
 		rts
-
-
 ; ---------------------------------------------------------------------------
-
 
 DPZ_Deformation:
 		move.w  (Camera_Y_pos_copy).w,d0
@@ -1278,41 +1237,28 @@ DPZ_Deformation:
 		move.w  d0,($FFFFEE70).w
 		move.w  d1,($FFFFEEE4).w
 		rts
-
-
 ; ---------------------------------------------------------------------------
-
 
 sub_23A912:
 		subi.w  #$148,d0
 		asr.w   #4,d0
 		addq.w  #8,d0
 		rts
-
-
 ; ---------------------------------------------------------------------------
-
 
 sub_23A91C:
 		asr.w   #1,d0
 		move.w  d0,d1
 		asr.w   #2,d1
 		rts
-
-
 ; ---------------------------------------------------------------------------
-
 
 CGZ_Deformation:
 		move.w  ($FFFFEED4).w,d0
-
-loc_23A928:
 		bsr.s   sub_23A94C
 		move.w  d0,(Camera_Y_pos_BG_copy).w
 		move.w  ($FFFFEED8).w,d0
 		bsr.s   sub_23A94C
-
-loc_23A934:
 		move.w  d0,($FFFFEE74).w
 		lea     ($FFFFA80A).w,a1
 		move.w  ($FFFFEEB6).w,d0
@@ -1320,9 +1266,6 @@ loc_23A934:
 		lea     ($FFFFA90A).w,a1
 		move.w  ($FFFFEEBA).w,d0
 		bsr.s   sub_23A95C
-
-
-; ---------------------------------------------------------------------------
 
 sub_23A94C:
 		bmi.s   loc_23A958
@@ -1335,10 +1278,7 @@ sub_23A94C:
 loc_23A958:
 		moveq   #0,d0
 		rts
-
-
 ; ---------------------------------------------------------------------------
-
 
 sub_23A95C:
 		swap    d0
@@ -1359,10 +1299,7 @@ loc_23A968:
 		addi.w  #$100,d1
 		move.w  d1,-(a1)
 		rts
-
-
 ; ---------------------------------------------------------------------------
-
 
 EMZ_Deformation:
 		move.w  (Camera_Y_pos_copy).w,d0
@@ -1378,10 +1315,6 @@ EMZ_Deformation:
 		move.w  ($FFFFEEBA).w,d0
 		bsr.s   sub_23A9BE
 
-
-; ---------------------------------------------------------------------------
-
-
 sub_23A9A8:
 		subi.w  #$148,d0
 		swap    d0
@@ -1392,10 +1325,7 @@ sub_23A9A8:
 		swap    d0
 		addi.w  #$48,d0
 		rts
-
-
 ; ---------------------------------------------------------------------------
-
 
 sub_23A9BE:
 		swap    d0
@@ -1427,7 +1357,6 @@ sub_23A9BE:
 		move.w  d0,2(a1)
 		rts
 ; ---------------------------------------------------------------------------
-
 Comp_ScreenInitArray:	dc.w  $3FF, $1FF, $1F0,   $C, $100, $100,   $F,  $40
 						dc.w  $1FF, $3FF, $3F0,  $1C,  $80, $200,  $1F,  $20
 						dc.w  $3FF, $1FF, $1F0,   $C, $100, $100,   $F,  $40
@@ -1439,11 +1368,10 @@ CGZ_DeformArray:     dc.w   $50,    8,  $10,  $10,$7FFF
 EMZ_DeformArray:     dc.w   $10,  $10,  $10,  $10,    8,   $C,  $24,  $38,  $20,$7FFF
 ; ---------------------------------------------------------------------------
 ;
-;
 ; AIZ STUFF
 ;
-;
 ; ---------------------------------------------------------------------------
+
 AIZ_TreeReveal:
 		asr.w   #4,d1
 		move.w  d1,d2
@@ -1499,7 +1427,7 @@ loc_23AC0C:
 		dbf     d6,loc_23ABAE
 		clr.w   (a0)
 		rts
-
+; ---------------------------------------------------------------------------
 AIZ_TreeRevealArray:     dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
 		dc.b   0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1,  0,  0,  0,  0,  0
 		dc.b   0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  0,  0
@@ -1588,8 +1516,6 @@ AIZ1_Deform:
 		swap    d0
 		move.w  d0,(a1)
 		swap    d0
-
-loc_23B06A:
 		add.l   d1,d0
 		swap    d0
 		move.w  d0,-$2C(a1)
@@ -1629,8 +1555,6 @@ loc_23B0AE:
 loc_23B0C6:
 		add.l   d2,d0
 		swap    d0
-
-loc_23B0CA:
 		move.w  d0,(a1)+
 		swap    d0
 		dbf     d1,loc_23B0C6
@@ -1641,8 +1565,6 @@ AIZ1_ApplyDeformWater:
 		lea     AIZ1_DeformArray(pc),a4
 		lea     ($FFFFA808).w,a5
 		move.w  (Water_level).w,d1
-
-loc_23B0E0:
 		sub.w   (Camera_Y_pos_copy).w,d1
 		cmpi.w  #$E0,d1
 		blt.s   loc_23B0EE
@@ -1739,7 +1661,6 @@ AIZ1_BGDrawArray:     dc.w  $220,$7FFF
 AIZ1_DeformArray:     dc.w   $D0,  $20,  $30,  $30,  $10,  $10,  $10,$800D,   $F,    6,   $E,  $50,  $20,$7FFF
 AIZ_FlameVScroll:     dc.b   0,$FF,$FE,$FB,$F8,$F6,$F3,$F2,$F1,$F2,$F3,$F6,$F9,$FB,$FE,$FF ;
 ; ---------------------------------------------------------------------------
-
 AIZ1_WaterFGDeformDelta:     dc.w     1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    0,    0,    0,    0
 		dc.w     0,    0,    0,    0,    0,    0,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF
 		dc.w $FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,    0,    0,    0,    0
@@ -1936,7 +1857,6 @@ loc_23B75E:
 locret_23B772:
 		rts
 ; ---------------------------------------------------------------------------
-
 AIZ2_BGDeformMake:     dc.b 1
 		dc.b $12,$2A
 		dc.b 3
@@ -2137,6 +2057,7 @@ HCZ2_BGDeformIndex:     dc.b   3, $A
 		dc.b   4,$26
 		dc.b $FF,  0
 ; ---------------------------------------------------------------------------
+
 MGZ1_Deform:
 		move.w  ($FFFFEECE).w,(Camera_Y_pos_BG_copy).w
 		move.w  (Camera_X_pos_copy).w,d0
@@ -2241,8 +2162,6 @@ MGZ2_FGVScrollArray:     dc.w $3CA0,  $20,  $20,  $20,  $20,  $20,  $20,  $20
 MGZ2_BGDeform:
 		move.w  ($FFFFEED2).w,d0
 		jmp     loc_23D1D8(pc,d0.w)
-
-
 ; ---------------------------------------------------------------------------
 
 loc_23D1D8:
@@ -2363,6 +2282,7 @@ MGZ2_BGDeformOffset:     dc.w $FFFB,$FFF8,    9,   $A,    2,$FFF4,    3,  $10
 		dc.w $FFFF,   $D,$FFF1,    6,$FFF5,$FFFC,   $E,$FFF8
 		dc.w   $10,    8,    0,$FFF8,  $10,    8,    0
 ; ---------------------------------------------------------------------------
+
 ICZ1_SetIntroPal:
 		tst.b   (Game_mode).w
 		bmi.s   loc_23DE92
@@ -2371,8 +2291,6 @@ ICZ1_SetIntroPal:
 
 loc_23DE92:
 		lea     ($FFFFFCE2).w,a1
-
-
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -2388,6 +2306,7 @@ sub_23DE96:
 		move.w  #$E80,(a1)
 		rts
 ; ---------------------------------------------------------------------------
+
 ICZ1_SetIndoorPal:
 		tst.b   (Game_mode).w
 		bmi.s   loc_23DED2
@@ -2396,8 +2315,6 @@ ICZ1_SetIndoorPal:
 
 loc_23DED2:
 		lea     ($FFFFFCE2).w,a1
-
-
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -2410,11 +2327,11 @@ sub_23DED6:
 		move.l  #$E240A02,(a1)+
 		move.w  #$402,(a1)
 		rts
-
-
+; ---------------------------------------------------------------------------
 ICZ1_IntroBGDeformArray:     dc.w   $44,   $C,   $B,   $D,  $18,  $50,    2,    6
 		dc.w     8,  $10,  $18,  $20,  $28,$7FFF
 ; ---------------------------------------------------------------------------
+
 ICZ2_OutDeform:
 		clr.w   (Camera_Y_pos_BG_copy).w		; Effective Y is always 0
 		move.w  (Camera_X_pos_copy).w,d0
@@ -2467,8 +2384,6 @@ loc_23E12E:
 		dbf     d1,loc_23E12E
 		rts
 
-
-
 ; =============== S U B R O U T I N E =======================================
 
 
@@ -2514,8 +2429,6 @@ ICZ2_InDeform:
 		move.w  d0,($FFFFEEE2).w
 		rts
 
-
-
 ; =============== S U B R O U T I N E =======================================
 
 
@@ -2528,8 +2441,6 @@ ICZ2_SetOutdoorsPal:
 loc_23E1B6:
 		lea     ($FFFFFCE2).w,a1
 
-
-
 ; =============== S U B R O U T I N E =======================================
 
 
@@ -2540,8 +2451,6 @@ sub_23E1BA:
 		move.l  #$C400E20,(a1)+
 		move.l  #$A000E00,(a1)
 		rts
-
-
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -2555,8 +2464,6 @@ ICZ2_SetIndoorsPal:
 loc_23E1E6:
 		lea     ($FFFFFCE2).w,a1
 
-
-
 ; =============== S U B R O U T I N E =======================================
 
 
@@ -2568,8 +2475,6 @@ sub_23E1EA:
 		move.l  #$E400840,(a1)+
 		move.w  #$600,(a1)
 		rts
-
-
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -2583,8 +2488,6 @@ ICZ2_SetICZ1Pal:
 loc_23E21A:
 		lea     ($FFFFFCE2).w,a1
 
-
-
 ; =============== S U B R O U T I N E =======================================
 
 
@@ -2595,7 +2498,6 @@ sub_23E21E:
 		move.l  #$8200620,(a1)+
 		move.l  #$2000600,(a1)
 		rts
-
 ; ---------------------------------------------------------------------------
 ICZ2_OutBGDeformArray:     dc.w $5A
 		dc.w $26
@@ -2604,6 +2506,7 @@ ICZ2_OutBGDeformArray:     dc.w $5A
 ICZ2_InBGDeformArray:     dc.w  $1A0,  $40,  $20,  $18,  $40,    8,    8,  $18
 		dc.w $7FFF
 ; ---------------------------------------------------------------------------
+
 LBZ1_CheckLayoutMod:
 		lea     LBZ1_LayoutModRange(pc),a1
 		moveq   #3,d3
@@ -2741,6 +2644,7 @@ loc_23E536:
 		adda.w  d0,a1
 		dbf     d1,loc_23E536
 		rts
+; ---------------------------------------------------------------------------
 LBZ1_FGVScrollArray:     dc.w $3B60,  $10,  $10,  $10,  $10,  $10,  $10,  $10
 		dc.w   $10,  $10,  $10,$7FFF
 LBZ1_LayoutModRange:     dc.w $13E0,$16A0, $100, $580
@@ -2800,7 +2704,6 @@ loc_23E79A:
 		subq.w  #2,(a1)+
 		addq.w  #7,(a1)
 		rts
-
 ; ---------------------------------------------------------------------------
 LBZ2_BGDeformArray:     dc.w   $C0,  $40,  $38,  $18,  $28,  $10,  $10,  $10
 		dc.w   $18,  $40,  $20,  $10,  $20,  $70,  $30,$80E0
@@ -2856,7 +2759,6 @@ Gumball_SetUpVScroll:
 		sub.w   d0,d1
 		neg.w   d1
 
-
 ; =============== S U B R O U T I N E =======================================
 
 
@@ -2869,13 +2771,10 @@ Gumball_VScroll:
 		move.w  d1,4(a1)
 		move.w  d1,$E(a1)
 		rts
-
-
 ; ---------------------------------------------------------------------------
 Gumball_VScrollArray:		dc.w $C0
 		dc.w $80
 		dc.w $7FFF
-
 ; ---------------------------------------------------------------------------
 
 Gumball_BackgroundInit:
@@ -2904,24 +2803,3 @@ Gumball_Deform:
 		asr.w   #1,d0
 		move.w  d0,($FFFFEEE2).w
 		rts
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
