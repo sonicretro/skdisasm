@@ -2,6 +2,13 @@
 
 LockOnROM_Start:		binclude "Lockon S3/Header.bin"
 	even
+SSMagic_TestLoc_200114 EQU LockOnROM_Start+$114
+SSMagic_TestLoc_20011A EQU LockOnROM_Start+$11A
+LockonDate EQU LockOnROM_Start+$11C
+SSMagic_TestLoc_200150 EQU LockOnROM_Start+$150
+LockonSerialNumber EQU	LockOnROM_Start+$180
+SSMagic_TestLoc_2001A4 EQU LockOnROM_Start+$1A4
+
 Pal_Competition1:		binclude "General/Competition Menu/Palettes/1.bin"
 	even
 Map_CompetitionObject:		include "General/Competition Menu/Map - Competition Objects.asm"
@@ -1091,7 +1098,7 @@ Snd_EMZ:			binclude	"Sound/Music/Endless Mine.bin"
 		org		soundBankStart+$6587
 Snd_S3Credits:		binclude	"Sound/Music/Sonic 3 Credits.bin"
 		org		soundBankStart+$75E4
-Snd_2PMenu:			binclude	"Sound/Music/Competition Menu.bin"	
+Snd_2PMenu:			binclude	"Sound/Music/Competition Menu.bin"
 Snd_Drown:			binclude	"Sound/Music/Countdown.bin"
 
 	finishBank
