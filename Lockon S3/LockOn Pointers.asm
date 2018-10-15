@@ -3,6 +3,7 @@
 
 
 LockOnROM_Start:ds.b $11
+S3_Level_Solid_Data EQU $260000
 
 byte_200011:	ds.b $AC
 byte_2000BD:	ds.b $43
