@@ -130,7 +130,7 @@
 		dc.l Obj_81		; 129
 		dc.l Obj_CutsceneKnuckles		; 130
 		dc.l Obj_83		; 131
-		dc.l Obj_84		; 132
+		dc.l Obj_AIZPlaneIntro	; 132
 		dc.l Obj_SSEntryRing		; 133
 		dc.l Obj_86		; 134
 		dc.l Obj_87		; 135
