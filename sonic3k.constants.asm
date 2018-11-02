@@ -277,6 +277,35 @@ H_scroll_buffer =		ramaddr( $FFFFE000 ) ; $380 bytes ; horizontal scroll table i
 Collision_response_list =	ramaddr( $FFFFE380 ) ; $80 bytes ; only objects in this list are processed by the collision response routines
 Stat_table =			ramaddr( $FFFFE400 ) ; $100 bytes ; used by Tails' AI in a Sonic and Tails game
 Pos_table_P2 =			ramaddr( $FFFFE400 ) ; $100 bytes ; used by Player 2 in competition mode
+Special_stage_anim_frame =	ramaddr( $FFFFE420 ) ; word ; special stage globe's current animation frame, $10 and higher is turning
+Special_stage_X_pos =		ramaddr( $FFFFE422 ) ; word
+Special_stage_Y_pos =		ramaddr( $FFFFE424 ) ; word
+Special_stage_angle =		ramaddr( $FFFFE426 ) ; byte ; $00 = north, $40 = west, $80 = south, $C0 = east
+Special_stage_velocity =	ramaddr( $FFFFE428 ) ; word ; player's movement speed, negative when going backwards
+Special_stage_turning =		ramaddr( $FFFFE42A ) ; byte ; direction of next turn, 4 = left, -4 = right
+Special_stage_bumper_lock =	ramaddr( $FFFFE42B ) ; byte ; if set, the player can't start advancing by pressing up
+Special_stage_prev_anim_frame =	ramaddr( $FFFFE42C ) ; byte
+Special_stage_palette_frame =	ramaddr( $FFFFE42F ) ; byte ; same as Special_stage_anim_frame, but set to 0 while turning
+Special_stage_turn_lock =	ramaddr( $FFFFE430 ) ; byte ; if set, the player can't turn
+Special_stage_advancing =	ramaddr( $FFFFE431 ) ; byte ; set when the player player presses up
+Special_stage_jumping =		ramaddr( $FFFFE432 ) ; byte ; $80 = normal jump, $81 = spring
+Special_stage_fade_timer =	ramaddr( $FFFFE433 ) ; byte ; counts up when leaving the special stage
+Special_stage_prev_X_pos =	ramaddr( $FFFFE434 ) ; word
+Special_stage_prev_Y_pos =	ramaddr( $FFFFE436 ) ; word
+Special_stage_spheres_left =	ramaddr( $FFFFE438 ) ; word
+Special_stage_ring_count =	ramaddr( $FFFFE43A ) ; word
+Special_stage_sphere_HUD_flag =	ramaddr( $FFFFE43C ) ; byte
+Special_stage_extra_life_flags = ramaddr( $FFFFE43D ) ; byte ; when bit 7 is set, the ring HUD is updated
+Special_stage_rate_timer =	ramaddr( $FFFFE43E ) ; word ; when this reaches 0, the special stage speeds up
+Special_stage_jumping_P2 =	ramaddr( $FFFFE440 ) ; byte ; $80 = normal jump, $81 = spring
+Special_stage_rings_left =	ramaddr( $FFFFE442 ) ; word
+Special_stage_rate =		ramaddr( $FFFFE444 ) ; word ; player's maximum speed in either direction
+Special_stage_palette_addr =	ramaddr( $FFFFE446 ) ; long ; ROM address of the stage's color palette
+Special_stage_clear_timer =	ramaddr( $FFFFE44A ) ; word ; counts up after getting the last sphere, when it reaches $100 the emerald appears
+Special_stage_jump_lock =	ramaddr( $FFFFE44C ) ; byte ; if set, the player can't jump
+Special_stage_emerald_timer =	ramaddr( $FFFFE44D ) ; byte ; counts down when the emerald appears, when it reaches 0 the emerald sound plays
+Special_stage_interact =	ramaddr( $FFFFE44E ) ; word ; address of the last bumper touched, or the emerald at the end of the stage
+Special_stage_started =		ramaddr( $FFFFE450 ) ; byte ; set when the player begins moving at the start of the stage
 Pos_table =			ramaddr( $FFFFE500 ) ; $100 bytes
 Competition_saved_data =	ramaddr( $FFFFE600 ) ; $54 bytes ; saved data from Competition Mode
 Saved_data =			ramaddr( $FFFFE6AC ) ; $54 bytes ; saved data from 1 player mode
@@ -355,6 +384,7 @@ Demo_number =			ramaddr( $FFFFEF7A ) ; byte ; the currently running demo
 Ring_consumption_table =	ramaddr( $FFFFEF80 ) ; $80 bytes ; stores the addresses of all rings currently being consumed
 Ring_consumption_count =	ramaddr( $FFFFEF80 ) ; word ; the number of rings being consumed currently
 Ring_consumption_list =		ramaddr( $FFFFEF82 ) ; $7E bytes ; the remaining part of the ring consumption table
+SStage_results_object_addr =	ramaddr( $FFFFEEE0 ) ; word ; RAM address of the special stage results object
 
 Target_water_palette =		ramaddr( $FFFFF000 ) ; $80 bytes ; used by palette fading routines
 Water_palette =			ramaddr( $FFFFF080 ) ; $80 bytes ; this is what actually gets displayed
@@ -591,6 +621,14 @@ Saved2_status_secondary =	ramaddr( $FFFFFF96 ) ; byte
 Saved_apparent_zone_and_act =	ramaddr( $FFFFFF9A ) ; word
 Saved2_apparent_zone_and_act =	ramaddr( $FFFFFF9C ) ; word
 Blue_spheres_header_flag =	ramaddr( $FFFFFF9F ) ; byte ; 0 = SEGA GENESIS, 1 = SEGA MEGA DRIVE
+Blue_spheres_mode =		ramaddr( $FFFFFFA0 ) ; byte ; 0 = single stage, 1 = full game
+Blue_spheres_menu_flag = 	ramaddr( $FFFFFFA1 ) ; byte ; 0 = NO WAY!, 1 = normal, bit 7 set = entering a code
+Blue_spheres_current_stage =	ramaddr( $FFFFFFA2 ) ; 4 bytes ; the layout parts that make up the current stage
+Blue_spheres_current_level =	ramaddr( $FFFFFFA6 ) ; long ; number shown at the top of the full game menu
+Blue_spheres_option =		ramaddr( $FFFFFFAA ) ; byte ; 0 = level, 1 = start, 2 = code
+Blue_spheres_progress_flag =	ramaddr( $FFFFFFAB ) ; byte ; 0 = normal, -1 = disabled (single stage mode or using a code from single stage mode)
+Blue_spheres_difficulty =	ramaddr( $FFFFFFAC ) ; byte ; value currently displayed
+Blue_spheres_target_difficulty = ramaddr( $FFFFFFAD ) ; byte ; value read from the layout
 SK_alone_flag =			ramaddr( $FFFFFFAE ) ; word ; -1 if Sonic 3 isn't locked on
 Emerald_count =			ramaddr( $FFFFFFB0 ) ; word ; both chaos and super emeralds
 Chaos_emerald_count =		ramaddr( $FFFFFFB0 ) ; byte
@@ -602,13 +640,15 @@ Next_extra_life_score_P2 =	ramaddr( $FFFFFFC4 ) ; long ; left over from Sonic 2
 
 Demo_mode_flag =		ramaddr( $FFFFFFD0 ) ; word
 Next_demo_number =		ramaddr( $FFFFFFD2 ) ; word
+Blue_spheres_stage_flag =	ramaddr( $FFFFFFD4 ) ; byte ; set if a Blue Sphere special stage is being run
 V_blank_cycles =		ramaddr( $FFFFFFD6 ) ; word ; the number of cycles between V-blanks
 Graphics_flags =		ramaddr( $FFFFFFD8 ) ; byte ; bit 7 set = English system, bit 6 set = PAL system
 Debug_mode_flag =		ramaddr( $FFFFFFDA ) ; word
 Level_select_flag =		ramaddr( $FFFFFFE0 ) ; byte
 Slow_motion_flag =		ramaddr( $FFFFFFE1 ) ; byte
 Debug_cheat_flag =		ramaddr( $FFFFFFE2 ) ; word ; set if the debug cheat's been entered
-
+Level_select_cheat_counter =	ramaddr( $FFFFFFE4 ) ; word ; progress entering S3 level select cheat
+Debug_mode_cheat_counter =	ramaddr( $FFFFFFE6 ) ; word ; progress entering S3 debug mode cheat
 Competition_mode =		ramaddr( $FFFFFFE8 ) ; word
 P1_character =			ramaddr( $FFFFFFEA ) ; byte ; 0 = Sonic, 1 = Tails, 2 = Knuckles
 P2_character =			ramaddr( $FFFFFFEB ) ; byte
