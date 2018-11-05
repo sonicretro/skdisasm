@@ -1,5 +1,5 @@
 	;          Object				Mappings			Subtype Frame Arttile
-	dbglistobj Obj_Ring,				Map_Ring,			   0,   0, make_art_tile($6BC,1,1)
+	dbglistobj Obj_Ring,				Map_Ring,			   0,   0, make_art_tile(ArtTile_Ring,1,1)
 	dbglistobj Obj_Bumper,				Map_PachinkoBumper,		   0,   0, make_art_tile($2CD,3,0)
 	dbglistobj Obj_PachinkoTriangleBumper,		Map_PachinkoTriangleBumper,	   0,   1, make_art_tile($2EB,3,1)
 	dbglistobj Obj_PachinkoFlipper,			Map_PachinkoFlipper,		   0,   4, make_art_tile($32F,0,1)
