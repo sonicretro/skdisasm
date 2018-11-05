@@ -692,12 +692,12 @@ ArtTile_ArtKos_Save_Extra             = $0454
 ; Universal locations.
 
 ; Universal (used on all standard levels).
-ArtTile_ArtNem_Powerups               = $04C4
-ArtTile_ArtUnc_Sonic                  = $0680
-ArtTile_ArtUnc_Tails_Tails            = $06B0
-ArtTile_ArtNem_Ring                   = $06BC
-ArtTile_ArtUnc_Shield                 = $079C
-ArtTile_ArtUnc_Shield_Sparks          = $07BB
+ArtTile_Monitors                      = $04C4
+ArtTile_Player_1                      = $0680
+ArtTile_Player_2_Tail                 = $06B0
+ArtTile_Ring                          = $06BC
+ArtTile_Shield                        = $079C
+ArtTile_Shield_Sparks                 = $07BB
 
 ; Codepage for level select
 
