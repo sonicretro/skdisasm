@@ -464,6 +464,10 @@ Nem_shift_value =		ramaddr( $FFFFF6F4 ) ; long ; the number of bits the data wor
 Nem_patterns_left =		ramaddr( $FFFFF6F8 ) ; word ; the number of patterns remaining to be decompressed
 Nem_frame_patterns_left =	ramaddr( $FFFFF6FA ) ; word ; the number of patterns remaining to be decompressed in the current frame
 
+Tails_CPU_interact =		ramaddr( $FFFFF700 ) ; word ; RAM address of the last object Tails stood on while controlled by AI
+Tails_CPU_idle_timer =		ramaddr( $FFFFF702 ) ; word ; counts down while controller 2 is idle, when it reaches 0 the AI takes over
+Tails_CPU_flight_timer =	ramaddr( $FFFFF704 ) ; word ; counts up while Tails is respawning, when it reaches 300 he drops into the level
+Tails_CPU_routine =		ramaddr( $FFFFF708 ) ; word ; Tails' current AI routine in a Sonic and Tails game
 Rings_manager_routine =		ramaddr( $FFFFF710 ) ; byte
 Level_started_flag =		ramaddr( $FFFFF711 ) ; byte
 Water_flag =			ramaddr( $FFFFF730 ) ; byte
