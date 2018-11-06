@@ -475,6 +475,7 @@ Ctrl_1_pressed_title =		ramaddr( $FFFFF749 ) ; byte
 Sonic_Knux_top_speed =		ramaddr( $FFFFF760 ) ; word
 Sonic_Knux_acceleration =	ramaddr( $FFFFF762 ) ; word
 Sonic_Knux_deceleration =	ramaddr( $FFFFF764 ) ; word
+Player_prev_frame =		ramaddr( $FFFFF766 ) ; byte ; used by DPLC routines to detect whether a DMA transfer is required
 Primary_Angle =			ramaddr( $FFFFF768 ) ; byte
 Secondary_Angle =		ramaddr( $FFFFF76A ) ; byte
 Object_load_routine =		ramaddr( $FFFFF76C ) ; byte ; routine counter for the object loading manager
@@ -496,6 +497,8 @@ Chain_bonus_counter =		ramaddr( $FFFFF7D0 ) ; word
 Time_bonus_countdown =		ramaddr( $FFFFF7D2 ) ; word ; used on the results screen
 Ring_bonus_countdown =		ramaddr( $FFFFF7D4 ) ; word ; used on the results screen
 Camera_X_pos_coarse_back =	ramaddr( $FFFFF7DA ) ; word ; Camera_X_pos_coarse - $80
+Player_prev_frame_P2 =		ramaddr( $FFFFF7DE ) ; byte ; used by DPLC routines to detect whether a DMA transfer is required
+Player_prev_frame_P2_tail =	ramaddr( $FFFFF7DF ) ; byte ; used by DPLC routines to detect whether a DMA transfer is required
 Level_trigger_array =		ramaddr( $FFFFF7E0 ) ; $10 bytes ; used by buttons, etc.
 Anim_Counters =			ramaddr( $FFFFF7F0 ) ; $10 bytes ; each word stores data on animated level art, including duration and current frame
 
