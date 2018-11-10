@@ -473,6 +473,7 @@ Level_started_flag =		ramaddr( $FFFFF711 ) ; byte
 Water_flag =			ramaddr( $FFFFF730 ) ; byte
 Flying_carrying_Sonic_flag =	ramaddr( $FFFFF73E ) ; byte ; set when Tails carries Sonic in a Sonic and Tails game
 Flying_picking_Sonic_timer =	ramaddr( $FFFFF73F ) ; byte ; until this is 0 Tails can't pick Sonic up
+Tails_CPU_star_post_flag =	ramaddr( $FFFFF746 ) ; byte ; copy of Last_star_post_hit, sets Tails' starting behavior in a Sonic and Tails game
 Ctrl_1_title =			ramaddr( $FFFFF748 ) ; word ; copy of Ctrl_1, used on the title screen
 Ctrl_1_held_title =		ramaddr( $FFFFF748 ) ; byte
 Ctrl_1_pressed_title =		ramaddr( $FFFFF749 ) ; byte
