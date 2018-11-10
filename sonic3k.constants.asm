@@ -708,6 +708,8 @@ ArtTile_Player_2_Tail                 = $06B0
 ArtTile_Ring                          = $06BC
 ArtTile_Shield                        = $079C
 ArtTile_Shield_Sparks                 = $07BB
+ArtTile_DashDust                      = $07E0
+ArtTile_DashDust_P2                   = $07F0
 
 ; Codepage for level select
 
