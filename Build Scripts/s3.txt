@@ -91,7 +91,7 @@
 #split	0x000BFA00,0x000C0180,Levels\DPZ\Animated Tiles\0.bin
 #split	0x000C0180,0x000C2180,Levels\DPZ\Animated Tiles\BG 0.bin
 #split	0x000C2180,0x000C2280,Levels\Gumball\Animated Tiles\0.bin
-#split	0x000C2280,0x000C3200,General\Sprites\Splash Drown\Splash Drown.bin
+#split	0x000C2280,0x000C3200,General\Sprites\Dash Dust\Splash Drown.bin
 #split	0x001200E0,0x00136620,General\Sprites\Tails\Art\Tails.bin
 #split	0x00136620,0x00137780,General\Sprites\Tails\Art\Tails tails.bin
 #split	0x00137780,0x0013A840,General\Sprites\Sonic\Art\Sonic 2P.bin
