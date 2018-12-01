@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ObjDef xmlns="http://www.sonicretro.org" Name="Boss" Depth="5">
   <Images>
+    <ImageFromMappings id="shoulder">
+      <ArtFile filename="../Levels/SOZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/SOZ/Misc Object Data/Map - End Boss.asm" frame="0" startpal="3" />
+    </ImageFromMappings>
+    <ImageFromMappings id="elbow">
+      <ArtFile filename="../Levels/SOZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/SOZ/Misc Object Data/Map - End Boss.asm" frame="1" startpal="3" />
+    </ImageFromMappings>
+    <ImageFromMappings id="arm">
+      <ArtFile filename="../Levels/SOZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/SOZ/Misc Object Data/Map - End Boss.asm" frame="2" startpal="3" />
+    </ImageFromMappings>
     <ImageFromMappings id="main">
       <ArtFile filename="../Levels/SOZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/SOZ/Misc Object Data/Map - End Boss.asm" frame="6" startpal="5" />
@@ -53,6 +65,15 @@
       </ImageRef>
       <ImageRef image="screw3">
         <Offset Y="44" />
+      </ImageRef>
+      <ImageRef image="shoulder">
+        <Offset Y="40" />
+      </ImageRef>
+      <ImageRef image="elbow">
+        <Offset Y="76" />
+      </ImageRef>
+      <ImageRef image="arm">
+        <Offset X="-28" Y="96" />
       </ImageRef>
     </DisplayOption>
   </Display>
