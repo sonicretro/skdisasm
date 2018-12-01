@@ -227,7 +227,7 @@
 #split	0x000A8044,0x000A872C,Levels\MHZ\Layout\3.bin
 
 /* Uncompressed Art */
-#split	0x000A9DFC,0x000AA57C,General\Sprites\Air Countdown\Air Countdown.bin
+#split	0x000A9DFC,0x000AA57C,General\Sprites\Bubbles\Air Countdown.bin
 #split	0x000AA57C,0x000AAA7C,General\Sprites\S2Menu\SONICMILES.bin
 #split	0x000AAA7C,0x000ABDFC,General\Sprites\Sonic\Art\SStage Sonic.bin
 #split	0x000ABF22,0x000AD302,General\Sprites\Knuckles\Art\SStage Knuckles.bin
