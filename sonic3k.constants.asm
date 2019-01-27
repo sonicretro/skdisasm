@@ -309,6 +309,8 @@ Special_stage_interact =	ramaddr( $FFFFE44E ) ; word ; address of the last bumpe
 Special_stage_started =		ramaddr( $FFFFE450 ) ; byte ; set when the player begins moving at the start of the stage
 Pos_table =			ramaddr( $FFFFE500 ) ; $100 bytes
 Competition_saved_data =	ramaddr( $FFFFE600 ) ; $54 bytes ; saved data from Competition Mode
+Save_pointer =			ramaddr( $FFFFE660 ) ; long ; pointer to the active save slot in 1 player mode
+
 Saved_data =			ramaddr( $FFFFE6AC ) ; $54 bytes ; saved data from 1 player mode
 Ring_status_table =		ramaddr( $FFFFE700 ) ; $400 bytes ; 1 word per ring
 Object_respawn_table =		ramaddr( $FFFFEB00 ) ; $300 bytes ; 1 byte per object, every object in the level gets an entry
@@ -625,7 +627,7 @@ Title_screen_option =		ramaddr( $FFFFFF86 ) ; byte
 Competition_mode_type =		ramaddr( $FFFFFF8B ) ; byte ; 0 = grand prix, 3 = match race, -1 = time attack
 Total_bonus_countup =		ramaddr( $FFFFFF8E ) ; word ; the total points to be added due to various bonuses this frame in the end of level results screen
 Level_music =			ramaddr( $FFFFFF90 ) ; word
-
+Collected_special_ring_array =	ramaddr( $FFFFFF92 ) ; long ; each bit indicates a special stage entry ring in the current zone
 Saved2_status_secondary =	ramaddr( $FFFFFF96 ) ; byte
 Saved_apparent_zone_and_act =	ramaddr( $FFFFFF9A ) ; word
 Saved2_apparent_zone_and_act =	ramaddr( $FFFFFF9C ) ; word
@@ -643,6 +645,7 @@ Emerald_count =			ramaddr( $FFFFFFB0 ) ; word ; both chaos and super emeralds
 Chaos_emerald_count =		ramaddr( $FFFFFFB0 ) ; byte
 Super_emerald_count =		ramaddr( $FFFFFFB1 ) ; byte
 Collected_emeralds_array =	ramaddr( $FFFFFFB2 ) ; 7 bytes ; 1 byte per emerald, 0 = not collected, 1 = chaos emerald collected, 2 = grey super emerald, 3 = super emerald collected
+Emeralds_converted_flag =	ramaddr( $FFFFFFBA ) ; byte ; set if at least one emerald has been converted to a super emerald
 SK_special_stage_flag =		ramaddr( $FFFFFFBB ) ; byte ; set if a Sonic & Knuckles special stage is being run
 Next_extra_life_score =		ramaddr( $FFFFFFC0 ) ; long
 Next_extra_life_score_P2 =	ramaddr( $FFFFFFC4 ) ; long ; left over from Sonic 2
