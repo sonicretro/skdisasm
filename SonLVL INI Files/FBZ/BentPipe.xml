@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Bent Pipe" Image="img0" Depth="4">
+  <Images>
+    <ImageFromMappings id="img0">
+      <ArtFile filename="../Levels/FBZ/Nemesis Art/Misc Art 1.bin" offset="-7744" />
+      <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Bent Pipe.asm" frame="0" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="img1">
+      <ArtFile filename="../Levels/FBZ/Nemesis Art/Misc Art 1.bin" offset="-7744" />
+      <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Bent Pipe.asm" frame="1" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="img2">
+      <ArtFile filename="../Levels/FBZ/Nemesis Art/Misc Art 1.bin" offset="-7744" />
+      <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Bent Pipe.asm" frame="2" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+  <Subtypes>
+    <Subtype id="00" name="Upper" image="img0" />
+    <Subtype id="01" name="Middle" image="img1" />
+    <Subtype id="02" name="Lower" image="img2" />
+  </Subtypes>
+</ObjDef>

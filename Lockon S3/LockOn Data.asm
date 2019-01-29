@@ -2,6 +2,13 @@
 
 LockOnROM_Start:		binclude "Lockon S3/Header.bin"
 	even
+SSMagic_TestLoc_200114 EQU LockOnROM_Start+$114
+SSMagic_TestLoc_20011A EQU LockOnROM_Start+$11A
+LockonDate EQU LockOnROM_Start+$11C
+SSMagic_TestLoc_200150 EQU LockOnROM_Start+$150
+LockonSerialNumber EQU	LockOnROM_Start+$180
+SSMagic_TestLoc_2001A4 EQU LockOnROM_Start+$1A4
+
 Pal_Competition1:		binclude "General/Competition Menu/Palettes/1.bin"
 	even
 Map_CompetitionObject:		include "General/Competition Menu/Map - Competition Objects.asm"
@@ -485,7 +492,7 @@ ArtUnc_AniDPZ__BG:		binclude "Levels/DPZ/Animated Tiles/BG 0.bin"
 
 ArtUnc_AniGumball:		binclude "Levels/Gumball/Animated Tiles/0.bin"
 	even
-ArtUnc_SplashDrown:				binclude "General/Sprites/Splash Drown/Splash Drown.bin"
+ArtUnc_SplashDrown:		binclude "General/Sprites/Dash Dust/Splash Drown.bin"
 	even
 
 ArtNem_Title_SonicSprites:		binclude "General/Title/Nemesis Art/S3 Sonic Sprites.bin"
@@ -962,9 +969,9 @@ ArtKosM_ALZTitleCard:		binclude "Levels/ALZ/KosinskiM Art/Title Card.bin"
 	even
 ArtKosM_BPZTitleCard:		binclude "Levels/BPZ/KosinskiM Art/Title Card.bin"
 	even
-ArtKosM_DPZTitleCard:		binclude "Levels/DPZ/KosinskiM Art/Title Card.bin"
-	even
 ArtKosM_CGZTitleCard:		binclude "Levels/CGZ/KosinskiM Art/Title Card.bin"
+	even
+ArtKosM_DPZTitleCard:		binclude "Levels/DPZ/KosinskiM Art/Title Card.bin"
 	even
 ArtKosM_EMZTitleCard:		binclude "Levels/EMZ/KosinskiM Art/Title Card.bin"
 	even
@@ -1091,7 +1098,7 @@ Snd_EMZ:			binclude	"Sound/Music/Endless Mine.bin"
 		org		soundBankStart+$6587
 Snd_S3Credits:		binclude	"Sound/Music/Sonic 3 Credits.bin"
 		org		soundBankStart+$75E4
-Snd_2PMenu:			binclude	"Sound/Music/Competition Menu.bin"	
+Snd_2PMenu:			binclude	"Sound/Music/Competition Menu.bin"
 Snd_Drown:			binclude	"Sound/Music/Countdown.bin"
 
 	finishBank
@@ -1501,7 +1508,7 @@ MGZ2_8x8_Secondary_KosM:		binclude "Levels/MGZ/Tiles/Act 2 Secondary.bin"
 	even
 MGZ2_128x128_Secondary_Kos:		binclude "Levels/MGZ/Chunks/Act 2 Secondary.bin"
 	even
-MGZ2_QuakeChunks:		binclude "Levels/MGZ/Chunks/Act 2 Quake.bin"
+MGZ2_QuakeChunks:		binclude "Levels/MGZ/Misc/Act 2 Quake Chunks.bin"
 	even
 
 CNZ_16x16_Kos:		binclude "Levels/CNZ/Blocks/Primary.bin"

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Cutscene Bridge" Image="img" Depth="3">
+  <Images>
+    <ImageFromMappings id="img" priority="true">
+      <ArtFile filename="../Levels/SSZ/Nemesis Art/Misc.bin" offset="-1024" />
+      <MapFile type="ASM" filename="../Levels/SSZ/Misc Object Data/Map - Collapsing Bridge.asm" startpal="2" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="img" />
+      <ImageRef image="img">
+        <Offset X="-64" />
+      </ImageRef>
+      <ImageRef image="img">
+        <Offset X="64" />
+      </ImageRef>
+    </DisplayOption>
+  </Display>
+</ObjDef>

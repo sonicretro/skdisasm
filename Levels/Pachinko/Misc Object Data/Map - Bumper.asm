@@ -1,6 +1,5 @@
-Map_PachinkoBumper:
-		dc.w	word_330A6-Map_PachinkoBumper
-		dc.w word_330AE-Map_PachinkoBumper
+Map_PachinkoBumper_:dc.w word_330A6-Map_PachinkoBumper_
+		dc.w word_330AE-Map_PachinkoBumper_
 word_330A6:	dc.w 1			; DATA XREF: ROM:000330A2o
 		dc.b  $F0,  $F,	  0,   0, $FF, $F0
 word_330AE:	dc.w 4			; DATA XREF: ROM:000330A2o

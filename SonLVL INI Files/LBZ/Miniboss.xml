@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Miniboss" Depth="2">
+  <Images>
+    <ImageFromMappings id="box1">
+      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss Box.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Miniboss Box.asm" frame="0" startpal="2" />
+    </ImageFromMappings>
+    <ImageFromMappings id="box2">
+      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss Box.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Miniboss Box.asm" frame="3" startpal="2" />
+    </ImageFromMappings>
+    <ImageFromMappings id="box3">
+      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss Box.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Miniboss Box.asm" frame="6" startpal="2" />
+    </ImageFromMappings>
+    <ImageFromMappings id="box4">
+      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss Box.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Miniboss Box.asm" frame="9" startpal="2" />
+    </ImageFromMappings>
+  </Images>
+  <DefaultImage>
+    <ImageRef image="box1">
+      <Offset X="-12" Y="-16" />
+    </ImageRef>
+    <ImageRef image="box1" xflip="ReverseFlip" yflip="ReverseFlip">
+      <Offset X="-12" Y="-16" />
+    </ImageRef>
+    <ImageRef image="box2">
+      <Offset X="20" Y="-12" />
+    </ImageRef>
+    <ImageRef image="box2" xflip="ReverseFlip" yflip="ReverseFlip">
+      <Offset X="20" Y="-12" />
+    </ImageRef>
+    <ImageRef image="box3">
+      <Offset X="-16" />
+    </ImageRef>
+    <ImageRef image="box3">
+      <Offset X="16" />
+    </ImageRef>
+    <ImageRef image="box4">
+      <Offset Y="-20" />
+    </ImageRef>
+    <ImageRef image="box4">
+      <Offset Y="-12" />
+    </ImageRef>
+    <ImageRef image="box4">
+      <Offset Y="12" />
+    </ImageRef>
+    <ImageRef image="box4">
+      <Offset Y="20" />
+    </ImageRef>
+  </DefaultImage>
+</ObjDef>

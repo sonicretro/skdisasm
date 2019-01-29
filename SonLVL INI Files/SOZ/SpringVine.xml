@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Spring Vine" Image="image" Depth="4">
+  <Images>
+    <ImageFromMappings id="image">
+      <ArtFile filename="../Levels/SOZ/Nemesis Art/Misc Art.bin" />
+      <MapFile type="ASM" filename="../Levels/SOZ/Misc Object Data/Map - Spring Vine.asm" startpal="2" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="image">
+        <Offset X="-40" Y="40" />
+      </ImageRef>
+      <ImageRef image="image">
+        <Offset X="-29" Y="28" />
+      </ImageRef>
+      <ImageRef image="image">
+        <Offset X="-18" Y="16" />
+      </ImageRef>
+      <ImageRef image="image">
+        <Offset X="-7" Y="4" />
+      </ImageRef>
+      <ImageRef image="image">
+        <Offset X="5" Y="-8" />
+      </ImageRef>
+      <ImageRef image="image">
+        <Offset X="16" Y="-20" />
+      </ImageRef>
+      <ImageRef image="image">
+        <Offset X="27" Y="-32" />
+      </ImageRef>
+      <ImageRef image="image">
+        <Offset X="39" Y="-44" />
+      </ImageRef>
+    </DisplayOption>
+  </Display>
+</ObjDef>

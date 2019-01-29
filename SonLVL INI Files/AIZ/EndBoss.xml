@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Boss" Image="main" Depth="5">
+  <Images>
+    <ImageFromMappings id="main" priority="true">
+      <ArtFile filename="../Levels/AIZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/AIZ/Misc Object Data/Map - End Boss.asm" frame="0" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="arm" priority="true">
+      <ArtFile filename="../Levels/AIZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/AIZ/Misc Object Data/Map - End Boss.asm" frame="1" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="cannon" priority="true">
+      <ArtFile filename="../Levels/AIZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/AIZ/Misc Object Data/Map - End Boss.asm" frame="4" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="head" priority="true">
+      <ArtFile filename="../General/Sprites/Robotnik/Ship.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Robotnik Ship.asm" frame="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="ship" priority="true">
+      <ArtFile filename="../General/Sprites/Robotnik/Ship.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Robotnik Ship.asm" frame="8" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="arm" xflip="ReverseFlip">
+        <Offset X="-20" Y="-4" />
+      </ImageRef>
+      <ImageRef image="cannon" xflip="ReverseFlip">
+        <Offset X="-48" Y="-4" />
+      </ImageRef>
+      <ImageRef image="main" xflip="ReverseFlip" />
+      <ImageRef image="arm" xflip="ReverseFlip">
+        <Offset X="20" Y="-4" />
+      </ImageRef>
+      <ImageRef image="cannon" xflip="ReverseFlip">
+        <Offset X="-8" Y="-4" />
+      </ImageRef>
+      <ImageRef image="head" xflip="ReverseFlip">
+        <Offset Y="-48" />
+      </ImageRef>
+      <ImageRef image="ship" xflip="ReverseFlip">
+        <Offset Y="-20" />
+      </ImageRef>
+    </DisplayOption>
+  </Display>
+</ObjDef>

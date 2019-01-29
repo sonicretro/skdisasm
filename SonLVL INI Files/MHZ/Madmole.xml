@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Madmole" Image="main" Depth="5">
+  <Images>
+    <ImageFromMappings id="main">
+      <ArtFile filename="../General/Sprites/Madmole/Madmole.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Madmole/Map - Madmole.asm" />
+    </ImageFromMappings>
+    <ImageFromMappings id="chute">
+      <ArtFile filename="../General/Sprites/Madmole/Madmole.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Madmole/Map - Madmole.asm" frame="13" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="main">
+        <Offset Y="-16" />
+      </ImageRef>
+      <ImageRef image="chute" />
+    </DisplayOption>
+  </Display>
+</ObjDef>

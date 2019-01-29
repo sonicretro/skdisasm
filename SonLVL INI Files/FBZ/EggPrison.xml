@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Egg Capsule" Image="main" Depth="4">
+  <Images>
+    <ImageFromMappings id="main">
+      <ArtFile filename="LevelArt" />
+      <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Egg Capsule.asm" frame="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="button">
+      <ArtFile filename="../Levels/FBZ/Nemesis Art/Egg Capsule.bin" offset="27552" />
+      <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Egg Capsule.asm" frame="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="animal">
+      <ArtFile filename="../General/Sprites/Animals/Squirrel.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Animals/Map - Animals 3.asm" />
+    </ImageFromMappings>
+    <ImageFromMappings id="ring">
+      <ArtFile filename="../General/Sprites/Ring/Ring.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Ring/Map - Ring.asm" frame="1" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="enemy">
+      <ArtFile filename="../General/Sprites/Technosqueek/Technosqueek.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Technosqueek/Map - Technosqueek.asm" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="ghost">
+      <ArtFile filename="../General/Sprites/SOZ Ghosts/SOZ Ghosts.bin" compression="Uncompressed" />
+      <MapFile type="ASM" filename="../General/Sprites/SOZ Ghosts/Map - SOZ Ghosts.asm" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+  <Subtypes>
+    <Subtype id="00" name="Animals" image="animal">
+      <ImageRef image="animal" xflip="ReverseFlip" />
+    </Subtype>
+    <Subtype id="01" name="Rings" image="ring" />
+    <Subtype id="02" name="Enemies" image="enemy" />
+    <Subtype id="03" name="Ghosts" image="ghost" />
+  </Subtypes>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="button">
+        <Offset Y="-36" />
+      </ImageRef>
+      <ImageRef image="main" />
+    </DisplayOption>
+  </Display>
+</ObjDef>

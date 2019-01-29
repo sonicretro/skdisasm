@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Boss" Image="ship" Depth="2">
+  <Images>
+    <ImageFromMappings id="main" priority="true">
+      <ArtFile filename="../Levels/HCZ/Nemesis Art/End Boss.bin" />
+      <MapFile type="ASM" filename="../Levels/HCZ/Misc Object Data/Map - End Boss.asm" frame="0" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="axle" priority="true">
+      <ArtFile filename="../Levels/HCZ/Nemesis Art/End Boss.bin" />
+      <MapFile type="ASM" filename="../Levels/HCZ/Misc Object Data/Map - End Boss.asm" frame="1" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="propeller" priority="true">
+      <ArtFile filename="../Levels/HCZ/Nemesis Art/End Boss.bin" />
+      <MapFile type="ASM" filename="../Levels/HCZ/Misc Object Data/Map - End Boss.asm" frame="2" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="bomb" priority="true">
+      <ArtFile filename="../Levels/HCZ/Nemesis Art/End Boss.bin" />
+      <MapFile type="ASM" filename="../Levels/HCZ/Misc Object Data/Map - End Boss.asm" frame="6" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="head" priority="true">
+      <ArtFile filename="../General/Sprites/Robotnik/Ship.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Robotnik Ship.asm" frame="0" startpal="6" />
+    </ImageFromMappings>
+    <ImageFromMappings id="ship" priority="true">
+      <ArtFile filename="../General/Sprites/Robotnik/Ship.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Robotnik Ship.asm" frame="5" startpal="6" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="head">
+        <Offset Y="-28" />
+      </ImageRef>
+      <ImageRef image="ship" />
+      <ImageRef image="bomb">
+        <Offset X="35" Y="6" />
+      </ImageRef>
+      <ImageRef image="bomb">
+        <Offset X="27" Y="-2" />
+      </ImageRef>
+      <ImageRef image="main">
+        <Offset Y="-12" />
+      </ImageRef>
+      <ImageRef image="axle">
+        <Offset Y="16" />
+      </ImageRef>
+      <ImageRef image="propeller">
+        <Offset Y="24" />
+      </ImageRef>
+    </DisplayOption>
+  </Display>
+</ObjDef>

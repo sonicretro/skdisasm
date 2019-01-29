@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Special Stage Ring" Image="img" Depth="1">
+  <Images>
+    <ImageFromMappings id="img">
+      <ArtFile filename="../General/Sprites/SS Entry/Entry Ring.bin" compression="Uncompressed" />
+      <MapFile type="ASM" filename="../General/Sprites/SS Entry/Map - Entry Ring.asm"
+        dplcfile="../General/Sprites/SS Entry/DPLC - Special Stage Entry Ring.asm" frame="8" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+  <Properties>
+    <BitsProperty name="Ring ID" type="int" startbit="0" length="5" description="The special stage ring array flag monitored by this object." />
+    <BitsProperty name="HPZ Warp" type="bool" startbit="7" length="1" description="If set, the ring always sends the player to Hidden Palace." />
+  </Properties>
+</ObjDef>

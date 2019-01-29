@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StartPosDef xmlns="http://www.sonicretro.org">
+  <ImageFromMappings>
+    <ArtFile filename="../General/Sprites/Knuckles/Art/Knuckles.bin" compression="Uncompressed" />
+    <MapFile type="ASM" filename="../General/Sprites/Knuckles/Map - Knuckles.asm"
+      dplcfile="../General/Sprites/Knuckles/Knuckles pattern load cues.asm" dplcver="S2" frame="140" startpal="4" />
+  </ImageFromMappings>
+</StartPosDef>

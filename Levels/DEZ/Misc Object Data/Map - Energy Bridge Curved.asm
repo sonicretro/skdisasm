@@ -17,5 +17,3 @@ word_48068:	dc.w 3
 word_4807C:	dc.w 2			
 		dc.b  $20,   0,	  0,   8, $FF, $F4
 		dc.b   $C,   0,	  0,   8,   0, $2C
-word_4808A:	dc.w $F000
-		dc.w $F600

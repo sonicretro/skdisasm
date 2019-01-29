@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Batbot" Image="main" Depth="5">
+  <Images>
+    <ImageFromMappings id="main" priority="true">
+      <ArtFile filename="../General/Sprites/Batbot/Batbot.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Batbot/Map - Batbot.asm" frame="2" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="bulb" priority="true">
+      <ArtFile filename="../General/Sprites/Batbot/Batbot.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Batbot/Map - Batbot.asm" frame="3" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="eyes" priority="true">
+      <ArtFile filename="../General/Sprites/Batbot/Batbot.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Batbot/Map - Batbot.asm" frame="5" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="main" />
+      <ImageRef image="bulb">
+        <Offset Y="16" />
+      </ImageRef>
+      <ImageRef image="eyes">
+        <Offset Y="3" />
+      </ImageRef>
+    </DisplayOption>
+  </Display>
+</ObjDef>

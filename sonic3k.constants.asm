@@ -247,6 +247,7 @@ Sprite_table_buffer_P2_2 =	ramaddr(   $FF7D80 ) ; $280 bytes ; alternate sprite 
 Level_layout_header =		ramaddr( $FFFF8000 ) ; 8 bytes ; first word = chunks per FG row, second word = chunks per BG row, third word = FG rows, fourth word = BG rows
 Level_layout_main =		ramaddr( $FFFF8008 ) ; $40 word-sized line pointers followed by actual layout data
 Block_table =			ramaddr( $FFFF9000 ) ; $1A00 bytes ; block (16x16) definitions, 8 bytes per definition
+SStage_collision_response_list = ramaddr( $FFFFA400 ) ; $100 bytes ; sprite collision list during a special stage
 
 Nem_code_table =		ramaddr( $FFFFAA00 ) ; $200 bytes ; code table is built up here and then used during decompression
 Sprite_table_input =		ramaddr( $FFFFAC00 ) ; $400 bytes ; 8 priority levels, $80 bytes per level
@@ -256,7 +257,8 @@ Player_1 =			ramaddr( $FFFFB000 ) ; main character in 1 player mode, player 1 in
 Player_2 =			ramaddr( $FFFFB04A ) ; Tails in a Sonic and Tails game, player 2 in Competition mode
 Reserved_object_3 =		ramaddr( $FFFFB094 ) ; during a level, an object whose sole purpose is to clear the collision response list is stored here
 Dynamic_object_RAM =		ramaddr( $FFFFB0DE ) ; $1A04 bytes ; 90 objects
-Level_object_RAM =		ramaddr( $FFFFCAE2 ) ; $4EA bytes ; various fixed in-level objects
+Dynamic_object_RAM_end =	ramaddr( $FFFFCAE2 )
+Level_object_RAM =		Dynamic_object_RAM_end ; $4EA bytes ; various fixed in-level objects
 Breathing_bubbles =		ramaddr( $FFFFCB2C ) ; for the main character
 Breathing_bubbles_P2 =		ramaddr( $FFFFCB76 ) ; for Tails in a Sonic and Tails game
 Super_stars =			ramaddr( $FFFFCBC0 ) ; for Super Sonic and Super Knuckles
@@ -276,8 +278,39 @@ H_scroll_buffer =		ramaddr( $FFFFE000 ) ; $380 bytes ; horizontal scroll table i
 Collision_response_list =	ramaddr( $FFFFE380 ) ; $80 bytes ; only objects in this list are processed by the collision response routines
 Stat_table =			ramaddr( $FFFFE400 ) ; $100 bytes ; used by Tails' AI in a Sonic and Tails game
 Pos_table_P2 =			ramaddr( $FFFFE400 ) ; $100 bytes ; used by Player 2 in competition mode
+Special_stage_anim_frame =	ramaddr( $FFFFE420 ) ; word ; special stage globe's current animation frame, $10 and higher is turning
+Special_stage_X_pos =		ramaddr( $FFFFE422 ) ; word
+Special_stage_Y_pos =		ramaddr( $FFFFE424 ) ; word
+Special_stage_angle =		ramaddr( $FFFFE426 ) ; byte ; $00 = north, $40 = west, $80 = south, $C0 = east
+Special_stage_velocity =	ramaddr( $FFFFE428 ) ; word ; player's movement speed, negative when going backwards
+Special_stage_turning =		ramaddr( $FFFFE42A ) ; byte ; direction of next turn, 4 = left, -4 = right
+Special_stage_bumper_lock =	ramaddr( $FFFFE42B ) ; byte ; if set, the player can't start advancing by pressing up
+Special_stage_prev_anim_frame =	ramaddr( $FFFFE42C ) ; byte
+Special_stage_palette_frame =	ramaddr( $FFFFE42F ) ; byte ; same as Special_stage_anim_frame, but set to 0 while turning
+Special_stage_turn_lock =	ramaddr( $FFFFE430 ) ; byte ; if set, the player can't turn
+Special_stage_advancing =	ramaddr( $FFFFE431 ) ; byte ; set when the player player presses up
+Special_stage_jumping =		ramaddr( $FFFFE432 ) ; byte ; $80 = normal jump, $81 = spring
+Special_stage_fade_timer =	ramaddr( $FFFFE433 ) ; byte ; counts up when leaving the special stage
+Special_stage_prev_X_pos =	ramaddr( $FFFFE434 ) ; word
+Special_stage_prev_Y_pos =	ramaddr( $FFFFE436 ) ; word
+Special_stage_spheres_left =	ramaddr( $FFFFE438 ) ; word
+Special_stage_ring_count =	ramaddr( $FFFFE43A ) ; word
+Special_stage_sphere_HUD_flag =	ramaddr( $FFFFE43C ) ; byte
+Special_stage_extra_life_flags = ramaddr( $FFFFE43D ) ; byte ; when bit 7 is set, the ring HUD is updated
+Special_stage_rate_timer =	ramaddr( $FFFFE43E ) ; word ; when this reaches 0, the special stage speeds up
+Special_stage_jumping_P2 =	ramaddr( $FFFFE440 ) ; byte ; $80 = normal jump, $81 = spring
+Special_stage_rings_left =	ramaddr( $FFFFE442 ) ; word
+Special_stage_rate =		ramaddr( $FFFFE444 ) ; word ; player's maximum speed in either direction
+Special_stage_palette_addr =	ramaddr( $FFFFE446 ) ; long ; ROM address of the stage's color palette
+Special_stage_clear_timer =	ramaddr( $FFFFE44A ) ; word ; counts up after getting the last sphere, when it reaches $100 the emerald appears
+Special_stage_clear_routine =	ramaddr( $FFFFE44C ) ; byte ; if set, the player can't jump
+Special_stage_emerald_timer =	ramaddr( $FFFFE44D ) ; byte ; counts down when the emerald appears, when it reaches 0 the emerald sound plays
+Special_stage_interact =	ramaddr( $FFFFE44E ) ; word ; address of the last bumper touched, or the emerald at the end of the stage
+Special_stage_started =		ramaddr( $FFFFE450 ) ; byte ; set when the player begins moving at the start of the stage
 Pos_table =			ramaddr( $FFFFE500 ) ; $100 bytes
 Competition_saved_data =	ramaddr( $FFFFE600 ) ; $54 bytes ; saved data from Competition Mode
+Save_pointer =			ramaddr( $FFFFE660 ) ; long ; pointer to the active save slot in 1 player mode
+
 Saved_data =			ramaddr( $FFFFE6AC ) ; $54 bytes ; saved data from 1 player mode
 Ring_status_table =		ramaddr( $FFFFE700 ) ; $400 bytes ; 1 word per ring
 Object_respawn_table =		ramaddr( $FFFFEB00 ) ; $300 bytes ; 1 byte per object, every object in the level gets an entry
@@ -305,8 +338,8 @@ H_scroll_frame_offset =		ramaddr( $FFFFEE24 ) ; word ; if this is non-zero with 
 Pos_table_index =		ramaddr( $FFFFEE26 ) ; word ; goes up in increments of 4
 H_scroll_frame_offset_P2 =	ramaddr( $FFFFEE28 ) ; word
 Pos_table_index_P2 =		ramaddr( $FFFFEE2A ) ; word
-Distance_from_screen_top =	ramaddr( $FFFFEE2C ) ; word ; the vertical scroll manager scrolls the screen until the player's distance from the top of the screen is equal to this (or between this and this + $40 when in the air). $60 by default
-Distance_from_screen_top_P2 =	ramaddr( $FFFFEE2E ) ; word
+Distance_from_top =		ramaddr( $FFFFEE2C ) ; word ; the vertical scroll manager scrolls the screen until the player's distance from the top of the screen is equal to this (or between this and this + $40 when in the air). $60 by default
+Distance_from_top_P2 =		ramaddr( $FFFFEE2E ) ; word
 Deform_lock =			ramaddr( $FFFFEE30 ) ; byte
 Camera_max_Y_pos_changing =	ramaddr( $FFFFEE32 ) ; byte ; set when the maximum camera Y pos is undergoing a change
 Dynamic_resize_routine =	ramaddr( $FFFFEE33 ) ; byte
@@ -354,6 +387,7 @@ Demo_number =			ramaddr( $FFFFEF7A ) ; byte ; the currently running demo
 Ring_consumption_table =	ramaddr( $FFFFEF80 ) ; $80 bytes ; stores the addresses of all rings currently being consumed
 Ring_consumption_count =	ramaddr( $FFFFEF80 ) ; word ; the number of rings being consumed currently
 Ring_consumption_list =		ramaddr( $FFFFEF82 ) ; $7E bytes ; the remaining part of the ring consumption table
+SStage_results_object_addr =	ramaddr( $FFFFEEE0 ) ; word ; RAM address of the special stage results object
 
 Target_water_palette =		ramaddr( $FFFFF000 ) ; $80 bytes ; used by palette fading routines
 Water_palette =			ramaddr( $FFFFF080 ) ; $80 bytes ; this is what actually gets displayed
@@ -433,17 +467,23 @@ Nem_shift_value =		ramaddr( $FFFFF6F4 ) ; long ; the number of bits the data wor
 Nem_patterns_left =		ramaddr( $FFFFF6F8 ) ; word ; the number of patterns remaining to be decompressed
 Nem_frame_patterns_left =	ramaddr( $FFFFF6FA ) ; word ; the number of patterns remaining to be decompressed in the current frame
 
+Tails_CPU_interact =		ramaddr( $FFFFF700 ) ; word ; RAM address of the last object Tails stood on while controlled by AI
+Tails_CPU_idle_timer =		ramaddr( $FFFFF702 ) ; word ; counts down while controller 2 is idle, when it reaches 0 the AI takes over
+Tails_CPU_flight_timer =	ramaddr( $FFFFF704 ) ; word ; counts up while Tails is respawning, when it reaches 300 he drops into the level
+Tails_CPU_routine =		ramaddr( $FFFFF708 ) ; word ; Tails' current AI routine in a Sonic and Tails game
 Rings_manager_routine =		ramaddr( $FFFFF710 ) ; byte
 Level_started_flag =		ramaddr( $FFFFF711 ) ; byte
 Water_flag =			ramaddr( $FFFFF730 ) ; byte
 Flying_carrying_Sonic_flag =	ramaddr( $FFFFF73E ) ; byte ; set when Tails carries Sonic in a Sonic and Tails game
 Flying_picking_Sonic_timer =	ramaddr( $FFFFF73F ) ; byte ; until this is 0 Tails can't pick Sonic up
+Tails_CPU_star_post_flag =	ramaddr( $FFFFF746 ) ; byte ; copy of Last_star_post_hit, sets Tails' starting behavior in a Sonic and Tails game
 Ctrl_1_title =			ramaddr( $FFFFF748 ) ; word ; copy of Ctrl_1, used on the title screen
 Ctrl_1_held_title =		ramaddr( $FFFFF748 ) ; byte
 Ctrl_1_pressed_title =		ramaddr( $FFFFF749 ) ; byte
-Sonic_Knux_top_speed =		ramaddr( $FFFFF760 ) ; word
-Sonic_Knux_acceleration =	ramaddr( $FFFFF762 ) ; word
-Sonic_Knux_deceleration =	ramaddr( $FFFFF764 ) ; word
+Max_speed =			ramaddr( $FFFFF760 ) ; word
+Acceleration =			ramaddr( $FFFFF762 ) ; word
+Deceleration =			ramaddr( $FFFFF764 ) ; word
+Player_prev_frame =		ramaddr( $FFFFF766 ) ; byte ; used by DPLC routines to detect whether a DMA transfer is required
 Primary_Angle =			ramaddr( $FFFFF768 ) ; byte
 Secondary_Angle =		ramaddr( $FFFFF76A ) ; byte
 Object_load_routine =		ramaddr( $FFFFF76C ) ; byte ; routine counter for the object loading manager
@@ -465,6 +505,8 @@ Chain_bonus_counter =		ramaddr( $FFFFF7D0 ) ; word
 Time_bonus_countdown =		ramaddr( $FFFFF7D2 ) ; word ; used on the results screen
 Ring_bonus_countdown =		ramaddr( $FFFFF7D4 ) ; word ; used on the results screen
 Camera_X_pos_coarse_back =	ramaddr( $FFFFF7DA ) ; word ; Camera_X_pos_coarse - $80
+Player_prev_frame_P2 =		ramaddr( $FFFFF7DE ) ; byte ; used by DPLC routines to detect whether a DMA transfer is required
+Player_prev_frame_P2_tail =	ramaddr( $FFFFF7DF ) ; byte ; used by DPLC routines to detect whether a DMA transfer is required
 Level_trigger_array =		ramaddr( $FFFFF7E0 ) ; $10 bytes ; used by buttons, etc.
 Anim_Counters =			ramaddr( $FFFFF7F0 ) ; $10 bytes ; each word stores data on animated level art, including duration and current frame
 
@@ -552,9 +594,9 @@ Rings_frame =			ramaddr( $FFFFFEB3 ) ; byte
 Ring_spill_anim_counter =	ramaddr( $FFFFFEB6 ) ; byte
 Ring_spill_anim_frame =		ramaddr( $FFFFFEB7 ) ; byte
 Ring_spill_anim_accum =		ramaddr( $FFFFFEB8 ) ; byte
-Tails_top_speed =		ramaddr( $FFFFFEC0 ) ; word
-Tails_acceleration =		ramaddr( $FFFFFEC2 ) ; word
-Tails_deceleration =		ramaddr( $FFFFFEC4 ) ; word
+Max_speed_P2 =			ramaddr( $FFFFFEC0 ) ; word
+Acceleration_P2 =		ramaddr( $FFFFFEC2 ) ; word
+Deceleration_P2 =		ramaddr( $FFFFFEC4 ) ; word
 Life_count_P2 =			ramaddr( $FFFFFEC6 ) ; byte ; left over from Sonic 2
 Total_ring_count =		ramaddr( $FFFFFEC8 ) ; word ; left over from Sonic 2
 Total_ring_count_P2 =		ramaddr( $FFFFFECA ) ; word ; left over from Sonic 2
@@ -585,29 +627,40 @@ Title_screen_option =		ramaddr( $FFFFFF86 ) ; byte
 Competition_mode_type =		ramaddr( $FFFFFF8B ) ; byte ; 0 = grand prix, 3 = match race, -1 = time attack
 Total_bonus_countup =		ramaddr( $FFFFFF8E ) ; word ; the total points to be added due to various bonuses this frame in the end of level results screen
 Level_music =			ramaddr( $FFFFFF90 ) ; word
-
+Collected_special_ring_array =	ramaddr( $FFFFFF92 ) ; long ; each bit indicates a special stage entry ring in the current zone
 Saved2_status_secondary =	ramaddr( $FFFFFF96 ) ; byte
 Saved_apparent_zone_and_act =	ramaddr( $FFFFFF9A ) ; word
 Saved2_apparent_zone_and_act =	ramaddr( $FFFFFF9C ) ; word
 Blue_spheres_header_flag =	ramaddr( $FFFFFF9F ) ; byte ; 0 = SEGA GENESIS, 1 = SEGA MEGA DRIVE
+Blue_spheres_mode =		ramaddr( $FFFFFFA0 ) ; byte ; 0 = single stage, 1 = full game
+Blue_spheres_menu_flag = 	ramaddr( $FFFFFFA1 ) ; byte ; 0 = NO WAY!, 1 = normal, bit 7 set = entering a code
+Blue_spheres_current_stage =	ramaddr( $FFFFFFA2 ) ; 4 bytes ; the layout parts that make up the current stage
+Blue_spheres_current_level =	ramaddr( $FFFFFFA6 ) ; long ; number shown at the top of the full game menu
+Blue_spheres_option =		ramaddr( $FFFFFFAA ) ; byte ; 0 = level, 1 = start, 2 = code
+Blue_spheres_progress_flag =	ramaddr( $FFFFFFAB ) ; byte ; 0 = normal, -1 = disabled (single stage mode or using a code from single stage mode)
+Blue_spheres_difficulty =	ramaddr( $FFFFFFAC ) ; byte ; value currently displayed
+Blue_spheres_target_difficulty = ramaddr( $FFFFFFAD ) ; byte ; value read from the layout
 SK_alone_flag =			ramaddr( $FFFFFFAE ) ; word ; -1 if Sonic 3 isn't locked on
 Emerald_count =			ramaddr( $FFFFFFB0 ) ; word ; both chaos and super emeralds
 Chaos_emerald_count =		ramaddr( $FFFFFFB0 ) ; byte
 Super_emerald_count =		ramaddr( $FFFFFFB1 ) ; byte
 Collected_emeralds_array =	ramaddr( $FFFFFFB2 ) ; 7 bytes ; 1 byte per emerald, 0 = not collected, 1 = chaos emerald collected, 2 = grey super emerald, 3 = super emerald collected
+Emeralds_converted_flag =	ramaddr( $FFFFFFBA ) ; byte ; set if at least one emerald has been converted to a super emerald
 SK_special_stage_flag =		ramaddr( $FFFFFFBB ) ; byte ; set if a Sonic & Knuckles special stage is being run
 Next_extra_life_score =		ramaddr( $FFFFFFC0 ) ; long
 Next_extra_life_score_P2 =	ramaddr( $FFFFFFC4 ) ; long ; left over from Sonic 2
 
 Demo_mode_flag =		ramaddr( $FFFFFFD0 ) ; word
 Next_demo_number =		ramaddr( $FFFFFFD2 ) ; word
+Blue_spheres_stage_flag =	ramaddr( $FFFFFFD4 ) ; byte ; set if a Blue Sphere special stage is being run
 V_blank_cycles =		ramaddr( $FFFFFFD6 ) ; word ; the number of cycles between V-blanks
 Graphics_flags =		ramaddr( $FFFFFFD8 ) ; byte ; bit 7 set = English system, bit 6 set = PAL system
 Debug_mode_flag =		ramaddr( $FFFFFFDA ) ; word
 Level_select_flag =		ramaddr( $FFFFFFE0 ) ; byte
 Slow_motion_flag =		ramaddr( $FFFFFFE1 ) ; byte
 Debug_cheat_flag =		ramaddr( $FFFFFFE2 ) ; word ; set if the debug cheat's been entered
-
+Level_select_cheat_counter =	ramaddr( $FFFFFFE4 ) ; word ; progress entering S3 level select cheat
+Debug_mode_cheat_counter =	ramaddr( $FFFFFFE6 ) ; word ; progress entering S3 debug mode cheat
 Competition_mode =		ramaddr( $FFFFFFE8 ) ; word
 P1_character =			ramaddr( $FFFFFFEA ) ; byte ; 0 = Sonic, 1 = Tails, 2 = Knuckles
 P2_character =			ramaddr( $FFFFFFEB ) ; byte
@@ -651,12 +704,16 @@ ArtTile_ArtKos_Save_Extra             = $0454
 ; Universal locations.
 
 ; Universal (used on all standard levels).
-ArtTile_ArtNem_Powerups               = $04C4
-ArtTile_ArtUnc_Sonic                  = $0680
-ArtTile_ArtUnc_Tails_Tails            = $06B0
-ArtTile_ArtNem_Ring                   = $06BC
-ArtTile_ArtUnc_Shield                 = $079C
-ArtTile_ArtUnc_Shield_Sparks          = $07BB
+ArtTile_Monitors                      = $04C4
+ArtTile_CutsceneKnux                  = $04DA
+ArtTile_Player_1                      = $0680
+ArtTile_Player_2                      = $06A0
+ArtTile_Player_2_Tail                 = $06B0
+ArtTile_Ring                          = $06BC
+ArtTile_Shield                        = $079C
+ArtTile_Shield_Sparks                 = $07BB
+ArtTile_DashDust                      = $07E0
+ArtTile_DashDust_P2                   = $07F0
 
 ; Codepage for level select
 

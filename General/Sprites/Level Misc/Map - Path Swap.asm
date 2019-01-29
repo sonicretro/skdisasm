@@ -1,11 +1,11 @@
-Map_PathSwap:	dc.w word_1D06A-Map_PathSwap
-		dc.w word_1D084-Map_PathSwap
-		dc.w word_1D09E-Map_PathSwap
-		dc.w word_1D09E-Map_PathSwap
-		dc.w word_1D0B8-Map_PathSwap
-		dc.w word_1D0D2-Map_PathSwap
-		dc.w word_1D0EC-Map_PathSwap
-		dc.w word_1D0EC-Map_PathSwap
+Map_PathSwap_:	dc.w word_1D06A-Map_PathSwap_
+		dc.w word_1D084-Map_PathSwap_
+		dc.w word_1D09E-Map_PathSwap_
+		dc.w word_1D09E-Map_PathSwap_
+		dc.w word_1D0B8-Map_PathSwap_
+		dc.w word_1D0D2-Map_PathSwap_
+		dc.w word_1D0EC-Map_PathSwap_
+		dc.w word_1D0EC-Map_PathSwap_
 word_1D06A:	dc.w 4			; DATA XREF: ROM:0001D05Ao
 		dc.b  $E0,   5,	  0,   0, $FF, $F8
 		dc.b  $F0,   5,	  0,   0, $FF, $F8

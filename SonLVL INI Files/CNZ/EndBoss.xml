@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Boss" Image="main" Depth="5">
+  <Images>
+    <ImageFromMappings id="main">
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/End Boss.bin" />
+      <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - End Boss.asm" frame="0" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="arm">
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/End Boss.bin" />
+      <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - End Boss.asm" frame="1" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="ball">
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/End Boss.bin" />
+      <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - End Boss.asm" frame="4" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="head" priority="true">
+      <ArtFile filename="../General/Sprites/Robotnik/Ship.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Robotnik Ship.asm" frame="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="ship" priority="true">
+      <ArtFile filename="../General/Sprites/Robotnik/Ship.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Robotnik Ship.asm" frame="9" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="ball">
+        <Offset Y="20" />
+      </ImageRef>
+      <ImageRef image="main" />
+      <ImageRef image="arm">
+        <Offset X="-44" Y="8" />
+      </ImageRef>
+      <ImageRef image="arm">
+        <Offset Y="8" />
+      </ImageRef>
+      <ImageRef image="arm">
+        <Offset X="44" Y="8" />
+      </ImageRef>
+      <ImageRef image="head">
+        <Offset Y="-36" />
+      </ImageRef>
+      <ImageRef image="ship">
+        <Offset Y="-8" />
+      </ImageRef>
+    </DisplayOption>
+  </Display>
+</ObjDef>

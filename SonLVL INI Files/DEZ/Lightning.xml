@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Lightning" Image="img" Depth="5">
+  <Images>
+    <ImageFromMappings id="img">
+      <ArtFile filename="../Levels/DEZ/Nemesis Art/Misc Art.bin" offset="-1408" />
+      <MapFile type="ASM" filename="../Levels/DEZ/Misc Object Data/Map - Lightning.asm" frame="3" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+  <Properties>
+    <BitsProperty name="Delay" type="int" startbit="0" length="8" description="How many frames the object will wait between bursts." />
+  </Properties>
+</ObjDef>

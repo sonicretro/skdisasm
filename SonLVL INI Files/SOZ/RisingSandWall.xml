@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Rising Sand Wall" Image="img" Depth="5">
+  <Images>
+    <ImageFromMappings id="img">
+      <ArtFile filename="../Levels/SOZ/Nemesis Art/Misc Art.bin" offset="-3360" />
+      <MapFile type="ASM" filename="../Levels/SOZ/Misc Object Data/Map - Rising Sand Wall.asm" startpal="2" />
+    </ImageFromMappings>
+  </Images>
+  <Properties>
+    <BitsProperty name="Range" type="int" startbit="0" length="8" description="Horizontal distance at which the object will rise, in pixels." />
+  </Properties>
+</ObjDef>

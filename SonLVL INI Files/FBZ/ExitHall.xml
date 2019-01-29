@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Exit Hall">
+  <Images>
+    <ImageFromMappings id="img0">
+      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Exit Door.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Exit Hall.asm" frame="0" startpal="2" />
+    </ImageFromMappings>
+    <ImageFromMappings id="img1">
+      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Exit Hall.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Exit Hall.asm" frame="1" startpal="2" />
+    </ImageFromMappings>
+  </Images>
+  <Subtypes>
+    <Subtype id="00" name="Door Frame" image="img0" />
+    <Subtype id="04" name="Hallway Background" image="img1" />
+  </Subtypes>
+  <Display>
+    <DisplayOption depth="0">
+      <Condition property="SubType" value="0" />
+      <ImageRef image="img0" />
+    </DisplayOption>
+    <DisplayOption depth="5">
+      <Condition property="SubType" value="4" />
+      <ImageRef image="img1" />
+    </DisplayOption>
+  </Display>
+</ObjDef>

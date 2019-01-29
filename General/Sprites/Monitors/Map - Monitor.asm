@@ -1,15 +1,15 @@
-Map_Monitor:	dc.w word_1DBBA-Map_Monitor
-		dc.w word_1DBC2-Map_Monitor
-		dc.w word_1DBD0-Map_Monitor
-		dc.w word_1DBDE-Map_Monitor
-		dc.w word_1DBEC-Map_Monitor
-		dc.w word_1DBFA-Map_Monitor
-		dc.w word_1DC08-Map_Monitor
-		dc.w word_1DC16-Map_Monitor
-		dc.w word_1DC24-Map_Monitor
-		dc.w word_1DC32-Map_Monitor
-		dc.w word_1DC40-Map_Monitor
-		dc.w word_1DC4E-Map_Monitor
+Map_Monitor_:	dc.w word_1DBBA-Map_Monitor_
+		dc.w word_1DBC2-Map_Monitor_
+		dc.w word_1DBD0-Map_Monitor_
+		dc.w word_1DBDE-Map_Monitor_
+		dc.w word_1DBEC-Map_Monitor_
+		dc.w word_1DBFA-Map_Monitor_
+		dc.w word_1DC08-Map_Monitor_
+		dc.w word_1DC16-Map_Monitor_
+		dc.w word_1DC24-Map_Monitor_
+		dc.w word_1DC32-Map_Monitor_
+		dc.w word_1DC40-Map_Monitor_
+		dc.w word_1DC4E-Map_Monitor_
 word_1DBBA:	dc.w 1			; DATA XREF: ROM:0001DBA2o
 		dc.b  $F0,  $F,	  0,   0, $FF, $F0
 word_1DBC2:	dc.w 2			; DATA XREF: ROM:0001DBA2o

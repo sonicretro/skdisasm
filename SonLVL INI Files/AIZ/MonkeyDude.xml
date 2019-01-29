@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Monkey Dude" Image="main" Depth="5">
+  <Images>
+    <ImageFromMappings id="main">
+      <ArtFile filename="../General/Sprites/Monkey Dude/Monkey Dude.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Monkey Dude/Map - Monkey Dude.asm" frame="0" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="arm">
+      <ArtFile filename="../General/Sprites/Monkey Dude/Monkey Dude.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Monkey Dude/Map - Monkey Dude.asm" frame="3" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="coconut">
+      <ArtFile filename="../General/Sprites/Monkey Dude/Monkey Dude.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Monkey Dude/Map - Monkey Dude.asm" frame="6" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="coconut">
+        <Offset X="-24" Y="-32" />
+      </ImageRef>
+      <ImageRef image="arm">
+        <Offset X="-24" Y="-24" />
+      </ImageRef>
+      <ImageRef image="arm">
+        <Offset X="-23" Y="-16" />
+      </ImageRef>
+      <ImageRef image="arm">
+        <Offset X="-20" Y="-8" />
+      </ImageRef>
+      <ImageRef image="arm">
+        <Offset X="-14" Y="-2" />
+      </ImageRef>
+      <ImageRef image="main" />
+    </DisplayOption>
+  </Display>
+</ObjDef>

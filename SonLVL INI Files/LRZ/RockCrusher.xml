@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Rock Crusher" Depth="3">
+  <Images>
+    <ImageFromMappings id="main" priority="true">
+      <ArtFile filename="../Levels/LRZ/KosinskiM Art/Rock Crusher.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/LRZ/Misc Object Data/Map - Rock Crusher.asm" startpal="5" frame="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="spike" priority="true">
+      <ArtFile filename="../Levels/LRZ/KosinskiM Art/Rock Crusher.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/LRZ/Misc Object Data/Map - Rock Crusher.asm" startpal="5" frame="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="piston" priority="true">
+      <ArtFile filename="../Levels/LRZ/KosinskiM Art/Rock Crusher.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/LRZ/Misc Object Data/Map - Rock Crusher.asm" startpal="5" frame="2" />
+    </ImageFromMappings>
+  </Images>
+  <ImageSets>
+    <ImageSet id="img">
+      <ImageRef image="piston">
+        <Offset X="-36" Y="-36" />
+      </ImageRef>
+      <ImageRef image="piston">
+        <Offset X="-28" Y="-36" />
+      </ImageRef>
+      <ImageRef image="piston">
+        <Offset X="36" Y="-36" />
+      </ImageRef>
+      <ImageRef image="piston">
+        <Offset X="28" Y="-36" />
+      </ImageRef>
+      <ImageRef image="spike">
+        <Offset X="-36" Y="28" />
+      </ImageRef>
+      <ImageRef image="spike">
+        <Offset X="-28" Y="28" />
+      </ImageRef>
+      <ImageRef image="spike">
+        <Offset X="36" Y="28" />
+      </ImageRef>
+      <ImageRef image="spike">
+        <Offset X="28" Y="28" />
+      </ImageRef>
+      <ImageRef image="main" />
+    </ImageSet>
+  </ImageSets>
+  <Subtypes>
+    <Subtype id="00" name="Sonic's Path">
+      <ImageSetRef set="img" />
+    </Subtype>
+    <Subtype id="02" name="Knuckles' Path">
+      <ImageSetRef set="img" />
+    </Subtype>
+  </Subtypes>
+</ObjDef>

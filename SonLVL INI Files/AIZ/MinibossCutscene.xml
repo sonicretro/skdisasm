@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Miniboss Cutscene" Image="main" Depth="4">
+  <Images>
+    <ImageFromMappings id="main" priority="true">
+      <ArtFile filename="../Levels/AIZ/Nemesis Art/Miniboss.bin" />
+      <MapFile type="ASM" filename="../Levels/AIZ/Misc Object Data/Map - Miniboss.asm" frame="0" startpal="5" />
+    </ImageFromMappings>
+    <ImageFromMappings id="fire" priority="true">
+      <ArtFile filename="../Levels/AIZ/Nemesis Art/Miniboss.bin" />
+      <MapFile type="ASM" filename="../Levels/AIZ/Misc Object Data/Map - Miniboss.asm" frame="1" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="main" />
+      <ImageRef image="fire">
+        <Offset Y="32" />
+      </ImageRef>
+    </DisplayOption>
+  </Display>
+</ObjDef>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Miniboss" Image="main" Depth="5">
+  <Images>
+    <ImageFromMappings id="main" priority="true">
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/Miniboss.bin" />
+      <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - Miniboss.asm" frame="0" startpal="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="spinner" priority="true">
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/Miniboss.bin" />
+      <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - Miniboss.asm" frame="7" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="main" />
+      <ImageRef image="spinner">
+        <Offset Y="44" />
+      </ImageRef>
+    </DisplayOption>
+  </Display>
+</ObjDef>
