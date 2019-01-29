@@ -20,6 +20,7 @@ verbose_errors = False
 
 systemPlatform = platform.system()
 
+# FIXME Make a more extensive test for Python environments that are compatible with the available executables
 if systemPlatform == "MSYS_NT-10.0":
 	systemPlatform = "Windows";
 
