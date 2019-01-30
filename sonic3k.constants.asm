@@ -454,10 +454,10 @@ Scroll_force_positions =	ramaddr( $FFFFF676 ) ; byte ; if this is set scrolling 
 Scroll_forced_X_pos =		ramaddr( $FFFFF678 ) ; word
 Scroll_forced_Y_pos =		ramaddr( $FFFFF67C ) ; word
 
-Nem_decomp_queue =		ramaddr( $FFFFF680 ) ; $60 bytes ; 6 bytes per entry, first longword is source location and next word is VRAM destination
-Nem_decomp_source =		ramaddr( $FFFFF680 ) ; long ; the compressed data location for the first entry in the queue
-Nem_decomp_destination =	ramaddr( $FFFFF684 ) ; word ; destination in VRAM for the first entry in the queue
-Nem_decomp_vars =		ramaddr( $FFFFF6E0 ) ; $20 bytes ; various variables used by the Nemesis decompression queue processor
+NemDec_queue =		ramaddr( $FFFFF680 ) ; $60 bytes ; 6 bytes per entry, first longword is source location and next word is VRAM destination
+NemDec_source =		ramaddr( $FFFFF680 ) ; long ; the compressed data location for the first entry in the queue
+NemDec_destination =	ramaddr( $FFFFF684 ) ; word ; destination in VRAM for the first entry in the queue
+NemDec_vars =		ramaddr( $FFFFF6E0 ) ; $20 bytes ; various variables used by the Nemesis decompression queue processor
 Nem_write_routine =		ramaddr( $FFFFF6E0 ) ; long ; points to either Nem_PCD_WriteRowToVDP or Nem_PCD_WriteRowToVDP_XOR
 Nem_repeat_count =		ramaddr( $FFFFF6E4 ) ; long ; stored repeat count for the current palette index
 Nem_palette_index =		ramaddr( $FFFFF6E8 ) ; long ; the current palette index
