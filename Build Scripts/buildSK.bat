@@ -4,16 +4,16 @@ pushd "%~dp0\.."
 
 REM // make sure we can write to the file skbuilt.bin
 REM // also make a backup to skbuilt.prev.bin
-IF NOT EXIST skbuilt.bin goto LABLNOCOPY
+IF NOT EXIST skbuilt.bin goto dontMoveSkbuiltBin
 IF EXIST skbuilt.prev.bin del skbuilt.prev.bin
-IF EXIST skbuilt.prev.bin goto LABLNOCOPY
+IF EXIST skbuilt.prev.bin goto dontMoveSkbuiltBin
 move /Y skbuilt.bin skbuilt.prev.bin
-IF EXIST skbuilt.bin goto LABLERROR2
+IF EXIST skbuilt.bin goto s3kBinAccessDeniedError
 
-:LABLNOCOPY
+:dontMoveSkbuiltBin
 REM // delete some intermediate assembler output just in case
 IF EXIST sonic3k.p del sonic3k.p
-IF EXIST sonic3k.p goto LABLERROR1
+IF EXIST sonic3k.p goto s3kPAccessDeniedError
 
 REM // clear the output window
 REM cls
@@ -29,30 +29,30 @@ REM // allow the user to choose to output error messages to file by supplying th
 IF "%1"=="-logerrors" ( "AS\Win32\asw.exe" -xx -q -c -D Sonic3_Complete=0 -E -A -L sonic3k.asm ) ELSE "AS\Win32\asw.exe" -xx -q -c -D Sonic3_Complete=0 -A -L sonic3k.asm
 
 REM // if there were errors, a log file is produced
-IF "%1"=="-logerrors" ( IF EXIST sonic3k.log goto LABLERROR3 )
+IF "%1"=="-logerrors" ( IF EXIST sonic3k.log goto displayErrorMessage )
 
 REM // combine the assembler output into a rom
 IF EXIST sonic3k.p "AS\Win32\s3p2bin" sonic3k.p skbuilt.bin sonic3k.h
 
 REM // done -- pause if we seem to have failed, then exit
-IF NOT EXIST sonic3k.p goto LABLPAUSE
-IF EXIST skbuilt.bin goto LABLEXIT
+IF NOT EXIST sonic3k.p goto pauseAndExit
+IF EXIST skbuilt.bin goto exit
 
-:LABLPAUSE
+:pauseAndExit
 pause
-goto LABLEXIT
+goto exit
 
-:LABLERROR1
+:s3kPAccessDeniedError
 echo Failed to build because write access to sonic3k.p was denied.
 pause
-goto LABLEXIT
+goto exit
 
-:LABLERROR2
+:s3kBinAccessDeniedError
 echo Failed to build because write access to skbuilt.bin was denied.
 pause
-goto LABLEXIT
+goto exit
 
-:LABLERROR3
+:displayErrorMessage
 REM // display a noticeable message
 echo.
 echo ***************************************************************************
@@ -63,6 +63,6 @@ echo ***************************************************************************
 echo.
 pause
 
-:LABLEXIT
+:exit
 popd
 exit /b
