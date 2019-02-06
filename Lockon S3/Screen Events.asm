@@ -610,7 +610,7 @@ sub_239E90:
 		move.w	(Camera_Y_pos_BG_copy).w,d0
 		move.w	(Camera_X_pos_copy).w,d3
 
-TwoP_ApplyDeformation:		       ;39E9C
+S3_ApplyDeformation2:
 		move.w	(a4)+,d2
 		smi	d4
 		bpl.s	loc_239EA6
@@ -621,11 +621,11 @@ loc_239EA6:
 		bmi.s	loc_239EB8
 		addq.w	#2,a5
 		tst.b	d4
-		beq.s	TwoP_ApplyDeformation
+		beq.s	S3_ApplyDeformation2
 		subq.w	#2,a5
 		add.w	d2,d2
 		adda.w	d2,a5
-		bra.s	TwoP_ApplyDeformation
+		bra.s	S3_ApplyDeformation2
 ; ---------------------------------------------------------------------------
 
 loc_239EB8:
@@ -900,7 +900,7 @@ loc_23A04A:
 		rts
 ; ---------------------------------------------------------------------------
 
-sub_23A080:
+S3_Adjust_BGDuringLoop:
 		move.w	(a1),d1
 		move.w	d0,(a1)+
 		sub.w	d1,d0
@@ -923,6 +923,33 @@ loc_23A094:
 loc_23A09A:
 		add.w	d0,(a1)+
 		rts
+; ---------------------------------------------------------------------------
+AIZ1_WaterFGDeformDelta:
+		dc.w   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  0,  0,  0
+		dc.w   0,  0,  0,  0,  0,  0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+		dc.w  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  0,  0,  0,  0
+		dc.w   0,  0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1
+		dc.w   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  0,  0,  0
+		dc.w   0,  0,  0,  0,  0,  0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+		dc.w  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  0,  0,  0,  0
+		dc.w   0,  0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1
+		dc.w   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  0,  0,  0
+		dc.w   0,  0,  0,  0,  0,  0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+		dc.w  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  0,  0,  0,  0
+		dc.w   0,  0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1
+		dc.w   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  0,  0,  0
+		dc.w   0,  0,  0,  0,  0,  0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+		dc.w  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  0,  0,  0,  0
+		dc.w   0,  0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1
+		dc.w   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  0,  0,  0
+		dc.w   0,  0,  0,  0,  0,  0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+AIZ1_WaterBGDeformDelta:
+		dc.w   0,  0, -1, -1, -1, -1, -1, -1,  0,  0,  0,  1,  1,  1,  1,  1
+		dc.w   1,  0,  0,  0, -1, -1, -1, -1, -1, -1,  0,  0,  0,  1,  1,  1
+		dc.w   1,  1,  1,  0,  0,  0, -1, -1, -1, -1, -1, -1,  0,  0,  0,  1
+		dc.w   1,  1,  1,  1,  1,  0, -1, -2, -2, -1,  0,  2,  2,  2,  2,  0
+		dc.w   0,  0, -1, -1, -1, -1, -1, -1,  0,  0,  0,  1,  1,  1,  1,  1
+		dc.w   1,  0,  0,  0, -1, -1, -1, -1, -1, -1,  0,  0,  0,  1,  1,  1
 ; ---------------------------------------------------------------------------
 
 Comp_ScreenInit:
@@ -959,9 +986,9 @@ Comp_ScreenEvent:
 		lsr.w	#1,d2
 		lea	($FFFFEEB4).w,a1
 		move.w	(Camera_X_pos_copy).w,d0
-		jsr	sub_23A080(pc)
+		jsr	S3_Adjust_BGDuringLoop(pc)
 		move.w	(Camera_X_pos_P2_copy).w,d0
-		jmp	sub_23A080(pc)
+		jmp	S3_Adjust_BGDuringLoop(pc)
 ; ---------------------------------------------------------------------------
 
 CGZ_ScreenEvent:
@@ -972,24 +999,24 @@ CGZ_ScreenEvent:
 		lsr.w	#1,d2
 		lea	($FFFFEED2).w,a1
 		move.w	(Camera_Y_pos_copy).w,d0
-		jsr	sub_23A080(pc)
+		jsr	S3_Adjust_BGDuringLoop(pc)
 		move.w	(Camera_Y_pos_P2_copy).w,d0
-		jmp	sub_23A080(pc)
+		jmp	S3_Adjust_BGDuringLoop(pc)
 ; ---------------------------------------------------------------------------
 
 ALZ_BackgroundInit:
 		jsr	ALZ_BackgroundEvent(pc)
-		bra.s	TwoP_BackgroundInit
+		bra.s	Comp_BackgroundInit
 ; ---------------------------------------------------------------------------
 
 BPZ_BackgroundInit:
 		jsr	BPZ_BackgroundEvent(pc)
-		bra.s	TwoP_BackgroundInit
+		bra.s	Comp_BackgroundInit
 ; ---------------------------------------------------------------------------
 
 DPZ_BackgroundInit:
 		jsr	DPZ_BackgroundEvent(pc)
-		bra.s	TwoP_BackgroundInit
+		bra.s	Comp_BackgroundInit
 ; ---------------------------------------------------------------------------
 
 CGZ_BackgroundInit:
@@ -1008,13 +1035,13 @@ CGZ_BackgroundInit:
 		divu.w	d0,d1
 		move.w	d1,($FFFFEEDA).w
 		jsr	CGZ_BackgroundEvent(pc)
-		bra.s	TwoP_BackgroundInit
+		bra.s	Comp_BackgroundInit
 ; ---------------------------------------------------------------------------
 
 EMZ_BackgroundInit:
 		jsr	EMZ_BackgroundEvent(pc)
 
-TwoP_BackgroundInit:
+Comp_BackgroundInit:
 		move.l	(V_scroll_value_P2).w,(V_scroll_value_P2_copy).w
 		moveq	#0,d0
 		move.b	(Current_zone_and_act).w,d0
@@ -1058,14 +1085,14 @@ loc_23A764:
 		move.w	(Camera_Y_pos_BG_copy).w,d0
 		move.w	(Camera_X_pos_copy).w,d3
 		moveq	#$6B,d1
-		jsr	TwoP_ApplyDeformation(pc)
+		jsr	S3_ApplyDeformation2(pc)
 		movea.l a6,a4
 		lea	($FFFFA900).w,a5
 		move.w	($FFFFEE74).w,d0
 		subq.w	#4,d0
 		move.w	(Camera_X_pos_P2_copy).w,d3
 		moveq	#$73,d1
-		jsr	TwoP_ApplyDeformation(pc)
+		jsr	S3_ApplyDeformation2(pc)
 		jmp	loc_23A04A(pc)
 ; ---------------------------------------------------------------------------
 
@@ -1357,19 +1384,15 @@ sub_23A9BE:
 		move.w	d0,2(a1)
 		rts
 ; ---------------------------------------------------------------------------
-Comp_ScreenInitArray:	dc.w  $3FF, $1FF, $1F0,	  $C, $100, $100,   $F,	 $40
-						dc.w  $1FF, $3FF, $3F0,	 $1C,  $80, $200,  $1F,	 $20
-						dc.w  $3FF, $1FF, $1F0,	  $C, $100, $100,   $F,	 $40
-						dc.w  $3FF,  $FF,  $F0,	   4, $100, $100,   $F,	 $40
-						dc.w  $3FF, $1FF, $1F0,	  $C, $100, $100,   $F,	 $40
-ALZ_BGDeformArray:     dc.w   $18,    8,    8,	  8,	8,    8,  $2E,	  6,   $D,$803F,$7FFF
-BPZ_DeformArray:     dc.w   $88,  $16,	 $A,  $28,  $10,    8,$7FFF
-CGZ_DeformArray:     dc.w   $50,    8,	$10,  $10,$7FFF
-EMZ_DeformArray:     dc.w   $10,  $10,	$10,  $10,    8,   $C,	$24,  $38,  $20,$7FFF
-; ---------------------------------------------------------------------------
-;
-; AIZ STUFF
-;
+Comp_ScreenInitArray:	dc.w  $3FF, $1FF, $1F0,   $C, $100, $100,   $F,  $40
+			dc.w  $1FF, $3FF, $3F0,  $1C,  $80, $200,  $1F,  $20
+			dc.w  $3FF, $1FF, $1F0,   $C, $100, $100,   $F,  $40
+			dc.w  $3FF,  $FF,  $F0,    4, $100, $100,   $F,  $40
+			dc.w  $3FF, $1FF, $1F0,   $C, $100, $100,   $F,  $40
+ALZ_BGDeformArray:	dc.w  $18,   8,   8,   8,   8,   8, $2E,   6,  $D,$803F,$7FFF
+BPZ_DeformArray:	dc.w  $88, $16,  $A, $28, $10,   8,$7FFF
+CGZ_DeformArray:	dc.w  $50,   8, $10, $10,$7FFF
+EMZ_DeformArray:	dc.w  $10, $10, $10, $10,   8,  $C, $24, $38, $20,$7FFF
 ; ---------------------------------------------------------------------------
 
 AIZ_TreeReveal:
@@ -1428,13 +1451,13 @@ loc_23AC0C:
 		clr.w	(a0)
 		rts
 ; ---------------------------------------------------------------------------
-AIZ_TreeRevealArray:	 dc.b	0,  0,	0,  0,	0,  0,	0,  0,	0,  0,	0,  0,	0,  0,	0,  0
-		dc.b   0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1,  0,  0,  0,  0,  0
-		dc.b   0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  0,  0
-		dc.b   0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  0
-		dc.b   0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0
-		dc.b   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1
-		dc.b   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1
+AIZ_TreeRevealArray:	dc.b  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+			dc.b  0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0
+			dc.b  0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0
+			dc.b  0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0
+			dc.b  0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0
+			dc.b  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+			dc.b  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
 ; ---------------------------------------------------------------------------
 
 AIZ1_IntroDeform:
@@ -1653,64 +1676,12 @@ loc_23B1B0:
 locret_23B1C4:
 		rts
 ; ---------------------------------------------------------------------------
-AIZ1_IntroDrawArray:	 dc.w  $3E0,  $10,  $10,  $10,	$10,  $10,  $10,  $10,	$10,$7FFF
-AIZ1_IntroDeformArray:	   dc.w	 $3E0,	  4,	4,    4,    4,	  4,	4,    4,    4,	  4,	4,    4,    4,	  4,	4,    4
-		dc.w	 4,    4,    4,	   4,	 4,    4,    4,	   4,	 4,    4,    4,	   4,	 4,    4,    4,	   4
-		dc.w	 4,    4,    4,	   4,$7FFF
-AIZ1_BGDrawArray:     dc.w  $220,$7FFF
-AIZ1_DeformArray:     dc.w   $D0,  $20,	 $30,  $30,  $10,  $10,	 $10,$800D,   $F,    6,	  $E,  $50,  $20,$7FFF
-AIZ_FlameVScroll:     dc.b   0,$FF,$FE,$FB,$F8,$F6,$F3,$F2,$F1,$F2,$F3,$F6,$F9,$FB,$FE,$FF ;
-; ---------------------------------------------------------------------------
-AIZ1_WaterFGDeformDelta:     dc.w     1,    1,	  1,	1,    1,    1,	  1,	1,    1,    1,	  1,	1,    0,    0,	  0,	0
-		dc.w	 0,    0,    0,	   0,	 0,    0,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF
-		dc.w $FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,	 0,    0,    0,	   0
-		dc.w	 0,    0,    0,	   0,	 0,    0,    1,	   1,	 1,    1,    1,	   1,	 1,    1,    1,	   1
-		dc.w	 1,    1,    1,	   1,	 1,    1,    1,	   1,	 1,    1,    1,	   1,	 0,    0,    0,	   0
-		dc.w	 0,    0,    0,	   0,	 0,    0,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF
-		dc.w $FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,	 0,    0,    0,	   0
-		dc.w	 0,    0,    0,	   0,	 0,    0,    1,	   1,	 1,    1,    1,	   1,	 1,    1,    1,	   1
-		dc.w	 1,    1,    1,	   1,	 1,    1,    1,	   1,	 1,    1,    1,	   1,	 0,    0,    0,	   0
-		dc.w	 0,    0,    0,	   0,	 0,    0,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF
-		dc.w $FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,	 0,    0,    0,	   0
-		dc.w	 0,    0,    0,	   0,	 0,    0,    1,	   1,	 1,    1,    1,	   1,	 1,    1,    1,	   1
-		dc.w	 1,    1,    1,	   1,	 1,    1,    1,	   1,	 1,    1,    1,	   1,	 0,    0,    0,	   0
-		dc.w	 0,    0,    0,	   0,	 0,    0,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF
-		dc.w $FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,	 0,    0,    0,	   0
-		dc.w	 0,    0,    0,	   0,	 0,    0,    1,	   1,	 1,    1,    1,	   1,	 1,    1,    1,	   1
-		dc.w	 1,    1,    1,	   1,	 1,    1,    1,	   1,	 1,    1,    1,	   1,	 0,    0,    0,	   0
-		dc.w	 0,    0,    0,	   0,	 0,    0,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF
-; ---------------------------------------------------------------------------
-AIZ1_WaterBGDeformDelta:     dc.w     0,    0,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,    0,    0,	  0,	1,    1,    1,	  1,	1
-		dc.w	 1,    0,    0,	   0,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,    0,	   0,	 0,    1,    1,	   1
-		dc.w	 1,    1,    1,	   0,	 0,    0,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,	 0,    0,    0,	   1
-		dc.w	 1,    1,    1,	   1,	 1,    0,$FFFF,$FFFE,$FFFE,$FFFF,    0,	   2,	 2,    2,    2,	   0
-		dc.w	 0,    0,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,	 0,    0,    0,	   1,	 1,    1,    1,	   1
-		dc.w	 1,    0,    0,	   0,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,    0,	   0,	 0,    1,    1,	   1
-		dc.w	 1,    1,    1,	   0,	 0,    0,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,	 0,    0,    0,	   1
-		dc.w	 1,    1,    1,	   1,	 1,    0,$FFFF,$FFFE,$FFFE,$FFFF,    0,	   2,	 2,    2,    2,	   0
-		dc.w	 0,    0,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,	 0,    0,    0,	   1,	 1,    1,    1,	   1
-		dc.w	 1,    0,    0,	   0,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,    0,	   0,	 0,    1,    1,	   1
-		dc.w	 1,    1,    1,	   0,	 0,    0,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,	 0,    0,    0,	   1
-		dc.w	 1,    1,    1,	   1,	 1,    0,$FFFF,$FFFE,$FFFE,$FFFF,    0,	   2,	 2,    2,    2,	   0
-		dc.w	 0,    0,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,	 0,    0,    0,	   1,	 1,    1,    1,	   1
-		dc.w	 1,    0,    0,	   0,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,    0,	   0,	 0,    1,    1,	   1
-; ---------------------------------------------------------------------------
-ALZ_AIZ2_BGDeformDelta:	    dc.w $FFFE,	   1,	 2,    2,$FFFF,	   2,	 2,    1,    2,$FFFF,$FFFE,$FFFE,$FFFE,	   1,$FFFF,$FFFF
-		dc.w $FFFF,    0,$FFFE,	   0,	 0,    0,$FFFE,	   0,$FFFE,    2,    0,$FFFE,	 2,    2,$FFFF,$FFFE
-		dc.w $FFFE,    1,    2,	   2,$FFFF,    2,    2,	   1,	 2,$FFFF,$FFFE,$FFFE,$FFFE,    1,$FFFF,$FFFF
-		dc.w $FFFF,    0,$FFFE,	   0,	 0,    0,$FFFE,	   0,$FFFE,    2,    0,$FFFE,	 2,    2,$FFFF,$FFFE
-		dc.w $FFFE,    1,    2,	   2,$FFFF,    2,    2,	   1,	 2,$FFFF,$FFFE,$FFFE,$FFFE,    1,$FFFF,$FFFF
-		dc.w $FFFF,    0,$FFFE,	   0,	 0,    0,$FFFE,	   0,$FFFE,    2,    0,$FFFE,	 2,    2,$FFFF,$FFFE
-		dc.w $FFFE,    1,    2,	   2,$FFFF,    2,    2,	   1,	 2,$FFFF,$FFFE,$FFFE,$FFFE,    1,$FFFF,$FFFF
-		dc.w $FFFF,    0,$FFFE,	   0,	 0,    0,$FFFE,	   0,$FFFE,    2,    0,$FFFE,	 2,    2,$FFFF,$FFFE
-		dc.w $FFFE,    1,    2,	   2,$FFFF,    2,    2,	   1,	 2,$FFFF,$FFFE,$FFFE,$FFFE,    1,$FFFF,$FFFF
-		dc.w $FFFF,    0,$FFFE,	   0,	 0,    0,$FFFE,	   0,$FFFE,    2,    0,$FFFE,	 2,    2,$FFFF,$FFFE
-		dc.w $FFFE,    1,    2,	   2,$FFFF,    2,    2,	   1,	 2,$FFFF,$FFFE,$FFFE,$FFFE,    1,$FFFF,$FFFF
-		dc.w $FFFF,    0,$FFFE,	   0,	 0,    0,$FFFE,	   0,$FFFE,    2,    0,$FFFE,	 2,    2,$FFFF,$FFFE
-		dc.w $FFFE,    1,    2,	   2,$FFFF,    2,    2,	   1,	 2,$FFFF,$FFFE,$FFFE,$FFFE,    1,$FFFF,$FFFF
-		dc.w $FFFF,    0,$FFFE,	   0,	 0,    0,$FFFE,	   0,$FFFE,    2,    0,$FFFE,	 2,    2,$FFFF,$FFFE
-		dc.w $FFFE,    1,    2,	   2,$FFFF,    2,    2,	   1,	 2,$FFFF,$FFFE,$FFFE,$FFFE,    1,$FFFF,$FFFF
-		dc.w $FFFF,    0,$FFFE,	   0,	 0,    0,$FFFE,	   0,$FFFE,    2,    0,$FFFE,	 2,    2,$FFFF,$FFFE
+AIZ1_IntroDrawArray:	dc.w $3E0, $10, $10, $10, $10, $10, $10, $10, $10, $7FFF
+AIZ1_IntroDeformArray:	dc.w $3E0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
+			dc.w 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, $7FFF
+AIZ1_BGDrawArray:	dc.w $220, $7FFF
+AIZ1_DeformArray:	dc.w $D0, $20, $30, $30, $10, $10, $10, $800D, $F, 6, $E, $50, $20, $7FFF
+AIZ_FlameVScroll:	dc.b 0, $FF, $FE, $FB, $F8, $F6, $F3, $F2, $F1, $F2, $F3, $F6, $F9, $FB, $FE, $FF
 ; ---------------------------------------------------------------------------
 
 AIZ2_Deform:
@@ -1857,78 +1828,91 @@ loc_23B75E:
 locret_23B772:
 		rts
 ; ---------------------------------------------------------------------------
-AIZ2_BGDeformMake:     dc.b 1
-		dc.b $12,$2A
-		dc.b 3
-		dc.b $10,$14,$28,$2C
-		dc.b 3
-		dc.b  $E,$16,$26,$2E
-		dc.b 4
-		dc.b   0, $C,$18,$24,$30
-		dc.b 3
-		dc.b   2, $A,$1A,$22
-		dc.b 3
-		dc.b   4,  8,$1C,$20
-		dc.b 1
-		dc.b   6,$1E
-		dc.b $FF
-		dc.b 0
-; ---------------------------------------------------------------------------
-AIZ2_FGDeformDelta:	dc.w	 0,    0,    1,	   1,	 0,    0,    0,	   0,	 1,    0,    0,	   0,	 0,    1,    0,	   0
-		dc.w	 0,    0,    0,	   0,	 0,    0,    0,	   0,	 0,    1,    0,	   0,	 1,    1,    0,	   0
-		dc.w	 0,    0,    1,	   1,	 0,    0,    0,	   0,	 1,    0,    0,	   0,	 0,    1,    0,	   0
-		dc.w	 0,    0,    0,	   0,	 0,    0,    0,	   0,	 0,    1,    0,	   0,	 1,    1,    0,	   0
-		dc.w	 0,    0,    1,	   1,	 0,    0,    0,	   0,	 1,    0,    0,	   0,	 0,    1,    0,	   0
-		dc.w	 0,    0,    0,	   0,	 0,    0,    0,	   0,	 0,    1,    0,	   0,	 1,    1,    0,	   0
-		dc.w	 0,    0,    1,	   1,	 0,    0,    0,	   0,	 1,    0,    0,	   0,	 0,    1,    0,	   0
-		dc.w	 0,    0,    0,	   0,	 0,    0,    0,	   0,	 0,    1,    0,	   0,	 1,    1,    0,	   0
-		dc.w	 0,    0,    1,	   1,	 0,    0,    0,	   0,	 1,    0,    0,	   0,	 0,    1,    0,	   0
-		dc.w	 0,    0,    0,	   0,	 0,    0,    0,	   0,	 0,    1,    0,	   0,	 1,    1,    0,	   0
-		dc.w	 0,    0,    1,	   1,	 0,    0,    0,	   0,	 1,    0,    0,	   0,	 0,    1,    0,	   0
-		dc.w	 0,    0,    0,	   0,	 0,    0,    0,	   0,	 0,    1,    0,	   0,	 1,    1,    0,	   0
-		dc.w	 0,    0,    1,	   1,	 0,    0,    0,	   0,	 1,    0,    0,	   0,	 0,    1,    0,	   0
-		dc.w	 0,    0,    0,	   0,	 0,    0,    0,	   0,	 0,    1,    0,	   0,	 1,    1,    0,	   0
-		dc.w	 0,    0,    1,	   1,	 0,    0,    0,	   0,	 1,    0,    0,	   0,	 0,    1,    0,	   0
-		dc.w	 0,    0,    0,	   0,	 0,    0,    0,	   0,	 0,    1,    0,	   0,	 1,    1,    0,	   0
-; ---------------------------------------------------------------------------
-AIZ2_BGDeformArray:	dc.w   $10,  $20,  $38,	 $58,  $28,  $40,  $38,	 $18,  $18,  $90,  $48,	 $10,  $18,  $20,  $38,	 $58
-		dc.w   $28,  $40,  $38,	 $18,  $18,  $90,  $48,	 $10,$7FFF
-Pal_AIZBattleship:     dc.w	0, $EEE, $2AE,	$6E,  $4C,  $EE,  $88, $224,  $CA,  $66,  $42,	$20, $CAA, $866, $644,	$44
-Pal_AIZBossSmall:     dc.w  $EEE, $CAA, $E26, $222,  $EE,    0,	   8, $2AE,  $4C,    6,	 $20, $C68, $A24, $622
-AIZBattleShip_BobbingMotion:	 dc.b	4,  4,	3,  3,	2,  1,	1,  0,	0,  0,	1,  1,	2,  3,	3,  4
-AIZBattleship_BombScript:     dc.w   $20,$3F5C
-		dc.w   $20,$3F2C
-		dc.w   $20,$3F5C
-		dc.w   $20,$3F2C
-		dc.w   $20,$3F5C
-		dc.w   $38,$3F2C
-		dc.w   $20,$3EDC
-		dc.w   $20,$3EAC
-		dc.w   $20,$3EDC
-		dc.w   $20,$3EAC
-		dc.w   $20,$3EDC
-		dc.w   $38,$3EAC
-		dc.w   $20,$3E5C
-		dc.w   $20,$3E2C
-		dc.w   $20,$3E5C
-		dc.w   $20,$3E2C
-		dc.w   $20,$3E5C
-		dc.w   $38,$3E2C
-		dc.w   $40,$3DEC
-		dc.w   $40,$3DEC
-		dc.w   $40,$3DEC
+AIZ2_BGDeformArray:
+		dc.w $10, $20, $38, $58, $28, $40, $38, $18, $18, $90, $48, $10, $18
+		dc.w $20, $38, $58, $28, $40, $38, $18, $18, $90, $48, $10, $7FFF
+AIZ2_BGDeformMake:
+		dc.b    1, $12, $2A
+		dc.b    3, $10, $14, $28, $2C
+		dc.b    3,  $E, $16, $26, $2E
+		dc.b    4,   0,  $C, $18, $24, $30
+		dc.b    3,   2,  $A, $1A, $22
+		dc.b    3,   4,   8, $1C, $20
+		dc.b    1,   6, $1E
+		dc.b  $FF,   0
+AIZ2_FGDeformDelta:
+		dc.w   0,  0,  1,  1,  0,  0,  0,  0,  1,  0,  0,  0,  0,  1,  0,  0
+		dc.w   0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  1,  1,  0,  0
+		dc.w   0,  0,  1,  1,  0,  0,  0,  0,  1,  0,  0,  0,  0,  1,  0,  0
+		dc.w   0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  1,  1,  0,  0
+		dc.w   0,  0,  1,  1,  0,  0,  0,  0,  1,  0,  0,  0,  0,  1,  0,  0
+		dc.w   0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  1,  1,  0,  0
+		dc.w   0,  0,  1,  1,  0,  0,  0,  0,  1,  0,  0,  0,  0,  1,  0,  0
+		dc.w   0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  1,  1,  0,  0
+		dc.w   0,  0,  1,  1,  0,  0,  0,  0,  1,  0,  0,  0,  0,  1,  0,  0
+		dc.w   0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  1,  1,  0,  0
+		dc.w   0,  0,  1,  1,  0,  0,  0,  0,  1,  0,  0,  0,  0,  1,  0,  0
+		dc.w   0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  1,  1,  0,  0
+		dc.w   0,  0,  1,  1,  0,  0,  0,  0,  1,  0,  0,  0,  0,  1,  0,  0
+		dc.w   0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  1,  1,  0,  0
+		dc.w   0,  0,  1,  1,  0,  0,  0,  0,  1,  0,  0,  0,  0,  1,  0,  0
+		dc.w   0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  1,  1,  0,  0
+ALZ_AIZ2_BGDeformDelta:
+		dc.w  -2,  1,  2,  2, -1,  2,  2,  1,  2, -1, -2, -2, -2,  1, -1, -1
+		dc.w  -1,  0, -2,  0,  0,  0, -2,  0, -2,  2,  0, -2,  2,  2, -1, -2
+		dc.w  -2,  1,  2,  2, -1,  2,  2,  1,  2, -1, -2, -2, -2,  1, -1, -1
+		dc.w  -1,  0, -2,  0,  0,  0, -2,  0, -2,  2,  0, -2,  2,  2, -1, -2
+		dc.w  -2,  1,  2,  2, -1,  2,  2,  1,  2, -1, -2, -2, -2,  1, -1, -1
+		dc.w  -1,  0, -2,  0,  0,  0, -2,  0, -2,  2,  0, -2,  2,  2, -1, -2
+		dc.w  -2,  1,  2,  2, -1,  2,  2,  1,  2, -1, -2, -2, -2,  1, -1, -1
+		dc.w  -1,  0, -2,  0,  0,  0, -2,  0, -2,  2,  0, -2,  2,  2, -1, -2
+		dc.w  -2,  1,  2,  2, -1,  2,  2,  1,  2, -1, -2, -2, -2,  1, -1, -1
+		dc.w  -1,  0, -2,  0,  0,  0, -2,  0, -2,  2,  0, -2,  2,  2, -1, -2
+		dc.w  -2,  1,  2,  2, -1,  2,  2,  1,  2, -1, -2, -2, -2,  1, -1, -1
+		dc.w  -1,  0, -2,  0,  0,  0, -2,  0, -2,  2,  0, -2,  2,  2, -1, -2
+		dc.w  -2,  1,  2,  2, -1,  2,  2,  1,  2, -1, -2, -2, -2,  1, -1, -1
+		dc.w  -1,  0, -2,  0,  0,  0, -2,  0, -2,  2,  0, -2,  2,  2, -1, -2
+		dc.w  -2,  1,  2,  2, -1,  2,  2,  1,  2, -1, -2, -2, -2,  1, -1, -1
+		dc.w  -1,  0, -2,  0,  0,  0, -2,  0, -2,  2,  0, -2,  2,  2, -1, -2
+Pal_AIZBattleship:	dc.w    0,$EEE,$2AE, $6E, $4C, $EE, $88,$224, $CA, $66, $42, $20,$CAA,$866,$644, $44
+Pal_AIZBossSmall:	dc.w $EEE,$CAA,$E26,$222, $EE,   0,   8,$2AE, $4C,   6, $20,$C68,$A24,$622
+AIZBattleShip_BobbingMotion:	dc.b   4,  4,  3,  3,  2,  1,  1,  0,  0,  0,  1,  1,  2,  3,  3,  4
+AIZBattleship_BombScript:
+		dc.w     $20, $3F5C
+		dc.w     $20, $3F2C
+		dc.w     $20, $3F5C
+		dc.w     $20, $3F2C
+		dc.w     $20, $3F5C
+		dc.w     $38, $3F2C
+		dc.w     $20, $3EDC
+		dc.w     $20, $3EAC
+		dc.w     $20, $3EDC
+		dc.w     $20, $3EAC
+		dc.w     $20, $3EDC
+		dc.w     $38, $3EAC
+		dc.w     $20, $3E5C
+		dc.w     $20, $3E2C
+		dc.w     $20, $3E5C
+		dc.w     $20, $3E2C
+		dc.w     $20, $3E5C
+		dc.w     $38, $3E2C
+		dc.w     $40, $3DEC
+		dc.w     $40, $3DEC
+		dc.w     $40, $3DEC
 		dc.w   $FFFF
 ; ---------------------------------------------------------------------------
-AIZBombExplodeDat:     dc.w	0,$FFC4,    0,	 $A ; X offset, Y offset, animation number, animation delay
-		dc.w	 0,$FFF4, $101,	   9
-		dc.w $FFFC,$FFCC,    0,	   8
-		dc.w	$C,$FFFC, $101,	   7
-		dc.w $FFF4,$FFFC, $101,	   5
-		dc.w	 8,$FFDC,    0,	   4
-		dc.w $FFF8,$FFE4,    0,	   2
-		dc.w	 0,$FFF4,    0,	   0
+AIZBombExplodeDat:
+		dc.w      0, $FFC4,     0,    $A ; X offset, Y offset, animation number, animation delay
+		dc.w      0, $FFF4,  $101,     9
+		dc.w  $FFFC, $FFCC,     0,     8
+		dc.w     $C, $FFFC,  $101,     7
+		dc.w  $FFF4, $FFFC,  $101,     5
+		dc.w      8, $FFDC,     0,     4
+		dc.w  $FFF8, $FFE4,     0,     2
+		dc.w      0, $FFF4,     0,     0
 ; ---------------------------------------------------------------------------
-AIZMakeTreeScript:     dc.w	0, $280
+AIZMakeTreeScript:
+		dc.w     0, $280
 		dc.w   $32, $380
 		dc.w   $8E, $280
 		dc.w  $103, $380
@@ -1959,25 +1943,10 @@ Map_AIZ2BGTree: include "Levels/AIZ/Misc Object Data/Map - Act 2 Background Tree
 
 Map_AIZ2BossSmall:include "Levels/AIZ/Misc Object Data/Map - Act 2 Boss Small.asm"
 ; ---------------------------------------------------------------------------
-HCZ1_BGDeformArray:	dc.w $40
-		dc.w 8
-		dc.w 8
-		dc.w 5
-		dc.w 5
-		dc.w 6
-		dc.w $F0
-		dc.w 6
-		dc.w 5
-		dc.w 5
-		dc.w 8
-		dc.w 8
-		dc.w $30
-		dc.w $80C0
-		dc.w $7FFF
+HCZ1_BGDeformArray	dc.w $40, 8, 8, 5, 5, 6, $F0, 6, 5, 5, 8, 8, $30, $80C0, $7FFF
 ; ---------------------------------------------------------------------------
-HCZ2_BGDeformArray:	dc.w	 8,    8,  $90,	 $10,	 8,  $30,  $18,	   8
-		dc.w	 8,  $A8,  $30,	 $18,	 8,    8,  $A8,	 $30
-		dc.w   $18,    8,    8,	 $B0,  $10,    8,$7FFF
+HCZ2_BGDeformArray:	dc.w 8, 8, $90, $10, 8, $30, $18, 8, 8, $A8, $30, $18
+			dc.w 8, 8, $A8, $30, $18, 8, 8, $B0, $10, 8, $7FFF
 HCZ2_BGDeformIndex:	dc.b   3, $A
 		dc.b $14,$1E
 		dc.b $2C,  2
@@ -2032,17 +2001,15 @@ loc_23C9AA:
 		move.w	d0,-4(a1)
 		rts
 ; ---------------------------------------------------------------------------
-MGZ1_BGDeformArray:	dc.w   $10,    4,    4,	   8,	 8,    8,   $D,	 $13
-		dc.w	 8,    8,    8,	   8,  $18,$7FFF
+MGZ1_BGDeformArray:	dc.w $10, 4, 4, 8, 8, 8, $D, $13, 8, 8, 8, 8, $18, $7FFF
 ; ---------------------------------------------------------------------------
-MGZ2_QuakeEventArray:	  dc.w	$780, $7C0, $580, $600, $5A0, $7E0 ; Player X boundaries, Player Y boundaries, Level size reset val
-		dc.w $31C0,$3200, $1C0, $280, $1E0,$2F60
-		dc.w $3440,$3480, $680, $700, $6A0,$32C0
-MGZ2_ChunkEventArray:	  dc.w	$F68, $F78, $500, $580, $F00, $500 ; Player X boundaries, Player Y boundaries, Screen redraw area
-		dc.w $3680,$3700, $2F0, $380,$3700, $280
-		dc.w $3000,$3080, $770, $800,$3080, $700
-; ---------------------------------------------------------------------------
-MGZ2_ScreenRedrawArray:	    dc.w   $40,	   3
+MGZ2_QuakeEventArray:	dc.w   $780,  $7C0,  $580,  $600,  $5A0,  $7E0  ; Player X boundaries, Player Y boundaries, Level size reset val
+			dc.w  $31C0, $3200,  $1C0,  $280,  $1E0, $2F60
+			dc.w  $3440, $3480,  $680,  $700,  $6A0, $32C0
+MGZ2_ChunkEventArray:	dc.w   $F68,  $F78,  $500,  $580,  $F00,  $500  ; Player X boundaries, Player Y boundaries, Screen redraw area
+			dc.w  $3680, $3700,  $2F0,  $380, $3700,  $280
+			dc.w  $3000, $3080,  $770,  $800, $3080,  $700
+MGZ2_ScreenRedrawArray:	dc.w   $40,    3
 		dc.w   $50,    3
 		dc.w   $50,    4
 		dc.w   $60,    4
@@ -2065,34 +2032,32 @@ MGZ2_ScreenRedrawArray:	    dc.w   $40,	   3
 		dc.w   $C0,    3
 		dc.w   $D0,    2
 		dc.w   $E0,    1
-MGZ2_ChunkReplaceArray:	    dc.w  $100, $500
+MGZ2_ChunkReplaceArray:	dc.w  $100, $500
 		dc.w  $180, $580
 		dc.w  $200, $600
 		dc.w  $280, $680
 		dc.w  $300, $700
 		dc.w  $380, $780
-		dc.w	 0, $800
-		dc.w	 0, $880
-		dc.w	 0, $900
-		dc.w	 0, $980
-		dc.w	 0, $A00
-		dc.w	 0, $A80
-		dc.w	 0, $B00
-		dc.w	 0, $B80
-		dc.w	 0, $C00
-		dc.w	 0, $C80
-		dc.w	 0, $D00
-		dc.w	 0, $D80
-		dc.w	 0, $E00
-		dc.w	 0, $E80
-		dc.w	 0, $F00
-		dc.w	 0, $F80
-		dc.w	 0,$1000
+		dc.w     0, $800
+		dc.w     0, $880
+		dc.w     0, $900
+		dc.w     0, $980
+		dc.w     0, $A00
+		dc.w     0, $A80
+		dc.w     0, $B00
+		dc.w     0, $B80
+		dc.w     0, $C00
+		dc.w     0, $C80
+		dc.w     0, $D00
+		dc.w     0, $D80
+		dc.w     0, $E00
+		dc.w     0, $E80
+		dc.w     0, $F00
+		dc.w     0, $F80
+		dc.w     0,$1000
 		dc.w   $80, $480
-; ---------------------------------------------------------------------------
-MGZ2_CollapseScrollDelay:     dc.w    $A,  $10,	   2,	 8,   $E,    6,	   0,	$C,  $12,    4
-MGZ2_FGVScrollArray:	 dc.w $3CA0,  $20,  $20,  $20,	$20,  $20,  $20,  $20
-		dc.w   $20,$7FFF
+MGZ2_CollapseScrollDelay:	dc.w    $A,  $10,    2,    8,   $E,    6,    0,   $C,  $12,    4
+MGZ2_FGVScrollArray:		dc.w $3CA0,  $20,  $20,  $20,  $20,  $20,  $20,  $20,  $20,$7FFF
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -2209,16 +2174,12 @@ loc_23D2B4:
 		dbf	d0,loc_23D2B4
 		rts
 ; ---------------------------------------------------------------------------
-MGZ2_BGDrawArray:     dc.w $200
-		dc.w $7FFF
-MGZ2_BGDeformArray:	dc.w   $10,  $10,  $10,	 $10,  $10,  $18,    8,	 $10
-		dc.w	 8,    8,  $10,	   8,	 8,    8,    5,	 $2B
-		dc.w	$C,    6,    6,	   8,	 8,  $18,  $D8,$7FFF
-MGZ2_BGDeformIndex:	dc.w   $1C,  $18,  $1A,	  $C,	 6,  $14,    2,	 $10
-		dc.w   $16,  $12,   $A,	   0,	 8,    4,   $E
-MGZ2_BGDeformOffset:	 dc.w $FFFB,$FFF8,    9,   $A,	  2,$FFF4,    3,  $10
-		dc.w $FFFF,   $D,$FFF1,	   6,$FFF5,$FFFC,   $E,$FFF8
-		dc.w   $10,    8,    0,$FFF8,  $10,    8,    0
+MGZ2_BGDrawArray:	dc.w $200, $7FFF
+MGZ2_BGDeformArray:	dc.w $10, $10, $10, $10, $10, $18, 8, $10, 8, 8, $10, 8
+			dc.w 8, 8, 5, $2B, $C, 6, 6, 8, 8, $18, $D8, $7FFF
+MGZ2_BGDeformIndex:	dc.w  $1C, $18, $1A,  $C,   6, $14,   2, $10, $16, $12,  $A,   0,   8,   4,  $E
+MGZ2_BGDeformOffset:	dc.w   -5,  -8,   9,  $A,   2, -$C,   3, $10,  -1,  $D, -$F,   6, -$B,  -4,  $E
+			dc.w   -8, $10,   8,   0,  -8, $10,   8,   0
 ; ---------------------------------------------------------------------------
 
 ICZ1_SetIntroPal:
@@ -2266,8 +2227,7 @@ sub_23DED6:
 		move.w	#$402,(a1)
 		rts
 ; ---------------------------------------------------------------------------
-ICZ1_IntroBGDeformArray:     dc.w   $44,   $C,	 $B,   $D,  $18,  $50,	  2,	6
-		dc.w	 8,  $10,  $18,	 $20,  $28,$7FFF
+ICZ1_IntroBGDeformArray:dc.w $44, $C, $B, $D, $18, $50, 2, 6, 8, $10, $18, $20, $28, $7FFF
 ; ---------------------------------------------------------------------------
 
 ICZ2_OutDeform:
@@ -2437,12 +2397,8 @@ sub_23E21E:
 		move.l	#$2000600,(a1)
 		rts
 ; ---------------------------------------------------------------------------
-ICZ2_OutBGDeformArray:	   dc.w $5A
-		dc.w $26
-		dc.w $8030
-		dc.w $7FFF
-ICZ2_InBGDeformArray:	  dc.w	$1A0,  $40,  $20,  $18,	 $40,	 8,    8,  $18
-		dc.w $7FFF
+ICZ2_OutBGDeformArray:	dc.w $5A, $26, $8030, $7FFF
+ICZ2_InBGDeformArray:	dc.w $1A0, $40, $20, $18, $40, 8, 8, $18, $7FFF
 ; ---------------------------------------------------------------------------
 
 LBZ1_CheckLayoutMod:
@@ -2478,9 +2434,9 @@ loc_23E48A:
 		move.w	d2,($FFFFEED2).w
 		lsr.w	#1,d2
 		jmp	LBZ1_LayoutModBranch-2(pc,d2.w)
+; ---------------------------------------------------------------------------
 
 LBZ1_LayoutModBranch:
-; ---------------------------------------------------------------------------
 		bra.s	LBZ1_LayoutMod1
 ; ---------------------------------------------------------------------------
 		bra.s	LBZ1_LayoutMod2
@@ -2583,18 +2539,16 @@ loc_23E536:
 		dbf	d1,loc_23E536
 		rts
 ; ---------------------------------------------------------------------------
-LBZ1_FGVScrollArray:	 dc.w $3B60,  $10,  $10,  $10,	$10,  $10,  $10,  $10
-		dc.w   $10,  $10,  $10,$7FFF
-LBZ1_LayoutModRange:	 dc.w $13E0,$16A0, $100, $580
-		dc.w $2160,$2520,    0, $700
-		dc.w $3A60,$3BA0,    0, $600
-		dc.w $3DE0,$3FA0,    0, $300
-
-LBZ1_LayoutModExitRange:	dc.w $1376,$170A
-		dc.w $20F6,$258A
-		dc.w $39F6,$3C0A
-		dc.w $3D76,$400A
-LBZ1_CollapseScrollSpeed:     dc.w  $1EE, $1F2,	 $C7, $1B3, $1B7, $198,	  $E, $139
+LBZ1_FGVScrollArray:	dc.w $3B60, $10, $10, $10, $10, $10, $10, $10, $10, $10, $10, $7FFF
+LBZ1_LayoutModRange:	dc.w $13E0,$16A0, $100, $580
+			dc.w $2160,$2520,    0, $700
+			dc.w $3A60,$3BA0,    0, $600
+			dc.w $3DE0,$3FA0,    0, $300
+LBZ1_LayoutModExitRange:dc.w $1376,$170A
+			dc.w $20F6,$258A
+			dc.w $39F6,$3C0A
+			dc.w $3D76,$400A
+LBZ1_CollapseScrollSpeed:dc.w  $1EE, $1F2,  $C7, $1B3, $1B7, $198,   $E, $139
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -2643,19 +2597,12 @@ loc_23E79A:
 		addq.w	#7,(a1)
 		rts
 ; ---------------------------------------------------------------------------
-LBZ2_BGDeformArray:	dc.w   $C0,  $40,  $38,	 $18,  $28,  $10,  $10,	 $10
-		dc.w   $18,  $40,  $20,	 $10,  $20,  $70,  $30,$80E0
-		dc.w   $20,$7FFF
-LBZ2_DEBGDeformArray:	  dc.w	 $38,  $18,  $28,  $10,	 $10,  $10,  $18,  $40
-		dc.w   $38,  $18,  $28,	 $10,  $10,  $10,  $18,	 $40
-		dc.w   $20,  $10,  $20,	 $70,  $60,  $10,$805F,$7FFF
-LBZ2_CloudDeformArray:	   dc.w	  $16,	 $E,   $A,  $14,   $C,	  6,  $18,  $10
-		dc.w   $12,    2,    8,	   4,	 0
-LBZ2_BGUWDeformRange:	  dc.w 7
-		dc.w 1
-		dc.w 3
-		dc.w 1
-		dc.w 7
+LBZ2_BGDeformArray:	dc.w $C0, $40, $38, $18, $28, $10, $10, $10, $18, $40, $20, $10, $20
+			dc.w $70, $30, $80E0, $20, $7FFF
+LBZ2_DEBGDeformArray:	dc.w $38, $18, $28, $10, $10, $10, $18, $40, $38, $18, $28, $10, $10
+			dc.w $10, $18, $40, $20, $10, $20, $70, $60, $10, $805F, $7FFF
+LBZ2_CloudDeformArray:	dc.w  $16,  $E,  $A, $14,  $C,   6, $18, $10, $12,   2,   8,   4,   0
+LBZ2_BGUWDeformRange:	dc.w    7,   1,   3,   1,   7
 ; ---------------------------------------------------------------------------
 
 Gumball_ScreenInit:
@@ -2710,9 +2657,7 @@ Gumball_VScroll:
 		move.w	d1,$E(a1)
 		rts
 ; ---------------------------------------------------------------------------
-Gumball_VScrollArray:		dc.w $C0
-		dc.w $80
-		dc.w $7FFF
+Gumball_VScrollArray:dc.w $C0, $80, $7FFF
 ; ---------------------------------------------------------------------------
 
 Gumball_BackgroundInit:
