@@ -18,15 +18,21 @@ verbose_errors = False
 
 # Paths to build tools, depending on OS
 
-if platform.system() == "Windows":
+systemPlatform = platform.system()
+
+# FIXME Make a more extensive test for Python environments that are compatible with the available executables
+if systemPlatform == "MSYS_NT-10.0":
+	systemPlatform = "Windows";
+
+if systemPlatform == "Windows":
 	asBinary = "AS/Win32/asw.exe";
 	s3p2binBinary = "AS/Win32/s3p2bin.exe";
 
-elif platform.system() == "Darwin": # Osx
+elif systemPlatform == "Darwin": # Osx
 	asBinary = "AS/Osx/asl";
 	s3p2binBinary = "AS/Osx/s3p2bin";
 
-elif platform.system() == "Linux":
+elif systemPlatform == "Linux":
 	asBinary = "AS/Linux/asl";
 	s3p2binBinary = "AS/Linux/s3p2bin";
 
