@@ -1,4 +1,4 @@
-Map_SStageSonic:	dc.w word_ABE2C-Map_SStageSonic
+		dc.w word_ABE2C-Map_SStageSonic
 		dc.w word_ABE2E-Map_SStageSonic
 		dc.w word_ABE3C-Map_SStageSonic
 		dc.w word_ABE4A-Map_SStageSonic
@@ -11,7 +11,6 @@ Map_SStageSonic:	dc.w word_ABE2C-Map_SStageSonic
 		dc.w word_ABECA-Map_SStageSonic
 		dc.w word_ABED2-Map_SStageSonic
 PLC_SStageSonic:dc.w word_ABE2C-PLC_SStageSonic
-
 		dc.w word_ABEDA-PLC_SStageSonic
 		dc.w word_ABEE0-PLC_SStageSonic
 		dc.w word_ABEE6-PLC_SStageSonic
@@ -24,7 +23,6 @@ PLC_SStageSonic:dc.w word_ABE2C-PLC_SStageSonic
 		dc.w word_ABF1A-PLC_SStageSonic
 		dc.w word_ABF1E-PLC_SStageSonic
 word_ABE2C:	dc.w 0
-
 word_ABE2E:	dc.w 2
 		dc.b  $DD,  $F,	  0,   0, $FF, $F0
 		dc.b  $FD,   8,	  0, $10, $FF, $F2

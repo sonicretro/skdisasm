@@ -9,7 +9,7 @@
 	dbglistobj Obj_Spikes,				Map_Spikes,			   0,   0, make_art_tile($49C,0,0)
 	dbglistobj Obj_Toxomister,			Map_Toxomister,			   0,   0, make_art_tile($562,0,0)
 	dbglistobj Obj_Fireworm,			Map_FirewormSegments,		   0,   0, make_art_tile($512,3,0)
-	dbglistobj Obj_LRZExplodingRock,		Map_LRZExplodingRock,		   0,   0, make_art_tile($530,0,0)
+	dbglistobj Obj_LRZExplodingRock,		Map_Iwamodoki,			   0,   0, make_art_tile($530,0,0)
 	dbglistobj Obj_LRZSinkingRock,			Map_LRZSinkingRock,		   0,   1, make_art_tile($090,2,0)
 	dbglistobj Obj_LRZDoor,				Map_LRZDoor,			   0,   1, make_art_tile($090,2,0)
 	dbglistobj Obj_LRZSwingingSpikeBall,		Map_LRZSwingingSpikeBall,	 $88,   3, make_art_tile($40D,0,1)

@@ -1,8 +1,8 @@
-		dc.w byte_162CA-Ani_Tails2P_Tail
-		dc.w byte_162CD-Ani_Tails2P_Tail
-		dc.w byte_162CD-Ani_Tails2P_Tail
-		dc.w byte_162D2-Ani_Tails2P_Tail
-byte_162CA:	dc.b  $20,   0,	$FF	
-byte_162CD:	dc.b	7,   1,	  2,   3, $FF 
-byte_162D2:	dc.b  $FC,   4,	  5,   6, $FF
-	even
+		dc.w AniTails2P_Tail00-AniTails2P_Tail
+		dc.w AniTails2P_Tail01-AniTails2P_Tail
+		dc.w AniTails2P_Tail01-AniTails2P_Tail
+		dc.w AniTails2P_Tail03-AniTails2P_Tail
+AniTails2P_Tail00:dc.b  $20,   0, $FF
+AniTails2P_Tail01:dc.b    7,   1,   2,   3, $FF
+AniTails2P_Tail03:dc.b  $FC,   4,   5,   6, $FF
+		even

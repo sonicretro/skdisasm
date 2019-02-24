@@ -91,7 +91,7 @@
 #split	0x000577DA,0x000577FA,Levels\SSZ\Palettes\Death Egg.bin
 #split	0x000592BE,0x000592EE,General\Ending\Palettes\Water Cycle.bin
 #split	0x0005B16E,0x0005B18E,General\Ending\Palettes\Sky.bin
-#split	0x0005CBCA,0x0005CC4A,General\Sprites\Continue\Screen.bin
+#split	0x0005CBCA,0x0005CC4A,General\Sprites\Continue\Palette.bin
 #split	0x0005FBE2,0x0005FC1E,General\Ending\Palettes\Super Knuckles End Pose.bin
 #split	0x00060A9A,0x00060ABA,General\Ending\Palettes\Small Plane.bin
 #split	0x00060ABA,0x00060ADA,General\Ending\Palettes\SK Logo.bin
@@ -128,7 +128,7 @@
 #split	0x0007299A,0x000729BA,Levels\LBZ\Palettes\Miniboss.bin
 #split	0x00073886,0x000738A6,Levels\LBZ\Palettes\Final Boss 1.bin
 #split	0x000738A6,0x000738C6,Levels\LBZ\Palettes\Ending.bin
-#split	0x000741FE,0x00074262,Levels\LBZ\Palettes\End Boss.bin
+#split	0x000741FE,0x0007421E,Levels\LBZ\Palettes\End Boss.bin
 #split	0x000751AA,0x000751CA,Levels\LBZ\Palettes\Final Boss 2.bin
 #split	0x00075F28,0x00075F48,Levels\MHZ\Palettes\Miniboss.bin
 #split	0x000769D4,0x000769F4,Levels\MHZ\Palettes\End Boss.bin
@@ -151,7 +151,7 @@
 #split	0x000A89BC,0x000A89DC,Levels\Misc\Palettes\Unknown 2.bin
 #split	0x000A89DC,0x000A8A3C,Levels\Misc\Palettes\Unknown 3.bin
 #split	0x000A8A3C,0x000A8A7C,General\Sprites\Sonic\Palettes\SonicAndTails.bin
-#split	0x000A8A7C,0x000A8AFC,General\Sprites\Sonic\Palettes\\SonicAndTailsS2.bin
+#split	0x000A8A7C,0x000A8AFC,General\Sprites\S2Menu\Palettes\Main.bin
 #split	0x000A8AFC,0x000A8B1C,General\Sprites\Knuckles\Palettes\Main.bin
 #split	0x000A8B1C,0x000A8B7C,Levels\AIZ\Palettes\Intro.bin
 #split	0x000A8B7C,0x000A8BDC,Levels\AIZ\Palettes\Main.bin
@@ -299,7 +299,7 @@
 #split	0x0018F984,0x00190AC4,General\Sprites\Shields\Bubble Shield.bin
 
 /* Nemesis-Compressed Art */
-#split	0x00004D2A,0x00004F8C,General\Title\Nemesis Art\SK Screen Text.bin
+#split	0x00004D2A,0x00004F8C,General\Title\Nemesis Art\S3 Screen Text.bin
 #split	0x00039A00,0x00039A40,General\Sprites\Snowboard\Snowboard Dust.bin
 #split	0x0005CD66,0x0005D3C6,General\Sprites\Continue\Player Sprites.bin
 #split	0x0005D3C6,0x0005D788,General\Sprites\Continue\Player Icons.bin
@@ -320,7 +320,7 @@
 #split	0x000D7C7A,0x000D7EEC,General\Sprites\Robotnik\FBZ Robotnik Head.bin
 #split	0x000D7EEC,0x000D8302,General\Sprites\Robotnik\FBZ Robotnik Stand.bin
 #split	0x000D8302,0x000D8766,General\Sprites\Robotnik\FBZ Robotnik Run.bin
-#split	0x000DB818,0x000DBDDE,Levels\FBZ\Nemesis Art\Miniboss Unused.bin
+#split	0x000DB818,0x000DBDDE,Levels\FBZ\Nemesis Art\S3 Miniboss.bin
 #split	0x000DBDDE,0x000DC2E0,Levels\FBZ\Nemesis Art\Act 2 Subboss.bin
 #split	0x000DC2E0,0x000DC6C2,Levels\FBZ\Nemesis Art\End Boss.bin
 #split	0x000DD976,0x000DD990,General\Sprites\Signpost\Stub.bin
@@ -366,7 +366,7 @@
 #split	0x0019200A,0x001927FE,General\Sprites\Enemy Misc\Explosion.bin
 #split	0x001927FE,0x00192AEE,General\Sprites\Level Misc\SpikesSprings.bin
 #split	0x00192AEE,0x00192D2A,General\Sprites\Ring\Ring.bin
-#split	0x00192D2A,0x00192F6E,General\Sprites\Enemy Misc\Enemy points.bin
+#split	0x00192D2A,0x00192F6E,General\Sprites\Enemy Misc\EnemyPtsStarpost.bin
 #split	0x00192F6E,0x001931D6,General\Sprites\Animals\Seal.bin
 #split	0x001931D6,0x00193308,General\Sprites\Animals\Blue Flicky.bin
 #split	0x00193308,0x00193456,General\Sprites\Animals\Chicken.bin
@@ -812,7 +812,7 @@
 /* Enigma Compressed plane mappings */
 #split	0x000AEDB0,0x000AEED0,General\Special Stage\Enigma Map\BG.bin
 #split	0x000AEF54,0x000B07B8,General\Special Stage\Enigma Map\Layout.bin
-#split	0x000CAB54,0x000CAD00,General\Sprites\S2Menu\2P Options Enigma.bin
+#split	0x000CAB54,0x000CAD00,General\Sprites\S2Menu\Enigma Map\2P Options.bin
 #split	0x000CBA68,0x000CBB32,General\Title\Enigma Map\SK SEGA.bin
 #split	0x000CBB32,0x000CBCE0,General\Title\Enigma Map\SK SonicKnux Frame 1.bin
 #split	0x000CBCE0,0x000CBF3E,General\Title\Enigma Map\SK SonicKnux Frame 2.bin
@@ -921,7 +921,7 @@
 #split	0x001FCA86,0x001FCB8A,Levels\Pachinko\Ring Pos\1.bin
 #split	0x001FCB96,0x001FCB9C,Levels\Slots\Ring Pos\1.bin
 #split	0x001FCD82,0x001FCE58,Levels\LRZ\Ring Pos\3.bin
-#split	0x001FCE58,0x001FCEE8,Levels\HPZ\Ring Pos\1.bin
+#split	0x001FCE58,0x001FCEE2,Levels\HPZ\Ring Pos\1.bin
 #split	0x001FCF24,0x001FCF2A,Levels\DEZ\Ring Pos\3.bin
 
 /* Start Positions*/
@@ -1024,6 +1024,9 @@
 #split	0x001E3D94,0x001E3D98,Levels\HPZ\Start Location\Knuckles\Special Stage.bin
 
 /* Collision */
+#split	0x00096000,0x00096100,Levels\Misc\Angles.bin
+#split	0x00096100,0x00097100,Levels\Misc\Height Maps.bin
+#split	0x00097100,0x00098100,Levels\Misc\Height Maps Rotated.bin
 #split	0x000981C0,0x000987C0,Levels\FBZ\Collision\1.bin
 #split	0x000987C0,0x00098DC0,Levels\MHZ\Collision\1.bin
 #split	0x00098DC0,0x000993C0,Levels\Misc\Unknown Collision.bin
@@ -1038,7 +1041,3 @@
 #split	0x0009C3C0,0x0009C9C0,Levels\Slots\Collision\1.bin
 #split	0x0009C9C0,0x0009CFC0,Levels\LRZ\Collision\3.bin
 #split	0x0009CFC0,0x0009D5C0,Levels\HPZ\Collision\1.bin
-
-#split	0x00096000,0x00096100,Levels\Misc\angles.bin
-#split	0x00096100,0x00097100,Levels\Misc\Height Maps.bin
-#split	0x00097100,0x00098100,Levels\Misc\Height Maps Rotated.bin

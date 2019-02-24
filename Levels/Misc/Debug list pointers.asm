@@ -22,8 +22,8 @@
 		dc.w Debug_SSZ-DebugOffs
 		dc.w Debug_DEZ1-DebugOffs
 		dc.w Debug_DEZ2-DebugOffs
-		dc.w Debug_DDZ-DebugOffs
-		dc.w DebugDEZBoss-DebugOffs
+		dc.w Debug_DDZ1-DebugOffs
+		dc.w Debug_DDZ2-DebugOffs
 		dc.w Debug_Ending-DebugOffs
 		dc.w Debug_Ending-DebugOffs
 		dc.w Debug_ALZ-DebugOffs

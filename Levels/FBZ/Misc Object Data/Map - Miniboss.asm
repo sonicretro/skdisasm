@@ -108,5 +108,3 @@ word_6FCC8:	dc.w 6
 word_6FCEE:	dc.w 2			
 		dc.b  $F8,   5,	  0, $4C, $FF, $F0
 		dc.b  $F8,   5,	  8, $4C,   0,	 0
-word_6FCFC:	dc.w   $560,  $660, $2900, $2C00 
-		dc.w   $5E0,  $5E0, $2900, $2900

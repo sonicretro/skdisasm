@@ -340,7 +340,7 @@ PLC_SStageTailstails:	ds.b $EB34
 Map_Sonic2P:	ds.b $1AA
 
 PLC_Sonic2P:	ds.b $102
-Map_Tails_2P:	ds.b $1BE
+Map_Tails2P:	ds.b $1BE
 Map_Tails2P_Tail:ds.b $9A
 PLC_Tails2P:	ds.b $10E
 DPLC_Tails2P_Tail:ds.b $5E
@@ -476,7 +476,7 @@ DAC_AA_Data:			DSDACBINCLUDE $68E
 DAC_AB_Data:			DSDACBINCLUDE $904
 DAC_AC_Data:			DSDACBINCLUDE $581
 DAC_AD_AE_Data:			DSDACBINCLUDE $1BC
-DAC_AF_B0_Data:			DSDACBINCLUDE $36C
+DAC_AF_Data:			DSDACBINCLUDE $36C
 
 		ds.b $135C
 

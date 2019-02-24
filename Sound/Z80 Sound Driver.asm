@@ -256,8 +256,8 @@ DAC_AB_Setup:			DAC_Setup $0D,DAC_AB_Data
 DAC_AC_Setup:			DAC_Setup $06,DAC_AC_Data
 DAC_AD_Setup:			DAC_Setup $10,DAC_AD_AE_Data
 DAC_AE_Setup:			DAC_Setup $18,DAC_AD_AE_Data
-DAC_AF_Setup:			DAC_Setup $09,DAC_AF_B0_Data
-DAC_B0_Setup:			DAC_Setup $12,DAC_AF_B0_Data
+DAC_AF_Setup:			DAC_Setup $09,DAC_AF_Data
+DAC_B0_Setup:			DAC_Setup $12,DAC_AF_Data
 DAC_B1_Setup:			DAC_Setup $18,DAC_B1_Data
 DAC_B2_Setup:			DAC_Setup $16,DAC_B2_B3_Data
 DAC_B3_Setup:			DAC_Setup $20,DAC_B2_B3_Data
@@ -867,8 +867,8 @@ DAC_Banks:
 		db		zmake68kBank(DAC_A0_Data)            ,zmake68kBank(DAC_A1_Data)            ,zmake68kBank(DAC_A2_Data)            ,zmake68kBank(DAC_A3_Data)
 		db		zmake68kBank(DAC_A4_Data)            ,zmake68kBank(DAC_A5_Data)            ,zmake68kBank(DAC_A6_Data)            ,zmake68kBank(DAC_A7_Data)
 		db		zmake68kBank(DAC_A8_Data)            ,zmake68kBank(DAC_A9_Data)            ,zmake68kBank(DAC_AA_Data)            ,zmake68kBank(DAC_AB_Data)
-		db		zmake68kBank(DAC_AC_Data)            ,zmake68kBank(DAC_AD_AE_Data)         ,zmake68kBank(DAC_AD_AE_Data)         ,zmake68kBank(DAC_AF_B0_Data)
-		db		zmake68kBank(DAC_AF_B0_Data)         ,zmake68kBank(DAC_B1_Data)            ,zmake68kBank(DAC_B2_B3_Data)         ,zmake68kBank(DAC_B2_B3_Data)
+		db		zmake68kBank(DAC_AC_Data)            ,zmake68kBank(DAC_AD_AE_Data)         ,zmake68kBank(DAC_AD_AE_Data)         ,zmake68kBank(DAC_AF_Data)
+		db		zmake68kBank(DAC_AF_Data)            ,zmake68kBank(DAC_B1_Data)            ,zmake68kBank(DAC_B2_B3_Data)         ,zmake68kBank(DAC_B2_B3_Data)
 		db		zmake68kBank(DAC_B4_C1_C2_C3_C4_Data),zmake68kBank(DAC_B5_Data)            ,zmake68kBank(DAC_B6_Data)            ,zmake68kBank(DAC_B7_Data)
 		db		zmake68kBank(DAC_B8_B9_Data)         ,zmake68kBank(DAC_B8_B9_Data)         ,zmake68kBank(DAC_BA_Data)            ,zmake68kBank(DAC_BB_Data)
 		db		zmake68kBank(DAC_BC_Data)            ,zmake68kBank(DAC_BD_Data)            ,zmake68kBank(DAC_BE_Data)            ,zmake68kBank(DAC_BF_Data)

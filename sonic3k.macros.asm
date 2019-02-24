@@ -2,6 +2,10 @@
 ; nameless temporary symbols should NOT be used inside macros because they can interfere with the surrounding code
 ; normal labels should be used instead (which automatically become local to the macro)
 
+; sign-extends a 32-bit integer to 64-bit
+; all RAM addresses are run through this function to allow them to work in both 16-bit and 32-bit addressing modes
+ramaddr function x,(-(x&$80000000)<<1)|x
+
 ; makes a VDP command
 vdpComm function addr,type,rwd,(((type&rwd)&3)<<30)|((addr&$3FFF)<<16)|(((type&rwd)&$FC)<<2)|((addr&$C000)>>14)
 
@@ -113,6 +117,13 @@ tiles_to_bytes function addr,((addr&$7FF)<<5)
 ; function to calculate the location of a tile in plane mappings with a width of 40 cells
 planeLocH28 function col,line,(($50 * line) + (2 * col))
 
+; macro for generating water palette transition tables
+watertransheader macro {INTLABEL}
+__LABEL__ label *
+	; Number of entries in list minus one
+	dc.w (((__LABEL___End - __LABEL__ - 2) / 2) - 1)
+	endm
+
 ; macro for generating level select strings
 levselstr macro str
 	save
@@ -120,6 +131,19 @@ levselstr macro str
 	dc.b strlen(str)-1, str
 	restore
     endm
+
+; codepage for level select
+	save
+	codepage LEVELSELECT
+	charset '0','9', 16
+	charset 'A','Z', 30
+	charset 'a','z', 30
+	charset '*', 26
+	charset $A9, 27	; '?'
+	charset ':', 28
+	charset '.', 29
+	charset ' ',  0
+	restore
 
 ; macros for defining animated PLC script lists
 zoneanimstart macro {INTLABEL}
@@ -142,6 +166,44 @@ start:
 	dc.w tiles_to_bytes(vramaddr)
 	dc.b numentries, numvramtiles
 zoneanimcount := zoneanimcount + 1
+    endm
+
+; macro for declaring a "main level load block" (MLLB)
+levartptrs macro plc1,plc2,palette,art1,art2,map16x161,map16x162,map128x1281,map128x1282
+	dc.l (plc1<<24)|art1
+	dc.l (plc2<<24)|art2
+	dc.l (palette<<24)|map16x161
+	dc.l (palette<<24)|map16x162
+	dc.l map128x1281
+	dc.l map128x1282
+    endm
+
+; macro for a pattern load request list header
+; must be on the same line as a label that has a corresponding _End label later
+plrlistheader macro {INTLABEL}
+__LABEL__ label *
+	dc.w (((__LABEL___End - __LABEL__Plc) / 6) - 1)
+__LABEL__Plc:
+    endm
+
+; macro for a pattern load request
+plreq macro toVRAMaddr,fromROMaddr
+	dc.l	fromROMaddr
+	dc.w	tiles_to_bytes(toVRAMaddr)
+    endm
+
+; macro for a debug object list header
+; must be on the same line as a label that has a corresponding _End label later
+dbglistheader macro {INTLABEL}
+__LABEL__ label *
+	dc.w ((__LABEL___End - __LABEL__ - 2) / $A)
+    endm
+
+; macro to define debug list object data
+dbglistobj macro   obj, mapaddr, subtype, frame, vram
+	dc.l frame<<24|obj
+	dc.l subtype<<24|mapaddr
+	dc.w vram
     endm
 
 tribyte macro val

@@ -73,4 +73,3 @@ Frame_348014:	dc.w 5
 		dc.w $3136
 		dc.w $313A
 		dc.w $313E
-		dc.w $18

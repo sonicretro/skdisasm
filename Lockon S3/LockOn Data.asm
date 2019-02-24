@@ -250,7 +250,7 @@ Map_HCZWaterSplash2:		include "Levels/HCZ/Misc Object Data/Map - Water Splash 2.
 
 Map_S3EndingGraphics:		include "General/Ending/Map - S3 Ending Graphics.asm"
 
-ArtNem_S3EndingGraphics:	binclude "General/Title/Nemesis Art/S3 Ending Graphics.bin"
+ArtNem_S3EndingGraphics:	binclude "General/Ending/Nemesis Art/S3 Ending Graphics.bin"
 	even
 SStageLayoutPtrs:		dc.l SStage1_Layout
 				dc.l SStage2_Layout
@@ -365,7 +365,7 @@ Map_Sonic2P:			include "General/Sprites/Sonic/Map - Sonic 2P.asm"
 
 PLC_Sonic2P:			include "General/Sprites/Sonic/DPLC - Sonic 2P.asm"
 
-Map_Tails_2P:			include "General/Sprites/Tails/Map - Tails 2P.asm"
+Map_Tails2P:			include "General/Sprites/Tails/Map - Tails 2P.asm"
 
 Map_Tails2P_Tail:		include "General/Sprites/Tails/Map - Tails tail 2P.asm"
 
@@ -838,7 +838,7 @@ ArtKosM_AIZIntroEmeralds:	binclude "Levels/AIZ/KosinskiM Art/Intro Emeralds.bin"
 	even
 ArtKosM_TailsEndPose:		binclude "General/Ending/KosinskiM Art/Tails Ending Pose.bin"
 	even
-ArtNem_S38x16Font:		binclude "General/Title/Nemesis Art/S3 8x16 Font.bin"
+ArtNem_S38x16Font:		binclude "General/Ending/Nemesis Art/S3 8x16 Font.bin"
 	even
 ArtNem_AIZCorkFloor:		binclude "Levels/AIZ/Nemesis Art/Cork Floor 1.bin"
 	even
@@ -1194,7 +1194,7 @@ DAC_AB_Setup2:			DAC_Null_Setup $0D,DAC_AB_Data
 DAC_AC_Setup2:			DAC_Null_Setup $06,DAC_AC_Data
 DAC_AD_Setup2:			DAC_Null_Setup $10,DAC_AD_AE_Data
 DAC_AE_Setup2:			DAC_Null_Chain $18,DAC_Invalid,DAC_AD_Setup2
-DAC_AF_Setup2:			DAC_Null_Setup $09,DAC_AF_B0_Data
+DAC_AF_Setup2:			DAC_Null_Setup $09,DAC_AF_Data
 DAC_B0_Setup2:			DAC_Null_Chain $12,DAC_Invalid,DAC_AF_Setup2
 DAC_B1_Setup2:			DAC_Null_Setup $18,DAC_B1_Data
 DAC_B2_Setup2:			DAC_Null_Setup $16,DAC_B2_B3_Data
@@ -1358,8 +1358,8 @@ DAC_AB_Setup3:			DAC_Setup $0D,DAC_AB_Data
 DAC_AC_Setup3:			DAC_Setup $06,DAC_AC_Data
 DAC_AD_Setup3:			DAC_Setup $10,DAC_AD_AE_Data
 DAC_AE_Setup3:			DAC_Setup $18,DAC_AD_AE_Data
-DAC_AF_Setup3:			DAC_Setup $09,DAC_AF_B0_Data
-DAC_B0_Setup3:			DAC_Setup $12,DAC_AF_B0_Data
+DAC_AF_Setup3:			DAC_Setup $09,DAC_AF_Data
+DAC_B0_Setup3:			DAC_Setup $12,DAC_AF_Data
 DAC_B1_Setup3:			DAC_Setup $18,DAC_B1_Data
 DAC_B2_Setup3:			DAC_Null_Chain $16,DAC_B2_B3_Data,Bank3_Filler2-3
 DAC_B3_Setup3:			DAC_Null_Chain $20,DAC_B2_B3_Data,Bank3_Filler2-3
@@ -1389,7 +1389,7 @@ DAC_A1_Setup3:			DAC_Null_Setup $0A,DAC_A1_Data
 DAC_AB_Data:			DACBINCLUDE "Sound/DAC/AB.bin"
 DAC_AC_Data:			DACBINCLUDE "Sound/DAC/AC.bin"
 DAC_AD_AE_Data:			DACBINCLUDE "Sound/DAC/AD-AE.bin"
-DAC_AF_B0_Data:			DACBINCLUDE "Sound/DAC/AF-B0.bin"
+DAC_AF_Data:			DACBINCLUDE "Sound/DAC/AF.bin"
 Bank3_Filler1:			cnop 	$28E0,soundBankStart
 DAC_B1_Data:			DACBINCLUDE "Sound/DAC/B1.bin"
 Bank3_Filler2:			cnop 	$3CAD,soundBankStart
