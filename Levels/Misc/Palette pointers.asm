@@ -12,7 +12,7 @@
 		dc.l Pal_SonicTails
 		dc.w $FC00
 		dc.w 7
-		dc.l Pal_SonicTailsS2
+		dc.l Pal_S2Menu
 		dc.w $FC00
 		dc.w $1F
 		dc.l Pal_Knuckles

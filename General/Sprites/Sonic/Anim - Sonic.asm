@@ -1,163 +1,119 @@
-AniSonic_:	dc.w byte_12AEE-AniSonic_
-		dc.w byte_12AF8-AniSonic_
-		dc.w byte_12B02-AniSonic_
-		dc.w byte_12B0C-AniSonic_
-		dc.w byte_12B16-AniSonic_
-		dc.w byte_12B20-AniSonic_
-		dc.w byte_12B8D-AniSonic_
-		dc.w byte_12B92-AniSonic_
-		dc.w byte_12B97-AniSonic_
-		dc.w byte_12B9C-AniSonic_
-		dc.w byte_12BA8-AniSonic_
-		dc.w byte_12BBF-AniSonic_
-		dc.w byte_12BC2-AniSonic_
-		dc.w byte_12BC7-AniSonic_
-		dc.w byte_12BCE-AniSonic_
-		dc.w byte_12BD1-AniSonic_
-		dc.w byte_12BDB-AniSonic_
-		dc.w byte_12BDF-AniSonic_
-		dc.w byte_12BE3-AniSonic_
-		dc.w byte_12BE9-AniSonic_
-		dc.w byte_12BF7-AniSonic_
-		dc.w byte_12BFA-AniSonic_
-		dc.w byte_12C01-AniSonic_
-		dc.w byte_12C04-AniSonic_
-		dc.w byte_12C07-AniSonic_
-		dc.w byte_12C0A-AniSonic_
-		dc.w byte_12C0E-AniSonic_
-		dc.w byte_12C11-AniSonic_
-		dc.w byte_12C15-AniSonic_
-		dc.w byte_12C18-AniSonic_
-		dc.w byte_12C1C-AniSonic_
-		dc.w byte_12CA4-AniSonic_
-		dc.w byte_12C24-AniSonic_
-		dc.w byte_12C28-AniSonic_
-		dc.w byte_12C2C-AniSonic_
-		dc.w byte_12C32-AniSonic_
-byte_12AEE:	dc.b  $FF,   7,	  8,   1,   2,	 3,   4,   5,	6, $FF
-
-
-byte_12AF8:	dc.b  $FF, $21,	$22, $23, $24, $FF, $FF, $FF, $FF, $FF
-
-
-byte_12B02:	dc.b  $FE, $96,	$97, $96, $98, $96, $99, $96, $9A, $FF
-
-
-byte_12B0C:	dc.b  $FE, $96,	$97, $96, $98, $96, $99, $96, $9A, $FF
-
-
-byte_12B16:	dc.b  $FD, $B6,	$B7, $B8, $B9, $FF, $FF, $FF, $FF, $FF
-
-
-byte_12B20:	dc.b    5, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA
-		dc.b  $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA
-		dc.b  $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BB, $BC, $BC, $BD, $BD, $BE, $BE, $BD, $BD
-		dc.b  $BE, $BE, $BD, $BD, $BE, $BE, $BD, $BD, $BE, $BE, $BD, $BD, $BE, $BE, $BD, $BD, $BE, $BE, $BD, $BD
-		dc.b  $BE, $BE, $BD, $BD, $BE, $BE, $AD, $AD, $AD, $AD, $AD, $AD, $AE, $AE, $AE, $AE, $AE, $AE, $AF, $D9
-		dc.b  $D9, $D9, $D9, $D9, $D9, $AF, $AF, $FE, $35
-byte_12B8D:	dc.b	7, $A4,	$A5, $A6, $FF
-byte_12B92:	dc.b	5, $C3,	$C4, $FE,   1
-
-byte_12B97:	dc.b	5, $9B,	$9C, $FE,   1
-byte_12B9C:	dc.b	0, $86,	$87, $86, $88, $86, $89, $86, $8A, $86,	$8B, $FF
-
-
-byte_12BA8:	dc.b	9, $BA,	$C5, $C6, $C6, $C6, $C6, $C6, $C6, $C7,	$C7, $C7, $C7, $C7, $C7, $C7, $C7, $C7,	$C7, $C7
-		dc.b  $C7, $FD,   0
-
-
-byte_12BBF:	dc.b   $F, $8F,	$FF
-
-byte_12BC2:	dc.b	5, $A1,	$A2, $A3, $FF
-
-byte_12BC7:	dc.b	3, $9D,	$9E, $9F, $A0, $FD,   0
-
-byte_12BCE:	dc.b	7, $C8,	$FF
-
-byte_12BD1:	dc.b	7, $C8,	$C9, $CA, $CB, $CC, $CD, $CE, $CF, $FF
-
-
-byte_12BDB:	dc.b  $2F, $8E,	$FD,   0
-
-byte_12BDF:	dc.b	1, $AA,	$AB, $FF
-
-byte_12BE3:	dc.b   $F, $43,	$43, $43, $FE,	 1
-
-byte_12BE9:	dc.b	7, $B0,	$B2, $B2, $B2, $B2, $B2, $B2, $B1, $B2,	$B3, $B2, $FE,	 4
-
-
-byte_12BF7:	dc.b  $13, $91,	$FF
-
-byte_12BFA:	dc.b   $B, $AC,	$AC,   3,   4, $FD,   0
-
-byte_12C01:	dc.b  $20, $A8,	$FF
-
-byte_12C04:	dc.b  $20, $A9,	$FF
-
-byte_12C07:	dc.b  $20, $A7,	$FF
-
-byte_12C0A:	dc.b	9, $D7,	$D8, $FF
-
-byte_12C0E:	dc.b  $40, $8D,	$FF
-
-byte_12C11:	dc.b	9, $8C,	$8D, $FF
-
-byte_12C15:	dc.b  $77,   0,	$FF
-
-byte_12C18:	dc.b  $13, $D0,	$D1, $FF
-
-byte_12C1C:	dc.b	3, $CF,	$C8, $C9, $CA, $CB, $FE,   4
-
-byte_12C24:	dc.b	9,   8,	  9, $FF
-byte_12C28:	dc.b	3,   7,	$FD,   0
-byte_12C2C:	dc.b   $B, $90,	$91, $92, $91, $FF
-byte_12C32:	dc.b   $B, $90,	$91, $92, $91, $FD,   0
-	even
-AniSuperSonic:
-AniSuperSonic_:	dc.w byte_12C7A-AniSuperSonic_
-
-		dc.w byte_12C84-AniSuperSonic_
-		dc.w byte_12B02-AniSuperSonic_
-		dc.w byte_12B0C-AniSuperSonic_
-		dc.w byte_12C8E-AniSuperSonic_
-		dc.w byte_12C98-AniSuperSonic_
-		dc.w byte_12C9C-AniSuperSonic_
-		dc.w byte_12B92-AniSuperSonic_
-		dc.w byte_12CA1-AniSuperSonic_
-		dc.w byte_12B9C-AniSuperSonic_
-		dc.w byte_12BA8-AniSuperSonic_
-		dc.w byte_12BBF-AniSuperSonic_
-		dc.w byte_12BC2-AniSuperSonic_
-		dc.w byte_12BC7-AniSuperSonic_
-		dc.w byte_12BCE-AniSuperSonic_
-		dc.w byte_12BD1-AniSuperSonic_
-		dc.w byte_12BDB-AniSuperSonic_
-		dc.w byte_12BDF-AniSuperSonic_
-		dc.w byte_12BE3-AniSuperSonic_
-		dc.w byte_12BE9-AniSuperSonic_
-		dc.w byte_12BF7-AniSuperSonic_
-		dc.w byte_12BFA-AniSuperSonic_
-		dc.w byte_12C01-AniSuperSonic_
-		dc.w byte_12C04-AniSuperSonic_
-		dc.w byte_12C07-AniSuperSonic_
-		dc.w byte_12C0A-AniSuperSonic_
-		dc.w byte_12C0E-AniSuperSonic_
-		dc.w byte_12C11-AniSuperSonic_
-		dc.w byte_12C15-AniSuperSonic_
-		dc.w byte_12C18-AniSuperSonic_
-		dc.w byte_12C1C-AniSuperSonic_
-		dc.w byte_12CA4-AniSuperSonic_
-byte_12C7A:	dc.b  $FF,   1,	  2,   3,   4,	 5,   6,   7,	8, $FF
-
-
-byte_12C84:	dc.b  $FF, $21,	$22, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-
-
-byte_12C8E:	dc.b  $FD, $B6,	$B7, $B8, $B9, $FF, $FF, $FF, $FF, $FF
-
-
-byte_12C98:	dc.b	7, $BA,	$BB, $FF
-byte_12C9C:	dc.b	9, $A1,	$A2, $A3, $FF
-byte_12CA1:	dc.b	5, $9B,	$FF
-byte_12CA4:	dc.b	2, $D2,	$D2, $D3, $D3, $D4, $D5, $D6, $D5, $D6,	$D5, $D6, $D5, $D6, $FD,   0
-	even
+		dc.w AniSonic00-AniSonic
+		dc.w AniSonic01-AniSonic
+		dc.w AniSonic02-AniSonic
+		dc.w AniSonic03-AniSonic
+		dc.w AniSonic04-AniSonic
+		dc.w AniSonic05-AniSonic
+		dc.w AniSonic06-AniSonic
+		dc.w AniSonic07-AniSonic
+		dc.w AniSonic08-AniSonic
+		dc.w AniSonic09-AniSonic
+		dc.w AniSonic0A-AniSonic
+		dc.w AniSonic0B-AniSonic
+		dc.w AniSonic0C-AniSonic
+		dc.w AniSonic0D-AniSonic
+		dc.w AniSonic0E-AniSonic
+		dc.w AniSonic0F-AniSonic
+		dc.w AniSonic10-AniSonic
+		dc.w AniSonic11-AniSonic
+		dc.w AniSonic12-AniSonic
+		dc.w AniSonic13-AniSonic
+		dc.w AniSonic14-AniSonic
+		dc.w AniSonic15-AniSonic
+		dc.w AniSonic16-AniSonic
+		dc.w AniSonic17-AniSonic
+		dc.w AniSonic18-AniSonic
+		dc.w AniSonic19-AniSonic
+		dc.w AniSonic1A-AniSonic
+		dc.w AniSonic1B-AniSonic
+		dc.w AniSonic1C-AniSonic
+		dc.w AniSonic1D-AniSonic
+		dc.w AniSonic1E-AniSonic
+		dc.w AniSonic1F-AniSonic
+		dc.w AniSonic20-AniSonic
+		dc.w AniSonic21-AniSonic
+		dc.w AniSonic22-AniSonic
+		dc.w AniSonic23-AniSonic
+AniSonic00:	dc.b  $FF,   7,   8,   1,   2,   3,   4,   5,   6, $FF
+AniSonic01:	dc.b  $FF, $21, $22, $23, $24, $FF, $FF, $FF, $FF, $FF
+AniSonic02:	dc.b  $FE, $96, $97, $96, $98, $96, $99, $96, $9A, $FF
+AniSonic03:	dc.b  $FE, $96, $97, $96, $98, $96, $99, $96, $9A, $FF
+AniSonic04:	dc.b  $FD, $B6, $B7, $B8, $B9, $FF, $FF, $FF, $FF, $FF
+AniSonic05:	dc.b    5, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA
+		dc.b  $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA
+		dc.b  $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA
+		dc.b  $BA, $BA, $BA, $BB, $BC, $BC, $BD, $BD, $BE, $BE, $BD, $BD, $BE, $BE, $BD, $BD
+		dc.b  $BE, $BE, $BD, $BD, $BE, $BE, $BD, $BD, $BE, $BE, $BD, $BD, $BE, $BE, $BD, $BD
+		dc.b  $BE, $BE, $BD, $BD, $BE, $BE, $AD, $AD, $AD, $AD, $AD, $AD, $AE, $AE, $AE, $AE
+		dc.b  $AE, $AE, $AF, $D9, $D9, $D9, $D9, $D9, $D9, $AF, $AF, $FE, $35
+AniSonic06:	dc.b    7, $A4, $A5, $A6, $FF
+AniSonic07:	dc.b    5, $C3, $C4, $FE,   1
+AniSonic08:	dc.b    5, $9B, $9C, $FE,   1
+AniSonic09:	dc.b    0, $86, $87, $86, $88, $86, $89, $86, $8A, $86, $8B, $FF
+AniSonic0A:	dc.b    9, $BA, $C5, $C6, $C6, $C6, $C6, $C6, $C6, $C7, $C7, $C7, $C7, $C7, $C7, $C7
+		dc.b  $C7, $C7, $C7, $C7, $C7, $FD,   0
+AniSonic0B:	dc.b   $F, $8F, $FF
+AniSonic0C:	dc.b    5, $A1, $A2, $A3, $FF
+AniSonic0D:	dc.b    3, $9D, $9E, $9F, $A0, $FD,   0
+AniSonic0E:	dc.b    7, $C8, $FF
+AniSonic0F:	dc.b    7, $C8, $C9, $CA, $CB, $CC, $CD, $CE, $CF, $FF
+AniSonic10:	dc.b  $2F, $8E, $FD,   0
+AniSonic11:	dc.b    1, $AA, $AB, $FF
+AniSonic12:	dc.b   $F, $43, $43, $43, $FE,   1
+AniSonic13:	dc.b    7, $B0, $B2, $B2, $B2, $B2, $B2, $B2, $B1, $B2, $B3, $B2, $FE,   4
+AniSonic14:	dc.b  $13, $91, $FF
+AniSonic15:	dc.b   $B, $AC, $AC,   3,   4, $FD,   0
+AniSonic16:	dc.b  $20, $A8, $FF
+AniSonic17:	dc.b  $20, $A9, $FF
+AniSonic18:	dc.b  $20, $A7, $FF
+AniSonic19:	dc.b    9, $D7, $D8, $FF
+AniSonic1A:	dc.b  $40, $8D, $FF
+AniSonic1B:	dc.b    9, $8C, $8D, $FF
+AniSonic1C:	dc.b  $77,   0, $FF
+AniSonic1D:	dc.b  $13, $D0, $D1, $FF
+AniSonic1E:	dc.b    3, $CF, $C8, $C9, $CA, $CB, $FE,   4
+AniSonic20:	dc.b    9,   8,   9, $FF
+AniSonic21:	dc.b    3,   7, $FD,   0
+AniSonic22:	dc.b   $B, $90, $91, $92, $91, $FF
+AniSonic23:	dc.b   $B, $90, $91, $92, $91, $FD,   0
+		even
+AniSuperSonic:	dc.w AniSuperSonic00-AniSuperSonic
+		dc.w AniSuperSonic01-AniSuperSonic
+		dc.w AniSonic02-AniSuperSonic
+		dc.w AniSonic03-AniSuperSonic
+		dc.w AniSuperSonic04-AniSuperSonic
+		dc.w AniSuperSonic05-AniSuperSonic
+		dc.w AniSuperSonic06-AniSuperSonic
+		dc.w AniSonic07-AniSuperSonic
+		dc.w AniSuperSonic08-AniSuperSonic
+		dc.w AniSonic09-AniSuperSonic
+		dc.w AniSonic0A-AniSuperSonic
+		dc.w AniSonic0B-AniSuperSonic
+		dc.w AniSonic0C-AniSuperSonic
+		dc.w AniSonic0D-AniSuperSonic
+		dc.w AniSonic0E-AniSuperSonic
+		dc.w AniSonic0F-AniSuperSonic
+		dc.w AniSonic10-AniSuperSonic
+		dc.w AniSonic11-AniSuperSonic
+		dc.w AniSonic12-AniSuperSonic
+		dc.w AniSonic13-AniSuperSonic
+		dc.w AniSonic14-AniSuperSonic
+		dc.w AniSonic15-AniSuperSonic
+		dc.w AniSonic16-AniSuperSonic
+		dc.w AniSonic17-AniSuperSonic
+		dc.w AniSonic18-AniSuperSonic
+		dc.w AniSonic19-AniSuperSonic
+		dc.w AniSonic1A-AniSuperSonic
+		dc.w AniSonic1B-AniSuperSonic
+		dc.w AniSonic1C-AniSuperSonic
+		dc.w AniSonic1D-AniSuperSonic
+		dc.w AniSonic1E-AniSuperSonic
+		dc.w AniSonic1F-AniSuperSonic
+AniSuperSonic00:dc.b  $FF,   1,   2,   3,   4,   5,   6,   7,   8, $FF
+AniSuperSonic01:dc.b  $FF, $21, $22, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+AniSuperSonic04:dc.b  $FD, $B6, $B7, $B8, $B9, $FF, $FF, $FF, $FF, $FF
+AniSuperSonic05:dc.b    7, $BA, $BB, $FF
+AniSuperSonic06:dc.b    9, $A1, $A2, $A3, $FF
+AniSuperSonic08:dc.b    5, $9B, $FF
+AniSonic1F:	dc.b    2, $D2, $D2, $D3, $D3, $D4, $D5, $D6, $D5, $D6, $D5, $D6, $D5, $D6, $FD,   0
+		even

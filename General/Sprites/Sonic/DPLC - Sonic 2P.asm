@@ -127,4 +127,3 @@ Frame_29FEDE:	dc.w 1
 		dc.w $8177
 Frame_29FEE2:	dc.w 1
 		dc.w $5180
-Map_Tails2P:	dc.w $5C		; ...

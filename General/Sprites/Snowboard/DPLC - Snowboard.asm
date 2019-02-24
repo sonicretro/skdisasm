@@ -58,4 +58,3 @@ Frame_348196:	dc.w 4
 		dc.w $1025
 		dc.w $5027
 		dc.w $102D
-word_1481A0:	dc.w $8158		; ...

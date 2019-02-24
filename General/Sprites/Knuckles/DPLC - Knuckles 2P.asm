@@ -147,4 +147,3 @@ Frame_2A05BA:	dc.w 1
 		dc.w $518E
 Frame_2A05BE:	dc.w 1
 		dc.w $B194
-ArtUnc_SurfboardIntro:dc.w 0		; ...

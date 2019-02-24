@@ -1,5 +1,4 @@
-Map_SStageKnuckles:dc.w word_AD332-Map_SStageKnuckles
-
+		dc.w word_AD332-Map_SStageKnuckles
 		dc.w word_AD3BA-Map_SStageKnuckles
 		dc.w word_AD370-Map_SStageKnuckles
 		dc.w word_AD35C-Map_SStageKnuckles
@@ -12,7 +11,6 @@ Map_SStageKnuckles:dc.w word_AD332-Map_SStageKnuckles
 		dc.w word_AD3D6-Map_SStageKnuckles
 		dc.w word_AD3DE-Map_SStageKnuckles
 PLC_SStageKnuckles:dc.w word_AD332-PLC_SStageKnuckles
-
 		dc.w word_AD41C-PLC_SStageKnuckles
 		dc.w word_AD3FE-PLC_SStageKnuckles
 		dc.w word_AD3F6-PLC_SStageKnuckles
@@ -25,7 +23,6 @@ PLC_SStageKnuckles:dc.w word_AD332-PLC_SStageKnuckles
 		dc.w word_AD428-PLC_SStageKnuckles
 		dc.w word_AD42C-PLC_SStageKnuckles
 word_AD332:	dc.w 0
-
 word_AD334:	dc.w 3
 		dc.b  $D5,  $F,	  0,   0, $FF, $F0
 		dc.b  $F5,   8,	  0, $10, $FF, $F8

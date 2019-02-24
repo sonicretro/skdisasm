@@ -955,9 +955,11 @@ ALZ_AIZ2_BGDeformDelta:
 		dc.w  -2,  1,  2,  2, -1,  2,  2,  1,  2, -1, -2, -2, -2,  1, -1, -1
 		dc.w  -1,  0, -2,  0,  0,  0, -2,  0, -2,  2,  0, -2,  2,  2, -1, -2
 Pal_AIZBattleship:
-		dc.w    0,$EEE,$2AE, $6E, $4C, $EE, $88,$224, $CA, $66, $42, $20,$CAA,$866,$644, $44
+		binclude "Levels/AIZ/Palettes/Battleship.bin"
+		even
 Pal_AIZBossSmall:
-		dc.w $EEE,$CAA,$E26,$222, $EE,   0,   8,$2AE, $4C,   6, $20,$C68,$A24,$622
+		binclude "Levels/AIZ/Palettes/Boss Small.bin"
+		even
 AIZBattleShip_BobbingMotion:
 		dc.b   4,  4,  3,  3,  2,  1,  1,  0,  0,  0,  1,  1,  2,  3,  3,  4
 AIZBattleship_BombScript:

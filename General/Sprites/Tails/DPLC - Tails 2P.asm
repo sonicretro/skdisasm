@@ -133,4 +133,3 @@ Frame_2A0244:	dc.w 1
 		dc.w $8157
 Frame_2A0248:	dc.w 1
 		dc.w $8160
-PLC_Tails2P_Tail:dc.w $20		; ...
