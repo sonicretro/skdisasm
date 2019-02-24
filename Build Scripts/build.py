@@ -62,11 +62,22 @@ def build(targetName, def0, def1):
 
 	assembleCommand = [asBinary, "-x", "-xx", "-n", "-c", "-A", "-L"];
 
-	assembleCommand.append(def0);
-	assembleCommand.append(def1);
+	if def0 is None:
+		assembleCommand.append("-o");
+		assembleCommand.append("sonic3k.p");
+		assembleCommand.append("-olist");
+		assembleCommand.append("sonic3k.lst");
+		assembleCommand.append("-shareout");
+		assembleCommand.append("sonic3k.h");
 
-	# Input asm file
-	assembleCommand.append("sonic3k.asm");
+		# Input asm file
+		assembleCommand.append("s3.asm");
+	else:
+		assembleCommand.append(def0);
+		assembleCommand.append(def1);
+
+		# Input asm file
+		assembleCommand.append("sonic3k.asm");
 
 	print("  Assembling .p file");
 
@@ -141,7 +152,7 @@ def check_hash(filePath, sha256_hash, filesize):
 		hashobj = hashlib.sha256();
 		while True:
 			buf = fileToCheck.read(4096)
-			if buf == "":
+			if not buf:
 				break
 
 			hashobj.update(buf);
@@ -155,10 +166,10 @@ def check_hash(filePath, sha256_hash, filesize):
 		print("  - Actual:   " + hashobj.hexdigest())
 		return False
 
-	print("  s&k rom verified ok")
+	print("rom verified ok")
 	return True
 
-def run(build3k, buildSK, verifySK):
+def run(build3k, buildS3, buildSK, verify):
 
 	# Navigate to base dir
 	os.chdir("..");
@@ -174,14 +185,18 @@ def run(build3k, buildSK, verifySK):
 	if build3k:
 		build("sonic3k", "-D", "Sonic3_Complete=1");
 
+	# Build Sonic3 rom
+	if buildS3:
+		build("s3built", None, None);
+
 	# Build S&K rom
 	if buildSK:
 		build("skbuilt", "-D", "Sonic3_Complete=0");
 
-	# Compare the newly built s&k rom with the actual rom to make sure it's byte-identical
-	if verifySK:
+	# Compare the newly built roms with the originals to make sure they're byte-identical
+	if verify:
+		check_hash("s3built.bin", s3_usa_hash, s3_usa_size);
 		check_hash("skbuilt.bin", sk_hash, sk_size);
-		raw_input("Press any key to exit")
 
 	print("Finished!");
 
@@ -194,8 +209,10 @@ def usage():
 	print("")
 	print("Valid targets:")
 	print("  3K        Sonic 3 & Knuckles")
+	print("  S3        Sonic 3")
 	print("  SK        Sonic & Knuckles")
-	print("  verify    Compare built Sonic & Knuckles to original")
+	print("  verifyS3  Compare built Sonic 3 to original")
+	print("  verifySK  Compare built Sonic & Knuckles to original")
 
 # Main program.
 # NOTE: This file is included by buildS3Complete.py and buildSK.py, so we
@@ -207,7 +224,9 @@ if __name__ == "__main__":
 
 	# Options.
 	build3K = False
+	buildS3 = False
 	buildSK = False
+	verifyS3 = False
 	verifySK = False
 
 	# Parse command line parameters.
@@ -215,9 +234,13 @@ if __name__ == "__main__":
 		param = sys.argv[i].lower()
 		if param == "3k":
 			build3K = True
+		elif param == "s3":
+			buildS3 = True
 		elif param == "sk":
 			buildSK = True
-		elif param == "verify":
+		elif param == "verifys3":
+			verifyS3 = True
+		elif param == "verifysk":
 			verifySK = True
 		elif param == "-usage":
 			usage()
@@ -229,11 +252,15 @@ if __name__ == "__main__":
 			usage()
 			sys.exit(1)
 
-	if build3K == False and buildSK == False and verifySK == False:
+	if build3K == False and buildS3 == False and buildSK == False and verifyS3 == False and verifySK == False:
 		print("No target(s) specified.")
 		print("")
 		usage()
 		sys.exit(1)
+
+	if platform.system() == "Windows":
+		os.environ["AS_MSGPATH"] = "AS/Win32";
+		os.environ["USEANSI"] = "n";
 
 	# Create build dir
 	makeDir("Build");
@@ -244,9 +271,21 @@ if __name__ == "__main__":
 		if ret == False:
 			sys.exit(1)
 
+	if buildS3 == True:
+		print("")
+		ret = build("s3built", None, None)
+		if ret == False:
+			sys.exit(1)
+
 	if buildSK == True:
 		print("")
 		ret = build("skbuilt", "-D", "Sonic3_Complete=0")
+		if ret == False:
+			sys.exit(1)
+
+	if verifyS3 == True:
+		print("")
+		ret = check_hash("s3built.bin", s3_usa_hash, s3_usa_size);
 		if ret == False:
 			sys.exit(1)
 
