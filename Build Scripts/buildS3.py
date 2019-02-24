@@ -5,4 +5,4 @@ sys.dont_write_bytecode = True
 
 import build
 
-build.run(True, True, True, True)
+build.run(False, True, False, False)
