@@ -29333,7 +29333,7 @@ loc_19486:
 		tst.w	($FFFFEF3A).w
 		beq.s	locret_194B8
 		clr.w	($FFFFEF3A).w
-		lea	($FFFFF7FC).w,a0
+		lea	(Anim_Counters+$C).w,a0
 		move.w	#$7C0,d0
 		moveq	#$4F,d1
 
@@ -31666,8 +31666,8 @@ loc_1A96C:
 		jsr	(Queue_Kos_Module).l
 		st	($FFFFEEC6).w
 		move.w	#$500,(Anim_Counters).w
-		move.w	#$500,($FFFFF7F2).w
-		move.w	#$500,($FFFFF7F4).w
+		move.w	#$500,(Anim_Counters+2).w
+		move.w	#$500,(Anim_Counters+4).w
 
 loc_1A9BE:
 		move.b	#1,(Last_star_post_hit).w
@@ -45772,15 +45772,15 @@ Offs_AniPLC:	dc.w AniPLC_AIZ1-Offs_AniFunc
 		dc.w AnimateTiles_LBZ2-Offs_AniFunc
 		dc.w AniPLC_LBZ2-Offs_AniFunc
 		dc.w AnimateTiles_NULL-Offs_AniFunc
-		dc.w AniPLC_ALZ-Offs_AniFunc
+		dc.w AniPLC_LRZ1-Offs_AniFunc
 		dc.w AnimateTiles_NULL-Offs_AniFunc
-		dc.w AniPLC_ALZ-Offs_AniFunc
+		dc.w AniPLC_LRZ1-Offs_AniFunc
 		dc.w AnimateTiles_NULL-Offs_AniFunc
-		dc.w AniPLC_ALZ-Offs_AniFunc
+		dc.w AniPLC_LRZ1-Offs_AniFunc
 		dc.w AnimateTiles_NULL-Offs_AniFunc
-		dc.w AniPLC_ALZ-Offs_AniFunc
+		dc.w AniPLC_LRZ1-Offs_AniFunc
 		dc.w AnimateTiles_LRZ1-Offs_AniFunc
-		dc.w AniPLC_ALZ-Offs_AniFunc
+		dc.w AniPLC_LRZ1-Offs_AniFunc
 		dc.w AnimateTiles_NULL-Offs_AniFunc
 		dc.w AniPLC_ALZ-Offs_AniFunc
 		dc.w AnimateTiles_NULL-Offs_AniFunc
@@ -45883,7 +45883,7 @@ AnimateTiles_HCZ1:
 ; ---------------------------------------------------------------------------
 
 loc_26BC2:
-		lea	($FFFFF7F4).w,a3
+		lea	(Anim_Counters+4).w,a3
 
 loc_26BC6:
 		moveq	#0,d1
@@ -46009,7 +46009,7 @@ AniHCZ_FixLowerBG:
 
 sub_26D0E:
 		lea	(AniPLC_HCZ1).l,a2
-		lea	($FFFFF7F4).w,a3
+		lea	(Anim_Counters+4).w,a3
 		move.w	($FFFFEEE2).w,d1
 		beq.s	loc_26CB8
 		bpl.s	loc_26D56
@@ -46507,7 +46507,7 @@ loc_27208:
 		bsr.w	loc_275F0
 
 loc_2720C:
-		lea	($FFFFF7FC).w,a3
+		lea	(Anim_Counters+$C).w,a3
 		lea	(AniPLC_LBZSpec).l,a2
 		bra.w	loc_275F0
 ; ---------------------------------------------------------------------------
@@ -46682,7 +46682,7 @@ sub_273A0:
 
 
 sub_273B4:
-		lea	($FFFFF7F4).w,a3
+		lea	(Anim_Counters+4).w,a3
 		move.w	#1,2(a3)
 		move.w	($FFFFEEE2).w,d1
 		beq.s	loc_27384
@@ -46724,7 +46724,7 @@ AnimateTiles_LRZ1:
 		add.w	d2,d1
 		lsr.w	#1,d0
 		lea	word_27446(pc,d0.w),a4
-		lea	(ArtUnc_AniALZ).l,a0
+		lea	(ArtUnc_AniLRZ__BG).l,a0
 		move.w	#$6020,d4
 		add.l	a0,d1
 		move.w	d4,d2
@@ -46777,7 +46777,7 @@ loc_2745E:
 		add.w	d2,d1
 		lsr.w	#1,d0
 		lea	word_274C0(pc,d0.w),a4
-		lea	(ArtUnc_AniALZ).l,a0
+		lea	(ArtUnc_AniLRZ__BG2).l,a0
 		move.w	#$64A0,d4
 		add.l	a0,d1
 		move.w	d4,d2
@@ -47299,6 +47299,7 @@ AniPLC_LBZ2:	dc.w 1
 		dc.b  $C
 		dc.b $10
 		dc.b $14
+AniPLC_LRZ1:
 AniPLC_ALZ:	dc.w 0
 		dc.l ArtUnc_AniALZ+$9000000
 		dc.w $4700
@@ -47372,43 +47373,43 @@ Animate_Init:
 loc_278C4:
 		cmpi.w	#$101,(Current_zone_and_act).w
 		bne.s	loc_278D8
-		move.b	#$20,($FFFFF7F1).w
-		move.b	#$40,($FFFFF7F3).w
+		move.b	#$20,(Anim_Counters+1).w
+		move.b	#$40,(Anim_Counters+3).w
 
 loc_278D8:
 		cmpi.b	#3,(Current_zone).w
 		bne.s	loc_27910
-		move.b	#$40,($FFFFF7F1).w
-		move.b	#0,($FFFFF7F2).w
-		move.b	#0,($FFFFF7F4).w
-		move.b	#0,($FFFFF7F6).w
-		move.b	#2,($FFFFF7F8).w
-		move.b	#2,($FFFFF7FA).w
-		move.b	#2,($FFFFF7FC).w
-		move.b	#1,($FFFFF7FE).w
+		move.b	#$40,(Anim_Counters+1).w
+		move.b	#0,(Anim_Counters+2).w
+		move.b	#0,(Anim_Counters+4).w
+		move.b	#0,(Anim_Counters+6).w
+		move.b	#2,(Anim_Counters+8).w
+		move.b	#2,(Anim_Counters+$A).w
+		move.b	#2,(Anim_Counters+$C).w
+		move.b	#1,(Anim_Counters+$E).w
 
 loc_27910:
 		cmpi.w	#$600,(Current_zone_and_act).w
 		bne.s	loc_2791E
-		move.b	#$20,($FFFFF7F3).w
+		move.b	#$20,(Anim_Counters+3).w
 
 loc_2791E:
 		cmpi.w	#$601,(Current_zone_and_act).w
 		bne.s	loc_27930
 		bsr.w	sub_273B4
-		move.b	#$10,($FFFFF7F1).w
+		move.b	#$10,(Anim_Counters+1).w
 
 loc_27930:
 		cmpi.w	#$900,(Current_zone_and_act).w
 		bne.s	loc_27944
-		move.b	#-1,($FFFFF7F1).w
-		move.b	#-1,($FFFFF7F3).w
+		move.b	#-1,(Anim_Counters+1).w
+		move.b	#-1,(Anim_Counters+3).w
 
 loc_27944:
 		cmpi.w	#$1000,(Current_zone_and_act).w
 		bne.s	locret_27958
-		move.b	#$40,($FFFFF7F1).w
-		move.b	#$40,($FFFFF7F3).w
+		move.b	#$40,(Anim_Counters+1).w
+		move.b	#$40,(Anim_Counters+3).w
 
 locret_27958:
 		rts
@@ -48004,7 +48005,7 @@ loc_283DC:
 		beq.s	loc_283F0
 		subq.w	#1,$30(a0)
 		bne.s	loc_28448
-		move.w	#0,($FFFFF7F4).w
+		move.w	#0,(Anim_Counters+4).w
 		bra.s	loc_2846E
 ; ---------------------------------------------------------------------------
 
@@ -48013,7 +48014,7 @@ loc_283F0:
 		beq.s	loc_2846E
 		clr.b	$29(a0)
 		move.w	#$81,$30(a0)
-		move.w	#1,($FFFFF7F4).w
+		move.w	#1,(Anim_Counters+4).w
 		btst	#0,$2C(a0)
 		bne.s	locret_28446
 
@@ -115685,7 +115686,7 @@ loc_5A84E:
 		move.l	#loc_5A8E6,$34(a0)
 		moveq	#-$30,d0
 		jsr	(Play_Sound_2).l
-		st	($FFFFF7FF).w
+		st	(Anim_Counters+$F).w
 		move.w	#$6000,($FFFFFA92).w
 		lea	Child6_IncLevX(pc),a2
 		jsr	CreateChild6_Simple(pc)
@@ -117988,6 +117989,8 @@ ArtUnc_AniLBZ2_0:
 ArtUnc_AniLBZ2_1:
 		binclude "Levels/LBZ/Animated Tiles/Act2 1.bin"
 		even
+ArtUnc_AniLRZ__BG:
+ArtUnc_AniLRZ__BG2:
 ArtUnc_AniALZ:	binclude "Levels/ALZ/Animated Tiles/0.bin"
 		even
 ArtUnc_AniBPZ__0:
