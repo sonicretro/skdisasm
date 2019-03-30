@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Clamer" Image="img" Depth="5">
+  <Images>
+    <ImageFromMappings id="img" priority="true">
+      <ArtFile filename="../General/Sprites/Clamer/Clamer.bin" compression="Uncompressed" />
+      <MapFile type="ASM" filename="../General/Sprites/Clamer/Map - Clamer.asm" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+</ObjDef>

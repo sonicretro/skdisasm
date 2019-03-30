@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Sparkle" Image="img" Depth="5">
+  <Images>
+    <ImageFromMappings id="img" priority="true">
+      <ArtFile filename="../General/Sprites/Sparkle/Sparkle.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - Blastoid.asm" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+</ObjDef>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Flybot767" Image="img" Depth="5">
+  <Images>
+    <ImageFromMappings id="img" priority="true">
+      <ArtFile filename="../General/Sprites/Flybot/Flybot.bin" compression="Uncompressed" />
+      <MapFile type="ASM" filename="../General/Sprites/Flybot/Map - Flybot.asm"
+        dplcfile="../General/Sprites/Flybot/DPLC - Flybot.asm" frame="3" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+</ObjDef>
