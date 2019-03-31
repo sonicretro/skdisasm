@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Miniboss" Image="img" Depth="5">
+  <Images>
+    <ImageFromMappings id="img">
+      <ArtFile filename="../Levels/MGZ/KosinskiM Art/Miniboss.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../Levels/MGZ/Misc Object Data/Map - Miniboss.asm" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+</ObjDef>

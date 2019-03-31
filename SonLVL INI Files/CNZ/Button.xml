@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Water Level Button" Image="img" Depth="2">
+  <Images>
+    <ImageFromMappings id="img" priority="true">
+      <ArtFile filename="../General/Sprites/Buttons/Gray Button.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Buttons/Map - Button.asm" frame="2" />
+    </ImageFromMappings>
+  </Images>
+</ObjDef>

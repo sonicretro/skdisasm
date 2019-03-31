@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Tulipon" Image="img" Depth="4">
+  <Images>
+    <ImageFromMappings id="img">
+      <ArtFile filename="../General/Sprites/Tulipon/Tulipon.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Tulipon/Map - Tulipon.asm" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+</ObjDef>

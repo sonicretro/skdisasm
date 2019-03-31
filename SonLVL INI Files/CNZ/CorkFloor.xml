@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Water Level Cork Floor" Image="img" Depth="5">
+  <Images>
+    <ImageFromMappings id="img">
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/Platform.bin" />
+      <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - Cork Floor.asm" startpal="2" />
+    </ImageFromMappings>
+  </Images>
+</ObjDef>

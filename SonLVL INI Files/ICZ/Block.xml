@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Block" Image="img" Depth="5">
+  <Images>
+    <ImageFromMappings id="img">
+      <ArtFile filename="../Levels/ICZ/Nemesis Art/Misc Art 2.bin" />
+      <MapFile type="ASM" filename="../Levels/ICZ/Misc Object Data/Map - Platforms.asm" frame="30" startpal="2" />
+    </ImageFromMappings>
+  </Images>
+</ObjDef>

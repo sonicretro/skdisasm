@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Jawz" Image="img" Depth="5">
+  <Images>
+    <ImageFromMappings id="img" priority="true">
+      <ArtFile filename="../General/Sprites/Jawz/Jawz.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Jawz/Map - Jawz.asm" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+</ObjDef>

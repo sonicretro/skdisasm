@@ -3,19 +3,19 @@
   <Images>
     <ImageFromMappings id="main" priority="true">
       <ArtFile filename="../General/Sprites/Dragonfly/Dragonfly.bin" compression="KosinskiM" />
-      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Dragonfly.asm" startpal="1" />
+      <MapFile type="ASM" filename="../General/Sprites/Dragonfly/Map - Dragonfly.asm" startpal="1" />
     </ImageFromMappings>
     <ImageFromMappings id="torso" priority="true">
       <ArtFile filename="../General/Sprites/Dragonfly/Dragonfly.bin" compression="KosinskiM" />
-      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Dragonfly.asm" startpal="1" frame="5" />
+      <MapFile type="ASM" filename="../General/Sprites/Dragonfly/Map - Dragonfly.asm" startpal="1" frame="5" />
     </ImageFromMappings>
     <ImageFromMappings id="tail" priority="true">
       <ArtFile filename="../General/Sprites/Dragonfly/Dragonfly.bin" compression="KosinskiM" />
-      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Dragonfly.asm" startpal="1" frame="6" />
+      <MapFile type="ASM" filename="../General/Sprites/Dragonfly/Map - Dragonfly.asm" startpal="1" frame="6" />
     </ImageFromMappings>
     <ImageFromMappings id="wings" priority="true">
       <ArtFile filename="../General/Sprites/Dragonfly/Dragonfly.bin" compression="KosinskiM" />
-      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Dragonfly.asm" startpal="1" frame="7" />
+      <MapFile type="ASM" filename="../General/Sprites/Dragonfly/Map - Dragonfly.asm" startpal="1" frame="7" />
     </ImageFromMappings>
   </Images>
   <Display>

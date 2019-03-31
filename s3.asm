@@ -368,7 +368,7 @@ byte_478:	dc.b $F
 		dc.b "NTSC GENESIS",0
 		dc.b 4
 		dc.b "PAL AND FRENCH SECAM MEGA DRIVE",0
-byte_4C2:       dc.b    0,   0,   0,   0,   0,   0,   0,   0, $18, $18, $18, $18,   0, $18, $18,   0
+byte_4C2:	dc.b    0,   0,   0,   0,   0,   0,   0,   0, $18, $18, $18, $18,   0, $18, $18,   0
 		dc.b  $36, $36, $48,   0,   0,   0,   0,   0, $12, $12, $7F, $12, $7F, $24, $24,   0
 		dc.b    8, $3F, $48, $3E,   9, $7E,   8,   0, $71, $52, $74,   8, $17, $25, $47,   0
 		dc.b  $18, $24, $18, $29, $45, $46, $39,   0, $30, $30, $40,   0,   0,   0,   0,   0
@@ -3706,27 +3706,27 @@ AnPal_PalAIZ2_4:dc.w  $6E, $6E, $6E, $6E,$28E,$4AE,$6AE,$8CE,$8EE,$AEE,$AEE,$AEE
 AnPal_PalAIZ2_5:dc.w   $C,  $C,  $C,  $C, $2C,  $E, $2E, $4E, $6E, $8E, $8E, $8E, $8E, $8E, $6E, $4E
 		dc.w  $4E, $4E, $2E, $2E, $2E,  $E,  $E, $2C, $2C, $2C
 
-AnPal_PalHCZ1:  dc.w $EC8,$EC0,$EA0,$E80,$EC0,$EA0,$E80,$EC8,$EA0,$E80,$EC8,$EC0,$E80,$EC8,$EC0,$EA0
+AnPal_PalHCZ1:	dc.w $EC8,$EC0,$EA0,$E80,$EC0,$EA0,$E80,$EC8,$EA0,$E80,$EC8,$EC0,$E80,$EC8,$EC0,$EA0
 
-AnPal_PalCNZ_1: dc.w    0, $66, $EE, $22, $44, $CC, $44, $22, $AA, $66,   0, $88, $88,   0, $66, $AA
+AnPal_PalCNZ_1:	dc.w    0, $66, $EE, $22, $44, $CC, $44, $22, $AA, $66,   0, $88, $88,   0, $66, $AA
 		dc.w  $22, $44, $CC, $44, $22, $EE, $66,   0, $EE, $88,   0, $CC, $AA, $22, $AA, $CC
 		dc.w  $44, $88, $EE, $66, $66, $EE, $88, $44, $CC, $AA, $22, $AA, $CC,   0, $88, $EE
 
-AnPal_PalCNZ_3: dc.w $E20, $8A,$C0E,$C42, $6C,$E0E,$A64, $4C,$E0C,$884, $2E,$E0A,$6A6,  $E,$E08,$4C6
+AnPal_PalCNZ_3:	dc.w $E20, $8A,$C0E,$C42, $6C,$E0E,$A64, $4C,$E0C,$884, $2E,$E0A,$6A6,  $E,$E08,$4C6
 		dc.w $20E,$E06,$2E8,$40E,$E04, $E8,$60E,$E02, $C8,$80E,$E00, $AA,$A0E,$E00, $8A,$C0E
 		dc.w $E20, $6C,$E0E,$C42, $4C,$E0C,$A64, $2E,$E0A,$884,  $E,$E08,$6A6,$20E,$E06,$4C6
 		dc.w $40E,$E04,$2E8,$60E,$E02, $E8,$80E,$E00, $C8,$A0E,$E00, $AA,$C0E,$E20, $8A,$E0E
 		dc.w $C42, $6C,$E0C,$A64, $4C,$E0A,$884, $2E,$E08,$6A6,  $E,$E06,$4C6,$20E,$E04,$2E8
 		dc.w $40E,$E02, $E8,$60E,$E00, $C8,$80E,$E00, $AA,$A0E
 
-AnPal_PalCNZ_5: dc.w $2E0,$ECE,$4E2,$EAC,$6E4,$E8A,$8E6,$E68,$AE8,$E46,$CEA,$E24,$EEC,$E02,$EEE,$E00
+AnPal_PalCNZ_5:	dc.w $2E0,$ECE,$4E2,$EAC,$6E4,$E8A,$8E6,$E68,$AE8,$E46,$CEA,$E24,$EEC,$E02,$EEE,$E00
 		dc.w $EEC,$E02,$CEA,$E24,$AE8,$E46,$8E6,$E68,$6E4,$E8A,$4E2,$EAC,$2E0,$ECE, $E0,$EEE
 
-AnPal_PalCNZ_2: dc.w $800,$800,$886,$800,$800,$864,$800,$800,$842,$800,$800,$820,$820,$800,$800,$842
+AnPal_PalCNZ_2:	dc.w $800,$800,$886,$800,$800,$864,$800,$800,$842,$800,$800,$820,$820,$800,$800,$842
 		dc.w $800,$800,$864,$800,$800,$886,$800,$800,$886,$820,$800,$864,$842,$800,$842,$864
 		dc.w $800,$820,$886,$800,$800,$886,$820,$800,$864,$842,$800,$842,$864,$800,$820,$886
 
-AnPal_PalCNZ_4: dc.w $E20,$E8A,$E0A,$E42,$E6A,$E0A,$E64,$E4A,$E0A,$E84,$E2A,$E0A,$EA6,$E0A,$E08,$EC6
+AnPal_PalCNZ_4:	dc.w $E20,$E8A,$E0A,$E42,$E6A,$E0A,$E64,$E4A,$E0A,$E84,$E2A,$E0A,$EA6,$E0A,$E08,$EC6
 		dc.w $E0A,$E06,$EE8,$E0A,$E04,$EE8,$E0A,$E02,$EC8,$E0A,$E00,$EAA,$E0A,$E00,$E8A,$E0A
 		dc.w $E20,$E6A,$E0A,$C42,$E4A,$E0A,$E64,$E2A,$E0A,$E84,$E0A,$E08,$EA6,$E0A,$E06,$EC6
 		dc.w $E0A,$E04,$EE8,$E0A,$E02,$EE8,$E0A,$E00,$EC8,$E0A,$E00,$EAA,$E0A,$E20,$E8A,$E0A
@@ -3735,21 +3735,21 @@ AnPal_PalCNZ_4: dc.w $E20,$E8A,$E0A,$E42,$E6A,$E0A,$E64,$E4A,$E0A,$E84,$E2A,$E0A
 		dc.w $8A6,$E66,$AE8,$E44,$CEA,$E22,$EEC,$E00,$EEC,$E00,$EEC,$E00,$CEA,$E22,$AE8,$E44
 		dc.w $8A6,$E66,$884,$E88,$862,$EAA,$840,$ECA,$822,$ECA
 
-AnPal_PalICZ_1: dc.w $E62,$E20,$E44,$E20,$E44,$E00,$E42,$E00,$E62,$C00,$E82,$A00,$EA2,$C00,$EC0,$E00
+AnPal_PalICZ_1:	dc.w $E62,$E20,$E44,$E20,$E44,$E00,$E42,$E00,$E62,$C00,$E82,$A00,$EA2,$C00,$EC0,$E00
 		dc.w $EE0,$E20,$EE4,$E00,$EE4,$C00,$EE4,$A00,$EE0,$800,$EC2,$A00,$EA2,$C00,$E82,$E20
 
-AnPal_PalICZ_2: dc.w $E06,$E08,$E04,$E06,$C04,$E04,$C02,$C04,$A02,$C02,$A00,$A02,$800,$A00,$600,$800
+AnPal_PalICZ_2:	dc.w $E06,$E08,$E04,$E06,$C04,$E04,$C02,$C04,$A02,$C02,$A00,$A02,$800,$A00,$600,$800
 		dc.w $600,$800,$600,$800,$600,$800,$800,$A00,$A00,$A02,$A02,$C02,$C02,$C04,$C04,$E04
 		dc.w $E04,$E06,$E06,$E08
 
-AnPal_PalICZ_3: dc.w $840,$EEA,$860,$EE0,$A80,$EC0,$EC0,$A80,$A80,$EC0,$860,$EE0
+AnPal_PalICZ_3:	dc.w $840,$EEA,$860,$EE0,$A80,$EC0,$EC0,$A80,$A80,$EC0,$860,$EE0
 
-AnPal_PalICZ_4: dc.w  $E8,$CEC, $C8,$AEA, $C8,$AEA, $A6,$6E8, $A6,$6E8, $84, $E8, $84, $E8, $82, $C8
+AnPal_PalICZ_4:	dc.w  $E8,$CEC, $C8,$AEA, $C8,$AEA, $A6,$6E8, $A6,$6E8, $84, $E8, $84, $E8, $82, $C8
 		dc.w  $64, $A6, $64, $A6, $82, $C8, $84, $E8, $A6,$6E8, $C8,$AEA, $E8,$CEC, $E8,$CEC
 
-AnPal_PalLBZ1:  dc.w  $8E0,  $C0,  $80,  $C0,  $80, $8E0,  $80, $8E0,  $C0
+AnPal_PalLBZ1:	dc.w  $8E0,  $C0,  $80,  $C0,  $80, $8E0,  $80, $8E0,  $C0
 
-AnPal_PalLBZ2:  dc.w $EEA,$EA4,$C62,$EA4,$C62,$EEA,$C62,$EEA,$EA4
+AnPal_PalLBZ2:	dc.w $EEA,$EA4,$C62,$EA4,$C62,$EEA,$C62,$EEA,$EA4
 
 AnPal_PalLRZ1_1:dc.w  $EE, $AE, $6E,  $E, $AE, $6E,  $E, $EE, $6E,  $E, $EE,$2CE, $2E,$8EE,$4EE, $6E
 		dc.w $AEE,$6EE, $8E, $4E,$4EE, $6E, $2E,$8EE, $6E,  $E, $EE,$2CE,  $E, $EE,$2CE, $6E
@@ -3759,21 +3759,21 @@ AnPal_PalLRZ1_1:dc.w  $EE, $AE, $6E,  $E, $AE, $6E,  $E, $EE, $6E,  $E, $EE,$2CE
 AnPal_PalLRZ1_2:dc.w $224,$224,$224,$424,$224,$426,$426,$224,$424,$224,$224,$224,$224,$224,$224,$422
 		dc.w $422,$422
 
-AnPal_PalBPZ_1: dc.w  $EE, $AE, $6C, $AE, $6E, $EE, $6E, $EE, $AE
+AnPal_PalBPZ_1:	dc.w  $EE, $AE, $6C, $AE, $6E, $EE, $6E, $EE, $AE
 
-AnPal_PalBPZ_2: dc.w $EE0,$E0E, $EE,$EA0,$A0E, $EA,$E60,$60E, $E6,$E20,$20E, $E2,$E02, $2E,$2E0,$E06
+AnPal_PalBPZ_2:	dc.w $EE0,$E0E, $EE,$EA0,$A0E, $EA,$E60,$60E, $E6,$E20,$20E, $E2,$E02, $2E,$2E0,$E06
 		dc.w  $6E,$6E0,$E0A, $AE,$AE0,$E0E, $EE,$EE0,$A0E, $EA,$EA0,$60E, $E6,$E60,$20E, $E2
 		dc.w $E20, $2E,$2E0,$E02, $6E,$6E0,$E06, $AE,$AE0,$E0A, $EE,$EE0,$E0E, $EA,$EA0,$A0E
 		dc.w  $E6,$E60,$60E, $E2,$E20,$20E,$2E0,$E02, $2E,$6E0,$E06, $6E,$AE0,$E0A, $AE
 
-AnPal_PalCGZ:   dc.w   $E,   8,   4,$EEE,  $C,   6,   2,$CCE,  $A,   4,   0,$AAE,   8,   2,   0,$88E
+AnPal_PalCGZ:	dc.w   $E,   8,   4,$EEE,  $C,   6,   2,$CCE,  $A,   4,   0,$AAE,   8,   2,   0,$88E
 		dc.w    6,   0,   0,$66E,   4,   0,   0,$44E,   6,   0,   0,$66E,   8,   2,   0,$88E
 		dc.w   $A,   4,   2,$AAE,  $C,   6,   4,$CCE
 
-AnPal_PalEMZ_1: dc.w    6,   8,  $A,  $C,  $E,  $E,  $E,  $E,  $C,  $A,   8,   6,   6,   6,   6,   8
+AnPal_PalEMZ_1:	dc.w    6,   8,  $A,  $C,  $E,  $E,  $E,  $E,  $C,  $A,   8,   6,   6,   6,   6,   8
 		dc.w   $A,  $C,  $E,  $E,  $E,  $C,  $A,   8,   6,   8,  $A,  $A,  $A,   8
 
-AnPal_PalEMZ_2: dc.w    0,  $E,   2,  $C,   4,  $A,   6,   8,   8,   6,  $A,   4,  $C,   2,  $E,   0
+AnPal_PalEMZ_2:	dc.w    0,  $E,   2,  $C,   4,  $A,   6,   8,   8,   6,  $A,   4,  $C,   2,  $E,   0
 		dc.w   $C,   2,  $A,   4,   8,   6,   6,   8,   4,  $A,   2,  $C
 
 ; =============== S U B R O U T I N E =======================================
@@ -29333,7 +29333,7 @@ loc_19486:
 		tst.w	($FFFFEF3A).w
 		beq.s	locret_194B8
 		clr.w	($FFFFEF3A).w
-		lea	($FFFFF7FC).w,a0
+		lea	(Anim_Counters+$C).w,a0
 		move.w	#$7C0,d0
 		moveq	#$4F,d1
 
@@ -31666,8 +31666,8 @@ loc_1A96C:
 		jsr	(Queue_Kos_Module).l
 		st	($FFFFEEC6).w
 		move.w	#$500,(Anim_Counters).w
-		move.w	#$500,($FFFFF7F2).w
-		move.w	#$500,($FFFFF7F4).w
+		move.w	#$500,(Anim_Counters+2).w
+		move.w	#$500,(Anim_Counters+4).w
 
 loc_1A9BE:
 		move.b	#1,(Last_star_post_hit).w
@@ -45772,15 +45772,15 @@ Offs_AniPLC:	dc.w AniPLC_AIZ1-Offs_AniFunc
 		dc.w AnimateTiles_LBZ2-Offs_AniFunc
 		dc.w AniPLC_LBZ2-Offs_AniFunc
 		dc.w AnimateTiles_NULL-Offs_AniFunc
-		dc.w AniPLC_ALZ-Offs_AniFunc
+		dc.w AniPLC_LRZ1-Offs_AniFunc
 		dc.w AnimateTiles_NULL-Offs_AniFunc
-		dc.w AniPLC_ALZ-Offs_AniFunc
+		dc.w AniPLC_LRZ1-Offs_AniFunc
 		dc.w AnimateTiles_NULL-Offs_AniFunc
-		dc.w AniPLC_ALZ-Offs_AniFunc
+		dc.w AniPLC_LRZ1-Offs_AniFunc
 		dc.w AnimateTiles_NULL-Offs_AniFunc
-		dc.w AniPLC_ALZ-Offs_AniFunc
+		dc.w AniPLC_LRZ1-Offs_AniFunc
 		dc.w AnimateTiles_LRZ1-Offs_AniFunc
-		dc.w AniPLC_ALZ-Offs_AniFunc
+		dc.w AniPLC_LRZ1-Offs_AniFunc
 		dc.w AnimateTiles_NULL-Offs_AniFunc
 		dc.w AniPLC_ALZ-Offs_AniFunc
 		dc.w AnimateTiles_NULL-Offs_AniFunc
@@ -45883,7 +45883,7 @@ AnimateTiles_HCZ1:
 ; ---------------------------------------------------------------------------
 
 loc_26BC2:
-		lea	($FFFFF7F4).w,a3
+		lea	(Anim_Counters+4).w,a3
 
 loc_26BC6:
 		moveq	#0,d1
@@ -46009,7 +46009,7 @@ AniHCZ_FixLowerBG:
 
 sub_26D0E:
 		lea	(AniPLC_HCZ1).l,a2
-		lea	($FFFFF7F4).w,a3
+		lea	(Anim_Counters+4).w,a3
 		move.w	($FFFFEEE2).w,d1
 		beq.s	loc_26CB8
 		bpl.s	loc_26D56
@@ -46507,7 +46507,7 @@ loc_27208:
 		bsr.w	loc_275F0
 
 loc_2720C:
-		lea	($FFFFF7FC).w,a3
+		lea	(Anim_Counters+$C).w,a3
 		lea	(AniPLC_LBZSpec).l,a2
 		bra.w	loc_275F0
 ; ---------------------------------------------------------------------------
@@ -46682,7 +46682,7 @@ sub_273A0:
 
 
 sub_273B4:
-		lea	($FFFFF7F4).w,a3
+		lea	(Anim_Counters+4).w,a3
 		move.w	#1,2(a3)
 		move.w	($FFFFEEE2).w,d1
 		beq.s	loc_27384
@@ -46724,7 +46724,7 @@ AnimateTiles_LRZ1:
 		add.w	d2,d1
 		lsr.w	#1,d0
 		lea	word_27446(pc,d0.w),a4
-		lea	(ArtUnc_AniALZ).l,a0
+		lea	(ArtUnc_AniLRZ__BG).l,a0
 		move.w	#$6020,d4
 		add.l	a0,d1
 		move.w	d4,d2
@@ -46777,7 +46777,7 @@ loc_2745E:
 		add.w	d2,d1
 		lsr.w	#1,d0
 		lea	word_274C0(pc,d0.w),a4
-		lea	(ArtUnc_AniALZ).l,a0
+		lea	(ArtUnc_AniLRZ__BG2).l,a0
 		move.w	#$64A0,d4
 		add.l	a0,d1
 		move.w	d4,d2
@@ -47299,6 +47299,7 @@ AniPLC_LBZ2:	dc.w 1
 		dc.b  $C
 		dc.b $10
 		dc.b $14
+AniPLC_LRZ1:
 AniPLC_ALZ:	dc.w 0
 		dc.l ArtUnc_AniALZ+$9000000
 		dc.w $4700
@@ -47372,43 +47373,43 @@ Animate_Init:
 loc_278C4:
 		cmpi.w	#$101,(Current_zone_and_act).w
 		bne.s	loc_278D8
-		move.b	#$20,($FFFFF7F1).w
-		move.b	#$40,($FFFFF7F3).w
+		move.b	#$20,(Anim_Counters+1).w
+		move.b	#$40,(Anim_Counters+3).w
 
 loc_278D8:
 		cmpi.b	#3,(Current_zone).w
 		bne.s	loc_27910
-		move.b	#$40,($FFFFF7F1).w
-		move.b	#0,($FFFFF7F2).w
-		move.b	#0,($FFFFF7F4).w
-		move.b	#0,($FFFFF7F6).w
-		move.b	#2,($FFFFF7F8).w
-		move.b	#2,($FFFFF7FA).w
-		move.b	#2,($FFFFF7FC).w
-		move.b	#1,($FFFFF7FE).w
+		move.b	#$40,(Anim_Counters+1).w
+		move.b	#0,(Anim_Counters+2).w
+		move.b	#0,(Anim_Counters+4).w
+		move.b	#0,(Anim_Counters+6).w
+		move.b	#2,(Anim_Counters+8).w
+		move.b	#2,(Anim_Counters+$A).w
+		move.b	#2,(Anim_Counters+$C).w
+		move.b	#1,(Anim_Counters+$E).w
 
 loc_27910:
 		cmpi.w	#$600,(Current_zone_and_act).w
 		bne.s	loc_2791E
-		move.b	#$20,($FFFFF7F3).w
+		move.b	#$20,(Anim_Counters+3).w
 
 loc_2791E:
 		cmpi.w	#$601,(Current_zone_and_act).w
 		bne.s	loc_27930
 		bsr.w	sub_273B4
-		move.b	#$10,($FFFFF7F1).w
+		move.b	#$10,(Anim_Counters+1).w
 
 loc_27930:
 		cmpi.w	#$900,(Current_zone_and_act).w
 		bne.s	loc_27944
-		move.b	#-1,($FFFFF7F1).w
-		move.b	#-1,($FFFFF7F3).w
+		move.b	#-1,(Anim_Counters+1).w
+		move.b	#-1,(Anim_Counters+3).w
 
 loc_27944:
 		cmpi.w	#$1000,(Current_zone_and_act).w
 		bne.s	locret_27958
-		move.b	#$40,($FFFFF7F1).w
-		move.b	#$40,($FFFFF7F3).w
+		move.b	#$40,(Anim_Counters+1).w
+		move.b	#$40,(Anim_Counters+3).w
 
 locret_27958:
 		rts
@@ -48004,7 +48005,7 @@ loc_283DC:
 		beq.s	loc_283F0
 		subq.w	#1,$30(a0)
 		bne.s	loc_28448
-		move.w	#0,($FFFFF7F4).w
+		move.w	#0,(Anim_Counters+4).w
 		bra.s	loc_2846E
 ; ---------------------------------------------------------------------------
 
@@ -48013,7 +48014,7 @@ loc_283F0:
 		beq.s	loc_2846E
 		clr.b	$29(a0)
 		move.w	#$81,$30(a0)
-		move.w	#1,($FFFFF7F4).w
+		move.w	#1,(Anim_Counters+4).w
 		btst	#0,$2C(a0)
 		bne.s	locret_28446
 
@@ -76439,7 +76440,7 @@ loc_3F306:
 		move.w	#$F,$2E(a0)
 		rts
 ; ---------------------------------------------------------------------------
-RawAni_3F320:   dc.b  $5A,   1, $59,   1, $55,   0, $56,   0, $57,   0
+RawAni_3F320:	dc.b  $5A,   1, $59,   1, $55,   0, $56,   0, $57,   0
 ; ---------------------------------------------------------------------------
 
 loc_3F32A:
@@ -96417,7 +96418,7 @@ byte_4F430:	dc.b  $10,   1
 		dc.b  $F4,   5
 		dc.b    0,   1
 		dc.b  $FC,   0
-Pal_ICZEndBoss: binclude "Levels/ICZ/Palettes/End Boss.bin"
+Pal_ICZEndBoss:	binclude "Levels/ICZ/Palettes/End Boss.bin"
 		even
 byte_4F464:	dc.b    0,   2
 		dc.b    4,   2
@@ -115685,7 +115686,7 @@ loc_5A84E:
 		move.l	#loc_5A8E6,$34(a0)
 		moveq	#-$30,d0
 		jsr	(Play_Sound_2).l
-		st	($FFFFF7FF).w
+		st	(Anim_Counters+$F).w
 		move.w	#$6000,($FFFFFA92).w
 		lea	Child6_IncLevX(pc),a2
 		jsr	CreateChild6_Simple(pc)
@@ -115901,7 +115902,7 @@ ObjDat3_5AAEE:	dc.l Map_RobotnikShip
 		dc.b 0
 ;		1st PLC		palette                          2nd 8x8 data                                       2nd 16x16 data                                     2nd 128x128 data
 ;			2nd PLC           1st 8x8 data                                    1st 16x16 data                                      1st 128x128 data
-LevelLoadBlock: levartptrs $B,  $B,  $A,  AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Primary_Kos,   AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos
+LevelLoadBlock:	levartptrs $B,  $B,  $A,  AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Primary_Kos,   AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos
 		levartptrs $C,  $C,  $B,  AIZ2_8x8_Primary_KosM, AIZ2_8x8_Secondary_KosM, AIZ2_16x16_Primary_Kos,   AIZ2_16x16_Secondary_Kos, AIZ2_128x128_Kos,        AIZ2_128x128_Kos
 		levartptrs $E,  $F,  $C,  HCZ_8x8_Primary_KosM,  HCZ1_8x8_Secondary_KosM, HCZ_16x16_Primary_Kos,    HCZ1_16x16_Secondary_Kos, HCZ_128x128_Primary_Kos, HCZ1_128x128_Secondary_Kos
 		levartptrs $10, $11, $D,  HCZ_8x8_Primary_KosM,  HCZ2_8x8_Secondary_KosM, HCZ_16x16_Primary_Kos,    HCZ2_16x16_Secondary_Kos, HCZ_128x128_Primary_Kos, HCZ2_128x128_Secondary_Kos
@@ -116715,29 +116716,29 @@ Debug_Ending: dbglistheader
 Debug_Ending_End
 
 Debug_ALZ: dbglistheader
-	include "Levels/ALZ/Debug/Main.asm"
+		include "Levels/ALZ/Debug/Main.asm"
 Debug_ALZ_End
 
 Debug_BPZ: dbglistheader
-	include "Levels/BPZ/Debug/Main.asm"
+		include "Levels/BPZ/Debug/Main.asm"
 Debug_BPZ_End
 
 Debug_DPZ: dbglistheader
-	include "Levels/DPZ/Debug/Main.asm"
+		include "Levels/DPZ/Debug/Main.asm"
 Debug_DPZ_End
 
 Debug_CGZ: dbglistheader
-	include "Levels/CGZ/Debug/Main.asm"
+		include "Levels/CGZ/Debug/Main.asm"
 Debug_CGZ_End
 
 Debug_EMZ: dbglistheader
-	include "Levels/EMZ/Debug/Main.asm"
+		include "Levels/EMZ/Debug/Main.asm"
 Debug_EMZ_End
 
 Debug_Pachinko_Special:
 Debug_HPZ:
-Debug_Gumball_Special:dbglistheader
-	include "Levels/Gumball/Debug/S3.asm"
+Debug_Gumball_Special: dbglistheader
+		include "Levels/Gumball/Debug/S3.asm"
 Debug_Gumball_Special_End
 
 Sprite_Listing:	include "Levels/Misc/Object pointers - S3 Set.asm"
@@ -117679,7 +117680,7 @@ Pal_Unknown2:	binclude "Levels/Misc/Palettes/Unknown 2 S3.bin"
 		even
 Pal_Unknown3:	binclude "Levels/Misc/Palettes/Unknown 3 S3.bin"
 		even
-Pal_SonicTails: binclude "General/Sprites/Sonic/Palettes/SonicAndTails.bin"
+Pal_SonicTails:	binclude "General/Sprites/Sonic/Palettes/SonicAndTails.bin"
 		even
 Pal_S2Menu:	binclude "General/Sprites/S2Menu/Palettes/Main.bin"
 		even
@@ -117988,6 +117989,8 @@ ArtUnc_AniLBZ2_0:
 ArtUnc_AniLBZ2_1:
 		binclude "Levels/LBZ/Animated Tiles/Act2 1.bin"
 		even
+ArtUnc_AniLRZ__BG:
+ArtUnc_AniLRZ__BG2:
 ArtUnc_AniALZ:	binclude "Levels/ALZ/Animated Tiles/0.bin"
 		even
 ArtUnc_AniBPZ__0:
