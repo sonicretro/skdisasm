@@ -119123,6 +119123,11 @@ ArtNem_SonicLifeIcon:
 ArtNem_TailsLifeIcon:
 		binclude "General/Sprites/HUD Icon/Tails Life Icon.bin"
 		even
+ArtNem_KnucklesLifeIcon:
+		binclude "General/Sprites/HUD Icon/Knuckles life icon.bin"
+		even
+ArtNem_Ring:	binclude "General/Sprites/Ring/Ring.bin"
+		even
 ArtNem_Monitors:binclude "General/Sprites/Monitors/Monitors.bin"
 		even
 ArtNem_VerticalSpikes:
@@ -119146,6 +119151,12 @@ ArtNem_GameOver:binclude "General/Sprites/Game Over/GameOver.bin"
 ArtNem_Explosion:
 		binclude "General/Sprites/Enemy Misc/Explosion.bin"
 		even
+ArtNem_ContinueTails:
+		binclude "General/Sprites/S2Menu/Tails Continue Sprites.bin"
+		even
+ArtNem_MiniSonic:
+		binclude "General/Sprites/S2Menu/Sonic Continue Icon.bin"
+		even
 ArtNem_MiniTails:
 		binclude "General/Sprites/S2Menu/Tails Continue Icon.bin"
 		even
@@ -119159,6 +119170,8 @@ ArtNem_EnemyPtsStarPost:
 		binclude "General/Sprites/Enemy Misc/EnemyPtsStarpost.bin"
 		even
 ArtNem_Seal:	binclude "General/Sprites/Animals/Seal.bin"
+		even
+ArtNem_Pig:	binclude "General/Sprites/Animals/Pig.bin"
 		even
 ArtNem_BlueFlicky:
 		binclude "General/Sprites/Animals/Blue Flicky.bin"

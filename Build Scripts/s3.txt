@@ -147,7 +147,8 @@
 #split	0x0015C988,0x0015CACE,General\Sprites\Level Misc\Vertical Spring.bin
 #split	0x0015CACE,0x0015CBD2,General\Sprites\Level Misc\Horizontal Spring.bin
 #split	0x0015CDBA,0x0015CEE6,General\Sprites\HUD Icon\HUD Text.bin
-#split	0x0015CFFE,0x0015D2DE,General\Sprites\HUD Icon\Tails Life Icon.bin
+#split	0x0015CFFE,0x0015D0E8,General\Sprites\HUD Icon\Tails Life Icon.bin
+#split	0x0015D1E6,0x0015D2DE,General\Sprites\Ring\Ring.bin
 #split	0x0015D738,0x0015D794,General\Sprites\Level Misc\Vertical Spikes.bin
 #split	0x0015D794,0x0015D7FC,General\Sprites\Level Misc\Horizontal Spikes.bin
 #split	0x0015D7FC,0x0015D8A2,General\Sprites\Enemy Misc\Enemy Points.bin
