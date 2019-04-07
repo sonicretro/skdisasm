@@ -3826,6 +3826,8 @@ SuperSonic_PalCycle_Revert:
 		move.w	(Palette_frame).w,d0
 		subq.w	#6,(Palette_frame).w
 		bcc.s	loc_3194
+		; Bug: this only clears the high byte of Palette_frame, causing subsequent
+		; fade-ins to pull color values from Pal_FromBlack
 		move.b	#0,(Palette_frame).w
 		move.b	#0,(Super_palette_status).w
 
@@ -28800,7 +28802,9 @@ loc_19028:
 		bclr	#7,(a2)
 
 loc_19034:
-		move.w	($30).w,d0
+		; Bug: probably meant to be $30(a0), as Test_Ring_Collisions_AttractRing
+		; stores the ring's address in the ring status table there
+		move.w	$30,d0
 		beq.s	loc_19040
 		movea.w	d0,a2
 		move.w	#0,(a2)
@@ -35533,6 +35537,8 @@ sub_1D436:
 		bsr.s	sub_1D44C
 		lea	(Player_2).w,a1
 		lea	$34(a0),a2
+		; Bug: if player 1 was riding the object, then d6 may have become dirty from
+		; a call to Perform_Player_DPLC, causing player 2 to behave erratically
 		addq.b	#1,d6
 ; End of function sub_1D436
 
@@ -45207,13 +45213,15 @@ loc_2634C:
 
 
 sub_2636C:
-		lea	($30).w,a2
+		; Bug: probably meant to be $30(a0)
+		lea	$30,a2
 		lea	(Player_1).w,a1
 		moveq	#3,d6
 		movem.l	d1-d3,-(sp)
 		bsr.s	sub_2638A
 		movem.l	(sp)+,d1-d3
-		lea	($34).w,a2
+		; Bug: probably meant to be $34(a0)
+		lea	$34,a2
 		lea	(Player_2).w,a1
 		addq.b	#1,d6
 ; End of function sub_2636C
@@ -56782,7 +56790,9 @@ loc_303CC:
 loc_303DA:
 		lea	(Ani_CNZBalloon).l,a1
 		jsr	(Animate_Sprite).l
-		tst.b	(5).w
+		; Bug: probably meant to be 5(a0), and at some point the animation terminated
+		; with code $FC (increment routine counter) rather than $FB (move offscreen)
+		tst.b	5
 		beq.s	loc_303F2
 		move.w	#$7F00,$10(a0)
 
@@ -59812,6 +59822,8 @@ loc_32A98:
 		bsr.s	sub_32AFE
 		lea	(Player_2).w,a1
 		lea	$34(a0),a2
+		; Bug: if player 1 was riding the object, then d6 may have become dirty from
+		; a call to Perform_Player_DPLC, causing player 2 to behave erratically
 		addq.b	#1,d6
 		move.w	(Ctrl_2_logical).w,d5
 		bsr.s	sub_32AFE
@@ -100438,6 +100450,7 @@ loc_51D52:
 
 loc_51D78:
 		tst.b	$30(a0)
+		; Bug: this branch is inverted, freeing the player if they're _not_ being held
 		bne.s	loc_51D82
 		jsr	Restore_PlayerControl(pc)
 
