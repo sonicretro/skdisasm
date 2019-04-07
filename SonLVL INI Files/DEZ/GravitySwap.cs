@@ -57,7 +57,7 @@ namespace S3KObjectDefinitions.DEZ
 			properties = new PropertySpec[2];
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);
 			sprite = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../General/Sprites/Ring/Ring.bin", CompressionType.Nemesis),
+				"../General/Sprites/Ring/RingHUDText.bin", CompressionType.Nemesis),
 				"../General/Sprites/Level Misc/Map - Path Swap.asm", 0, 2, true);
 
 			properties[0] = new PropertySpec("Left Gravity", typeof(int), "Extended",

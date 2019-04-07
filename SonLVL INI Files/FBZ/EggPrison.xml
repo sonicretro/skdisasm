@@ -14,7 +14,7 @@
       <MapFile type="ASM" filename="../General/Sprites/Animals/Map - Animals 3.asm" />
     </ImageFromMappings>
     <ImageFromMappings id="ring">
-      <ArtFile filename="../General/Sprites/Ring/Ring.bin" />
+      <ArtFile filename="../General/Sprites/Ring/RingHUDText.bin" />
       <MapFile type="ASM" filename="../General/Sprites/Ring/Map - Ring.asm" frame="1" startpal="1" />
     </ImageFromMappings>
     <ImageFromMappings id="enemy">

@@ -116090,7 +116090,7 @@ Offs_PLC:	dc.w PLC_00-Offs_PLC
 
 PLC_00: plrlistheader
 		plreq $7D4, ArtNem_SonicLifeIcon
-		plreq ArtTile_Ring, ArtNem_Ring
+		plreq ArtTile_Ring, ArtNem_RingHUDText
 		plreq $5E4, ArtNem_EnemyPtsStarPost
 		plreq ArtTile_Monitors, ArtNem_Monitors
 PLC_00_End
@@ -116098,7 +116098,7 @@ PLC_00_End
 PLC_01: plrlistheader
 		plreq $7D4, ArtNem_SonicLifeIcon
 		plreq ArtTile_Monitors, ArtNem_Monitors
-		plreq ArtTile_Ring, ArtNem_Ring
+		plreq ArtTile_Ring, ArtNem_RingHUDText
 		plreq $5E4, ArtNem_EnemyPtsStarPost
 PLC_01_End
 
@@ -116129,7 +116129,7 @@ PLC_06_End
 PLC_07: plrlistheader
 		plreq $7D4, ArtNem_TailsLifeIcon
 		plreq ArtTile_Monitors, ArtNem_Monitors
-		plreq ArtTile_Ring, ArtNem_Ring
+		plreq ArtTile_Ring, ArtNem_RingHUDText
 		plreq $5E4, ArtNem_EnemyPtsStarPost
 PLC_07_End
 
@@ -119152,7 +119152,8 @@ ArtNem_MiniTails:
 ArtNem_SpikesSprings:
 		binclude "General/Sprites/Level Misc/SpikesSprings.bin"
 		even
-ArtNem_Ring:	binclude "General/Sprites/Ring/Ring.bin"
+ArtNem_RingHUDText:
+		binclude "General/Sprites/Ring/RingHUDText.bin"
 		even
 ArtNem_EnemyPtsStarPost:
 		binclude "General/Sprites/Enemy Misc/EnemyPtsStarpost.bin"
@@ -119585,7 +119586,7 @@ ArtUnc_SSEntryFlash:
 		binclude "General/Sprites/SS Entry/Entry Flash.bin"
 		even
 ArtKosM_BadnikExplosion:
-		binclude "General/Sprites/Enemy Misc/Badnik Explosion.bin"
+		binclude "General/Sprites/SS Entry/Badnik Explosion.bin"
 		even
 ArtNem_BonusStage:
 		binclude "General/Sprites/Bonus/Bonus Stage.bin"
