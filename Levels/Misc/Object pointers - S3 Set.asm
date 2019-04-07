@@ -196,7 +196,6 @@
 		dc.l Obj_ICZ_TensionPlatform		; 195
 		dc.l Obj_9F_1				; 196
 		dc.l Obj_HiddenMonitor			; 197
-
 		dc.l Obj_81				; 198
 		dc.l Obj_CutsceneKnuckles		; 199
 		dc.l Obj_BB_1				; 200
