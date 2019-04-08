@@ -68716,7 +68716,7 @@ loc_39E80:
 ApplyDeformation:
 		move.w	#$DF,d1
 
-loc_39E90:
+ApplyDeformation3:
 		lea	(H_scroll_buffer).w,a1
 		move.w	(Camera_Y_pos_BG_copy).w,d0
 		move.w	(Camera_X_pos_copy).w,d3
@@ -69013,15 +69013,15 @@ Reset_TileOffsetPositionEff:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_3A03C:
+Update_CameraPositionP2:
 		move.w	(Camera_X_pos_P2).w,(Camera_X_pos_P2_copy).w
 		move.w	(Camera_Y_pos_P2).w,(Camera_Y_pos_P2_copy).w
 		rts
-; End of function sub_3A03C
+; End of function Update_CameraPositionP2
 
 ; ---------------------------------------------------------------------------
 
-loc_3A04A:
+Update_VScrollValueP2:
 		move.w	(Camera_Y_pos_P2_copy).w,d0
 		subi.w	#$70,d0
 		move.w	d0,(V_scroll_value_P2).w
@@ -69247,7 +69247,7 @@ sub_3A626:
 ; ---------------------------------------------------------------------------
 
 Comp_ScreenInit:
-		jsr	sub_3A03C(pc)
+		jsr	Update_CameraPositionP2(pc)
 		move.w	(Camera_X_pos_copy).w,d0
 		move.w	d0,($FFFFEEB4).w
 		move.w	d0,($FFFFEEB6).w
@@ -69275,7 +69275,7 @@ Comp_ScreenInit:
 
 
 Comp_ScreenEvent:
-		jsr	sub_3A03C(pc)
+		jsr	Update_CameraPositionP2(pc)
 		move.w	(Screen_X_wrap_value).w,d2
 		addq.w	#1,d2
 		move.w	d2,d3
@@ -69393,7 +69393,7 @@ loc_3A764:
 		move.w	(Camera_X_pos_P2_copy).w,d3
 		moveq	#$73,d1
 		jsr	ApplyDeformation2(pc)
-		jmp	loc_3A04A(pc)
+		jmp	Update_VScrollValueP2(pc)
 ; End of function ALZ_BackgroundEvent
 
 
@@ -69411,7 +69411,7 @@ DPZ_BackgroundEvent:
 		move.w	($FFFFEE70).w,d1
 		moveq	#$1C,d2
 		bsr.s	sub_3A7BA
-		jmp	loc_3A04A(pc)
+		jmp	Update_VScrollValueP2(pc)
 ; End of function DPZ_BackgroundEvent
 
 
@@ -70383,7 +70383,7 @@ AIZ1_ApplyDeformWater:
 
 loc_3B0EE:
 		subq.w	#1,d1
-		jsr	loc_39E90(pc)
+		jsr	ApplyDeformation3(pc)
 		move.l	a1,-(sp)
 		lea	($FFFFA840).w,a1
 		lea	AIZ1_WaterFGDeformDelta(pc),a6
