@@ -2,35 +2,35 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Auto Spin" Image="vert1" Depth="5" Debug="true">
   <Images>
     <ImageFromMappings id="vert1">
-      <ArtFile filename="../General/Sprites/Ring/Ring.bin" />
+      <ArtFile filename="../General/Sprites/Ring/RingHUDText.bin" />
       <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - Path Swap.asm" frame="0" />
     </ImageFromMappings>
     <ImageFromMappings id="vert2">
-      <ArtFile filename="../General/Sprites/Ring/Ring.bin" />
+      <ArtFile filename="../General/Sprites/Ring/RingHUDText.bin" />
       <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - Path Swap.asm" frame="1" />
     </ImageFromMappings>
     <ImageFromMappings id="vert3">
-      <ArtFile filename="../General/Sprites/Ring/Ring.bin" />
+      <ArtFile filename="../General/Sprites/Ring/RingHUDText.bin" />
       <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - Path Swap.asm" frame="2" />
     </ImageFromMappings>
     <ImageFromMappings id="vert4">
-      <ArtFile filename="../General/Sprites/Ring/Ring.bin" />
+      <ArtFile filename="../General/Sprites/Ring/RingHUDText.bin" />
       <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - Path Swap.asm" frame="3" />
     </ImageFromMappings>
     <ImageFromMappings id="horiz1">
-      <ArtFile filename="../General/Sprites/Ring/Ring.bin" />
+      <ArtFile filename="../General/Sprites/Ring/RingHUDText.bin" />
       <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - Path Swap.asm" frame="4" />
     </ImageFromMappings>
     <ImageFromMappings id="horiz2">
-      <ArtFile filename="../General/Sprites/Ring/Ring.bin" />
+      <ArtFile filename="../General/Sprites/Ring/RingHUDText.bin" />
       <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - Path Swap.asm" frame="5" />
     </ImageFromMappings>
     <ImageFromMappings id="horiz3">
-      <ArtFile filename="../General/Sprites/Ring/Ring.bin" />
+      <ArtFile filename="../General/Sprites/Ring/RingHUDText.bin" />
       <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - Path Swap.asm" frame="6" />
     </ImageFromMappings>
     <ImageFromMappings id="horiz4">
-      <ArtFile filename="../General/Sprites/Ring/Ring.bin" />
+      <ArtFile filename="../General/Sprites/Ring/RingHUDText.bin" />
       <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - Path Swap.asm" frame="7" />
     </ImageFromMappings>
   </Images>

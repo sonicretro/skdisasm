@@ -16,7 +16,7 @@ namespace S3KObjectDefinitions.SOZ
 
 		public override void Init(ObjectData data)
 		{
-			var art = LevelData.ReadFile("../General/Sprites/Ring/Ring.bin", CompressionType.Nemesis);
+			var art = LevelData.ReadFile("../General/Sprites/Ring/RingHUDText.bin", CompressionType.Nemesis);
 			var map = LevelData.ASMToBin(
 				"../General/Sprites/Level Misc/Map - Path Swap.asm", LevelData.Game.MappingsVersion);
 

@@ -3826,6 +3826,8 @@ SuperSonic_PalCycle_Revert:
 		move.w	(Palette_frame).w,d0
 		subq.w	#6,(Palette_frame).w
 		bcc.s	loc_3194
+		; Bug: this only clears the high byte of Palette_frame, causing subsequent
+		; fade-ins to pull color values from Pal_FromBlack
 		move.b	#0,(Palette_frame).w
 		move.b	#0,(Super_palette_status).w
 
@@ -28800,7 +28802,9 @@ loc_19028:
 		bclr	#7,(a2)
 
 loc_19034:
-		move.w	($30).w,d0
+		; Bug: probably meant to be $30(a0), as Test_Ring_Collisions_AttractRing
+		; stores the ring's address in the ring status table there
+		move.w	$30,d0
 		beq.s	loc_19040
 		movea.w	d0,a2
 		move.w	#0,(a2)
@@ -35533,6 +35537,8 @@ sub_1D436:
 		bsr.s	sub_1D44C
 		lea	(Player_2).w,a1
 		lea	$34(a0),a2
+		; Bug: if player 1 was riding the object, then d6 may have become dirty from
+		; a call to Perform_Player_DPLC, causing player 2 to behave erratically
 		addq.b	#1,d6
 ; End of function sub_1D436
 
@@ -45207,13 +45213,15 @@ loc_2634C:
 
 
 sub_2636C:
-		lea	($30).w,a2
+		; Bug: probably meant to be $30(a0)
+		lea	$30,a2
 		lea	(Player_1).w,a1
 		moveq	#3,d6
 		movem.l	d1-d3,-(sp)
 		bsr.s	sub_2638A
 		movem.l	(sp)+,d1-d3
-		lea	($34).w,a2
+		; Bug: probably meant to be $34(a0)
+		lea	$34,a2
 		lea	(Player_2).w,a1
 		addq.b	#1,d6
 ; End of function sub_2636C
@@ -56782,7 +56790,9 @@ loc_303CC:
 loc_303DA:
 		lea	(Ani_CNZBalloon).l,a1
 		jsr	(Animate_Sprite).l
-		tst.b	(5).w
+		; Bug: probably meant to be 5(a0), and at some point the animation terminated
+		; with code $FC (increment routine counter) rather than $FB (move offscreen)
+		tst.b	5
 		beq.s	loc_303F2
 		move.w	#$7F00,$10(a0)
 
@@ -59812,6 +59822,8 @@ loc_32A98:
 		bsr.s	sub_32AFE
 		lea	(Player_2).w,a1
 		lea	$34(a0),a2
+		; Bug: if player 1 was riding the object, then d6 may have become dirty from
+		; a call to Perform_Player_DPLC, causing player 2 to behave erratically
 		addq.b	#1,d6
 		move.w	(Ctrl_2_logical).w,d5
 		bsr.s	sub_32AFE
@@ -68716,7 +68728,7 @@ loc_39E80:
 ApplyDeformation:
 		move.w	#$DF,d1
 
-loc_39E90:
+ApplyDeformation3:
 		lea	(H_scroll_buffer).w,a1
 		move.w	(Camera_Y_pos_BG_copy).w,d0
 		move.w	(Camera_X_pos_copy).w,d3
@@ -69013,15 +69025,15 @@ Reset_TileOffsetPositionEff:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_3A03C:
+Update_CameraPositionP2:
 		move.w	(Camera_X_pos_P2).w,(Camera_X_pos_P2_copy).w
 		move.w	(Camera_Y_pos_P2).w,(Camera_Y_pos_P2_copy).w
 		rts
-; End of function sub_3A03C
+; End of function Update_CameraPositionP2
 
 ; ---------------------------------------------------------------------------
 
-loc_3A04A:
+Update_VScrollValueP2:
 		move.w	(Camera_Y_pos_P2_copy).w,d0
 		subi.w	#$70,d0
 		move.w	d0,(V_scroll_value_P2).w
@@ -69247,7 +69259,7 @@ sub_3A626:
 ; ---------------------------------------------------------------------------
 
 Comp_ScreenInit:
-		jsr	sub_3A03C(pc)
+		jsr	Update_CameraPositionP2(pc)
 		move.w	(Camera_X_pos_copy).w,d0
 		move.w	d0,($FFFFEEB4).w
 		move.w	d0,($FFFFEEB6).w
@@ -69275,7 +69287,7 @@ Comp_ScreenInit:
 
 
 Comp_ScreenEvent:
-		jsr	sub_3A03C(pc)
+		jsr	Update_CameraPositionP2(pc)
 		move.w	(Screen_X_wrap_value).w,d2
 		addq.w	#1,d2
 		move.w	d2,d3
@@ -69393,7 +69405,7 @@ loc_3A764:
 		move.w	(Camera_X_pos_P2_copy).w,d3
 		moveq	#$73,d1
 		jsr	ApplyDeformation2(pc)
-		jmp	loc_3A04A(pc)
+		jmp	Update_VScrollValueP2(pc)
 ; End of function ALZ_BackgroundEvent
 
 
@@ -69411,7 +69423,7 @@ DPZ_BackgroundEvent:
 		move.w	($FFFFEE70).w,d1
 		moveq	#$1C,d2
 		bsr.s	sub_3A7BA
-		jmp	loc_3A04A(pc)
+		jmp	Update_VScrollValueP2(pc)
 ; End of function DPZ_BackgroundEvent
 
 
@@ -70383,7 +70395,7 @@ AIZ1_ApplyDeformWater:
 
 loc_3B0EE:
 		subq.w	#1,d1
-		jsr	loc_39E90(pc)
+		jsr	ApplyDeformation3(pc)
 		move.l	a1,-(sp)
 		lea	($FFFFA840).w,a1
 		lea	AIZ1_WaterFGDeformDelta(pc),a6
@@ -100438,6 +100450,7 @@ loc_51D52:
 
 loc_51D78:
 		tst.b	$30(a0)
+		; Bug: this branch is inverted, freeing the player if they're _not_ being held
 		bne.s	loc_51D82
 		jsr	Restore_PlayerControl(pc)
 
@@ -116077,7 +116090,7 @@ Offs_PLC:	dc.w PLC_00-Offs_PLC
 
 PLC_00: plrlistheader
 		plreq $7D4, ArtNem_SonicLifeIcon
-		plreq ArtTile_Ring, ArtNem_Ring
+		plreq ArtTile_Ring, ArtNem_RingHUDText
 		plreq $5E4, ArtNem_EnemyPtsStarPost
 		plreq ArtTile_Monitors, ArtNem_Monitors
 PLC_00_End
@@ -116085,7 +116098,7 @@ PLC_00_End
 PLC_01: plrlistheader
 		plreq $7D4, ArtNem_SonicLifeIcon
 		plreq ArtTile_Monitors, ArtNem_Monitors
-		plreq ArtTile_Ring, ArtNem_Ring
+		plreq ArtTile_Ring, ArtNem_RingHUDText
 		plreq $5E4, ArtNem_EnemyPtsStarPost
 PLC_01_End
 
@@ -116116,7 +116129,7 @@ PLC_06_End
 PLC_07: plrlistheader
 		plreq $7D4, ArtNem_TailsLifeIcon
 		plreq ArtTile_Monitors, ArtNem_Monitors
-		plreq ArtTile_Ring, ArtNem_Ring
+		plreq ArtTile_Ring, ArtNem_RingHUDText
 		plreq $5E4, ArtNem_EnemyPtsStarPost
 PLC_07_End
 
@@ -119110,6 +119123,11 @@ ArtNem_SonicLifeIcon:
 ArtNem_TailsLifeIcon:
 		binclude "General/Sprites/HUD Icon/Tails Life Icon.bin"
 		even
+ArtNem_KnucklesLifeIcon:
+		binclude "General/Sprites/HUD Icon/Knuckles life icon.bin"
+		even
+ArtNem_Ring:	binclude "General/Sprites/Ring/Ring.bin"
+		even
 ArtNem_Monitors:binclude "General/Sprites/Monitors/Monitors.bin"
 		even
 ArtNem_VerticalSpikes:
@@ -119133,18 +119151,27 @@ ArtNem_GameOver:binclude "General/Sprites/Game Over/GameOver.bin"
 ArtNem_Explosion:
 		binclude "General/Sprites/Enemy Misc/Explosion.bin"
 		even
+ArtNem_ContinueTails:
+		binclude "General/Sprites/S2Menu/Tails Continue Sprites.bin"
+		even
+ArtNem_MiniSonic:
+		binclude "General/Sprites/S2Menu/Sonic Continue Icon.bin"
+		even
 ArtNem_MiniTails:
 		binclude "General/Sprites/S2Menu/Tails Continue Icon.bin"
 		even
 ArtNem_SpikesSprings:
 		binclude "General/Sprites/Level Misc/SpikesSprings.bin"
 		even
-ArtNem_Ring:	binclude "General/Sprites/Ring/Ring.bin"
+ArtNem_RingHUDText:
+		binclude "General/Sprites/Ring/RingHUDText.bin"
 		even
 ArtNem_EnemyPtsStarPost:
 		binclude "General/Sprites/Enemy Misc/EnemyPtsStarpost.bin"
 		even
 ArtNem_Seal:	binclude "General/Sprites/Animals/Seal.bin"
+		even
+ArtNem_Pig:	binclude "General/Sprites/Animals/Pig.bin"
 		even
 ArtNem_BlueFlicky:
 		binclude "General/Sprites/Animals/Blue Flicky.bin"
@@ -119572,7 +119599,7 @@ ArtUnc_SSEntryFlash:
 		binclude "General/Sprites/SS Entry/Entry Flash.bin"
 		even
 ArtKosM_BadnikExplosion:
-		binclude "General/Sprites/Enemy Misc/Badnik Explosion.bin"
+		binclude "General/Sprites/SS Entry/Badnik Explosion.bin"
 		even
 ArtNem_BonusStage:
 		binclude "General/Sprites/Bonus/Bonus Stage.bin"

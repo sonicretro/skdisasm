@@ -28,7 +28,7 @@ AIZ1_WaterBGDeformDelta:
 ; ---------------------------------------------------------------------------
 
 Comp_ScreenInit:
-		jsr	(sub_4F314).l
+		jsr	(Update_CameraPositionP2).l
 		move.w	(Camera_X_pos_copy).w,d0
 		move.w	d0,($FFFFEEB4).w
 		move.w	d0,($FFFFEEB6).w
@@ -54,7 +54,7 @@ Comp_ScreenInit:
 ; ---------------------------------------------------------------------------
 
 Comp_ScreenEvent:
-		jsr	(sub_4F314).l
+		jsr	(Update_CameraPositionP2).l
 		move.w	(Screen_X_wrap_value).w,d2
 		addq.w	#1,d2
 		move.w	d2,d3
@@ -168,7 +168,7 @@ loc_23A764:
 		move.w	(Camera_X_pos_P2_copy).w,d3
 		moveq	#$73,d1
 		jsr	(ApplyDeformation2).l
-		jmp	(loc_4F322).l
+		jmp	(Update_VScrollValueP2).l
 ; ---------------------------------------------------------------------------
 
 DPZ_BackgroundEvent:
@@ -182,7 +182,7 @@ DPZ_BackgroundEvent:
 		move.w	($FFFFEE70).w,d1
 		moveq	#$1C,d2
 		bsr.s	sub_23A7BA
-		jmp	(loc_4F322).l
+		jmp	(Update_VScrollValueP2).l
 ; ---------------------------------------------------------------------------
 
 sub_23A7BA:
@@ -674,7 +674,7 @@ AIZ1_ApplyDeformWater:
 
 loc_23B0EE:
 		subq.w	#1,d1
-		jsr	(sub_4F0D2).l
+		jsr	(ApplyDeformation3).l
 		move.l	a1,-(sp)
 		lea	($FFFFA840).w,a1
 		lea	AIZ1_WaterFGDeformDelta(pc),a6
