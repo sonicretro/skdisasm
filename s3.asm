@@ -31526,6 +31526,8 @@ Do_ResizeEvents:
 		move.w	(Current_zone_and_act).w,d0
 		ror.b	#1,d0
 		lsr.w	#6,d0
+		; Bug: this clamps the array index too hard, causing Competition and bonus
+		; stages to execute resize routines meant for the early game levels
 		andi.w	#$3E,d0
 		move.w	LevelResizeArray(pc,d0.w),d0
 		jsr	LevelResizeArray(pc,d0.w)
