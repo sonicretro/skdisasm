@@ -31572,13 +31572,13 @@ LevelResizeArray:dc.w AIZ1_Resize-LevelResizeArray
 		dc.w HCZ2_Resize-LevelResizeArray
 		dc.w MGZ_Resize-LevelResizeArray
 		dc.w MGZ_Resize-LevelResizeArray
-		dc.w NoResize2-LevelResizeArray
-		dc.w NoResize2-LevelResizeArray
-		dc.w NoResize2-LevelResizeArray
-		dc.w NoResize2-LevelResizeArray
+		dc.w No_Resize2-LevelResizeArray
+		dc.w No_Resize2-LevelResizeArray
+		dc.w No_Resize2-LevelResizeArray
+		dc.w No_Resize2-LevelResizeArray
 		dc.w ICZ1_Resize-LevelResizeArray
 		dc.w ICZ2_Resize-LevelResizeArray
-		dc.w NoResize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
 		dc.w LBZ2_Resize-LevelResizeArray
 		dc.w No_Resize3-LevelResizeArray
 		dc.w No_Resize3-LevelResizeArray
@@ -32061,7 +32061,7 @@ locret_1AD84:
 		rts
 ; ---------------------------------------------------------------------------
 
-NoResize2:
+No_Resize2:
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -32128,7 +32128,7 @@ locret_1ADF8:
 		rts
 ; ---------------------------------------------------------------------------
 
-NoResize:
+No_Resize:
 		rts
 ; ---------------------------------------------------------------------------
 
