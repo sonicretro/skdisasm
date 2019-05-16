@@ -107,7 +107,7 @@ namespace S3KObjectDefinitions.Common
 			BuildSpritesSubtypes(7, false);
 		}
 
-		protected void BuildSpritesSubtypes(int startpal, bool s3, string girderart = "../General/Sprites/Enemy Misc/Badnik Explosion.bin")
+		protected void BuildSpritesSubtypes(int startpal, bool s3, string girderart = "../General/Sprites/SS Entry/Badnik Explosion.bin")
 		{
 			var bytes = new byte[s3 ? 7 : 13];
 			for (var i = 0; i < bytes.Length; i++)
