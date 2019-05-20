@@ -186,7 +186,7 @@ def run(build3k, buildS3, buildSK, verify):
 
 	# Build Sonic3&K Complete rom
 	if build3k:
-		build("sonic3k", "-D", "Sonic3_Complete=1", verify);
+		build("sonic3k", "-D", "Sonic3_Complete=1", False);
 
 	# Build Sonic3 rom
 	if buildS3:
@@ -270,19 +270,19 @@ if __name__ == "__main__":
 
 	if build3K == True:
 		print("")
-		ret = build("sonic3k", "-D", "Sonic3_Complete=1")
+		ret = build("sonic3k", "-D", "Sonic3_Complete=1", False)
 		if ret == False:
 			sys.exit(1)
 
 	if buildS3 == True:
 		print("")
-		ret = build("s3built", None, None)
+		ret = build("s3built", None, None, verifyS3)
 		if ret == False:
 			sys.exit(1)
 
 	if buildSK == True:
 		print("")
-		ret = build("skbuilt", "-D", "Sonic3_Complete=0")
+		ret = build("skbuilt", "-D", "Sonic3_Complete=0", verifySK)
 		if ret == False:
 			sys.exit(1)
 
