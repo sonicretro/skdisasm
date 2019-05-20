@@ -42,7 +42,7 @@ def makeDir(path):
 	if not os.path.isdir(path):
 		os.mkdir(path);
 
-def build(targetName, def0, def1):
+def build(targetName, def0, def1, accurate):
 
 	print("Building "+targetName);
 
@@ -105,6 +105,9 @@ def build(targetName, def0, def1):
 	# Create binary
 
 	binaryCommand = [s3p2binBinary, "sonic3k.p", romPath, "sonic3k.h"];
+
+	if accurate:
+		binaryCommand.append("-a");
 
 	# Output file
 
@@ -183,15 +186,15 @@ def run(build3k, buildS3, buildSK, verify):
 
 	# Build Sonic3&K Complete rom
 	if build3k:
-		build("sonic3k", "-D", "Sonic3_Complete=1");
+		build("sonic3k", "-D", "Sonic3_Complete=1", verify);
 
 	# Build Sonic3 rom
 	if buildS3:
-		build("s3built", None, None);
+		build("s3built", None, None, verify);
 
 	# Build S&K rom
 	if buildSK:
-		build("skbuilt", "-D", "Sonic3_Complete=0");
+		build("skbuilt", "-D", "Sonic3_Complete=0", verify);
 
 	# Compare the newly built roms with the originals to make sure they're byte-identical
 	if verify:
