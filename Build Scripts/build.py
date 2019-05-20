@@ -44,7 +44,7 @@ def makeDir(path):
 
 def build(targetName, def0, def1, accurate):
 
-	print("Building "+targetName);
+	print("Building '" + targetName + ".bin'");
 
 	# Create full paths for all files
 	romPath = targetName + ".bin";	
@@ -142,7 +142,7 @@ def check_hash(filePath, sha256_hash, filesize):
 	- filesize: Expected file size.
 	"""
 
-	print("  Checking '" + filePath + "'");
+	print("Checking '" + filePath + "'");
 	actual_size = os.stat(filePath).st_size;
 	if (actual_size != filesize):
 		print("  File size is incorrect.")
@@ -169,7 +169,7 @@ def check_hash(filePath, sha256_hash, filesize):
 		print("  - Actual:   " + hashobj.hexdigest())
 		return False
 
-	print("rom verified ok")
+	print("  ROM verified OK")
 	return True
 
 def run(build3k, buildS3, buildSK, verify):
