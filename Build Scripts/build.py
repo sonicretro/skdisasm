@@ -207,15 +207,16 @@ def usage():
 	print("Syntax: " + sys.argv[0] + " [targets]")
 	print("")
 	print("Options:")
-	print("  -usage    Show command line usage.")
-	print("  -verbose  Verbose error output.")
+	print("  -usage     Show command line usage.")
+	print("  -verbose   Verbose error output.")
+	print("  -accurate  Use accurate sound driver compression.")
 	print("")
 	print("Valid targets:")
-	print("  3K        Sonic 3 & Knuckles")
-	print("  S3        Sonic 3")
-	print("  SK        Sonic & Knuckles")
-	print("  verifyS3  Compare built Sonic 3 to original")
-	print("  verifySK  Compare built Sonic & Knuckles to original")
+	print("  3K         Sonic 3 & Knuckles")
+	print("  S3         Sonic 3")
+	print("  SK         Sonic & Knuckles")
+	print("  verifyS3   Compare built Sonic 3 to original")
+	print("  verifySK   Compare built Sonic & Knuckles to original")
 
 # Main program.
 # NOTE: This file is included by buildS3Complete.py and buildSK.py, so we
@@ -231,6 +232,7 @@ if __name__ == "__main__":
 	buildSK = False
 	verifyS3 = False
 	verifySK = False
+	accurate = False
 
 	# Parse command line parameters.
 	for i in range(1, len(sys.argv)):
@@ -250,6 +252,8 @@ if __name__ == "__main__":
 			sys.exit(0)
 		elif param == "-verbose":
 			verbose_errors = True
+		elif param == "-accurate":
+			accurate = True
 		else:
 			print("Unrecognized option: " + sys.argv[i])
 			usage()
@@ -270,19 +274,19 @@ if __name__ == "__main__":
 
 	if build3K == True:
 		print("")
-		ret = build("sonic3k", "-D", "Sonic3_Complete=1", False)
+		ret = build("sonic3k", "-D", "Sonic3_Complete=1", accurate)
 		if ret == False:
 			sys.exit(1)
 
 	if buildS3 == True:
 		print("")
-		ret = build("s3built", None, None, verifyS3)
+		ret = build("s3built", None, None, accurate)
 		if ret == False:
 			sys.exit(1)
 
 	if buildSK == True:
 		print("")
-		ret = build("skbuilt", "-D", "Sonic3_Complete=0", verifySK)
+		ret = build("skbuilt", "-D", "Sonic3_Complete=0", accurate)
 		if ret == False:
 			sys.exit(1)
 
