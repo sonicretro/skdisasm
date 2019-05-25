@@ -4547,8 +4547,6 @@ zPlaySEGAPCM:
 		padding off
 		!org		Z80_SoundDriver+Size_of_Snd_driver_guess
 
-		align0 $10
-
 ; Z80_Snd_Driver2:
 Z80_SoundDriverData:
 ; ---------------------------------------------------------------------------
@@ -4884,8 +4882,6 @@ z80_UniVoiceBank:
 		restore
 		padding off
 		!org		Z80_SoundDriverData+Size_of_Snd_driver2_guess
-
-		align0 $10
 
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
