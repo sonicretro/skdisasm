@@ -4,7 +4,7 @@ language: c
 script:
   - cd "${TRAVIS_BUILD_DIR}/Build Scripts" && python build.py -verbose 3K
   - cd "${TRAVIS_BUILD_DIR}/Build Scripts" && python build.py -verbose S3
-  - cd "${TRAVIS_BUILD_DIR}/Build Scripts" && python build.py -verbose SK
+  - cd "${TRAVIS_BUILD_DIR}/Build Scripts" && python build.py -verbose -accurate SK
   - cd "${TRAVIS_BUILD_DIR}/Build Scripts" && python build.py -verbose verifyS3
   - cd "${TRAVIS_BUILD_DIR}/Build Scripts" && python build.py -verbose verifySK
 
