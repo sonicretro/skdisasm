@@ -490,14 +490,14 @@ ChecksumError2:
 		move.l	(sp)+,d1
 
 ChecksumError2_Loop:
-		move.l	#-$40000000,(VDP_control_port).l
+		move.l	#$C0000000,(VDP_control_port).l
 		move.w	d7,(VDP_data_port).l
 		addq.w	#1,d7
 		bra.s	ChecksumError2_Loop
 ; ---------------------------------------------------------------------------
 
 ChecksumError:
-		move.l	#-$40000000,(VDP_control_port).l
+		move.l	#$C0000000,(VDP_control_port).l
 		moveq	#$3F,d7
 
 loc_7C8:
@@ -1556,7 +1556,7 @@ loc_13C2:
 		move.l	#$40000010,(VDP_control_port).l
 		move.w	d0,(a1)
 		move.w	d0,(a1)
-		move.l	#-$40000000,(VDP_control_port).l
+		move.l	#$C0000000,(VDP_control_port).l
 		move.w	#$3F,d7
 
 loc_13F6:
@@ -74161,7 +74161,7 @@ ICZ1BGE_Transition:
 		jsr	(Load_Level).l
 		jsr	(LoadSolids).l
 		jsr	(CheckLevelForWater).l
-		move.w	#-$7FEC,(VDP_control_port).l
+		move.w	#$8014,(VDP_control_port).l
 		moveq	#$15,d0
 		jsr	(LoadPalette_Immediate).l
 		movem.l	(sp)+,d7-a0/a2-a3
@@ -75207,7 +75207,7 @@ LBZ1BGE_DoTransition:
 		jsr	(Load_Level).l
 		jsr	(LoadSolids).l
 		jsr	(CheckLevelForWater).l
-		move.w	#-$7FEC,(VDP_control_port).l
+		move.w	#$8014,(VDP_control_port).l
 		moveq	#$17,d0
 		jsr	(LoadPalette_Immediate).l
 		movem.l	(sp)+,d7-a0/a2-a3
