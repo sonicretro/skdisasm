@@ -118053,9 +118053,9 @@ DemoDat_AIZ:	binclude "Levels/AIZ/Demodata/1.bin"
 DemoDat_HCZ:	binclude "Levels/HCZ/Demodata/1.bin"
 		even
 DemoDat_MGZ:	binclude "Levels/MGZ/Demodata/1.bin"
-		align $400
+		even
 
-		dc.b [$1A0] $FF
+		org $C71A0
 Snd_Minib:	binclude "Sound/Music/Sonic 3/Sonic 3 Miniboss.bin"
 Snd_FinalBoss:	binclude "Sound/Music/Sonic 3/Final Boss.bin"
 		align $1000
