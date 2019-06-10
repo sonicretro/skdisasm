@@ -222,8 +222,10 @@ bool buildRom(FILE* from, FILE* to)
 		{
 			// Kosinski-compressed Z80 segment
 			z80Start = start;
-			start = lastStart + lastLength;
+			start = lastStart;
 			int srcStart = ftell(from);
+
+			fseek(to, start, SEEK_SET);	// We want to overwrite the last segment
 
 			unsigned char *uncompressed_buffer = malloc(length);
 			fread(uncompressed_buffer, length, 1, from);
@@ -240,17 +242,8 @@ bool buildRom(FILE* from, FILE* to)
 
 			fseek(from, srcStart + length, SEEK_SET);
 			lastSegmentCompressed = true;
-			continue;
-		}
 
-		if(!lastSegmentCompressed)
-		{
-			if(start+3 < ftell(to)) // 3 bytes of leeway for instruction patching
-				printf("\nWarning: overlapping allocation detected! $%lX < $%lX", start, ftell(to));
-		}
-		else
-		{
-			if(start < ftell(to))
+			if (compressedLength > lastLength)
 			{
 				#ifdef __MINGW32__
 				#define PRINTF __mingw_printf
@@ -263,7 +256,12 @@ bool buildRom(FILE* from, FILE* to)
 					PRINTF("\nERROR: Compressed sound driver might not fit.\nPlease increase your value of Size_of_Snd_driver2_guess to at least $%zX and try again.", compressedLength);
 				return false;
 			}
+
+			continue;
 		}
+
+		if(start+3 < ftell(to)) // 3 bytes of leeway for instruction patching
+			printf("\nWarning: overlapping allocation detected! $%lX < $%lX", start, ftell(to));
 
 		lastStart = start;
 		lastLength = length;

@@ -505,9 +505,11 @@ zTempVariablesEnd:
 	endif
 		dephase
 ; ---------------------------------------------------------------------------
-		!org z80_SoundDriverStart
+		!org z80_SoundDriverStart	; Rewind the ROM address to where we were earlier (allocating the RAM above messes with it)
 ; z80_SoundDriver:
 Z80_SoundDriver:
+		org		Z80_SoundDriver+Size_of_Snd_driver_guess	; This 'org' inserts some padding that we can paste the compressed sound driver over later (see the 's3p2bin' tool)
+
 		save
 		!org	0							; z80 Align, handled by the build process
 		CPU Z80
@@ -4545,10 +4547,11 @@ zPlaySEGAPCM:
 
 		restore
 		padding off
-		!org		Z80_SoundDriver+Size_of_Snd_driver_guess
+		!org		Z80_SoundDriver+Size_of_Snd_driver_guess	; The assembler still thinks we're in Z80 memory, so use an 'org' to switch back to the cartridge
 
 ; Z80_Snd_Driver2:
 Z80_SoundDriverData:
+		org		Z80_SoundDriverData+Size_of_Snd_driver2_guess	; Once again, create some padding that we can paste the compressed data over later
 ; ---------------------------------------------------------------------------
 		save
 		CPU Z80
@@ -4881,7 +4884,7 @@ z80_UniVoiceBank:
 ; ===========================================================================
 		restore
 		padding off
-		!org		Z80_SoundDriverData+Size_of_Snd_driver2_guess
+		!org		Z80_SoundDriverData+Size_of_Snd_driver2_guess	; The assembler still thinks we're in Z80 memory, so use an 'org' to switch back to the cartridge
 
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
