@@ -12136,10 +12136,8 @@ ObjDat_CompetitionTimeAttack:dc.w 5
 		dc.b 1
 		dc.b 2
 MapUnc_CompetitionNumbers:
-		dc.w  $A503, $A50F, $A504, $A510, $A505, $A511, $A506, $A50F
-		dc.w  $A507, $A512, $A508, $A513, $A509, $A50F, $A50A, $A510
-		dc.w  $A50B, $A50F, $A50C, $A50F, $A50D, $A514, $A50E, $A514
-		dc.w  $8000, $8000
+		binclude "General/Competition Menu/Uncompressed Map/Numbers.bin"
+		even
 ; ---------------------------------------------------------------------------
 
 Competition_PlayerSelect:
@@ -13019,36 +13017,23 @@ MapEni_CompetitionResultsLED:
 		binclude "General/Competition Menu/Enigma Map/Menu.bin"
 		even
 MapUnc_CompetitionResultsLetters:
-		dc.w  $A3BA, $ABBA
-		dc.w  $A3BB, $A3BC
-		dc.w  $A3BD, $A3BE
-		dc.w  $A3BF, $A3C0
-		dc.w  $A3C1, $A3C2
-		dc.w  $A3C3, $A3C4
-		dc.w  $A3C5, $A3C6
-		dc.w  $A3C7, $A3C8
-		dc.w  $A3C9, $A3CA
-		dc.w  $A3CB, $A3CC
+		binclude "General/Competition Menu/Uncompressed Map/Results Letters.bin"
+		even
 MapUnc_CompetitionResultsDividers:
-		dc.w  $A3E0, $A3E0, $A3E0, $A3E0
-		dc.w  $A3E1, $A3E1, $A3E1, $A3E1
-		dc.w  $A3E0, $A3E0, $A3E0, $A3E0
-		dc.w  $A3E1, $A3E1, $A3E1, $A3E1
-		dc.w  $A3E0, $A3E0, $A3E0, $A3E0
-		dc.w  $A3E1, $A3E1, $A3E1, $A3E1
-		dc.w  $A3E0, $A3E0, $A3E0, $A3E0
-		dc.w  $A3E1, $A3E1, $A3E1, $A3E1
-		dc.w  $A3E0, $A3E0, $A3E0, $A3E0
-		dc.w  $A3E1, $A3E1, $A3E1, $A3E1
+		binclude "General/Competition Menu/Uncompressed Map/Results Dividers.bin"
+		even
 MapUnc_CompetitionResultsTOTAL:
-		dc.w  $A3D8, $A3D9, $A3D8, $A3DA, $A3DB
-		dc.w  $A3DC, $A3DD, $A3DC, $A3DE, $A3DF
+		binclude "General/Competition Menu/Uncompressed Map/Results TOTAL.bin"
+		even
 MapUnc_ResultsWin:
-		dc.w  $A3CD, $A3CE, $A3CF, $A3D0
+		binclude "General/Competition Menu/Uncompressed Map/Results Win.bin"
+		even
 MapUnc_ResultsLose:
-		dc.w  $A3D1, $A3D2, $A3D3, $ABD3
+		binclude "General/Competition Menu/Uncompressed Map/Results Lose.bin"
+		even
 MapUnc_ResultsTie:
-		dc.w  $A3D4, $A3D5, $A3D6, $A3D7
+		binclude "General/Competition Menu/Uncompressed Map/Results Tie.bin"
+		even
 ; ---------------------------------------------------------------------------
 
 TimeAttack_Records:
@@ -13366,31 +13351,14 @@ VRAMDatList_B2CA:dc.w 8
 		dc.w 2
 		dc.w 7
 MapUnc_CompetitionLAPNum:
-		dc.w  $A3E2, $A3E3, $A3E4, $8000
-		dc.w  $A3E8, $A3E5, $A3E6, $A3E7
-		dc.w  $8000, $A3ED, $A3E2, $A3E3
-		dc.w  $A3E4, $8000, $A3E9, $A3E5
-		dc.w  $A3E6, $A3E7, $8000, $A3EE
-		dc.w  $A3E2, $A3E3, $A3E4, $8000
-		dc.w  $A3EA, $A3E5, $A3E6, $A3E7
-		dc.w  $8000, $A3EF, $A3E2, $A3E3
-		dc.w  $A3E4, $8000, $A3EB, $A3E5
-		dc.w  $A3E6, $A3E7, $8000, $A3F0
-		dc.w  $A3E2, $A3E3, $A3E4, $8000
-		dc.w  $A3EC, $A3E5, $A3E6, $A3E7
-		dc.w  $8000, $A3F1
+		binclude "General/Competition Menu/Uncompressed Map/LAP.bin"
+		even
 MapUnc_CompetitionRECORDS:
-		dc.w  $E5A3, $E5A9, $E5A5, $E5B9, $E5A3, $E5A7, $E5BD
-		dc.w  $E5A2, $E5AA, $E5A6, $E5A6, $E5A2, $E5A8, $E5A6
+		binclude "General/Competition Menu/Uncompressed Map/RECORDS.bin"
+		even
 MapUnc_Competition1st2nd3rd:
-		dc.w  $E58F, $E5BD, $E5BE
-		dc.w  $E590, $E5A6, $E5AF
-		dc.w  $8000, $8000, $8000
-		dc.w  $E591, $E5B7, $E5A7
-		dc.w  $E592, $E5B8, $E5A8
-		dc.w  $8000, $8000, $8000
-		dc.w  $E593, $E5A3, $E5A7
-		dc.w  $E594, $E5A2, $E5A8
+		binclude "General/Competition Menu/Uncompressed Map/1ST 2ND 3RD.bin"
+		even
 CompTimeAttack_LevelNameMaps:
 		dc.l MapUnc_CompetitionAZURELAKE
 		dc.l MapUnc_CompetitionBALLOONPARK
@@ -13398,20 +13366,20 @@ CompTimeAttack_LevelNameMaps:
 		dc.l MapUnc_CompetitionCHROMEGADGET
 		dc.l MapUnc_CompetitionENDLESSMINE
 MapUnc_CompetitionAZURELAKE:
-		dc.w  $8000, $E5A1, $E5C5, $E5BF, $E5A3, $E5A9, $8000, $E5B3, $E5A1, $E5B1, $E5A9, $8000, $8000
-		dc.w  $8000, $E5A2, $E5C6, $E5A6, $E5A2, $E5AA, $8000, $E5B4, $E5A2, $E5B2, $E5AA, $8000, $8000
+		binclude "General/Competition Menu/Uncompressed Map/AZURE LAKE.bin"
+		even
 MapUnc_CompetitionBALLOONPARK:
-		dc.w  $E5A3, $E5A1, $E5B3, $E5B3, $E5B9, $E5B9, $E5B7, $8000, $E5BA, $E5A1, $E5A3, $E5B1, $8000
-		dc.w  $E5A4, $E5A2, $E5B4, $E5B4, $E5A6, $E5A6, $E5B8, $8000, $E5AB, $E5A2, $E5A2, $E5B2, $8000
+		binclude "General/Competition Menu/Uncompressed Map/BALLOON PARK.bin"
+		even
 MapUnc_CompetitionCHROMEGADGET:
-		dc.w  $E5A5, $E5AD, $E5A3, $E5B9, $E5B5, $E5A9, $8000, $E5AC, $E5A1, $E5A7, $E5AC, $E5A9, $E5BE
-		dc.w  $E5A6, $E5A2, $E5A2, $E5A6, $E5B6, $E5AA, $8000, $E5A6, $E5A2, $E5A8, $E5A6, $E5AA, $E5AF
+		binclude "General/Competition Menu/Uncompressed Map/CHROME GADGET.bin"
+		even
 MapUnc_CompetitionDESERTPALACE:
-		dc.w  $E5A7, $E5A9, $E5BD, $E5A9, $E5A3, $E5BE, $8000, $E5BA, $E5A1, $E5B3, $E5A1, $E5A5, $E5A9
-		dc.w  $E5A8, $E5AA, $E5A6, $E5AA, $E5A2, $E5AF, $8000, $E5AB, $E5A2, $E5B4, $E5A2, $E5A6, $E5AA
+		binclude "General/Competition Menu/Uncompressed Map/DESERT PALACE.bin"
+		even
 MapUnc_CompetitionENDLESSMINE:
-		dc.w  $E5A9, $E5B7, $E5A7, $E5B3, $E5A9, $E5BD, $E5BD, $8000, $E5B5, $E5AE, $E5B7, $E5A9, $8000
-		dc.w  $E5AA, $E5B8, $E5A8, $E5B4, $E5AA, $E5A6, $E5A6, $8000, $E5B6, $E5AF, $E5B8, $E5AA, $8000
+		binclude "General/Competition Menu/Uncompressed Map/ENDLESS MINE.bin"
+		even
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -119795,18 +119763,11 @@ MapEni_CompetitionLevBorder:
 		binclude "General/Competition Menu/Enigma Map/Level Border.bin"
 		even
 MapUnc_CompetitionTimeBorder:
-		dc.w  $829F, $82A1, $82A1, $82A1, $82A1, $82A1, $82A1, $82A1, $82A1, $82A1, $82A9, $82AB
-		dc.w  $82A0, $82A2, $82A2, $82A2, $82A2, $82A2, $82A2, $82A2, $82A2, $82A2, $82AA, $82AC
-		dc.w  $82A0, $82AB, $82AB, $82AB, $82AB, $82AB, $82AB, $82AB, $82AB, $82AB, $82B1, $82B5
-		dc.w  $82A0, $82AB, $82AB, $82AB, $82AB, $82AB, $82AB, $82AB, $82AB, $82AB, $82B1, $82B5
-		dc.w  $82A0, $82AB, $82AB, $82AB, $82AB, $82AB, $82AB, $82AB, $82AB, $82AB, $82B1, $82B5
-		dc.w  $82A0, $82AB, $82AB, $82AB, $82AB, $82AB, $82AB, $82AB, $82AB, $82AB, $82B1, $82B5
-		dc.w  $82A0, $82AB, $82AB, $82AB, $82AB, $82AB, $82AB, $82AB, $82AB, $82AB, $82B1, $82B5
-		dc.w  $82B9, $82BB, $82BB, $82BB, $82BB, $82BB, $82BB, $82BB, $82BB, $82BB, $82C3, $82C5
-		dc.w  $82BA, $82BC, $82BC, $82BC, $82BC, $82BC, $82BC, $82BC, $82BC, $82BC, $82BC, $82C6
+		binclude "General/Competition Menu/Uncompressed Map/Time Border.bin"
+		even
 MapUnc_CompetitionBESTTIME:
-		dc.w  $A515, $A516, $A517, $A518, $A519, $A51A, $A51B, $A51C, $A51D
-		dc.w  $A51E, $A51F, $A520, $A521, $A522, $A523, $A524, $A525, $A526
+		binclude "General/Competition Menu/Uncompressed Map/Time Text.bin"
+		even
 MapEni_CompetitionLevImage:
 		binclude "General/Competition Menu/Enigma Map/Level Images.bin"
 		even
@@ -119826,55 +119787,30 @@ Map_CompetitionPlayerSprite:
 		include "General/Competition Menu/Map - Competition Player Sprites.asm"
 ArtKos_CompetitionPlayer:
 		binclude "General/Competition Menu/Kosinski Art/Player Sprites.bin"
-	even
+		even
 MapEni_SaveScreen_Layout:
 		binclude "General/Save Menu/Enigma Map/Save Screen Layout.bin"
 		even
 MapUnc_SaveScreenNEW:
-		dc.w  $A2A3, $A2A3, $A2A3, $A2A3, $A2A3, $A2A3, $A2A3, $A2A3, $A2A3, $A2A3
-		dc.w  $A2A3, $A2A3, $A2A3, $A2A3, $A2A3, $A2A3, $A2A3, $A2A3, $A2A3, $A2A3
-		dc.w  $A2A3, $A2C7, $A2C8, $A2C9, $A2CA, $A2CB, $A2CC, $A2CD, $A2CE, $A2A3
-		dc.w  $A2A3, $A2CF, $A2D0, $A2D1, $A2D2, $A2D3, $A2D4, $A2D5, $A2D6, $A2A3
-		dc.w  $A2A3, $A2D7, $A2D8, $A2D9, $B2CA, $A2DA, $A2DB, $A2DC, $A2A3, $A2A3
-		dc.w  $A2A3, $A2A3, $A2A3, $A2A3, $A2A3, $A2A3, $A2A3, $A2A3, $A2A3, $A2A3
-		dc.w  $A2A3, $A2A3, $A2A3, $A2A3, $A2A3, $A2A3, $A2A3, $A2A3, $A2A3, $A2A3
+		binclude "General/Save Menu/Uncompressed Map/NEW.bin"
+		even
 MapPtrs_SaveScreenStatic:
 		dc.l MapUnc_SaveScreenStatic1
 		dc.l MapUnc_SaveScreenStatic2
 		dc.l MapUnc_SaveScreenStatic3
 		dc.l MapUnc_SaveScreenStatic4
 MapUnc_SaveScreenStatic1:
-		dc.w $A2DD, $A2DE, $A2DF, $A2E0, $A2DD, $A2DE, $A2DF, $A2E0, $A2DD, $A2E0
-		dc.w $AAE0, $AADD, $AAE0, $B2DE, $B2DF, $B2E0, $B2DD, $AADD, $AAE0, $AADD
-		dc.w $AAE0, $AADF, $AADE, $AADD, $AAE0, $AADF, $AADE, $B2DF, $AAE0, $AADD
-		dc.w $A2DF, $AAE0, $BAE0, $BADF, $BADE, $A2E0, $A2E0, $A2DE, $A2DF, $A2E0
-		dc.w $BAE0, $BADF, $BADE, $BADD, $BAE0, $BADF, $BADE, $BADD, $A2E0, $BADE
-		dc.w $A2DD, $A2DE, $A2DF, $A2E0, $A2DD, $A2DE, $A2DF, $A2E0, $A2DD, $A2E0
-		dc.w $AAE0, $AADD, $AAE0, $B2DE, $B2DF, $B2E0, $B2DD, $AADD, $AAE0, $AADD
+		binclude "General/Save Menu/Uncompressed Map/Static 1.bin"
+		even
 MapUnc_SaveScreenStatic2:
-		dc.w $B2DD, $B2E0, $B2DD, $AADD, $AAE0, $AADF, $AADE, $B2E0, $B2DD, $B2E0
-		dc.w $BAE0, $BADD, $BAE0, $BADF, $BADE, $BADD, $BAE0, $BADF, $BADE, $BADD
-		dc.w $A2DE, $BAE0, $A2DD, $A2DE, $A2DF, $A2E0, $A2DD, $A2DE, $A2DF, $A2E0
-		dc.w $BAE0, $BADF, $BADE, $BAE0, $BAE0, $A2DE, $A2DF, $A2E0, $B2E0, $BADF
-		dc.w $B2DD, $B2E0, $AADF, $B2DE, $B2DF, $B2E0, $B2DD, $B2DE, $B2DF, $B2E0
-		dc.w $B2DD, $B2E0, $B2DD, $AADD, $AAE0, $AADF, $AADE, $B2E0, $B2DD, $B2E0
-		dc.w $BAE0, $BADD, $BAE0, $BADF, $BADE, $BADD, $BAE0, $BADF, $BADE, $BADD
+		binclude "General/Save Menu/Uncompressed Map/Static 2.bin"
+		even
 MapUnc_SaveScreenStatic3:
-		dc.w $BAE0, $BADD, $BAE0, $A2DE, $A2DF, $A2E0, $A2DD, $BADD, $BAE0, $BADD
-		dc.w $B2DD, $B2DE, $B2DF, $B2E0, $B2DD, $B2DE, $B2DF, $B2E0, $B2DD, $B2E0
-		dc.w $AAE0, $AADF, $AADE, $AADD, $AAE0, $AADF, $AADE, $AADD, $B2E0, $AADE
-		dc.w $B2DF, $BAE0, $AAE0, $AADF, $AADE, $B2E0, $B2E0, $B2DE, $B2DF, $B2E0
-		dc.w $BAE0, $BADF, $BADE, $BADD, $BAE0, $BADF, $BADE, $A2DF, $BAE0, $BADD
-		dc.w $BAE0, $BADD, $BAE0, $A2DE, $A2DF, $A2E0, $A2DD, $BADD, $BAE0, $BADD
-		dc.w $B2DD, $B2DE, $B2DF, $B2E0, $B2DD, $B2DE, $B2DF, $B2E0, $B2DD, $B2E0
+		binclude "General/Save Menu/Uncompressed Map/Static 3.bin"
+		even
 MapUnc_SaveScreenStatic4:
-		dc.w $AAE0, $AADD, $AAE0, $AADF, $AADE, $AADD, $AAE0, $AADF, $AADE, $AADD
-		dc.w $A2DD, $A2E0, $A2DD, $BADD, $BAE0, $BADF, $BADE, $A2E0, $A2DD, $A2E0
-		dc.w $A2DD, $A2E0, $BADF, $A2DE, $A2DF, $A2E0, $A2DD, $A2DE, $A2DF, $A2E0
-		dc.w $AAE0, $AADF, $AADE, $AAE0, $AAE0, $B2DE, $B2DF, $B2E0, $A2E0, $AADF
-		dc.w $B2DE, $AAE0, $B2DD, $B2DE, $B2DF, $B2E0, $B2DD, $B2DE, $B2DF, $B2E0
-		dc.w $AAE0, $AADD, $AAE0, $AADF, $AADE, $AADD, $AAE0, $AADF, $AADE, $AADD
-		dc.w $A2DD, $A2E0, $A2DD, $BADD, $BAE0, $BADF, $BADE, $A2E0, $A2DD, $A2E0
+		binclude "General/Save Menu/Uncompressed Map/Static 4.bin"
+		even
 ArtKos_SaveScreenMisc:
 		binclude "General/Save Menu/Kosinski Art/Misc.bin"
 		even
