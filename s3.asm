@@ -41867,13 +41867,13 @@ loc_23762:
 loc_2376C:
 		move.w	($FFFFE404).w,d0
 		lea	($FFFFE40E).w,a1
-		bsr.w	sub_239B8
+		bsr.w	GetScalars
 		move.w	($FFFFE402).w,d0
 		lea	($FFFFE40A).w,a1
-		bsr.w	sub_239B8
+		bsr.w	GetScalars
 		move.w	(Stat_table).w,d0
 		lea	($FFFFE406).w,a1
-		bsr.w	sub_239B8
+		bsr.w	GetScalars
 
 Obj_EosianSphere:
 		move.w	$10(a0),d0
@@ -42045,50 +42045,35 @@ sub_2398E:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_239B8:
+GetScalars:
 		add.w	d0,d0
 		andi.w	#$1FE,d0
-		move.w	word_239D0(pc,d0.w),(a1)+
+		move.w	ScalarTable(pc,d0.w),(a1)+
 		addi.w	#$80,d0
 		andi.w	#$1FE,d0
-		move.w	word_239D0(pc,d0.w),(a1)+
+		move.w	ScalarTable(pc,d0.w),(a1)+
 		rts
-; End of function sub_239B8
+; End of function GetScalars
 
 ; ---------------------------------------------------------------------------
-word_239D0:	dc.w      0,  $192,  $324,  $4B5,  $646,  $7D6,  $964,  $AF1
-		dc.w   $C7C,  $E06,  $F8D, $1112, $1294, $1413, $1590, $1709
-		dc.w  $187E, $19EF, $1B5D, $1CC6, $1E2B, $1F8C, $20E7, $223D
-		dc.w  $238E, $24DA, $2620, $2760, $289A, $29CE, $2AFB, $2C21
-		dc.w  $2D41, $2E5A, $2F6C, $3076, $3179, $3274, $3368, $3453
-		dc.w  $3537, $3612, $36E5, $37B0, $3871, $392B, $39DB, $3A82
-		dc.w  $3B21, $3BB6, $3C42, $3CC5, $3D3F, $3DAF, $3E15, $3E72
-		dc.w  $3EC5, $3F0F, $3F4F, $3F85, $3FB1, $3FD4, $3FEC, $3FFB
-		dc.w  $4000, $3FFB, $3FEC, $3FD4, $3FB1, $3F85, $3F4F, $3F0F
-		dc.w  $3EC5, $3E72, $3E15, $3DAF, $3D3F, $3CC5, $3C42, $3BB6
-		dc.w  $3B21, $3A82, $39DB, $392B, $3871, $37B0, $36E5, $3612
-		dc.w  $3537, $3453, $3368, $3274, $3179, $3076, $2F6C, $2E5A
-		dc.w  $2D41, $2C21, $2AFB, $29CE, $289A, $2760, $2620, $24DA
-		dc.w  $238E, $223D, $20E7, $1F8C, $1E2B, $1CC6, $1B5D, $19EF
-		dc.w  $187E, $1709, $1590, $1413, $1294, $1112,  $F8D,  $E06
-		dc.w   $C7C,  $AF1,  $964,  $7D6,  $646,  $4B5,  $324,  $192
-		dc.w      0, -$192, -$324, -$4B5, -$646, -$7D6, -$964, -$AF1
-		dc.w  -$C7C, -$E06, -$F8D,-$1112,-$1294,-$1413,-$1590,-$1709
-		dc.w -$187E,-$19EF,-$1B5D,-$1CC6,-$1E2B,-$1F8C,-$20E7,-$223D
-		dc.w -$238E,-$24DA,-$2620,-$2760,-$289A,-$29CE,-$2AFB,-$2C21
-		dc.w -$2D41,-$2E5A,-$2F6C,-$3076,-$3179,-$3274,-$3368,-$3453
-		dc.w -$3537,-$3612,-$36E5,-$37B0,-$3871,-$392B,-$39DB,-$3A82
-		dc.w -$3B21,-$3BB6,-$3C42,-$3CC5,-$3D3F,-$3DAF,-$3E15,-$3E72
-		dc.w -$3EC5,-$3F0F,-$3F4F,-$3F85,-$3FB1,-$3FD4,-$3FEC,-$3FFB
-		dc.w -$4000,-$3FFB,-$3FEC,-$3FD4,-$3FB1,-$3F85,-$3F4F,-$3F0F
-		dc.w -$3EC5,-$3E72,-$3E15,-$3DAF,-$3D3F,-$3CC5,-$3C42,-$3BB6
-		dc.w -$3B21,-$3A82,-$39DB,-$392B,-$3871,-$37B0,-$36E5,-$3612
-		dc.w -$3537,-$3453,-$3368,-$3274,-$3179,-$3076,-$2F6C,-$2E5A
-		dc.w -$2D41,-$2C21,-$2AFB,-$29CE,-$289A,-$2760,-$2620,-$24DA
-		dc.w -$238E,-$223D,-$20E7,-$1F8C,-$1E2B,-$1CC6,-$1B5D,-$19EF
-		dc.w -$187E,-$1709,-$1590,-$1413,-$1294,-$1112, -$F8D, -$E06
-		dc.w  -$C7C, -$AF1, -$964, -$7D6, -$646, -$4B5, -$324, -$192
-Map_SphereTest:	include "General/Special Stage/Map - Eosian Spheres.asm"
+ScalarTable:	dc.w      0,  $192,  $324,  $4B5,  $646,  $7D6,  $964,  $AF1,  $C7C,  $E06,  $F8D, $1112, $1294, $1413, $1590, $1709
+		dc.w  $187E, $19EF, $1B5D, $1CC6, $1E2B, $1F8C, $20E7, $223D, $238E, $24DA, $2620, $2760, $289A, $29CE, $2AFB, $2C21
+		dc.w  $2D41, $2E5A, $2F6C, $3076, $3179, $3274, $3368, $3453, $3537, $3612, $36E5, $37B0, $3871, $392B, $39DB, $3A82
+		dc.w  $3B21, $3BB6, $3C42, $3CC5, $3D3F, $3DAF, $3E15, $3E72, $3EC5, $3F0F, $3F4F, $3F85, $3FB1, $3FD4, $3FEC, $3FFB
+		dc.w  $4000, $3FFB, $3FEC, $3FD4, $3FB1, $3F85, $3F4F, $3F0F, $3EC5, $3E72, $3E15, $3DAF, $3D3F, $3CC5, $3C42, $3BB6
+		dc.w  $3B21, $3A82, $39DB, $392B, $3871, $37B0, $36E5, $3612, $3537, $3453, $3368, $3274, $3179, $3076, $2F6C, $2E5A
+		dc.w  $2D41, $2C21, $2AFB, $29CE, $289A, $2760, $2620, $24DA, $238E, $223D, $20E7, $1F8C, $1E2B, $1CC6, $1B5D, $19EF
+		dc.w  $187E, $1709, $1590, $1413, $1294, $1112,  $F8D,  $E06,  $C7C,  $AF1,  $964,  $7D6,  $646,  $4B5,  $324,  $192
+		dc.w      0, $FE6E, $FCDC, $FB4B, $F9BA, $F82A, $F69C, $F50F, $F384, $F1FA, $F073, $EEEE, $ED6C, $EBED, $EA70, $E8F7
+		dc.w  $E782, $E611, $E4A3, $E33A, $E1D5, $E074, $DF19, $DDC3, $DC72, $DB26, $D9E0, $D8A0, $D766, $D632, $D505, $D3DF
+		dc.w  $D2BF, $D1A6, $D094, $CF8A, $CE87, $CD8C, $CC98, $CBAD, $CAC9, $C9EE, $C91B, $C850, $C78F, $C6D5, $C625, $C57E
+		dc.w  $C4DF, $C44A, $C3BE, $C33B, $C2C1, $C251, $C1EB, $C18E, $C13B, $C0F1, $C0B1, $C07B, $C04F, $C02C, $C014, $C005
+		dc.w  $C000, $C005, $C014, $C02C, $C04F, $C07B, $C0B1, $C0F1, $C13B, $C18E, $C1EB, $C251, $C2C1, $C33B, $C3BE, $C44A
+		dc.w  $C4DF, $C57E, $C625, $C6D5, $C78F, $C850, $C91B, $C9EE, $CAC9, $CBAD, $CC98, $CD8C, $CE87, $CF8A, $D094, $D1A6
+		dc.w  $D2BF, $D3DF, $D505, $D632, $D766, $D8A0, $D9E0, $DB26, $DC72, $DDC3, $DF19, $E074, $E1D5, $E33A, $E4A3, $E611
+		dc.w  $E782, $E8F7, $EA70, $EBED, $ED6C, $EEEE, $F073, $F1FA, $F384, $F50F, $F69C, $F82A, $F9BA, $FB4B, $FCDC, $FE6E
+Map_SphereTest:
+		include "General/Special Stage/Map - Eosian Spheres.asm"
 ; ---------------------------------------------------------------------------
 
 Obj_0E:
