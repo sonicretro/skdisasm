@@ -14226,7 +14226,9 @@ loc_C098:
 		move.w	d1,(Camera_X_pos_copy).w
 		neg.w	d1
 		move.w	d1,(H_scroll_buffer+2).w
-		move.l	#$C0AC,(a0)
+		move.l	#loc_C0AC,(a0)
+
+loc_C0AC:
 		tst.w	($FFFFEEE4).w
 		bne.s	loc_C0C4
 		btst	#4,(Ctrl_1_pressed).w
@@ -14409,7 +14411,9 @@ loc_C25E:
 		movea.l	d0,a1
 		move.b	2(a1),$35(a0)
 		move.b	3(a1),$37(a0)
-		move.l	#$C284,(a0)
+		move.l	#loc_C284,(a0)
+
+loc_C284:
 		clr.w	$16(a0)
 		movea.l	$30(a0),a1
 		move.b	($FFFFEF4B).w,d0
