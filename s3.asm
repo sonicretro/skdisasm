@@ -11725,8 +11725,6 @@ Obj_Competition_ZoneSelect:
 locret_9DC0:
 		rts
 ; ---------------------------------------------------------------------------
-
-loc_9DC2:
 		cmpi.w	#-$58,(H_scroll_buffer).w
 		bne.s	loc_9E06
 		tst.w	($FFFFEEE6).w
@@ -12202,7 +12200,7 @@ loc_A1D2:
 		lea	(RAM_start).l,a1
 		movea.w	#$20,a2
 		jsr	KosArt_To_VDP(pc)
-		move.l	#$952E,($FFFFEF44).w
+		move.l	#locret_952E,($FFFFEF44).w
 		move.b	#$1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		lea	(ArtKos_CompetitionLevel).l,a0
@@ -12628,7 +12626,7 @@ loc_AA02:
 		lea	(RAM_start).l,a1
 		movea.w	#$20,a2
 		jsr	KosArt_To_VDP(pc)
-		move.l	#$952E,($FFFFEF44).w
+		move.l	#locret_952E,($FFFFEF44).w
 		move.b	#$1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		lea	(ArtKos_CompetitionLevel).l,a0
