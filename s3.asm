@@ -11725,6 +11725,8 @@ Obj_Competition_ZoneSelect:
 locret_9DC0:
 		rts
 ; ---------------------------------------------------------------------------
+
+loc_9DC2:
 		cmpi.w	#-$58,(H_scroll_buffer).w
 		bne.s	loc_9E06
 		tst.w	($FFFFEEE6).w
