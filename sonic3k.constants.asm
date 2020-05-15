@@ -33,7 +33,7 @@ x_pixel =		x_pos ; word ; x-coordinate for objects using screen positioning
 y_pixel =		y_pos ; word ; y-coordinate for objects using screen positioning
 collision_flags =	$28 ; byte ; TT SSSSSS ; TT = collision type, SSSSSS = size
 collision_property =	$29 ; byte ; usage varies, bosses use it as a hit counter
-shield_reaction =	$2B ; byte ; bit 3 = bounces off shield, bit 4 = negated by fire shield, bit 5 = negated by lightning shield, bit 6 = negated by bubble shield 
+shield_reaction =	$2B ; byte ; bit 3 = bounces off shield, bit 4 = negated by fire shield, bit 5 = negated by lightning shield, bit 6 = negated by bubble shield
 subtype =		$2C ; byte
 ros_bit =		$3B ; byte ; the bit to be cleared when an object is destroyed if the ROS flag is set
 ros_addr =		$3C ; word ; the RAM address whose bit to clear when an object is destroyed if the ROS flag is set
@@ -112,14 +112,14 @@ object_size =		$4A ; the size of an object's status table entry
 next_object =		object_size
 ; ---------------------------------------------------------------------------
 ; unknown or inconsistently used offsets that are not applicable to sonic/tails:
-objoff_12 =		2+x_pos 
+objoff_12 =		2+x_pos
 objoff_16 =		2+y_pos
 objoff_1C =		$1C
 objoff_1D =		$1D
 objoff_27 =		$27
 objoff_2E =		$2E
 objoff_2F =		$2F
-objoff_30 =		$30 
+objoff_30 =		$30
  enum   objoff_31=$31,objoff_32=$32,objoff_33=$33,objoff_34=$34,objoff_35=$35,objoff_36=$36,objoff_37=$37
  enum 	objoff_38=$38,objoff_39=$39,objoff_3A=$3A,objoff_3B=$3B,objoff_3C=$3C,objoff_3D=$3D,objoff_3E=$3E
  enum 	objoff_3F=$3F,objoff_40=$40,objoff_41=$41,objoff_42=$42,objoff_43=$43,objoff_44=$44,objoff_45=$45
@@ -207,7 +207,7 @@ SRAM_access_flag =		$A130F1
 Security_addr =			$A14000
 ; ---------------------------------------------------------------------------
 
-; I/O Area 
+; I/O Area
 HW_Version =			$A10001
 HW_Port_1_Data =		$A10003
 HW_Port_2_Data =		$A10005
@@ -395,7 +395,7 @@ VRAM_buffer =			ramaddr( $FFFFF580 ) ; $80 bytes ; used to temporarily hold data
 
 Game_mode =			ramaddr( $FFFFF600 ) ; byte
 Ctrl_1_logical =		ramaddr( $FFFFF602 ) ; word ; both held and pressed
-Ctrl_1_held_logical =		ramaddr( $FFFFF602 ) ; byte 
+Ctrl_1_held_logical =		ramaddr( $FFFFF602 ) ; byte
 Ctrl_1_pressed_logical =	ramaddr( $FFFFF603 ) ; byte
 Ctrl_1 =			ramaddr( $FFFFF604 ) ; word ; both held and pressed
 Ctrl_1_held =			ramaddr( $FFFFF604 ) ; byte ; all held buttons
@@ -713,3 +713,249 @@ ArtTile_Shield                        = $079C
 ArtTile_Shield_Sparks                 = $07BB
 ArtTile_DashDust                      = $07E0
 ArtTile_DashDust_P2                   = $07F0
+
+; ---------------------------------------------------------------------------
+; Sound commands list.
+
+	phase $E1
+mus_FadeOut			ds.b 1		; $E1 - fade out music
+mus_Stop			ds.b 1		; $E2 - stop music and sound effects
+mus_MutePSG			ds.b 1		; $E3 - mute all PSG channels
+mus_StopSFX			ds.b 1		; $E4 - stop all sound effects
+mus_FadeOut2			ds.b 1		; $E5 - fade out music (duplicate)
+
+mus_StopSEGA =			$FE		; $FE - Stop SEGA sound
+mus_SEGA =			$FF		; $FF - Play SEGA sound
+; ---------------------------------------------------------------------------
+; Music ID's list. These do not affect the sound driver, be careful.
+
+	phase $01
+mus_AIZ1			ds.b 1		; $01
+mus_AIZ2			ds.b 1		; $02
+mus_HCZ1			ds.b 1		; $03
+mus_HCZ2			ds.b 1		; $04
+mus_MGZ1			ds.b 1		; $05
+mus_MGZ2			ds.b 1		; $06
+mus_CNZ1			ds.b 1		; $07
+mus_CNZ2			ds.b 1		; $08
+mus_FBZ1			ds.b 1		; $09
+mus_FBZ2			ds.b 1		; $0A
+mus_ICZ1			ds.b 1		; $0B
+mus_ICZ2			ds.b 1		; $0C
+mus_LBZ1			ds.b 1		; $0D
+mus_LBZ2			ds.b 1		; $0E
+mus_MHZ1			ds.b 1		; $0F
+mus_MHZ2			ds.b 1		; $10
+mus_SOZ1			ds.b 1		; $11
+mus_SOZ2			ds.b 1		; $12
+mus_LRZ1			ds.b 1		; $13
+mus_HPZ				ds.b 1		; $14
+mus_SSZ				ds.b 1		; $15
+mus_DEZ1			ds.b 1		; $16
+mus_DEZ2			ds.b 1		; $17
+mus_MinibossK			ds.b 1		; $18
+mus_EndBoss			ds.b 1		; $19
+mus_DDZ				ds.b 1		; $1A
+mus_MagneticOrbs		ds.b 1		; $1B
+mus_SlotMachine			ds.b 1		; $1C
+mus_Gumball			ds.b 1		; $1D
+mus_SpecialStage		ds.b 1		; $1E
+mus_Knuckles			ds.b 1		; $1F
+mus_ALZ				ds.b 1		; $20
+mus_BPZ				ds.b 1		; $21
+mus_DPZ				ds.b 1		; $22
+mus_CGZ				ds.b 1		; $23
+mus_EMZ				ds.b 1		; $24
+mus_TitleScreen			ds.b 1		; $25
+mus_Credits3			ds.b 1		; $26
+mus_GameOver			ds.b 1		; $27
+mus_Continue			ds.b 1		; $28
+mus_GotThroughAct		ds.b 1		; $29
+mus_ExtraLife			ds.b 1		; $2A
+mus_Emerald			ds.b 1		; $2B
+mus_Invincibility		ds.b 1		; $2C
+mus_CompetitionMenu		ds.b 1		; $2D
+mus_Miniboss			ds.b 1		; $2E
+mus_DataSelect			ds.b 1		; $2F
+mus_FinalBoss			ds.b 1		; $30
+mus_Drowning			ds.b 1		; $31
+mus_Ending			ds.b 1		; $32
+
+mus_CreditsK =			$DC		; $DC
+
+; ---------------------------------------------------------------------------
+; Sound effect ID's list. These do not affect the sound driver, be careful.
+
+	phase $33
+sfx_RingRight			ds.b 1		; $33
+sfx_RingLeft			ds.b 1		; $34
+sfx_Death			ds.b 1		; $35
+sfx_Skid			ds.b 1		; $36
+sfx_SpikeHit			ds.b 1		; $37
+sfx_Bubble			ds.b 1		; $38
+sfx_Splash			ds.b 1		; $39
+sfx_Shield			ds.b 1		; $3A
+sfx_Drown			ds.b 1		; $3B
+sfx_Roll			ds.b 1		; $3C
+sfx_Break			ds.b 1		; $3D
+sfx_FireShield			ds.b 1		; $3E
+sfx_BubbleShield		ds.b 1		; $3F
+sfx_Unk40			ds.b 1		; $40
+sfx_ElectricShield		ds.b 1		; $41
+sfx_InstaAttack			ds.b 1		; $42
+sfx_FireAttack			ds.b 1		; $43
+sfx_BubbleAttack		ds.b 1		; $44
+sfx_ElectricAttack		ds.b 1		; $45
+sfx_SuperAlt			ds.b 1		; $46
+sfx_SandwallRise		ds.b 1		; $47
+sfx_48				ds.b 1		; $48
+sfx_Thump			ds.b 1		; $49
+sfx_Grab			ds.b 1		; $4A
+sfx_WaterfallSplash		ds.b 1		; $4B
+sfx_GlideLand			ds.b 1		; $4C
+sfx_Projectile			ds.b 1		; $4D
+sfx_MissileExplode		ds.b 1		; $4E
+sfx_Flamethrower		ds.b 1		; $4F
+sfx_BossActivate		ds.b 1		; $50
+sfx_MissileThrow		ds.b 1		; $51
+sfx_SpikeMove			ds.b 1		; $52
+sfx_Charging			ds.b 1		; $53
+sfx_BossLazer			ds.b 1		; $54
+sfx_BlockConveyor		ds.b 1		; $55
+sfx_FlipBridge			ds.b 1		; $56
+sfx_Geyser			ds.b 1		; $57
+sfx_FanLatch			ds.b 1		; $58
+sfx_Collapse			ds.b 1		; $59
+sfx_Unk5A			ds.b 1		; $5A
+sfx_Button			ds.b 1		; $5B
+sfx_MetalSpark			ds.b 1		; $5C
+sfx_FloorThump			ds.b 1		; $5D
+sfx_Lazer			ds.b 1		; $5E
+sfx_Crash			ds.b 1		; $5F
+sfx_BossZoom			ds.b 1		; $60
+sfx_61				ds.b 1		; $61
+sfx_Jump			ds.b 1		; $62
+sfx_Starpost			ds.b 1		; $63
+sfx_64				ds.b 1		; $64
+sfx_BlueSphere			ds.b 1		; $65
+sfx_AllSpheres			ds.b 1		; $66
+sfx_LevelProjectile		ds.b 1		; $67
+sfx_Perfect			ds.b 1		; $68
+sfx_PushBlock			ds.b 1		; $69
+sfx_Goal			ds.b 1		; $6A
+sfx_ActionBlock			ds.b 1		; $6B
+sfx_Splash2			ds.b 1		; $6C
+sfx_Unk6D			ds.b 1		; $6D
+sfx_BossHit			ds.b 1		; $6E
+sfx_Rumble2			ds.b 1		; $6F
+sfx_LavaBall			ds.b 1		; $70
+sfx_Shield2			ds.b 1		; $71
+sfx_Hoverpad			ds.b 1		; $72
+sfx_Transporter			ds.b 1		; $73
+sfx_TunnelPropeller		ds.b 1		; $74
+sfx_BalloonPlatform		ds.b 1		; $75
+sfx_TrapDoor			ds.b 1		; $76
+sfx_Balloon			ds.b 1		; $77
+sfx_GravityMachine		ds.b 1		; $78
+sfx_Lightning			ds.b 1		; $79
+sfx_7A				ds.b 1		; $7A
+sfx_SmallBumpers		ds.b 1		; $7B
+sfx_7C				ds.b 1		; $7C
+sfx_Unk7D			ds.b 1		; $7D
+sfx_GroundSlide			ds.b 1		; $7E
+sfx_7F				ds.b 1		; $7F
+sfx_IceSpikes			ds.b 1		; $80
+sfx_TubeLauncher		ds.b 1		; $81
+sfx_82				ds.b 1		; $82
+sfx_BridgeCollapse		ds.b 1		; $83
+sfx_Unk84			ds.b 1		; $84
+sfx_Unk85			ds.b 1		; $85
+sfx_Alarm			ds.b 1		; $86
+sfx_MushroomBounce		ds.b 1		; $87
+sfx_PulleyMove			ds.b 1		; $88
+sfx_WeatherMachine		ds.b 1		; $89
+sfx_8A				ds.b 1		; $8A
+sfx_ChopTree			ds.b 1		; $8B
+sfx_ChopStuck			ds.b 1		; $8C
+sfx_Unk8D			ds.b 1		; $8D
+sfx_Unk8E			ds.b 1		; $8E
+sfx_DoorOpen			ds.b 1		; $8F
+sfx_DoorMove			ds.b 1		; $90
+sfx_DoorClose			ds.b 1		; $91
+sfx_GhostAppear			ds.b 1		; $92
+sfx_93				ds.b 1		; $93
+sfx_94				ds.b 1		; $94
+sfx_95				ds.b 1		; $95
+sfx_MetalLand			ds.b 1		; $96
+sfx_97				ds.b 1		; $97
+sfx_98				ds.b 1		; $98
+sfx_Unk99			ds.b 1		; $99
+sfx_9A				ds.b 1		; $9A
+sfx_ThumpBoss			ds.b 1		; $9B
+sfx_SuperEmerald		ds.b 1		; $9C
+sfx_Targeting			ds.b 1		; $9D
+sfx_9E				ds.b 1		; $9E
+sfx_SuperTransform		ds.b 1		; $9F
+sfx_A0				ds.b 1		; $A0
+sfx_UnkA1			ds.b 1		; $A1
+sfx_A2				ds.b 1		; $A2
+sfx_A3				ds.b 1		; $A3
+sfx_A4				ds.b 1		; $A4
+sfx_UnkA5			ds.b 1		; $A5
+sfx_A6				ds.b 1		; $A6
+sfx_LaunchReady			ds.b 1		; $A7
+sfx_A8				ds.b 1		; $A8
+sfx_AirDing			ds.b 1		; $A9
+sfx_Bumper			ds.b 1		; $AA
+sfx_Spindash			ds.b 1		; $AB
+sfx_Continue			ds.b 1		; $AC
+sfx_LaunchGo			ds.b 1		; $AD
+sfx_AE				ds.b 1		; $AE
+sfx_EnterSS			ds.b 1		; $AF
+sfx_Register			ds.b 1		; $B0
+sfx_Spring			ds.b 1		; $B1
+sfx_Error			ds.b 1		; $B2
+sfx_BigRing			ds.b 1		; $B3
+sfx_Explode			ds.b 1		; $B4
+sfx_Diamonds			ds.b 1		; $B5
+sfx_Dash			ds.b 1		; $B6
+sfx_SlotMachine			ds.b 1		; $B7
+sfx_Signpost			ds.b 1		; $B8
+sfx_RingLoss			ds.b 1		; $B9
+sfx_Flying			ds.b 1		; $BA
+sfx_FlyTired			ds.b 1		; $BB
+sfx_UnkBC			ds.b 1		; $BC
+sfx_LargeShip			ds.b 1		; $BD
+sfx_EggmanSiren			ds.b 1		; $BE
+sfx_BF				ds.b 1		; $BF
+sfx_C0				ds.b 1		; $C0
+sfx_SmallFan			ds.b 1		; $C1
+sfx_C2				ds.b 1		; $C2
+sfx_C3				ds.b 1		; $C3
+sfx_C4				ds.b 1		; $C4
+sfx_UnkC5			ds.b 1		; $C5
+sfx_C6				ds.b 1		; $C6
+sfx_CannonTurn			ds.b 1		; $C7
+sfx_C8				ds.b 1		; $C8
+sfx_SpikeBalls			ds.b 1		; $C9
+sfx_LightTunnel			ds.b 1		; $CA
+sfx_Rumble			ds.b 1		; $CB
+sfx_BigRumble			ds.b 1		; $CC
+sfx_CD				ds.b 1		; $CD
+sfx_WindQuiet			ds.b 1		; $CE
+sfx_WindLoud			ds.b 1		; $CF
+sfx_D0				ds.b 1		; $D0
+sfx_UnkD1			ds.b 1		; $D1
+sfx_GumballTab			ds.b 1		; $D2
+sfx_D3				ds.b 1		; $D3
+sfx_D4				ds.b 1		; $D4
+sfx_LavaFall			ds.b 1		; $D5
+sfx_UnkD6			ds.b 1		; $D6
+sfx_D7				ds.b 1		; $D7
+sfx_UnkD8			ds.b 1		; $D8
+sfx_D9				ds.b 1		; $D9
+sfx_LeafBlower			ds.b 1		; $DA
+sfx_DB				ds.b 1		; $DB
+
+	dephase
+	!org 0				; make sure we reset the ROM position to 0
