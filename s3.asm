@@ -4352,7 +4352,7 @@ Sega_Screen:
 ; ---------------------------------------------------------------------------
 
 Title_Screen:
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		bsr.w	Play_Sound
 		bsr.w	Clear_Nem_Queue
 		bsr.w	Pal_FadeToBlack
@@ -4448,7 +4448,7 @@ loc_36AE:
 		ori.b	#$40,d0
 		move.w	d0,(VDP_control_port).l
 		bsr.w	Pal_FadeFromBlack
-		moveq	#-1,d0
+		moveq	#mus_SEGA,d0
 		bsr.w	Play_Sound
 		move.w	#$B4,(Demo_timer).w
 
@@ -4463,7 +4463,7 @@ Wait_SegaS3K:
 		bne.s	Wait_SegaS3K
 
 loc_36F8:
-		moveq	#-2,d0
+		moveq	#mus_StopSEGA,d0
 		bsr.w	Play_Sound
 		lea	(Pal_Title).l,a1
 
@@ -4488,7 +4488,7 @@ loc_3704:
 		lea	(ArtKos_S3TitleSonic8).l,a1
 		lea	(RAM_start).l,a2
 		jsr	(Queue_Kos).l
-		moveq	#$25,d0
+		moveq	#mus_TitleScreen,d0
 		bsr.w	Play_Sound
 
 Wait_TitleS3K:
@@ -4605,7 +4605,7 @@ loc_38D8:
 		move.b	d0,(Continue_count).w
 		move.l	#$1388,(Next_extra_life_score).w
 		move.l	#$1388,(Next_extra_life_score_P2).w
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		bsr.w	Play_Sound_2
 		moveq	#0,d0
 		move.b	(Title_screen_option).w,d0
@@ -4627,7 +4627,7 @@ loc_3970:
 ; ---------------------------------------------------------------------------
 
 loc_3978:
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		bsr.w	Play_Sound_2
 		move.w	(Next_demo_number).w,d0
 		andi.w	#7,d0
@@ -5018,7 +5018,7 @@ OldDebugCode:
 		tst.b	1(a1)
 		bne.s	locret_406C
 		move.w	#$101,(Debug_cheat_flag).w
-		moveq	#$B9,d0
+		moveq	#sfx_RingLoss,d0
 		bsr.w	Play_Sound_2
 
 loc_4066:
@@ -5097,7 +5097,7 @@ loc_4124:
 		move.b	d2,(Title_screen_option).w
 		andi.b	#3,d0
 		beq.s	loc_413A
-		moveq	#$5B,d0
+		moveq	#sfx_Button,d0
 		jsr	(Play_Sound_2).l
 
 loc_413A:
@@ -5200,7 +5200,7 @@ S3_Level_Select_Code:
 		bne.s	locret_42C8
 		move.w	#$101,(Level_select_flag).w
 		move.w	#$101,(Debug_cheat_flag).w
-		moveq	#$33,d0
+		moveq	#sfx_RingRight,d0
 		bsr.w	Play_Sound_2
 
 loc_42C2:
@@ -5231,37 +5231,38 @@ Map_TitleSonicAnim:
 Map_TitleTailsPlane:
 		include "General/Title/Map - S3 Tails Plane.asm"
 LevelMusic_Playlist:
-		dc.b    1,   2
-		dc.b    3,   4
-		dc.b    5,   6
-		dc.b    7,   8
-		dc.b    9,  $A
-		dc.b   $B,  $C
-		dc.b   $D,  $E
-		dc.b   $F, $10
-		dc.b  $11, $12
-		dc.b  $13, $14
-		dc.b  $15, $16
-		dc.b  $17, $17
-		dc.b  $1A, $1A
-		dc.b  $1C, $1C
-		dc.b  $20, $20
-		dc.b  $21, $21
-		dc.b  $22, $22
-		dc.b  $23, $23
-		dc.b  $24, $24
-		dc.b  $1E, $1E
-		dc.b  $1D, $1D
-		dc.b  $1E, $1E
-		dc.b  $1C, $1C
-		dc.b  $1C, $1C
+	dc.b mus_AIZ1,		mus_AIZ2	; ANGEL ISLAND ZONE
+	dc.b mus_HCZ1,		mus_HCZ2	; HYDROCITY ZONE ACT
+	dc.b mus_MGZ1,		mus_MGZ2	; MARBLE GARDEN ZONE
+	dc.b mus_CNZ1,		mus_CNZ2	; CARNIVAL NIGHT ZONE
+	dc.b mus_FBZ1,		mus_FBZ2	; FLYING BATTERY ZONE
+	dc.b mus_ICZ1,		mus_ICZ2	; ICE CAP ZONE
+	dc.b mus_LBZ1,		mus_LBZ2	; LAUNCH BASE ZONE
+	dc.b mus_MHZ1,		mus_MHZ2	; MUSHROOM HILL ZONE
+	dc.b mus_SOZ1,		mus_SOZ2	; SANDOPOLIS ZONE
+	dc.b mus_LRZ1,		mus_HPZ		; LAVA REEF ZONE
+	dc.b mus_SSZ,		mus_DEZ1	; SKY SANCTUARY ZONE
+	dc.b mus_DEZ2,		mus_DEZ2	; DEATH EGG ZONE
+	dc.b mus_DDZ,		mus_DDZ		; DOOMSDAY ZONE
+	dc.b mus_SlotMachine, 	mus_SlotMachine	; AIZ INTRO & ENDING
+	dc.b mus_ALZ,		mus_ALZ		; AZURE LAKE ZONE
+	dc.b mus_BPZ,		mus_BPZ		; BALLOON PARK ZONE
+	dc.b mus_DPZ,		mus_DPZ		; DESERT PALACE ZONE
+	dc.b mus_CGZ,		mus_CGZ		; CHROME GADGET ZONE
+	dc.b mus_EMZ,		mus_EMZ		; ENDLESS MINE ZONE
+	dc.b mus_SpecialStage,	mus_SpecialStage; GUMBALL?
+	dc.b mus_Gumball,	mus_Gumball	; PACHINKO?
+	dc.b mus_SpecialStage,	mus_SpecialStage; SLOTS?
+	dc.b mus_SlotMachine, 	mus_SlotMachine	; LAVA REEF ZONE BOSS & HIDDEN PALACE ZONE
+	dc.b mus_SlotMachine, 	mus_SlotMachine	; FINAL BOSS & SPECIAL STAGE?
+	even
 ; ---------------------------------------------------------------------------
 
 Level:
 		bset	#7,(Game_mode).w
 		tst.w	(Demo_mode_flag).w
 		bmi.s	loc_46C2
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		bsr.w	Play_Sound_2
 
 loc_46C2:
@@ -7496,7 +7497,7 @@ loc_62E0:
 		move.l	(a1),(a2)+
 		clr.l	(a1)+
 		dbf	d1,loc_62E0
-		moveq	#$2F,d0
+		moveq	#mus_DataSelect,d0
 		bsr.w	Play_Sound
 		move.w	#$707,(Demo_timer).w
 		clr.w	(Competition_mode).w
@@ -7529,7 +7530,7 @@ LevelSelect2P_Main:
 LevelSelect2P_PressStart:
 		bsr.w	Chk2PZoneCompletion
 		bmi.s	loc_6368
-		moveq	#-$4E,d0
+		moveq	#sfx_Error,d0
 		bsr.w	Play_Sound_2
 		bra.w	LevelSelect2P_Main
 ; ---------------------------------------------------------------------------
@@ -7754,7 +7755,7 @@ MenuScreen_Options:
 		jsr	(AnimateTiles_DoAniPLC).l
 		moveq	#4,d0
 		bsr.w	LoadPalette
-		moveq	#$2F,d0
+		moveq	#mus_DataSelect,d0
 		bsr.w	Play_Sound
 		clr.w	(Competition_mode).w
 		clr.l	(Camera_X_pos).w
@@ -8120,7 +8121,7 @@ loc_696C:
 		move.l	(a1),(a2)+
 		clr.l	(a1)+
 		dbf	d1,loc_696C
-		moveq	#$2F,d0
+		moveq	#mus_DataSelect,d0
 		jsr	(Play_Sound).l
 		move.w	#$707,(Demo_timer).w
 		clr.w	(Competition_mode).w
@@ -8249,7 +8250,7 @@ LevelSelect_StartZone:
 		move.b	d0,(Continue_count).w
 		move.l	#$1388,(Next_extra_life_score).w
 		move.l	#$1388,(Next_extra_life_score_P2).w
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound_2).l
 		moveq	#0,d0
 		move.w	d0,($FFFFFF8A).w
@@ -8339,7 +8340,7 @@ loc_6BCA:
 loc_6BF4:
 		btst	#4,d1
 		beq.s	locret_6C02
-		moveq	#-$1D,d0
+		moveq	#mus_MutePSG,d0
 		jsr	(Play_Sound).l
 
 locret_6C02:
@@ -8635,7 +8636,7 @@ CheckCheats:
 		tst.b	1(a0)
 		bne.s	loc_6E8E
 		move.w	#$101,(a1)
-		moveq	#$33,d0
+		moveq	#sfx_RingRight,d0
 		jsr	(Play_Sound_2).l
 
 loc_6E88:
@@ -8653,14 +8654,14 @@ loc_6E8E:
 		tst.w	d2
 		bne.s	loc_6EBA
 		move.b	#$F,(Continue_count).w
-		moveq	#$28,d0
+		moveq	#mus_Continue,d0
 		jsr	(Play_Sound).l
 		bra.s	loc_6EC8
 ; ---------------------------------------------------------------------------
 
 loc_6EBA:
 		move.w	#7,(Emerald_count).w
-		moveq	#$2B,d0
+		moveq	#mus_Emerald,d0
 		jsr	(Play_Sound).l
 
 loc_6EC8:
@@ -8762,7 +8763,7 @@ AniPLC_SONICMILES:dc.w 0
 ; ---------------------------------------------------------------------------
 
 SpecialStage:
-		moveq	#$E2,d0
+		moveq	#mus_Stop,d0
 		bsr.w	Play_Sound
 		bsr.w	Clear_Nem_Queue
 		bsr.w	Pal_FadeToWhite
@@ -8945,7 +8946,7 @@ loc_7770:
 		bsr.w	Wait_VSync
 		move.b	#0,(Special_stage_fade_timer).w
 		move.w	#$8C89,(VDP_control_port).l
-		moveq	#$1C,d0
+		moveq	#mus_SlotMachine,d0
 		bsr.w	Play_Sound
 		move.w	(VDP_reg_1_command).w,d0
 		ori.b	#$40,d0
@@ -9450,7 +9451,7 @@ loc_803E:
 		move.l	#-$100000,$40(a0)
 		move.b	#-$80,(Special_stage_jumping).w
 		move.b	#0,(Special_stage_turning).w
-		moveq	#$62,d0
+		moveq	#sfx_Jump,d0
 		jsr	(Play_Sound_2).l
 
 loc_806E:
@@ -9582,7 +9583,7 @@ loc_81FA:
 		bne.s	loc_8226
 		move.l	#-$100000,$40(a0)
 		move.b	#1,(Special_stage_jumping_P2).w
-		moveq	#$62,d0
+		moveq	#sfx_Jump,d0
 		jsr	(Play_Sound_2).l
 
 loc_8226:
@@ -9984,7 +9985,7 @@ sub_85FE:
 		ori.b	#-$80,(Last_star_post_hit).w
 
 loc_8664:
-		moveq	#$6A,d0
+		moveq	#sfx_Goal,d0
 		jsr	(Play_Sound_2).l
 
 locret_866C:
@@ -10000,7 +10001,7 @@ loc_866E:
 		move.l	a1,4(a2)
 
 loc_8682:
-		moveq	#$65,d0
+		moveq	#sfx_BlueSphere,d0
 		jsr	(Play_Sound_2).l
 		rts
 ; ---------------------------------------------------------------------------
@@ -10013,7 +10014,7 @@ loc_868C:
 		move.w	d1,(Special_stage_interact).w
 		move.b	#1,(Special_stage_bumper_lock).w
 		move.b	#0,(Special_stage_advancing).w
-		moveq	#$AA,d0
+		moveq	#sfx_Bumper,d0
 		jsr	(Play_Sound_2).l
 		rts
 ; ---------------------------------------------------------------------------
@@ -10029,7 +10030,7 @@ loc_86B2:
 loc_86C6:
 		subq.w	#1,(Special_stage_rings_left).w
 		bne.s	loc_86D4
-		moveq	#$68,d0
+		moveq	#sfx_Perfect,d0
 		jsr	(Play_Sound).l
 
 loc_86D4:
@@ -10040,12 +10041,12 @@ loc_86D4:
 		bset	#0,(Special_stage_extra_life_flags).w
 		bne.s	loc_86FE
 		addq.b	#1,(Continue_count).w
-		move.w	#$FFAC,d0
+		move.w	#$FF00|sfx_Continue,d0
 		jmp	(Play_Sound).l
 ; ---------------------------------------------------------------------------
 
 loc_86FE:
-		moveq	#$33,d0
+		moveq	#sfx_RingRight,d0
 		cmpi.w	#100,(Special_stage_ring_count).w
 		bcs.s	loc_8726
 		bset	#1,(Special_stage_extra_life_flags).w
@@ -10057,7 +10058,7 @@ loc_86FE:
 
 loc_8720:
 		addq.b	#1,(Life_count).w
-		moveq	#$B9,d0
+		moveq	#sfx_RingLoss,d0
 
 loc_8726:
 		jsr	(Play_Sound_2).l
@@ -10377,7 +10378,7 @@ sub_89E2:
 		addq.w	#2,(Special_stage_clear_timer).w
 		cmpi.w	#2,(Special_stage_clear_timer).w
 		bne.s	loc_8A0C
-		moveq	#$66,d0
+		moveq	#sfx_AllSpheres,d0
 		jsr	(Play_Sound).l
 
 loc_8A0C:
@@ -10445,7 +10446,7 @@ loc_8AB6:
 		subq.b	#1,(Special_stage_emerald_timer).w
 		bne.s	locret_8AD8
 		addq.b	#1,(Special_stage_clear_routine).w
-		moveq	#$2B,d0
+		moveq	#mus_Emerald,d0
 		jsr	(Play_Sound).l
 
 locret_8AD8:
@@ -10489,7 +10490,7 @@ loc_8B2E:
 		ori.b	#$80,(Last_star_post_hit).w
 
 loc_8B50:
-		moveq	#$6A,d0
+		moveq	#sfx_Goal,d0
 		jsr	(Play_Sound_2).l
 
 locret_8B58:
@@ -10739,7 +10740,7 @@ loc_8D64:
 		dbf	d0,loc_8D52
 		subq.w	#2,d1
 		bne.s	loc_8D46
-		moveq	#$B9,d0
+		moveq	#sfx_RingLoss,d0
 		jsr	(Play_Sound_2).l
 		moveq	#1,d1
 
@@ -11227,7 +11228,7 @@ loc_9658:
 		jsr	(Init_SpriteTable).l
 		jsr	(Process_Sprites).l
 		jsr	(Render_Sprites).l
-		moveq	#$2D,d0
+		moveq	#mus_CompetitionMenu,d0
 		jsr	(Play_Sound).l
 		move.b	#$1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
@@ -11304,7 +11305,7 @@ loc_975E:
 loc_9768:
 		move.l	d0,(a1)+
 		dbf	d1,loc_9768
-		moveq	#$63,d0
+		moveq	#sfx_Starpost,d0
 		jmp	(Play_Sound_2).l
 ; ---------------------------------------------------------------------------
 
@@ -11313,7 +11314,7 @@ loc_9776:
 		move.b	($FFFFEF48).w,d1
 		lsr.w	#1,d0
 		bcc.s	loc_978A
-		moveq	#$5B,d2
+		moveq	#sfx_Button,d2
 		subq.b	#1,d1
 		bcc.s	loc_979A
 		moveq	#3,d1
@@ -11323,7 +11324,7 @@ loc_9776:
 loc_978A:
 		lsr.w	#1,d0
 		bcc.s	loc_979A
-		moveq	#$5B,d2
+		moveq	#sfx_Button,d2
 		addq.b	#1,d1
 		cmpi.b	#3,d1
 		bls.s	loc_979A
@@ -11364,7 +11365,7 @@ Obj_Competition_97D0:
 		beq.s	loc_97F6
 		tst.b	($FFFFEF4E).w
 		seq	($FFFFEF4E).w
-		moveq	#$5B,d0
+		moveq	#sfx_Button,d0
 		jsr	(Play_Sound_2).l
 
 loc_97F6:
@@ -11569,7 +11570,7 @@ loc_9BF4:
 		move.l	#Map_CompetitionSelect,$C(a0)
 		addi.w	#$C29F,$A(a0)
 		move.w	#$B0,$10(a0)
-		moveq	#$2D,d0
+		moveq	#mus_CompetitionMenu,d0
 		jsr	(Play_Sound).l
 		move.b	#$1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
@@ -11661,7 +11662,7 @@ loc_9D04:
 		bcs.s	loc_9D3C
 		cmpi.b	#4,(a0)
 		beq.s	loc_9D5C
-		moveq	#$5B,d0
+		moveq	#sfx_Button,d0
 		jsr	(Play_Sound_2).l
 		addq.b	#1,(a0)
 		cmpi.b	#4,(a0)
@@ -11675,7 +11676,7 @@ loc_9D04:
 loc_9D3C:
 		tst.b	(a0)
 		beq.s	loc_9D5C
-		moveq	#$5B,d0
+		moveq	#sfx_Button,d0
 		jsr	(Play_Sound_2).l
 		subq.b	#1,(a0)
 		beq.s	loc_9D5C
@@ -11688,7 +11689,7 @@ loc_9D3C:
 loc_9D5C:
 		andi.w	#$E0,d1
 		beq.w	loc_9C5C
-		moveq	#$63,d0
+		moveq	#sfx_Starpost,d0
 		jsr	(Play_Sound_2).l
 		moveq	#0,d0
 		move.b	($FFFFEF4A).w,d0
@@ -12261,7 +12262,7 @@ loc_A29C:
 		jsr	sub_B596(pc)
 		jsr	(Process_Sprites).l
 		jsr	(Render_Sprites).l
-		moveq	#$2D,d0
+		moveq	#mus_CompetitionMenu,d0
 		jsr	(Play_Sound).l
 		move.b	#$1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
@@ -12345,7 +12346,7 @@ loc_A3EE:
 		andi.w	#$C,d0
 		beq.w	loc_A498
 		move.l	d0,-(sp)
-		moveq	#$C3,d0
+		moveq	#sfx_C3,d0
 		jsr	(Play_Sound_2).l
 		move.l	(sp)+,d0
 		clr.b	$34(a0)
@@ -12428,7 +12429,7 @@ loc_A4A6:
 		beq.s	loc_A4BC
 		st	$2F(a0)
 		sf	(a2)
-		moveq	#$63,d0
+		moveq	#sfx_Starpost,d0
 		jsr	(Play_Sound_2).l
 
 loc_A4BC:
@@ -12683,7 +12684,7 @@ loc_AAF4:
 		jsr	(Init_SpriteTable).l
 		jsr	(Process_Sprites).l
 		jsr	(Render_Sprites).l
-		moveq	#$28,d0
+		moveq	#mus_Continue,d0
 		jsr	(Play_Sound).l
 		move.b	#$1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
@@ -13181,7 +13182,7 @@ loc_B0FC:
 		jsr	(Init_SpriteTable).l
 		jsr	(Process_Sprites).l
 		jsr	(Render_Sprites).l
-		moveq	#$28,d0
+		moveq	#mus_Continue,d0
 		jsr	(Play_Sound).l
 		move.b	#$1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
@@ -13942,7 +13943,7 @@ loc_BA3E:
 		lea	(ArtKos_SaveScreenS3Zone).l,a0
 		lea	(RAM_start).l,a1
 		jsr	(Kos_Decomp).l
-		moveq	#$2F,d0
+		moveq	#mus_DataSelect,d0
 		jsr	(Play_Sound).l
 		move.l	#loc_BB0A,($FFFFEF44).w
 		move.b	#$1E,(V_int_routine).w
@@ -13980,7 +13981,7 @@ loc_BAC8:
 loc_BAD0:
 		cmpi.b	#$4C,(Game_mode).w
 		beq.s	SaveScreen_MainLoop
-		moveq	#$AF,d0
+		moveq	#sfx_EnterSS,d0
 		jmp	(Play_Sound_2).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -14266,10 +14267,10 @@ loc_C0EA:
 		tst.b	($FFFFEF4B).w
 		beq.s	loc_C106
 		subq.b	#1,($FFFFEF4B).w
-		moveq	#-$49,d0
+		moveq	#sfx_SlotMachine,d0
 		tst.w	($FFFFEEE4).w
 		beq.s	loc_C0FE
-		moveq	#$7B,d0
+		moveq	#sfx_SmallBumpers,d0
 
 loc_C0FE:
 		jsr	(Play_Sound_2).l
@@ -14281,10 +14282,10 @@ loc_C106:
 		cmpi.b	#7,($FFFFEF4B).w
 		beq.s	loc_C12C
 		addq.b	#1,($FFFFEF4B).w
-		moveq	#-$49,d0
+		moveq	#sfx_SlotMachine,d0
 		tst.w	($FFFFEEE4).w
 		beq.s	loc_C124
-		moveq	#$7B,d0
+		moveq	#sfx_SmallBumpers,d0
 
 loc_C124:
 		jsr	(Play_Sound_2).l
@@ -14478,7 +14479,7 @@ loc_C306:
 		move.b	(Ctrl_1_pressed).w,d0
 		btst	#1,d0
 		beq.s	loc_C32A
-		moveq	#$5B,d2
+		moveq	#sfx_Button,d2
 		subq.w	#1,d1
 		bpl.s	loc_C320
 		moveq	#6,d1
@@ -14495,7 +14496,7 @@ loc_C320:
 loc_C32A:
 		btst	#0,d0
 		beq.s	loc_C344
-		moveq	#$5B,d2
+		moveq	#sfx_Button,d2
 		addq.w	#1,d1
 		cmpi.w	#4,d1
 		bne.s	loc_C33C
@@ -14644,7 +14645,7 @@ sub_C4CC:
 		move.b	(Ctrl_1_pressed).w,d1
 		lsr.w	#1,d1
 		bcc.s	loc_C4EA
-		moveq	#$5B,d2
+		moveq	#sfx_Button,d2
 		addq.w	#1,d0
 		cmpi.w	#2,d0
 		bls.s	loc_C4F6
@@ -14655,7 +14656,7 @@ sub_C4CC:
 loc_C4EA:
 		lsr.w	#1,d1
 		bcc.s	loc_C4F6
-		moveq	#$5B,d2
+		moveq	#sfx_Button,d2
 		subq.w	#1,d0
 		bpl.s	loc_C4F6
 		moveq	#2,d0
@@ -14739,7 +14740,7 @@ loc_C5AA:
 		move.b	(Ctrl_1_pressed).w,d0
 		andi.w	#$E0,d0
 		beq.w	loc_C688
-		moveq	#$63,d0
+		moveq	#sfx_Starpost,d0
 		jsr	(Play_Sound_2).l
 		st	($FFFFEEE4).w
 		addq.b	#4,5(a0)
@@ -14767,7 +14768,7 @@ loc_C5D4:
 		movea.l	d0,a1
 		tst.b	(a1)
 		bmi.s	loc_C63C
-		moveq	#$63,d0
+		moveq	#sfx_Starpost,d0
 		jsr	(Play_Sound_2).l
 		st	($FFFFEEE2).w
 		addq.b	#8,5(a0)
@@ -14829,7 +14830,7 @@ loc_C6AC:
 		bne.s	loc_C6DA
 		btst	#2,(Ctrl_1_pressed).w
 		beq.s	loc_C6E8
-		moveq	#$68,d0
+		moveq	#sfx_Perfect,d0
 		jsr	(Play_Sound_2).l
 		movea.l	$2E(a0),a1
 		clr.l	(a1)
@@ -15060,7 +15061,7 @@ loc_EA5E:
 		addi.l	#$1388,(Next_extra_life_score).w
 		addq.b	#1,(Life_count).w
 		addq.b	#1,(Update_HUD_life_count).w
-		move.w	#$2A,d0
+		move.w	#mus_ExtraLife,d0
 		jmp	(Play_Sound).l
 ; ---------------------------------------------------------------------------
 
@@ -16516,7 +16517,7 @@ loc_FCFC:
 		bclr	#4,$2A(a0)
 		bclr	#5,$2A(a0)
 		clr.b	$40(a0)
-		move.w	#$D9,d0
+		move.w	#sfx_D9,d0
 		jmp	(Play_Sound_2).l
 ; End of function Check_CNZ_Bumpers
 
@@ -18770,7 +18771,7 @@ loc_11544:
 		move.w	#0,$1C(a0)
 		move.b	#$1A,$20(a0)
 		move.b	#$78,$34(a0)
-		moveq	#$35,d0
+		moveq	#sfx_Death,d0
 		jsr	(Play_Sound_2).l
 		moveq	#-1,d0
 		rts
@@ -18793,7 +18794,7 @@ Kill_Character:
 		move.w	#0,$1C(a0)
 		move.b	#$18,$20(a0)
 		bset	#7,$A(a0)
-		moveq	#$35,d0
+		moveq	#sfx_Death,d0
 		jsr	(Play_Sound_2).l
 
 loc_115A8:
@@ -19245,7 +19246,7 @@ loc_11A30:
 		move.b	#3,$1F(a0)
 		move.b	#2,$20(a0)
 		addq.w	#4,$14(a0)
-		move.w	#$3C,d0
+		move.w	#sfx_Roll,d0
 		jsr	(Play_Sound_2).l
 		tst.w	$1C(a0)
 		bne.s	locret_11A62
@@ -19268,7 +19269,7 @@ sub_11A64:
 		andi.b	#$70,d0
 		beq.w	locret_11AAE
 		move.b	#9,$20(a0)
-		move.w	#-$55,d0
+		move.w	#$FF00|sfx_Spindash,d0
 		jsr	(Play_Sound_2).l
 		addq.l	#4,sp
 		move.b	#1,$3D(a0)
@@ -19322,7 +19323,7 @@ loc_11B14:
 loc_11B22:
 		bset	#2,$2A(a0)
 		move.b	#0,$20(a6)
-		moveq	#-$4A,d0
+		moveq	#sfx_Dash,d0
 		jsr	(Play_Sound_2).l
 		bra.s	loc_11BA4
 ; ---------------------------------------------------------------------------
@@ -19360,7 +19361,7 @@ loc_11B74:
 		andi.b	#$70,d0
 		beq.w	loc_11BA4
 		move.w	#$900,$20(a0)
-		move.w	#-$55,d0
+		move.w	#$FF00|sfx_Spindash,d0
 		jsr	(Play_Sound_2).l
 		addi.w	#$200,$3E(a0)
 		cmpi.w	#$800,$3E(a0)
@@ -19739,7 +19740,7 @@ loc_11F88:
 		asr	$1A(a0)
 		beq.s	locret_11F32
 		move.w	#$100,$20(a6)
-		move.w	#$39,d0
+		move.w	#sfx_Splash,d0
 		jmp	(Play_Sound_2).l
 ; ---------------------------------------------------------------------------
 
@@ -19779,7 +19780,7 @@ loc_12002:
 		move.w	#-$1000,$1A(a0)
 
 loc_12028:
-		move.w	#$39,d0
+		move.w	#sfx_Splash,d0
 		jmp	(Play_Sound_2).l
 ; End of function Sonic_Water
 
@@ -20231,7 +20232,7 @@ loc_124C2:
 		blt.s	locret_1250A
 		tst.b	$2D(a0)
 		bmi.s	locret_1250A
-		move.w	#$36,d0
+		move.w	#sfx_Skid,d0
 		jsr	(Play_Sound_2).l
 		move.b	#$D,$20(a0)
 		bclr	#0,$2A(a0)
@@ -20286,7 +20287,7 @@ loc_12548:
 		bgt.s	locret_12590
 		tst.b	$2D(a0)
 		bmi.s	locret_12590
-		move.w	#$36,d0
+		move.w	#sfx_Skid,d0
 		jsr	(Play_Sound_2).l
 		move.b	#$D,$20(a0)
 		bset	#0,$2A(a0)
@@ -20602,7 +20603,7 @@ Player_DoRoll:
 		move.b	#7,$1F(a0)
 		move.b	#2,$20(a0)
 		addq.w	#5,$14(a0)
-		move.w	#$3C,d0
+		move.w	#sfx_Roll,d0
 		jsr	(Play_Sound_2).l
 		tst.w	$1C(a0)
 		bne.s	locret_1280E
@@ -20654,7 +20655,7 @@ loc_12854:
 		addq.l	#4,sp
 		move.b	#1,$40(a0)
 		clr.b	$3C(a0)
-		move.w	#$62,d0
+		move.w	#sfx_Jump,d0
 		jsr	(Play_Sound_2).l
 		move.b	$44(a0),$1E(a0)
 		move.b	$45(a0),$1F(a0)
@@ -20744,7 +20745,7 @@ loc_12972:
 		move.w	#0,$1A(a0)
 		move.w	#$2000,(H_scroll_frame_offset).w
 		bsr.w	Reset_Player_Position_Array
-		move.w	#$43,d0
+		move.w	#sfx_FireAttack,d0
 		jmp	(Play_Sound_2).l
 ; ---------------------------------------------------------------------------
 
@@ -20755,7 +20756,7 @@ Sonic_LightningShield:
 		move.b	#1,$2F(a0)
 		move.w	#-$580,$1A(a0)
 		clr.b	$40(a0)
-		move.w	#$45,d0
+		move.w	#sfx_ElectricAttack,d0
 		jmp	(Play_Sound_2).l
 ; ---------------------------------------------------------------------------
 
@@ -20767,7 +20768,7 @@ Sonic_BubbleShield:
 		move.w	#0,$18(a0)
 		move.w	#0,$1C(a0)
 		move.w	#$800,$1A(a0)
-		move.w	#$44,d0
+		move.w	#sfx_BubbleAttack,d0
 		jmp	(Play_Sound_2).l
 ; ---------------------------------------------------------------------------
 
@@ -20784,7 +20785,7 @@ Sonic_InstaShield:
 		bne.s	locret_12A20
 		move.b	#1,($FFFFCD08).w
 		move.b	#1,$2F(a0)
-		move.w	#$42,d0
+		move.w	#sfx_InstaAttack,d0
 		jmp	(Play_Sound_2).l
 ; ---------------------------------------------------------------------------
 
@@ -20806,9 +20807,9 @@ Sonic_Transform:
 		move.w	#$100,4(a4)
 		move.b	#0,$35(a0)
 		bset	#1,$2B(a0)
-		move.w	#$FF9F,d0
+		move.w	#$FF00|sfx_SuperTransform,d0
 		jsr	(Play_Sound_2).l
-		move.w	#$2C,d0
+		move.w	#mus_Invincibility,d0
 		jmp	(Play_Sound).l
 ; End of function Sonic_JumpHeight
 
@@ -20875,7 +20876,7 @@ Sonic_Spindash:
 		andi.b	#$70,d0
 		beq.w	locret_12B9A
 		move.b	#9,$20(a0)
-		move.w	#$FFAB,d0
+		move.w	#$FF00|sfx_Spindash,d0
 		jsr	(Play_Sound_2).l
 		addq.l	#4,sp
 		move.b	#1,$3D(a0)
@@ -20941,7 +20942,7 @@ loc_12C00:
 loc_12C0E:
 		bset	#2,$2A(a0)
 		move.b	#0,$20(a6)
-		moveq	#$B6,d0
+		moveq	#sfx_Dash,d0
 		jsr	(Play_Sound_2).l
 		bra.s	loc_12C90
 ; ---------------------------------------------------------------------------
@@ -20979,7 +20980,7 @@ loc_12C60:
 		andi.b	#$70,d0
 		beq.w	loc_12C90
 		move.w	#$900,$20(a0)
-		move.w	#-$55,d0
+		move.w	#$FF00|sfx_Spindash,d0
 		jsr	(Play_Sound_2).l
 		addi.w	#$200,$3E(a0)
 		cmpi.w	#$800,$3E(a0)
@@ -21513,7 +21514,7 @@ loc_130D2:
 		ext.w	d0
 		sub.w	d0,$14(a0)
 		move.b	#2,($FFFFCD08).w
-		move.w	#$44,d0
+		move.w	#sfx_BubbleAttack,d0
 		jmp	(Play_Sound_2).l
 ; End of function BubbleShield_Bounce
 
@@ -21658,7 +21659,7 @@ loc_132D0:
 		clr.b	(Update_HUD_timer).w
 		clr.b	($FFFFFEC7).w
 		move.b	#8,5(a0)
-		move.w	#$27,d0
+		move.w	#mus_GameOver,d0
 		jsr	(Play_Sound).l
 		moveq	#3,d0
 		jmp	(Load_PLC_2).l
@@ -22799,7 +22800,7 @@ loc_1418E:
 		addq.b	#8,d0
 		andi.b	#$F,d0
 		bne.s	locret_141A8
-		moveq	#-$45,d0
+		moveq	#sfx_FlyTired,d0
 		jsr	(Play_Sound_2).l
 
 locret_141A8:
@@ -22811,7 +22812,7 @@ loc_141AA:
 		addq.b	#8,d0
 		andi.b	#$F,d0
 		bne.s	locret_141BE
-		moveq	#$BA,d0
+		moveq	#sfx_Flying,d0
 		jsr	(Play_Sound_2).l
 
 locret_141BE:
@@ -22884,7 +22885,7 @@ loc_14242:
 		move.b	#3,$1F(a0)
 		move.b	#2,$20(a0)
 		addq.w	#4,$14(a0)
-		move.w	#$3C,d0
+		move.w	#sfx_Roll,d0
 		jsr	(Play_Sound_2).l
 		tst.w	$1C(a0)
 		bne.s	locret_14274
@@ -22907,7 +22908,7 @@ sub_14276:
 		andi.b	#$70,d0
 		beq.w	locret_142C4
 		move.b	#9,$20(a0)
-		move.w	#$FFAB,d0
+		move.w	#$FF00|sfx_Spindash,d0
 		jsr	(Play_Sound_2).l
 		addq.l	#4,sp
 		move.b	#1,$3D(a0)
@@ -22957,7 +22958,7 @@ loc_1431E:
 loc_1432C:
 		bset	#2,$2A(a0)
 		move.b	#0,$20(a6)
-		move.w	#$FFB6,d0
+		move.w	#$FF00|sfx_Dash,d0
 		jsr	(Play_Sound_2).l
 		bra.s	loc_1439E
 ; ---------------------------------------------------------------------------
@@ -22986,7 +22987,7 @@ loc_1436E:
 		andi.b	#$70,d0
 		beq.w	loc_1439E
 		move.w	#$900,$20(a0)
-		move.w	#-$55,d0
+		move.w	#$FF00|sfx_Spindash,d0
 		jsr	(Play_Sound_2).l
 		addi.w	#$200,$3E(a0)
 		cmpi.w	#$800,$3E(a0)
@@ -24250,7 +24251,7 @@ loc_151B0:
 		tst.b	$3D(a1)
 		bne.s	locret_15200
 		bsr.s	sub_15202
-		moveq	#$4A,d0
+		moveq	#sfx_Grab,d0
 		jsr	(Play_Sound_2).l
 		move.b	#1,(a2)
 
@@ -24328,7 +24329,7 @@ loc_152D8:
 		asr	$1A(a0)
 		beq.s	locret_1528A
 		move.w	#$100,$20(a6)
-		move.w	#$39,d0
+		move.w	#sfx_Splash,d0
 		jmp	(Play_Sound_2).l
 ; ---------------------------------------------------------------------------
 
@@ -24365,7 +24366,7 @@ loc_1533C:
 		move.w	#-$1000,$1A(a0)
 
 loc_15362:
-		move.w	#$39,d0
+		move.w	#sfx_Splash,d0
 		jmp	(Play_Sound_2).l
 ; End of function sub_15284
 
@@ -24528,7 +24529,7 @@ loc_154E4:
 		addq.b	#8,d0
 		andi.b	#$F,d0
 		bne.s	locret_1550A
-		moveq	#-$45,d0
+		moveq	#sfx_FlyTired,d0
 		jsr	(Play_Sound_2).l
 
 locret_1550A:
@@ -24543,7 +24544,7 @@ loc_1550C:
 		addq.b	#8,d0
 		andi.b	#$F,d0
 		bne.s	locret_1552A
-		moveq	#-$46,d0
+		moveq	#sfx_Flying,d0
 		jsr	(Play_Sound_2).l
 
 locret_1552A:
@@ -24883,7 +24884,7 @@ loc_15828:
 		blt.s	locret_15870
 		tst.b	$2D(a0)
 		bmi.s	locret_15870
-		move.w	#$36,d0
+		move.w	#sfx_Skid,d0
 		jsr	(Play_Sound_2).l
 		move.b	#$D,$20(a0)
 		bclr	#0,$2A(a0)
@@ -24938,7 +24939,7 @@ loc_158AE:
 		bgt.s	locret_158F6
 		tst.b	$2D(a0)
 		bmi.s	locret_158F6
-		move.w	#$36,d0
+		move.w	#sfx_Skid,d0
 		jsr	(Play_Sound_2).l
 		move.b	#$D,$20(a0)
 		bset	#0,$2A(a0)
@@ -25255,7 +25256,7 @@ loc_15B44:
 		move.b	#7,$1F(a0)
 		move.b	#2,$20(a0)
 		addq.w	#1,$14(a0)
-		move.w	#$3C,d0
+		move.w	#sfx_Roll,d0
 		jsr	(Play_Sound_2).l
 		tst.w	$1C(a0)
 		bne.s	locret_15B76
@@ -25302,7 +25303,7 @@ loc_15BB2:
 		addq.l	#4,sp
 		move.b	#1,$40(a0)
 		clr.b	$3C(a0)
-		move.w	#$62,d0
+		move.w	#sfx_Jump,d0
 		jsr	(Play_Sound_2).l
 		move.b	$44(a0),$1E(a0)
 		move.b	$45(a0),$1F(a0)
@@ -25406,7 +25407,7 @@ Tails_Spindash:
 		andi.b	#$70,d0
 		beq.w	locret_15D4E
 		move.b	#9,$20(a0)
-		move.w	#-$55,d0
+		move.w	#$FF00|sfx_Spindash,d0
 		jsr	(Play_Sound_2).l
 		addq.l	#4,sp
 		move.b	#1,$3D(a0)
@@ -25467,7 +25468,7 @@ loc_15DA8:
 loc_15DB6:
 		bset	#2,$2A(a0)
 		move.b	#0,$20(a6)
-		move.w	#-$4A,d0
+		move.w	#$FF00|sfx_Dash,d0
 		jsr	(Play_Sound_2).l
 		bra.s	loc_15E28
 ; ---------------------------------------------------------------------------
@@ -25496,7 +25497,7 @@ loc_15DF8:
 		andi.b	#$70,d0
 		beq.w	loc_15E28
 		move.w	#$900,$20(a0)
-		move.w	#-$55,d0
+		move.w	#$FF00|sfx_Spindash,d0
 		jsr	(Play_Sound_2).l
 		addi.w	#$200,$3E(a0)
 		cmpi.w	#$800,$3E(a0)
@@ -27238,7 +27239,7 @@ AirCountdown_Countdown:
 		bne.s	loc_17278
 		tst.b	$43(a0)
 		bne.s	loc_17278
-		moveq	#$31,d0
+		moveq	#mus_Drowning,d0
 		jsr	(Play_Sound).l
 
 loc_17278:
@@ -27252,14 +27253,14 @@ loc_17278:
 AirCountdown_WarnSound:
 		tst.b	$43(a0)
 		bne.s	AirCountdown_ReduceAir
-		moveq	#-$57,d0
+		moveq	#sfx_AirDing,d0
 		jsr	(Play_Sound_2).l
 
 AirCountdown_ReduceAir:
 		subq.b	#1,$2C(a2)
 		bcc.w	loc_17322
 		move.b	#-$7F,$2E(a2)
-		move.w	#$3B,d0
+		move.w	#sfx_Drown,d0
 		jsr	(Play_Sound_2).l
 		move.b	#$A,$38(a0)
 		move.w	#1,$3A(a0)
@@ -27386,17 +27387,17 @@ Player_ResetAirTimer:
 		move.w	(Level_music).w,d0
 		btst	#1,$2B(a1)
 		beq.s	loc_17430
-		move.w	#$2C,d0
+		move.w	#mus_Invincibility,d0
 
 loc_17430:
 		tst.b	(Super_Sonic_Knux_flag).w
 		beq.w	loc_1743C
-		move.w	#$2C,d0
+		move.w	#mus_Invincibility,d0
 
 loc_1743C:
 		tst.b	(Boss_flag).w
 		beq.s	loc_17446
-		move.w	#$18,d0
+		move.w	#mus_MinibossK,d0
 
 loc_17446:
 		jsr	(Play_Sound).l
@@ -28547,7 +28548,7 @@ GiveRing:
 		addq.w	#1,(Total_ring_count).w
 
 GiveRing_1P:
-		move.w	#$33,d0
+		move.w	#sfx_RingRight,d0
 		cmpi.w	#$3E7,(Ring_count).w
 		bcc.s	JmpTo_Play_Sound_2
 		addq.w	#1,(Ring_count).w
@@ -28564,7 +28565,7 @@ GiveRing_1P:
 loc_18DB4:
 		addq.b	#1,(Life_count).w
 		addq.b	#1,(Update_HUD_life_count).w
-		moveq	#$2A,d0
+		moveq	#mus_ExtraLife,d0
 		jmp	(Play_Sound).l
 ; ---------------------------------------------------------------------------
 
@@ -28590,7 +28591,7 @@ loc_18DE4:
 		tst.w	(Competition_mode).w
 		beq.s	GiveRing_1P
 		ori.b	#1,($FFFFFEBE).w
-		move.w	#$33,d0
+		move.w	#sfx_RingRight,d0
 		cmpi.w	#100,(Ring_count_P2).w
 		bcs.s	loc_18E20
 		bset	#1,($FFFFFEBF).w
@@ -28602,7 +28603,7 @@ loc_18DE4:
 
 loc_18E14:
 		addq.b	#1,(Life_count_P2).w
-		moveq	#$2A,d0
+		moveq	#mus_ExtraLife,d0
 		jmp	(Play_Sound).l
 ; ---------------------------------------------------------------------------
 
@@ -28685,7 +28686,7 @@ loc_18EDE:
 		dbf	d5,loc_18E60
 
 loc_18EEE:
-		move.w	#$FFB9,d0
+		move.w	#$FF00|sfx_RingLoss,d0
 		jsr	(Play_Sound_2).l
 		move.w	#0,(Ring_count).w
 		move.b	#$80,(Update_HUD_ring_count).w
@@ -32925,7 +32926,7 @@ Monitor_Give_1up:
 		addq.w	#1,($FFFFFECC).w
 		addq.b	#1,(Life_count).w
 		addq.b	#1,(Update_HUD_life_count).w
-		moveq	#$2A,d0
+		moveq	#mus_ExtraLife,d0
 		jmp	(Play_Sound).l
 ; ---------------------------------------------------------------------------
 
@@ -32958,7 +32959,7 @@ loc_1B6F8:
 		beq.s	loc_1B71C
 
 loc_1B714:
-		moveq	#$33,d0
+		moveq	#sfx_RingRight,d0
 		jmp	(Play_Sound).l
 ; ---------------------------------------------------------------------------
 
@@ -32997,7 +32998,7 @@ Monitor_Give_Fire_Shield:
 		andi.b	#$8E,$2B(a1)
 		bset	#0,$2B(a1)
 		bset	#4,$2B(a1)
-		moveq	#$3E,d0
+		moveq	#sfx_FireShield,d0
 		jsr	(Play_Sound).l
 		tst.b	$43(a0)
 		bne.s	loc_1B7A2
@@ -33017,7 +33018,7 @@ Monitor_Give_Lightning_Shield:
 		andi.b	#$8E,$2B(a1)
 		bset	#0,$2B(a1)
 		bset	#5,$2B(a1)
-		moveq	#$41,d0
+		moveq	#sfx_ElectricShield,d0
 		jsr	(Play_Sound).l
 		tst.b	$43(a0)
 		bne.s	loc_1B7E0
@@ -33037,7 +33038,7 @@ Monitor_Give_Bubble_Shield:
 		andi.b	#$8E,$2B(a1)
 		bset	#0,$2B(a1)
 		bset	#6,$2B(a1)
-		moveq	#$3F,d0
+		moveq	#sfx_BubbleShield,d0
 		jsr	(Play_Sound).l
 		tst.b	$43(a0)
 		bne.s	loc_1B81E
@@ -33062,7 +33063,7 @@ Monitor_Give_Invincibility:
 		bne.s	loc_1B856
 		cmpi.b	#$C,$2C(a1)
 		bls.s	loc_1B856
-		moveq	#$2C,d0
+		moveq	#mus_Invincibility,d0
 		jsr	(Play_Sound).l
 
 loc_1B856:
@@ -33097,9 +33098,9 @@ Monitor_Give_SuperSonic:
 		move.w	#$100,(Deceleration).w
 		move.b	#0,(Player_1+invincibility_timer).w
 		bset	#1,$2B(a1)
-		moveq	#$46,d0
+		moveq	#sfx_SuperAlt,d0
 		jsr	(Play_Sound_2).l
-		moveq	#$2C,d0
+		moveq	#mus_Invincibility,d0
 		jmp	(Play_Sound).l
 ; ---------------------------------------------------------------------------
 		rts
@@ -34128,7 +34129,7 @@ loc_1C24C:
 		move.b	#$C,6(a0)
 		move.b	#3,$24(a0)
 		move.b	#0,$22(a0)
-		moveq	#$3D,d0
+		moveq	#sfx_Break,d0
 		jsr	(Play_Sound_2).l
 		move.l	#loc_1C2A0,(a0)
 
@@ -34383,7 +34384,7 @@ loc_1C5D4:
 		move.b	#7,$1F(a1)
 		move.b	#2,$20(a1)
 		addq.w	#5,$14(a1)
-		moveq	#$3C,d0
+		moveq	#sfx_Roll,d0
 		jsr	(Play_Sound_2).l
 		rts
 ; End of function sub_1C518
@@ -35040,7 +35041,7 @@ loc_1CD68:
 		dbf	d1,loc_1CD60
 
 loc_1CDC2:
-		moveq	#$59,d0
+		moveq	#sfx_Collapse,d0
 		jmp	(Play_Sound_2).l
 ; End of function sub_1CD50
 
@@ -36218,7 +36219,7 @@ loc_1DBDE:
 		dbf	d1,loc_1DB82
 
 loc_1DBE2:
-		moveq	#$59,d0
+		moveq	#sfx_Collapse,d0
 		jmp	(Play_Sound_2).l
 ; End of function sub_1DB60
 
@@ -36956,7 +36957,7 @@ loc_1E47E:
 		clr.w	$48(a0)
 
 loc_1E494:
-		moveq	#$59,d0
+		moveq	#sfx_Collapse,d0
 		jmp	(Play_Sound_2).l
 ; ---------------------------------------------------------------------------
 byte_1E49C:	dc.b  $30, $2C, $28, $24, $20, $1C, $2E, $2A, $26, $22, $1E, $1A, $2C, $28, $24, $20, $1C, $18, $2A, $26
@@ -37261,7 +37262,7 @@ loc_1F9BA:
 		dbf	d1,loc_1F9B0
 
 loc_1F9FA:
-		moveq	#$59,d0
+		moveq	#sfx_Collapse,d0
 		jmp	(Play_Sound_2).l
 ; End of function sub_1F98C
 
@@ -38225,7 +38226,7 @@ loc_206EC:
 		move.b	#3,$2E(a1)
 		andi.b	#-3,4(a1)
 		move.b	#1,(a2)
-		moveq	#$4A,d0
+		moveq	#sfx_Grab,d0
 		jsr	(Play_Sound_2).l
 
 locret_20766:
@@ -39179,7 +39180,7 @@ loc_216DC:
 		move.b	#$F,$47(a1)
 
 loc_216EE:
-		moveq	#$B1,d0
+		moveq	#sfx_Spring,d0
 		jmp	(Play_Sound_2).l
 ; End of function sub_2164A
 
@@ -39362,7 +39363,7 @@ loc_218F2:
 		bclr	#5,$2A(a0)
 		bclr	#6,$2A(a0)
 		bclr	#5,$2A(a1)
-		moveq	#$B1,d0
+		moveq	#sfx_Spring,d0
 		jmp	(Play_Sound_2).l
 ; End of function sub_21836
 
@@ -39553,7 +39554,7 @@ loc_21B00:
 		bclr	#3,$2A(a1)
 		clr.b	$40(a1)
 		move.b	#2,5(a1)
-		moveq	#$B1,d0
+		moveq	#sfx_Spring,d0
 		jmp	(Play_Sound_2).l
 ; End of function sub_21A6A
 
@@ -39659,7 +39660,7 @@ loc_21C46:
 		move.b	#$F,$47(a1)
 
 loc_21C58:
-		moveq	#$B1,d0
+		moveq	#sfx_Spring,d0
 		jmp	(Play_Sound_2).l
 ; End of function sub_21B74
 
@@ -39747,7 +39748,7 @@ loc_21D5E:
 		move.b	#$F,$47(a1)
 
 loc_21D70:
-		moveq	#$B1,d0
+		moveq	#sfx_Spring,d0
 		jmp	(Play_Sound_2).l
 ; End of function sub_21CB2
 
@@ -39913,7 +39914,7 @@ sub_22146:
 		bne.s	locret_221A4
 		tst.b	4(a0)
 		bpl.s	locret_221A4
-		moveq	#$52,d0
+		moveq	#sfx_SpikeMove,d0
 		jsr	(Play_Sound_2).l
 		bra.s	locret_221A4
 ; ---------------------------------------------------------------------------
@@ -40123,7 +40124,7 @@ sub_2236A:
 		bne.s	locret_223CE
 		tst.b	4(a0)
 		bpl.s	locret_223CE
-		moveq	#$52,d0
+		moveq	#sfx_SpikeMove,d0
 		jsr	(Play_Sound_2).l
 		bra.s	locret_223CE
 ; ---------------------------------------------------------------------------
@@ -40654,7 +40655,7 @@ sub_22960:
 		bne.s	locret_229BE
 		tst.b	4(a0)
 		bpl.s	locret_229BE
-		moveq	#$52,d0
+		moveq	#sfx_SpikeMove,d0
 		jsr	(Play_Sound_2).l
 		bra.s	locret_229BE
 ; ---------------------------------------------------------------------------
@@ -40726,7 +40727,7 @@ sub_229FC:
 		bne.s	locret_22A5A
 		tst.b	4(a0)
 		bpl.s	locret_22A5A
-		moveq	#$52,d0
+		moveq	#sfx_SpikeMove,d0
 		jsr	(Play_Sound_2).l
 		bra.s	locret_22A5A
 ; ---------------------------------------------------------------------------
@@ -43444,7 +43445,7 @@ loc_24B18:
 		bclr	#5,$2A(a1)
 		clr.b	$40(a1)
 		clr.b	$3D(a1)
-		moveq	#$7B,d0
+		moveq	#sfx_SmallBumpers,d0
 		jsr	(Play_Sound_2).l
 		rts
 ; End of function sub_24B04
@@ -43769,7 +43770,7 @@ loc_25218:
 		bclr	#5,$2A(a1)
 
 loc_25236:
-		moveq	#$B1,d0
+		moveq	#sfx_Spring,d0
 		jmp	(Play_Sound_2).l
 ; End of function sub_25194
 
@@ -43921,7 +43922,7 @@ loc_2539E:
 loc_253F0:
 		tst.b	4(a0)
 		bpl.s	loc_253FE
-		moveq	#$43,d0
+		moveq	#sfx_FireAttack,d0
 		jsr	(Play_Sound_2).l
 
 loc_253FE:
@@ -44564,7 +44565,7 @@ loc_25C26:
 		tst.b	$26(a0)
 		bpl.s	locret_25C64
 		move.w	#$80,8(a0)
-		moveq	#$72,d0
+		moveq	#sfx_Hoverpad,d0
 		jsr	(Play_Sound_2).l
 
 locret_25C64:
@@ -44575,7 +44576,7 @@ loc_25C66:
 		tst.b	$26(a0)
 		bmi.s	locret_25C7A
 		move.w	#$200,8(a0)
-		moveq	#$72,d0
+		moveq	#sfx_Hoverpad,d0
 		jsr	(Play_Sound_2).l
 
 locret_25C7A:
@@ -44624,7 +44625,7 @@ loc_25CB6:
 		tst.b	$26(a0)
 		bpl.s	locret_25CF4
 		move.w	#$80,8(a0)
-		moveq	#$72,d0
+		moveq	#sfx_Hoverpad,d0
 		jsr	(Play_Sound_2).l
 
 locret_25CF4:
@@ -44635,7 +44636,7 @@ loc_25CF6:
 		tst.b	$26(a0)
 		bmi.s	locret_25D0A
 		move.w	#$200,8(a0)
-		moveq	#$72,d0
+		moveq	#sfx_Hoverpad,d0
 		jsr	(Play_Sound_2).l
 
 locret_25D0A:
@@ -44690,7 +44691,7 @@ loc_25D78:
 		tst.b	$26(a0)
 		bpl.s	locret_25D9C
 		move.w	#$80,8(a0)
-		moveq	#$72,d0
+		moveq	#sfx_Hoverpad,d0
 		jsr	(Play_Sound_2).l
 
 locret_25D9C:
@@ -44701,7 +44702,7 @@ loc_25D9E:
 		tst.b	$26(a0)
 		bmi.s	locret_25DB2
 		move.w	#$200,8(a0)
-		moveq	#$72,d0
+		moveq	#sfx_Hoverpad,d0
 		jsr	(Play_Sound_2).l
 
 locret_25DB2:
@@ -44733,7 +44734,7 @@ loc_25DE6:
 		tst.b	$26(a0)
 		bpl.s	locret_25E0A
 		move.w	#$80,8(a0)
-		moveq	#$72,d0
+		moveq	#sfx_Hoverpad,d0
 		jsr	(Play_Sound_2).l
 
 locret_25E0A:
@@ -44744,7 +44745,7 @@ loc_25E0C:
 		tst.b	$26(a0)
 		bmi.s	locret_25E20
 		move.w	#$200,8(a0)
-		moveq	#$72,d0
+		moveq	#sfx_Hoverpad,d0
 		jsr	(Play_Sound_2).l
 
 locret_25E20:
@@ -44795,7 +44796,7 @@ loc_25E86:
 
 loc_25E8E:
 		move.l	#Obj_LBZElevatorCupFlicker,(a0)
-		moveq	#$35,d0
+		moveq	#sfx_Death,d0
 		jsr	(Play_Sound_2).l
 		lea	$3C(a0),a2
 		lea	(Player_1).w,a1
@@ -45579,7 +45580,7 @@ loc_26798:
 		dbf	d1,loc_2678E
 
 loc_267CC:
-		moveq	#$59,d0
+		moveq	#sfx_Collapse,d0
 		jmp	(Play_Sound_2).l
 ; End of function sub_266EE
 
@@ -47775,7 +47776,7 @@ loc_27D48:
 		move.b	#$14,$20(a1)
 		move.b	#1,$2E(a1)
 		move.b	#1,(a2)
-		moveq	#$5B,d0
+		moveq	#sfx_Button,d0
 		jsr	(Play_Sound_2).l
 
 locret_27DBA:
@@ -47826,10 +47827,10 @@ loc_2817A:
 		move.b	#1,$32(a0)
 		tst.b	4(a0)
 		bpl.s	loc_281DA
-		moveq	#$5F,d0
+		moveq	#sfx_Crash,d0
 		cmpi.b	#2,(Current_zone).w
 		beq.s	loc_281BE
-		moveq	#-$6A,d0
+		moveq	#sfx_MetalLand,d0
 
 loc_281BE:
 		jsr	(Play_Sound_2).l
@@ -47922,7 +47923,7 @@ loc_282D4:
 		move.b	#2,$22(a1)
 		move.b	#-$68,$28(a1)
 		move.l	#loc_28364,(a1)
-		moveq	#-$58,d0
+		moveq	#sfx_A8,d0
 		jsr	(Play_Sound_2).l
 
 loc_28318:
@@ -48033,7 +48034,7 @@ loc_2845A:
 		move.w	$30(a0),d0
 		andi.b	#$1F,d0
 		bne.s	locret_2846C
-		moveq	#$86,d0
+		moveq	#sfx_Alarm,d0
 		jsr	(Play_Sound_2).l
 
 locret_2846C:
@@ -48183,7 +48184,7 @@ Obj_AutoTunnelInit:
 		move.w	$14(a0),$14(a1)
 		clr.b	1(a4)
 		bsr.w	AutoTunnel_GetPath
-		moveq	#$3C,d0
+		moveq	#sfx_Roll,d0
 		jsr	(Play_Sound_2).l
 		btst	#5,$2C(a0)
 		beq.s	locret_28644
@@ -48234,7 +48235,7 @@ loc_2867C:
 		move.w	#0,$1A(a1)
 
 loc_2869E:
-		moveq	#$81,d0
+		moveq	#sfx_TubeLauncher,d0
 		jsr	(Play_Sound_2).l
 		btst	#5,$2C(a0)
 		beq.s	loc_286DA
@@ -48875,7 +48876,7 @@ LBZTubeElevator_WaitPlayer:
 
 loc_28DC4:
 		addq.b	#2,(a4)
-		moveq	#$3C,d0
+		moveq	#sfx_Roll,d0
 		jsr	(Play_Sound_2).l
 		bra.s	LBZTubeElevator_StartSpin
 ; ---------------------------------------------------------------------------
@@ -49322,7 +49323,7 @@ loc_293BA:
 		move.b	#0,$36(a0)
 		tst.b	4(a0)
 		bpl.s	loc_293E4
-		moveq	#$4B,d0
+		moveq	#sfx_WaterfallSplash,d0
 		jsr	(Play_Sound_2).l
 
 loc_293E4:
@@ -49938,7 +49939,7 @@ loc_2A0DC:
 		addq.b	#3,d0
 		andi.b	#7,d0
 		bne.s	locret_2A0FC
-		moveq	#$4C,d0
+		moveq	#sfx_GlideLand,d0
 		jsr	(Play_Sound_2).l
 
 locret_2A0FC:
@@ -49959,7 +49960,7 @@ loc_2A104:
 		addq.b	#3,d0
 		andi.b	#7,d0
 		bne.s	locret_2A124
-		moveq	#$4C,d0
+		moveq	#sfx_GlideLand,d0
 		jsr	(Play_Sound_2).l
 
 locret_2A124:
@@ -50430,7 +50431,7 @@ loc_2A6E6:
 loc_2A724:
 		move.w	#0,$18(a3)
 		move.w	#0,$1A(a3)
-		moveq	#$59,d0
+		moveq	#sfx_Collapse,d0
 		jmp	(Play_Sound_2).l
 ; End of function sub_2A6C6
 
@@ -50528,7 +50529,7 @@ loc_2A934:
 		tst.b	$36(a0)
 		bne.s	loc_2A978
 		move.b	#1,$36(a0)
-		moveq	#$56,d0
+		moveq	#sfx_FlipBridge,d0
 		jsr	(Play_Sound_2).l
 		move.w	#$68,d1
 		btst	#0,$2A(a0)
@@ -50552,7 +50553,7 @@ loc_2A978:
 
 loc_2A98C:
 		move.b	#0,$36(a0)
-		moveq	#$56,d0
+		moveq	#sfx_FlipBridge,d0
 		jsr	(Play_Sound_2).l
 		move.l	#loc_2A9B0,(a0)
 		bra.s	loc_2A9AA
@@ -50798,7 +50799,7 @@ loc_2AB98:
 loc_2ABFC:
 		move.w	#0,$18(a3)
 		move.w	#0,$1A(a3)
-		moveq	#-$7D,d0
+		moveq	#sfx_BridgeCollapse,d0
 		jmp	(Play_Sound_2).l
 ; End of function sub_2AB76
 
@@ -51712,7 +51713,7 @@ loc_2BBCE:
 loc_2BBE4:
 		tst.b	(a3)
 		bne.s	loc_2BBF0
-		moveq	#$5B,d0
+		moveq	#sfx_Button,d0
 		jsr	(Play_Sound_2).l
 
 loc_2BBF0:
@@ -51753,7 +51754,7 @@ loc_2BC38:
 loc_2BC4E:
 		tst.b	(a3)
 		bne.s	loc_2BC5A
-		moveq	#$5B,d0
+		moveq	#sfx_Button,d0
 		jsr	(Play_Sound_2).l
 
 loc_2BC5A:
@@ -51797,7 +51798,7 @@ loc_2BC92:
 loc_2BCD6:
 		tst.b	(a3)
 		bne.s	loc_2BCE2
-		moveq	#$5B,d0
+		moveq	#sfx_Button,d0
 		jsr	(Play_Sound_2).l
 
 loc_2BCE2:
@@ -52371,7 +52372,7 @@ sub_2C49E:
 		addi.w	#$40,d0
 		cmpi.w	#$68,d0
 		bcc.w	locret_2C55E
-		moveq	#$63,d0
+		moveq	#sfx_Starpost,d0
 		jsr	(Play_Sound_2).l
 		jsr	(Create_New_Sprite).l
 		bne.s	loc_2C546
@@ -53244,7 +53245,7 @@ Obj_LevelResultsWait:
 		bne.s	locret_2CF8E
 		move.b	#$1E,(Player_1+air_left).w
 		move.b	#$1E,(Player_2+air_left).w
-		moveq	#$29,d0
+		moveq	#mus_GotThroughAct,d0
 		jmp	(Play_Sound).l
 ; ---------------------------------------------------------------------------
 
@@ -53269,7 +53270,7 @@ loc_2CF6E:
 		move.w	(Level_frame_counter).w,d0
 		andi.w	#3,d0
 		bne.s	locret_2CF8E
-		moveq	#$5B,d0
+		moveq	#sfx_Button,d0
 		jmp	(Play_Sound_2).l
 ; ---------------------------------------------------------------------------
 
@@ -53278,7 +53279,7 @@ locret_2CF8E:
 ; ---------------------------------------------------------------------------
 
 loc_2CF90:
-		moveq	#$B0,d0
+		moveq	#sfx_Register,d0
 		jsr	(Play_Sound_2).l
 		jsr	(SaveGame).l
 		move.w	#$5A,$2E(a0)
@@ -53591,7 +53592,7 @@ locret_2D216:
 ; ---------------------------------------------------------------------------
 
 SpecialStage_Results:
-		moveq	#$E1,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		move	#$2700,sr
 		move.w	(VDP_reg_1_command).w,d0
@@ -53746,7 +53747,7 @@ loc_2D49A:
 		subq.w	#1,$2E(a0)
 		cmpi.w	#$121,$2E(a0)
 		bne.s	locret_2D4F2
-		moveq	#$29,d0
+		moveq	#mus_GotThroughAct,d0
 		jmp	(Play_Sound).l
 ; ---------------------------------------------------------------------------
 
@@ -53770,7 +53771,7 @@ loc_2D4D6:
 		move.w	(Level_frame_counter).w,d0
 		andi.w	#3,d0
 		bne.s	locret_2D4F2
-		moveq	#$5B,d0
+		moveq	#sfx_Button,d0
 		jmp	(Play_Sound_2).l
 ; ---------------------------------------------------------------------------
 
@@ -53779,7 +53780,7 @@ locret_2D4F2:
 ; ---------------------------------------------------------------------------
 
 loc_2D4F4:
-		moveq	#$B0,d0
+		moveq	#sfx_Register,d0
 		jsr	(Play_Sound_2).l
 		move.w	#$78,$2E(a0)
 		addq.b	#2,5(a0)
@@ -53798,7 +53799,7 @@ loc_2D512:
 		bne.s	loc_2D536
 		move.l	#loc_2D83C,(a1)
 		move.w	#$10E,$2E(a0)
-		moveq	#$AC,d0
+		moveq	#sfx_Continue,d0
 		jsr	(Play_Sound_2).l
 
 loc_2D536:
@@ -54584,7 +54585,7 @@ sub_2E2C8:
 		btst	#6,$2B(a1)
 		bne.w	locret_2E392
 		jsr	(Player_ResetAirTimer).l
-		moveq	#$38,d0
+		moveq	#sfx_Bubble,d0
 		jsr	(Play_Sound_2).l
 		clr.w	$18(a1)
 		clr.w	$1A(a1)
@@ -54769,7 +54770,7 @@ loc_2E80C:
 		cmp.w	$10(a0),d0
 		bcs.w	loc_2E896
 		move.l	#loc_2E8CC,(a0)
-		moveq	#$57,d0
+		moveq	#sfx_Geyser,d0
 		jsr	(Play_Sound_2).l
 		lea	(byte_2E89C).l,a3
 		move.w	$10(a0),d2
@@ -54880,9 +54881,9 @@ loc_2E958:
 		tst.b	4(a0)
 		bmi.s	loc_2E990
 		clr.b	($FFFFF650).w
-		move.w	#$FFE3,d0
+		move.w	#$FF00|mus_MutePSG,d0
 		jsr	(Play_Sound_2).l
-		move.w	#$FFE4,d0
+		move.w	#$FF00|mus_StopSFX,d0
 		jsr	(Play_Sound_2).l
 		move.w	#$96,$30(a0)
 		move.l	#loc_2E996,(a0)
@@ -55057,7 +55058,7 @@ loc_2EBD6:
 		move.b	#$1A,(Player_1+anim).w
 		move.b	#$1A,(Player_2+anim).w
 		move.l	#loc_2ECAA,(a0)
-		moveq	#$57,d0
+		moveq	#sfx_Geyser,d0
 		jsr	(Play_Sound_2).l
 		move.b	#1,($FFFFF650).w
 		lea	(byte_2EC7A).l,a3
@@ -55202,11 +55203,11 @@ loc_2EDB4:
 loc_2EDBA:
 		tst.b	4(a0)
 		bmi.s	loc_2EDFE
-		move.w	#-$1C,d0
+		move.w	#$FF00|mus_StopSFX,d0
 		jsr	(Play_Sound_2).l
-		move.w	#-$1D,d0
+		move.w	#$FF00|mus_MutePSG,d0
 		jsr	(Play_Sound_2).l
-		move.w	#-$1C,d0
+		move.w	#$FF00|mus_StopSFX,d0
 		jsr	(Play_Sound_2).l
 		move.b	#0,($FFFFF650).w
 		move.w	$48(a0),d0
@@ -55338,7 +55339,7 @@ loc_2F0D0:
 		addq.b	#1,d0
 		andi.b	#$F,d0
 		bne.s	loc_2F0EA
-		moveq	#-$3F,d0
+		moveq	#sfx_SmallFan,d0
 		jsr	(Play_Sound_2).l
 
 loc_2F0EA:
@@ -55454,7 +55455,7 @@ loc_2F22E:
 		bne.s	loc_2F25C
 		move.b	#1,$42(a1)
 		move.w	#0,$34(a1)
-		moveq	#$58,d0
+		moveq	#sfx_FanLatch,d0
 		jsr	(Play_Sound_2).l
 
 loc_2F25C:
@@ -55472,7 +55473,7 @@ loc_2F26C:
 		beq.s	loc_2F28C
 		move.b	#0,$42(a1)
 		move.b	#0,$24(a1)
-		moveq	#$58,d0
+		moveq	#sfx_FanLatch,d0
 		jsr	(Play_Sound_2).l
 
 loc_2F28C:
@@ -55539,7 +55540,7 @@ loc_2F322:
 		move.b	#$18,7(a0)
 		move.b	#$20,6(a0)
 		move.w	#8,$30(a0)
-		moveq	#$58,d0
+		moveq	#sfx_FanLatch,d0
 		jsr	(Play_Sound_2).l
 		move.l	#loc_2F35C,(a0)
 
@@ -55555,7 +55556,7 @@ loc_2F372:
 		move.b	($FFFFFE05).w,d0
 		andi.b	#$F,d0
 		bne.s	loc_2F384
-		moveq	#-$40,d0
+		moveq	#sfx_C0,d0
 		jsr	(Play_Sound_2).l
 
 loc_2F384:
@@ -55762,7 +55763,7 @@ loc_2F796:
 		bne.s	loc_2F7B4
 		move.b	#0,$34(a0)
 		move.l	#loc_2F6D8,(a0)
-		moveq	#$B6,d0
+		moveq	#sfx_Dash,d0
 		jsr	(Play_Sound_2).l
 		bra.s	loc_2F7D0
 ; ---------------------------------------------------------------------------
@@ -55897,7 +55898,7 @@ loc_2F8EE:
 		tst.w	(Debug_placement_mode).w
 		bne.s	locret_2F96A
 		bset	d6,$35(a0)
-		moveq	#$3C,d0
+		moveq	#sfx_Roll,d0
 		jsr	(Play_Sound_2).l
 		move.b	#0,$20(a1)
 		move.b	#$13,$1E(a1)
@@ -56020,7 +56021,7 @@ loc_2FB46:
 		addq.w	#8,$30(a0)
 		cmpi.w	#$40,$30(a0)
 		bne.s	loc_2FB9E
-		moveq	#$58,d0
+		moveq	#sfx_FanLatch,d0
 		jsr	(Play_Sound_2).l
 		bra.s	loc_2FB9E
 ; ---------------------------------------------------------------------------
@@ -56030,7 +56031,7 @@ loc_2FB8A:
 		beq.s	loc_2FBAA
 		subq.w	#8,$30(a0)
 		bne.s	loc_2FB9E
-		moveq	#$58,d0
+		moveq	#sfx_FanLatch,d0
 		jsr	(Play_Sound_2).l
 
 loc_2FB9E:
@@ -56804,7 +56805,7 @@ sub_30412:
 loc_30466:
 		tst.b	$34(a0)
 		bne.s	locret_3047A
-		moveq	#$77,d0
+		moveq	#sfx_Balloon,d0
 		jsr	(Play_Sound_2).l
 		move.b	#1,$34(a0)
 
@@ -56902,7 +56903,7 @@ loc_30804:
 		move.b	($FFFFFE05).w,d0
 		andi.b	#$1F,d0
 		bne.s	locret_30832
-		moveq	#-$39,d0
+		moveq	#sfx_CannonTurn,d0
 		jsr	(Play_Sound_2).l
 
 locret_30832:
@@ -57174,7 +57175,7 @@ loc_30CC4:
 		neg.w	$1A(a0)
 		subi.w	#$80,$1A(a0)
 		move.b	#0,$30(a0)
-		moveq	#$75,d0
+		moveq	#sfx_BalloonPlatform,d0
 		jmp	(Play_Sound_2).l
 ; End of function sub_30C48
 
@@ -57220,7 +57221,7 @@ sub_30D8C:
 		cmpi.w	#$20,d0
 		bcc.s	locret_30DBE
 		move.b	#1,$20(a0)
-		moveq	#$76,d0
+		moveq	#sfx_TrapDoor,d0
 		jsr	(Play_Sound_2).l
 
 locret_30DBE:
@@ -57323,7 +57324,7 @@ loc_30F24:
 		move.b	($FFFFFE05).w,d0
 		andi.b	#$1F,d0
 		bne.s	loc_30F4C
-		moveq	#$72,d0
+		moveq	#sfx_Hoverpad,d0
 		jsr	(Play_Sound_2).l
 
 loc_30F4C:
@@ -57342,7 +57343,7 @@ loc_30F56:
 		move.b	($FFFFFE05).w,d0
 		andi.b	#$1F,d0
 		bne.s	loc_30F7E
-		moveq	#$72,d0
+		moveq	#sfx_Hoverpad,d0
 		jsr	(Play_Sound_2).l
 
 loc_30F7E:
@@ -57468,7 +57469,7 @@ loc_31142:
 		add.w	d0,$10(a1)
 		move.w	$36(a0),d0
 		bne.s	loc_31158
-		moveq	#$74,d0
+		moveq	#sfx_TunnelPropeller,d0
 		jsr	(Play_Sound_2).l
 
 loc_31158:
@@ -57517,7 +57518,7 @@ sub_31180:
 		move.b	#1,(a2)
 		move.b	$34(a0),2(a2)
 		move.w	d0,-(sp)
-		moveq	#$73,d0
+		moveq	#sfx_Transporter,d0
 		jsr	(Play_Sound_2).l
 		move.w	(sp)+,d0
 
@@ -58484,7 +58485,7 @@ loc_31CEA:
 		bset	#1,$2A(a1)
 		bclr	#4,$2A(a1)
 		bclr	#5,$2A(a1)
-		moveq	#$7B,d0
+		moveq	#sfx_SmallBumpers,d0
 		jmp	(Play_Sound_2).l
 ; End of function sub_31C48
 
@@ -58807,7 +58808,7 @@ loc_32062:
 		bclr	#6,$2A(a0)
 		bclr	#5,$2A(a1)
 		bclr	#4,$2A(a1)
-		moveq	#$7B,d0
+		moveq	#sfx_SmallBumpers,d0
 		jmp	(Play_Sound_2).l
 ; End of function sub_31FA6
 
@@ -58896,7 +58897,7 @@ sub_32146:
 		bclr	#5,$2A(a1)
 		clr.b	$40(a1)
 		move.b	#1,$20(a0)
-		moveq	#-$56,d0
+		moveq	#sfx_Bumper,d0
 		jsr	(Play_Sound_2).l
 		move.w	$48(a0),d0
 		beq.s	loc_321B4
@@ -58986,7 +58987,7 @@ sub_32248:
 		bclr	#5,$2A(a1)
 		clr.b	$40(a1)
 		move.b	#1,$20(a0)
-		moveq	#$7B,d0
+		moveq	#sfx_SmallBumpers,d0
 		jsr	(Play_Sound_2).l
 		rts
 ; End of function sub_32248
@@ -59071,7 +59072,7 @@ loc_323AE:
 		add.w	$10(a0),d1
 		move.w	d1,$10(a1)
 		move.w	$14(a0),$14(a1)
-		move.w	#$3C,d0
+		move.w	#sfx_Roll,d0
 		jsr	(Play_Sound_2).l
 
 locret_323C6:
@@ -59814,7 +59815,7 @@ loc_32A98:
 		addi.w	#$80,d1
 		cmp.w	d1,d0
 		bcc.s	loc_32AF8
-		moveq	#-$3A,d0
+		moveq	#sfx_C6,d0
 		jsr	(Play_Sound_2).l
 
 loc_32AF8:
@@ -60584,7 +60585,7 @@ loc_3342C:
 		beq.s	loc_33460
 		andi.b	#$40,d0
 		beq.s	loc_33460
-		moveq	#-$37,d0
+		moveq	#sfx_SpikeBalls,d0
 		jsr	(Play_Sound_2).l
 
 loc_33460:
@@ -60615,7 +60616,7 @@ loc_33486:
 		beq.s	loc_334AE
 		andi.b	#$40,d0
 		beq.s	loc_334AE
-		moveq	#-$37,d0
+		moveq	#sfx_SpikeBalls,d0
 		jsr	(Play_Sound_2).l
 
 loc_334AE:
@@ -60797,7 +60798,7 @@ loc_336DC:
 		move.b	#2,$20(a1)
 
 loc_3371E:
-		moveq	#$6E,d0
+		moveq	#sfx_BossHit,d0
 		jsr	(Play_Sound_2).l
 
 loc_33726:
@@ -60829,7 +60830,7 @@ loc_33726:
 		subi.w	#$20,$10(a1)
 
 loc_337B4:
-		moveq	#$67,d0
+		moveq	#sfx_LevelProjectile,d0
 		jsr	(Play_Sound_2).l
 
 loc_337BC:
@@ -61314,7 +61315,7 @@ loc_33F9E:
 loc_33FD6:
 		move.w	#$10,$34(a0)
 		move.b	#1,(a2)
-		moveq	#$64,d0
+		moveq	#sfx_64,d0
 		jsr	(Play_Sound_2).l
 
 locret_33FE8:
@@ -61796,7 +61797,7 @@ loc_34554:
 		move.b	#7,$1F(a1)
 		move.b	#2,$20(a1)
 		bset	#2,$2A(a1)
-		move.w	#$62,d0
+		move.w	#sfx_Jump,d0
 		jsr	(Play_Sound_2).l
 
 loc_3459C:
@@ -62342,7 +62343,7 @@ loc_34B30:
 		blt.s	locret_34B74
 		move.b	#$D,$20(a0)
 		bclr	#0,$2A(a0)
-		move.w	#$36,d0
+		move.w	#sfx_Skid,d0
 		jsr	(Play_Sound_2).l
 		movea.l	a0,a2
 		suba.w	#-$5000,a2
@@ -62396,7 +62397,7 @@ loc_34BB2:
 		bgt.s	locret_34BF6
 		move.b	#$D,$20(a0)
 		bset	#0,$2A(a0)
-		move.w	#$36,d0
+		move.w	#sfx_Skid,d0
 		jsr	(Play_Sound_2).l
 		movea.l	a0,a2
 		suba.w	#-$5000,a2
@@ -63046,7 +63047,7 @@ loc_353C0:
 		bclr	#4,$2A(a1)
 		bclr	#5,$2A(a1)
 		clr.b	$40(a1)
-		moveq	#$7B,d0
+		moveq	#sfx_SmallBumpers,d0
 		jmp	(Play_Sound_2).l
 ; End of function sub_35370
 
@@ -63178,7 +63179,7 @@ loc_35860:
 loc_358A2:
 		tst.b	(a3)
 		bne.s	loc_358B4
-		moveq	#$5B,d0
+		moveq	#sfx_Button,d0
 		jsr	(Play_Sound_2).l
 		move.b	#0,$24(a0)
 
@@ -63589,7 +63590,7 @@ loc_35CFC:
 		neg.w	$1C(a2)
 
 loc_35D4C:
-		moveq	#$7B,d0
+		moveq	#sfx_SmallBumpers,d0
 		jmp	(Play_Sound_2).l
 ; End of function sub_35CF0
 
@@ -64074,7 +64075,7 @@ loc_3642E:
 		eori.b	#$18,4(a1)
 
 loc_36484:
-		moveq	#$B2,d0
+		moveq	#sfx_Error,d0
 		jmp	(Play_Sound_2).l
 ; ---------------------------------------------------------------------------
 
@@ -64283,7 +64284,7 @@ loc_366FE:
 		bne.s	loc_36740
 		cmpi.b	#5,$24(a0)
 		bne.s	loc_36740
-		moveq	#$A7,d0
+		moveq	#sfx_LaunchReady,d0
 		move.b	$23(a0),d1
 		cmpi.b	#1,d1
 		beq.s	loc_3673A
@@ -64291,7 +64292,7 @@ loc_366FE:
 		beq.s	loc_3673A
 		cmpi.b	#$15,d1
 		beq.s	loc_3673A
-		moveq	#$AD,d0
+		moveq	#sfx_LaunchGo,d0
 		cmpi.b	#$1F,d1
 		bne.s	loc_36740
 
@@ -64367,7 +64368,7 @@ loc_367C4:
 loc_367E8:
 		move.b	#-$80,(Update_HUD_timer).w
 		jsr	sub_369C2(pc)
-		moveq	#$6A,d0
+		moveq	#sfx_Goal,d0
 		jsr	(Play_Sound_2).l
 		move.b	($FFFFFEDA).w,d0
 		cmp.b	($FFFFFEDD).w,d0
@@ -64398,7 +64399,7 @@ loc_36824:
 loc_3684E:
 		move.b	#-$80,($FFFFFEC7).w
 		bsr.w	sub_36998
-		moveq	#$6A,d0
+		moveq	#sfx_Goal,d0
 		jsr	(Play_Sound_2).l
 
 locret_36860:
@@ -64506,7 +64507,7 @@ loc_36936:
 		bset	#3,4(a0)
 		move.b	#-$80,(Update_HUD_timer).w
 		move.w	#$78,($FFFFEEE8).w
-		moveq	#$6A,d0
+		moveq	#sfx_Goal,d0
 		jsr	(Play_Sound_2).l
 
 loc_36966:
@@ -64519,7 +64520,7 @@ loc_36966:
 		bset	#4,4(a0)
 		move.b	#-$80,($FFFFFEC7).w
 		move.w	#$78,($FFFFEEE8).w
-		moveq	#$6A,d0
+		moveq	#sfx_Goal,d0
 		jsr	(Play_Sound_2).l
 
 locret_36996:
@@ -65251,7 +65252,7 @@ loc_37A8A:
 		addq.b	#2,d0
 		andi.b	#$F,d0
 		bne.s	loc_37AB2
-		moveq	#$DB,d0
+		moveq	#sfx_DB,d0
 		jsr	(Play_Sound_2).l
 
 loc_37AB2:
@@ -65805,7 +65806,7 @@ loc_37FFE:
 loc_38062:
 		move.w	#0,$18(a3)
 		move.w	#0,$1A(a3)
-		moveq	#$83,d0
+		moveq	#sfx_BridgeCollapse,d0
 		jmp	(Play_Sound_2).l
 ; End of function sub_37FDC
 
@@ -66728,7 +66729,7 @@ loc_38B00:
 		move.b	($FFFFFE05).w,d0
 		andi.b	#$F,d0
 		bne.s	loc_38B12
-		moveq	#-$38,d0
+		moveq	#sfx_C8,d0
 		jsr	(Play_Sound_2).l
 
 loc_38B12:
@@ -66779,7 +66780,7 @@ loc_38B84:
 		move.b	#$19,$20(a2)
 		move.b	#0,$2E(a2)
 		move.w	#$14,($FFFFEECC).w
-		moveq	#$5F,d0
+		moveq	#sfx_Crash,d0
 		jsr	(Play_Sound_2).l
 		move.w	#2,(Tails_CPU_routine).w
 
@@ -66795,7 +66796,7 @@ loc_38BCA:
 		bne.s	loc_38BF0
 
 loc_38BE8:
-		moveq	#$7E,d0
+		moveq	#sfx_GroundSlide,d0
 		jsr	(Play_Sound_2).l
 
 loc_38BF0:
@@ -66833,7 +66834,7 @@ loc_38C56:
 		move.b	$22(a0),d0
 		cmp.b	$32(a0),d0
 		beq.s	loc_38C68
-		moveq	#$7E,d0
+		moveq	#sfx_GroundSlide,d0
 		jsr	(Play_Sound_2).l
 
 loc_38C68:
@@ -67201,7 +67202,7 @@ loc_390D0:
 		move.w	#$5C0,($FFFFCCB2).w
 
 loc_39120:
-		moveq	#-$7E,d0
+		moveq	#sfx_82,d0
 		jsr	(Play_Sound_2).l
 		move.b	#0,(Ctrl_1_locked).w
 		move.b	#0,(Ctrl_2_locked).w
@@ -67279,7 +67280,7 @@ loc_391EC:
 		move.b	#0,$2E(a2)
 		move.b	#0,(Ctrl_1_locked).w
 		move.w	#$14,($FFFFEECC).w
-		moveq	#$5F,d0
+		moveq	#sfx_Crash,d0
 		jsr	(Play_Sound_2).l
 		jmp	(Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -71068,7 +71069,7 @@ loc_3B87A:
 		subq.w	#1,d0
 		andi.w	#$F,d0
 		bne.s	loc_3B88E
-		moveq	#-$43,d0
+		moveq	#sfx_LargeShip,d0
 		jsr	(Play_Sound_2).l
 
 loc_3B88E:
@@ -71147,7 +71148,7 @@ AIZShipBomb_Delay:
 		subq.w	#1,$32(a0)
 		bne.s	loc_3B97C
 		addq.b	#4,5(a0)
-		moveq	#$51,d0
+		moveq	#sfx_MissileThrow,d0
 		jsr	(Play_Sound_2).l
 
 loc_3B97C:
@@ -71167,7 +71168,7 @@ AIZShipBomb_Drop:
 		cmpi.w	#-8,d1
 		bgt.s	locret_3BA04
 		move.w	#$10,($FFFFEECC).w
-		moveq	#$4E,d0
+		moveq	#sfx_MissileExplode,d0
 		jsr	(Play_Sound_2).l
 		jsr	(Create_New_Sprite3).l
 		bne.s	loc_3B9FE
@@ -71377,7 +71378,7 @@ loc_3BBE6:
 		subq.w	#1,d0
 		andi.w	#$F,d0
 		bne.s	locret_3BC04
-		moveq	#-$42,d0
+		moveq	#sfx_EggmanSiren,d0
 		jsr	(Play_Sound_2).l
 
 locret_3BC04:
@@ -71967,7 +71968,7 @@ loc_3C70E:
 		tst.w	($FFFFEECC).w
 		bpl.s	loc_3C754
 		move.w	#$E,($FFFFEECC).w
-		moveq	#$5F,d0
+		moveq	#sfx_Crash,d0
 		jsr	(Play_Sound_2).l
 		bra.s	loc_3C754
 ; ---------------------------------------------------------------------------
@@ -71983,7 +71984,7 @@ loc_3C73C:
 		subq.w	#1,d0
 		andi.w	#$F,d0
 		bne.s	loc_3C754
-		moveq	#$6F,d0
+		moveq	#sfx_Rumble2,d0
 		jsr	(Play_Sound_2).l
 
 loc_3C754:
@@ -72224,7 +72225,7 @@ Do_ShakeSound:
 		subq.w	#1,d0
 		andi.w	#$F,d0
 		bne.s	locret_3C9F6
-		moveq	#$6F,d0
+		moveq	#sfx_Rumble2,d0
 		jsr	(Play_Sound_2).l
 
 locret_3C9F6:
@@ -72399,7 +72400,7 @@ loc_3CBA4:
 		subq.w	#1,d0
 		andi.w	#$F,d0
 		bne.s	loc_3CBC8
-		moveq	#-$34,d0
+		moveq	#sfx_BigRumble,d0
 		jsr	(Play_Sound_2).l
 
 loc_3CBC8:
@@ -73267,7 +73268,7 @@ loc_3D426:
 		move.w	($FFFFEED4).w,d0
 		cmp.w	$2E(a0),d0
 		bcs.s	loc_3D444
-		moveq	#$5F,d0
+		moveq	#sfx_Crash,d0
 		jsr	(Play_Sound_2).l
 		move.w	#$E,($FFFFEECC).w
 		jmp	(Delete_Current_Sprite).l
@@ -74223,7 +74224,7 @@ ICZ1_BigSnowFall:
 		subq.w	#1,d0
 		andi.w	#$F,d0
 		bne.s	loc_3DE42
-		moveq	#$6F,d0
+		moveq	#sfx_Rumble2,d0
 		jsr	(Play_Sound_2).l
 		bra.s	loc_3DE42
 ; ---------------------------------------------------------------------------
@@ -74877,7 +74878,7 @@ loc_3E3EA:
 		bne.s	loc_3E40A
 		tst.w	d2
 		beq.s	loc_3E40A
-		moveq	#-$34,d0
+		moveq	#sfx_BigRumble,d0
 		jsr	(Play_Sound_2).l
 
 loc_3E40A:
@@ -74893,7 +74894,7 @@ loc_3E40A:
 loc_3E426:
 		clr.l	(a1)+
 		dbf	d0,loc_3E426
-		moveq	#$5F,d0
+		moveq	#sfx_Crash,d0
 		jsr	(Play_Sound_2).l
 
 loc_3E434:
@@ -75448,7 +75449,7 @@ loc_3E95A:
 		subq.w	#1,d0
 		andi.w	#$F,d0
 		bne.s	loc_3E96E
-		moveq	#-$33,d0
+		moveq	#sfx_CD,d0
 		jsr	(Play_Sound_2).l
 
 loc_3E96E:
@@ -76272,7 +76273,7 @@ loc_3F0F4:
 		move.w	(VDP_reg_1_command).w,d0
 		ori.b	#$40,d0
 		move.w	d0,(VDP_control_port).l
-		moveq	#$28,d0
+		moveq	#mus_Continue,d0
 		jsr	(Play_Sound).l
 		jsr	(Pal_FadeFromBlack).l
 
@@ -76774,7 +76775,7 @@ ArtNem_ContinueDigits:
 ; ---------------------------------------------------------------------------
 
 S3Credits:
-		moveq	#$E2,d0
+		moveq	#mus_Stop,d0
 		jsr	(Play_Sound).l
 		jsr	(Clear_Nem_Queue).l
 		jsr	(Pal_FadeToBlack).l
@@ -76873,7 +76874,7 @@ loc_403FE:
 loc_404AC:
 		move.l	(a1)+,(a2)+
 		dbf	d6,loc_404AC
-		moveq	#$26,d0
+		moveq	#mus_Credits3,d0
 		jsr	(Play_Sound).l
 		move.w	#$B4,($FFFFFA82).w
 		move.b	#$18,(V_int_routine).w
@@ -78211,7 +78212,7 @@ loc_43322:
 loc_4332E:
 		addq.b	#2,5(a0)
 		st	($FFFFF660).w
-		move.b	#-6,d0
+		move.b	#mus_FA,d0
 		jsr	(Play_Sound_2).l
 
 locret_43340:
@@ -78762,7 +78763,7 @@ loc_438D2:
 		bset	#0,4(a0)
 
 loc_438E2:
-		moveq	#-$2E,d0
+		moveq	#sfx_GumballTab,d0
 		jsr	(Play_Sound_2).l
 
 loc_438EA:
@@ -79011,7 +79012,7 @@ loc_43B8E:
 		move.w	#$F,($FF2020).l
 		movea.w	($FFFFFAA4).w,a1
 		bset	#0,$38(a1)
-		moveq	#-$4F,d0
+		moveq	#sfx_Spring,d0
 		jsr	(Play_Sound_2).l
 		rts
 ; End of function sub_43B6E
@@ -79122,7 +79123,7 @@ word_43CE4:	dc.w  $FFE8,   $30, $FFE8,   $30
 loc_43CEC:
 		addq.b	#1,(Life_count).w
 		addq.b	#1,(Update_HUD_life_count).w
-		moveq	#$2A,d0
+		moveq	#mus_ExtraLife,d0
 		jmp	(Play_Sound).l
 ; ---------------------------------------------------------------------------
 
@@ -79187,7 +79188,7 @@ sub_43D42:
 		bclr	#5,$2A(a1)
 		clr.b	$40(a1)
 		move.b	#1,$20(a0)
-		moveq	#$7B,d0
+		moveq	#sfx_SmallBumpers,d0
 		jmp	(Play_Sound_2).l
 ; End of function sub_43D42
 
@@ -79201,7 +79202,7 @@ loc_43DA2:
 		bset	#0,$2B(a1)
 		moveq	#4,d0
 		bsr.w	sub_43E20
-		moveq	#$3E,d0
+		moveq	#sfx_FireShield,d0
 		jmp	(Play_Sound).l
 ; ---------------------------------------------------------------------------
 
@@ -79213,7 +79214,7 @@ loc_43DCC:
 		bset	#0,$2B(a1)
 		moveq	#6,d0
 		bsr.w	sub_43E20
-		moveq	#$3F,d0
+		moveq	#sfx_BubbleShield,d0
 		jmp	(Play_Sound).l
 ; ---------------------------------------------------------------------------
 
@@ -79225,7 +79226,7 @@ loc_43DF6:
 		bset	#0,$2B(a1)
 		moveq	#5,d0
 		bsr.w	sub_43E20
-		moveq	#$41,d0
+		moveq	#sfx_ElectricShield,d0
 		jmp	(Play_Sound).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -79604,7 +79605,7 @@ loc_4429C:
 		cmp.w	$10(a0),d0
 		bcs.s	locret_4429A
 		bset	#0,4(a1)
-		moveq	#-$4D,d0
+		moveq	#sfx_BigRing,d0
 		jsr	(Play_Sound_2).l
 		rts
 ; ---------------------------------------------------------------------------
@@ -79615,7 +79616,7 @@ SSEntry_Range:	dc.w $FFE8
 ; ---------------------------------------------------------------------------
 
 loc_442FE:
-		moveq	#-$4D,d0
+		moveq	#sfx_BigRing,d0
 		jsr	(Play_Sound_2).l
 		move.b	$2C(a0),d0
 		move.l	(Collected_special_ring_array).w,d1
@@ -79676,7 +79677,7 @@ SSEntryFlash_Finished:
 SSEntryFlash_GoSS:
 		cmpi.w	#7,(Emerald_count).w
 		beq.s	loc_443E4
-		moveq	#-$51,d0
+		moveq	#sfx_EnterSS,d0
 		jsr	(Play_Sound_2).l
 		jsr	(Clear_SpriteRingMem).l
 		jsr	(Save_Level_Data2).l
@@ -80250,10 +80251,10 @@ loc_44C36:
 		lea	ObjDat4_456DC(pc),a1
 		jsr	(SetUp_ObjAttributesSlotted).l
 		move.l	#word_4578B,$30(a0)
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		move.w	#$78,$2E(a0)
-		move.b	#$1F,$26(a0)
+		move.b	#mus_Knuckles,$26(a0)
 		move.w	(Camera_min_Y_pos).w,($FFFFFA96).w
 		move.w	(Camera_target_max_Y_pos).w,($FFFFFA98).w
 		move.w	(Camera_min_X_pos).w,($FFFFFA94).w
@@ -80622,7 +80623,7 @@ loc_45064:
 		move.b	#8,5(a0)
 		move.w	#$F,$2E(a0)
 		move.l	#loc_45096,$34(a0)
-		moveq	#$51,d0
+		moveq	#sfx_MissileThrow,d0
 		jsr	(Play_Sound_2).l
 		lea	ChildObjDat_45740(pc),a2
 		jsr	(CreateChild1_Normal).l
@@ -80726,7 +80727,7 @@ loc_4519E:
 		move.l	#loc_451C2,(a0)
 		move.w	#-$200,$18(a0)
 		move.w	#-$400,$1A(a0)
-		moveq	#$51,d0
+		moveq	#sfx_MissileThrow,d0
 		jsr	(Play_Sound_2).l
 
 loc_451C2:
@@ -80848,7 +80849,7 @@ loc_4530A:
 		move.w	$14(a0),d0
 		cmp.w	(Water_level).w,d0
 		bcs.s	loc_45322
-		moveq	#$39,d0
+		moveq	#sfx_Splash,d0
 		jsr	(Play_Sound_2).l
 		move.b	#$C,5(a0)
 
@@ -81043,7 +81044,7 @@ loc_45556:
 		move.w	d0,(Mean_water_level).w
 		move.w	#$350,(Target_water_level).w
 		st	($FFFFFAA3).w
-		moveq	#$57,d0
+		moveq	#sfx_Geyser,d0
 		jsr	(Play_Sound_2).l
 		jsr	(Create_New_Sprite).l
 		bne.s	locret_45588
@@ -81136,7 +81137,7 @@ loc_4566A:
 		beq.s	loc_456C0
 		clr.b	($FFFFFAA3).w
 		move.w	#$A58,(Target_water_level).w
-		moveq	#$57,d0
+		moveq	#sfx_Geyser,d0
 		jsr	(Play_Sound_2).l
 		jsr	(Create_New_Sprite).l
 		bne.s	loc_456C0
@@ -81153,7 +81154,7 @@ sub_456C6:
 		jsr	(Create_New_Sprite).l
 		bne.s	locret_456DA
 		move.l	#Obj_Song_Fade_Transition,(a1)
-		move.b	#$1F,$2C(a1)
+		move.b	#mus_Knuckles,$2C(a1)
 
 locret_456DA:
 		rts
@@ -82434,7 +82435,7 @@ loc_464AC:
 		move.w	#$B4,$2E(a0)
 		move.w	d5,(Camera_min_X_pos).w
 		move.w	d5,(Camera_max_X_pos).w
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 
 locret_464C8:
@@ -82459,7 +82460,7 @@ loc_464D0:
 sub_464F2:
 		move.w	#$100,$1A(a0)
 		move.w	#$AF,$2E(a0)
-		moveq	#$2E,d0
+		moveq	#mus_Miniboss,d0
 		jsr	(Play_Sound).l
 		rts
 ; End of function sub_464F2
@@ -82504,7 +82505,7 @@ loc_4654C:
 
 loc_46566:
 		move.w	#$40,$2E(a0)
-		moveq	#$4F,d0
+		moveq	#sfx_Flamethrower,d0
 		jsr	(Play_Sound_2).l
 		lea	Child1_AIZ_MinibossFlames(pc),a2
 		jmp	(CreateChild1_Normal).l
@@ -82522,7 +82523,7 @@ loc_46596:
 		lea	Pal_AIZMiniboss(pc),a1
 		jsr	(PalLoad_Line1).l
 		move.b	#$F,$28(a0)
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		move.w	#$400,$18(a0)
 		clr.w	$1A(a0)
@@ -82713,7 +82714,7 @@ off_467A2:	dc.w sub_467AA-off_467A2
 sub_467AA:
 		lea	word_46F40(pc),a1
 		jsr	(SetUp_ObjAttributes2).l
-		moveq	#$4D,d0
+		moveq	#sfx_Projectile,d0
 		jsr	(Play_Sound_2).l
 		move.l	#byte_47062,$30(a0)
 		move.l	#loc_467EA,$34(a0)
@@ -82738,7 +82739,7 @@ loc_467EA:
 
 loc_46800:
 		move.b	#6,5(a0)
-		moveq	#$51,d0
+		moveq	#sfx_MissileThrow,d0
 		jsr	(Play_Sound_2).l
 		move.w	#$80,8(a0)
 		bset	#1,4(a0)
@@ -82943,7 +82944,7 @@ loc_46A22:
 loc_46A40:
 		move.b	#$A,5(a0)
 		move.b	#8,$39(a0)
-		moveq	#$4F,d0
+		moveq	#sfx_Flamethrower,d0
 		jsr	(Play_Sound_2).l
 		lea	Child1_AIZ_MinibossFlames(pc),a2
 		jmp	(CreateChild1_Normal).l
@@ -83154,7 +83155,7 @@ loc_46C84:
 ; ---------------------------------------------------------------------------
 
 loc_46C96:
-		moveq	#$4E,d0
+		moveq	#sfx_MissileExplode,d0
 		jsr	(Play_Sound_2).l
 		lea	ChildObjDat_46FEE(pc),a2
 		jsr	(CreateChild1_Normal).l
@@ -83394,7 +83395,7 @@ loc_46E80:
 		tst.b	$20(a0)
 		bne.s	loc_46EA6
 		move.b	#$20,$20(a0)
-		moveq	#$6E,d0
+		moveq	#sfx_BossHit,d0
 		jsr	(Play_Sound_2).l
 		bset	#6,$2A(a0)
 
@@ -83668,7 +83669,7 @@ loc_470BE:
 		move.l	#Obj_Wait,(a0)
 		move.w	#$78,$2E(a0)
 		move.l	#Obj_AIZ_EndBossMusic,$34(a0)
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		move.b	#1,(Boss_flag).w
 		clr.b	($FFFFFAA3).w
@@ -83683,7 +83684,7 @@ loc_470BE:
 
 Obj_AIZ_EndBossMusic:
 		move.l	#Obj_AIZ_EndBossMain,(a0)
-		moveq	#$19,d0
+		moveq	#mus_EndBoss,d0
 		jsr	(Play_Sound).l
 		rts
 ; ---------------------------------------------------------------------------
@@ -83723,7 +83724,7 @@ loc_47176:
 
 loc_47180:
 		move.b	#2,5(a0)
-		moveq	#$4B,d0
+		moveq	#sfx_WaterfallSplash,d0
 		jsr	(Play_Sound_2).l
 		ori.b	#$48,$38(a0)
 		move.l	#loc_471E2,$34(a0)
@@ -83826,7 +83827,7 @@ loc_472C2:
 
 loc_472CC:
 		move.b	#$A,5(a0)
-		moveq	#$4B,d0
+		moveq	#sfx_WaterfallSplash,d0
 		jsr	(Play_Sound_2).l
 		move.l	#loc_472FC,$34(a0)
 		clr.b	$28(a0)
@@ -83881,7 +83882,7 @@ loc_47360:
 		move.l	#Obj_Wait,(a0)
 		bset	#4,$38(a0)
 		move.w	#$7F,$2E(a0)
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		lea	ChildObjDat_47BBC(pc),a2
 		jmp	(CreateChild1_Normal).l
@@ -84210,7 +84211,7 @@ loc_47718:
 		lea	word_47B48(pc),a1
 		jsr	(SetUp_ObjAttributes3).l
 		bset	#4,$2B(a0)
-		moveq	#$4D,d0
+		moveq	#sfx_Projectile,d0
 		jsr	(Play_Sound_2).l
 		move.b	#$C,$1E(a0)
 		move.w	#$9F,$2E(a0)
@@ -84488,7 +84489,7 @@ sub_47A20:
 		tst.b	$20(a0)
 		bne.s	loc_47A40
 		move.b	#$20,$20(a0)
-		moveq	#$6E,d0
+		moveq	#sfx_BossHit,d0
 		jsr	(Play_Sound_2).l
 
 loc_47A40:
@@ -84859,7 +84860,7 @@ loc_47D82:
 		move.l	#Obj_Wait,(a0)
 		move.w	#$78,$2E(a0)
 		move.l	#loc_47DBA,$34(a0)
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		bset	#3,$38(a0)
 		lea	Pal_HCZMiniboss(pc),a1
@@ -84868,7 +84869,7 @@ loc_47D82:
 
 loc_47DBA:
 		move.l	#Obj_HCZ_MinibossLoop,(a0)
-		moveq	#$19,d0
+		moveq	#mus_EndBoss,d0
 		jsr	(Play_Sound).l
 
 locret_47DC8:
@@ -84947,7 +84948,7 @@ loc_47E92:
 
 loc_47E96:
 		move.b	#$A,5(a0)
-		moveq	#$3C,d0
+		moveq	#sfx_Roll,d0
 		jsr	(Play_Sound_2).l
 		bset	#6,$38(a0)
 		bclr	#7,$38(a0)
@@ -85045,7 +85046,7 @@ loc_47FAA:
 
 loc_47FBC:
 		move.b	#$14,5(a0)
-		moveq	#-$6F,d0
+		moveq	#sfx_DoorClose,d0
 		jsr	(Play_Sound_2).l
 		bclr	#3,$38(a0)
 		move.w	#$9F,$2E(a0)
@@ -85088,7 +85089,7 @@ loc_4804A:
 		move.b	#$16,5(a0)
 		bclr	#6,$38(a0)
 		move.w	#-$400,$1A(a0)
-		moveq	#$70,d0
+		moveq	#sfx_LavaBall,d0
 		jsr	(Play_Sound_2).l
 		rts
 ; ---------------------------------------------------------------------------
@@ -85235,7 +85236,7 @@ loc_481F0:
 		move.b	#4,$40(a0)
 		move.l	#loc_48266,$34(a0)
 		bclr	#6,$38(a0)
-		moveq	#$67,d0
+		moveq	#sfx_LevelProjectile,d0
 		jsr	(Play_Sound_2).l
 		rts
 ; ---------------------------------------------------------------------------
@@ -85405,7 +85406,7 @@ loc_483C0:
 		move.b	#6,5(a0)
 		move.l	#byte_48C30,$30(a0)
 		move.l	#loc_48400,$34(a0)
-		moveq	#-$40,d0
+		moveq	#sfx_C0,d0
 		jsr	(Play_Sound_2).l
 		lea	ChildObjDat_48BD6(pc),a2
 		jmp	(CreateChild6_Simple).l
@@ -85429,7 +85430,7 @@ loc_4841C:
 		movea.w	$46(a0),a1
 		btst	#2,$38(a1)
 		beq.s	loc_4843E
-		moveq	#-$41,d0
+		moveq	#sfx_BF,d0
 		jsr	(sub_542A6).l
 		lea	byte_48C55(pc),a1
 		jmp	(Animate_RawNoSST).l
@@ -85918,7 +85919,7 @@ sub_488E4:
 
 sub_488FA:
 		bset	#7,$38(a0)
-		moveq	#$39,d0
+		moveq	#sfx_Splash,d0
 		jsr	(Play_Sound_2).l
 		clr.w	($FFFFFA9A).w
 		lea	ChildObjDat_48BC2(pc),a2
@@ -86135,7 +86136,7 @@ sub_48A8C:
 		tst.b	$20(a0)
 		bne.s	loc_48AAC
 		move.b	#$20,$20(a0)
-		moveq	#$6E,d0
+		moveq	#sfx_BossHit,d0
 		jsr	(Play_Sound_2).l
 
 loc_48AAC:
@@ -86363,10 +86364,10 @@ Obj_HCZEndBoss:
 		jsr	(Check_CameraInRange).l
 		move.l	#loc_48D2E,(a0)
 		move.b	#1,(Boss_flag).w
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		move.w	#$78,$2E(a0)
-		move.b	#$19,$26(a0)
+		move.b	#mus_EndBoss,$26(a0)
 		move.w	(Camera_target_max_Y_pos).w,($FFFFFA98).w
 		move.w	#$738,(Camera_target_max_Y_pos).w
 		move.w	#$4000,$1C(a0)
@@ -86528,7 +86529,7 @@ loc_48EF6:
 		bset	#4,$38(a0)
 		move.w	#$7F,$2E(a0)
 		move.l	#loc_48F3C,$34(a0)
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		moveq	#$C,d0
 		jmp	(Set_IndexedVelocity).l
@@ -86608,7 +86609,7 @@ loc_48FF0:
 ; ---------------------------------------------------------------------------
 
 loc_4900E:
-		moveq	#-$40,d0
+		moveq	#sfx_C0,d0
 		jsr	(sub_542A6).l
 		jmp	(Animate_RawGetFaster).l
 ; ---------------------------------------------------------------------------
@@ -86625,7 +86626,7 @@ loc_49034:
 		movea.w	$46(a0),a1
 		btst	#3,$38(a1)
 		beq.s	loc_4904E
-		moveq	#-$40,d0
+		moveq	#sfx_C0,d0
 		jmp	(sub_542A6).l
 ; ---------------------------------------------------------------------------
 
@@ -87063,7 +87064,7 @@ loc_4953E:
 loc_49544:
 		lea	ChildObjDat_49C22(pc),a2
 		jsr	(CreateChild6_Simple).l
-		moveq	#$4E,d0
+		moveq	#sfx_MissileExplode,d0
 		jsr	(Play_Sound_2).l
 		lea	ChildObjDat_49BF4(pc),a2
 		jsr	(CreateChild1_Normal).l
@@ -87122,7 +87123,7 @@ loc_495FE:
 		move.b	($FFFFFE0F).w,d0
 		andi.b	#7,d0
 		bne.s	loc_49610
-		moveq	#$6F,d0
+		moveq	#sfx_Rumble2,d0
 		jsr	(Play_Sound_2).l
 
 loc_49610:
@@ -87136,7 +87137,7 @@ loc_4961C:
 		lea	ObjDat3_49BC0(pc),a1
 		jsr	(SetUp_ObjAttributes).l
 		st	($FFFFEECC).w
-		moveq	#$57,d0
+		moveq	#sfx_Geyser,d0
 		jsr	(Play_Sound_2).l
 		lea	(Player_1).w,a1
 		move.w	$10(a1),d0
@@ -87582,7 +87583,7 @@ sub_49A06:
 		tst.b	$20(a0)
 		bne.s	loc_49A2A
 		move.b	#$20,$20(a0)
-		moveq	#$6E,d0
+		moveq	#sfx_BossHit,d0
 		jsr	(Play_Sound_2).l
 
 loc_49A2A:
@@ -87959,7 +87960,7 @@ Obj_MGZ2DrillingEggman:
 		move.w	#$78,$2E(a0)
 		move.l	#Obj_MGZ2DrillingEggmanGo,$34(a0)
 		clr.b	$2C(a0)
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		lea	(ArtKosM_MGZEndBoss).l,a1
 		move.w	#$67E0,d2
@@ -87975,7 +87976,7 @@ Obj_MGZ2DrillingEggman:
 
 Obj_MGZ2DrillingEggmanGo:
 		move.l	#Obj_MGZ2DrillingEggmanStart,(a0)
-		moveq	#$19,d0
+		moveq	#mus_EndBoss,d0
 		jsr	(Play_Sound).l
 
 locret_49DD8:
@@ -88028,7 +88029,7 @@ loc_49E56:
 		tst.l	(Nem_decomp_queue).w
 		bne.w	locret_49DD8
 		move.b	#4,5(a0)
-		moveq	#$59,d0
+		moveq	#sfx_Collapse,d0
 		jsr	(Play_Sound_2).l
 		rts
 ; ---------------------------------------------------------------------------
@@ -88278,7 +88279,7 @@ loc_4A132:
 		move.b	#1,(Boss_flag).w
 		move.b	#$1C,$1E(a0)
 		move.w	#$C,$26(a0)
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		move.w	#$78,$2E(a0)
 		move.l	#loc_4A1C8,$34(a0)
@@ -88305,7 +88306,7 @@ loc_4A1C2:
 
 loc_4A1C8:
 		move.b	#4,5(a0)
-		moveq	#$19,d0
+		moveq	#mus_EndBoss,d0
 		jsr	(Play_Sound).l
 		move.w	#$80,$1A(a0)
 		move.w	#$BF,$2E(a0)
@@ -88377,7 +88378,7 @@ loc_4A294:
 		move.l	#loc_4A2CE,$34(a0)
 		st	($FFFFEEC4).w
 		st	($FFFFF665).w
-		moveq	#$61,d0
+		moveq	#sfx_61,d0
 		jsr	(Play_Sound_2).l
 		jsr	(Create_New_Sprite).l
 		bne.s	locret_4A2C6
@@ -88482,7 +88483,7 @@ loc_4A3D4:
 
 loc_4A3EA:
 		move.b	#$1E,5(a0)
-		moveq	#$60,d0
+		moveq	#sfx_BossZoom,d0
 		jsr	(Play_Sound_2).l
 		bclr	#3,$38(a0)
 		bclr	#2,$38(a0)
@@ -88623,7 +88624,7 @@ loc_4A592:
 		move.l	#Obj_Wait,(a0)
 		bclr	#7,4(a0)
 		bset	#4,$38(a0)
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		move.w	#$7F,$2E(a0)
 		move.l	#loc_4A5CA,$34(a0)
@@ -89800,7 +89801,7 @@ loc_4B21C:
 		tst.b	$20(a0)
 		bne.s	loc_4B230
 		move.b	#$20,$20(a0)
-		moveq	#$6E,d0
+		moveq	#sfx_BossHit,d0
 		jsr	(Play_Sound_2).l
 
 loc_4B230:
@@ -90230,7 +90231,7 @@ loc_4B5B4:
 		move.l	#Obj_Wait,(a0)
 		move.w	#$78,$2E(a0)
 		move.l	#Obj_CNZMinibossGo,$34(a0)
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		move.b	#1,(Boss_flag).w
 		moveq	#$5D,d0
@@ -90241,7 +90242,7 @@ loc_4B5B4:
 
 Obj_CNZMinibossGo:
 		move.l	#Obj_CNZMinibossStart,(a0)
-		moveq	#$2E,d0
+		moveq	#mus_Miniboss,d0
 		jsr	(Play_Sound).l
 		jsr	(Create_New_Sprite).l
 		bne.s	locret_4B628
@@ -90378,7 +90379,7 @@ Obj_CNZMinibossEnd:
 		bset	#4,$38(a0)
 		move.w	#$7F,$2E(a0)
 		move.l	#Obj_CNZMinibossEndGo,$34(a0)
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		lea	Child6_CNZMinibossMakeDebris(pc),a2
 		jmp	(CreateChild6_Simple).l
@@ -90830,7 +90831,7 @@ CNZMiniboss_CheckTopHit:
 		beq.s	CNZMiniboss_BossDefeated
 		bset	#6,$2A(a0)
 		move.b	#$20,$20(a0)
-		moveq	#$6E,d0
+		moveq	#sfx_BossHit,d0
 		jsr	(Play_Sound_2).l
 
 loc_4BCDA:
@@ -91152,10 +91153,10 @@ Obj_CNZEndBoss:
 		jsr	(Check_CameraInRange).l
 		move.l	#loc_4BFF4,(a0)
 		move.b	#1,(Boss_flag).w
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		move.w	#$78,$2E(a0)
-		move.b	#$19,$26(a0)
+		move.b	#mus_EndBoss,$26(a0)
 		move.w	(Camera_target_max_Y_pos).w,($FFFFFA98).w
 		move.w	#$240,(Camera_target_max_Y_pos).w
 		move.w	#$4760,$1C(a0)
@@ -91371,7 +91372,7 @@ loc_4C1EA:
 		bset	#4,$38(a0)
 		move.w	#$7F,$2E(a0)
 		move.l	#loc_4C21A,$34(a0)
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		lea	ChildObjDat_4C8D6(pc),a2
 		jmp	CreateChild1_Normal(pc)
@@ -91510,7 +91511,7 @@ loc_4C3AA:
 ; ---------------------------------------------------------------------------
 
 loc_4C3BC:
-		moveq	#$5D,d0
+		moveq	#sfx_FloorThump,d0
 		jsr	(Play_Sound_2).l
 		move.w	$1A(a0),d0
 		cmpi.w	#$80,d0
@@ -91738,7 +91739,7 @@ loc_4C5F6:
 ; ---------------------------------------------------------------------------
 
 loc_4C600:
-		moveq	#$78,d0
+		moveq	#sfx_GravityMachine,d0
 		jsr	(sub_542A6).l
 		jsr	Refresh_ChildPosition(pc)
 		jsr	Animate_Raw(pc)
@@ -91925,7 +91926,7 @@ sub_4C778:
 		tst.b	$20(a0)
 		bne.s	loc_4C79C
 		move.b	#$20,$20(a0)
-		moveq	#$6E,d0
+		moveq	#sfx_BossHit,d0
 		jsr	(Play_Sound_2).l
 
 loc_4C79C:
@@ -92168,7 +92169,7 @@ loc_4C9EE:
 		move.b	#6,5(a0)
 		move.l	#loc_4CA10,$34(a0)
 		move.w	#$78,$2E(a0)
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 
 locret_4CA0A:
@@ -92181,7 +92182,7 @@ loc_4CA0C:
 
 loc_4CA10:
 		move.b	#8,5(a0)
-		moveq	#$2E,d0
+		moveq	#mus_Miniboss,d0
 		jsr	(Play_Sound).l
 		rts
 ; ---------------------------------------------------------------------------
@@ -93217,7 +93218,7 @@ sub_4D3C6:
 		subq.b	#1,$29(a0)
 		beq.s	loc_4D40E
 		move.b	#$20,$20(a0)
-		moveq	#$6E,d0
+		moveq	#sfx_BossHit,d0
 		jsr	(Play_Sound_2).l
 
 loc_4D3E8:
@@ -93404,7 +93405,7 @@ loc_4D57A:
 		move.w	#$240,(Camera_target_max_Y_pos).w
 		move.w	#$78,$2E(a0)
 		move.l	#loc_4D5EC,$34(a0)
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		move.b	#1,(Boss_flag).w
 		moveq	#$6A,d0
@@ -93431,7 +93432,7 @@ loc_4D5E8:
 loc_4D5EC:
 		move.b	#4,5(a0)
 		move.w	#$3F,$2E(a0)
-		moveq	#$2E,d0
+		moveq	#mus_Miniboss,d0
 		jsr	(Play_Sound).l
 
 locret_4D600:
@@ -93869,7 +93870,7 @@ sub_4DA98:
 		tst.b	$20(a0)
 		bne.s	loc_4DAB2
 		move.b	#$20,$20(a0)
-		moveq	#$6E,d0
+		moveq	#sfx_BossHit,d0
 		jsr	(Play_Sound_2).l
 
 loc_4DAB2:
@@ -94002,7 +94003,7 @@ loc_4DBC0:
 		jsr	(PalLoad_Line1).l
 		move.w	#$78,$2E(a0)
 		move.l	#loc_4DC30,$34(a0)
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		lea	(ChildObjDat_4642E).l,a2
 		jsr	CreateChild1_Normal(pc)
@@ -94022,7 +94023,7 @@ loc_4DC26:
 
 loc_4DC30:
 		move.b	#4,5(a0)
-		moveq	#$19,d0
+		moveq	#mus_EndBoss,d0
 		jsr	(Play_Sound).l
 
 locret_4DC3E:
@@ -94121,7 +94122,7 @@ loc_4DD3C:
 		bset	#4,$38(a0)
 		move.w	#$7F,$2E(a0)
 		move.l	#loc_4DD66,$34(a0)
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		lea	ChildObjDat_4E2EA(pc),a2
 		jmp	CreateChild1_Normal(pc)
@@ -94613,7 +94614,7 @@ sub_4E200:
 		tst.b	$20(a0)
 		bne.s	loc_4E224
 		move.b	#$20,$20(a0)
-		moveq	#$6E,d0
+		moveq	#sfx_BossHit,d0
 		jsr	(Play_Sound_2).l
 
 loc_4E224:
@@ -94770,10 +94771,10 @@ Obj_ICZMiniboss:
 		jsr	(Check_CameraInRange).l
 		move.l	#loc_4E3F4,(a0)
 		move.b	#1,(Boss_flag).w
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		move.w	#$78,$2E(a0)
-		move.b	#$2E,$26(a0)
+		move.b	#mus_Miniboss,$26(a0)
 		move.w	(Camera_max_X_pos).w,($FFFFFA92).w
 		move.w	(Camera_target_max_Y_pos).w,($FFFFFA98).w
 		move.w	#$2B8,(Camera_target_max_Y_pos).w
@@ -94881,7 +94882,7 @@ loc_4E4BE:
 		bset	#2,$38(a0)
 		move.w	#$7F,$2E(a0)
 		move.l	#loc_4E4DC,$34(a0)
-		moveq	#$74,d0
+		moveq	#sfx_TunnelPropeller,d0
 		jsr	(Play_Sound_2).l
 		rts
 ; ---------------------------------------------------------------------------
@@ -94909,7 +94910,7 @@ loc_4E50A:
 		neg.w	$3E(a0)
 		move.w	$3E(a0),$18(a0)
 		move.w	#$5F,$2E(a0)
-		moveq	#-$41,d0
+		moveq	#sfx_BF,d0
 		jsr	(Play_Sound_2).l
 		rts
 ; ---------------------------------------------------------------------------
@@ -95143,7 +95144,7 @@ loc_4E75E:
 loc_4E768:
 		move.b	#8,5(a0)
 		move.b	#-$75,$28(a0)
-		moveq	#-$41,d0
+		moveq	#sfx_BF,d0
 		jsr	(Play_Sound_2).l
 		rts
 ; ---------------------------------------------------------------------------
@@ -95235,7 +95236,7 @@ loc_4E84C:
 
 loc_4E850:
 		move.b	#$14,5(a0)
-		moveq	#$67,d0
+		moveq	#sfx_LevelProjectile,d0
 		jsr	(Play_Sound_2).l
 		move.w	#$400,$1A(a0)
 		clr.w	$18(a0)
@@ -95527,7 +95528,7 @@ sub_4EAC2:
 		tst.b	$20(a0)
 		bne.s	loc_4EAE2
 		move.b	#$20,$20(a0)
-		moveq	#$6E,d0
+		moveq	#sfx_BossHit,d0
 		jsr	(Play_Sound_2).l
 
 loc_4EAE2:
@@ -95660,10 +95661,10 @@ Obj_ICZEndBoss:
 		jsr	(Check_CameraInRange).l
 		move.l	#loc_4ED30,(a0)
 		move.b	#1,(Boss_flag).w
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		move.w	#$78,$2E(a0)
-		move.b	#$19,$26(a0)
+		move.b	#mus_EndBoss,$26(a0)
 		move.w	(Camera_target_max_Y_pos).w,($FFFFFA98).w
 		move.w	#$5F8,(Camera_target_max_Y_pos).w
 		move.w	#$4390,$1C(a0)
@@ -95766,7 +95767,7 @@ loc_4EDFA:
 
 loc_4EE16:
 		move.l	#loc_4EE3C,$34(a0)
-		moveq	#$7F,d0
+		moveq	#sfx_7F,d0
 		jsr	(Play_Sound_2).l
 		bsr.w	sub_4F1D2
 		cmpi.w	#2,$26(a0)
@@ -95803,7 +95804,7 @@ loc_4EE74:
 		bset	#4,$38(a0)
 		move.w	#$7F,$2E(a0)
 		move.l	#loc_4EEA4,$34(a0)
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		lea	ChildObjDat_4F400(pc),a2
 		jmp	CreateChild1_Normal(pc)
@@ -96267,7 +96268,7 @@ sub_4F2F4:
 
 loc_4F31C:
 		move.b	#$20,$20(a0)
-		moveq	#$6E,d0
+		moveq	#sfx_BossHit,d0
 		jsr	(Play_Sound_2).l
 
 loc_4F32A:
@@ -96850,7 +96851,7 @@ loc_4F866:
 		move.b	5(a0),$3A(a0)
 		move.b	#$A,5(a0)
 		move.b	#$20,$20(a0)
-		moveq	#$6E,d0
+		moveq	#sfx_BossHit,d0
 		jsr	(Play_Sound_2).l
 
 loc_4F886:
@@ -97002,7 +97003,7 @@ loc_4F9CE:
 		jsr	(Create_New_Sprite).l
 		bne.s	loc_4FA0C
 		move.l	#Obj_Song_Fade_Transition,(a1)
-		move.b	#$19,$2C(a1)
+		move.b	#mus_EndBoss,$2C(a1)
 
 loc_4FA0C:
 		lea	(Child1_MakeRoboHead3).l,a2
@@ -97412,7 +97413,7 @@ loc_4FE2E:
 		move.l	#loc_4FE6A,(a0)
 		tst.b	4(a0)
 		bpl.s	loc_4FE42
-		moveq	#$5E,d0
+		moveq	#sfx_Lazer,d0
 		jsr	(Play_Sound_2).l
 
 loc_4FE42:
@@ -97709,7 +97710,7 @@ sub_500DA:
 		move.b	#6,5(a0)
 		move.b	#$20,$20(a0)
 		bset	#6,$2A(a0)
-		moveq	#$6E,d0
+		moveq	#sfx_BossHit,d0
 		jsr	(Play_Sound_2).l
 		move.w	$1A(a0),d0
 		asl.w	#1,d0
@@ -98063,10 +98064,10 @@ loc_50444:
 		jsr	SetUp_ObjAttributes(pc)
 		move.b	#8,$29(a0)
 		move.b	#1,(Boss_flag).w
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		move.w	#$78,$2E(a0)
-		move.b	#$19,$26(a0)
+		move.b	#mus_EndBoss,$26(a0)
 		move.w	#$5A0,(Camera_target_max_Y_pos).w
 		move.w	#$3A20,$1C(a0)
 		move.w	#$3A20,(Camera_max_X_pos).w
@@ -98119,7 +98120,7 @@ loc_504DC:
 
 loc_504F2:
 		move.b	#8,5(a0)
-		moveq	#-$30,d0
+		moveq	#sfx_D0,d0
 		jsr	(Play_Sound_2).l
 		move.w	#-$40,$1A(a0)
 		move.w	#$DF,$2E(a0)
@@ -98157,7 +98158,7 @@ loc_5054C:
 
 loc_50562:
 		move.b	#$C,5(a0)
-		moveq	#-$7F,d0
+		moveq	#sfx_TubeLauncher,d0
 		jsr	(Play_Sound_2).l
 		bra.w	loc_509B6
 ; ---------------------------------------------------------------------------
@@ -98264,7 +98265,7 @@ loc_50666:
 sub_50690:
 		move.l	#Delete_Current_Sprite,(a0)
 		bset	#7,$2A(a0)
-		moveq	#$6E,d0
+		moveq	#sfx_BossHit,d0
 		jsr	(Play_Sound_2).l
 		lea	ChildObjDat_50C2C(pc),a2
 		jmp	CreateChild1_Normal(pc)
@@ -98690,7 +98691,7 @@ sub_50A7A:
 		tst.b	$20(a0)
 		bne.s	loc_50A9E
 		move.b	#$20,$20(a0)
-		moveq	#$6E,d0
+		moveq	#sfx_BossHit,d0
 		jsr	(Play_Sound_2).l
 
 loc_50A9E:
@@ -98965,7 +98966,7 @@ loc_50D3C:
 		jsr	(Create_New_Sprite).l
 		bne.s	loc_50D64
 		move.l	#Obj_Song_Fade_Transition,(a1)
-		move.b	#$30,$2C(a1)
+		move.b	#mus_FinalBoss,$2C(a1)
 
 loc_50D64:
 		jsr	(Create_New_Sprite).l
@@ -99270,7 +99271,7 @@ loc_51042:
 		bset	#1,$38(a0)
 		move.w	#$14,($FFFFEECC).w
 		move.w	#3,$2E(a0)
-		moveq	#$61,d0
+		moveq	#sfx_61,d0
 		jsr	(Play_Sound_2).l
 		rts
 ; ---------------------------------------------------------------------------
@@ -99893,7 +99894,7 @@ sub_5174A:
 		addi.w	#$80,d0
 		cmp.w	$14(a0),d0
 		bcc.s	locret_51762
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		move.l	(sp),(a0)
 
@@ -99916,9 +99917,9 @@ loc_5177E:
 		move.l	(a1)+,(a2)+
 		dbf	d0,loc_5177E
 		move.l	#loc_517BA,(a0)
-		moveq	#$4F,d0
+		moveq	#sfx_Flamethrower,d0
 		jsr	(Play_Sound_2).l
-		moveq	#$32,d0
+		moveq	#mus_Ending,d0
 		jsr	(Play_Sound).l
 		jsr	sub_5439C(pc)
 		lsl.w	#2,d0
@@ -100385,7 +100386,7 @@ sub_51CDE:
 
 loc_51D06:
 		move.b	#$3C,$20(a0)
-		moveq	#$6E,d0
+		moveq	#sfx_BossHit,d0
 		jsr	(Play_Sound_2).l
 		movea.w	$44(a0),a1
 		clr.b	$28(a1)
@@ -100905,7 +100906,7 @@ Obj_HiddenMonitorMain:
 		bcs.s	loc_52366
 
 loc_52352:
-		moveq	#$7E,d0
+		moveq	#sfx_GroundSlide,d0
 		jsr	(Play_Sound_2).l
 		move.l	#Sprite_OnScreen_Test,(a0)
 
@@ -100919,7 +100920,7 @@ loc_52366:
 		move.b	#2,5(a0)
 		move.b	#4,$3C(a0)
 		move.w	#-$500,$1A(a0)
-		moveq	#$44,d0
+		moveq	#sfx_BubbleAttack,d0
 		jsr	(Play_Sound_2).l
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
@@ -100964,7 +100965,7 @@ loc_523FA:
 		move.w	(Camera_Y_pos).w,d0
 		subi.w	#$20,d0
 		move.w	d0,$14(a0)
-		moveq	#-$48,d0
+		moveq	#sfx_Signpost,d0
 		jsr	(Play_Sound_2).l
 		lea	Child1_EndSignStub(pc),a2
 		jmp	CreateChild1_Normal(pc)
@@ -101151,7 +101152,7 @@ loc_525E8:
 		lsl.w	#4,d0
 		move.w	d0,$18(a0)
 		move.w	#-$200,$1A(a0)
-		moveq	#-$48,d0
+		moveq	#sfx_Signpost,d0
 		jsr	(Play_Sound_2).l
 		lea	Child6_EndSignScore(pc),a2
 		jsr	CreateChild6_Simple(pc)
@@ -101412,7 +101413,7 @@ Obj_NormalExpControl:
 
 
 sub_52850:
-		moveq	#-$4C,d0
+		moveq	#sfx_Explode,d0
 		jsr	(Play_Sound_2).l
 		lea	Child6_MakeBossExplosion1(pc),a2
 		jsr	CreateChild1_Normal(pc)
@@ -104359,7 +104360,7 @@ Map_Offscreen:	dc.w 0
 
 Obj_Song_Fade_ToLevelMusic:
 		move.w	#$78,$2E(a0)
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		move.l	#loc_54048,(a0)
 
@@ -104372,7 +104373,7 @@ loc_54048:
 
 Obj_Song_Fade_Transition:
 		move.w	#$78,$2E(a0)
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		move.l	#loc_5406E,(a0)
 
@@ -104396,7 +104397,7 @@ Obj_PlayLevelMusic:
 		move.w	d0,(Level_music).w
 		btst	#1,(Player_1+status_secondary).w
 		beq.s	loc_540A4
-		moveq	#$2C,d0
+		moveq	#mus_Invincibility,d0
 
 loc_540A4:
 		jmp	(Play_Sound).l
@@ -104404,13 +104405,13 @@ loc_540A4:
 
 ; ---------------------------------------------------------------------------
 PlayLevelMusic_Playlist:
-		dc.b    1,   2
-		dc.b    3,   4
-		dc.b    5,   6
-		dc.b    7,   8
-		dc.b    9,  $A
-		dc.b   $B,  $C
-		dc.b   $D,  $E
+		dc.b mus_AIZ1, mus_AIZ2
+		dc.b mus_HCZ1, mus_HCZ2
+		dc.b mus_MGZ1, mus_MGZ2
+		dc.b mus_CNZ1, mus_CNZ2
+		dc.b mus_FBZ1, mus_FBZ2
+		dc.b mus_ICZ1, mus_ICZ2
+		dc.b mus_LBZ1, mus_LBZ2
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -104438,7 +104439,7 @@ Obj_EndSignControl:
 		bset	#4,$38(a0)
 		move.w	#$7F,$2E(a0)
 		move.l	#Obj_EndSignControlDoSign,$34(a0)
-		moveq	#-$1F,d0
+		moveq	#mus_FadeOut,d0
 		jsr	(Play_Sound).l
 		rts
 ; End of function Obj_EndSignControl
@@ -104893,7 +104894,7 @@ loc_544A8:
 		beq.s	loc_544CC
 
 loc_544C4:
-		moveq	#$33,d0
+		moveq	#sfx_RingRight,d0
 		jmp	(Play_Sound).l
 ; ---------------------------------------------------------------------------
 
@@ -104901,7 +104902,7 @@ loc_544CC:
 		addq.w	#1,($FFFFFECC).w
 		addq.b	#1,(Life_count).w
 		addq.b	#1,(Update_HUD_life_count).w
-		moveq	#$2A,d0
+		moveq	#mus_ExtraLife,d0
 		jmp	(Play_Sound).l
 ; ---------------------------------------------------------------------------
 
@@ -105648,7 +105649,7 @@ loc_54BC2:
 		bne.s	locret_54B9C
 
 loc_54BD4:
-		moveq	#$4D,d0
+		moveq	#sfx_Projectile,d0
 		jsr	(Play_Sound_2).l
 		lea	ChildObjDat_54C26(pc),a2
 		jsr	CreateChild2_Complex(pc)
@@ -105825,7 +105826,7 @@ loc_54D8E:
 		move.w	#$20,$2E(a0)
 		move.l	#loc_54DCA,$34(a0)
 		bset	#1,$38(a0)
-		moveq	#$48,d0
+		moveq	#sfx_48,d0
 		jsr	(Play_Sound_2).l
 		lea	ChildObjDat_54F26(pc),a2
 		jsr	CreateChild1_Normal(pc)
@@ -105925,7 +105926,7 @@ loc_54E7A:
 
 loc_54E80:
 		move.b	d1,$22(a0)
-		moveq	#$48,d0
+		moveq	#sfx_48,d0
 		jsr	(Play_Sound_2).l
 		lea	ChildObjDat_54F1E(pc),a2
 		jsr	CreateChild1_Normal(pc)
@@ -106572,7 +106573,7 @@ loc_553DC:
 loc_55406:
 		bset	#0,$38(a0)
 		move.b	#4,$22(a0)
-		moveq	#$51,d0
+		moveq	#sfx_MissileThrow,d0
 		jsr	(Play_Sound_2).l
 		lea	(ChildObjDat_55498).l,a2
 		jsr	CreateChild2_Complex(pc)
@@ -106963,7 +106964,7 @@ loc_55774:
 		bne.s	locret_55772
 		tst.b	4(a0)
 		bpl.w	locret_55772
-		moveq	#$4D,d0
+		moveq	#sfx_Projectile,d0
 		jsr	(Play_Sound_2).l
 		lea	ChildObjDat_557DE(pc),a2
 		jmp	CreateChild5_ComplexAdjusted(pc)
@@ -107396,7 +107397,7 @@ loc_55B58:
 loc_55B6C:
 		move.w	d0,$18(a0)
 		move.w	#-$400,$1A(a0)
-		moveq	#-$5E,d0
+		moveq	#sfx_A2,d0
 		jsr	(Play_Sound_2).l
 		lea	ChildObjDat_55CD4(pc),a2
 		jsr	CreateChild1_Normal(pc)
@@ -107473,7 +107474,7 @@ loc_55C2E:
 		jsr	SetUp_ObjAttributes2(pc)
 		move.l	#loc_55C4C,(a0)
 		move.b	$2C(a0),$2F(a0)
-		moveq	#$39,d0
+		moveq	#sfx_Splash,d0
 		jsr	(Play_Sound_2).l
 		rts
 ; ---------------------------------------------------------------------------
@@ -107854,7 +107855,7 @@ loc_5601C:
 
 loc_56022:
 		move.w	d0,(Ring_count).w
-		moveq	#$33,d0
+		moveq	#sfx_RingRight,d0
 		jsr	(Play_Sound_2).l
 
 loc_5602E:
@@ -108024,7 +108025,7 @@ loc_561D2:
 		beq.s	loc_561E8
 		cmpi.b	#4,$23(a0)
 		bne.s	loc_561E8
-		moveq	#-$6C,d0
+		moveq	#sfx_94,d0
 		jsr	(Play_Sound_2).l
 
 loc_561E8:
@@ -108158,7 +108159,7 @@ loc_5632C:
 		add.w	d0,$14(a0)
 		andi.b	#7,d1
 		bne.s	loc_56342
-		moveq	#$6F,d0
+		moveq	#sfx_Rumble2,d0
 		jsr	(Play_Sound_2).l
 		bsr.w	sub_567FE
 
@@ -108211,7 +108212,7 @@ loc_56390:
 		jsr	(Create_New_Sprite).l
 		bne.s	loc_563E8
 		move.l	#Obj_Song_Fade_Transition,(a1)
-		move.b	#$2E,$2C(a1)
+		move.b	#mus_Miniboss,$2C(a1)
 
 loc_563E8:
 		lea	ChildObjDat_568EA(pc),a2
@@ -108304,7 +108305,7 @@ loc_564E6:
 		add.w	d0,$14(a0)
 		andi.b	#7,d1
 		bne.s	loc_564FC
-		moveq	#$6F,d0
+		moveq	#sfx_Rumble2,d0
 		jsr	(Play_Sound_2).l
 		bsr.w	sub_567FE
 
@@ -108614,7 +108615,7 @@ sub_5682E:
 		tst.b	$20(a0)
 		bne.s	loc_56854
 		move.b	#$20,$20(a0)
-		moveq	#$6E,d0
+		moveq	#sfx_BossHit,d0
 		jsr	(Play_Sound_2).l
 		bset	#6,$2A(a0)
 
@@ -108901,7 +108902,7 @@ loc_56AC0:
 		beq.s	locret_56AE4
 		cmpi.b	#4,$22(a0)
 		bne.s	locret_56AE4
-		moveq	#$4D,d0
+		moveq	#sfx_Projectile,d0
 		jsr	(Play_Sound_2).l
 		lea	ChildObjDat_56BF0(pc),a2
 		jsr	CreateChild5_ComplexAdjusted(pc)
@@ -108971,7 +108972,7 @@ sub_56B64:
 		move.b	#2,5(a1)
 		clr.b	$40(a1)
 		bclr	#4,$2A(a1)
-		moveq	#-$4F,d0
+		moveq	#sfx_Spring,d0
 		jsr	(Play_Sound_2).l
 		rts
 ; End of function sub_56B64
@@ -109349,7 +109350,7 @@ loc_56EA6:
 		move.b	#$10,$20(a1)
 		move.b	#2,5(a1)
 		clr.b	$40(a1)
-		moveq	#-$4F,d0
+		moveq	#sfx_Spring,d0
 		jsr	(Play_Sound_2).l
 		rts
 ; End of function sub_56E8C
@@ -109479,7 +109480,7 @@ loc_56FD8:
 		add.w	d0,$14(a0)
 		move.w	#$20,$2E(a0)
 		move.l	#loc_57002,$34(a0)
-		moveq	#$79,d0
+		moveq	#sfx_Lightning,d0
 		jsr	(Play_Sound_2).l
 		tst.b	4(a0)
 		bpl.w	locret_56FA0
@@ -110689,7 +110690,7 @@ loc_57AF8:
 		lea	ChildObjDat_57C3A(pc),a2
 		jsr	CreateChild6_Simple(pc)
 		jsr	Go_Delete_Sprite(pc)
-		moveq	#$59,d0
+		moveq	#sfx_Collapse,d0
 		jsr	(Play_Sound_2).l
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
@@ -110978,7 +110979,7 @@ loc_57D38:
 		move.b	#$10,5(a0)
 		move.w	#$1F,$2E(a0)
 		move.l	#loc_57D92,$34(a0)
-		moveq	#-$6A,d0
+		moveq	#sfx_MetalLand,d0
 		jsr	(Play_Sound_2).l
 		rts
 ; ---------------------------------------------------------------------------
@@ -111109,7 +111110,7 @@ loc_57E4E:
 		clr.w	$2E(a0)
 		clr.w	$30(a0)
 		clr.b	$39(a0)
-		moveq	#$7F,d0
+		moveq	#sfx_7F,d0
 		jsr	(Play_Sound_2).l
 
 loc_57E72:
@@ -111145,7 +111146,7 @@ loc_57EBA:
 loc_57EBE:
 		move.l	#loc_57E4E,(a0)
 		bclr	#1,$38(a0)
-		moveq	#-$1C,d0
+		moveq	#mus_StopSFX,d0
 		jsr	(Play_Sound_2).l
 		jmp	Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
@@ -111694,7 +111695,7 @@ loc_5840C:
 		move.l	#loc_5836E,(a0)
 		bclr	#0,$38(a0)
 		move.w	#$10,($FFFFEECC).w
-		moveq	#-$6A,d0
+		moveq	#sfx_MetalLand,d0
 		jsr	(Play_Sound_2).l
 		rts
 
@@ -111735,7 +111736,7 @@ loc_58446:
 		jsr	CreateChild1_Normal(pc)
 		jsr	Displace_PlayerOffObject(pc)
 		jsr	Go_Delete_Sprite(pc)
-		moveq	#$59,d0
+		moveq	#sfx_Collapse,d0
 		jsr	(Play_Sound_2).l
 		addq.w	#4,sp
 
@@ -112375,7 +112376,7 @@ loc_589B2:
 		clr.b	$28(a0)
 		lea	ChildObjDat_58A4A(pc),a2
 		jsr	CreateChild6_Simple(pc)
-		moveq	#$5D,d0
+		moveq	#sfx_FloorThump,d0
 		jsr	(Play_Sound_2).l
 
 loc_589DC:
@@ -112570,7 +112571,7 @@ loc_58B8A:
 		move.b	#2,5(a1)
 		lea	ChildObjDat_58C20(pc),a2
 		jsr	CreateChild1_Normal(pc)
-		moveq	#$6E,d0
+		moveq	#sfx_BossHit,d0
 		jsr	(Play_Sound_2).l
 		jsr	(Go_Delete_Sprite).l
 
@@ -112666,7 +112667,7 @@ loc_58C98:
 		lea	ChildObjDat_58CE2(pc),a2
 		jsr	CreateChild6_Simple(pc)
 		jsr	Go_Delete_Sprite(pc)
-		moveq	#-$80,d0
+		moveq	#sfx_IceSpikes,d0
 		jsr	(Play_Sound_2).l
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -113605,7 +113606,7 @@ sub_5955A:
 		move.w	$2E(a0),d0
 		andi.w	#3,d0
 		bne.s	locret_59502
-		moveq	#-$38,d0
+		moveq	#sfx_C8,d0
 		jsr	(Play_Sound_2).l
 		lea	ChildObjDat_59592(pc),a2
 		jmp	CreateChild1_Normal(pc)
@@ -114026,7 +114027,7 @@ loc_5996C:
 		bne.s	locret_599AE
 		tst.b	4(a0)
 		bpl.s	locret_599AE
-		moveq	#$4D,d0
+		moveq	#sfx_Projectile,d0
 		jsr	(Play_Sound_2).l
 		lea	ChildObjDat_59A30(pc),a2
 		jsr	CreateChild2_Complex(pc)
@@ -114828,7 +114829,7 @@ loc_5A03C:
 		jsr	(SetUp_ObjAttributes2).l
 		move.l	#loc_5A05C,(a0)
 		move.l	#Go_Delete_Sprite,$34(a0)
-		moveq	#$5E,d0
+		moveq	#sfx_Lazer,d0
 		jsr	(Play_Sound_2).l
 
 loc_5A05C:
@@ -115317,11 +115318,11 @@ loc_5A4E4:
 		jsr	(Create_New_Sprite).l
 		bne.s	loc_5A4F8
 		move.l	#Obj_Song_Fade_Transition,(a1)
-		move.b	#$2E,$2C(a1)
+		move.b	#mus_Miniboss,$2C(a1)
 
 loc_5A4F8:
 		bset	#3,$38(a0)
-		moveq	#$50,d0
+		moveq	#sfx_BossActivate,d0
 		jsr	(Play_Sound_2).l
 		lea	ChildObjDat_5A810(pc),a2
 		jsr	CreateChild1_Normal(pc)
@@ -115345,7 +115346,7 @@ Obj_C4_1:
 		jsr	(Create_New_Sprite).l
 		bne.s	loc_5A568
 		move.l	#Obj_Song_Fade_Transition,(a1)
-		move.b	#$2E,$2C(a1)
+		move.b	#mus_Miniboss,$2C(a1)
 
 loc_5A568:
 		lea	ChildObjDat_5A808(pc),a2
@@ -115574,7 +115575,7 @@ sub_5A7B4:
 		tst.b	$20(a0)
 		bne.s	loc_5A7D4
 		move.b	#$20,$20(a0)
-		moveq	#$6E,d0
+		moveq	#sfx_BossHit,d0
 		jsr	(Play_Sound_2).l
 		bset	#6,$2A(a0)
 
@@ -115668,7 +115669,7 @@ loc_5A84E:
 		move.w	#-$100,$1A(a0)
 		move.w	#$3F,$2E(a0)
 		move.l	#loc_5A8E6,$34(a0)
-		moveq	#-$30,d0
+		moveq	#sfx_D0,d0
 		jsr	(Play_Sound_2).l
 		st	(Anim_Counters+$F).w
 		move.w	#$6000,($FFFFFA92).w
@@ -115744,7 +115745,7 @@ loc_5A990:
 		move.l	#loc_5A9AC,(a0)
 		move.w	#-$200,$18(a0)
 		move.w	#-$200,$1A(a0)
-		moveq	#$49,d0
+		moveq	#sfx_Thump,d0
 		jsr	(Play_Sound_2).l
 		rts
 ; ---------------------------------------------------------------------------

@@ -724,6 +724,7 @@ mus_MutePSG			ds.b 1		; $E3 - mute all PSG channels
 mus_StopSFX			ds.b 1		; $E4 - stop all sound effects
 mus_FadeOut2			ds.b 1		; $E5 - fade out music (duplicate)
 
+mus_FA =			$FA		; $FA - ???
 mus_StopSEGA =			$FE		; $FE - Stop SEGA sound
 mus_SEGA =			$FF		; $FF - Play SEGA sound
 ; ---------------------------------------------------------------------------
