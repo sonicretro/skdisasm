@@ -400,7 +400,7 @@ zROMWindow				=	$8000
 	if fix_sndbugs
 zDataStart				=	$1BF0
 	else
-zDataStart				=	$1C00	
+zDataStart				=	$1C00
 	endif
 		phase zDataStart
 	if fix_sndbugs
@@ -514,21 +514,6 @@ Z80_SoundDriver:
 		!org	0							; z80 Align, handled by the build process
 		CPU Z80
 		listing purecode
-; ---------------------------------------------------------------------------
-MusID__First			= 01h
-MusID_1UP				= 2Ah
-MusID_Emerald			= 2Bh
-MusID__End				= 33h
-SndID__First			= MusID__End
-SndID_Ring				= SndID__First
-SndID_Spindash			= 0ABh
-SndID__FirstContinuous	= 0BCh
-MusID_SKCredits			= 0DCh
-SndID__End				= 0E0h
-FadeID__First			= 0E1h
-FadeID__End				= 0E6h
-SndID_StopSega			= 0FEh
-SndID_Sega				= 0FFh
 ; ---------------------------------------------------------------------------
 NoteRest				= 080h
 FirstCoordFlag			= 0E0h
@@ -890,12 +875,12 @@ zUpdateMusic:
 		call	zDoMusicFadeOut				; Check if music should be faded out and fade if needed
 		call	zDoMusicFadeIn				; Check if music should be faded in and fade if needed
 		ld	a, (zFadeToPrevFlag)			; Get fade-to-prev flag
-		cp	MusID_1UP-MusID__First						; Is it still 1-Up?
+		cp	mus_ExtraLife-Mus__First			; Is it still 1-Up?
 		jr	nz, .check_fade_in				; Branch if not
 		ld	a, (zMusicNumber)				; Get next music to play
-		cp	MusID_1UP						; Is it another 1-Up?
+		cp	mus_ExtraLife						; Is it another 1-Up?
 		jr	z, .clr_queue					; Branch if yes
-		cp	MusID__End-MusID__First					; Is it music (except credits song)?
+		cp	Mus__End-Mus__First					; Is it music (except credits song)?
 		jr	c, .clr_sfx						; Branch if not
 
 .clr_queue:
@@ -1855,19 +1840,19 @@ zCycleSoundQueue:
 ; TypeCheck:
 ;sub_4FB
 zPlaySoundByIndex:
-		cp	MusID_SKCredits					; Is this the credits music?
+		cp	mus_CreditsK					; Is this the credits music?
 		jp	z, zPlayMusicCredits			; Branch if yes
-		cp	SndID_Sega						; Is this the SEGA sound?
+		cp	mus_SEGA						; Is this the SEGA sound?
 		jp	z, zPlaySegaSound				; Branch if yes
-		cp	MusID__End						; Is this a music?
+		cp	Mus__End						; Is this a music?
 		jp	c, zPlayMusic					; Branch if yes
-		cp	SndID__End						; Is this a sound effect?
+		cp	sfx__End						; Is this a sound effect?
 		jp	c, zPlaySound_CheckRing			; Branch if yes
-		cp	FadeID__First					; Is it before the first fade effect?
+		cp	mus__FirstCmd					; Is it before the first fade effect?
 		jp	c, zStopAllSound					; Branch if yes
-		cp	FadeID__End						; Is this after the last fade effect?
+		cp	Mus__EndCmd						; Is this after the last fade effect?
 		jp	nc, zStopAllSound					; Branch if yes
-		sub	FadeID__First					; If none of the checks passed, do fade effects.
+		sub	mus__FirstCmd					; If none of the checks passed, do fade effects.
 		ld	hl, zFadeEffects				; hl = switch table pointer
 		rst	PointerTableOffset				; Get address of function that handles the fade effect
 	if fix_sndbugs=0
@@ -1928,10 +1913,10 @@ zPlayMusicCredits:
 
 ;loc_558
 zPlayMusic:
-		sub	MusID__First								; Remap index from 1h-32h to 0h-31h (see also credits music, above)
+		sub	Mus__First								; Remap index from 1h-32h to 0h-31h (see also credits music, above)
 		ret	m								; Return if negative (id = 0)
 		push	af							; Save af
-		cp	MusID_1UP-MusID__First						; Is it the 1-up music?
+		cp	mus_ExtraLife-Mus__First						; Is it the 1-up music?
 		jp	nz, zPlayMusic_DoFade			; Branch if not
 		ld	a, (zFadeInTimeout)				; Fading timeout
 		or	a								; Is music being faded?
@@ -1949,7 +1934,7 @@ zPlayMusic:
 ; ---------------------------------------------------------------------------
 .no_fade:
 		ld	a, (zFadeToPrevFlag)			; Get fade-to-prev flag
-		cp	MusID_1UP-MusID__First						; Was it triggered by the 1-up song?
+		cp	mus_ExtraLife-Mus__First						; Was it triggered by the 1-up song?
 		jp	z, zBGMLoad						; Branch if yes
 		xor	a								; a = 0
 		ld	(zMusicNumber), a				; Clear M68K input queue...
@@ -1987,7 +1972,7 @@ zPlayMusic:
 		add	hl, de							; Advance to next track
 		djnz	.loop						; Loop for all tracks
 
-		ld	a, MusID_1UP-MusID__First					; a = 1-up id-1
+		ld	a, mus_ExtraLife-Mus__First					; a = 1-up id-1
 		ld	(zFadeToPrevFlag), a			; Set fade-to-prev flag to it
 		ld	a, (zCurrentTempo)				; Get current tempo
 		ld	(zCurrentTempoSave), a			; Save it
@@ -2125,7 +2110,7 @@ zPSGInitBytes:
 ; ---------------------------------------------------------------------------
 ;loc_6A9
 zPlaySound_CheckRing:
-		sub	SndID__First					; Make it a 0-based index
+		sub	sfx_First					; Make it a 0-based index
 		or	a								; Is it the ring sound?
 		jp	nz, zPlaySound_Bankswitch		; Branch if not
 		ld	a, (zRingSpeaker)				; Get speaker on which ring sound is played
@@ -2141,9 +2126,9 @@ zPlaySound_Bankswitch:
 		ld	c, zID_SFXPointers				; SFX table index
 		ld	(zUpdatingSFX), a				; Clear flag to update SFX
 		ex	af, af'							; Restore af
-		cp	SndID_Spindash-SndID__First		; Is this the spindash sound?
+		cp	sfx_Spindash-sfx_First		; Is this the spindash sound?
 		jp	z, zPlaySound					; Branch if yes
-		cp	SndID__FirstContinuous-SndID__First	; Is this before sound 0BCh?
+		cp	sfx__FirstContinuous-sfx_First	; Is this before sound 0BCh?
 		jp	c, zPlaySound_Normal			; Branch if yes
 		push	af							; Save af
 		ld	b, a							; b = sound index
@@ -4499,7 +4484,7 @@ DecTable:
 ; disables interrupts) until either of the following conditions hold:
 ;
 ;	(1)	The SEGA PCM is fully played
-;	(2)	The next song to play is 0FEh (SndID_StopSega)
+;	(2)	The next song to play is 0FEh (mus_StopSEGA)
 ;loc_1126
 zPlaySEGAPCM:
 		di									; Disable interrupts
@@ -4522,7 +4507,7 @@ zPlaySEGAPCM:
 		ld	a, (hl)							; a = next byte of SEGA PCM
 		ld	(zYM2612_D0), a					; Send to DAC
 		ld	a, (zMusicNumber)				; Check next song number
-		cp	SndID_StopSega					; Is it the command to stop playing SEGA PCM?
+		cp	mus_StopSEGA					; Is it the command to stop playing SEGA PCM?
 		jr	z, .done						; Break the loop if yes
 		nop
 		nop
