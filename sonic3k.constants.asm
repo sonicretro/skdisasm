@@ -347,7 +347,7 @@ Apparent_zone =			ramaddr( $FFFFEE4E ) ; byte ; always equal to actual zone
 Apparent_act =			ramaddr( $FFFFEE4F ) ; byte ; for example, after AIZ gets burnt, this indicates act 1 even though it's actually act 2
 Palette_fade_timer =		ramaddr( $FFFFEE50 ) ; word ; the palette gets faded in until this timer expires
 
-Act_3_flag =			ramaddr( $FFFFEE5E ) ; byte ; set when entering LRZ 3 or DEZ 3 directly from previous act. Prevents title card from loading
+Act3_flag =			ramaddr( $FFFFEE5E ) ; byte ; set when entering LRZ 3 or DEZ 3 directly from previous act. Prevents title card from loading
 Camera_X_pos_P2 =		ramaddr( $FFFFEE60 ) ; word
 Camera_Y_pos_P2 =		ramaddr( $FFFFEE64 ) ; word
 Camera_X_pos_P2_copy =		ramaddr( $FFFFEE68 ) ; word
@@ -368,16 +368,50 @@ Screen_X_wrap_value =		ramaddr( $FFFFEEA8 ) ; word ; set to $FFFF
 Screen_Y_wrap_value =		ramaddr( $FFFFEEAA ) ; word ; either $7FF or $FFF
 Camera_Y_pos_mask =		ramaddr( $FFFFEEAC ) ; word ; either $7F0 or $FF0
 Layout_row_index_mask =		ramaddr( $FFFFEEAE ) ; word ; either $3C or $7C
+Screen_shake_flag =		ramaddr( $FFFFEECC ) ; word ; flag for enabling screen shake. Negative values cause screen to shake infinitely, positive values make the screen shake for a short amount of time
+Screen_shake_offset =		ramaddr( $FFFFEECE ) ; word ; vertical offset when screen_shake_flag is enabled. This is added to camera position later
+Screen_shake_last_offset =	ramaddr( $FFFFEED0 ) ; word ; value of Screen_shake_offset for the previous frame
 
-Not_ghost_flag =		ramaddr( $FFFFEE49 ) ; byte ; set if Player 2 in competition mode isn't a ghost of player 1
-Demo_data_addr =		ramaddr( $FFFFEE52 ) ; long ; keeps getting incremented as the demo progresses
+Events_array =			ramaddr( $FFFFEED2 ) ; $1A bytes ; various flags used by screen events and background events
+_unkEEEA =			ramaddr( $FFFFEEEA ) ; word ; various unknown uses for EEEA
+FBZ_cloud_addr =		ramaddr( $FFFFEEEA ) ; $14 bytes ; addresses for cloud objects in FBZ2
+Vscroll_buffer =		ramaddr( $FFFFEEEA ) ; $50 bytes ; vertical scroll buffer used in various levels
+_unkEEEE =			ramaddr( $FFFFEEEE ) ; word ; used exclusively in SSZ background events code
+_unkEEF2 =			ramaddr( $FFFFEEF2 ) ; word ; used exclusively in SSZ background events code
+_unkEEF4 =			ramaddr( $FFFFEEF4 ) ; word ; used exclusively in SSZ background events code
+_unkEEF6 =			ramaddr( $FFFFEEF6 ) ; long ; used exclusively in SSZ background events code
+_unkEEFA =			ramaddr( $FFFFEEFA ) ; word ; used exclusively in SSZ background events code
+
+Spritemask_flag =		ramaddr( $FFFFEF3A ) ; word ; when set, indicates that special sprites are used for sprite masking
 Use_normal_sprite_table =	ramaddr( $FFFFEF3C ) ; word ; if this is set Sprite_table_buffer and Sprite_table_buffer_P2 will be DMAed instead of Sprite_table_buffer_2 and Sprite_table_buffer_P2_2
+Switch_sprite_table =		ramaddr( $FFFFEF3E ) ; word ; if set, switches the state of Use_normal_sprite_table
 SRAM_mask_interrupts_flag =	ramaddr( $FFFFEF56 ) ; word ; if this is set SRAM routines will mask all interrupts (by setting the SR to $2700)
-
+Event_LBZ2_DeathEgg =		ramaddr( $FFFFEF40 ) ; word ; if set, Launch Base 2 Death Egg is currently rising
+_unkEF40_1 =			ramaddr( $FFFFEF40 ) ; long ; used as a part of calculating decimal scores
+_unkEF44_1 =			ramaddr( $FFFFEF44 ) ; long ; used as a jump pointer in vint 1E, unknown why this is used
+_unkEF44_2 =			ramaddr( $FFFFEF44 ) ; long ; used as a part of calculating decimal scores
+Competition_menu_selection =	ramaddr( $FFFFEF48 ) ; byte ; 0 = Grandprix, 1 = Matchrace, 2 = Timeattack. 3 = Exit
+Not_ghost_flag =		ramaddr( $FFFFEF49 ) ; byte ; set if Player 2 in competition mode isn't a ghost of player 1
+Competition_menu_zone =		ramaddr( $FFFFEF4A ) ; byte ; competition mode zone id. This is different from the zone order in game
+Dataselect_entry =		ramaddr( $FFFFEF4B ) ; byte ; the selected save entry in data select menu. This includes no save and delete options, too
+Dataselect_nosave_player =	ramaddr( $FFFFEF4C ) ; word ; Player mode for NO SAVE option in data select menu
+Competition_menu_monitors =	ramaddr( $FFFFEF4E ) ; byte ; 0 = Enabled, FF = Disabled
+Demo_start_button =		ramaddr( $FFFFEF50 ) ; byte ; keeps track of whether controller 1 has pressed the start button. May be used by the demo data itself
+Demo_data_addr =		ramaddr( $FFFFEF52 ) ; long ; keeps getting incremented as the demo progresses
 Object_index_addr =		ramaddr( $FFFFEF5A ) ; long ; points to either the object index for S3 levels or that for S&K levels
+Act3_ring_count =		ramaddr( $FFFFEF5E ) ; word ; stores ring count during act 3 transition
+Act3_timer =			ramaddr( $FFFFEF60 ) ; long ; stores timer during act 3 transition
 Camera_Y_pos_coarse_back =	ramaddr( $FFFFEF64 ) ; word ; Camera_Y_pos_coarse - $80
+Glide_screen_shake =		ramaddr( $FFFFEF66 ) ; word ; alternate screen shaking flag only used when hyper knuckles hits a wall after gliding
+_unkEF68 =			ramaddr( $FFFFEF68 ) ; word ; stores a tile used in special stage results screen, unknown purpose
+Special_stage_zone_and_act =	ramaddr( $FFFFEF6A ) ; word ; stored zone and act during special stage results screen?
+HPZ_special_stage_completed =	ramaddr( $FFFFEF6C ) ; word ; set if special stage was completed. This determines which cutscene to play when entering HPZS
+Current_special_stage_2 =	ramaddr( $FFFFEF6E ) ; byte ; seems to be just a copy of Current_special_stage
+HPZ_current_special_stage =	ramaddr( $FFFFEF70 ) ; byte ; seems to be just a copy of Current_special_stage used specifically for HPZS
 Ending_running_flag =		ramaddr( $FFFFEF72 ) ; word ; the only thing this does is prevent the game from pausing
 Plane_buffer_2_addr =		ramaddr( $FFFFEF74 ) ; long ; the address of the second plane buffer to process, if applicable
+Demo_hold_counter =		ramaddr( $FFFFEF78 ) ; byte ; the number of frames to hold the current buttons. This only applies to S&K demos
+Demo_hold_buttons =		ramaddr( $FFFFEF79 ) ; byte ; the buttons to hold. This only applies to S&K demos
 Demo_number =			ramaddr( $FFFFEF7A ) ; word ; the currently running demo
 Ring_consumption_table =	ramaddr( $FFFFEF80 ) ; $80 bytes ; stores the addresses of all rings currently being consumed
 Ring_consumption_count =	ramaddr( $FFFFEF80 ) ; word ; the number of rings being consumed currently
@@ -621,6 +655,7 @@ Kos_module_destination =	ramaddr( $FFFFFF68 ) ; word ; the VRAM destination for 
 
 Sound_test_sound =		ramaddr( $FFFFFF84 ) ; word
 Title_screen_option =		ramaddr( $FFFFFF86 ) ; byte
+Competition_mode_monitors =	ramaddr( $FFFFFF8A ) ; byte ; 0 = Enabled, FF = Disabled.
 Competition_mode_type =		ramaddr( $FFFFFF8B ) ; byte ; 0 = grand prix, 3 = match race, -1 = time attack
 Total_bonus_countup =		ramaddr( $FFFFFF8E ) ; word ; the total points to be added due to various bonuses this frame in the end of level results screen
 Level_music =			ramaddr( $FFFFFF90 ) ; word
@@ -831,7 +866,7 @@ sfx_Geyser			ds.b 1		; $57
 sfx_FanLatch			ds.b 1		; $58
 sfx_Collapse			ds.b 1		; $59
 sfx_UnknownCharge		ds.b 1		; $5A
-sfx_Button			ds.b 1		; $5B
+sfx_Switch			ds.b 1		; $5B
 sfx_MetalSpark			ds.b 1		; $5C
 sfx_FloorThump			ds.b 1		; $5D
 sfx_Lazer			ds.b 1		; $5E
