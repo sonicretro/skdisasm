@@ -368,11 +368,26 @@ Screen_X_wrap_value =		ramaddr( $FFFFEEA8 ) ; word ; set to $FFFF
 Screen_Y_wrap_value =		ramaddr( $FFFFEEAA ) ; word ; either $7FF or $FFF
 Camera_Y_pos_mask =		ramaddr( $FFFFEEAC ) ; word ; either $7F0 or $FF0
 Layout_row_index_mask =		ramaddr( $FFFFEEAE ) ; word ; either $3C or $7C
+
+_unkEEB0 =			ramaddr( $FFFFEEB0 ) ; word ;
+Special_events_routine =	ramaddr( $FFFFEEB2 ) ; word ; routine counter for various special events. Used for example with LBZ2 Death Egg sequence
+Events_fg_0 =			ramaddr( $FFFFEEB4 ) ; word ; various flags used by screen events
+Events_fg_1 =			ramaddr( $FFFFEEB6 ) ; word ; various flags used by screen events
+Events_fg_2 =			ramaddr( $FFFFEEB8 ) ; word ; various flags used by screen events
+_unkEEBA =			ramaddr( $FFFFEEBA ) ; word ; only used in Sonic 3
+Level_repeat_offset =		ramaddr( $FFFFEEBC ) ; word ; the number of pixels the screen was moved this frame, used to offset level objects horizontally. Used only for level repeat sections, such as AIZ airship.
+Events_fg_3 =			ramaddr( $FFFFEEBE ) ; word ; various flags used by screen events
+Events_routine_fg =		ramaddr( $FFFFEEC0 ) ; word ; screen events routine counter
+Events_routine_bg =		ramaddr( $FFFFEEC2 ) ; word ; background events routine counter
+Events_fg_4 =			ramaddr( $FFFFEEC4 ) ; word ; various flags used by screen events
+Events_fg_5 =			ramaddr( $FFFFEEC6 ) ; word ; various flags used by screen events
+Draw_delayed_position =		ramaddr( $FFFFEEC8 ) ; word ; position to redraw screen from. Screen is reloaded 1 row at a time to avoid game lag
+Draw_delayed_rowcount =		ramaddr( $FFFFEECA ) ; word ; number of rows for screen redrawing. Screen is reloaded 1 row at a time to avoid game lag
 Screen_shake_flag =		ramaddr( $FFFFEECC ) ; word ; flag for enabling screen shake. Negative values cause screen to shake infinitely, positive values make the screen shake for a short amount of time
 Screen_shake_offset =		ramaddr( $FFFFEECE ) ; word ; vertical offset when screen_shake_flag is enabled. This is added to camera position later
 Screen_shake_last_offset =	ramaddr( $FFFFEED0 ) ; word ; value of Screen_shake_offset for the previous frame
 
-Events_array =			ramaddr( $FFFFEED2 ) ; $1A bytes ; various flags used by screen events and background events
+Events_bg =			ramaddr( $FFFFEED2 ) ; $1A bytes ; various flags used by background events
 _unkEEEA =			ramaddr( $FFFFEEEA ) ; word ; various unknown uses for EEEA
 FBZ_cloud_addr =		ramaddr( $FFFFEEEA ) ; $14 bytes ; addresses for cloud objects in FBZ2
 Vscroll_buffer =		ramaddr( $FFFFEEEA ) ; $50 bytes ; vertical scroll buffer used in various levels
