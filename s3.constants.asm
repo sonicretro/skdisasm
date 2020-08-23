@@ -1,4 +1,12 @@
+SStage_extra_sprites :=		ramaddr( $FFFF8400 ) ; $70 bytes ; some extra sprite info for special stages
 SStage_collision_response_list := ramaddr( $FFFF8800 ) ; $100 bytes ; sprite collision list during a special stage
+SStage_unkA500 :=		ramaddr( $FFFF8900 ) ; unknown special stage array
+SStage_unkA600 :=		ramaddr( $FFFF8A00 ) ; unknown special stage array
+
+_unkE412 =			ramaddr( $FFFFE412 ) ; word ; unused, but referenced in sphere test
+_unkE414 =			ramaddr( $FFFFE414 ) ; word ; used in sphere test
+_unkE416 =			ramaddr( $FFFFE416 ) ; word ; used in sphere test
+Sphere_test_address =		ramaddr( $FFFFE418 ) ; word ; address of the sphere test object
 
 H_int_jump :=			ramaddr( $FFFFF608 ) ; 6 bytes ; contains an instruction to jump to the H-int handler
 H_int_addr :=			ramaddr( $FFFFF60A ) ; long

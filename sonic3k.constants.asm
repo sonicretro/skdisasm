@@ -242,8 +242,14 @@ Sprite_table_buffer_P2_2 =	ramaddr(   $FF7D80 ) ; $280 bytes ; alternate sprite 
 
 Level_layout_header =		ramaddr( $FFFF8000 ) ; 8 bytes ; first word = chunks per FG row, second word = chunks per BG row, third word = FG rows, fourth word = BG rows
 Level_layout_main =		ramaddr( $FFFF8008 ) ; $40 word-sized line pointers followed by actual layout data
-Block_table =			ramaddr( $FFFF9000 ) ; $1A00 bytes ; block (16x16) definitions, 8 bytes per definition
-SStage_collision_response_list := ramaddr( $FFFFA400 ) ; $100 bytes ; sprite collision list during a special stage
+Object_respawn_table_2 =	ramaddr( $FFFF8400 ) ; $300 bytes ; respawn table used by glowing spheres bonus stage, because... Reasons?
+Block_table =			ramaddr( $FFFF9000 ) ; $1800 bytes ; block (16x16) definitions, 8 bytes per definition, spece for $300 blocks
+SStage_collision_response_list := ramaddr( $FFFFA400 );$100 bytes ; sprite collision list during a special stage
+SStage_unkA500 :=		ramaddr( $FFFFA500 ) ; unknown special stage array
+SStage_unkA600 :=		ramaddr( $FFFFA600 ) ; unknown special stage array
+HScroll_table =			ramaddr( $FFFFA800 ) ; $200 bytes ; array of background scroll positions for the level. WARNING: some references are before this label
+_unkA880 =			ramaddr( $FFFFA880 ) ; used in SSZ screen/background events
+_unkA8E0 =			ramaddr( $FFFFA8E0 ) ; used in SSZ screen/background events
 Nem_code_table =		ramaddr( $FFFFAA00 ) ; $200 bytes ; code table is built up here and then used during decompression
 Sprite_table_input =		ramaddr( $FFFFAC00 ) ; $400 bytes ; 8 priority levels, $80 bytes per level
 
@@ -253,7 +259,7 @@ Player_2 =			ramaddr( $FFFFB04A ) ; Tails in a Sonic and Tails game, player 2 in
 Reserved_object_3 =		ramaddr( $FFFFB094 ) ; during a level, an object whose sole purpose is to clear the collision response list is stored here
 Dynamic_object_RAM =		ramaddr( $FFFFB0DE ) ; $1A04 bytes ; 90 objects
 Dynamic_object_RAM_end =	ramaddr( $FFFFCAE2 )
-Level_object_RAM =		Dynamic_object_RAM_end ; $4EA bytes ; various fixed in-level objects
+Level_object_RAM =		Dynamic_object_RAM_end;$4EA bytes ; various fixed in-level objects
 Breathing_bubbles =		ramaddr( $FFFFCB2C ) ; for the main character
 Breathing_bubbles_P2 =		ramaddr( $FFFFCB76 ) ; for Tails in a Sonic and Tails game
 Super_stars =			ramaddr( $FFFFCBC0 ) ; for Super Sonic and Super Knuckles
@@ -265,12 +271,22 @@ Shield =			ramaddr( $FFFFCCE8 )
 Shield_P2 =			ramaddr( $FFFFCD32 ) ; left over from Sonic 2 I'm guessing
 Invincibility_stars =		ramaddr( $FFFFCD7C )
 Invincibility_stars_P2 =	ramaddr( $FFFFCEA4 )
+Wave_Splash =			ramaddr( $FFFFCF82 ) ; $4A ; Obj_HCZWaveSplash is loaded here
+Conveyor_belt_load_array =	ramaddr( $FFFFCFE0 ) ; $E bytes ; each subtype of hcz conveyor belt uses a different byte to check if it's already loaded. Since they're so wide, the object loader may try loading them multiple times
 
 Kos_decomp_buffer =		ramaddr( $FFFFD000 ) ; $1000 bytes ; each module in a KosM archive is decompressed here and then DMAed to VRAM
 H_scroll_buffer =		ramaddr( $FFFFE000 ) ; $380 bytes ; horizontal scroll table is built up here and then DMAed to VRAM
 Collision_response_list =	ramaddr( $FFFFE380 ) ; $80 bytes ; only objects in this list are processed by the collision response routines
 Stat_table =			ramaddr( $FFFFE400 ) ; $100 bytes ; used by Tails' AI in a Sonic and Tails game
 Pos_table_P2 =			ramaddr( $FFFFE400 ) ; $100 bytes ; used by Player 2 in competition mode
+
+SStage_scalar_index_0 =		ramaddr( $FFFFE400 ) ; word ; unknown scalar table index value
+SStage_scalar_index_1 =		ramaddr( $FFFFE402 ) ; word ; unknown scalar table index value
+SStage_scalar_index_2 =		ramaddr( $FFFFE404 ) ; word ; unknown scalar table index value
+SStage_scalar_result_0 =	ramaddr( $FFFFE406 ) ; long ; unknown scalar table results values
+SStage_scalar_result_1 =	ramaddr( $FFFFE40A ) ; long ; unknown scalar table results values
+SStage_scalar_result_2 =	ramaddr( $FFFFE40E ) ; long ; unknown scalar table results values
+SStage_scalar_result_3 =	ramaddr( $FFFFE41C ) ; long ; unknown scalar table results values
 Special_stage_anim_frame =	ramaddr( $FFFFE420 ) ; word ; special stage globe's current animation frame, $10 and higher is turning
 Special_stage_X_pos =		ramaddr( $FFFFE422 ) ; word
 Special_stage_Y_pos =		ramaddr( $FFFFE424 ) ; word
@@ -289,7 +305,7 @@ Special_stage_prev_Y_pos =	ramaddr( $FFFFE436 ) ; word
 Special_stage_spheres_left =	ramaddr( $FFFFE438 ) ; word
 Special_stage_ring_count =	ramaddr( $FFFFE43A ) ; word
 Special_stage_sphere_HUD_flag =	ramaddr( $FFFFE43C ) ; byte
-Special_stage_extra_life_flags = ramaddr( $FFFFE43D ) ; byte ; when bit 7 is set, the ring HUD is updated
+Special_stage_extra_life_flags = ramaddr( $FFFFE43D ); byte ; when bit 7 is set, the ring HUD is updated
 Special_stage_rate_timer =	ramaddr( $FFFFE43E ) ; word ; when this reaches 0, the special stage speeds up
 Special_stage_jumping_P2 =	ramaddr( $FFFFE440 ) ; byte ; $80 = normal jump, $81 = spring
 Special_stage_rings_left =	ramaddr( $FFFFE442 ) ; word
@@ -300,19 +316,21 @@ Special_stage_clear_routine =	ramaddr( $FFFFE44C ) ; byte ; if set, the player c
 Special_stage_emerald_timer =	ramaddr( $FFFFE44D ) ; byte ; counts down when the emerald appears, when it reaches 0 the emerald sound plays
 Special_stage_interact =	ramaddr( $FFFFE44E ) ; word ; address of the last bumper touched, or the emerald at the end of the stage
 Special_stage_started =		ramaddr( $FFFFE450 ) ; byte ; set when the player begins moving at the start of the stage
-
+SStage_extra_sprites :=		ramaddr( $FFFFE480 ) ; $70 bytes ; some extra sprite info for special stages
 Pos_table =			ramaddr( $FFFFE500 ) ; $100 bytes
 Competition_saved_data =	ramaddr( $FFFFE600 ) ; $54 bytes ; saved data from Competition Mode
 Save_pointer :=			ramaddr( $FFFFE660 ) ; long ; pointer to the active save slot in 1 player mode
-
+Emerald_flicker_flag =		ramaddr( $FFFFE666 ) ; word ; controls the emerald flicker in save screen and special stage results.
 Saved_data :=			ramaddr( $FFFFE6AC ) ; $54 bytes ; saved data from 1 player mode
 Ring_status_table =		ramaddr( $FFFFE700 ) ; $400 bytes ; 1 word per ring
 Object_respawn_table =		ramaddr( $FFFFEB00 ) ; $300 bytes ; 1 byte per object, every object in the level gets an entry
+
 Camera_RAM =			ramaddr( $FFFFEE00 ) ; various camera and scroll-related variables are stored here
 H_scroll_amount =		ramaddr( $FFFFEE00 ) ; word ; number of pixels camera scrolled horizontally in the last frame * $100
 V_scroll_amount =		ramaddr( $FFFFEE02 ) ; word ; number of pixels camera scrolled vertically in the last frame * $100
 H_scroll_amount_P2 =		ramaddr( $FFFFEE04 ) ; word
 V_scroll_amount_P2 =		ramaddr( $FFFFEE06 ) ; word
+_unkEE08 =			ramaddr( $FFFFEE08 ) ; byte ; this is actually unused
 Scroll_lock =			ramaddr( $FFFFEE0A ) ; byte ; if this is set scrolling routines aren't called
 Scroll_lock_P2 =		ramaddr( $FFFFEE0B ) ; byte
 Camera_target_min_X_pos =	ramaddr( $FFFFEE0C ) ; word
@@ -338,7 +356,8 @@ Camera_max_Y_pos_changing =	ramaddr( $FFFFEE32 ) ; byte ; set when the maximum c
 Dynamic_resize_routine =	ramaddr( $FFFFEE33 ) ; byte
 Fast_V_scroll_flag =		ramaddr( $FFFFEE39 ) ; byte ; if this is set vertical scroll when the player is on the ground and has a speed of less than $800 is capped at 24 pixels per frame instead of 6
 V_scroll_value_P2_copy =	ramaddr( $FFFFEE3A ) ; long ; upper word for foreground, lower word for background
-
+Camera_X_diff =			ramaddr( $FFFFEE3E ) ; word ; difference between Camera_X_pos_copy and Camera_X_pos_BG_copy, used for background collision in SSZ and other levels
+Camera_Y_diff =			ramaddr( $FFFFEE40 ) ; word ; difference between Camera_Y_pos_copy and Camera_Y_pos_BG_copy, used for background collision in SSZ and other levels
 Ring_start_addr_ROM =		ramaddr( $FFFFEE42 ) ; long ; address in the ring layout of the first ring whose X position is >= camera X position - 8
 Ring_end_addr_ROM =		ramaddr( $FFFFEE46 ) ; long ; address in the ring layout of the first ring whose X position is >= camera X position + 328
 Ring_start_addr_RAM =		ramaddr( $FFFFEE4A ) ; word ; address in the ring status table of the first ring whose X position is >= camera X position - 8
@@ -346,22 +365,32 @@ Apparent_zone_and_act =		ramaddr( $FFFFEE4E ) ; word
 Apparent_zone =			ramaddr( $FFFFEE4E ) ; byte ; always equal to actual zone
 Apparent_act =			ramaddr( $FFFFEE4F ) ; byte ; for example, after AIZ gets burnt, this indicates act 1 even though it's actually act 2
 Palette_fade_timer =		ramaddr( $FFFFEE50 ) ; word ; the palette gets faded in until this timer expires
-
+_unkEE52 =			ramaddr( $FFFFEE52 ) ; long ; something to do with competition mode
+_unkEE56 =			ramaddr( $FFFFEE56 ) ; long ; something to do with competition mode. Wiki said this was to do with demos, but I doubt that's the case
+_unkEE5A =			ramaddr( $FFFFEE5A ) ; byte
+_unkEE5C =			ramaddr( $FFFFEE5C ) ; word
 Act3_flag =			ramaddr( $FFFFEE5E ) ; byte ; set when entering LRZ 3 or DEZ 3 directly from previous act. Prevents title card from loading
-Camera_X_pos_P2 =		ramaddr( $FFFFEE60 ) ; word
-Camera_Y_pos_P2 =		ramaddr( $FFFFEE64 ) ; word
+Camera_X_pos_P2 =		ramaddr( $FFFFEE60 ) ; long
+Camera_Y_pos_P2 =		ramaddr( $FFFFEE64 ) ; long
 Camera_X_pos_P2_copy =		ramaddr( $FFFFEE68 ) ; word
 Camera_Y_pos_P2_copy =		ramaddr( $FFFFEE6C ) ; word
-Camera_X_pos =			ramaddr( $FFFFEE78 ) ; word
-Camera_Y_pos =			ramaddr( $FFFFEE7C ) ; word
-Camera_X_pos_copy =		ramaddr( $FFFFEE80 ) ; word
-Camera_Y_pos_copy =		ramaddr( $FFFFEE84 ) ; word
+_unkEE70 =			ramaddr( $FFFFEE70 ) ; word ; it is unclear how this is used
+_unkEE74 =			ramaddr( $FFFFEE74 ) ; word ; it is unclear how this is used
+Camera_X_pos =			ramaddr( $FFFFEE78 ) ; long
+Camera_Y_pos =			ramaddr( $FFFFEE7C ) ; long
+Camera_X_pos_copy =		ramaddr( $FFFFEE80 ) ; long
+Camera_Y_pos_copy =		ramaddr( $FFFFEE84 ) ; long
 Camera_X_pos_rounded =		ramaddr( $FFFFEE88 ) ; word ; rounded down to the nearest block boundary ($10th pixel)
 Camera_Y_pos_rounded =		ramaddr( $FFFFEE8A ) ; word ; rounded down to the nearest block boundary ($10th pixel)
 Camera_X_pos_BG_copy =		ramaddr( $FFFFEE8C ) ; word
-Camera_Y_pos_BG_copy =		ramaddr( $FFFFEE90 ) ; word
+_unkEE8E =			ramaddr( $FFFFEE8E ) ; word ; various uses in screen/background events and competition mode
+Camera_Y_pos_BG_copy =		ramaddr( $FFFFEE90 ) ; word/long?
 Camera_X_pos_BG_rounded =	ramaddr( $FFFFEE94 ) ; word ; rounded down to the nearest block boundary ($10th pixel)
 Camera_Y_pos_BG_rounded =	ramaddr( $FFFFEE96 ) ; word ; rounded down to the nearest block boundary ($10th pixel)
+_unkEE98 =			ramaddr( $FFFFEE98 ) ; long/word ; various uses in screen/background events and competition mode
+_unkEE9C =			ramaddr( $FFFFEE9C ) ; long/word ; various uses in screen/background events and competition mode
+_unkEEA0 =			ramaddr( $FFFFEEA0 ) ; word ; various uses in screen/background events and competition mode
+_unkEEA2 =			ramaddr( $FFFFEEA2 ) ; word ; various uses in screen/background events and competition mode
 Plane_double_update_flag =	ramaddr( $FFFFEEA4 ) ; word ; set when two block are to be updated instead of one (i.e. the camera's scrolled by more than $10 pixels)
 Special_V_int_routine =		ramaddr( $FFFFEEA6 ) ; word
 Screen_X_wrap_value =		ramaddr( $FFFFEEA8 ) ; word ; set to $FFFF
@@ -644,6 +673,7 @@ Max_speed_P2 =			ramaddr( $FFFFFEC0 ) ; word
 Acceleration_P2 =		ramaddr( $FFFFFEC2 ) ; word
 Deceleration_P2 =		ramaddr( $FFFFFEC4 ) ; word
 Life_count_P2 =			ramaddr( $FFFFFEC6 ) ; byte ; left over from Sonic 2
+_unkFEC7 =			ramaddr( $FFFFFEC7 ) ; byte ; used in competition mode
 Total_ring_count =		ramaddr( $FFFFFEC8 ) ; word ; left over from Sonic 2
 Total_ring_count_P2 =		ramaddr( $FFFFFECA ) ; word ; left over from Sonic 2
 Ring_count_P2 =			ramaddr( $FFFFFED0 ) ; word ; left over from Sonic 2
@@ -676,6 +706,7 @@ Total_bonus_countup =		ramaddr( $FFFFFF8E ) ; word ; the total points to be adde
 Level_music =			ramaddr( $FFFFFF90 ) ; word
 Collected_special_ring_array =	ramaddr( $FFFFFF92 ) ; long ; each bit indicates a special stage entry ring in the current zone
 Saved2_status_secondary =	ramaddr( $FFFFFF96 ) ; byte
+Respawn_table_keep =		ramaddr( $FFFFFF97 ) ; byte ; if set, respawn table is not reset during level load
 Saved_apparent_zone_and_act =	ramaddr( $FFFFFF9A ) ; word
 Saved2_apparent_zone_and_act =	ramaddr( $FFFFFF9C ) ; word
 
@@ -687,7 +718,7 @@ Blue_spheres_current_level =	ramaddr( $FFFFFFA6 ) ; long ; number shown at the t
 Blue_spheres_option =		ramaddr( $FFFFFFAA ) ; byte ; 0 = level, 1 = start, 2 = code
 Blue_spheres_progress_flag =	ramaddr( $FFFFFFAB ) ; byte ; 0 = normal, -1 = disabled (single stage mode or using a code from single stage mode)
 Blue_spheres_difficulty =	ramaddr( $FFFFFFAC ) ; byte ; value currently displayed
-Blue_spheres_target_difficulty = ramaddr( $FFFFFFAD ) ; byte ; value read from the layout
+Blue_spheres_target_difficulty = ramaddr( $FFFFFFAD ); byte ; value read from the layout
 SK_alone_flag =			ramaddr( $FFFFFFAE ) ; word ; -1 if Sonic 3 isn't locked on
 Emerald_count =			ramaddr( $FFFFFFB0 ) ; word ; both chaos and super emeralds
 Chaos_emerald_count =		ramaddr( $FFFFFFB0 ) ; byte
