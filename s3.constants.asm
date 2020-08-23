@@ -13,6 +13,17 @@ H_int_addr :=			ramaddr( $FFFFF60A ) ; long
 Save_pointer :=			ramaddr( $FFFFE6B8 ) ; long ; pointer to the active save slot in 1 player mode
 Saved_data :=			ramaddr( $FFFFE6CC ) ; $34 bytes ; saved data from 1 player mode
 
+CNZ_bumper_routine =		ramaddr( $FFFFF71A ) ; byte ; left over from Sonic 2
+CNZ_bumper_unk =		ramaddr( $FFFFF71B ) ; byte ; left over from Sonic 2 ; set only, never used again
+CNZ_visible_bumpers_start =	ramaddr( $FFFFF71C ) ; long ; left over from Sonic 2
+CNZ_Visible_bumpers_end =	ramaddr( $FFFFF720 ) ; long ; left over from Sonic 2
+CNZ_Visible_bumpers_start_P2 =	ramaddr( $FFFFF724 ) ; long ; left over from Sonic 2
+CNZ_Visible_bumpers_end_P2 =	ramaddr( $FFFFF728 ) ; long ; left over from Sonic 2
+
+Current_zone_2P =		ramaddr( $FFFFFF88 ) ; byte ; left over from Sonic 2
+Current_act_2P =		ramaddr( $FFFFFF89 ) ; byte ; left over from Sonic 2
+Options_menu_box =		ramaddr( $FFFFFF8C ) ; byte ; left over from Sonic 2
+_unkFF98 =			ramaddr( $FFFFFF98 ) ; word ; unused
 Level_select_flag :=		ramaddr( $FFFFFFD0 ) ; byte
 Slow_motion_flag :=		ramaddr( $FFFFFFD1 ) ; byte
 Debug_cheat_flag :=		ramaddr( $FFFFFFD2 ) ; word ; set if the debug cheat's been entered
@@ -21,6 +32,10 @@ Debug_mode_cheat_counter :=	ramaddr( $FFFFFFD6 ) ; word ; progress entering debu
 Competition_mode :=		ramaddr( $FFFFFFD8 ) ; word
 P1_character :=			ramaddr( $FFFFFFDA ) ; byte ; 0 := Sonic, 1 := Tails, 2 := Knuckles
 P2_character :=			ramaddr( $FFFFFFDB ) ; byte
+_dbgFFDC =			ramaddr( $FFFFFFDC ) ; byte ; seems like a leftover constant. Existed in Sonic 1 and Sonic 2 as well
+_dbgFFDD =			ramaddr( $FFFFFFDD ) ; byte ; seems like a leftover constant. Existed in Sonic 1 and Sonic 2 as well
+_dbgFFDE =			ramaddr( $FFFFFFDE ) ; byte ; seems like a leftover constant. Existed in Sonic 1 and Sonic 2 as well
+_dbgFFDF =			ramaddr( $FFFFFFDF ) ; byte ; seems like a leftover constant. Existed in Sonic 1 and Sonic 2 as well
 
 Demo_mode_flag :=		ramaddr( $FFFFFFF0 ) ; word
 Next_demo_number :=		ramaddr( $FFFFFFF2 ) ; word ; the currently running demo
