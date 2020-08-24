@@ -67194,14 +67194,14 @@ loc_390D0:
 		cmpi.w	#$5C0,$14(a2)
 		bcc.s	loc_3913A
 		move.b	#0,$2E(a2)
-		move.w	#$400,(Dynamic_object_RAM+(object_size*95)+anim).w
-		move.w	#$5C0,(Dynamic_object_RAM+(object_size*95)+y_pos).w
+		move.w	#$400,(Dust+anim).w
+		move.w	#$5C0,(Dust+y_pos).w
 		lea	(Player_2).w,a2
 		tst.l	(a2)
 		beq.s	loc_39120
 		move.b	#0,$2E(a2)
-		move.w	#$400,(Dynamic_object_RAM+(object_size*96)+anim).w
-		move.w	#$5C0,(Dynamic_object_RAM+(object_size*96)+y_pos).w
+		move.w	#$400,(Dust_P2+anim).w
+		move.w	#$5C0,(Dust_P2+y_pos).w
 
 loc_39120:
 		moveq	#sfx_SandSplash,d0
@@ -76543,7 +76543,7 @@ loc_3F46C:
 ; ---------------------------------------------------------------------------
 
 loc_3F472:
-		bclr	#2,(Dynamic_object_RAM+(object_size*94)+render_flags).w
+		bclr	#2,(Tails_tails+render_flags).w
 		jmp	(Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
