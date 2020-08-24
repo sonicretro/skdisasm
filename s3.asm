@@ -4279,7 +4279,7 @@ LoadPalette:
 		adda.w	d0,a1
 		movea.l	(a1)+,a2
 		movea.w	(a1)+,a3
-		adda.w	#$80,a3
+		adda.w	#Target_palette-Normal_palette,a3
 		move.w	(a1)+,d7
 
 loc_3508:
@@ -4316,7 +4316,7 @@ LoadPalette2:
 		adda.w	d0,a1
 		movea.l	(a1)+,a2
 		movea.w	(a1)+,a3
-		suba.w	#$B80,a3
+		suba.w	#Normal_palette-Water_palette,a3
 		move.w	(a1)+,d7
 
 loc_353C:
@@ -4335,7 +4335,7 @@ LoadPalette2_Immediate:
 		adda.w	d0,a1
 		movea.l	(a1)+,a2
 		movea.w	(a1)+,a3
-		suba.w	#$C00,a3
+		suba.w	#Normal_palette-Target_water_palette,a3
 		move.w	(a1)+,d7
 
 loc_3558:
@@ -9231,14 +9231,14 @@ locret_7CEE:
 
 ; ---------------------------------------------------------------------------
 Find_First_Sprite_Table:
-		dc.b  $FF,   0,   1,   2,   3,   4,   5,   5,   6,   7,   8,   9,  $A,  $B,  $B,  $C
-		dc.b   $D,  $E,  $F, $10, $11, $12, $12, $13, $14, $15, $16, $17, $18, $18, $19, $1A
-		dc.b  $1B, $1C, $1D, $1E, $1E, $1F, $20, $21, $22, $23, $24, $25, $25, $26, $27, $28
-		dc.b  $29, $2A, $2B, $2B, $2C, $2D, $2E, $2F, $30, $31, $32, $32, $33, $34, $35, $36
-		dc.b  $37, $38, $38, $39, $3A, $3B, $3C, $3D, $3E, $3E, $3F, $40, $41, $42, $43, $44
-		dc.b  $45, $45, $46, $47, $48, $49, $4A, $4B, $4B, $4C, $4D, $4E, $4F, $50, $51, $52
-		dc.b  $52, $53, $54, $55, $56, $57, $58, $58, $59, $5A, $5B, $5C, $5D, $5E, $5E, $5F
-		dc.b  $60, $61, $62, $63, $64, $65, $65, $66, $67, $68, $69, $6A, $6B, $6B, $6C, $6D
+.a		set	Object_RAM
+.b		set	Object_RAM_end+object_size
+.c		set	.b			; begin from bottom of array and decrease backwards
+		rept	(.b-.a)/$40		; repeat for all slots, minus exception
+.c		set	.c-$40			; address for previous $40 (also skip last part)
+		dc.b	(.b-.c-1)/object_size-1	; write possible slots according to object_size division + hack + dbf hack
+		endm
+		even
 ; ---------------------------------------------------------------------------
 
 Obj_SStage_7D70:
