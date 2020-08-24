@@ -83429,7 +83429,7 @@ loc_46ED4:
 		jsr	(CreateChild1_Normal).l
 		jmp	(BossDefeated_StopTimer).l
 ; ---------------------------------------------------------------------------
-word_46EFC:	dc.w  $FC2E, $FC34, $FC36, $FC3C
+word_46EFC:	dc.w Normal_palette_line_2+$0E, Normal_palette_line_2+$14, Normal_palette_line_2+$16, Normal_palette_line_2+$1C
 word_46F04:	dc.w   $644,  $240,   $20,  $644
 		dc.w   $888,  $AAA,  $EEE,  $AAA
 ObjDat3_46F14:	dc.l Map_AIZMiniboss
@@ -86172,7 +86172,8 @@ loc_48AEA:
 ; End of function sub_48A8C
 
 ; ---------------------------------------------------------------------------
-word_48B0A:	dc.w  $FC28, $FC2E, $FC32, $FC34, $FC36, $FC3A, $FC3C
+word_48B0A:	dc.w Normal_palette_line_2+$08, Normal_palette_line_2+$0E, Normal_palette_line_2+$12, Normal_palette_line_2+$14
+		dc.w Normal_palette_line_2+$16, Normal_palette_line_2+$1A, Normal_palette_line_2+$1C
 word_48B18:	dc.w      4,     0,    $C,     8,   $20,  $826,  $624
 		dc.w   $AAA,  $AAA,  $888,  $AAA,  $EEE,  $888,  $AAA
 ObjDat3_48B34:	dc.l Map_HCZMiniboss
@@ -87615,7 +87616,7 @@ loc_49A5E:
 ; End of function sub_49A06
 
 ; ---------------------------------------------------------------------------
-word_49A72:	dc.w  $FC34, $FC36, $FC3C
+word_49A72:	dc.w Normal_palette_line_2+$14, Normal_palette_line_2+$16, Normal_palette_line_2+$1C
 word_49A78:	dc.w      6,   $20,  $624
 		dc.w   $EEE,  $EEE,  $EEE
 
@@ -91958,7 +91959,7 @@ loc_4C7D0:
 ; End of function sub_4C778
 
 ; ---------------------------------------------------------------------------
-word_4C7E4:	dc.w  $FC32, $FC34, $FC36, $FC3C
+word_4C7E4:	dc.w Normal_palette_line_2+$12, Normal_palette_line_2+$14, Normal_palette_line_2+$16, Normal_palette_line_2+$1C
 word_4C7EC:	dc.w    $60,   $20,   $20,  $640
 		dc.w   $888,  $EEE,  $EEE,  $AAA
 
@@ -93251,7 +93252,7 @@ loc_4D40E:
 ; End of function sub_4D3C6
 
 ; ---------------------------------------------------------------------------
-word_4D430:	dc.w  $FC24, $FC28, $FC36, $FC3E
+word_4D430:	dc.w Normal_palette_line_2+$04, Normal_palette_line_2+$08, Normal_palette_line_2+$16, Normal_palette_line_2+$1E
 word_4D438:	dc.w   $222,  $644,   $20,   $20
 		dc.w   $AAA,  $AAA,  $EEE,  $EEE
 
@@ -93899,7 +93900,7 @@ locret_4DAE8:
 ; End of function sub_4DA98
 
 ; ---------------------------------------------------------------------------
-word_4DAEA:	dc.w  $FC38, $FC3A, $FC3C
+word_4DAEA:	dc.w Normal_palette_line_2+$18, Normal_palette_line_2+$1A, Normal_palette_line_2+$1C
 word_4DAF0:	dc.w   $866,  $644,   $20
 		dc.w   $EEE,  $EEE,  $EEE
 ObjDat3_4DAFC:	dc.l Map_FBZ2Subboss
@@ -94647,7 +94648,7 @@ loc_4E256:
 ; End of function sub_4E200
 
 ; ---------------------------------------------------------------------------
-word_4E260:	dc.w  $FC26, $FC28, $FC32, $FC3C
+word_4E260:	dc.w Normal_palette_line_2+$06, Normal_palette_line_2+$08, Normal_palette_line_2+$12, Normal_palette_line_2+$1C
 word_4E268:	dc.w    $2A,   $26,   $20,  $644
 		dc.w   $888,  $AAA,  $EEE,  $AAA
 ObjDat3_4E278:	dc.l Map_FBZEndBoss
@@ -96321,7 +96322,7 @@ sub_4F382:
 ; End of function sub_4F382
 
 ; ---------------------------------------------------------------------------
-word_4F38E:	dc.w  $FC34, $FC3C
+word_4F38E:	dc.w Normal_palette_line_2+$14, Normal_palette_line_2+$1C
 word_4F392:	dc.w    $20,  $644
 		dc.w   $EEE,  $AAA
 ObjDat3_4F39A:	dc.l Map_ICZEndBoss
@@ -97797,7 +97798,7 @@ sub_501E2:
 ; End of function sub_501E2
 
 ; ---------------------------------------------------------------------------
-word_501EE:	dc.w  $FC28, $FC3C
+word_501EE:	dc.w Normal_palette_line_2+$08, Normal_palette_line_2+$1C
 word_501F2:	dc.w    $26,   $20
 		dc.w   $EEE,  $EEE
 
@@ -100448,7 +100449,8 @@ sub_51D88:
 ; End of function sub_51D88
 
 ; ---------------------------------------------------------------------------
-word_51D94:	dc.w  $FC28, $FC2E, $FC30, $FC38, $FC3A, $FC3C
+word_51D94:	dc.w Normal_palette_line_2+$08, Normal_palette_line_2+$0E, Normal_palette_line_2+$10
+		dc.w Normal_palette_line_2+$18, Normal_palette_line_2+$1A, Normal_palette_line_2+$1C
 word_51DA0:	dc.w      8,    $A,     4,  $644,  $422,     0
 		dc.w   $888,  $666,  $AAA,  $AAA,  $EEE,  $EEE
 
@@ -108657,7 +108659,7 @@ loc_56880:
 ; End of function sub_5682E
 
 ; ---------------------------------------------------------------------------
-word_568A2:	dc.w  $FC38, $FC3A, $FC3C
+word_568A2:	dc.w Normal_palette_line_2+$18, Normal_palette_line_2+$1A, Normal_palette_line_2+$1C
 word_568A8:	dc.w   $CAA,  $866,  $644
 		dc.w   $EEE,  $EEE,  $EEE
 ObjDat3_568B4:	dc.l Map_MGZMiniBoss
