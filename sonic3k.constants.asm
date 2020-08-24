@@ -276,6 +276,7 @@ Shield_P2			ds.b object_size	; left over from Sonic 2 I'm guessing
 Invincibility_stars		ds.b object_size*4
 Invincibility_stars_P2		ds.b object_size*3
 Wave_Splash			ds.b object_size	; Obj_HCZWaveSplash is loaded here
+Object_RAM_end =		*
 			ds.b $14			; unused
 Conveyor_belt_load_array	ds.b $E			; each subtype of hcz conveyor belt uses a different byte to check if it's already loaded. Since they're so wide, the object loader may try loading them multiple times
 			ds.b $12			; unused

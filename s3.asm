@@ -4377,7 +4377,7 @@ loc_35B2:
 		dbf	d1,loc_35B2
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#$7FF,d1
+		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
 
 loc_35C2:
 		move.l	d0,(a1)+
@@ -5357,7 +5357,7 @@ loc_47A4:
 		dbf	d1,loc_47A4
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#$7FF,d1
+		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
 
 loc_47B4:
 		move.l	d0,(a1)+
@@ -7420,7 +7420,7 @@ loc_618C:
 		dbf	d1,loc_618C
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#$7FF,d1
+		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
 
 loc_619C:
 		move.l	d0,(a1)+
@@ -8788,7 +8788,7 @@ loc_7500:
 		dbf	d1,loc_7500
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#$7FF,d1
+		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
 
 loc_7510:
 		move.l	d0,(a1)+
@@ -9214,7 +9214,7 @@ SSNum000_Map:	dc.w  $CF89, $C781, $CF81, $C781, $CF81, $C781, $CF81, $C789
 
 Create_New_Sprite2:
 		movea.l	a0,a1
-		move.w	#-$307E,d0
+		move.w	#Wave_Splash,d0
 		sub.w	a0,d0
 		lsr.w	#6,d0
 		move.b	Find_First_Sprite_Table(pc,d0.w),d0
@@ -11160,7 +11160,7 @@ loc_957C:
 		dbf	d1,loc_957C
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#$7FF,d1
+		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
 
 loc_958C:
 		move.l	d0,(a1)+
@@ -11452,7 +11452,7 @@ loc_9A48:
 		dbf	d1,loc_9A48
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#$7FF,d1
+		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
 
 loc_9A58:
 		move.l	d0,(a1)+
@@ -12180,7 +12180,7 @@ loc_A1C2:
 		dbf	d1,loc_A1C2
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#$7FF,d1
+		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
 
 loc_A1D2:
 		move.l	d0,(a1)+
@@ -12603,7 +12603,7 @@ loc_A9F2:
 		dbf	d1,loc_A9F2
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#$7FF,d1
+		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
 
 loc_AA02:
 		move.l	d0,(a1)+
@@ -13074,7 +13074,7 @@ loc_AF76:
 		dbf	d1,loc_AF76
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#$7FF,d1
+		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
 
 loc_AF86:
 		move.l	d0,(a1)+
@@ -13854,7 +13854,7 @@ loc_B8DC:
 		dbf	d1,loc_B8DC
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#$7FF,d1
+		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
 
 loc_B8EC:
 		move.l	d0,(a1)+
@@ -28940,7 +28940,7 @@ Process_Sprites:
 		bcc.s	loc_191D2
 
 loc_191BE:
-		moveq	#$6D,d7
+		moveq	#(Object_RAM_end-Object_RAM)/object_size-1,d7
 ; End of function Process_Sprites
 
 
@@ -28954,7 +28954,7 @@ sub_191C0:
 		jsr	(a1)
 
 loc_191C8:
-		lea	$4A(a0),a0
+		lea	next_object(a0),a0
 		dbf	d7,sub_191C0
 
 locret_191D0:
@@ -28963,12 +28963,12 @@ locret_191D0:
 
 ; ---------------------------------------------------------------------------
 
-loc_191D2:
-		moveq	#3,d7
+loc_191D2:	; this is broken?
+		moveq	#((Dynamic_object_RAM+object_size)-Object_RAM)/object_size-1,d7
 		bsr.s	sub_191C0
-		moveq	#$59,d7
+		moveq	#((Level_object_RAM+object_size)-(Dynamic_object_RAM+object_size))/object_size-1,d7
 		bsr.s	sub_191DE
-		moveq	#$F,d7
+		moveq	#(Object_RAM_end-(Level_object_RAM+object_size))/object_size-1,d7
 		bra.s	sub_191C0
 
 ; =============== S U B R O U T I N E =======================================
@@ -28977,12 +28977,12 @@ loc_191D2:
 sub_191DE:
 		move.l	(a0),d0
 		beq.s	loc_191EC
-		tst.b	4(a0)
+		tst.b	render_flags(a0)
 		bpl.s	loc_191EC
 		jsr	Draw_Sprite(pc)
 
 loc_191EC:
-		lea	$4A(a0),a0
+		lea	next_object(a0),a0
 		dbf	d7,sub_191DE
 		rts
 ; End of function sub_191DE
@@ -30776,7 +30776,7 @@ locret_1A0C0:
 
 Create_New_Sprite:
 		lea	(Dynamic_object_RAM).w,a1
-		moveq	#$59,d0
+		moveq	#((Dynamic_object_RAM_end-Dynamic_object_RAM)/object_size)-1,d0
 		bra.s	loc_1A0DA
 ; End of function Create_New_Sprite
 
@@ -30793,7 +30793,7 @@ Create_New_Sprite3:
 		bmi.s	locret_1A0E4
 
 loc_1A0DA:
-		lea	$4A(a1),a1
+		lea	next_object(a1),a1
 		tst.l	(a1)
 		dbeq	d0,loc_1A0DA
 
@@ -30802,26 +30802,28 @@ locret_1A0E4:
 ; End of function Create_New_Sprite3
 
 ; ---------------------------------------------------------------------------
-byte_1A0E6:	dc.b  $FF,   0,   1,   2,   3,   4,   5,   5,   6,   7,   8,   9,  $A,  $B,  $B,  $C
-		dc.b   $D,  $E,  $F, $10, $11, $12, $12, $13, $14, $15, $16, $17, $18, $18, $19, $1A
-		dc.b  $1B, $1C, $1D, $1E, $1E, $1F, $20, $21, $22, $23, $24, $25, $25, $26, $27, $28
-		dc.b  $29, $2A, $2B, $2B, $2C, $2D, $2E, $2F, $30, $31, $32, $32, $33, $34, $35, $36
-		dc.b  $37, $38, $38, $39, $3A, $3B, $3C, $3D, $3E, $3E, $3F, $40, $41, $42, $43, $44
-		dc.b  $45, $45, $46, $47, $48, $49, $4A, $4B, $4B, $4C, $4D, $4E, $4F, $50, $51, $52
-		dc.b  $52, $53, $54, $55, $56, $57, $58, $58
+byte_1A0E6:
+.a		set	Dynamic_object_RAM
+.b		set	Dynamic_object_RAM_end
+.c		set	.b			; begin from bottom of array and decrease backwards
+		rept	(.b-.a)/$40		; repeat for all slots, minus exception
+.c		set	.c-$40			; address for previous $40 (also skip last part)
+		dc.b	(.b-.c-1)/object_size-1	; write possible slots according to object_size division + hack + dbf hack
+		endm
+		even
 
 ; =============== S U B R O U T I N E =======================================
 
 
 Clear_SpriteRingMem:
 		lea	(Dynamic_object_RAM).w,a1
-		moveq	#$59,d1
+		moveq	#((Dynamic_object_RAM_end-Dynamic_object_RAM)/object_size)-1,d1
 
 loc_1A154:
-		lea	$4A(a1),a1
+		lea	next_object(a1),a1
 		tst.l	(a1)
 		beq.s	loc_1A168
-		move.w	$48(a1),d0
+		move.w	respawn_addr(a1),d0
 		beq.s	loc_1A168
 		movea.w	d0,a2
 		bclr	#7,(a2)
@@ -53615,7 +53617,7 @@ loc_2D260:
 		dbf	d1,loc_2D260
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#$7FF,d1
+		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
 
 loc_2D270:
 		move.l	d0,(a1)+
@@ -64185,10 +64187,10 @@ sub_3653C:
 		lea	(byte_3656C).l,a4
 		adda.w	d0,a4
 		lea	(Dynamic_object_RAM).w,a1
-		moveq	#$59,d0
+		moveq	#(Dynamic_object_RAM_end-Dynamic_object_RAM)/object_size-1,d0
 
 loc_36550:
-		lea	$4A(a1),a1
+		lea	next_object(a1),a1
 		cmpi.l	#loc_35962,(a1)
 		bne.s	loc_36566
 		move.b	(a4)+,$20(a1)
