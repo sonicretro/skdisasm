@@ -214,3 +214,39 @@ tribyte macro val
 	endif
     endm
 
+; macro to define a palette script pointer
+palscriptptr	macro header, data
+	dc.w data-header, 0
+	dc.l header
+._headpos :=	header
+    endm
+
+; macro to define a palette script header
+palscripthdr	macro palette, entries, value
+	dc.w (palette)&$FFFF
+	dc.b entries-1, value
+    endm
+
+; macro to define a palette script data
+palscriptdata	macro frames, data
+.framec :=	frames-1
+	shift
+	dc.w ALLARGS
+	dc.w .framec
+    endm
+
+; macro to repeat script from start
+palscriptrept	macro header
+	dc.w -4
+    endm
+
+; macro to define loop from start for x number of times, then initialize with new header
+palscriptloop	macro header
+	dc.w -8, header-._headpos
+._headpos :=	header
+    endm
+
+; macro to run the custom script routine
+palscriptrun	macro header
+	dc.w -$C
+    endm

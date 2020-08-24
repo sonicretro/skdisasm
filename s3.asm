@@ -93374,12 +93374,14 @@ ChildObjDat_4D4F6:dc.w 4
 		dc.b $FC
 Pal_FBZMiniboss:binclude "Levels/FBZ/Palettes/S3 Miniboss.bin"
 		even
-word_4D540:	dc.w 4
+
+word_4D540:	palscriptptr .header, .data
 		dc.w 0
-		dc.l word_4D54A
-		dc.w 0
-word_4D54A:	dc.w $FC3E
-		dc.w      6,  $EEE,     0,  $644,     3, $FFF4
+.header	palscripthdr	Normal_palette_line_2+$1E, 1, 7-1
+
+.data	palscriptdata	1, $EEE
+	palscriptdata	4, $644
+	palscriptrun
 ; ---------------------------------------------------------------------------
 
 Obj_AB_1_FBZ_Laser_Boss:
@@ -95644,18 +95646,21 @@ ChildObjDat_4EB98:dc.w 3
 		dc.b 0
 Pal_ICZMiniboss:binclude "Levels/ICZ/Palettes/Miniboss.bin"
 		even
-word_4EBE2:	dc.w 4
+word_4EBE2:	palscriptptr .header, .data
 		dc.w 0
-		dc.l word_4EBEC
-		dc.w 0
-word_4EBEC:	dc.w $FC62
-		dc.w   $901,  $EEC,  $CC6,  $C80,  $C60,  $C40,  $A40,  $820,  $620,  $200,  $600,     7,  $EEC,  $CC6,  $C82,  $C80
-		dc.w   $C40,  $A40,  $820,  $820,  $200,  $600,     7,  $EEC,  $CC8,  $E82,  $C82,  $C40,  $C40,  $A20,  $820,  $200
-		dc.w   $600,     7,  $EEE,  $EC8,  $EA4,  $C82,  $C60,  $C40,  $A20,  $A20,  $400,  $600,     7,  $EEE,  $EC8,  $EA4
-		dc.w   $E82,  $C60,  $C40,  $C20,  $A20,  $400,  $600,     7,  $EEE,  $EC8,  $EA6,  $E82,  $C62,  $C40,  $C20,  $C20
-		dc.w   $600,  $800,     7,  $EEE,  $EE8,  $EC6,  $EA2,  $C80,  $C60,  $C20,  $C20,  $600,  $A00,     7,  $EEE,  $EEA
-		dc.w   $EC6,  $EA4,  $C82,  $C60,  $C40,  $C20,  $800,  $C00,     7,  $EEE,  $EEA,  $EC8,  $EA4,  $C82,  $C60,  $C40
-		dc.w   $E20,  $A00,  $C00,     7,  $EEE,  $EEA,  $EC8,  $EA4,  $C82,  $C60,  $C40,  $E20,  $A00,  $E00,     7, $FFF4
+
+.header	palscripthdr	Normal_palette_line_4+$02, 10, 2-1
+.data	palscriptdata	8, $EEC, $CC6, $C80, $C60, $C40, $A40, $820, $620, $200, $600
+	palscriptdata	8, $EEC, $CC6, $C82, $C80, $C40, $A40, $820, $820, $200, $600
+	palscriptdata	8, $EEC, $CC8, $E82, $C82, $C40, $C40, $A20, $820, $200, $600
+	palscriptdata	8, $EEE, $EC8, $EA4, $C82, $C60, $C40, $A20, $A20, $400, $600
+	palscriptdata	8, $EEE, $EC8, $EA4, $E82, $C60, $C40, $C20, $A20, $400, $600
+	palscriptdata	8, $EEE, $EC8, $EA6, $E82, $C62, $C40, $C20, $C20, $600, $800
+	palscriptdata	8, $EEE, $EE8, $EC6, $EA2, $C80, $C60, $C20, $C20, $600, $A00
+	palscriptdata	8, $EEE, $EEA, $EC6, $EA4, $C82, $C60, $C40, $C20, $800, $C00
+	palscriptdata	8, $EEE, $EEA, $EC8, $EA4, $C82, $C60, $C40, $E20, $A00, $C00
+	palscriptdata	8, $EEE, $EEA, $EC8, $EA4, $C82, $C60, $C40, $E20, $A00, $E00
+	palscriptrun
 ; ---------------------------------------------------------------------------
 
 Obj_ICZEndBoss:
@@ -100853,23 +100858,25 @@ Pal_SuperSonicEndPose:
 		even
 Map_SonicTailsEndPoses:
 		include "General/Ending/Map - Sonic Tails Ending Poses S3.asm"
-PalSPtr_LBZFinalBoss2_FadeIn:
-		dc.w 4
+PalSPtr_LBZFinalBoss2_FadeIn:	palscriptptr .header, .data
 		dc.w 0
-		dc.l PalScript_LBZFinalBoss2_FadeIn
+
+.header	palscripthdr	Normal_palette_line_4+$16, 4, 2-1
+.data	palscriptdata	16, $ECE, $E8A, $E48, $E46
+	palscriptdata	16, $CAC, $C68, $C46, $A44
+	palscriptdata	16, $A88, $A46, $824, $622
+	palscriptdata	16, $844, $622, $400, $200
+	palscriptrun
+
+PalSPtr_LBZFinalBoss2_FadeOut:	palscriptptr .header, .data
 		dc.w 0
-PalScript_LBZFinalBoss2_FadeIn:
-		dc.w $FC76
-		dc.w   $301,  $ECE,  $E8A,  $E48,  $E46,    $F,  $CAC,  $C68,  $C46,  $A44,    $F,  $A88,  $A46,  $824,  $622,    $F
-		dc.w   $844,  $622,  $400,  $200,    $F, $FFF4
-PalSPtr_LBZFinalBoss2_FadeOut:
-		dc.w 4
-		dc.w 0
-		dc.l PalScript_LBZFinalBoss2_FadeOut
-		dc.w 0
-PalScript_LBZFinalBoss2_FadeOut:dc.w $FC76
-		dc.w   $301,  $844,  $622,  $400,  $200,    $F,  $A88,  $A46,  $824,  $622,    $F,  $CAC,  $C68,  $C46,  $A44,    $F
-		dc.w   $ECE,  $E8A,  $E48,  $E46,    $F, $FFF4
+
+.header	palscripthdr	Normal_palette_line_4+$16, 4, 2-1
+.data	palscriptdata	16, $844, $622, $400, $200
+	palscriptdata	16, $A88, $A46, $824, $622
+	palscriptdata	16, $CAC, $C68, $C46, $A44
+	palscriptdata	16, $ECE, $E8A, $E48, $E46
+	palscriptrun
 ; ---------------------------------------------------------------------------
 
 Obj_HiddenMonitor:
@@ -119286,52 +119293,139 @@ Map_HCZMinibossSplash:
 DPLC_HCZMinibossSplash:
 		include "Levels/HCZ/Misc Object Data/DPLC - Miniboss Splash.asm"
 Map_ICZEndBoss:	include "Levels/ICZ/Misc Object Data/Map - End Boss.asm"
-PalSPtr_CNZMinibossNormal:
-		dc.w 4
+PalSPtr_CNZMinibossNormal:	palscriptptr .header, .data
 		dc.w 0
-		dc.l PalScript_CNZMinibossNormal
+.header	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+
+.data	palscriptdata	1, $EEE
+	palscriptdata	1, $A22
+	palscriptdata	6, $020
+	palscriptloop	.headr2
+
+.headr2	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+	palscriptdata	1, $EEE
+	palscriptdata	1, $A22
+	palscriptdata	4, $020
+	palscriptloop	.headr3
+
+.headr3	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+	palscriptdata	1, $EEE
+	palscriptdata	1, $A22
+	palscriptdata	2, $020
+	palscriptloop	.headr4
+
+.headr4	palscripthdr	Normal_palette_line_2+$14, 1, $B-1
+	palscriptdata	1, $EEE
+	palscriptdata	1, $A22
+	palscriptdata	1, $020
+	palscriptrun
+
+PalSPtr_CNZMinibossSparks:	palscriptptr .header, .data
 		dc.w 0
-PalScript_CNZMinibossNormal:
-		dc.w $FC34
-		dc.w      2,  $EEE,     0,  $A22,     0,   $20,     5, $FFF8,   $14, $FC34,     2,  $EEE,     0,  $A22,     0,   $20
-		dc.w      3, $FFF8,   $14, $FC34,     2,  $EEE,     0,  $A22,     0,   $20,     1, $FFF8,   $14, $FC34,    $A,  $EEE
-		dc.w      0,  $A22,     0,   $20,     0, $FFF4
-PalSPtr_CNZMinibossSparks:
-		dc.w 4
+.header	palscripthdr	Normal_palette_line_2+$14, 1, $31-1
+
+.data	palscriptdata	1, $EEE
+	palscriptdata	1, $A22
+	palscriptdata	1, $020
+	palscriptloop	.headr2
+
+.headr2	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+	palscriptdata	1, $EEE
+	palscriptdata	1, $A22
+	palscriptdata	2, $020
+	palscriptloop	.headr3
+
+.headr3	palscripthdr	Normal_palette_line_2+$14, 1, 4-1
+	palscriptdata	1, $EEE
+	palscriptdata	1, $A22
+	palscriptdata	4, $020
+	palscriptloop	.headr4
+
+.headr4	palscripthdr	Normal_palette_line_2+$14, 1, 2-1
+	palscriptdata	96, $020
+	palscriptloop	PalSPtr_CNZMinibossNormal.headr3
+
+PalSPtr_CNZMinibossOpen:	palscriptptr .header, .data
 		dc.w 0
-		dc.l PalScript_CNZMinibossSparks
-		dc.w 0
-PalScript_CNZMinibossSparks:
-		dc.w $FC34
-		dc.w    $30,  $EEE,     0,  $A22,     0,   $20,     0, $FFF8,   $14, $FC34,     2,  $EEE,     0,  $A22,     0,   $20
-		dc.w      1, $FFF8,   $14, $FC34,     3,  $EEE,     0,  $A22,     0,   $20,     3, $FFF8,   $14, $FC34,     1,   $20
-		dc.w    $5F, $FFF8, $FF94
-PalSPtr_CNZMinibossOpen:
-		dc.w 4
-		dc.w 0
-		dc.l PalScript_CNZMinibossOpen
-		dc.w 0
-PalScript_CNZMinibossOpen:
-		dc.w $FC34
-		dc.w      0,  $EEE,     0,  $A22,     0,   $20,     1,  $EEE,     0,  $A22,     0,   $20,     7,  $EEE,     0,  $A22
-		dc.w      0,   $20,     2, $FFFC
+.header	palscripthdr	Normal_palette_line_2+$14, 1, 0
+
+.data	palscriptdata	1, $EEE
+	palscriptdata	1, $A22
+	palscriptdata	2, $020
+	palscriptdata	1, $EEE
+	palscriptdata	1, $A22
+	palscriptdata	8, $020
+	palscriptdata	1, $EEE
+	palscriptdata	1, $A22
+	palscriptdata	3, $020
+	palscriptrept
+
 Map_CNZMiniboss:include "Levels/CNZ/Misc Object Data/Map - Miniboss.asm"
-word_16322C:	dc.w 4
+word_16322C:	palscriptptr .header, .data
 		dc.w 0
-		dc.l word_163236
+
+.header	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+.data	palscriptdata	8, $222
+	palscriptdata	1, $C22
+	palscriptdata	1, $EE0
+	palscriptloop	.headr2
+
+.headr2	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+	palscriptdata	6, $222
+	palscriptdata	1, $C22
+	palscriptdata	1, $EE0
+	palscriptloop	.headr3
+
+.headr3	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+	palscriptdata	4, $222
+	palscriptdata	1, $C22
+	palscriptdata	1, $EE0
+	palscriptloop	.headr4
+
+.headr4	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+	palscriptdata	2, $222
+	palscriptdata	1, $C22
+	palscriptdata	1, $EE0
+	palscriptloop	.headr5
+
+.headr5	palscripthdr	Normal_palette_line_2+$14, 1, 0
+	palscriptdata	1, $222
+	palscriptdata	1, $C22
+	palscriptdata	1, $EE0
+	palscriptrept
+
+word_163298:	palscriptptr .header, .data
 		dc.w 0
-word_163236:	dc.w $FC34
-		dc.w      2,  $222,     7,  $C22,     0,  $EE0,     0, $FFF8,   $14, $FC34,     2,  $222,     5,  $C22,     0,  $EE0
-		dc.w      0, $FFF8,   $14, $FC34,     2,  $222,     3,  $C22,     0,  $EE0,     0, $FFF8,   $14, $FC34,     2,  $222
-		dc.w      1,  $C22,     0,  $EE0,     0, $FFF8,   $14, $FC34,     0,  $222,     0,  $C22,     0,  $EE0,     0, $FFFC
-word_163298:	dc.w 4
-		dc.w 0
-		dc.l word_1632A2
-		dc.w 0
-word_1632A2:	dc.w $FC34
-		dc.w      2,  $222,     1,  $C22,     0,  $EE0,     0, $FFF8,   $14, $FC34,     2,  $222,     3,  $C22,     0,  $EE0
-		dc.w      0, $FFF8,   $14, $FC34,     2,  $222,     5,  $C22,     0,  $EE0,     0, $FFF8,   $14, $FC34,     2,  $222
-		dc.w      7,  $C22,     0,  $EE0,     0, $FFF8,   $14, $FC34,     4,  $222,     9,  $C22,     0,  $EE0,     0, $FFF4
+
+.header	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+.data	palscriptdata	2, $222
+	palscriptdata	1, $C22
+	palscriptdata	1, $EE0
+	palscriptloop	.headr2
+
+.headr2	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+	palscriptdata	4, $222
+	palscriptdata	1, $C22
+	palscriptdata	1, $EE0
+	palscriptloop	.headr3
+
+.headr3	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+	palscriptdata	6, $222
+	palscriptdata	1, $C22
+	palscriptdata	1, $EE0
+	palscriptloop	.headr4
+
+.headr4	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+	palscriptdata	8, $222
+	palscriptdata	1, $C22
+	palscriptdata	1, $EE0
+	palscriptloop	.headr5
+
+.headr5	palscripthdr	Normal_palette_line_2+$14, 1, 5-1
+	palscriptdata	10,$222
+	palscriptdata	1, $C22
+	palscriptdata	1, $EE0
+	palscriptrun
 ICZMiniboss_OrbAngleLookup:
 		dc.b    0,   1,   2,   4,   5,   6,   7,   8,   9,  $B,  $C,  $D,  $E,  $F, $10, $11
 		dc.b  $12, $13, $15, $16, $17, $18, $19, $1A, $1B, $1C, $1D, $1E, $1E, $1F, $20, $21
