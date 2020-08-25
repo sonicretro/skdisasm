@@ -69115,7 +69115,7 @@ loc_3A0F2:
 
 Offset_ObjectsDuringTransition:
 		lea	(Dynamic_object_RAM+object_size).w,a1
-		moveq	#$59,d2
+		moveq	#((Breathing_bubbles)-(Dynamic_object_RAM+object_size))/object_size-1,d2
 
 loc_3A0FE:
 		tst.l	(a1)
@@ -107160,7 +107160,7 @@ loc_55932:
 
 sub_5593C:
 		lea	(Dynamic_object_RAM+object_size).w,a2
-		move.w	#$59,d0
+		move.w	#((Breathing_bubbles)-(Dynamic_object_RAM+object_size))/object_size-1,d0
 
 loc_55944:
 		cmpi.l	#loc_55810,(a2)
