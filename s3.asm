@@ -85837,12 +85837,12 @@ locret_48866:
 ; End of function sub_48844
 
 ; ---------------------------------------------------------------------------
-		dc.w $B000
+		dc.w Player_1
 		dc.w 0
-		dc.w $B04A
+		dc.w Player_2
 		dc.w 0
-		dc.w $B000
-		dc.w $B04A
+		dc.w Player_1
+		dc.w Player_2
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -104077,9 +104077,9 @@ locret_53E50:
 ; End of function Check_PlayerCollision
 
 ; ---------------------------------------------------------------------------
-word_53E52:	dc.w $B000
-		dc.w $B04A
-		dc.w $B000
+word_53E52:	dc.w Player_1
+		dc.w Player_2
+		dc.w Player_1
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -106915,9 +106915,9 @@ loc_55708:
 		move.w	a1,$44(a0)
 		jmp	EnemyDefeat_Score(pc)
 ; ---------------------------------------------------------------------------
-word_55710:	dc.w $B000
-		dc.w $B04A
-		dc.w $B000
+word_55710:	dc.w Player_1
+		dc.w Player_2
+		dc.w Player_1
 ObjDat3_55716:	dc.l Map_Jawz
 		dc.w $A539
 		dc.w $280
@@ -106999,8 +106999,8 @@ sub_557A6:
 ; End of function sub_557A6
 
 ; ---------------------------------------------------------------------------
-		dc.w $B000
-		dc.w $B04A
+		dc.w Player_1
+		dc.w Player_2
 ObjDat3_557C6:	dc.l Map_Blastoid
 		dc.w $A539
 		dc.w $280
@@ -107832,9 +107832,9 @@ loc_55FB4:
 locret_55FD4:
 		rts
 ; ---------------------------------------------------------------------------
-word_55FD6:	dc.w  $B000, $F604
-		dc.w  $B04A, $F606
-		dc.w  $B000, $F604
+word_55FD6:	dc.w  Player_1, Ctrl_1
+		dc.w  Player_2, Ctrl_2
+		dc.w  Player_1, Ctrl_1
 ; ---------------------------------------------------------------------------
 
 loc_55FE2:
@@ -112682,9 +112682,9 @@ loc_58C98:
 		jsr	(Play_Sound_2).l
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-word_58CC4:	dc.w $B000
-		dc.w $B04A
-		dc.w $B000
+word_58CC4:	dc.w Player_1
+		dc.w Player_2
+		dc.w Player_1
 ObjDat3_58CCA:	dc.l Map_ICZPlatforms
 		dc.w $43B6
 		dc.w $280
