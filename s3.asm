@@ -96482,7 +96482,7 @@ loc_4F502:
 loc_4F51A:
 		move.b	(a1)+,(a2)+
 		dbf	d6,loc_4F51A
-		move.l	#-$57E,$30(a0)
+		move.l	#_unkFA82,$30(a0)
 		move.b	#$10,$24(a0)
 		move.l	#loc_4F546,$34(a0)
 
