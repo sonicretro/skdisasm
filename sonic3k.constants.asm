@@ -456,6 +456,8 @@ Demo_number			ds.w 1			; the currently running demo
 Ring_consumption_table =	*			; $80 bytes ; stores the addresses of all rings currently being consumed
 Ring_consumption_count		ds.w 1			; the number of rings being consumed currently
 Ring_consumption_list		ds.w $3F		; the remaining part of the ring consumption table
+
+SStage_layout_buffer =		*			; $600 bytes ; yes, this area is used to for special stage layouts!
 Target_water_palette		ds.b $80		; used by palette fading routines
 Water_palette			ds.b $80		; this is what actually gets displayed
 Water_palette_line_2 =		Water_palette+$20	; $20 bytes
