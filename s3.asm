@@ -100471,7 +100471,7 @@ Perform_Art_Scaling:
 		movea.l	(sp)+,a0
 		move.w	(_unkF740).w,d3
 		lsl.w	#4,d3
-		move.l	#-$3000,d1
+		move.l	#Kos_decomp_buffer,d1
 		move.w	$3A(a0),d2
 		jmp	(Add_To_DMA_Queue).l
 ; End of function Perform_Art_Scaling
