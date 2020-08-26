@@ -76237,7 +76237,7 @@ ContinueScreen:
 		clr.b	(_unkFA88).w
 		lea	(Player_1).w,a1
 		moveq	#0,d0
-		move.w	#$7FF,d1
+		move.w	#(Kos_decomp_buffer-Player_1)/4-1,d1
 
 loc_3F0C4:
 		move.l	d0,(a1)+
