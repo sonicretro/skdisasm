@@ -84548,7 +84548,9 @@ sub_47A9A:
 ; End of function sub_47A9A
 
 ; ---------------------------------------------------------------------------
-word_47AC0:	dc.w Normal_palette_line_2+$04, Normal_palette_line_2+$06,Normal_palette_line_2+$08, Normal_palette_line_2+$0E,Normal_palette_line_2+$1C
+word_47AC0:	dc.w Normal_palette_line_2+$08, Normal_palette_line_2+$0E, Normal_palette_line_2+$12
+		dc.w Normal_palette_line_2+$14, Normal_palette_line_2+$16, Normal_palette_line_2+$1A
+		dc.w Normal_palette_line_2+$1C
 word_47ACE:	dc.w   $222,     8,   $4C,     6,   $20,  $A24,  $622
 		dc.w   $AAA,  $AAA,  $AAA,  $CCC,  $EEE,  $666,  $888
 
