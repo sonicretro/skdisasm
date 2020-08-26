@@ -5244,17 +5244,17 @@ LevelMusic_Playlist:
 	dc.b mus_SSZ,		mus_DEZ1	; SKY SANCTUARY ZONE
 	dc.b mus_DEZ2,		mus_DEZ2	; DEATH EGG ZONE
 	dc.b mus_DDZ,		mus_DDZ		; DOOMSDAY ZONE
-	dc.b mus_SlotMachine, 	mus_SlotMachine	; AIZ INTRO & ENDING
+	dc.b mus_SpecialStage, 	mus_SpecialStage; AIZ INTRO & ENDING
 	dc.b mus_ALZ,		mus_ALZ		; AZURE LAKE ZONE
 	dc.b mus_BPZ,		mus_BPZ		; BALLOON PARK ZONE
 	dc.b mus_DPZ,		mus_DPZ		; DESERT PALACE ZONE
 	dc.b mus_CGZ,		mus_CGZ		; CHROME GADGET ZONE
 	dc.b mus_EMZ,		mus_EMZ		; ENDLESS MINE ZONE
-	dc.b mus_SpecialStage,	mus_SpecialStage; GUMBALL?
-	dc.b mus_Gumball,	mus_Gumball	; PACHINKO?
-	dc.b mus_SpecialStage,	mus_SpecialStage; SLOTS?
-	dc.b mus_SlotMachine, 	mus_SlotMachine	; LAVA REEF ZONE BOSS & HIDDEN PALACE ZONE
-	dc.b mus_SlotMachine, 	mus_SlotMachine	; FINAL BOSS & SPECIAL STAGE?
+	dc.b mus_Gumball,	mus_Gumball	; GUMBALL
+	dc.b mus_SlotMachine,	mus_SlotMachine	; PACHINKO?
+	dc.b mus_Gumball,	mus_Gumball	; SLOTS?
+	dc.b mus_SpecialStage, 	mus_SpecialStage; LAVA REEF ZONE BOSS & HIDDEN PALACE ZONE
+	dc.b mus_SpecialStage, 	mus_SpecialStage; FINAL BOSS & SPECIAL STAGE?
 	even
 ; ---------------------------------------------------------------------------
 
@@ -8946,7 +8946,7 @@ loc_7770:
 		bsr.w	Wait_VSync
 		move.b	#0,(Special_stage_fade_timer).w
 		move.w	#$8C89,(VDP_control_port).l
-		moveq	#mus_SlotMachine,d0
+		moveq	#mus_SpecialStage,d0
 		bsr.w	Play_Sound
 		move.w	(VDP_reg_1_command).w,d0
 		ori.b	#$40,d0
@@ -84548,7 +84548,7 @@ sub_47A9A:
 ; End of function sub_47A9A
 
 ; ---------------------------------------------------------------------------
-word_47AC0:	dc.w  $FC28, $FC2E, $FC32, $FC34, $FC36, $FC3A, $FC3C
+word_47AC0:	dc.w Normal_palette_line_2+$04, Normal_palette_line_2+$06,Normal_palette_line_2+$08, Normal_palette_line_2+$0E,Normal_palette_line_2+$1C
 word_47ACE:	dc.w   $222,     8,   $4C,     6,   $20,  $A24,  $622
 		dc.w   $AAA,  $AAA,  $AAA,  $CCC,  $EEE,  $666,  $888
 
@@ -89850,7 +89850,7 @@ MGZ2_BossPalAdjust:
 ; End of function MGZ2_BossPalAdjust
 
 ; ---------------------------------------------------------------------------
-word_4B28E:	dc.w  $FC36, $FC3A, $FC3C
+word_4B28E:	dc.w Normal_palette_line_2+$16, Normal_palette_line_2+$1A, Normal_palette_line_2+$1C
 word_4B294:	dc.w    $20,  $866,  $644
 		dc.w   $EEE,  $888,  $AAA
 ; ---------------------------------------------------------------------------
@@ -90886,7 +90886,8 @@ CNZMiniboss_BossFlash:
 ; End of function CNZMiniboss_BossFlash
 
 ; ---------------------------------------------------------------------------
-word_4BD48:	dc.w  $FC24, $FC26, $FC28, $FC2E, $FC3C
+word_4BD48:	dc.w Normal_palette_line_2+$04, Normal_palette_line_2+$06, Normal_palette_line_2+$08
+		dc.w Normal_palette_line_2+$0E, Normal_palette_line_2+$1C
 word_4BD52:	dc.w   $6E0,  $280,   $40,   $28,  $642
 		dc.w   $888,  $AAA,  $CCC,  $888,  $AAA
 ; ---------------------------------------------------------------------------

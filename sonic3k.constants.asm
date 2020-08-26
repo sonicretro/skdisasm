@@ -715,7 +715,7 @@ Target_palette			ds.b $80		; used by palette fading routines
 Target_palette_line_2 =		Target_palette+$20	; $20 bytes
 Target_palette_line_3 =		Target_palette+$40	; $20 bytes
 Target_palette_line_4 =		Target_palette+$60	; $20 bytes
-				ds.b $100		; stack contents
+Stack_contents			ds.b $100		; stack contents
 System_stack =			*			; this is the top of the stack, it grows downwards
 
 			ds.w 1				; unused
@@ -1081,9 +1081,9 @@ mus_MinibossK			ds.b 1		; $18
 mus_EndBoss			ds.b 1		; $19
 mus_DDZ				ds.b 1		; $1A
 mus_MagneticOrbs		ds.b 1		; $1B
-mus_SlotMachine			ds.b 1		; $1C
-mus_Gumball			ds.b 1		; $1D
-mus_SpecialStage		ds.b 1		; $1E
+mus_SpecialStage		ds.b 1		; $1C
+mus_SlotMachine			ds.b 1		; $1D
+mus_Gumball			ds.b 1		; $1E
 mus_Knuckles			ds.b 1		; $1F
 mus_ALZ				ds.b 1		; $20
 mus_BPZ				ds.b 1		; $21
@@ -1220,7 +1220,7 @@ sfx_SuperEmerald		ds.b 1		; $9C
 sfx_Targeting			ds.b 1		; $9D
 sfx_Clank			ds.b 1		; $9E
 sfx_SuperTransform		ds.b 1		; $9F
-sfx_MissleShoot			ds.b 1		; $A0
+sfx_MissileShoot		ds.b 1		; $A0
 sfx_UnknownOminous		ds.b 1		; $A1
 sfx_FloorLauncher		ds.b 1		; $A2
 sfx_GravityLift			ds.b 1		; $A3
