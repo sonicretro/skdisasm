@@ -34,6 +34,10 @@ else:
 	print("Unknown platform")
 	sys.exit(1)
 
+def chdir_to_root():
+	basedir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+	os.chdir(basedir)
+
 def delete(path):
 	if os.path.isfile(path):
 		os.remove(path);
@@ -175,7 +179,7 @@ def check_hash(filePath, sha256_hash, filesize):
 def run(build3k, buildS3, buildSK, verify):
 
 	# Navigate to base dir
-	os.chdir("..");
+	chdir_to_root()
 
 	if platform.system() == "Windows":
 		os.environ["AS_MSGPATH"] = "AS/Win32";
@@ -224,7 +228,7 @@ def usage():
 if __name__ == "__main__":
 	sys.dont_write_bytecode = True
 	print("Sonic & Knuckles disassembly build script")
-	os.chdir("..")
+	chdir_to_root()
 
 	# Options.
 	build3K = False
