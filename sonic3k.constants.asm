@@ -596,9 +596,9 @@ Deceleration			ds.w 1
 Player_prev_frame		ds.b 1			; used by DPLC routines to detect whether a DMA transfer is required
 			ds.b 1				; unused
 Primary_Angle			ds.b 1
-			ds.b 1				; unused
+Primary_Angle_save		ds.b 1	; Used in FindFloor/FindWall
 Secondary_Angle			ds.b 1
-			ds.b 1				; unused
+Secondary_Angle_save	ds.b 1	; Used in FindFloor/FindWall
 
 Object_load_routine		ds.b 1			; routine counter for the object loading manager
 			ds.b 1				; unused
