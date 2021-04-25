@@ -1266,8 +1266,8 @@ zFinishTrackUpdate:
 		bit	1, (ix+zTrack.PlaybackControl)	; Is 'do not attack next note' flag set?
 		ret	nz								; Return if yes
 		xor	a								; Clear a
-		ld	(ix+zTrack.ModulationSpeed), a	; Clear modulation speed
-		ld	(ix+zTrack.ModulationValLow), a	; Clear low byte of accumulated modulation
+		ld	(ix+zTrack.ModEnvIndex), a		; Clear modulation envelope index
+		ld	(ix+zTrack.ModEnvSens), a		; Clear modulation envelope multiplier
 		ld	(ix+zTrack.VolEnv), a			; Reset volume envelope
 		ld	a, (ix+zTrack.NoteFillMaster)	; Get master note fill
 		ld	(ix+zTrack.NoteFillTimeout), a	; Set note fill timeout
