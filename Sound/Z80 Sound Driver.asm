@@ -4297,8 +4297,7 @@ zDoVolEnv:
 		; In order to get here, the flutter value would have to be:
 		; (1) negative;
 		; (2) not 80h, 81h or 83h.
-		; As it stands, none of the entries in the flutter tables will allow
-		; this code to execute.
+		; VolEnv_0A contains such a value, but luckily isn't used by any songs or sounds.
 		ld	a, (bc)							; Get value from wherever the hell bc is pointing to
 		jr	zDoVolEnvSetValue				; Use this as new envelope index
 ; ---------------------------------------------------------------------------
@@ -4583,11 +4582,11 @@ ModEnv_02:	db    0,   0,   0,   0, 13h, 26h, 39h, 4Ch, 5Fh, 72h, 7Fh, 72h, 83h
 ModEnv_03:	db    1,   2,   3,   2,   1,   0,0FFh,0FEh,0FDh,0FEh,0FFh,   0, 82h,   0
 ModEnv_04:	db    0,   0,   1,   3,   1,   0,0FFh,0FDh,0FFh,   0, 82h,   2
 ModEnv_05:	db    0,   0,   0,   0,   0, 0Ah, 14h, 1Eh, 14h, 0Ah,   0,0F6h,0ECh,0E2h,0ECh,0F6h
-        	db  82h,   4
+			db  82h,   4
 ModEnv_06:	db    0,   0,   0,   0, 16h, 2Ch, 42h, 2Ch, 16h,   0,0EAh,0D4h,0BEh,0D4h,0EAh, 82h
-        	db    3
+			db    3
 ModEnv_07:	db    1,   2,   3,   4,   3,   2,   1,   0,0FFh,0FEh,0FDh,0FCh,0FDh,0FEh,0FFh,   0
-        	db  82h,   1
+			db  82h,   1
 
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
@@ -4616,7 +4615,15 @@ VolEnv_07:	db    0,   0,   0,   2,   3,   3,   4,   5,   6,   7,   8,   9, 0Ah, 
 VolEnv_08:	db    3,   2,   1,   1,   0,   0,   1,   2,   3,   4, 81h
 VolEnv_09:	db    1,   0,   0,   0,   0,   1,   1,   1,   2,   2,   2,   3,   3,   3,   3,   4
 			db    4,   4,   5,   5, 81h
-VolEnv_0A:	db  10h, 20h, 30h, 40h, 30h, 20h, 10h,   0,0F0h, 80h
+; The -10h in this FM volume envelope appears to be erroneous:
+; negative volume attenuations aren't supported, and instead
+; trigger the code intended for byte 82h.
+; This envelope appears in many SMPS Z80 Type 2 DAC drivers,
+; suggesting it was some kind of poorly-thought-out example.
+; Oddly, this same envelope appears in Ristar (whose driver
+; *does* support negative attenuations), despite SMPS 68k not
+; supporting FM volume envelopes.
+VolEnv_0A:	db  10h, 20h, 30h, 40h, 30h, 20h, 10h,   0,-10h, 80h
 VolEnv_0B:	db    0,   0,   1,   1,   3,   3,   4,   5, 83h
 VolEnv_0C:	db    0, 81h
 VolEnv_0D:	db    2, 83h
