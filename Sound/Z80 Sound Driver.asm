@@ -1413,7 +1413,10 @@ zDoFMVolEnv:
 		push	bc							; Save bc
 		jr	nc, .skip_reg					; Branch if c bit shifted was zero
 		add	a, (hl)							; Add TL value to volume envelope
+	if fix_sndbugs=0
+		; This isn't actually needed
 		and	7Fh								; Strip sign bit
+	endif
 		ld	c, a							; c = TL + volume envelope
 		ld	a, (de)							; a = YM2612 register
 		call	zWriteFMIorII				; Send TL data to YM2612
@@ -3321,9 +3324,17 @@ zSendTL:
 		or	a								; Is it positive?
 		jp	p, .skip_track_vol				; Branch if yes
 		add	a, (ix+zTrack.Volume)			; Add track's volume to it
+	if fix_sndbugs
+		; Perform some clamping, to prevent volume attenuation overflow (quiet sounds becoming loud)
+		jr	nc,.skip_track_vol
+		ld	a, 7Fh
+	endif
 
 .skip_track_vol:
+	if fix_sndbugs=0
+		; Not actually needed
 		and	7Fh								; Strip sign bit
+	endif
 		ld	c, a							; c = new volume for operator
 		ld	a, (de)							; a = register write command
 		call	zWriteFMIorII				; Send it to YM2612
