@@ -2980,6 +2980,8 @@ zPSGFrequencies:
 		dw 01Bh,01Ah,018h,017h,016h,015h,013h,012h,011h,010h,000h,000h
 ;loc_B4D
 zFMFrequencies:
+		; This table spans only a single octave, as the octave frequency
+		; is calculated at run-time unlike in Sonic 1 and 2's drivers.
 		dw 284h,2ABh,2D3h,2FEh,32Dh,35Ch,38Fh,3C5h,3FFh,43Ch,47Ch,4C0h
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
