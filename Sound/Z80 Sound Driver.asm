@@ -2968,16 +2968,16 @@ zFadeInToPrevious:
 ; ---------------------------------------------------------------------------
 ;loc_AA5
 zPSGFrequencies:
-		; This table starts with 12 notes not in S1 or S2:
+		; This table differs from the one in Sonic 1 and 2's drivers by
+		; having an extra octave at the start and two extra notes at
+		; the end, allowing it to span notes c-0 to b-7.
 		dw 3FFh,3FFh,3FFh,3FFh,3FFh,3FFh,3FFh,3FFh,3FFh,3F7h,3BEh,388h
-		; The following notes are present on S1 and S2 too:
 		dw 356h,326h,2F9h,2CEh,2A5h,280h,25Ch,23Ah,21Ah,1FBh,1DFh,1C4h
 		dw 1ABh,193h,17Dh,167h,153h,140h,12Eh,11Dh,10Dh,0FEh,0EFh,0E2h
 		dw 0D6h,0C9h,0BEh,0B4h,0A9h,0A0h,097h,08Fh,087h,07Fh,078h,071h
 		dw 06Bh,065h,05Fh,05Ah,055h,050h,04Bh,047h,043h,040h,03Ch,039h
 		dw 036h,033h,030h,02Dh,02Bh,028h,026h,024h,022h,020h,01Fh,01Dh
 		dw 01Bh,01Ah,018h,017h,016h,015h,013h,012h,011h,010h,000h,000h
-		; Then, it falls through to the 12 base notes from FM octaves.
 ;loc_B4D
 zFMFrequencies:
 		dw 284h,2ABh,2D3h,2FEh,32Dh,35Ch,38Fh,3C5h,3FFh,43Ch,47Ch,4C0h
