@@ -544,8 +544,12 @@ bankswitch1 macro
 			rrca
 			ld	(hl), a
 		endm
+	if fix_sndbugs
+		ld	(hl),h ; The low bit of h is 0
+	else
 		xor	a
 		ld	(hl), a
+	endif
     endm
 
 bankswitch2 macro
@@ -555,8 +559,12 @@ bankswitch2 macro
 			rra
 			ld	(hl), a
 		endm
+	if fix_sndbugs
+		ld	(hl),h ; The low bit of h is 0
+	else
 		xor	a
 		ld	(hl), a
+	endif
     endm
 
 bankswitch3 macro
@@ -578,8 +586,12 @@ bankswitchToMusic macro
 			rra
 			ld	(hl), a
 		endm
+	if fix_sndbugs
+		ld	(hl),h ; The low bit of h is 0
+	else
 		xor	a
 		ld	(hl), a
+	endif
     endm
 
 ; macro to make a certain error message clearer should you happen to get it...
