@@ -102,7 +102,7 @@ CGZ_BackgroundInit:
 		move.w	d0,(Events_bg+$04).w
 		move.w	d0,(Events_bg+$06).w
 		moveq	#0,d0
-		move.b	(_unkFEDA).w,d0
+		move.b	(Competition_total_laps).w,d0
 		addq.w	#1,d0
 		lsl.w	#8,d0
 		subi.w	#$70,d0
