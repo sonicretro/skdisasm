@@ -820,10 +820,10 @@ Ring_count_P2			ds.w 1			; left over from Sonic 2
 Timer_P2			ds.l 1			; left over from Sonic 2
 Timer_minute_P2 =		Timer_P2+1		; left over from Sonic 2
 Score_P2			ds.l 1			; left over from Sonic 2
-_unkFEDA			ds.b 1
+Competition_total_laps			ds.b 1		;total number of laps in comeptition mode (typically 5)
 			ds.b 1				; unused
-_unkFEDC			ds.b 1
-_unkFEDD			ds.b 1
+Competition_lap_count			ds.b 1		;current lap number for player 1 in competition mode
+Competition_lap_count_2P		ds.b 1		;current lap number for player 2 in competition mode
 _unkFEDE			ds.b 1			; unused
 			ds.b $23			; unused
 Results_screen_2P		ds.w 1			; left over from Sonic 2
