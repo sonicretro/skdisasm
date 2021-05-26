@@ -793,12 +793,12 @@ LRZ_rocks_addr_front		ds.l 1			; the address inside the lrz rocks data of the fi
 LRZ_rocks_addr_back		ds.l 1			; the address inside the lrz rocks data of the first rock whose X pos is >= Camera_X_pos_coarse - $80
 Oscillating_table		ds.b $42		; various oscillating variables
 Oscillating_table_end =		*			; end of oscillating data array
-_unkFEB0			ds.b 1
-_unkFEB1			ds.b 1
+Slot_machine_goal_frame_timer			ds.b 1
+Slot_machine_goal_frame			ds.b 1
 Rings_frame_timer		ds.b 1
 Rings_frame			ds.b 1
-_unkFEB4			ds.b 1
-_unkFEB5			ds.b 1
+Slot_machine_peppermint_frame_timer			ds.b 1
+Slot_machine_peppermint_frame			ds.b 1
 Ring_spill_anim_counter		ds.b 1
 Ring_spill_anim_frame		ds.b 1
 Ring_spill_anim_accum		ds.b 1
