@@ -63885,8 +63885,8 @@ Obj_2PGoalMarker:
 		lsl.w	#3,d0
 		subi.w	#$14,d0
 		move.w	d0,$38(a0)
-		move.b	#5,(_unkFEDA).w
-		clr.w	(_unkFEDC).w
+		move.b	#5,(Competition_total_laps).w
+		clr.w	(Competition_lap_count).w
 		clr.w	(Events_bg+$14).w
 		clr.b	(Update_HUD_timer).w
 		clr.l	(Timer).w
@@ -63931,13 +63931,13 @@ loc_3627C:
 		move.w	$10(a0),d1
 		lea	$34(a0),a2
 		lea	(Player_1).w,a1
-		lea	(_unkFEDC).w,a3
+		lea	(Competition_lap_count).w,a3
 		lea	(_unkF74A).w,a4
 		lea	(Timer).w,a5
 		lea	($FF7828).l,a6
 		bsr.w	sub_3638E
 		lea	(Player_2).w,a1
-		lea	(_unkFEDD).w,a3
+		lea	(Competition_lap_count_2P).w,a3
 		lea	(_unkF74B).w,a4
 		lea	(Timer_P2).w,a5
 		lea	($FF7840).l,a6
@@ -63975,7 +63975,7 @@ loc_362D0:
 		move.w	#0,$32(a1)
 
 loc_36352:
-		clr.w	(_unkFEDC).w
+		clr.w	(Competition_lap_count).w
 		clr.b	(Update_HUD_timer).w
 		clr.l	(Timer).w
 		clr.b	(_unkFEC7).w
@@ -64238,10 +64238,10 @@ loc_36618:
 		move.l	#loc_36624,(a0)
 
 loc_36624:
-		move.b	(_unkFEDC).w,d0
-		cmp.b	(_unkFEDA).w,d0
+		move.b	(Competition_lap_count).w,d0
+		cmp.b	(Competition_total_laps).w,d0
 		ble.s	loc_36632
-		move.b	(_unkFEDA).w,d0
+		move.b	(Competition_total_laps).w,d0
 
 loc_36632:
 		subi.b	#$A,d0
@@ -64252,10 +64252,10 @@ loc_36632:
 ; ---------------------------------------------------------------------------
 
 loc_36646:
-		move.b	(_unkFEDD).w,d0
-		cmp.b	(_unkFEDA).w,d0
+		move.b	(Competition_lap_count_2P).w,d0
+		cmp.b	(Competition_total_laps).w,d0
 		ble.s	loc_36654
-		move.b	(_unkFEDA).w,d0
+		move.b	(Competition_total_laps).w,d0
 
 loc_36654:
 		subi.b	#$A,d0
@@ -64349,8 +64349,8 @@ loc_3679E:
 		move.w	#$78,(Events_bg+$16).w
 
 loc_367AA:
-		move.b	(_unkFEDA).w,d0
-		cmp.b	(_unkFEDC).w,d0
+		move.b	(Competition_total_laps).w,d0
+		cmp.b	(Competition_lap_count).w,d0
 		bcc.s	loc_36824
 		move.b	#3,$20(a0)
 		tst.b	(Not_ghost_flag).w
@@ -64372,8 +64372,8 @@ loc_367E8:
 		jsr	sub_369C2(pc)
 		moveq	#sfx_Goal,d0
 		jsr	(Play_Sound_2).l
-		move.b	(_unkFEDA).w,d0
-		cmp.b	(_unkFEDD).w,d0
+		move.b	(Competition_total_laps).w,d0
+		cmp.b	(Competition_lap_count_2P).w,d0
 		bcc.s	loc_3681E
 		move.b	#6,$20(a0)
 		bclr	#3,4(a0)
@@ -64388,7 +64388,7 @@ loc_3681E:
 ; ---------------------------------------------------------------------------
 
 loc_36824:
-		cmp.b	(_unkFEDD).w,d0
+		cmp.b	(Competition_lap_count_2P).w,d0
 		bcc.s	locret_36860
 		move.b	#4,$20(a0)
 		bset	#4,4(a0)
@@ -64433,15 +64433,15 @@ locret_36898:
 ; ---------------------------------------------------------------------------
 
 loc_3689A:
-		move.b	(_unkFEDC).w,d0
+		move.b	(Competition_lap_count).w,d0
 		tst.b	(Update_HUD_timer).w
 		bpl.s	loc_368AE
-		move.b	(_unkFEDD).w,d0
+		move.b	(Competition_lap_count_2P).w,d0
 		tst.b	(Update_HUD_timer).w
 		bmi.s	loc_368B4
 
 loc_368AE:
-		cmp.b	(_unkFEDA).w,d0
+		cmp.b	(Competition_total_laps).w,d0
 		beq.s	loc_368BA
 
 loc_368B4:
@@ -64500,8 +64500,8 @@ byte_36931:	dc.b 0
 ; ---------------------------------------------------------------------------
 
 loc_36936:
-		move.b	(_unkFEDA).w,d0
-		cmp.b	(_unkFEDC).w,d0
+		move.b	(Competition_total_laps).w,d0
+		cmp.b	(Competition_lap_count).w,d0
 		bcc.s	loc_36966
 		tst.b	(Update_HUD_timer).w
 		bmi.s	loc_36966
@@ -64513,8 +64513,8 @@ loc_36936:
 		jsr	(Play_Sound_2).l
 
 loc_36966:
-		move.b	(_unkFEDA).w,d0
-		cmp.b	(_unkFEDD).w,d0
+		move.b	(Competition_total_laps).w,d0
+		cmp.b	(Competition_lap_count_2P).w,d0
 		bcc.s	locret_36996
 		tst.b	(_unkFEC7).w
 		bmi.s	locret_36996
@@ -69311,7 +69311,7 @@ CGZ_BackgroundInit:
 		move.w	d0,(Events_bg+$04).w
 		move.w	d0,(Events_bg+$06).w
 		moveq	#0,d0
-		move.b	(_unkFEDA).w,d0
+		move.b	(Competition_total_laps).w,d0
 		addq.w	#1,d0
 		lsl.w	#8,d0
 		subi.w	#$70,d0
