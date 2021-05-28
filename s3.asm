@@ -13279,7 +13279,7 @@ loc_B244:
 		move.l	#loc_B252,(a0)
 
 loc_B252:
-		move.b	(_unkEE5A).w,d0
+		move.b	(Competition_time_attack_new_top_record).w,d0
 		cmp.b	$2E(a0),d0
 		bne.s	loc_B264
 		btst	#3,(Level_frame_counter+1).w
@@ -63886,7 +63886,7 @@ Obj_2PGoalMarker:
 		subi.w	#$14,d0
 		move.w	d0,$38(a0)
 		move.b	#5,(Competition_total_laps).w
-		clr.w	(Competition_lap_count).w
+		clr.w	(Competition_current_lap).w
 		clr.w	(Events_bg+$14).w
 		clr.b	(Update_HUD_timer).w
 		clr.l	(Timer).w
@@ -63931,20 +63931,20 @@ loc_3627C:
 		move.w	$10(a0),d1
 		lea	$34(a0),a2
 		lea	(Player_1).w,a1
-		lea	(Competition_lap_count).w,a3
+		lea	(Competition_current_lap).w,a3
 		lea	(_unkF74A).w,a4
 		lea	(Timer).w,a5
 		lea	($FF7828).l,a6
 		bsr.w	sub_3638E
 		lea	(Player_2).w,a1
-		lea	(Competition_lap_count_2P).w,a3
+		lea	(Competition_current_lap_2P).w,a3
 		lea	(_unkF74B).w,a4
 		lea	(Timer_P2).w,a5
 		lea	($FF7840).l,a6
 		bsr.w	sub_3638E
 		lea	(Ani_2PGoalMarker).l,a1
 		jsr	(Animate_Sprite).l
-		move.w	$36(a0),(_unkEE5C).w
+		move.w	$36(a0),(Competition_lap_count).w
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -63975,7 +63975,7 @@ loc_362D0:
 		move.w	#0,$32(a1)
 
 loc_36352:
-		clr.w	(Competition_lap_count).w
+		clr.w	(Competition_current_lap).w
 		clr.b	(Update_HUD_timer).w
 		clr.l	(Timer).w
 		clr.b	(_unkFEC7).w
@@ -64138,9 +64138,9 @@ sub_364EC:
 loc_364F4:
 		clr.l	(a1)+
 		dbf	d0,loc_364F4
-		clr.l	(_unkEE52).w
-		clr.l	(_unkEE56).w
-		st	(_unkEE5A).w
+		clr.l	(Competition_time_record).w
+		clr.l	(Competition_time_record_P2).w
+		st	(Competition_time_attack_new_top_record).w
 		rts
 ; End of function sub_364EC
 
@@ -64238,7 +64238,7 @@ loc_36618:
 		move.l	#loc_36624,(a0)
 
 loc_36624:
-		move.b	(Competition_lap_count).w,d0
+		move.b	(Competition_current_lap).w,d0
 		cmp.b	(Competition_total_laps).w,d0
 		ble.s	loc_36632
 		move.b	(Competition_total_laps).w,d0
@@ -64252,7 +64252,7 @@ loc_36632:
 ; ---------------------------------------------------------------------------
 
 loc_36646:
-		move.b	(Competition_lap_count_2P).w,d0
+		move.b	(Competition_current_lap_2P).w,d0
 		cmp.b	(Competition_total_laps).w,d0
 		ble.s	loc_36654
 		move.b	(Competition_total_laps).w,d0
@@ -64339,9 +64339,9 @@ loc_36786:
 		subq.b	#1,d0
 		bne.w	loc_36862
 		move.l	#$93B63,d0
-		cmp.l	(_unkEE52).w,d0
+		cmp.l	(Competition_time_record).w,d0
 		bls.s	loc_3679E
-		cmp.l	(_unkEE56).w,d0
+		cmp.l	(Competition_time_record_P2).w,d0
 		bhi.s	loc_367AA
 
 loc_3679E:
@@ -64350,7 +64350,7 @@ loc_3679E:
 
 loc_367AA:
 		move.b	(Competition_total_laps).w,d0
-		cmp.b	(Competition_lap_count).w,d0
+		cmp.b	(Competition_current_lap).w,d0
 		bcc.s	loc_36824
 		move.b	#3,$20(a0)
 		tst.b	(Not_ghost_flag).w
@@ -64373,7 +64373,7 @@ loc_367E8:
 		moveq	#sfx_Goal,d0
 		jsr	(Play_Sound_2).l
 		move.b	(Competition_total_laps).w,d0
-		cmp.b	(Competition_lap_count_2P).w,d0
+		cmp.b	(Competition_current_lap_2P).w,d0
 		bcc.s	loc_3681E
 		move.b	#6,$20(a0)
 		bclr	#3,4(a0)
@@ -64388,7 +64388,7 @@ loc_3681E:
 ; ---------------------------------------------------------------------------
 
 loc_36824:
-		cmp.b	(Competition_lap_count_2P).w,d0
+		cmp.b	(Competition_current_lap_2P).w,d0
 		bcc.s	locret_36860
 		move.b	#4,$20(a0)
 		bset	#4,4(a0)
@@ -64433,10 +64433,10 @@ locret_36898:
 ; ---------------------------------------------------------------------------
 
 loc_3689A:
-		move.b	(Competition_lap_count).w,d0
+		move.b	(Competition_current_lap).w,d0
 		tst.b	(Update_HUD_timer).w
 		bpl.s	loc_368AE
-		move.b	(Competition_lap_count_2P).w,d0
+		move.b	(Competition_current_lap_2P).w,d0
 		tst.b	(Update_HUD_timer).w
 		bmi.s	loc_368B4
 
@@ -64449,9 +64449,9 @@ loc_368B4:
 		bmi.s	loc_368CE
 
 loc_368BA:
-		cmpi.l	#$93B63,(_unkEE52).w
+		cmpi.l	#$93B63,(Competition_time_record).w
 		bcc.s	loc_368CE
-		cmpi.l	#$93B63,(_unkEE56).w
+		cmpi.l	#$93B63,(Competition_time_record_P2).w
 		bcs.s	locret_3692A
 
 loc_368CE:
@@ -64460,8 +64460,8 @@ loc_368CE:
 		subi.b	#$E,d0
 		move.b	byte_36931(pc,d0.w),d0
 		lea	($FF7800).l,a1
-		move.l	(_unkEE52).w,(a1,d0.w)
-		move.l	(_unkEE56).w,$14(a1,d0.w)
+		move.l	(Competition_time_record).w,(a1,d0.w)
+		move.l	(Competition_time_record_P2).w,$14(a1,d0.w)
 		tst.b	(Update_HUD_timer).w
 		bmi.s	loc_368FC
 		move.l	#$93B63,(a1,d0.w)
@@ -64501,7 +64501,7 @@ byte_36931:	dc.b 0
 
 loc_36936:
 		move.b	(Competition_total_laps).w,d0
-		cmp.b	(Competition_lap_count).w,d0
+		cmp.b	(Competition_current_lap).w,d0
 		bcc.s	loc_36966
 		tst.b	(Update_HUD_timer).w
 		bmi.s	loc_36966
@@ -64514,7 +64514,7 @@ loc_36936:
 
 loc_36966:
 		move.b	(Competition_total_laps).w,d0
-		cmp.b	(Competition_lap_count_2P).w,d0
+		cmp.b	(Competition_current_lap_2P).w,d0
 		bcc.s	locret_36996
 		tst.b	(_unkFEC7).w
 		bmi.s	locret_36996
@@ -64559,7 +64559,7 @@ sub_369C2:
 		lsl.w	#4,d0
 		lea	(Competition_saved_data).w,a1
 		adda.w	d0,a1
-		move.l	(_unkEE52).w,d0
+		move.l	(Competition_time_record).w,d0
 		cmp.l	(a1),d0
 		bcc.s	loc_36A08
 		move.b	$D(a1),$E(a1)
@@ -64568,7 +64568,7 @@ sub_369C2:
 		move.l	4(a1),8(a1)
 		move.l	(a1),4(a1)
 		move.l	d0,(a1)
-		clr.b	(_unkEE5A).w
+		clr.b	(Competition_time_attack_new_top_record).w
 		bra.s	loc_36A42
 ; ---------------------------------------------------------------------------
 
@@ -64579,7 +64579,7 @@ loc_36A08:
 		move.b	(P1_character).w,$D(a1)
 		move.l	4(a1),8(a1)
 		move.l	d0,4(a1)
-		move.b	#1,(_unkEE5A).w
+		move.b	#1,(Competition_time_attack_new_top_record).w
 		bra.s	loc_36A42
 ; ---------------------------------------------------------------------------
 
@@ -64588,7 +64588,7 @@ loc_36A2C:
 		bcc.s	locret_36A48
 		move.b	(P1_character).w,$E(a1)
 		move.l	d0,8(a1)
-		move.b	#2,(_unkEE5A).w
+		move.b	#2,(Competition_time_attack_new_top_record).w
 
 loc_36A42:
 		jsr	(Write_SaveGeneral).l
@@ -64650,9 +64650,9 @@ loc_3726E:
 		lea	($FF700A).l,a2
 		lea	(Timer_minute).w,a3
 		moveq	#0,d1
-		move.b	(_unkEE5C).w,d1
+		move.b	(Competition_lap_count).w,d1
 		lea	(Update_HUD_timer).w,a4
-		lea	(_unkEE52).w,a5
+		lea	(Competition_time_record).w,a5
 		lea	($FF7828).l,a6
 		bra.s	loc_3730E
 ; ---------------------------------------------------------------------------
@@ -64686,9 +64686,9 @@ loc_372EC:
 		lea	($FF708A).l,a2
 		lea	(Timer_minute_P2).w,a3
 		moveq	#0,d1
-		move.b	(_unkEE5C+1).w,d1
+		move.b	(Competition_lap_count_2P).w,d1
 		lea	(_unkFEC7).w,a4
-		lea	(_unkEE56).w,a5
+		lea	(Competition_time_record_P2).w,a5
 		lea	($FF7840).l,a6
 
 loc_3730E:
