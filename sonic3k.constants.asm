@@ -343,11 +343,18 @@ Apparent_zone_and_act =		*
 Apparent_zone			ds.b 1			; always equal to actual zone
 Apparent_act			ds.b 1			; for example, after AIZ gets burnt, this indicates act 1 even though it's actually act 2
 Palette_fade_timer		ds.w 1			; the palette gets faded in until this timer expires
-_unkEE52			ds.l 1			; something to do with competition mode
-_unkEE56			ds.l 1			; something to do with competition mode. Wiki said this was to do with demos, but I doubt that's the case
-_unkEE5A			ds.b 1
+Competition_time_record		ds.l 1		; player 1's recorded time for the current run, to be displayed in menus and the result screen 
+Competition_time_record_minute =			Competition_time_record+1
+Competition_time_record_second =			Competition_time_record+2
+Competition_time_record_frame =			Competition_time_record+3
+Competition_time_record_2P	ds.l 1		; player 2's recorded time for the current run, to be displayed in menus and the result screen 
+Competition_time_record_minute_P2 =		Competition_time_record_P2+1
+Competition_time_record_second_P2 =		Competition_time_record_P2+2
+Competition_time_record_frame_P2 =		Competition_time_record_P2+3
+Competition_time_attack_new_top_record			ds.b 1		; signifies new time records in time attack mode. set: no new records, clear: 1st place, $1: 2nd place, $2: 3rd place record.
 			ds.b 1				; unused
-_unkEE5C			ds.w 1
+Competition_lap_count			ds.b 1			; number of laps that player 1 has completed
+Competition_lap_count_2P			ds.b 1		; number of laps that player 2 has completed
 Act3_flag			ds.b 1			; set when entering LRZ 3 or DEZ 3 directly from previous act. Prevents title card from loading
 			ds.b 1				; unused
 Camera_X_pos_P2			ds.l 1
@@ -817,13 +824,15 @@ Total_ring_count_P2		ds.w 1			; left over from Sonic 2
 Monitors_broken			ds.w 1			; left over from Sonic 2. Apparently Sonic 3 developers liked copypasting, since gaining a life from rings also increments this counter
 Monitors_broken_P2		ds.w 1			; left over from Sonic 2
 Ring_count_P2			ds.w 1			; left over from Sonic 2
-Timer_P2			ds.l 1			; left over from Sonic 2
-Timer_minute_P2 =		Timer_P2+1		; left over from Sonic 2
+Timer_P2			ds.l 1			; used in competition mode
+Timer_minute_P2 =		Timer_P2+1
+Timer_second_P2 =		Timer_P2+2
+Timer_frame_P2 =		Timer_P2+3		; the second gets incremented when this reaches 60
 Score_P2			ds.l 1			; left over from Sonic 2
-Competition_total_laps			ds.b 1		;total number of laps in comeptition mode (typically 5)
+Competition_total_laps			ds.b 1		; total number of laps in comeptition mode (typically 5)
 			ds.b 1				; unused
-Competition_lap_count			ds.b 1		;current lap number for player 1 in competition mode
-Competition_lap_count_2P		ds.b 1		;current lap number for player 2 in competition mode
+Competition_current_lap			ds.b 1		; current lap number for player 1 in competition mode
+Competition_current_lap_2P		ds.b 1		; current lap number for player 2 in competition mode
 _unkFEDE			ds.b 1			; unused
 			ds.b $23			; unused
 Results_screen_2P		ds.w 1			; left over from Sonic 2
