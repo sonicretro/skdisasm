@@ -347,7 +347,7 @@ Competition_time_record		ds.l 1		; player 1's recorded time for the current run,
 Competition_time_record_minute =			Competition_time_record+1
 Competition_time_record_second =			Competition_time_record+2
 Competition_time_record_frame =			Competition_time_record+3
-Competition_time_record_2P	ds.l 1		; player 2's recorded time for the current run, to be displayed in menus and the result screen 
+Competition_time_record_P2	ds.l 1		; player 2's recorded time for the current run, to be displayed in menus and the result screen 
 Competition_time_record_minute_P2 =		Competition_time_record_P2+1
 Competition_time_record_second_P2 =		Competition_time_record_P2+2
 Competition_time_record_frame_P2 =		Competition_time_record_P2+3
