@@ -245,8 +245,8 @@ Chunk_table			ds.b $8000		; chunk (128x128) definitions, $80 bytes per definitio
 Level_layout_header		ds.b 8			; first word = chunks per FG row, second word = chunks per BG row, third word = FG rows, fourth word = BG rows
 Level_layout_main		ds.b $FF8		; $40 word-sized line pointers followed by actual layout data
 Object_respawn_table_2 :=	Level_layout_header+$400; $200 bytes ; respawn table used by glowing spheres bonus stage, because... Reasons?
-Ring_status_table_2 :=		Level_layout_header+$600; $400 bytes ; rinng status table used by glowing spheres bonus stage, because... Reasons?
-Block_table			ds.b $1800		; block (16x16) definitions, 8 bytes per definition, spece for $300 blocks
+Ring_status_table_2 :=		Level_layout_header+$600; $400 bytes ; ring status table used by glowing spheres bonus stage, because... Reasons?
+Block_table			ds.b $1800		; block (16x16) definitions, 8 bytes per definition, space for $300 blocks
 SStage_collision_response_list := Block_table+$1400	; $100 bytes ; sprite collision list during a special stage
 SStage_unkA500 :=		Block_table+$1500	; unknown special stage array
 SStage_unkA600 :=		Block_table+$1600	; unknown special stage array
@@ -523,7 +523,7 @@ Mean_water_level		ds.w 1			; the steady central value of the water level
 Target_water_level		ds.w 1
 Water_speed			ds.b 1			; this is added to or subtracted from Mean_water_level every frame till it reaches Target_water_level
 Water_entered_counter		ds.b 1			; incremented when entering and exiting water, read by the the floating AIZ spike log, cleared on level initialisation and dynamic events of certain levels
-Water_full_screen_flag		ds.b 1			; set if water covers the entire screen (i.e. the underwater pallete should be DMAed during V-int rather than the normal palette)
+Water_full_screen_flag		ds.b 1			; set if water covers the entire screen (i.e. the underwater palette should be DMAed during V-int rather than the normal palette)
 Do_Updates_in_H_int		ds.b 1			; if this is set Do_Updates will be called from H-int instead of V-int
 Palette_cycle_counters		ds.b $C			; various counters and variables for palette cycles
 Palette_frame			ds.w 1
@@ -829,7 +829,7 @@ Timer_minute_P2 =		Timer_P2+1
 Timer_second_P2 =		Timer_P2+2
 Timer_frame_P2 =		Timer_P2+3		; the second gets incremented when this reaches 60
 Score_P2			ds.l 1			; left over from Sonic 2
-Competition_total_laps			ds.b 1		; total number of laps in comeptition mode (typically 5)
+Competition_total_laps			ds.b 1		; total number of laps in competition mode (typically 5)
 			ds.b 1				; unused
 Competition_current_lap			ds.b 1		; current lap number for player 1 in competition mode
 Competition_current_lap_2P		ds.b 1		; current lap number for player 2 in competition mode
@@ -837,7 +837,7 @@ _unkFEDE			ds.b 1			; unused
 			ds.b $23			; unused
 Results_screen_2P		ds.w 1			; left over from Sonic 2
 Perfect_rings_left		ds.w 1			; left over from Sonic 2
-_unkFF06			ds.w 1			; uknown
+_unkFF06			ds.w 1			; unknown
 Player_mode			ds.w 1			; 0 = Sonic and Tails, 1 = Sonic alone, 2 = Tails alone, 3 = Knuckles alone
 Player_option			ds.w 1			; option selected on level select, data select screen or Sonic & Knuckles title screen
 			ds.w 1				; unused
