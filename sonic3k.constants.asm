@@ -952,6 +952,7 @@ Checksum_string :=		*			; set to 'SM&K' once the checksum routine has run
 	if (.check>0)&(.check<$FF0000)
 		fatal "Sonic & Knuckles RAM definitions are too large by $\{*} bytes!"
 	endif
+	dephase
 
 ; extra Special Stage variables
 	phase Pos_table_P2
@@ -1058,6 +1059,7 @@ Mus__EndCmd =			*		; next ID after last sound command
 mus_FA =			$FA		; $FA - ???
 mus_StopSEGA =			$FE		; $FE - Stop SEGA sound
 mus_SEGA =			$FF		; $FF - Play SEGA sound
+	dephase
 ; ---------------------------------------------------------------------------
 ; Music ID's list. These do not affect the sound driver, be careful.
 
@@ -1114,6 +1116,7 @@ mus_FinalBoss			ds.b 1		; $30
 mus_Drowning			ds.b 1		; $31
 mus_Ending			ds.b 1		; $32
 Mus__End =			*		; next ID after last music
+	dephase
 
 ; ---------------------------------------------------------------------------
 ; Sound effect ID's list. These do not affect the sound driver, be careful.

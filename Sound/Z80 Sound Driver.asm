@@ -485,6 +485,7 @@ zSFX_PSG1:		zTrack
 zSFX_PSG2:		zTrack
 zSFX_PSG3:		zTrack
 zTracksSFXEnd:
+		dephase
 
 		phase zTracksSFXStart
 zTracksSaveStart:
