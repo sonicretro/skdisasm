@@ -88,7 +88,7 @@ DAC_Null_Chain macro rate,dacptr,linkptr
 ; Music Bank 1
 ; ---------------------------------------------------------------------------
 Snd_Bank1_Start:
-Snd_SKCredits:		binclude 	"Sound/Music/Credits.bin"
+Snd_SKCredits:		binclude	"Sound/Music/Credits.bin"
 Snd_GameOver:		binclude	"Sound/Music/Game Over.bin"
 Snd_Continue:		binclude	"Sound/Music/Continue.bin"
 Snd_Results:		binclude	"Sound/Music/Level Outro.bin"

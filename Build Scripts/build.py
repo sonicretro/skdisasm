@@ -66,6 +66,7 @@ def build(targetName, def0, def1, accurate):
 
 	assembleCommand = [asBinary, "-x", "-xx", "-n", "-c", "-A", "-L"];
 
+	basedir = os.path.relpath(os.getcwd())
 	if def0 is None:
 		assembleCommand.append("-o");
 		assembleCommand.append("sonic3k.p");
@@ -73,17 +74,21 @@ def build(targetName, def0, def1, accurate):
 		assembleCommand.append("sonic3k.lst");
 		assembleCommand.append("-shareout");
 		assembleCommand.append("sonic3k.h");
+		assembleCommand.append("-i");
+		assembleCommand.append(basedir);
 
 		# Input asm file
 		assembleCommand.append("s3.asm");
 	else:
 		assembleCommand.append(def0);
 		assembleCommand.append(def1);
+		assembleCommand.append("-i");
+		assembleCommand.append(basedir);
 
 		# Input asm file
 		assembleCommand.append("sonic3k.asm");
 
-	print("  Assembling .p file");
+	print("  Assembling .p file", assembleCommand);
 
 	assembleProcess = subprocess.Popen(assembleCommand, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	output, errors = assembleProcess.communicate()

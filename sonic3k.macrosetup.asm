@@ -87,3 +87,8 @@ tracenum := (tracenum+1)
 	endif
    endm
 tracenum := 0
+
+bit function nBits,1<<(nBits-1)
+signmask function val,nBits,-((-(val&bit(nBits)))&bit(nBits))
+signextend function val,nBits,(val+signmask(val,nBits))!signmask(val,nBits)
+signextendB function val,signextend(val,8)
