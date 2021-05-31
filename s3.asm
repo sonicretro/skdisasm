@@ -23640,12 +23640,12 @@ loc_14ADE:
 		bset	#0,$2A(a0)
 
 loc_14AF2:
-		tst.b	(_unkF70F).w
+		tst.b	(Tails_CPU_auto_jump_flag).w
 		beq.s	loc_14B0A
 		ori.w	#$7000,d1
 		btst	#1,$2A(a0)
 		bne.s	loc_14B46
-		move.b	#0,(_unkF70F).w
+		move.b	#0,(Tails_CPU_auto_jump_flag).w
 
 loc_14B0A:
 		move.w	(Level_frame_counter).w,d0
@@ -23669,7 +23669,7 @@ loc_14B2A:
 		cmpi.b	#8,$20(a0)
 		beq.s	loc_14B46
 		ori.w	#$7070,d1
-		move.b	#1,(_unkF70F).w
+		move.b	#1,(Tails_CPU_auto_jump_flag).w
 
 loc_14B46:
 		move.w	d1,(Ctrl_2_logical).w
@@ -23912,10 +23912,10 @@ loc_14DEA:
 		clr.b	(_unkFAAC).w
 		btst	#1,(Ctrl_1_held).w
 		beq.s	loc_14E1E
-		addq.b	#1,(_unkF70E).w
-		cmpi.b	#-$40,(_unkF70E).w
+		addq.b	#1,(Tails_CPU_auto_fly_timer).w
+		cmpi.b	#-$40,(Tails_CPU_auto_fly_timer).w
 		bcs.s	loc_14E58
-		move.b	#0,(_unkF70E).w
+		move.b	#0,(Tails_CPU_auto_fly_timer).w
 		ori.w	#$7070,(Ctrl_2_logical).w
 		bra.s	loc_14E58
 ; ---------------------------------------------------------------------------
@@ -23923,19 +23923,19 @@ loc_14DEA:
 loc_14E1E:
 		btst	#0,(Ctrl_1_held).w
 		beq.s	loc_14E40
-		addq.b	#1,(_unkF70E).w
-		cmpi.b	#$20,(_unkF70E).w
+		addq.b	#1,(Tails_CPU_auto_fly_timer).w
+		cmpi.b	#$20,(Tails_CPU_auto_fly_timer).w
 		bcs.s	loc_14E58
-		move.b	#0,(_unkF70E).w
+		move.b	#0,(Tails_CPU_auto_fly_timer).w
 		ori.w	#$7070,(Ctrl_2_logical).w
 		bra.s	loc_14E58
 ; ---------------------------------------------------------------------------
 
 loc_14E40:
-		addq.b	#1,(_unkF70E).w
-		cmpi.b	#$58,(_unkF70E).w
+		addq.b	#1,(Tails_CPU_auto_fly_timer).w
+		cmpi.b	#$58,(Tails_CPU_auto_fly_timer).w
 		bcs.s	loc_14E58
-		move.b	#0,(_unkF70E).w
+		move.b	#0,(Tails_CPU_auto_fly_timer).w
 		ori.w	#$7070,(Ctrl_2_logical).w
 
 loc_14E58:
@@ -24033,10 +24033,10 @@ loc_14F68:
 		move.w	#0,(Ctrl_2_logical).w
 		cmpi.w	#$200,$1A(a0)
 		bge.s	loc_14FAE
-		addq.b	#1,(_unkF70E).w
-		cmpi.b	#$58,(_unkF70E).w
+		addq.b	#1,(Tails_CPU_auto_fly_timer).w
+		cmpi.b	#$58,(Tails_CPU_auto_fly_timer).w
 		bcs.s	loc_14FB4
-		move.b	#0,(_unkF70E).w
+		move.b	#0,(Tails_CPU_auto_fly_timer).w
 
 loc_14FAE:
 		ori.w	#$7070,(Ctrl_2_logical).w

@@ -572,8 +572,8 @@ Tails_CPU_flight_timer		ds.w 1			; counts up while Tails is respawning, when it 
 Tails_CPU_routine		ds.w 1			; Tails' current AI routine in a Sonic and Tails game
 Tails_CPU_target_X		ds.w 1			; Tails' target x-position
 Tails_CPU_target_Y		ds.w 1			; Tails' target y-position
-_unkF70E			ds.b 1
-_unkF70F			ds.b 1
+Tails_CPU_auto_fly_timer	ds.b 1		; counts up until AI Tails automatically flies up to maintain altitude, while grabbing Sonic in Marble Garden Act 2's boss
+Tails_CPU_auto_jump_flag	ds.b 1		; set to #1 when AI Tails needs to jump of his own accord, regardless of whether Sonic jumped or not
 Rings_manager_routine		ds.b 1
 Level_started_flag		ds.b 1
 _unkF712			ds.b $1C		; ??? ; unknown object respawn table
