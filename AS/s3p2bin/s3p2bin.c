@@ -230,9 +230,9 @@ bool buildRom(FILE* from, FILE* to)
 
 			unsigned char *compressed_buffer;
 			if (accurate_compression)
-				compressedLength = AccurateKosinskiCompress(uncompressed_buffer, length, &compressed_buffer);
+				compressedLength = KosinskiCompress(uncompressed_buffer, length, &compressed_buffer);
 			else
-				compressed_buffer = KosinskiCompress(uncompressed_buffer, length, &compressedLength);
+				compressed_buffer = ClownLZSS_KosinskiCompress(uncompressed_buffer, length, &compressedLength);
 
 			free(uncompressed_buffer);
 			fwrite(compressed_buffer, compressedLength, 1, to);
