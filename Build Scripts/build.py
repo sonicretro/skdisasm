@@ -88,7 +88,7 @@ def build(targetName, def0, def1, accurate):
 		# Input asm file
 		assembleCommand.append("sonic3k.asm");
 
-	print("  Assembling .p file", assembleCommand);
+	print("  Assembling .p file");
 
 	assembleProcess = subprocess.Popen(assembleCommand, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	output, errors = assembleProcess.communicate()
