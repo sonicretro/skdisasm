@@ -3221,7 +3221,7 @@ AnPal_Load:
 OffsAnPal:	dc.w AnPal_AIZ1-OffsAnPal
 		dc.w AnPal_AIZ2-OffsAnPal
 		dc.w AnPal_HCZ1-OffsAnPal
-		dc.w AnPal_None2-OffsAnPal
+		dc.w AnPal_HCZ2-OffsAnPal
 		dc.w AnPal_None-OffsAnPal
 		dc.w AnPal_None-OffsAnPal
 		dc.w AnPal_CNZ-OffsAnPal
@@ -3416,7 +3416,7 @@ locret_2608:
 
 ; ---------------------------------------------------------------------------
 
-AnPal_None2:
+AnPal_HCZ2:
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -4452,7 +4452,7 @@ loc_36AE:
 		bsr.w	Play_Sound
 		move.w	#$B4,(Demo_timer).w
 
-Wait_SegaS3K:
+Wait_Sega:
 		move.b	#$14,(V_int_routine).w
 		bsr.w	Wait_VSync
 		move.b	(Ctrl_1_pressed).w,d0
@@ -4460,7 +4460,7 @@ Wait_SegaS3K:
 		andi.b	#-$80,d0
 		bne.w	loc_36F8
 		tst.w	(Demo_timer).w
-		bne.s	Wait_SegaS3K
+		bne.s	Wait_Sega
 
 loc_36F8:
 		moveq	#signextendB(mus_StopSEGA),d0
@@ -4491,7 +4491,7 @@ loc_3704:
 		moveq	#signextendB(mus_TitleScreen),d0
 		bsr.w	Play_Sound
 
-Wait_TitleS3K:
+Wait_Title:
 		move.b	#4,(V_int_routine).w
 		jsr	(Process_Kos_Queue).l
 		bsr.w	Wait_VSync
@@ -4505,7 +4505,7 @@ Wait_TitleS3K:
 		andi.b	#-$80,d0
 		bne.w	loc_379E
 		cmpi.w	#$C,(Title_anim_frame).w
-		bcs.s	Wait_TitleS3K
+		bcs.s	Wait_Title
 
 loc_379E:
 		move.w	#$C,(Title_anim_frame).w
@@ -20593,7 +20593,7 @@ Sonic_JumpHeight:
 
 loc_128F0:
 		cmp.w	$1A(a0),d1
-		ble.w	Sonic_InstaAndShieldMoves
+		ble.w	Sonic_ShieldMoves
 		move.b	(Ctrl_1_held_logical).w,d0
 		andi.b	#$70,d0
 		bne.s	locret_12906
@@ -20614,7 +20614,7 @@ locret_1291C:
 		rts
 ; ---------------------------------------------------------------------------
 
-Sonic_InstaAndShieldMoves:
+Sonic_ShieldMoves:
 		tst.b	$2F(a0)
 		bne.w	locret_12A20
 		move.b	(Ctrl_1_pressed_logical).w,d0
@@ -27311,40 +27311,40 @@ loc_1744C:
 Ani_Shields:	include "General/Sprites/Shields/Anim - Shields.asm"
 ; ---------------------------------------------------------------------------
 
-Obj_Shield_S2:
+Obj_S2Shield:
 		moveq	#0,d0
 		move.b	5(a0),d0
-		move.w	Obj_Shield_S2_Index(pc,d0.w),d1
-		jmp	Obj_Shield_S2_Index(pc,d1.w)
+		move.w	Obj_S2Shield_Index(pc,d0.w),d1
+		jmp	Obj_S2Shield_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
-Obj_Shield_S2_Index:dc.w Obj_Shield_S2_Init-Obj_Shield_S2_Index
-		dc.w Obj_Shield_S2_Main-Obj_Shield_S2_Index
+Obj_S2Shield_Index:dc.w Obj_S2Shield_Init-Obj_S2Shield_Index
+		dc.w Obj_S2Shield_Main-Obj_S2Shield_Index
 ; ---------------------------------------------------------------------------
 
-Obj_Shield_S2_Init:
+Obj_S2Shield_Init:
 		addq.b	#2,5(a0)
-		move.l	#Map_Shield_S2,$C(a0)
+		move.l	#Map_S2Shield,$C(a0)
 		move.b	#4,4(a0)
 		move.w	#$80,8(a0)
 		move.b	#$18,7(a0)
 		move.w	#ArtTile_Shield,$A(a0)
 
-Obj_Shield_S2_Main:
+Obj_S2Shield_Main:
 		movea.w	$42(a0),a2
 		btst	#1,$2B(a2)
 		bne.s	locret_17566
 		btst	#0,$2B(a2)
-		beq.s	Obj_Shield_S2_Destroy
+		beq.s	Obj_S2Shield_Destroy
 		move.w	$10(a2),$10(a0)
 		move.w	$14(a2),$14(a0)
 		move.b	$2A(a2),$2A(a0)
 		andi.w	#$7FFF,$A(a0)
 		tst.w	$A(a2)
-		bpl.s	Obj_Shield_S2_Display
+		bpl.s	Obj_S2Shield_Display
 		ori.w	#$8000,$A(a0)
 
-Obj_Shield_S2_Display:
-		lea	(Ani_Shield_S2).l,a1
+Obj_S2Shield_Display:
+		lea	(Ani_S2Shield).l,a1
 		jsr	(Animate_Sprite).l
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -27353,7 +27353,7 @@ locret_17566:
 		rts
 ; ---------------------------------------------------------------------------
 
-Obj_Shield_S2_Destroy:
+Obj_S2Shield_Destroy:
 		jmp	(Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 off_1756E:	dc.l byte_1776D
@@ -27519,8 +27519,8 @@ byte_17782:	dc.b    8,   7,   6,   5,   4,   3,   2,   3,   4,   5,   6,   7, $F
 		dc.b    7,   6,   5,   4,   3
 byte_1779B:	dc.b    7,   6,   5,   4,   3,   2,   1,   2,   3,   4,   5,   6, $FF,   1,   2,   3,   4,   5,   6,   7
 		dc.b    6,   5,   4,   3,   2
-Ani_Shield_S2:	include "General/Sprites/Shields/Anim - Shield S2.asm"
-Map_Shield_S2:	include "General/Sprites/Shields/Map - Shield S2.asm"
+Ani_S2Shield:	include "General/Sprites/Shields/Anim - Shield S2.asm"
+Map_S2Shield:	include "General/Sprites/Shields/Map - Shield S2.asm"
 Map_Invincibility:
 		include "General/Sprites/Shields/Map - Invincibility.asm"
 ; ---------------------------------------------------------------------------
@@ -31459,50 +31459,50 @@ LevelResizeArray:dc.w AIZ1_Resize-LevelResizeArray
 		dc.w AIZ2_Resize-LevelResizeArray
 		dc.w HCZ1_Resize-LevelResizeArray
 		dc.w HCZ2_Resize-LevelResizeArray
-		dc.w MGZ_Resize-LevelResizeArray
-		dc.w MGZ_Resize-LevelResizeArray
-		dc.w No_Resize2-LevelResizeArray
-		dc.w No_Resize2-LevelResizeArray
-		dc.w No_Resize2-LevelResizeArray
-		dc.w No_Resize2-LevelResizeArray
+		dc.w MGZ1_Resize-LevelResizeArray
+		dc.w MGZ2_Resize-LevelResizeArray
+		dc.w CNZ1_Resize-LevelResizeArray
+		dc.w CNZ2_Resize-LevelResizeArray
+		dc.w FBZ1_Resize-LevelResizeArray
+		dc.w FBZ2_Resize-LevelResizeArray
 		dc.w ICZ1_Resize-LevelResizeArray
 		dc.w ICZ2_Resize-LevelResizeArray
-		dc.w No_Resize-LevelResizeArray
+		dc.w LBZ1_Resize-LevelResizeArray
 		dc.w LBZ2_Resize-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
-		dc.w No_Resize3-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
+		dc.w No_Resize-LevelResizeArray
 ; ---------------------------------------------------------------------------
 
 AIZ1_Resize:
@@ -31648,7 +31648,7 @@ off_1AAAA:	dc.w AIZ2_Resize1-off_1AAAA
 		dc.w AIZ2_Resize6-off_1AAAA
 		dc.w AIZ2_Resize7-off_1AAAA
 		dc.w AIZ2_Resize8-off_1AAAA
-		dc.w AIZ2_SonicResizeEnd-off_1AAAA
+		dc.w AIZ2_ResizeEnd-off_1AAAA
 ; ---------------------------------------------------------------------------
 
 AIZ2_Resize1:
@@ -31797,7 +31797,7 @@ locret_1AC36:
 		rts
 ; ---------------------------------------------------------------------------
 
-AIZ2_SonicResizeEnd:
+AIZ2_ResizeEnd:
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -31881,7 +31881,11 @@ locret_1ACD6:
 		rts
 ; ---------------------------------------------------------------------------
 
-MGZ_Resize:
+MGZ1_Resize:
+		; Bug: MGZ1 uses a dynamic resize routine meant for MGZ2
+		; This causes the act 2 boss to spawn in out-of-bounds act 1
+
+MGZ2_Resize:
 		moveq	#0,d0
 		move.b	(Dynamic_resize_routine).w,d0
 		move.w	off_1ACE6(pc,d0.w),d0
@@ -31950,7 +31954,10 @@ locret_1AD84:
 		rts
 ; ---------------------------------------------------------------------------
 
-No_Resize2:
+CNZ1_Resize:
+CNZ2_Resize:
+FBZ1_Resize:
+FBZ2_Resize:
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -32017,7 +32024,7 @@ locret_1ADF8:
 		rts
 ; ---------------------------------------------------------------------------
 
-No_Resize:
+LBZ1_Resize:
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -32058,7 +32065,7 @@ locret_1AE66:
 		rts
 ; ---------------------------------------------------------------------------
 
-No_Resize3:
+No_Resize:
 		rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -32622,7 +32629,7 @@ loc_1B4C8:
 		lea	(Player_1).w,a1
 		moveq	#3,d6
 		movem.l	d1-d4,-(sp)
-		bsr.w	SolidObject_Monitor_SonicKnux
+		bsr.w	SolidObject_Monitor_Sonic
 		movem.l	(sp)+,d1-d4
 		lea	(Player_2).w,a1
 		moveq	#4,d6
@@ -32639,13 +32646,13 @@ loc_1B504:
 ; =============== S U B R O U T I N E =======================================
 
 
-SolidObject_Monitor_SonicKnux:
+SolidObject_Monitor_Sonic:
 		btst	d6,$2A(a0)
 		bne.s	Monitor_ChkOverEdge
 		cmpi.b	#2,$20(a1)
 		bne.w	SolidObject_cont
 		rts
-; End of function SolidObject_Monitor_SonicKnux
+; End of function SolidObject_Monitor_Sonic
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -38395,7 +38402,7 @@ loc_20BD0:
 		move.w	#1,$20(a0)
 		subi.w	#5,$10(a0)
 		move.b	#7,$22(a0)
-		jsr	(SurfboardIntro_LoadPLC).l
+		jsr	(SurfboardIntro_Load_PLC).l
 		bra.s	loc_20C00
 ; ---------------------------------------------------------------------------
 
@@ -38439,7 +38446,7 @@ loc_20C30:
 loc_20C74:
 		lea	(Ani_SurfboardIntro).l,a1
 		jsr	(Animate_Sprite).l
-		jsr	(SurfboardIntro_LoadPLC).l
+		jsr	(SurfboardIntro_Load_PLC).l
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Ani_SurfboardIntro:
@@ -38536,7 +38543,7 @@ loc_20D98:
 		move.b	(a1,d0.w),d0
 		addq.b	#1,d0
 		move.b	d0,$22(a0)
-		jsr	(SurfboardIntro_LoadPLC).l
+		jsr	(SurfboardIntro_Load_PLC).l
 		subq.w	#1,$2E(a0)
 		bpl.s	locret_20DCA
 		move.w	#5,$2E(a0)
@@ -38558,7 +38565,7 @@ SurfboardIntro_UpFrames:
 ; =============== S U B R O U T I N E =======================================
 
 
-SurfboardIntro_LoadPLC:
+SurfboardIntro_Load_PLC:
 		moveq	#0,d0
 		move.b	$22(a0),d0
 		cmp.b	(Player_prev_frame).w,d0
@@ -38590,7 +38597,7 @@ loc_20E06:
 
 locret_20E32:
 		rts
-; End of function SurfboardIntro_LoadPLC
+; End of function SurfboardIntro_Load_PLC
 
 ; ---------------------------------------------------------------------------
 Map_SurfboardIntro:
@@ -77896,7 +77903,7 @@ ArtNem_EndingGraphics:
 		binclude "General/Ending/Nemesis Art/S3 Ending Graphics.bin"
 		even
 ; ---------------------------------------------------------------------------
-		movea.l ObjB0(pc,d6.w),a6
+		movea.l Obj_SonicOnSegaScr(pc,d6.w),a6
 		jsr	(a6)
 		nop
 		nop
@@ -77911,21 +77918,21 @@ ArtNem_EndingGraphics:
 		rte
 ; ---------------------------------------------------------------------------
 
-ObjB0:
+Obj_SonicOnSegaScr:
 		moveq	#0,d0
 		move.b	5(a0),d0
-		move.w	ObjB0_Index(pc,d0.w),d1
-		jmp	ObjB0_Index(pc,d1.w)
+		move.w	off_4316C(pc,d0.w),d1
+		jmp	off_4316C(pc,d1.w)
 ; ---------------------------------------------------------------------------
-ObjB0_Index:	dc.w ObjB0_Init-ObjB0_Index
-		dc.w ObjB0_RunLeft-ObjB0_Index
-		dc.w ObjB0_MidWipe-ObjB0_Index
-		dc.w ObjB0_RunRight-ObjB0_Index
-		dc.w ObjB0_EndWipe-ObjB0_Index
-		dc.w locret_43340-ObjB0_Index
+off_4316C:	dc.w SonicOnSegaScr_Init-off_4316C
+		dc.w SonicOnSegaScr_RunLeft-off_4316C
+		dc.w SonicOnSegaScr_MidWipe-off_4316C
+		dc.w SonicOnSegaScr_RunRight-off_4316C
+		dc.w SonicOnSegaScr_EndWipe-off_4316C
+		dc.w locret_43340-off_4316C
 ; ---------------------------------------------------------------------------
 
-ObjB0_Init:
+SonicOnSegaScr_Init:
 		lea	ObjDat3_434E0(pc),a1
 		jsr	(SetUp_ObjAttributes).l
 		move.b	#0,4(a0)
@@ -77996,11 +78003,11 @@ SonicRunningSpriteScaleData:
 		dc.b 3
 ; ---------------------------------------------------------------------------
 
-ObjB0_RunLeft:
+SonicOnSegaScr_RunLeft:
 		subi.w	#$20,$10(a0)
 		subq.w	#1,$2E(a0)
 		bmi.s	loc_43254
-		bsr.w	ObjB0_Move_Streaks_Left
+		bsr.w	SonicOnSegaScr_Move_Streaks_Left
 		lea	(Ani_SonicOnSegaScr).l,a1
 		jsr	(Animate_Sprite).l
 		jmp	(Draw_Sprite).l
@@ -78014,11 +78021,11 @@ loc_43254:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-ObjB0_MidWipe:
+SonicOnSegaScr_MidWipe:
 		tst.w	$2E(a0)
 		beq.s	loc_4327E
 		subq.w	#1,$2E(a0)
-		bsr.w	ObjB0_Move_Streaks_Left
+		bsr.w	SonicOnSegaScr_Move_Streaks_Left
 
 loc_4327E:
 		lea	byte_433F4(pc),a1
@@ -78057,11 +78064,11 @@ locret_432D8:
 		rts
 ; ---------------------------------------------------------------------------
 
-ObjB0_RunRight:
+SonicOnSegaScr_RunRight:
 		subq.w	#1,$2E(a0)
 		bmi.s	loc_432FC
 		addi.w	#$20,$10(a0)
-		bsr.w	ObjB0_Move_Streaks_Right
+		bsr.w	SonicOnSegaScr_Move_Streaks_Right
 		lea	(Ani_SonicOnSegaScr).l,a1
 		jsr	(Animate_Sprite).l
 		jmp	(Draw_Sprite).l
@@ -78075,11 +78082,11 @@ loc_432FC:
 		rts
 ; ---------------------------------------------------------------------------
 
-ObjB0_EndWipe:
+SonicOnSegaScr_EndWipe:
 		tst.w	$2E(a0)
 		beq.s	loc_43322
 		subq.w	#1,$2E(a0)
-		bsr.w	ObjB0_Move_Streaks_Right
+		bsr.w	SonicOnSegaScr_Move_Streaks_Right
 
 loc_43322:
 		lea	byte_4346A(pc),a1
@@ -78124,7 +78131,7 @@ ObjB1_Main:
 ; =============== S U B R O U T I N E =======================================
 
 
-ObjB0_Move_Streaks_Left:
+SonicOnSegaScr_Move_Streaks_Left:
 		lea	(H_scroll_buffer+$138).w,a1
 		move.w	#$22,d6
 
@@ -78133,13 +78140,13 @@ loc_43386:
 		addq.w	#8,a1
 		dbf	d6,loc_43386
 		rts
-; End of function ObjB0_Move_Streaks_Left
+; End of function SonicOnSegaScr_Move_Streaks_Left
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-ObjB0_Move_Streaks_Right:
+SonicOnSegaScr_Move_Streaks_Right:
 		lea	(H_scroll_buffer+$13C).w,a1
 		move.w	#$22,d6
 
@@ -78148,7 +78155,7 @@ loc_4339A:
 		addq.w	#8,a1
 		dbf	d6,loc_4339A
 		rts
-; End of function ObjB0_Move_Streaks_Right
+; End of function SonicOnSegaScr_Move_Streaks_Right
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -79732,7 +79739,7 @@ loc_44790:
 		bset	#7,$2A(a0)
 		move.w	#-$600,$1A(a0)
 		move.w	#$80,$18(a0)
-		lea	Pal_CutsceneKnux1(pc),a1
+		lea	Pal_CutsceneKnux(pc),a1
 		jmp	(PalLoad_Line1).l
 ; ---------------------------------------------------------------------------
 
@@ -79880,7 +79887,7 @@ loc_44950:
 		bsr.w	sub_456C6
 		move.w	#$77,$2E(a0)
 		move.l	#loc_449A8,$34(a0)
-		lea	Pal_CutsceneKnux1(pc),a1
+		lea	Pal_CutsceneKnux(pc),a1
 		jsr	(PalLoad_Line1).l
 		lea	ChildObjDat_4572A(pc),a2
 		jsr	(CreateChild6_Simple).l
@@ -80053,7 +80060,7 @@ loc_44B42:
 		move.w	#$1F,$2E(a0)
 		move.l	#loc_44B82,$34(a0)
 		move.w	#$5C0,(Camera_min_Y_pos).w
-		lea	Pal_CutsceneKnux1(pc),a1
+		lea	Pal_CutsceneKnux(pc),a1
 		jmp	(PalLoad_Line1).l
 ; ---------------------------------------------------------------------------
 
@@ -80142,7 +80149,7 @@ loc_44C36:
 		move.w	#$1D00,$1C(a0)
 		move.w	#$1D00,(Camera_max_X_pos).w
 		move.l	#loc_44CAE,$34(a0)
-		lea	Pal_CutsceneKnux1(pc),a1
+		lea	Pal_CutsceneKnux(pc),a1
 		jsr	(PalLoad_Line1).l
 		lea	ChildObjDat_45730(pc),a2
 		jmp	(CreateChild1_Normal).l
@@ -80345,7 +80352,7 @@ loc_44EA2:
 		st	(Ctrl_1_locked).w
 		move.b	#-$80,(Player_1+object_control).w
 		bsr.w	sub_456C6
-		lea	Pal_CutsceneKnux1(pc),a1
+		lea	Pal_CutsceneKnux(pc),a1
 		jmp	(PalLoad_Line1).l
 ; ---------------------------------------------------------------------------
 
@@ -80463,7 +80470,7 @@ loc_44FE8:
 		jsr	(SetUp_ObjAttributesSlotted).l
 		move.b	#$16,$22(a0)
 		move.w	#$A0,(Camera_min_Y_pos).w
-		lea	Pal_CutsceneKnux1(pc),a1
+		lea	Pal_CutsceneKnux(pc),a1
 		jsr	(PalLoad_Line1).l
 		lea	ChildObjDat_45738(pc),a2
 		jmp	(CreateChild1_Normal).l
@@ -80661,7 +80668,7 @@ loc_45242:
 		bset	#0,4(a0)
 		move.b	#$20,$22(a0)
 		bsr.w	sub_456C6
-		lea	Pal_CutsceneKnux1(pc),a1
+		lea	Pal_CutsceneKnux(pc),a1
 		jsr	(PalLoad_Line1).l
 		lea	ChildObjDat_4574E(pc),a2
 		jmp	(CreateChild3_NormalRepeated).l
@@ -81151,7 +81158,7 @@ byte_4579E:	dc.b  $20,   5
 		dc.b  $21,   5
 		dc.b  $20,   5
 		dc.b  $F4,   0
-Pal_CutsceneKnux1:
+Pal_CutsceneKnux:
 		binclude "General/Sprites/Knuckles/Cutscene/Pal.bin"
 		even
 Pal_CNZFlash:	binclude "Levels/CNZ/Palettes/Flash.bin"
@@ -115790,8 +115797,8 @@ LevelLoadBlock:	levartptrs $B,  $B,  $A,  AIZ1_8x8_Primary_KosM, AIZ1_8x8_Second
 		levartptrs $14, $14, $F,  MGZ_8x8_Primary_KosM,  MGZ2_8x8_Secondary_KosM, MGZ_16x16_Primary_Kos,    MGZ2_16x16_Secondary_Kos, MGZ_128x128_Primary_Kos, MGZ2_128x128_Secondary_Kos
 		levartptrs $16, $17, $10, CNZ_8x8_KosM,          CNZ_8x8_KosM,            CNZ_16x16_Kos,            CNZ_16x16_Kos,            CNZ_128x128_Kos,         CNZ_128x128_Kos
 		levartptrs $18, $19, $11, CNZ_8x8_KosM,          CNZ_8x8_KosM,            CNZ_16x16_Kos,            CNZ_16x16_Kos,            CNZ_128x128_Kos,         CNZ_128x128_Kos
-		levartptrs $1A, $1A, $12, ArtKosM_FBZ,           ArtKosM_FBZ,             FBZ_16x16_Kos,            FBZ_16x16_Kos,            FBZ_128x128_Kos,         FBZ_128x128_Kos
-		levartptrs $1C, $1C, $13, ArtKosM_FBZ,           ArtKosM_FBZ,             FBZ_16x16_Kos,            FBZ_16x16_Kos,            FBZ_128x128_Kos,         FBZ_128x128_Kos
+		levartptrs $1A, $1A, $12, FBZ1_8x8_KosM,         FBZ1_8x8_KosM,           FBZ1_16x16_Kos,           FBZ1_16x16_Kos,           FBZ1_128x128_Kos,        FBZ1_128x128_Kos
+		levartptrs $1C, $1C, $13, FBZ2_8x8_KosM,         FBZ2_8x8_KosM,           FBZ2_16x16_Kos,           FBZ2_16x16_Kos,           FBZ2_128x128_Kos,        FBZ2_128x128_Kos
 		levartptrs $1E, $1E, $14, ICZ_8x8_Primary_KosM,  ICZ1_8x8_Secondary_KosM, ICZ_16x16_Primary_Kos,    ICZ1_16x16_Secondary_Kos, ICZ_128x128_Primary_Kos, ICZ1_128x128_Secondary_Kos
 		levartptrs $20, $20, $15, ICZ_8x8_Primary_KosM,  ICZ2_8x8_Secondary_KosM, ICZ_16x16_Primary_Kos,    ICZ2_16x16_Secondary_Kos, ICZ_128x128_Primary_Kos, ICZ2_128x128_Secondary_Kos
 		levartptrs $22, $22, $16, LBZ_8x8_Primary_KosM,  LBZ1_8x8_Secondary_KosM, LBZ_16x16_Primary_Kos,    LBZ1_16x16_Secondary_Kos, LBZ1_128x128_Kos,        LBZ1_128x128_Kos
@@ -117381,8 +117388,8 @@ SolidIndexes:	dc.l Solid_AIZ1
 		dc.l Solid_MGZ2
 		dc.l Solid_CNZ
 		dc.l Solid_CNZ
-		dc.l Solid_FBZ
-		dc.l Solid_FBZ
+		dc.l Solid_FBZ1
+		dc.l Solid_FBZ2
 		dc.l Solid_ICZ1
 		dc.l Solid_ICZ2
 		dc.l Solid_LBZ1
@@ -117435,7 +117442,8 @@ Solid_MGZ2:	binclude "Levels/MGZ/Collision/2.bin"
 		even
 Solid_CNZ:	binclude "Levels/CNZ/Collision/1.bin"
 		even
-Solid_FBZ:
+Solid_FBZ1:
+Solid_FBZ2:
 Solid_ICZ1:	binclude "Levels/ICZ/Collision/1.bin"
 		even
 Solid_ICZ2:	binclude "Levels/ICZ/Collision/2.bin"
@@ -119921,9 +119929,12 @@ CNZ_8x8_KosM:	binclude "Levels/CNZ/Tiles/Primary.bin"
 		even
 CNZ_128x128_Kos:binclude "Levels/CNZ/Chunks/Primary.bin"
 		even
-FBZ_16x16_Kos:
-ArtKosM_FBZ:
-FBZ_128x128_Kos:
+FBZ1_16x16_Kos:
+FBZ1_8x8_KosM:
+FBZ1_128x128_Kos:
+FBZ2_16x16_Kos:
+FBZ2_8x8_KosM:
+FBZ2_128x128_Kos:
 ICZ_16x16_Primary_Kos:
 		binclude "Levels/ICZ/Blocks/Primary.bin"
 		even
