@@ -1,12 +1,12 @@
 ; Palette pointers
 
-		dc.l Pal_Unknown1
+		dc.l Pal_S2Sega
 		dc.w Normal_palette&$FFFF
 		dc.w $1F
-		dc.l Pal_Unknown2
+		dc.l Pal_S2Title
 		dc.w Normal_palette_line_2&$FFFF
 		dc.w 7
-		dc.l Pal_Unknown3
+		dc.l Pal_S2LevSel
 		dc.w Normal_palette&$FFFF
 		dc.w $1F
 		dc.l Pal_SonicTails
@@ -18,16 +18,16 @@
 		dc.l Pal_Knuckles
 		dc.w Normal_palette&$FFFF
 		dc.w 7
-		dc.l Pal_Unknown1
+		dc.l Pal_S2Sega
 		dc.w Normal_palette&$FFFF
 		dc.w $1F
-		dc.l Pal_Unknown1
+		dc.l Pal_S2Sega
 		dc.w Normal_palette&$FFFF
 		dc.w $1F
-		dc.l Pal_Unknown1
+		dc.l Pal_S2Sega
 		dc.w Normal_palette&$FFFF
 		dc.w $1F
-		dc.l Pal_Unknown1
+		dc.l Pal_S2Sega
 		dc.w Normal_palette&$FFFF
 		dc.w $1F
 		dc.l Pal_AIZIntro

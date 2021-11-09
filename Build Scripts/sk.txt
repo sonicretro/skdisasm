@@ -152,9 +152,9 @@
 #split	0x0007F01C,0x0007F03C,Levels\DEZ\Palettes\Miniboss 2.bin
 #split	0x0007FD08,0x0007FD28,Levels\DEZ\Palettes\End Boss.bin
 #split	0x00090680,0x000906A0,Levels\LRZ\Palettes\Rock Crusher.bin
-#split	0x000A893C,0x000A89BC,Levels\Misc\Palettes\Unknown 1.bin
-#split	0x000A89BC,0x000A89DC,Levels\Misc\Palettes\Unknown 2.bin
-#split	0x000A89DC,0x000A8A3C,Levels\Misc\Palettes\Unknown 3.bin
+#split	0x000A893C,0x000A89BC,General\Sprites\S2Menu\Palettes\Sega Screen.bin
+#split	0x000A89BC,0x000A89DC,General\Sprites\S2Menu\Palettes\Title Screen SK.bin
+#split	0x000A89DC,0x000A8A3C,General\Sprites\S2Menu\Palettes\Proto Level Select SK.bin
 #split	0x000A8A3C,0x000A8A7C,General\Sprites\Sonic\Palettes\SonicAndTails.bin
 #split	0x000A8A7C,0x000A8AFC,General\Sprites\S2Menu\Palettes\Main.bin
 #split	0x000A8AFC,0x000A8B1C,General\Sprites\Knuckles\Palettes\Main.bin

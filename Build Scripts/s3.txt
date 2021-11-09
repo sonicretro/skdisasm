@@ -47,8 +47,8 @@
 #split	0x00043470,0x000434E0,General\Sprites\S2Menu\Palettes\Sega Screen 3.bin
 #split	0x0004D520,0x0004D540,Levels\FBZ\Palettes\S3 Miniboss.bin
 #split	0x0005215C,0x0005217C,General\Ending\Palettes\S3 Super Sonic End Pose.bin
-#split	0x0008C1B4,0x0008C1D4,Levels\Misc\Palettes\Unknown 2 S3.bin
-#split	0x0008C1D4,0x0008C234,Levels\Misc\Palettes\Unknown 3 S3.bin
+#split	0x0008C1B4,0x0008C1D4,General\Sprites\S2Menu\Palettes\Title Screen.bin
+#split	0x0008C1D4,0x0008C234,General\Sprites\S2Menu\Palettes\Proto Level Select.bin
 #split	0x0008CDB4,0x0008CE14,Levels\Pachinko\Palettes\S3.bin
 #split	0x0008CE14,0x0008CE74,Levels\Slots\Palettes\S3.bin
 #split	0x00164896,0x00164A96,Levels\Misc\Palettes\MGZ Fade to CNZ.bin
