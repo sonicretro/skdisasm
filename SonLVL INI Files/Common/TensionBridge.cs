@@ -11,7 +11,7 @@ namespace S3KObjectDefinitions.HCZ
 		public override void Init(ObjectData data)
 		{
 			BuildSpritesProperties(
-				"../Levels/HCZ/Nemesis Art/Act 2  Block Platform.bin", -512,
+				"../Levels/HCZ/Nemesis Art/Act 2 Block Platform.bin", -512,
 				"../Levels/Misc/Map - Tension Bridge.asm", 2, false, null, null, 0);
 		}
 	}

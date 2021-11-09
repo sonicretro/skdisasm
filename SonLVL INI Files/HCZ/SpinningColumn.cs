@@ -98,7 +98,7 @@ namespace S3KObjectDefinitions.HCZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/HCZ/Nemesis Art/Act 2  Block Platform.bin", CompressionType.Nemesis)), -768);
+				"../Levels/HCZ/Nemesis Art/Act 2 Block Platform.bin", CompressionType.Nemesis)), -768);
 
 			properties = new PropertySpec[2];
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);

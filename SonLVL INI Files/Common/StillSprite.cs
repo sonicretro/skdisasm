@@ -81,7 +81,7 @@ namespace S3KObjectDefinitions.HCZ
 			var art5 = indexer.ToArray();
 
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/HCZ/Nemesis Art/Act 2  Block Platform.bin", CompressionType.Nemesis)), -512);
+				"../Levels/HCZ/Nemesis Art/Act 2 Block Platform.bin", CompressionType.Nemesis)), -512);
 			var art6 = indexer.ToArray();
 
 			BuildSpritesSubtypes(
