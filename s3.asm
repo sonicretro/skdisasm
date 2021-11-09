@@ -117673,11 +117673,11 @@ Layout_Slot_Special:
 		even
 PalPoint:	include "Levels/Misc/Palette pointers S3.asm"
 
-Pal_Unknown1:	binclude "Levels/Misc/Palettes/Unknown 1.bin"
+Pal_S2Sega:	binclude "General/Sprites/S2Menu/Palettes/Sega Screen.bin"
 		even
-Pal_Unknown2:	binclude "Levels/Misc/Palettes/Unknown 2 S3.bin"
+Pal_S2Title:	binclude "General/Sprites/S2Menu/Palettes/Title Screen.bin"
 		even
-Pal_Unknown3:	binclude "Levels/Misc/Palettes/Unknown 3 S3.bin"
+Pal_S2LevSel:	binclude "General/Sprites/S2Menu/Palettes/Proto Level Select.bin"
 		even
 Pal_SonicTails:	binclude "General/Sprites/Sonic/Palettes/SonicAndTails.bin"
 		even
