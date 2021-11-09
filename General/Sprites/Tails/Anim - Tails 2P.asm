@@ -23,8 +23,8 @@
 		dc.w AniTails2P16-AniTails2P
 		dc.w AniTails2P17-AniTails2P
 		dc.w AniTails2P18-AniTails2P
-		dc.w AniTails2P19-AniTails2P
-		dc.w AniTails2P19-AniTails2P
+		dc.w AniTails2P1A-AniTails2P
+		dc.w AniTails2P1A-AniTails2P
 		dc.w AniTails2P1B-AniTails2P
 		dc.w AniTails2P1C-AniTails2P
 		dc.w AniTails2P1D-AniTails2P
@@ -52,7 +52,7 @@ AniTails2P15:	dc.b   $B, $15, $FF
 AniTails2P16:	dc.b  $20, $20, $FF
 AniTails2P17:	dc.b  $20, $20, $FF
 AniTails2P18:	dc.b  $20, $20, $FF
-AniTails2P19:	dc.b  $40, $21, $FF
+AniTails2P1A:	dc.b  $40, $21, $FF
 AniTails2P1B:	dc.b    9, $21, $FF
 AniTails2P1C:	dc.b  $77,   0, $FF
 AniTails2P1D:	dc.b    3, $1B, $FF

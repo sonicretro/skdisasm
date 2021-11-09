@@ -2003,7 +2003,7 @@ loc_181C:
 
 loc_1834:
 		move.w	#0,(DMA_queue).w
-		move.l	#-$500,(DMA_queue_slot).w
+		move.l	#DMA_queue,(DMA_queue_slot).w
 		rts
 ; End of function Process_DMA_Queue
 
@@ -2703,12 +2703,8 @@ locret_1CBA:
 
 
 Kos_Decomp:
-
-var_2		= -2
-var_1		= -1
-
 		subq.l	#2,sp
-		move.b	(a0)+,2+var_1(sp)
+		move.b	(a0)+,1(sp)
 		move.b	(a0)+,(sp)
 		move.w	(sp),d5
 		moveq	#$F,d4
@@ -2717,7 +2713,7 @@ Kos_Decomp_Loop:
 		lsr.w	#1,d5
 		move	sr,d6
 		dbf	d4,Kos_Decomp_ChkBit
-		move.b	(a0)+,2+var_1(sp)
+		move.b	(a0)+,1(sp)
 		move.b	(a0)+,(sp)
 		move.w	(sp),d5
 		moveq	#$F,d4
@@ -2734,7 +2730,7 @@ Kos_Decomp_Match:
 		lsr.w	#1,d5
 		move	sr,d6
 		dbf	d4,Kos_Decomp_ChkBit2
-		move.b	(a0)+,2+var_1(sp)
+		move.b	(a0)+,1(sp)
 		move.b	(a0)+,(sp)
 		move.w	(sp),d5
 		moveq	#$F,d4
@@ -2744,7 +2740,7 @@ Kos_Decomp_ChkBit2:
 		bcs.s	Kos_Decomp_FullMatch
 		lsr.w	#1,d5
 		dbf	d4,loc_1D0A
-		move.b	(a0)+,2+var_1(sp)
+		move.b	(a0)+,1(sp)
 		move.b	(a0)+,(sp)
 		move.w	(sp),d5
 		moveq	#$F,d4
@@ -2753,7 +2749,7 @@ loc_1D0A:
 		roxl.w	#1,d3
 		lsr.w	#1,d5
 		dbf	d4,loc_1D1C
-		move.b	(a0)+,2+var_1(sp)
+		move.b	(a0)+,1(sp)
 		move.b	(a0)+,(sp)
 		move.w	(sp),d5
 		moveq	#$F,d4
@@ -4738,8 +4734,6 @@ SonicFrameIndex:dc.b    1,   2,   3,   4,   5,   6,   7,   8,   9,  $A,  $B, $FF
 
 locret_3AB0:
 		rts
-; End of function Iterate_TitleSonicFrame
-
 ; ---------------------------------------------------------------------------
 		move.b	(Title_anim_buffer).w,d2
 		cmpi.b	#1,d2
@@ -4773,6 +4767,8 @@ loc_3AFC:
 
 locret_3B0A:
 		rts
+; End of function Iterate_TitleSonicFrame
+
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -18435,7 +18431,7 @@ Touch_Monitor:
 ; ---------------------------------------------------------------------------
 
 loc_11312:
-		cmpa.w	#-$5000,a0
+		cmpa.w	#Player_1,a0
 		beq.s	loc_1131E
 		tst.w	(Competition_mode).w
 		beq.s	locret_11334
@@ -19538,7 +19534,7 @@ Sonic_RecordPosCompetitionP2:
 
 
 Reset_Player_Position_Array:
-		cmpa.w	#-$5000,a0
+		cmpa.w	#Player_1,a0
 		bne.s	Reset_Player_Position_ArrayP2
 		lea	(Pos_table).w,a1
 		lea	(Stat_table).w,a2
@@ -25308,7 +25304,7 @@ loc_15D50:
 		neg.w	d0
 		addi.w	#$2000,d0
 		lea	(H_scroll_frame_offset).w,a1
-		cmpa.w	#-$5000,a0
+		cmpa.w	#Player_1,a0
 		beq.s	loc_15DA8
 		lea	(H_scroll_frame_offset_P2).w,a1
 
@@ -25953,11 +25949,6 @@ loc_16362:
 
 Animate_Tails:
 		lea	(AniTails).l,a1
-; End of function Animate_Tails
-
-
-; =============== S U B R O U T I N E =======================================
-
 
 Animate_Tails_Part2:
 		moveq	#0,d0
@@ -25981,7 +25972,7 @@ loc_16392:
 		subq.b	#1,$24(a0)
 		bpl.s	locret_163D0
 		move.b	d0,$24(a0)
-; End of function Animate_Tails_Part2
+; End of function Animate_Tails
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -32637,6 +32628,8 @@ SolidObject_Monitor_Tails:
 		cmpi.b	#2,$20(a1)
 		bne.w	SolidObject_cont
 		rts
+; End of function SolidObject_Monitor_Tails
+
 ; ---------------------------------------------------------------------------
 
 Monitor_ChkOverEdge:
@@ -32664,8 +32657,6 @@ Monitor_CharStandOn:
 		bsr.w	MvSonicOnPtfm
 		moveq	#0,d4
 		rts
-; End of function SolidObject_Monitor_Tails
-
 ; ---------------------------------------------------------------------------
 
 Obj_MonitorBreak:
@@ -37999,7 +37990,7 @@ loc_20648:
 		move.b	#0,$20(a1)
 		andi.w	#-2,d0
 		move.b	byte_206CE(pc,d0.w),d2
-		move.b	byte_206CF(pc,d0.w),d3
+		move.b	byte_206CE+1(pc,d0.w),d3
 		ext.w	d2
 		ext.w	d3
 		btst	#0,$2A(a1)
@@ -38047,7 +38038,7 @@ byte_206BE:	dc.b $78
 		dc.b $79
 		dc.b $79
 byte_206CE:	dc.b 0
-byte_206CF:	dc.b $18
+		dc.b $18
 		dc.b $EE
 		dc.b $13
 		dc.b $E8
@@ -38645,7 +38636,7 @@ SurfboardSplash2_Init:
 ; ---------------------------------------------------------------------------
 
 Obj_SurfboardSplash_Main:
-		movea.w	%110000(a0),a1
+		movea.w	$30(a0),a1
 		lea	(SurfboardSplash_Offsets).l,a2
 		bsr.w	SurfboardSplash_SetOffsets
 		move.w	$10(a1),$10(a0)
@@ -42576,7 +42567,7 @@ sub_242D8:
 		lea	$33(a0),a2
 		lea	(Player_2).w,a1
 		move.w	(Ctrl_2).w,d0
-		bsr.s	i
+		bsr.s	sub_242F0
 		lea	(Player_1).w,a1
 		subq.w	#1,a2
 		move.w	(Ctrl_1).w,d0
@@ -42586,7 +42577,7 @@ sub_242D8:
 ; =============== S U B R O U T I N E =======================================
 
 
-i:
+sub_242F0:
 		tst.b	(a2)
 		beq.w	loc_2436C
 		tst.b	4(a1)
@@ -42666,7 +42657,7 @@ loc_2437A:
 
 locret_243DE:
 		rts
-; End of function i
+; End of function sub_242F0
 
 ; ---------------------------------------------------------------------------
 Map_LBZPlatformUndersideUnused:
@@ -49001,7 +48992,7 @@ LBZTubeElevator_CheckPlayer:
 		bne.w	loc_29128
 		tst.w	(Debug_placement_mode).w
 		bne.w	locret_29126
-		cmpa.w	#-$4FB6,a1
+		cmpa.w	#Player_2,a1
 		bne.s	loc_2909A
 		btst	#4,$2A(a0)
 		beq.s	loc_2909A
@@ -50945,7 +50936,7 @@ loc_2B02C:
 		move.b	$23(a0),d0
 		addq.b	#1,$23(a0)
 		move.b	byte_2B056(pc,d0.w),$22(a0)
-		move.b	byte_2B057(pc,d0.w),d0
+		move.b	byte_2B056+1(pc,d0.w),d0
 		bpl.s	loc_2B054
 		move.b	#0,$23(a0)
 
@@ -50953,7 +50944,7 @@ loc_2B054:
 		bra.s	loc_2B05E
 ; ---------------------------------------------------------------------------
 byte_2B056:	dc.b 7
-byte_2B057:	dc.b 8
+		dc.b 8
 		dc.b 9
 		dc.b $A
 		dc.b 9
@@ -59604,7 +59595,7 @@ loc_32A22:
 		move.l	a0,-(sp)
 		movea.l	a1,a0
 		move.w	a0,d1
-		subi.w	#-$5000,d1
+		subi.w	#Player_1,d1
 		bne.s	loc_32A56
 		cmpi.w	#2,(Player_mode).w
 		beq.s	loc_32A56
@@ -59978,7 +59969,7 @@ loc_32E78:
 		move.l	a0,-(sp)
 		movea.l	a1,a0
 		move.w	a0,d1
-		subi.w	#-$5000,d1
+		subi.w	#Player_1,d1
 		bne.s	loc_32EA6
 		cmpi.w	#2,(Player_mode).w
 		beq.s	loc_32EA6
@@ -61380,7 +61371,7 @@ loc_342B6:
 		muls.w	$1C(a0),d0
 		asr.l	#8,d0
 		move.w	d0,$1A(a0)
-		bsr.s	h
+		bsr.s	sub_34354
 		jsr	(MoveSprite2).l
 		tst.b	$2D(a0)
 		bne.s	loc_342E6
@@ -61428,7 +61419,7 @@ loc_3434E:
 ; =============== S U B R O U T I N E =======================================
 
 
-h:
+sub_34354:
 		move.b	#$40,d1
 		tst.w	$1C(a0)
 		beq.s	locret_343CE
@@ -61490,7 +61481,7 @@ loc_343D6:
 loc_34400:
 		add.w	d1,$1A(a0)
 		rts
-; End of function h
+; End of function sub_34354
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -62214,8 +62205,8 @@ loc_34B30:
 		move.w	#sfx_Skid,d0
 		jsr	(Play_Sound_2).l
 		movea.l	a0,a2
-		suba.w	#-$5000,a2
-		adda.w	#-$33AC,a2
+		suba.w	#Player_1,a2
+		adda.w	#Dust,a2
 		move.b	#6,5(a2)
 		move.b	#$15,$22(a2)
 
@@ -62268,8 +62259,8 @@ loc_34BB2:
 		move.w	#sfx_Skid,d0
 		jsr	(Play_Sound_2).l
 		movea.l	a0,a2
-		suba.w	#-$5000,a2
-		adda.w	#-$33AC,a2
+		suba.w	#Player_1,a2
+		adda.w	#Dust,a2
 		move.b	#6,5(a2)
 		move.b	#$15,$22(a2)
 
@@ -80089,11 +80080,9 @@ loc_44BE0:
 ; ---------------------------------------------------------------------------
 ChildObjDat_44BEC:dc.w 1
 		dc.l Obj_DecLevStartYGradual
-		dc.b 0
-		dc.b 0
+		dc.w 0
 		dc.l Obj_IncLevEndXGradual
-		dc.b 0
-		dc.b 0
+		dc.w 0
 ; ---------------------------------------------------------------------------
 
 CutsceneKnux_CNZ2A:
@@ -89228,7 +89217,7 @@ loc_4ADF4:
 		movea.l	(sp)+,a0
 		move.w	(_unkF740).w,d3
 		lsl.w	#4,d3
-		move.l	#-$3000,d1
+		move.l	#Kos_decomp_buffer,d1
 		move.w	$3A(a0),d2
 		jsr	(Add_To_DMA_Queue).l
 
@@ -96491,7 +96480,7 @@ loc_4F63E:
 		lea	word_4F95A(pc),a1
 		jsr	SetUp_ObjAttributes3(pc)
 		move.w	#$100,$2E(a0)
-		move.l	#sub_4F68E,$34(a0)
+		move.l	#loc_4F68E,$34(a0)
 		move.b	#4,$3D(a0)
 		move.w	#5,$3E(a0)
 		cmpi.b	#$A,$2C(a0)
@@ -96512,11 +96501,9 @@ loc_4F682:
 		move.w	$3E(a0),d2
 		jsr	MoveSprite_CircularSimple(pc)
 		jmp	Obj_Wait(pc)
+; ---------------------------------------------------------------------------
 
-; =============== S U B R O U T I N E =======================================
-
-
-sub_4F68E:
+loc_4F68E:
 		move.b	#4,5(a0)
 		bsr.w	sub_4F818
 		move.l	#loc_4F6CA,$34(a0)
@@ -96582,12 +96569,12 @@ loc_4F726:
 loc_4F73A:
 		bclr	#1,$38(a0)
 		neg.b	$3D(a0)
-		bsr.w	sub_4F68E
+		bsr.w	loc_4F68E
 		cmpi.b	#$A,$2C(a0)
 		bne.s	loc_4F76A
 		move.b	#$A,5(a0)
 		move.w	#$3C,$2E(a0)
-		move.l	#sub_4F68E,$34(a0)
+		move.l	#loc_4F68E,$34(a0)
 		bset	#1,$38(a0)
 
 loc_4F76A:
@@ -96608,8 +96595,6 @@ loc_4F786:
 		movea.l	off_4F792(pc,d1.w),a1
 		move.b	(a1,d0.w),$3C(a0)
 		rts
-; End of function sub_4F68E
-
 ; ---------------------------------------------------------------------------
 off_4F792:	dc.l byte_4F800
 		dc.l byte_4F806
@@ -98079,7 +98064,7 @@ loc_505BA:
 		movea.w	$46(a0),a1
 		btst	#7,$2A(a1)
 		beq.s	loc_505E4
-		bsr.w	sub_50690
+		bsr.w	loc_50690
 
 loc_505E4:
 		jmp	Child_DrawTouch_Sprite(pc)
@@ -98114,7 +98099,7 @@ loc_50628:
 
 loc_50638:
 		move.b	#6,5(a0)
-		move.l	#sub_50690,$34(a0)
+		move.l	#loc_50690,$34(a0)
 		move.w	$26(a0),d0
 		clr.w	$1A(a0)
 		rts
@@ -98139,19 +98124,15 @@ loc_50666:
 		bne.w	locret_504DA
 		lea	ChildObjDat_50C24(pc),a2
 		jmp	CreateChild1_Normal(pc)
+; ---------------------------------------------------------------------------
 
-; =============== S U B R O U T I N E =======================================
-
-
-sub_50690:
+loc_50690:
 		move.l	#Delete_Current_Sprite,(a0)
 		bset	#7,$2A(a0)
 		moveq	#signextendB(sfx_BossHit),d0
 		jsr	(Play_Sound_2).l
 		lea	ChildObjDat_50C2C(pc),a2
 		jmp	CreateChild1_Normal(pc)
-; End of function sub_50690
-
 ; ---------------------------------------------------------------------------
 
 loc_506AC:
@@ -103785,17 +103766,12 @@ MoveSlowFall_AnimateRaw:
 ; ---------------------------------------------------------------------------
 		jsr	Swing_UpAndDown(pc)
 
-; =============== S U B R O U T I N E =======================================
-
-
 Move_AnimateRaw_Wait:
 		jsr	(MoveSprite2).l
 
 loc_53CD6:
 		jsr	Animate_Raw(pc)
 		jmp	Obj_Wait(pc)
-; End of function Move_AnimateRaw_Wait
-
 ; ---------------------------------------------------------------------------
 
 Refresh_ChildPosWait:
@@ -106901,7 +106877,7 @@ ObjDat3_557D2:	dc.l Map_Blastoid
 ChildObjDat_557DE:dc.w 0
 		dc.l loc_54B46
 		dc.l ObjDat3_557D2
-		dc.l word_55805
+		dc.l byte_55805
 		dc.l Move_AnimateRaw
 		dc.b $EC
 		dc.b $F9
@@ -106915,9 +106891,9 @@ byte_557F6:	dc.b    0, $7F
 		dc.b    1,   4
 		dc.b    0, $3F
 		dc.b  $F4
-word_55805:	dc.w 2
-		dc.w $3FC
-		dc.b 0
+byte_55805:	dc.b    0,   2
+		dc.b    3, $FC
+		dc.b    0
 ; ---------------------------------------------------------------------------
 
 Obj_Buggernaut:
@@ -113849,7 +113825,7 @@ off_598CC:	dc.w loc_598D2-off_598CC
 ; ---------------------------------------------------------------------------
 
 loc_598D2:
-		lea	word_59A04(pc),a1
+		lea	word_59A14(pc),a1
 		jmp	SetUp_ObjAttributes3(pc)
 ; ---------------------------------------------------------------------------
 
@@ -113889,7 +113865,7 @@ off_59928:	dc.w loc_59930-off_59928
 ; ---------------------------------------------------------------------------
 
 loc_59930:
-		lea	word_59A0A(pc),a1
+		lea	word_59A1A(pc),a1
 		jmp	SetUp_ObjAttributes3(pc)
 ; ---------------------------------------------------------------------------
 
@@ -113986,12 +113962,12 @@ ObjDat3_599F8:	dc.l Map_SnaleBlaster
 		dc.b $10
 		dc.b 0
 		dc.b $B
-word_59A04:	dc.w $180
+word_59A14:	dc.w $180
 		dc.b 4
 		dc.b $C
 		dc.b 5
 		dc.b 0
-word_59A0A:	dc.w $200
+word_59A1A:	dc.w $200
 		dc.b 4
 		dc.b 4
 		dc.b 7
