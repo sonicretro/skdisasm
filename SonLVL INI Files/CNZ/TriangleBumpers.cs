@@ -55,6 +55,8 @@ namespace S3KObjectDefinitions.CNZ
 
 		public override Rectangle GetBounds(ObjectEntry obj)
 		{
+			if (obj.SubType == 0) return base.GetBounds(obj);
+
 			return new Rectangle(obj.X - obj.SubType, obj.Y - 8, obj.SubType * 2, 16);
 		}
 

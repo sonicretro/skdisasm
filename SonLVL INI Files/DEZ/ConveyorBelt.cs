@@ -63,6 +63,7 @@ namespace S3KObjectDefinitions.DEZ
 		public override Rectangle GetBounds(ObjectEntry obj)
 		{
 			var width = (obj.SubType & 0x7F) << 4;
+			if (width == 0) return base.GetBounds(obj);
 
 			return new Rectangle(obj.X - (width / 2), obj.Y - 16, width, 32);
 		}

@@ -57,6 +57,8 @@ namespace S3KObjectDefinitions.LBZ
 		public override Rectangle GetBounds(ObjectEntry obj)
 		{
 			var width = obj.SubType << 1;
+			if (width == 0) return base.GetBounds(obj);
+
 			return new Rectangle(obj.X - (width / 2), obj.Y - 64, width, 128);
 		}
 

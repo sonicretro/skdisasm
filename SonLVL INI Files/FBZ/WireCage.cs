@@ -73,6 +73,7 @@ namespace S3KObjectDefinitions.FBZ
 		public override Rectangle GetBounds(ObjectEntry obj)
 		{
 			var length = (obj.SubType & 0x7F) << 4;
+			if (length == 0) return base.GetBounds(obj);
 
 			if (obj.SubType < 0x80)
 				return new Rectangle(obj.X - (length / 2), obj.Y - 64, length, 128);

@@ -6,7 +6,8 @@ using SonicRetro.SonLVL.API;
 
 namespace S3KObjectDefinitions.LRZ
 {
-	class RockSprite : ExtraObjEntry
+	[Serializable]
+	public class RockSprite : ExtraObjEntry
 	{
 		private static Sprite[] sprites;
 

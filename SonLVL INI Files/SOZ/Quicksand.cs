@@ -64,8 +64,9 @@ namespace S3KObjectDefinitions.SOZ
 		{
 			var direction = obj.SubType & 0xC0;
 			var width = (obj.SubType & 0x3F) << 4;
-			var height = width;
+			if (width == 0) return base.GetBounds(obj);
 
+			var height = width;
 			if (direction == 0x00) width = 32;
 			else if (direction == 0x40) height = 32;
 			else if (direction == 0x80) width = 64;
