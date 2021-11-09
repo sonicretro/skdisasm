@@ -101347,8 +101347,12 @@ PLC_52730:	dc.w 6
 		dc.w $8AC0
 		dc.l ArtNem_AIZCorkFloor2
 		dc.w $8800
-		dc.w    0,$EEE,$EC0,$E60,$C22, $EE, $88,$60A, $8E, $2E,$844, $20,$EAA,$A66,$ECC, $44
-		dc.w    0,$EEE,$EC0,$E60,$C22, $EE, $88, $8E, $2C,$822,   0, $20,$CAA,$866,$644, $44
+Pal_AfterMiniboss_AIZ:
+		binclude "Levels/AIZ/Palettes/Miniboss After.bin"
+		even
+Pal_AfterMiniboss_ICZ:
+		binclude "Levels/ICZ/Palettes/Miniboss After.bin"
+		even
 PLC_MonitorsSpikesSprings:dc.w 1
 		dc.l ArtNem_Monitors
 		dc.w tiles_to_bytes(ArtTile_Monitors)
