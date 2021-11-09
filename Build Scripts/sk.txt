@@ -7,6 +7,7 @@
 #split	0x00001D64,0x00001FE4,Levels\Misc\sine.bin
 #split	0x00002040,0x00002142,Levels\Misc\arctan.bin
 #split	0x00006D2C,0x00006D6C,Levels\Misc\StartingWaterHeights.bin
+#split	0x0000A264,0x0000A464,General\Special Stage\Scalars.bin
 #split	0x0001CBBE,0x0001CCAE,Levels\LRZ\Misc\Rock Sprite Attribute Data.bin
 #split	0x000B2E36,0x000B6946,General\Special Stage\Layout\Perspective Maps.bin
 #split	0x000CAD06,0x000CB81A,Levels\LRZ\Misc\Act 1 Rock Placement.bin
