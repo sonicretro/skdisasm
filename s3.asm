@@ -69296,7 +69296,7 @@ ALZ_Deformation:
 		move.w	d0,(_unkEE74).w
 		addq.w	#3,(Events_bg+$00).w
 		addi.l	#$1000,(Events_bg+$02).w
-		lea	ALZ_AIZ2_BGDeformDelta(pc),a4
+		lea	AIZ2_ALZ_BGDeformDelta(pc),a4
 		lea	(HScroll_table).w,a1
 		move.w	(Events_fg_1).w,d0
 		bsr.s	sub_3A81E
@@ -70770,7 +70770,7 @@ loc_3B6D0:
 		lea	(HScroll_table).w,a2
 		lea	AIZ2_BGDeformArray(pc),a4
 		lea	(HScroll_table+$1C0).w,a5
-		lea	ALZ_AIZ2_BGDeformDelta(pc),a6
+		lea	AIZ2_ALZ_BGDeformDelta(pc),a6
 		move.w	(Camera_Y_pos_BG_copy).w,d0
 		move.w	#$DF,d1
 		move.w	(Level_frame_counter).w,d2
@@ -71279,7 +71279,7 @@ AIZ2_FGDeformDelta:
 		dc.w   0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  1,  1,  0,  0
 		dc.w   0,  0,  1,  1,  0,  0,  0,  0,  1,  0,  0,  0,  0,  1,  0,  0
 		dc.w   0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  1,  1,  0,  0
-ALZ_AIZ2_BGDeformDelta:
+AIZ2_ALZ_BGDeformDelta:
 		dc.w  -2,  1,  2,  2, -1,  2,  2,  1,  2, -1, -2, -2, -2,  1, -1, -1
 		dc.w  -1,  0, -2,  0,  0,  0, -2,  0, -2,  2,  0, -2,  2,  2, -1, -2
 		dc.w  -2,  1,  2,  2, -1,  2,  2,  1,  2, -1, -2, -2, -2,  1, -1, -1
@@ -74418,7 +74418,7 @@ loc_3E0E8:
 		move.w	(Level_frame_counter).w,d1
 		lsr.w	#2,d1
 		andi.w	#$3E,d1
-		lea	ALZ_AIZ2_BGDeformDelta(pc),a5
+		lea	AIZ2_ALZ_BGDeformDelta(pc),a5
 		adda.w	d1,a5
 		moveq	#7,d1
 

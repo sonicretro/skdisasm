@@ -1,32 +1,3 @@
-
-AIZ1_WaterFGDeformDelta:
-		dc.w   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  0,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
-		dc.w  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  0,  0,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1
-		dc.w   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  0,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
-		dc.w  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  0,  0,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1
-		dc.w   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  0,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
-		dc.w  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  0,  0,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1
-		dc.w   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  0,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
-		dc.w  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  0,  0,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1
-		dc.w   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  0,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
-AIZ1_WaterBGDeformDelta:
-		dc.w   0,  0, -1, -1, -1, -1, -1, -1,  0,  0,  0,  1,  1,  1,  1,  1
-		dc.w   1,  0,  0,  0, -1, -1, -1, -1, -1, -1,  0,  0,  0,  1,  1,  1
-		dc.w   1,  1,  1,  0,  0,  0, -1, -1, -1, -1, -1, -1,  0,  0,  0,  1
-		dc.w   1,  1,  1,  1,  1,  0, -1, -2, -2, -1,  0,  2,  2,  2,  2,  0
-		dc.w   0,  0, -1, -1, -1, -1, -1, -1,  0,  0,  0,  1,  1,  1,  1,  1
-		dc.w   1,  0,  0,  0, -1, -1, -1, -1, -1, -1,  0,  0,  0,  1,  1,  1
-; ---------------------------------------------------------------------------
-
 Comp_ScreenInit:
 		jsr	(Update_CameraPositionP2).l
 		move.w	(Camera_X_pos_copy).w,d0
@@ -209,7 +180,7 @@ ALZ_Deformation:
 		move.w	d0,(_unkEE74).w
 		addq.w	#3,(Events_bg+$00).w
 		addi.l	#$1000,(Events_bg+$02).w
-		lea	ALZ_AIZ2_BGDeformDelta(pc),a4
+		lea	(AIZ2_ALZ_BGDeformDelta).l,a4
 		lea	(HScroll_table).w,a1
 		move.w	(Events_fg_1).w,d0
 		bsr.s	sub_23A81E
@@ -677,7 +648,7 @@ loc_23B0EE:
 		jsr	(ApplyDeformation3).l
 		move.l	a1,-(sp)
 		lea	(HScroll_table+$040).w,a1
-		lea	AIZ1_WaterFGDeformDelta(pc),a6
+		lea	(AIZ1_WaterFGDeformDelta).l,a6
 		move.w	(Water_level).w,d0
 		subi.w	#$DE,d1
 		neg.w	d1
@@ -693,7 +664,7 @@ loc_23B0EE:
 		lea	(HScroll_table+$040).w,a2
 		lea	AIZ1_DeformArray(pc),a4
 		lea	(HScroll_table+$008).w,a5
-		lea	AIZ1_WaterBGDeformDelta(pc),a6
+		lea	(AIZ1_WaterBGDeformDelta).l,a6
 		move.w	(Water_level).w,d0
 		sub.w	(Camera_Y_pos_copy).w,d0
 		add.w	(Camera_Y_pos_BG_copy).w,d0
@@ -811,7 +782,7 @@ locret_23B67E:
 
 AIZ2_ApplyDeform:
 		lea	(HScroll_table).w,a1
-		lea	AIZ2_FGDeformDelta(pc),a6
+		lea	(AIZ2_SOZ1_LRZ3_FGDeformDelta).l,a6
 		move.w	(Camera_Y_pos_copy).w,d0
 		move.w	#$DF,d1
 		move.w	(Level_frame_counter).w,d2
@@ -838,7 +809,7 @@ AIZ2_ApplyDeform:
 		add.w	d0,d2
 
 loc_23B6CA:
-		lea	AIZ1_WaterFGDeformDelta(pc),a6
+		lea	(AIZ1_WaterFGDeformDelta).l,a6
 		moveq	#$7E,d3
 
 loc_23B6D0:
@@ -849,7 +820,7 @@ loc_23B6D0:
 		lea	(HScroll_table).w,a2
 		lea	AIZ2_BGDeformArray(pc),a4
 		lea	(HScroll_table+$1C0).w,a5
-		lea	ALZ_AIZ2_BGDeformDelta(pc),a6
+		lea	(AIZ2_ALZ_BGDeformDelta).l,a6
 		move.w	(Camera_Y_pos_BG_copy).w,d0
 		move.w	#$DF,d1
 		move.w	(Level_frame_counter).w,d2
@@ -880,7 +851,7 @@ loc_23B6D0:
 		add.w	d0,d2
 
 loc_23B73E:
-		lea	AIZ1_WaterBGDeformDelta(pc),a6
+		lea	(AIZ1_WaterBGDeformDelta).l,a6
 		moveq	#$7E,d3
 
 loc_23B744:
@@ -920,40 +891,6 @@ AIZ2_BGDeformMake:
 		dc.b    3,   4,   8, $1C, $20
 		dc.b    1,   6, $1E
 		dc.b  $FF,   0
-AIZ2_FGDeformDelta:
-		dc.w   0,  0,  1,  1,  0,  0,  0,  0,  1,  0,  0,  0,  0,  1,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  1,  1,  0,  0
-		dc.w   0,  0,  1,  1,  0,  0,  0,  0,  1,  0,  0,  0,  0,  1,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  1,  1,  0,  0
-		dc.w   0,  0,  1,  1,  0,  0,  0,  0,  1,  0,  0,  0,  0,  1,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  1,  1,  0,  0
-		dc.w   0,  0,  1,  1,  0,  0,  0,  0,  1,  0,  0,  0,  0,  1,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  1,  1,  0,  0
-		dc.w   0,  0,  1,  1,  0,  0,  0,  0,  1,  0,  0,  0,  0,  1,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  1,  1,  0,  0
-		dc.w   0,  0,  1,  1,  0,  0,  0,  0,  1,  0,  0,  0,  0,  1,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  1,  1,  0,  0
-		dc.w   0,  0,  1,  1,  0,  0,  0,  0,  1,  0,  0,  0,  0,  1,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  1,  1,  0,  0
-		dc.w   0,  0,  1,  1,  0,  0,  0,  0,  1,  0,  0,  0,  0,  1,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  1,  1,  0,  0
-ALZ_AIZ2_BGDeformDelta:
-		dc.w  -2,  1,  2,  2, -1,  2,  2,  1,  2, -1, -2, -2, -2,  1, -1, -1
-		dc.w  -1,  0, -2,  0,  0,  0, -2,  0, -2,  2,  0, -2,  2,  2, -1, -2
-		dc.w  -2,  1,  2,  2, -1,  2,  2,  1,  2, -1, -2, -2, -2,  1, -1, -1
-		dc.w  -1,  0, -2,  0,  0,  0, -2,  0, -2,  2,  0, -2,  2,  2, -1, -2
-		dc.w  -2,  1,  2,  2, -1,  2,  2,  1,  2, -1, -2, -2, -2,  1, -1, -1
-		dc.w  -1,  0, -2,  0,  0,  0, -2,  0, -2,  2,  0, -2,  2,  2, -1, -2
-		dc.w  -2,  1,  2,  2, -1,  2,  2,  1,  2, -1, -2, -2, -2,  1, -1, -1
-		dc.w  -1,  0, -2,  0,  0,  0, -2,  0, -2,  2,  0, -2,  2,  2, -1, -2
-		dc.w  -2,  1,  2,  2, -1,  2,  2,  1,  2, -1, -2, -2, -2,  1, -1, -1
-		dc.w  -1,  0, -2,  0,  0,  0, -2,  0, -2,  2,  0, -2,  2,  2, -1, -2
-		dc.w  -2,  1,  2,  2, -1,  2,  2,  1,  2, -1, -2, -2, -2,  1, -1, -1
-		dc.w  -1,  0, -2,  0,  0,  0, -2,  0, -2,  2,  0, -2,  2,  2, -1, -2
-		dc.w  -2,  1,  2,  2, -1,  2,  2,  1,  2, -1, -2, -2, -2,  1, -1, -1
-		dc.w  -1,  0, -2,  0,  0,  0, -2,  0, -2,  2,  0, -2,  2,  2, -1, -2
-		dc.w  -2,  1,  2,  2, -1,  2,  2,  1,  2, -1, -2, -2, -2,  1, -1, -1
-		dc.w  -1,  0, -2,  0,  0,  0, -2,  0, -2,  2,  0, -2,  2,  2, -1, -2
 Pal_AIZBattleship:
 		binclude "Levels/AIZ/Palettes/Battleship.bin"
 		even
@@ -1346,7 +1283,7 @@ loc_23E0E8:
 		move.w	(Level_frame_counter).w,d1
 		lsr.w	#2,d1
 		andi.w	#$3E,d1
-		lea	ALZ_AIZ2_BGDeformDelta(pc),a5
+		lea	(AIZ2_ALZ_BGDeformDelta).l,a5
 		adda.w	d1,a5
 		moveq	#7,d1
 
