@@ -10,7 +10,6 @@
 #split	0x0006BD18,0x0006C120,General\Special Stage\Layout\S3 8.bin
 #split	0x0006D000,0x0006F460,Levels\HCZ\Misc\HCZ Waterline Scroll Data.bin
 #split	0x0006F460,0x000704A0,Levels\LBZ\Misc\LBZ Waterline Scroll Data.bin
-#split	0x00093240,0x00098100,General\Special Stage\Layout\S3 Plane Map.bin
 #split	0x0009A7DA,0x0009FC3A,General\Special Stage\Layout\S3 Perspective Maps.bin
 #split	0x00144E80,0x00144F48,Levels\ICZ\Misc\ICZ Snowboard Slope 1.bin
 #split	0x00144F48,0x00145010,Levels\ICZ\Misc\ICZ Snowboard Slope 2.bin
@@ -351,6 +350,7 @@
 #split	0x0000B452,0x0000B486,General\Competition Menu\Uncompressed Map\CHROME GADGET.bin
 #split	0x0000B486,0x0000B4BA,General\Competition Menu\Uncompressed Map\DESERT PALACE.bin
 #split	0x0000B4BA,0x0000B4EE,General\Competition Menu\Uncompressed Map\ENDLESS MINE.bin
+#split	0x00093240,0x00098100,General\Special Stage\Uncompressed Map\Layout S3.bin
 #split	0x0019F150,0x0019F228,General\Competition Menu\Uncompressed Map\Time Border.bin
 #split	0x0019F228,0x0019F24C,General\Competition Menu\Uncompressed Map\Time Text.bin
 #split	0x001A20DE,0x001A216A,General\Save Menu\Uncompressed Map\NEW.bin
