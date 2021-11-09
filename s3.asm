@@ -23286,7 +23286,7 @@ loc_14804:
 		move.w	d0,$3E(a0)
 		move.b	d0,$40(a0)
 		move.b	d0,$41(a0)
-		move.b	#-$10,$25(a0)
+		move.b	#$F0,$25(a0)
 		bsr.w	Tails_Set_Flying_Animation
 
 locret_148A0:
@@ -23305,13 +23305,13 @@ Tails_FlySwim_Unknown:
 		move.b	#2,$2A(a0)
 		move.w	#0,$10(a0)
 		move.w	#0,$14(a0)
-		move.b	#-$10,$25(a0)
+		move.b	#$F0,$25(a0)
 		bsr.w	Tails_Set_Flying_Animation
 		rts
 ; ---------------------------------------------------------------------------
 
 loc_148E4:
-		move.b	#-$10,$25(a0)
+		move.b	#$F0,$25(a0)
 		ori.b	#2,$2A(a0)
 		bsr.w	Tails_Set_Flying_Animation
 		move.w	#0,(Tails_CPU_flight_timer).w
@@ -23652,7 +23652,7 @@ locret_14C46:
 
 loc_14C48:
 		move.b	#1,$2F(a0)
-		move.b	#-$10,$25(a0)
+		move.b	#$F0,$25(a0)
 		move.b	#2,$2A(a0)
 		move.w	#$100,$18(a0)
 		move.w	#0,$1A(a0)
@@ -23702,7 +23702,7 @@ loc_14D08:
 
 loc_14D10:
 		move.w	#0,(Tails_CPU_idle_timer).w
-		move.b	#-$10,$25(a0)
+		move.b	#$F0,$25(a0)
 		move.w	#0,(Ctrl_2_logical).w
 		move.b	(Level_frame_counter+1).w,d0
 		andi.b	#$F,d0
@@ -23727,7 +23727,7 @@ loc_14D4C:
 
 loc_14D54:
 		move.b	#1,$2F(a0)
-		move.b	#-$10,$25(a0)
+		move.b	#$F0,$25(a0)
 		move.b	#2,$2A(a0)
 		move.w	#0,$18(a0)
 		move.w	#0,$1A(a0)
@@ -23739,7 +23739,7 @@ loc_14D54:
 
 loc_14D8C:
 		move.w	#0,(Tails_CPU_idle_timer).w
-		move.b	#-$10,$25(a0)
+		move.b	#$F0,$25(a0)
 		move.w	#0,(Ctrl_2_logical).w
 		move.b	(Level_frame_counter+1).w,d0
 		andi.b	#7,d0
@@ -23761,7 +23761,7 @@ loc_14DC2:
 ; ---------------------------------------------------------------------------
 
 loc_14DD2:
-		move.b	#-$10,$25(a0)
+		move.b	#$F0,$25(a0)
 		tst.w	(Tails_CPU_idle_timer).w
 		beq.s	loc_14DEA
 		tst.b	(Flying_carrying_Sonic_flag).w
@@ -23777,7 +23777,7 @@ loc_14DEA:
 		btst	#1,(Ctrl_1_held).w
 		beq.s	loc_14E1E
 		addq.b	#1,(Tails_CPU_auto_fly_timer).w
-		cmpi.b	#-$40,(Tails_CPU_auto_fly_timer).w
+		cmpi.b	#$C0,(Tails_CPU_auto_fly_timer).w
 		bcs.s	loc_14E58
 		move.b	#0,(Tails_CPU_auto_fly_timer).w
 		ori.w	#$7070,(Ctrl_2_logical).w
@@ -23817,7 +23817,7 @@ loc_14E68:
 
 loc_14E78:
 		move.b	#1,$2F(a0)
-		move.b	#-$10,$25(a0)
+		move.b	#$F0,$25(a0)
 		move.b	#2,$2A(a0)
 		move.w	#0,$18(a0)
 		move.w	#0,$1A(a0)
@@ -23826,7 +23826,7 @@ loc_14E78:
 
 loc_14EA2:
 		move.w	#0,(Tails_CPU_idle_timer).w
-		move.b	#-$10,$25(a0)
+		move.b	#$F0,$25(a0)
 		move.w	#0,(Ctrl_2_logical).w
 		move.b	(Level_frame_counter+1).w,d0
 		andi.b	#7,d0
@@ -23845,13 +23845,13 @@ locret_14ED8:
 ; ---------------------------------------------------------------------------
 
 loc_14EDA:
-		move.b	#-$10,$25(a0)
+		move.b	#$F0,$25(a0)
 		rts
 ; ---------------------------------------------------------------------------
 
 loc_14EE2:
 		move.b	#1,$2F(a0)
-		move.b	#-$10,$25(a0)
+		move.b	#$F0,$25(a0)
 		move.b	#2,$2A(a0)
 		move.w	#$100,$18(a0)
 		move.w	#0,$1A(a0)
@@ -43113,7 +43113,7 @@ Obj_LBZExplodingTrigger:
 		move.b	#$10,7(a0)
 		move.b	#$10,6(a0)
 		move.w	#$280,8(a0)
-		move.b	#-$3A,$28(a0)
+		move.b	#$C6,$28(a0)
 		move.l	#loc_24944,(a0)
 
 loc_24944:
@@ -44312,7 +44312,7 @@ loc_25B34:
 		move.w	#6,$36(a0)
 		btst	#0,$2C(a0)
 		beq.s	loc_25B5A
-		addi.b	#-$80,$27(a0)
+		addi.b	#$80,$27(a0)
 
 loc_25B5A:
 		move.l	#Obj_LBZCupElevatorMain,(a0)
@@ -47473,7 +47473,7 @@ Obj_LBZLoweringGrapple:
 		move.b	#4,4(a0)
 		move.b	#$10,7(a0)
 		move.w	#$80,8(a0)
-		move.b	#-$80,6(a0)
+		move.b	#$80,6(a0)
 		move.w	$14(a0),$3C(a0)
 		move.l	#Map_LBZLoweringGrapple,$C(a0)
 		move.w	#$42EA,$A(a0)
@@ -47902,7 +47902,7 @@ word_2847A:	dc.w $C0, $FFA0
 Obj_23_1:
 		move.b	#4,4(a0)
 		move.b	#$10,7(a0)
-		move.b	#-$80,6(a0)
+		move.b	#$80,6(a0)
 		move.b	#0,8(a0)
 		moveq	#0,d0
 		move.b	$2C(a0),d0
@@ -49675,7 +49675,7 @@ Map_LBZCorkFloor:
 Obj_AIZFlippingBridge:
 		move.l	#Map_AIZFlippingBridge,$C(a0)
 		move.w	#$42E9,$A(a0)
-		move.b	#-$80,7(a0)
+		move.b	#$80,7(a0)
 		move.b	#4,6(a0)
 		move.b	#4,4(a0)
 		move.w	#$200,8(a0)
@@ -49707,7 +49707,7 @@ loc_29FEA:
 		move.l	#Map_AIZFlippingBridge,$C(a1)
 		move.w	#$42E9,$A(a1)
 		move.b	#4,4(a1)
-		move.b	#-$80,7(a1)
+		move.b	#$80,7(a1)
 		move.b	#$40,6(a1)
 		move.w	#$200,8(a1)
 		move.w	$10(a0),$10(a1)
@@ -51370,7 +51370,7 @@ Obj_31_1:
 		move.w	d0,$32(a0)
 		neg.w	d0
 		move.w	d0,$30(a0)
-		move.b	#-$80,7(a0)
+		move.b	#$80,7(a0)
 		move.l	#loc_2B9D2,(a0)
 
 loc_2B9D2:
@@ -51479,7 +51479,7 @@ loc_2BAC2:
 		add.w	$14(a0),d1
 		move.w	d1,$14(a1)
 		move.b	(a2),d0
-		addi.b	#-$80,d0
+		addi.b	#$80,d0
 		move.b	d0,$27(a1)
 		addq.b	#2,(a2)
 		move.b	#$80,$2D(a1)
@@ -53007,10 +53007,10 @@ loc_2CE14:
 		lea	(ArtKosM_ResultsTAILS).l,a1
 
 loc_2CE4C:
-		move.w	#-$5000,d2
+		move.w	#$B000,d2
 		tst.b	(Apparent_act).w
 		beq.s	loc_2CE5A
-		move.w	#-$4C00,d2
+		move.w	#$B400,d2
 
 loc_2CE5A:
 		jsr	(Queue_Kos_Module).l
@@ -53455,12 +53455,12 @@ SpecialStage_Results:
 		move.w	d0,(VDP_control_port).l
 		jsr	(Clear_DisplayData).l
 		lea	(VDP_control_port).l,a6
-		move.w	#-$7FFC,(a6)
-		move.w	#-$7DD0,(a6)
-		move.w	#-$7BF9,(a6)
-		move.w	#-$7500,(a6)
-		move.w	#-$737F,(a6)
-		move.w	#-$6FEF,(a6)
+		move.w	#$8004,(a6)
+		move.w	#$8230,(a6)
+		move.w	#$8407,(a6)
+		move.w	#$8B00,(a6)
+		move.w	#$8C81,(a6)
+		move.w	#$9011,(a6)
 		lea	(Sprite_table_input).w,a1
 		moveq	#0,d0
 		move.w	#$FF,d1
@@ -53499,7 +53499,7 @@ loc_2D270:
 		lea	(ArtKosM_ResultsTAILS).l,a1
 
 loc_2D2DE:
-		move.w	#-$5000,d2
+		move.w	#$B000,d2
 		jsr	(Queue_Kos_Module).l
 		lea	(ArtKosM_SSResults).l,a1
 		move.w	#$20,d2
@@ -54594,7 +54594,7 @@ loc_2E794:
 
 loc_2E7A4:
 		lea	(ArtKosM_HCZGeyserHorz).l,a1
-		move.w	#-$6000,d2
+		move.w	#$A000,d2
 		jsr	(Queue_Kos_Module).l
 		move.l	#loc_2E7BA,(a0)
 
@@ -54609,7 +54609,7 @@ loc_2E7C2:
 		move.w	#$300,8(a0)
 		move.l	#Map_HCZWaterWall,$C(a0)
 		move.w	#$4500,$A(a0)
-		move.b	#-$80,7(a0)
+		move.b	#$80,7(a0)
 		move.b	#$20,6(a0)
 		bset	#6,4(a0)
 		move.w	#1,$16(a0)
@@ -54872,7 +54872,7 @@ loc_2EB48:
 
 loc_2EB4E:
 		lea	(ArtKosM_HCZGeyserVert).l,a1
-		move.w	#-$6000,d2
+		move.w	#$A000,d2
 		jsr	(Queue_Kos_Module).l
 		move.b	#1,$22(a0)
 		move.b	#$81,(Player_1+object_control).w
@@ -55377,7 +55377,7 @@ loc_2F2F8:
 
 loc_2F304:
 		lea	(ArtKosM_HCZLargeFan).l,a1
-		move.w	#-$6000,d2
+		move.w	#$A000,d2
 		jsr	(Queue_Kos_Module).l
 		move.l	#loc_2F31A,(a0)
 
@@ -56345,7 +56345,7 @@ loc_300D8:
 loc_300DA:
 		clr.w	$1C(a1)
 		move.b	4(a2),d0
-		subi.b	#-$80,d0
+		subi.b	#$80,d0
 		beq.s	loc_30104
 		bpl.s	loc_300F4
 		addi.b	#6,d0
@@ -56362,7 +56362,7 @@ loc_300F4:
 		moveq	#0,d0
 
 loc_300FC:
-		addi.b	#-$80,d0
+		addi.b	#$80,d0
 		move.b	d0,4(a2)
 
 loc_30104:
@@ -56784,7 +56784,7 @@ loc_30844:
 		subi.w	#$18,$14(a1)
 		move.b	$1D(a0),d0
 		lsl.b	#4,d0
-		addi.b	#-$80,d0
+		addi.b	#$80,d0
 		jsr	(GetSineCosine).l
 		asl.w	#3,d1
 		asl.w	#3,d0
@@ -56876,7 +56876,7 @@ loc_30960:
 loc_30966:
 		move.b	$1D(a0),d0
 		lsl.b	#4,d0
-		addi.b	#-$80,d0
+		addi.b	#$80,d0
 		jsr	(GetSineCosine).l
 		asl.w	#4,d1
 		asl.w	#4,d0
@@ -56927,7 +56927,7 @@ sub_309D8:
 		move.w	(a2)+,d5
 		subq.w	#1,d5
 		bmi.s	locret_30A30
-		move.w	#-$7700,d4
+		move.w	#$8900,d4
 
 loc_30A04:
 		moveq	#0,d1
@@ -57730,10 +57730,10 @@ loc_31546:
 		bpl.s	loc_31588
 		add.w	d0,$26(a0)
 		move.b	$26(a0),d0
-		cmpi.b	#-$80,d0
+		cmpi.b	#$80,d0
 		bcc.s	loc_31570
 		andi.b	#$7F,d0
-		addi.b	#-$80,d0
+		addi.b	#$80,d0
 		move.b	d0,$26(a0)
 		subq.b	#1,$44(a0)
 		andi.b	#3,$44(a0)
@@ -57741,9 +57741,9 @@ loc_31546:
 loc_31570:
 		move.w	#$20,d2
 		move.b	$26(a0),d0
-		cmpi.b	#-$80,d0
+		cmpi.b	#$80,d0
 		bcc.s	loc_315B0
-		move.b	#-$80,d0
+		move.b	#$80,d0
 		move.b	d0,$26(a0)
 		bra.s	loc_315B0
 ; ---------------------------------------------------------------------------
@@ -57751,10 +57751,10 @@ loc_31570:
 loc_31588:
 		add.w	d0,$26(a0)
 		move.b	$26(a0),d0
-		cmpi.b	#-$80,d0
+		cmpi.b	#$80,d0
 		bcc.s	loc_315AC
 		andi.b	#$7F,d0
-		addi.b	#-$80,d0
+		addi.b	#$80,d0
 		move.b	d0,$26(a0)
 		addq.b	#1,$44(a0)
 		andi.b	#3,$44(a0)
@@ -57819,7 +57819,7 @@ sub_3161A:
 		sub.w	$10(a0),d0
 		bpl.s	loc_3163C
 		neg.w	d0
-		move.b	#-$80,1(a2)
+		move.b	#$80,1(a2)
 
 loc_3163C:
 		move.b	d0,2(a2)
@@ -58081,7 +58081,7 @@ sub_319AE:
 		sub.w	$10(a0),d0
 		bpl.s	loc_319D0
 		neg.w	d0
-		move.b	#-$80,1(a2)
+		move.b	#$80,1(a2)
 
 loc_319D0:
 		move.b	d0,2(a2)
@@ -58543,7 +58543,7 @@ Obj_5D_1:
 		andi.b	#7,d0
 		move.b	d0,$22(a0)
 		beq.s	loc_31F1C
-		move.b	#-$80,6(a0)
+		move.b	#$80,6(a0)
 
 loc_31F1C:
 		move.l	#loc_31F22,(a0)
@@ -58921,7 +58921,7 @@ loc_3233C:
 		cmpi.w	#$40,d0
 		bcc.s	loc_323AE
 		neg.w	d1
-		move.b	#-$80,1(a4)
+		move.b	#$80,1(a4)
 
 loc_323AE:
 		add.w	$10(a0),d1
@@ -59732,7 +59732,7 @@ loc_32B86:
 
 loc_32B92:
 		bsr.w	sub_32E68
-		move.b	#-$80,(a2)
+		move.b	#$80,(a2)
 		move.b	#-$40,$26(a1)
 		move.w	$10(a1),d0
 		sub.w	$10(a0),d0
@@ -59836,7 +59836,7 @@ loc_32CA4:
 		moveq	#0,d0
 		move.b	(a2),d0
 		andi.w	#$7FFF,$A(a1)
-		cmpi.b	#-$80,d0
+		cmpi.b	#$80,d0
 		bcs.s	loc_32CDE
 		ori.w	#$8000,$A(a1)
 
@@ -59938,7 +59938,7 @@ loc_32DF4:
 		moveq	#0,d0
 		move.b	(a2),d0
 		andi.w	#$7FFF,$A(a1)
-		cmpi.b	#-$80,d0
+		cmpi.b	#$80,d0
 		bcs.s	loc_32E2E
 		ori.w	#$8000,$A(a1)
 
@@ -60075,7 +60075,7 @@ loc_32F38:
 		sub.w	$14(a0),d0
 		move.w	d0,(a2)
 		bsr.w	sub_32E68
-		move.b	#-$40,$26(a1)
+		move.b	#$C0,$26(a1)
 		bclr	#0,4(a1)
 		move.b	#$80,5(a2)
 		move.w	$10(a1),d0
@@ -60178,7 +60178,7 @@ loc_33088:
 loc_330C6:
 		btst	#0,$2A(a0)
 		beq.s	loc_330D4
-		addi.b	#-$80,$26(a1)
+		addi.b	#$80,$26(a1)
 
 loc_330D4:
 		bclr	#2,$2A(a1)
@@ -60240,7 +60240,7 @@ loc_33138:
 		move.w	d0,$14(a1)
 		moveq	#0,d0
 		andi.w	#$7FFF,$A(a1)
-		cmpi.b	#-$80,d2
+		cmpi.b	#$80,d2
 		bcc.s	loc_33196
 		ori.w	#$8000,$A(a1)
 
@@ -60948,7 +60948,7 @@ Obj_MGZPulley:
 		move.w	$A(a0),$A(a1)
 		move.b	4(a0),4(a1)
 		move.b	#$60,7(a1)
-		move.b	#-$40,6(a1)
+		move.b	#$C0,6(a1)
 		move.w	#$300,8(a1)
 		move.w	$10(a0),$12(a1)
 		move.w	$10(a0),$10(a1)
@@ -62682,9 +62682,9 @@ loc_350A8:
 
 loc_350C0:
 		add.w	d1,$36(a0)
-		cmpi.w	#-$8000,$36(a0)
+		cmpi.w	#$8000,$36(a0)
 		bcs.s	loc_350D2
-		move.w	#-$8000,$36(a0)
+		move.w	#$8000,$36(a0)
 
 loc_350D2:
 		bra.s	loc_350E8
@@ -64136,7 +64136,7 @@ loc_366CC:
 		move.l	#Map_2PNeonDisplay,$C(a0)
 		move.w	#$8756,$A(a0)
 		move.w	#0,8(a0)
-		move.b	#-$80,7(a0)
+		move.b	#$80,7(a0)
 		move.b	#$28,6(a0)
 		move.l	#loc_366FE,(a0)
 		tst.b	(Not_ghost_flag).w
@@ -65053,8 +65053,8 @@ Obj_HCZWaterSplash:
 loc_379B4:
 		ori.b	#4,4(a0)
 		move.w	#$300,8(a0)
-		move.b	#-$60,7(a0)
-		move.b	#-$80,6(a0)
+		move.b	#$A0,7(a0)
+		move.b	#$80,6(a0)
 		move.b	#-1,$31(a0)
 		move.b	#0,$2A(a0)
 		bset	#6,4(a0)
@@ -65318,7 +65318,7 @@ loc_37CDC:
 
 loc_37CEE:
 		move.b	#4,4(a0)
-		move.b	#-$80,7(a0)
+		move.b	#$80,7(a0)
 		move.b	#8,6(a0)
 		move.w	$14(a0),d2
 		move.w	d2,$3C(a0)
@@ -66726,7 +66726,7 @@ sub_38C7A:
 
 
 sub_38C8C:
-		move.w	#-$3000,d4
+		move.w	#$D000,d4
 		move.l	#ArtUnc_SonicSnowboard,d6
 		lea	(DPLC_SonicSnowboard).l,a2
 
@@ -70523,7 +70523,7 @@ AIZ2BGE_FireRedraw:
 
 loc_3B480:
 		addq.w	#2,a3
-		move.w	#-$2000,d7
+		move.w	#$E000,d7
 		clr.w	(Events_bg+$00).w
 		addq.w	#4,(Events_routine_bg).w
 
@@ -81185,7 +81185,7 @@ loc_45888:
 		move.w	#$40,$2E(a0)
 		move.l	#loc_458F6,$34(a0)
 		move.w	#8,$40(a0)
-		move.w	#-$16E8,(Events_fg_1).w
+		move.w	#$E918,(Events_fg_1).w
 		move.b	#-1,(Player_prev_frame).w
 		lea	(Player_1).w,a1
 		move.b	#0,$22(a1)
@@ -81408,10 +81408,10 @@ loc_45B56:
 		move.b	#$20,7(a0)
 		jsr	Swing_Setup1(pc)
 		lea	(ArtKosM_AIZIntroPlane).l,a1
-		move.w	#-$5AE0,d2
+		move.w	#$A520,d2
 		jsr	(Queue_Kos_Module).l
 		lea	(ArtKosM_AIZIntroEmeralds).l,a1
-		move.w	#-$49E0,d2
+		move.w	#$B620,d2
 		jsr	(Queue_Kos_Module).l
 		lea	ChildObjDat_45E3E(pc),a2
 		jmp	(CreateChild1_Normal).l
@@ -88087,10 +88087,10 @@ loc_4A04A:
 		moveq	#$14,d0
 		jsr	(Load_PLC).l
 		lea	(ArtKosM_Spiker).l,a1
-		move.w	#-$5A00,d2
+		move.w	#$A600,d2
 		jsr	(Queue_Kos_Module).l
 		lea	(ArtKosM_Mantis).l,a1
-		move.w	#-$5620,d2
+		move.w	#$A9E0,d2
 		jsr	(Queue_Kos_Module).l
 		lea	(PLC_MonitorsSpikesSprings).l,a1
 		jsr	(Load_PLC_Raw).l
@@ -89136,7 +89136,7 @@ loc_4ACFC:
 		lea	ObjDat3_4B3C8(pc),a1
 		jsr	(SetUp_ObjAttributes).l
 		move.l	#loc_4AD68,(a0)
-		move.w	#-$72E0,$3A(a0)
+		move.w	#$8D20,$3A(a0)
 		move.w	(Camera_X_pos).w,d0
 		addi.w	#$140,d0
 		move.w	d0,$10(a0)
@@ -97950,7 +97950,7 @@ loc_50444:
 		moveq	#$77,d0
 		jsr	(Load_PLC).l
 		lea	(ArtKosM_LBZEndBoss).l,a1
-		move.w	#-$7B60,d2
+		move.w	#$84A0,d2
 		jsr	(Queue_Kos_Module).l
 		lea	Pal_LBZEndBoss(pc),a1
 		jmp	PalLoad_Line1(pc)
@@ -103422,7 +103422,7 @@ Find_SonicTails8Way:
 		divu.w	d2,d3
 		tst.w	d0
 		beq.s	loc_53A9C
-		cmpi.w	#-$8000,d2
+		cmpi.w	#$8000,d2
 		bcs.s	loc_53AEC
 		tst.w	d0
 		beq.s	loc_53AE8
@@ -103430,7 +103430,7 @@ Find_SonicTails8Way:
 ; ---------------------------------------------------------------------------
 
 loc_53A9C:
-		cmpi.w	#-$8000,d2
+		cmpi.w	#$8000,d2
 		bcs.s	loc_53AFC
 		tst.w	d1
 		bne.s	loc_53AF8
@@ -103443,7 +103443,7 @@ loc_53AAA:
 		divu.w	d3,d2
 		tst.w	d1
 		bne.s	loc_53AC2
-		cmpi.w	#-$8000,d2
+		cmpi.w	#$8000,d2
 		bcs.s	loc_53AE4
 		tst.w	d0
 		bne.s	loc_53AE8
@@ -103451,7 +103451,7 @@ loc_53AAA:
 ; ---------------------------------------------------------------------------
 
 loc_53AC2:
-		cmpi.w	#-$8000,d2
+		cmpi.w	#$8000,d2
 		bcs.s	loc_53AF4
 		tst.w	d0
 		bne.s	loc_53AF0
@@ -106067,7 +106067,7 @@ loc_550EA:
 		btst	#3,$38(a0)
 		beq.s	loc_55104
 		addq.b	#4,d0
-		cmpi.b	#-$80,d0
+		cmpi.b	#$80,d0
 		bcc.s	loc_55112
 		move.b	d0,$3C(a0)
 		rts
@@ -106075,7 +106075,7 @@ loc_550EA:
 
 loc_55104:
 		subq.b	#4,d0
-		cmpi.b	#-$80,d0
+		cmpi.b	#$80,d0
 		bls.s	loc_55112
 		move.b	d0,$3C(a0)
 		rts
@@ -106110,7 +106110,7 @@ loc_5512C:
 loc_5514A:
 		move.b	$41(a0),d1
 		bsr.w	sub_5533C
-		subi.b	#-$80,d0
+		subi.b	#$80,d0
 		cmpi.b	#$60,d0
 		bcs.s	loc_55168
 
