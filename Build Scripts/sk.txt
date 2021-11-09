@@ -821,6 +821,10 @@
 #split	0x001DFE92,0x001E01B2,Levels\Pachinko\Chunks\Primary.bin
 #split	0x001E36C4,0x001E3BB4,Levels\Slots\Chunks\Primary.bin
 
+/* Uncompressed plane mappings */
+#split	0x00008CB4,0x00008D2C,General\Special Stage\Uncompressed Map\HUD Numbers.bin
+#split	0x00008D2C,0x00008D5C,General\Special Stage\Uncompressed Map\HUD.bin
+
 /* Enigma Compressed plane mappings */
 #split	0x000AEDB0,0x000AEED0,General\Special Stage\Enigma Map\BG.bin
 #split	0x000AEF54,0x000B07B8,General\Special Stage\Enigma Map\Layout.bin

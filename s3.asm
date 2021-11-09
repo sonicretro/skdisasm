@@ -8845,12 +8845,12 @@ loc_7546:
 		move.l	#$74000003,(VDP_control_port).l
 		lea	(ArtNem_SStageShadow).l,a0
 		bsr.w	Nem_Decomp
-		lea	(SSNum000_Map).l,a1
+		lea	(MapUnc_SSNum000).l,a1
 		move.l	#$40840003,d0
 		moveq	#7,d1
 		moveq	#2,d2
 		jsr	(Plane_Map_To_VRAM).l
-		lea	(SSNum000_Map).l,a1
+		lea	(MapUnc_SSNum000).l,a1
 		move.l	#$40BC0003,d0
 		moveq	#7,d1
 		moveq	#2,d2
@@ -9167,7 +9167,7 @@ Pal_SStage_8:	binclude "General/Special Stage/Palettes/3-8 S3.bin"
 Draw_SSNum:
 		lea	(SSNum_Precision).l,a2
 		moveq	#2,d6
-		lea	SSNum_Map(pc),a1
+		lea	MapUnc_SSNum(pc),a1
 
 loc_7BE2:
 		moveq	#0,d2
@@ -9202,12 +9202,10 @@ loc_7BEE:
 SSNum_Precision:dc.w $64
 		dc.w $A
 		dc.w 1
-SSNum_Map:	dc.l $C781CF81,$C782C783,$C781CF81,$C781CF81,$C784C785,$C786C787,$C781CF81,$CF87C788,$C781CF81,$C781CF81
-		dc.l $C78ACF8A,$C78BC78C,$C78DC78E,$C78FC790,$C791C792,$C793C794,$C795C796,$C797C798,$C799CF99,$DF96DF95
-		dc.l $D781DF81,$C79BD783,$DF88D787,$D781DF81,$C79CC79D,$D781DF81,$D781DF81,$C79EC79F,$D781DF81,$D781DF81
-SSNum000_Map:	dc.w  $CF89, $C781, $CF81, $C781, $CF81, $C781, $CF81, $C789
-		dc.w  $CF9A, $C78A, $CF8A, $C78A, $CF8A, $C78A, $CF8A, $C79A
-		dc.w  $DF89, $D781, $DF81, $D781, $DF81, $D781, $DF81, $D789
+MapUnc_SSNum:	binclude "General/Special Stage/Uncompressed Map/HUD Numbers.bin"
+		even
+MapUnc_SSNum000:binclude "General/Special Stage/Uncompressed Map/HUD.bin"
+		even
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -117803,7 +117801,7 @@ MapEni_SStageBG:binclude "General/Special Stage/Enigma Map/BG.bin"
 ArtNem_SStageBG:binclude "General/Special Stage/Nemesis Art/BG.bin"
 		even
 MapUnc_SStageLayout:
-		binclude "General/Special Stage/Layout/S3 Plane Map.bin"
+		binclude "General/Special Stage/Uncompressed Map/Layout S3.bin"
 		even
 ArtNem_SStageLayout:
 		binclude "General/Special Stage/Nemesis Art/Layout.bin"
