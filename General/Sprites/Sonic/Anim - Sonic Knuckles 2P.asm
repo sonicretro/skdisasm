@@ -23,8 +23,8 @@
 		dc.w AniSonic2P16-AniSonic2P
 		dc.w AniSonic2P17-AniSonic2P
 		dc.w AniSonic2P18-AniSonic2P
-		dc.w AniSonic2P19-AniSonic2P
-		dc.w AniSonic2P19-AniSonic2P
+		dc.w AniSonic2P1A-AniSonic2P
+		dc.w AniSonic2P1A-AniSonic2P
 		dc.w AniSonic2P1B-AniSonic2P
 		dc.w AniSonic2P1C-AniSonic2P
 		dc.w AniSonic2P05-AniSonic2P
@@ -59,8 +59,8 @@ AniKnuckles2P:	dc.w AniSonic2P00-AniKnuckles2P
 		dc.w AniSonic2P16-AniKnuckles2P
 		dc.w AniSonic2P17-AniKnuckles2P
 		dc.w AniSonic2P18-AniKnuckles2P
-		dc.w AniSonic2P19-AniKnuckles2P
-		dc.w AniSonic2P19-AniKnuckles2P
+		dc.w AniSonic2P1A-AniKnuckles2P
+		dc.w AniSonic2P1A-AniKnuckles2P
 		dc.w AniSonic2P1B-AniKnuckles2P
 		dc.w AniSonic2P1C-AniKnuckles2P
 		dc.w AniSonic2P05-AniKnuckles2P
@@ -92,7 +92,7 @@ AniSonic2P15:	dc.b   $B, $15, $FF
 AniSonic2P16:	dc.b  $20, $20, $FF
 AniSonic2P17:	dc.b  $20, $20, $FF
 AniSonic2P18:	dc.b  $20, $20, $FF
-AniSonic2P19:	dc.b  $40, $21, $FF
+AniSonic2P1A:	dc.b  $40, $21, $FF
 AniSonic2P1B:	dc.b    9, $21, $FF
 AniSonic2P1C:	dc.b  $77,   0, $FF
 AniSonic2P20:	dc.b    9, $1B, $FF
