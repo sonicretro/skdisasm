@@ -833,7 +833,7 @@ Competition_total_laps			ds.b 1		; total number of laps in competition mode (typ
 			ds.b 1				; unused
 Competition_current_lap			ds.b 1		; current lap number for player 1 in competition mode
 Competition_current_lap_2P		ds.b 1		; current lap number for player 2 in competition mode
-_unkFEDE			ds.b 1			; unused
+Loser_time_left			ds.b 1			; left over from Sonic 2
 			ds.b $23			; unused
 Results_screen_2P		ds.w 1			; left over from Sonic 2
 Perfect_rings_left		ds.w 1			; left over from Sonic 2
@@ -1056,7 +1056,7 @@ mus_StopSFX			ds.b 1		; $E4 - stop all sound effects
 mus_FadeOut2			ds.b 1		; $E5 - fade out music (duplicate)
 Mus__EndCmd =			*		; next ID after last sound command
 
-mus_FA =			$FA		; $FA - ???
+mus_S2SEGA =			$FA		; $FA - SEGA sound ID in Sonic 2
 mus_StopSEGA =			$FE		; $FE - Stop SEGA sound
 mus_SEGA =			$FF		; $FF - Play SEGA sound
 	dephase
