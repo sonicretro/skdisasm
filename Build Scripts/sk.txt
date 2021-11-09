@@ -6,7 +6,6 @@
 /* Miscellaneous */
 #split	0x00001D64,0x00001FE4,Levels\Misc\sine.bin
 #split	0x00002040,0x00002142,Levels\Misc\arctan.bin
-#split	0x00005F82,0x00005FB2,Sound\Music\Music playlist.bin
 #split	0x00006D2C,0x00006D6C,Levels\Misc\StartingWaterHeights.bin
 #split	0x0001CBBE,0x0001CCAE,Levels\LRZ\Misc\Rock Sprite Attribute Data.bin
 #split	0x000B2E36,0x000B6946,General\Special Stage\Layout\Perspective Maps.bin
@@ -79,7 +78,7 @@
 #split	0x0000CCF8,0x0000CD18,General\Save Menu\Palettes\Zone Card 10.bin
 #split	0x0000CD18,0x0000CD38,General\Save Menu\Palettes\Zone Card 11.bin
 #split	0x0000CD38,0x0000CD58,General\Save Menu\Palettes\Zone Card 12.bin
-#split	0x0002E318,0x0002E398,General\Results\Palettes\Main.bin
+#split	0x0002E318,0x0002E398,General\Special Stage\Palettes\Results.bin
 #split	0x0004CB36,0x0004CBB6,General\Blue Sphere\Palettes\Title 1.bin
 #split	0x0004CBB6,0x0004CC36,General\Blue Sphere\Palettes\Title 2.bin
 #split	0x0004DE08,0x0004DE68,General\Blue Sphere\Palettes\Results Line 0-2.bin
@@ -142,7 +141,6 @@
 #split	0x00079726,0x00079786,Levels\LRZ\Palettes\Boss Act Fire.bin
 #split	0x0007A1EE,0x0007A20E,Levels\LRZ\Palettes\End Boss.bin
 #split	0x0007B268,0x0007B288,Levels\SSZ\Palettes\MTZOrbs.bin
-#split	0x0007D850,0x0007D9EA,Levels\SSZ\Palettes\GHZMisc.bin
 #split	0x0007EFFC,0x0007F01C,Levels\DEZ\Palettes\Miniboss 1.bin
 #split	0x0007F01C,0x0007F03C,Levels\DEZ\Palettes\Miniboss 2.bin
 #split	0x0007FD08,0x0007FD28,Levels\DEZ\Palettes\End Boss.bin
@@ -227,6 +225,9 @@
 #split	0x000A8044,0x000A872C,Levels\MHZ\Layout\3.bin
 
 /* Uncompressed Art */
+#split	0x0000E18A,0x0000E48A,General\Sprites\HUD Icon\HUD Digits.bin
+#split	0x0000E48A,0x0000E5CA,General\Sprites\HUD Icon\Lives Digits.bin
+#split	0x0000E5CA,0x0000E8AA,General\Sprites\HUD Icon\Debug Digits.bin
 #split	0x000A9DFC,0x000AA57C,General\Sprites\Bubbles\Air Countdown.bin
 #split	0x000AA57C,0x000AAA7C,General\Sprites\S2Menu\SONICMILES.bin
 #split	0x000AAA7C,0x000ABDFC,General\Sprites\Sonic\Art\SStage Sonic.bin
@@ -379,7 +380,6 @@
 #split	0x0019385A,0x00194388,General\Sprites\Bonus\Bonus Stage.bin
 
 /* Kosinski-Compressed Art */
-
 #split	0x000CC6A0,0x000CCA20,General\Title\Kosinski Art\SK Big SEGA.bin
 #split	0x000CCA20,0x000CD910,General\Title\Kosinski Art\SK Screen Background.bin
 #split	0x000D2504,0x000D33E4,General\Title\Kosinski Art\SK Sonic Falling.bin

@@ -36,6 +36,8 @@
 #split	0x0000BCB6,0x0000BCD6,General\Save Menu\Palettes\Zone Card 8 S3.bin
 #split	0x000236AC,0x000236CC,General\Special Stage\Palettes\Eosian Spheres.bin
 #split	0x0002D39E,0x0002D41E,General\Special Stage\Palettes\Results S3.bin
+#split	0x0003C05A,0x0003C07A,Levels\AIZ\Palettes\Battleship.bin
+#split	0x0003C07A,0x0003C096,Levels\AIZ\Palettes\Boss Small.bin
 #split	0x0003F698,0x0003F718,General\Sprites\Continue\Palette S3.bin
 #split	0x0004160A,0x0004164A,General\Ending\Palettes\S3 Ending.bin
 #split	0x0004164A,0x0004168A,General\Ending\Palettes\S3 Logo.bin
@@ -153,6 +155,7 @@
 #split	0x0015D794,0x0015D7FC,General\Sprites\Level Misc\Horizontal Spikes.bin
 #split	0x0015D7FC,0x0015D8A2,General\Sprites\Enemy Misc\Enemy Points.bin
 #split	0x0015D8A2,0x0015DA5A,General\Sprites\Starpost\Starpost.bin
+#split	0x0015EEB4,0x0015EFFC,General\Sprites\S2Menu\Tails Continue Icon.bin
 #split	0x00164BF2,0x00165260,Levels\AIZ\Nemesis Art\Miniboss.bin
 #split	0x001671A2,0x0016732A,Levels\AIZ\Nemesis Art\Miniboss Small.bin
 #split	0x00168400,0x0016929E,Levels\HCZ\Nemesis Art\Miniboss.bin
@@ -331,6 +334,30 @@
 #split	0x000DF5E4,0x000DFABE,Sound\Music\Competition Menu.bin
 #split	0x000DFABE,0x000DFBFE,Sound\Music\Countdown.bin
 #split	0x000DFBFE,0x000DFEAC,Sound\Music\Sonic 3\Sonic 3 Game Complete.bin
+
+/* Uncompressed plane mappings */
+#split	0x0000A130,0x0000A164,General\Competition Menu\Uncompressed Map\Numbers.bin
+#split	0x0000AE7C,0x0000AEA4,General\Competition Menu\Uncompressed Map\Results Letters.bin
+#split	0x0000AEA4,0x0000AEF4,General\Competition Menu\Uncompressed Map\Results Dividers.bin
+#split	0x0000AEF4,0x0000AF08,General\Competition Menu\Uncompressed Map\Results TOTAL.bin
+#split	0x0000AF08,0x0000AF10,General\Competition Menu\Uncompressed Map\Results Win.bin
+#split	0x0000AF10,0x0000AF18,General\Competition Menu\Uncompressed Map\Results Lose.bin
+#split	0x0000AF18,0x0000AF20,General\Competition Menu\Uncompressed Map\Results Tie.bin
+#split	0x0000B326,0x0000B38A,General\Competition Menu\Uncompressed Map\LAP.bin
+#split	0x0000B38A,0x0000B3A6,General\Competition Menu\Uncompressed Map\RECORDS.bin
+#split	0x0000B3A6,0x0000B3D6,General\Competition Menu\Uncompressed Map\1ST 2ND 3RD.bin
+#split	0x0000B3EA,0x0000B41E,General\Competition Menu\Uncompressed Map\AZURE LAKE.bin
+#split	0x0000B41E,0x0000B452,General\Competition Menu\Uncompressed Map\BALLOON PARK.bin
+#split	0x0000B452,0x0000B486,General\Competition Menu\Uncompressed Map\CHROME GADGET.bin
+#split	0x0000B486,0x0000B4BA,General\Competition Menu\Uncompressed Map\DESERT PALACE.bin
+#split	0x0000B4BA,0x0000B4EE,General\Competition Menu\Uncompressed Map\ENDLESS MINE.bin
+#split	0x0019F150,0x0019F228,General\Competition Menu\Uncompressed Map\Time Border.bin
+#split	0x0019F228,0x0019F24C,General\Competition Menu\Uncompressed Map\Time Text.bin
+#split	0x001A20DE,0x001A216A,General\Save Menu\Uncompressed Map\NEW.bin
+#split	0x001A217A,0x001A2206,General\Save Menu\Uncompressed Map\Static 1.bin
+#split	0x001A2206,0x001A2292,General\Save Menu\Uncompressed Map\Static 2.bin
+#split	0x001A2292,0x001A231E,General\Save Menu\Uncompressed Map\Static 3.bin
+#split	0x001A231E,0x001A23AA,General\Save Menu\Uncompressed Map\Static 4.bin
 
 /* Enigma Mappings */
 #split	0x0000729C,0x000072EE,General\Sprites\S2Menu\Enigma Map\Level Select 2P.bin
