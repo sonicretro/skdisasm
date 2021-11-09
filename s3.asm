@@ -119586,7 +119586,7 @@ ArtNem_AIZSlideRope:
 		binclude "Levels/AIZ/Nemesis Art/Zip Vine.bin"
 		even
 ArtNem_AIZBackgroundTree:
-	binclude "Levels/AIZ/Nemesis Art/BG Tree.bin"
+		binclude "Levels/AIZ/Nemesis Art/BG Tree.bin"
 		even
 ArtNem_AIZMisc1:binclude "Levels/AIZ/Nemesis Art/Misc Art 1.bin"
 		even
@@ -119622,7 +119622,7 @@ ArtNem_HCZ2Slide:
 		binclude "Levels/HCZ/Nemesis Art/Act 2 Slide.bin"
 		even
 ArtNem_HCZ2BlockPlat:
-		binclude "Levels/HCZ/Nemesis Art/Act 2  Block Platform.bin"
+		binclude "Levels/HCZ/Nemesis Art/Act 2 Block Platform.bin"
 		even
 ArtUnc_HCZWaterSplash2:
 		binclude "Levels/HCZ/Animated Tiles/Water Splash 2.bin"
@@ -119631,7 +119631,7 @@ ArtUnc_HCZWaterSplash:
 		binclude "Levels/HCZ/Animated Tiles/Water Splash.bin"
 		even
 ArtNem_HCZ2KnuxWall:
-		binclude "Levels/HCZ/Nemesis Art/Act 2  Knuckles Wall.bin"
+		binclude "Levels/HCZ/Nemesis Art/Act 2 Knuckles Wall.bin"
 		even
 ArtNem_MGZMisc1:binclude "Levels/MGZ/Nemesis Art/Misc Art 1.bin"
 		even

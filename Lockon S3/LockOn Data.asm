@@ -842,13 +842,13 @@ ArtKosM_HCZGeyserVert:		binclude "Levels/HCZ/KosinskiM Art/Geyser Vertical.bin"
 	even
 ArtNem_HCZ2Slide:		binclude "Levels/HCZ/Nemesis Art/Act 2 Slide.bin"
 	even
-ArtNem_HCZ2BlockPlat:		binclude "Levels/HCZ/Nemesis Art/Act 2  Block Platform.bin"
+ArtNem_HCZ2BlockPlat:		binclude "Levels/HCZ/Nemesis Art/Act 2 Block Platform.bin"
 	even
 ArtUnc_HCZWaterSplash2:		binclude "Levels/HCZ/Animated Tiles/Water Splash 2.bin"
 	even
 ArtUnc_HCZWaterSplash:		binclude "Levels/HCZ/Animated Tiles/Water Splash.bin"
 	even
-ArtNem_HCZ2KnuxWall:		binclude "Levels/HCZ/Nemesis Art/Act 2  Knuckles Wall.bin"
+ArtNem_HCZ2KnuxWall:		binclude "Levels/HCZ/Nemesis Art/Act 2 Knuckles Wall.bin"
 	even
 ArtNem_MGZMisc1:		binclude "Levels/MGZ/Nemesis Art/Misc Art 1.bin"
 	even

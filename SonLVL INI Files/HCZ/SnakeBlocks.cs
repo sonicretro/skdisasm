@@ -77,7 +77,7 @@ namespace S3KObjectDefinitions.HCZ
 			properties = new PropertySpec[2];
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);
 			sprite = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../Levels/HCZ/Nemesis Art/Act 2  Block Platform.bin", CompressionType.Nemesis),
+				"../Levels/HCZ/Nemesis Art/Act 2 Block Platform.bin", CompressionType.Nemesis),
 				"../Levels/HCZ/Misc Object Data/Map - Floating Platform.asm", 1, 0);
 
 			var bitmap = new BitmapBits(129, 129);

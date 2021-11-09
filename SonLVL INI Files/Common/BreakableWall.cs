@@ -54,7 +54,7 @@ namespace S3KObjectDefinitions.HCZ
 		public override void Init(ObjectData data)
 		{
 			base.Init(data);
-			var art = LevelData.ReadFile("../Levels/HCZ/Nemesis Art/Act 2  Knuckles Wall.bin", CompressionType.Nemesis);
+			var art = LevelData.ReadFile("../Levels/HCZ/Nemesis Art/Act 2 Knuckles Wall.bin", CompressionType.Nemesis);
 			var sprite = ObjectHelper.MapASMToBmp(art, "../Levels/HCZ/Misc Object Data/Map - Breakable Wall.asm", 2, 2);
 			sprites[1] = BuildFlippedSprites(sprite);
 			properties[0].Enumeration.Add("Knuckles Wall", 1);
