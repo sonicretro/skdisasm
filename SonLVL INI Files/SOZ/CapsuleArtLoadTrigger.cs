@@ -61,7 +61,7 @@ namespace S3KObjectDefinitions.SOZ
 		{
 			if (obj.SubType == 0) return new Rectangle(obj.X - 16, obj.Y - 64, 32, 128);
 			if (obj.SubType == 4) return new Rectangle(obj.X - 16, obj.Y - 128, 32, 256);
-			return new Rectangle(obj.X - 8, obj.Y - 7, 16, 14);
+			return base.GetBounds(obj);
 		}
 
 		public override void Init(ObjectData data)

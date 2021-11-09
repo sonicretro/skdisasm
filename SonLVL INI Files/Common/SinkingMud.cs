@@ -73,6 +73,8 @@ namespace S3KObjectDefinitions.Common
 		public override Rectangle GetBounds(ObjectEntry obj)
 		{
 			var width = obj.SubType << 4;
+			if (width == 0) return base.GetBounds(obj);
+
 			return new Rectangle(obj.X - (width / 2), obj.Y - (height / 2), width, height);
 		}
 
