@@ -235,6 +235,14 @@ palscriptdata	macro frames, data
 	dc.w .framec
     endm
 
+; macro to define a palette script data from an external file
+palscriptfile	macro frames, data
+.framec :=	frames-1
+	shift
+	binclude ALLARGS
+	dc.w .framec
+    endm
+
 ; macro to repeat script from start
 palscriptrept	macro header
 	dc.w -4
