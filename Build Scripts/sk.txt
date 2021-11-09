@@ -151,6 +151,8 @@
 #split	0x0007EFFC,0x0007F01C,Levels\DEZ\Palettes\Miniboss 1.bin
 #split	0x0007F01C,0x0007F03C,Levels\DEZ\Palettes\Miniboss 2.bin
 #split	0x0007FD08,0x0007FD28,Levels\DEZ\Palettes\End Boss.bin
+#split	0x00083CFA,0x00083D1A,Levels\AIZ\Palettes\Miniboss After.bin
+#split	0x00083D1A,0x00083D3A,Levels\ICZ\Palettes\Miniboss After.bin
 #split	0x00090680,0x000906A0,Levels\LRZ\Palettes\Rock Crusher.bin
 #split	0x000A893C,0x000A89BC,General\Sprites\S2Menu\Palettes\Sega Screen.bin
 #split	0x000A89BC,0x000A89DC,General\Sprites\S2Menu\Palettes\Title Screen SK.bin
