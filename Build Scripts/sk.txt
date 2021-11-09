@@ -141,6 +141,13 @@
 #split	0x00079726,0x00079786,Levels\LRZ\Palettes\Boss Act Fire.bin
 #split	0x0007A1EE,0x0007A20E,Levels\LRZ\Palettes\End Boss.bin
 #split	0x0007B268,0x0007B288,Levels\SSZ\Palettes\MTZOrbs.bin
+#split	0x0007D850,0x0007D870,General\Sprites\Mecha Sonic\Palettes\Main.bin
+#split	0x0007DA6E,0x0007DA8E,General\Sprites\Mecha Sonic\Palettes\Flash 1.bin
+#split	0x0007DA90,0x0007DAB0,General\Sprites\Mecha Sonic\Palettes\Flash 2.bin
+#split	0x0007DAB2,0x0007DAD2,General\Sprites\Mecha Sonic\Palettes\Flash 3.bin
+#split	0x0007DADC,0x0007DAFC,General\Sprites\Mecha Sonic\Palettes\Super 1.bin
+#split	0x0007DAFE,0x0007DB1E,General\Sprites\Mecha Sonic\Palettes\Super 2.bin
+#split	0x0007DB20,0x0007DB40,General\Sprites\Mecha Sonic\Palettes\Super 3.bin
 #split	0x0007EFFC,0x0007F01C,Levels\DEZ\Palettes\Miniboss 1.bin
 #split	0x0007F01C,0x0007F03C,Levels\DEZ\Palettes\Miniboss 2.bin
 #split	0x0007FD08,0x0007FD28,Levels\DEZ\Palettes\End Boss.bin
