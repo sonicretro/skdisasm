@@ -9079,8 +9079,8 @@ loc_7BEE:
 ; End of function Draw_SSNum
 
 ; ---------------------------------------------------------------------------
-SSNum_Precision:dc.w $64
-		dc.w $A
+SSNum_Precision:dc.w 100
+		dc.w 10
 		dc.w 1
 MapUnc_SSNum:	binclude "General/Special Stage/Uncompressed Map/HUD Numbers.bin"
 		even
@@ -14913,7 +14913,7 @@ HUD_AddToScore:
 		move.b	#1,(Update_HUD_score).w
 		lea	(Score).w,a3
 		add.l	d0,(a3)
-		move.l	#$F423F,d1
+		move.l	#999999,d1
 		cmp.l	(a3),d1
 		bhi.s	loc_EA5E
 		move.l	d1,(a3)
@@ -20694,9 +20694,9 @@ Sonic_Super:
 		ori.b	#1,(Update_HUD_ring_count).w
 		cmpi.w	#1,(Ring_count).w
 		beq.s	loc_12AC6
-		cmpi.w	#$A,(Ring_count).w
+		cmpi.w	#10,(Ring_count).w
 		beq.s	loc_12AC6
-		cmpi.w	#$64,(Ring_count).w
+		cmpi.w	#100,(Ring_count).w
 		bne.s	loc_12ACC
 
 loc_12AC6:
@@ -28416,7 +28416,7 @@ GiveRing:
 
 GiveRing_1P:
 		move.w	#sfx_RingRight,d0
-		cmpi.w	#$3E7,(Ring_count).w
+		cmpi.w	#999,(Ring_count).w
 		bcc.s	JmpTo_Play_Sound_2
 		addq.w	#1,(Ring_count).w
 		ori.b	#1,(Update_HUD_ring_count).w
@@ -32798,24 +32798,24 @@ Monitor_Give_Rings:
 		lea	(Update_HUD_ring_count).w,a3
 		lea	(Extra_life_flags).w,a4
 		lea	(Total_ring_count).w,a5
-		addi.w	#$A,(a5)
-		cmpi.w	#$3E7,(a5)
+		addi.w	#10,(a5)
+		cmpi.w	#999,(a5)
 		bcs.s	loc_1B6EA
-		move.w	#$3E7,(a5)
+		move.w	#999,(a5)
 
 loc_1B6EA:
-		addi.w	#$A,(a2)
-		cmpi.w	#$3E7,(a2)
+		addi.w	#10,(a2)
+		cmpi.w	#999,(a2)
 		bcs.s	loc_1B6F8
-		move.w	#$3E7,(a2)
+		move.w	#999,(a2)
 
 loc_1B6F8:
 		ori.b	#1,(a3)
-		cmpi.w	#$64,(a2)
+		cmpi.w	#100,(a2)
 		bcs.s	loc_1B714
 		bset	#1,(a4)
 		beq.s	loc_1B71C
-		cmpi.w	#$C8,(a2)
+		cmpi.w	#200,(a2)
 		bcs.s	loc_1B714
 		bset	#2,(a4)
 		beq.s	loc_1B71C
@@ -52238,7 +52238,7 @@ sub_2C49E:
 		move.b	#2,$22(a1)
 		move.w	#$20,$36(a1)
 		move.w	a0,$3E(a1)
-		cmpi.w	#$32,(Ring_count).w
+		cmpi.w	#50,(Ring_count).w
 		bcs.s	loc_2C546
 		bsr.w	sub_2C83E
 
@@ -53020,7 +53020,7 @@ loc_2CE5A:
 		moveq	#0,d1
 		move.b	(Timer_second).w,d1
 		add.w	d1,d0
-		cmpi.w	#$257,d0
+		cmpi.w	#599,d0
 		bne.s	loc_2CE80
 		move.w	#10000,(Time_bonus_countdown).w
 		bra.s	loc_2CE98
@@ -53101,14 +53101,14 @@ loc_2CF4C:
 		moveq	#0,d0
 		tst.w	(Time_bonus_countdown).w
 		beq.s	loc_2CF5E
-		addi.w	#$A,d0
-		subi.w	#$A,(Time_bonus_countdown).w
+		addi.w	#10,d0
+		subi.w	#10,(Time_bonus_countdown).w
 
 loc_2CF5E:
 		tst.w	(Ring_bonus_countdown).w
 		beq.s	loc_2CF6E
-		addi.w	#$A,d0
-		subi.w	#$A,(Ring_bonus_countdown).w
+		addi.w	#10,d0
+		subi.w	#10,(Ring_bonus_countdown).w
 
 loc_2CF6E:
 		add.w	d0,(Total_bonus_countup).w
@@ -53348,7 +53348,14 @@ loc_2D124:
 		dc.b 0, 0, 4
 		dc.b 0, 0, 2
 		dc.b 0, 0, 1
-TimeBonus:	dc.w  $1388, $1388,  $3E8,  $1F4,  $190,  $12C,   $64,    $A
+TimeBonus:	dc.w 5000
+		dc.w 5000
+		dc.w 1000
+		dc.w 500
+		dc.w 400
+		dc.w 300
+		dc.w 100
+		dc.w 10
 ObjArray_LevResults:dc.l Obj_LevResultsCharName
 		dc.w $E0
 		dc.w $FDE0
@@ -53581,7 +53588,7 @@ loc_2D442:
 		clr.w	(Time_bonus_countdown).w
 		tst.w	(Special_stage_rings_left).w
 		bne.s	loc_2D48E
-		move.w	#$1388,(Time_bonus_countdown).w
+		move.w	#5000,(Time_bonus_countdown).w
 
 loc_2D48E:
 		move.w	#$168,$2E(a0)
@@ -104740,7 +104747,7 @@ AddRings:
 		lea	(Update_HUD_ring_count).w,a3
 		lea	(Extra_life_flags).w,a4
 		lea	(Total_ring_count).w,a5
-		move.w	#$3E7,d1
+		move.w	#999,d1
 		add.w	d0,(a5)
 		cmp.w	(a5),d1
 		bcc.s	loc_544A0
@@ -104754,11 +104761,11 @@ loc_544A0:
 
 loc_544A8:
 		ori.b	#1,(a3)
-		cmpi.w	#$64,(a2)
+		cmpi.w	#100,(a2)
 		bcs.s	loc_544C4
 		bset	#1,(a4)
 		beq.s	loc_544CC
-		cmpi.w	#$C8,(a2)
+		cmpi.w	#200,(a2)
 		bcs.s	loc_544C4
 		bset	#2,(a4)
 		beq.s	loc_544CC
