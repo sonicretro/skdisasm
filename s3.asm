@@ -119686,7 +119686,6 @@ ArtKosM_SSResults:
 		dc.w $1220
 ArtKos_SSResultsGeneral:
 		binclude "General/Special Stage/Kosinski Art/S3 SSResults General.bin"
-		even
 ArtKos_SSResultsTKIcons:
 		binclude "General/Special Stage/Kosinski Art/S3 SSResults Tails Knuckles Icons.bin"
 		even

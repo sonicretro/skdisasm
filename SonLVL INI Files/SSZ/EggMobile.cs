@@ -80,7 +80,7 @@ namespace S3KObjectDefinitions.SSZ
 				"../General/Sprites/Mecha Sonic/Map - Mecha Sonic.asm", 0, 1, true);
 
 			var emerald = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../General/Ending/Kosinski Art/Master Emerald.bin", CompressionType.Kosinski),
+				"../General/Ending/KosinskiM Art/Master Emerald.bin", CompressionType.KosinskiM),
 				"../Levels/SSZ/Misc Object Data/Map - Master Emerald.asm", 0, 0, true);
 
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);

@@ -396,7 +396,6 @@
 #split	0x000D33E4,0x000D3A64,General\Title\Kosinski Art\SK Death Egg.bin
 #split	0x000D3A64,0x000D3BB4,General\Title\Kosinski Art\SK Mountain Sprite.bin
 #split	0x000D4BA6,0x000D5CC6,General\Title\Kosinski Art\SK Sonic and Knuckles Hands.bin
-#split	0x000DE364,0x000DE684,General\Ending\Kosinski Art\ANDKnuckles Subtitle.bin
 #split	0x00156C08,0x001574E8,Levels\Pachinko\Kosinski Art\Animated BG 1.bin
 #split	0x001574E8,0x001578F8,Levels\Pachinko\Kosinski Art\Animated BG 2.bin
 #split	0x0015BAC0,0x0015C130,General\Special Stage\Kosinski Art\SSResults General.bin
@@ -404,10 +403,6 @@
 #split	0x0015CD62,0x0015EDB2,General\Save Menu\Kosinski Art\SK Zone Art.bin
 #split	0x0015EDB2,0x0015FC12,General\Save Menu\Kosinski Art\Portraits.bin
 #split	0x0015A774,0x0015B374,General\Save Menu\Kosinski Art\SK Extra.bin
-#split	0x0015FDDE,0x0015FFBE,General\Sprites\Robotnik\Egg Robo Head.bin
-#split	0x00163248,0x00163418,General\Ending\Kosinski Art\Robotnik Standing Smug.bin
-#split	0x0016416E,0x0016461E,General\Ending\Kosinski Art\Sonic Knuckles Pose Banner.bin
-#split	0x0017FCBC,0x0018008C,General\Ending\Kosinski Art\Master Emerald.bin
 #split	0x00187D1C,0x00188E7C,General\Blue Sphere\Kosinski Art\Characters.bin
 #split	0x00188F1E,0x001897DE,General\Blue Sphere\Kosinski Art\Character Sprites.bin
 #split	0x001897DE,0x00189C4E,General\Blue Sphere\Kosinski Art\Normal Text.bin
@@ -429,6 +424,7 @@
 #split	0x000DB406,0x000DB818,General\Sprites\SS Entry\Badnik Explosion.bin
 #split	0x000DC6C2,0x000DC9C4,General\Sprites\Blaster\Blaster.bin
 #split	0x000DC9C4,0x000DCC76,General\Sprites\Technosqueek\Technosqueek.bin
+#split	0x000DE362,0x000DE684,General\Ending\KosinskiM Art\ANDKnuckles Subtitle.bin
 #split	0x0014C652,0x0014C7D4,General\Sprites\Sonic\Art\Hyper Sonic Stars.bin
 #split	0x0014C7D4,0x0014C926,General\Sprites\Tails\Art\Super Tails birds.bin
 #split	0x001541B0,0x00154552,Levels\SSZ\KosinskiM Art\Spiral Ramp.bin
@@ -450,6 +446,7 @@
 #split	0x0015C9BC,0x0015CA9E,Levels\DEZ\KosinskiM Art\Title Card.bin
 #split	0x0015CA9E,0x0015CC30,Levels\DDZ\KosinskiM Art\Title Card.bin
 #split	0x0015CC30,0x0015CD62,Levels\HPZ\KosinskiM Art\Title Card.bin
+#split	0x0015FDDC,0x0015FFBE,General\Sprites\Robotnik\Egg Robo Head.bin
 #split	0x001607D8,0x00160AAA,General\Sprites\Robotnik\Robotnik Ship Crane.bin
 #split	0x00160AAA,0x00160D8C,General\Ending\KosinskiM Art\Island Lift Animated Tiles.bin
 #split	0x00160D8C,0x0016118E,General\Ending\KosinskiM Art\Pelican and Dolphin.bin
@@ -457,8 +454,10 @@
 #split	0x00161660,0x001620D2,General\Ending\KosinskiM Art\Sonic Ending Pose.bin
 #split	0x001620D2,0x00162914,General\Ending\KosinskiM Art\Super Sonic Ending Pose.bin
 #split	0x00162914,0x00163246,General\Ending\KosinskiM Art\Sonic Plane Ending.bin
+#split	0x00163246,0x00163418,General\Ending\KosinskiM Art\Robotnik Standing Smug.bin
 #split	0x00163418,0x00163B9A,General\Ending\KosinskiM Art\Sonic Plane.bin
 #split	0x00163B9A,0x0016416C,General\Sprites\Knuckles\Cutscene\Knuckles Ending Cutscene.bin
+#split	0x0016416C,0x0016461E,General\Ending\KosinskiM Art\Sonic Knuckles Pose Banner.bin
 #split	0x0016461E,0x001649A0,General\Ending\KosinskiM Art\Sonic 3 Pose Banner.bin
 #split	0x00165000,0x001651D2,General\Sprites\Knuckles\Cutscene\Knuckles Intro Bomb.bin
 #split	0x001651D2,0x001652B4,Levels\FBZ\KosinskiM Art\Exit Hall.bin
@@ -502,6 +501,7 @@
 #split	0x0017EDB4,0x0017EFA6,Levels\SSZ\KosinskiM Art\GHZ Ball and Chain.bin
 #split	0x0017EFA6,0x0017F738,Levels\SSZ\KosinskiM Art\MTZ Orbs.bin
 #split	0x0017F738,0x0017FCBA,General\Sprites\Mecha Sonic\Mecha Sonic Extra Art.bin
+#split	0x0017FCBA,0x0018008C,General\Ending\KosinskiM Art\Master Emerald.bin
 #split	0x0018008C,0x001803EE,General\Sprites\Spikebonker\Spikebonker.bin
 #split	0x001803EE,0x001805A0,General\Sprites\Chainspike\Chainspike.bin
 #split	0x001805A0,0x00181002,Levels\DEZ\KosinskiM Art\Miniboss Misc Art.bin
