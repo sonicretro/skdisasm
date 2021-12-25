@@ -22519,7 +22519,7 @@ loc_1400A:
 		move.w	(Ctrl_2).w,(Ctrl_2_logical).w
 
 loc_14016:
-		bsr.w	sub_14626
+		bsr.w	Tails_Display
 		btst	#0,$2E(a0)
 		bne.s	loc_14034
 		moveq	#0,d0
@@ -22880,9 +22880,9 @@ Obj_Tails:
 		lea	(Distance_from_top_P2).w,a5
 		lea	(Dust_P2).w,a6
 		cmpi.w	#2,(Player_mode).w
-		bne.s	loc_14404
+		bne.s	Tails_Normal
 		tst.w	(Debug_placement_mode).w
-		beq.s	loc_14404
+		beq.s	Tails_Normal
 		cmpi.b	#1,(Debug_placement_type).w
 		beq.s	loc_143FE
 		btst	#4,(Ctrl_1_pressed).w
@@ -22904,22 +22904,22 @@ loc_143FE:
 		jmp	(DebugMode).l
 ; ---------------------------------------------------------------------------
 
-loc_14404:
+Tails_Normal:
 		moveq	#0,d0
 		move.b	5(a0),d0
-		move.w	off_14412(pc,d0.w),d1
-		jmp	off_14412(pc,d1.w)
+		move.w	Tails_Index(pc,d0.w),d1
+		jmp	Tails_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
-off_14412:	dc.w loc_14420-off_14412
-		dc.w loc_14514-off_14412
-		dc.w loc_1620A-off_14412
-		dc.w loc_162C4-off_14412
-		dc.w loc_162F4-off_14412
-		dc.w loc_16308-off_14412
-		dc.w loc_16324-off_14412
+Tails_Index:	dc.w Tails_Init-Tails_Index
+		dc.w Tails_Control-Tails_Index
+		dc.w loc_1620A-Tails_Index
+		dc.w loc_162C4-Tails_Index
+		dc.w loc_162F4-Tails_Index
+		dc.w loc_16308-Tails_Index
+		dc.w loc_16324-Tails_Index
 ; ---------------------------------------------------------------------------
 
-loc_14420:
+Tails_Init:
 		addq.b	#2,5(a0)
 		move.b	#$F,$1E(a0)
 		move.b	#9,$1F(a0)
@@ -22937,27 +22937,27 @@ loc_14420:
 		cmpi.w	#2,(Player_mode).w
 		bne.s	loc_144B4
 		tst.b	(Last_star_post_hit).w
-		bne.s	loc_144CC
+		bne.s	Tails_Init_Continued
 		move.w	#ArtTile_Player_2,$A(a0)
 		move.b	#$C,$46(a0)
 		move.b	#$D,$47(a0)
 		cmpi.b	#2,(Special_bonus_entry_flag).w
-		beq.s	loc_144CC
+		beq.s	Tails_Init_Continued
 		move.w	$10(a0),(Saved_X_pos).w
 		move.w	$14(a0),(Saved_Y_pos).w
 		move.w	$A(a0),(Saved_art_tile).w
 		move.w	$46(a0),(Saved_solid_bits).w
-		bra.s	loc_144CC
+		bra.s	Tails_Init_Continued
 ; ---------------------------------------------------------------------------
 
 loc_144B4:
 		move.w	#ArtTile_Player_2,$A(a0)
 		move.w	(Player_1+top_solid_bit).w,$46(a0)
 		tst.w	(Player_1+art_tile).w
-		bpl.s	loc_144CC
+		bpl.s	Tails_Init_Continued
 		ori.w	#$8000,$A(a0)
 
-loc_144CC:
+Tails_Init_Continued:
 		move.b	#0,$30(a0)
 		move.b	#4,$31(a0)
 		move.b	#$1E,$2C(a0)
@@ -22976,7 +22976,7 @@ loc_144F4:
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_14514:
+Tails_Control:
 		cmpi.w	#2,(Player_mode).w
 		bne.s	loc_14544
 		tst.w	(Debug_mode_flag).w
@@ -23034,8 +23034,8 @@ loc_145AA:
 		moveq	#0,d0
 		move.b	$2A(a0),d0
 		andi.w	#6,d0
-		move.w	off_1461E(pc,d0.w),d1
-		jsr	off_1461E(pc,d1.w)
+		move.w	Tails_Modes(pc,d0.w),d1
+		jsr	Tails_Modes(pc,d1.w)
 		movem.l	(sp)+,a4-a6
 
 loc_145C4:
@@ -23045,9 +23045,9 @@ loc_145C4:
 		and.w	d0,$14(a0)
 
 loc_145D4:
-		bsr.s	sub_14626
+		bsr.s	Tails_Display
 		bsr.w	Sonic_RecordPos
-		bsr.w	sub_15284
+		bsr.w	Tails_Water
 		move.b	(Primary_Angle).w,$3A(a0)
 		move.b	(Secondary_Angle).w,$3B(a0)
 		tst.b	(WindTunnel_flag_P2).w
@@ -23071,15 +23071,15 @@ loc_1460C:
 locret_1461C:
 		rts
 ; ---------------------------------------------------------------------------
-off_1461E:	dc.w Tails_Stand_Path-off_1461E
-		dc.w Tails_Stand_Freespace-off_1461E
-		dc.w Tails_Spin_Path-off_1461E
-		dc.w Tails_Spin_Freespace-off_1461E
+Tails_Modes:	dc.w Tails_Stand_Path-Tails_Modes
+		dc.w Tails_Stand_Freespace-Tails_Modes
+		dc.w Tails_Spin_Path-Tails_Modes
+		dc.w Tails_Spin_Freespace-Tails_Modes
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_14626:
+Tails_Display:
 		move.b	$34(a0),d0
 		beq.s	loc_14634
 		subq.b	#1,$34(a0)
@@ -23144,7 +23144,7 @@ loc_146BA:
 		move.w	(a1)+,4(a4)
 		bclr	#2,$2B(a0)
 		rts
-; End of function sub_14626
+; End of function Tails_Display
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -24144,7 +24144,7 @@ sub_15202:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_15284:
+Tails_Water:
 		tst.b	(Water_flag).w
 		bne.s	loc_1528C
 
@@ -24217,7 +24217,7 @@ loc_1533C:
 loc_15362:
 		move.w	#sfx_Splash,d0
 		jmp	(Play_Sound_2).l
-; End of function sub_15284
+; End of function Tails_Water
 
 ; ---------------------------------------------------------------------------
 
