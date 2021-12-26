@@ -5927,7 +5927,7 @@ loc_4EF2:
 		andi.b	#$8E,$2B(a1)
 		bset	#0,$2B(a1)
 		bset	#4,$2B(a1)
-		move.l	#Obj_Fire_Shield,(Shield).w
+		move.l	#Obj_FireShield,(Shield).w
 		move.w	a1,(Shield+parent).w
 		rts
 ; ---------------------------------------------------------------------------
@@ -5938,7 +5938,7 @@ loc_4F18:
 		andi.b	#$8E,$2B(a1)
 		bset	#0,$2B(a1)
 		bset	#5,$2B(a1)
-		move.l	#Obj_Lightning_Shield,(Shield).w
+		move.l	#Obj_LightningShield,(Shield).w
 		move.w	a1,(Shield+parent).w
 		rts
 ; ---------------------------------------------------------------------------
@@ -5949,7 +5949,7 @@ loc_4F3E:
 		andi.b	#$8E,$2B(a1)
 		bset	#0,$2B(a1)
 		bset	#6,$2B(a1)
-		move.l	#Obj_Bubble_Shield,(Shield).w
+		move.l	#Obj_BubbleShield,(Shield).w
 		move.w	a1,(Shield+parent).w
 		rts
 ; ---------------------------------------------------------------------------
@@ -5969,7 +5969,7 @@ SpawnLevelMainSprites_SpawnPlayers:
 		bne.s	loc_4FC2
 		move.l	#Obj_Sonic,(Player_1).w
 		move.l	#Obj_DashDust,(Dust).w
-		move.l	#Obj_Insta_Shield,(Shield).w
+		move.l	#Obj_InstaShield,(Shield).w
 		move.w	#Player_1,(Shield+parent).w
 		move.l	#Obj_Tails,(Player_2).w
 		move.w	(Player_1+x_pos).w,(Player_2+x_pos).w
@@ -5986,7 +5986,7 @@ loc_4FC2:
 		bne.s	loc_4FE6
 		move.l	#Obj_Sonic,(Player_1).w
 		move.l	#Obj_DashDust,(Dust).w
-		move.l	#Obj_Insta_Shield,(Shield).w
+		move.l	#Obj_InstaShield,(Shield).w
 		move.w	#Player_1,(Shield+parent).w
 		rts
 ; ---------------------------------------------------------------------------
@@ -27963,7 +27963,7 @@ Map_SuperSonic_Stars:
 		include "General/Sprites/Shields/Map - Super Sonic Stars.asm"
 ; ---------------------------------------------------------------------------
 
-Obj_Insta_Shield:
+Obj_InstaShield:
 		move.l	#Map_InstaShield,$C(a0)
 		move.l	#DPLC_InstaShield,$3C(a0)
 		move.l	#ArtUnc_InstaShield,$38(a0)
@@ -27980,9 +27980,9 @@ Obj_Insta_Shield:
 loc_180DE:
 		move.w	#1,$20(a0)
 		move.b	#-1,$34(a0)
-		move.l	#Obj_Insta_Shield_Main,(a0)
+		move.l	#Obj_InstaShield_Main,(a0)
 
-Obj_Insta_Shield_Main:
+Obj_InstaShield_Main:
 		movea.w	$42(a0),a2
 		btst	#1,$2B(a2)
 		bne.s	locret_18158
@@ -28019,7 +28019,7 @@ locret_18158:
 		rts
 ; ---------------------------------------------------------------------------
 
-Obj_Fire_Shield:
+Obj_FireShield:
 		move.l	#Map_FireShield,$C(a0)
 		move.l	#DPLC_FireShield,$3C(a0)
 		move.l	#ArtUnc_FireShield,$38(a0)
@@ -28036,18 +28036,18 @@ Obj_Fire_Shield:
 loc_181A4:
 		move.w	#1,$20(a0)
 		move.b	#-1,$34(a0)
-		move.l	#Obj_Fire_Shield_Main,(a0)
+		move.l	#Obj_FireShield_Main,(a0)
 
-Obj_Fire_Shield_Main:
+Obj_FireShield_Main:
 		movea.w	$42(a0),a2
 		btst	#1,$2B(a2)
 		bne.s	locret_18236
 		cmpi.b	#$1C,$20(a2)
 		beq.s	locret_18236
 		btst	#0,$2B(a2)
-		beq.w	Obj_Fire_Shield_Destroy
+		beq.w	Obj_FireShield_Destroy
 		btst	#6,$2A(a2)
-		bne.s	Obj_Fire_Shield_DestroyUnderwater
+		bne.s	Obj_FireShield_DestroyUnderwater
 		move.w	$10(a2),$10(a0)
 		move.w	$14(a2),$14(a0)
 		tst.b	$20(a0)
@@ -28076,22 +28076,22 @@ locret_18236:
 		rts
 ; ---------------------------------------------------------------------------
 
-Obj_Fire_Shield_DestroyUnderwater:
+Obj_FireShield_DestroyUnderwater:
 		andi.b	#-$72,$2B(a2)
 		jsr	(Create_New_Sprite).l
-		bne.w	Obj_Fire_Shield_Destroy
+		bne.w	Obj_FireShield_Destroy
 		move.l	#Obj_FireShield_Dissipate,(a1)
 		move.w	$10(a0),$10(a1)
 		move.w	$14(a0),$14(a1)
 
-Obj_Fire_Shield_Destroy:
+Obj_FireShield_Destroy:
 		andi.b	#$8E,$2B(a2)
-		move.l	#Obj_Insta_Shield,(a0)
+		move.l	#Obj_InstaShield,(a0)
 		rts
 ; ---------------------------------------------------------------------------
 
-Obj_Lightning_Shield:
-		move.l	#ArtUnc_Obj_Lightning_Shield_Sparks,d1
+Obj_LightningShield:
+		move.l	#ArtUnc_LightningShield_Sparks,d1
 		move.w	#tiles_to_bytes(ArtTile_Shield_Sparks),d2
 		move.w	#$50,d3
 		jsr	(Add_To_DMA_Queue).l
@@ -28111,18 +28111,18 @@ Obj_Lightning_Shield:
 loc_182C6:
 		move.w	#1,$20(a0)
 		move.b	#-1,$34(a0)
-		move.l	#Obj_Lightning_Shield_Main,(a0)
+		move.l	#Obj_LightningShield_Main,(a0)
 
-Obj_Lightning_Shield_Main:
+Obj_LightningShield_Main:
 		movea.w	$42(a0),a2
 		btst	#1,$2B(a2)
 		bne.s	locret_1835E
 		cmpi.b	#$1C,$20(a2)
 		beq.s	locret_1835E
 		btst	#0,$2B(a2)
-		beq.w	Obj_Lightning_Shield_Destroy
+		beq.w	Obj_LightningShield_Destroy
 		btst	#6,$2A(a2)
-		bne.s	Obj_Lightning_Shield_DestroyUnderwater
+		bne.s	Obj_LightningShield_DestroyUnderwater
 		move.w	$10(a2),$10(a0)
 		move.w	$14(a2),$14(a0)
 		move.b	$2A(a2),$2A(a0)
@@ -28134,11 +28134,11 @@ Obj_Lightning_Shield_Main:
 
 loc_18328:
 		tst.b	$20(a0)
-		beq.s	Obj_Lightning_Shield_Display
-		bsr.s	Obj_Lightning_Shield_Create_Spark
+		beq.s	Obj_LightningShield_Display
+		bsr.s	Obj_LightningShield_CreateSpark
 		clr.b	$20(a0)
 
-Obj_Lightning_Shield_Display:
+Obj_LightningShield_Display:
 		lea	(Ani_LightningShield).l,a1
 		jsr	(Animate_Sprite).l
 		move.w	#$80,8(a0)
@@ -28155,9 +28155,9 @@ locret_1835E:
 		rts
 ; ---------------------------------------------------------------------------
 
-Obj_Lightning_Shield_DestroyUnderwater:
+Obj_LightningShield_DestroyUnderwater:
 		tst.w	(Palette_fade_timer).w
-		bne.s	Obj_Lightning_Shield_Destroy
+		bne.s	Obj_LightningShield_Destroy
 		andi.b	#$8E,$2B(a2)
 		lea	(Water_palette).w,a1
 		lea	(Target_water_palette).w,a2
@@ -28169,26 +28169,26 @@ loc_18378:
 		dbf	d0,loc_18378
 		move.w	#0,(Water_palette_line_3).w
 		move.b	#3,$24(a0)
-		move.l	#Obj_Lightning_Shield_DestroyUnderwater2,(a0)
+		move.l	#Obj_LightningShield_DestroyUnderwater2,(a0)
 		rts
 ; ---------------------------------------------------------------------------
 
-Obj_Lightning_Shield_Destroy:
+Obj_LightningShield_Destroy:
 		andi.b	#$8E,$2B(a2)
-		move.l	#Obj_Insta_Shield,(a0)
+		move.l	#Obj_InstaShield,(a0)
 		rts
 
 ; =============== S U B R O U T I N E =======================================
 
 
-Obj_Lightning_Shield_Create_Spark:
+Obj_LightningShield_CreateSpark:
 		lea	(SparkVelocities).l,a2
 		moveq	#3,d1
 
 loc_183AE:
 		bsr.w	Create_New_Sprite
 		bne.s	locret_183FC
-		move.l	#Obj_Lightning_Shield_Spark,(a1)
+		move.l	#Obj_LightningShield_Spark,(a1)
 		move.w	$10(a0),$10(a1)
 		move.w	$14(a0),$14(a1)
 		move.l	$C(a0),$C(a1)
@@ -28204,7 +28204,7 @@ loc_183AE:
 
 locret_183FC:
 		rts
-; End of function Obj_Lightning_Shield_Create_Spark
+; End of function Obj_LightningShield_CreateSpark
 
 ; ---------------------------------------------------------------------------
 SparkVelocities:dc.w  -$200, -$200
@@ -28213,21 +28213,21 @@ SparkVelocities:dc.w  -$200, -$200
 		dc.w   $200,  $200
 ; ---------------------------------------------------------------------------
 
-Obj_Lightning_Shield_Spark:
+Obj_LightningShield_Spark:
 		jsr	(MoveSprite2).l
 		addi.w	#$18,$1A(a0)
 		lea	(Ani_LightningShield).l,a1
 		jsr	(Animate_Sprite).l
 		tst.b	5(a0)
-		bne.s	Obj_Lightning_Shield_Spark_Delete
+		bne.s	Obj_LightningShield_Spark_Delete
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-Obj_Lightning_Shield_Spark_Delete:
+Obj_LightningShield_Spark_Delete:
 		jmp	(Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-Obj_Lightning_Shield_DestroyUnderwater2:
+Obj_LightningShield_DestroyUnderwater2:
 		subq.b	#1,$24(a0)
 		bpl.s	locret_18456
 		lea	(Target_water_palette).w,a1
@@ -28237,13 +28237,13 @@ Obj_Lightning_Shield_DestroyUnderwater2:
 loc_1844A:
 		move.l	(a1)+,(a2)+
 		dbf	d0,loc_1844A
-		move.l	#Obj_Insta_Shield,(a0)
+		move.l	#Obj_InstaShield,(a0)
 
 locret_18456:
 		rts
 ; ---------------------------------------------------------------------------
 
-Obj_Bubble_Shield:
+Obj_BubbleShield:
 		move.l	#Map_BubbleShield,$C(a0)
 		move.l	#DPLC_BubbleShield,$3C(a0)
 		move.l	#ArtUnc_BubbleShield,$38(a0)
@@ -28262,16 +28262,16 @@ loc_184A2:
 		move.b	#-1,$34(a0)
 		movea.w	$42(a0),a1
 		bsr.w	Player_ResetAirTimer
-		move.l	#Obj_Bubble_Shield_Main,(a0)
+		move.l	#Obj_BubbleShield_Main,(a0)
 
-Obj_Bubble_Shield_Main:
+Obj_BubbleShield_Main:
 		movea.w	$42(a0),a2
 		btst	#1,$2B(a2)
 		bne.s	locret_18518
 		cmpi.b	#$1C,$20(a2)
 		beq.s	locret_18518
 		btst	#0,$2B(a2)
-		beq.s	Obj_Bubble_Shield_Destroy
+		beq.s	Obj_BubbleShield_Destroy
 		move.w	$10(a2),$10(a0)
 		move.w	$14(a2),$14(a0)
 		move.b	$2A(a2),$2A(a0)
@@ -28292,9 +28292,9 @@ locret_18518:
 		rts
 ; ---------------------------------------------------------------------------
 
-Obj_Bubble_Shield_Destroy:
+Obj_BubbleShield_Destroy:
 		andi.b	#$8E,$2B(a2)
-		move.l	#Obj_Insta_Shield,(a0)
+		move.l	#Obj_InstaShield,(a0)
 		rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -32771,10 +32771,10 @@ off_1B69C:	dc.w Monitor_Give_Eggman-off_1B69C
 		dc.w Monitor_Give_1up-off_1B69C
 		dc.w Monitor_Give_Eggman-off_1B69C
 		dc.w Monitor_Give_Rings-off_1B69C
-		dc.w Monitor_Give_Super_Sneakers-off_1B69C
-		dc.w Monitor_Give_Fire_Shield-off_1B69C
-		dc.w Monitor_Give_Lightning_Shield-off_1B69C
-		dc.w Monitor_Give_Bubble_Shield-off_1B69C
+		dc.w Monitor_Give_SpeedShoes-off_1B69C
+		dc.w Monitor_Give_FireShield-off_1B69C
+		dc.w Monitor_Give_LightningShield-off_1B69C
+		dc.w Monitor_Give_BubbleShield-off_1B69C
 		dc.w Monitor_Give_Invincibility-off_1B69C
 		dc.w Monitor_Give_SuperSonic-off_1B69C
 ; ---------------------------------------------------------------------------
@@ -32831,7 +32831,7 @@ loc_1B71C:
 		bra.w	Monitor_Give_Eggman
 ; ---------------------------------------------------------------------------
 
-Monitor_Give_Super_Sneakers:
+Monitor_Give_SpeedShoes:
 		addq.w	#1,(a2)
 		bset	#2,$2B(a1)
 		move.b	#$96,$36(a1)
@@ -32855,7 +32855,7 @@ loc_1B76A:
 		jmp	(Change_Music_Tempo).l
 ; ---------------------------------------------------------------------------
 
-Monitor_Give_Fire_Shield:
+Monitor_Give_FireShield:
 		addq.w	#1,(a2)
 		andi.b	#$8E,$2B(a1)
 		bset	#0,$2B(a1)
@@ -32864,18 +32864,18 @@ Monitor_Give_Fire_Shield:
 		jsr	(Play_Sound).l
 		tst.b	$43(a0)
 		bne.s	loc_1B7A2
-		move.l	#Obj_Fire_Shield,(Shield).w
+		move.l	#Obj_FireShield,(Shield).w
 		move.w	a1,(Shield+parent).w
 		rts
 ; ---------------------------------------------------------------------------
 
 loc_1B7A2:
-		move.l	#Obj_Fire_Shield,(Shield_P2).w
+		move.l	#Obj_FireShield,(Shield_P2).w
 		move.w	a1,(Shield_P2+parent).w
 		rts
 ; ---------------------------------------------------------------------------
 
-Monitor_Give_Lightning_Shield:
+Monitor_Give_LightningShield:
 		addq.w	#1,(a2)
 		andi.b	#$8E,$2B(a1)
 		bset	#0,$2B(a1)
@@ -32884,18 +32884,18 @@ Monitor_Give_Lightning_Shield:
 		jsr	(Play_Sound).l
 		tst.b	$43(a0)
 		bne.s	loc_1B7E0
-		move.l	#Obj_Lightning_Shield,(Shield).w
+		move.l	#Obj_LightningShield,(Shield).w
 		move.w	a1,(Shield+parent).w
 		rts
 ; ---------------------------------------------------------------------------
 
 loc_1B7E0:
-		move.l	#Obj_Lightning_Shield,(Shield_P2).w
+		move.l	#Obj_LightningShield,(Shield_P2).w
 		move.w	a1,(Shield_P2+parent).w
 		rts
 ; ---------------------------------------------------------------------------
 
-Monitor_Give_Bubble_Shield:
+Monitor_Give_BubbleShield:
 		addq.w	#1,(a2)
 		andi.b	#$8E,$2B(a1)
 		bset	#0,$2B(a1)
@@ -32904,13 +32904,13 @@ Monitor_Give_Bubble_Shield:
 		jsr	(Play_Sound).l
 		tst.b	$43(a0)
 		bne.s	loc_1B81E
-		move.l	#Obj_Bubble_Shield,(Shield).w
+		move.l	#Obj_BubbleShield,(Shield).w
 		move.w	a1,(Shield+parent).w
 		rts
 ; ---------------------------------------------------------------------------
 
 loc_1B81E:
-		move.l	#Obj_Bubble_Shield,(Shield_P2).w
+		move.l	#Obj_BubbleShield,(Shield_P2).w
 		move.w	a1,(Shield_P2+parent).w
 		rts
 ; ---------------------------------------------------------------------------
@@ -79066,7 +79066,7 @@ sub_43D42:
 
 loc_43DA2:
 		lea	(Player_1).w,a1
-		move.l	#Obj_Fire_Shield,(Shield).w
+		move.l	#Obj_FireShield,(Shield).w
 		move.w	a1,(Shield+parent).w
 		andi.b	#-$72,$2B(a1)
 		bset	#0,$2B(a1)
@@ -79078,7 +79078,7 @@ loc_43DA2:
 
 loc_43DCC:
 		lea	(Player_1).w,a1
-		move.l	#Obj_Bubble_Shield,(Shield).w
+		move.l	#Obj_BubbleShield,(Shield).w
 		move.w	a1,(Shield+parent).w
 		andi.b	#-$72,$2B(a1)
 		bset	#0,$2B(a1)
@@ -79090,7 +79090,7 @@ loc_43DCC:
 
 loc_43DF6:
 		lea	(Player_1).w,a1
-		move.l	#Obj_Lightning_Shield,(Shield).w
+		move.l	#Obj_LightningShield,(Shield).w
 		move.w	a1,(Shield+parent).w
 		andi.b	#-$72,$2B(a1)
 		bset	#0,$2B(a1)
@@ -118876,7 +118876,7 @@ ArtUnc_FireShield:
 ArtUnc_LightningShield:
 		binclude "General/Sprites/Shields/Lightning Shield.bin"
 		even
-ArtUnc_Obj_Lightning_Shield_Sparks:
+ArtUnc_LightningShield_Sparks:
 		binclude "General/Sprites/Shields/Sparks.bin"
 		even
 ArtUnc_BubbleShield:
