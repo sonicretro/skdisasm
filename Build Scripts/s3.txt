@@ -52,7 +52,7 @@
 #split	0x0008C1D4,0x0008C234,General\Sprites\S2Menu\Palettes\Proto Level Select.bin
 #split	0x0008CDB4,0x0008CE14,Levels\Pachinko\Palettes\S3.bin
 #split	0x0008CE14,0x0008CE74,Levels\Slots\Palettes\S3.bin
-#split	0x00164896,0x00164A96,Levels\Misc\Palettes\MGZ Fade to CNZ.bin
+#split	0x00164896,0x00164A96,Levels\MGZ\Palettes\Fade to CNZ.bin
 #split	0x0019D262,0x0019D282,General\Save Menu\Palettes\BG.bin
 #split	0x0019D282,0x0019D2A2,General\Competition Menu\Palettes\BG.bin
 
@@ -381,7 +381,7 @@
 #split	0x0014FF48,0x00150018,General\Title\Enigma Map\S3 Sonic C.bin
 #split	0x00150018,0x00150112,General\Title\Enigma Map\S3 Sonic D.bin
 #split	0x00150112,0x001501E0,General\Title\Enigma Map\S3 BG.bin
-#split	0x0019D2A2,0x0019D4A4,General\Title\Enigma Map\S3 Menu BG.bin
+#split	0x0019D2A2,0x0019D4A4,General\Save Menu\Enigma Map\Menu BG.bin
 #split	0x0019F104,0x0019F150,General\Competition Menu\Enigma Map\Level Border.bin
 #split	0x0019F24C,0x0019F36C,General\Competition Menu\Enigma Map\Level Images.bin
 #split	0x0019F36C,0x0019F46E,General\Competition Menu\Enigma Map\Level Names.bin
