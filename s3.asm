@@ -8236,7 +8236,7 @@ LevSelControls_SwitchSide:
 		move.w	d0,(Level_select_option).w
 
 loc_6C1A:
-		bra.s	loc_6C3C
+		bra.s	LevelSelect_PickCharacterNumber
 ; ---------------------------------------------------------------------------
 		rts
 ; ---------------------------------------------------------------------------
@@ -8273,7 +8273,7 @@ LevelSelect_SwitchTable:
 		dc.b $B		; 29
 ; ---------------------------------------------------------------------------
 
-loc_6C3C:
+LevelSelect_PickCharacterNumber:
 		btst	#5,(Ctrl_1_pressed).w
 		beq.s	loc_6C56
 		addq.b	#1,(P1_character).w
@@ -21512,8 +21512,8 @@ loc_1328A:
 		subq.b	#1,(Life_count).w
 		bne.s	loc_132F0
 		move.w	#0,$3E(a0)
-		move.l	#loc_2C9AC,(Reserved_object_3).w
-		move.l	#loc_2C9AC,(Dynamic_object_RAM).w
+		move.l	#Obj_GameOver,(Reserved_object_3).w
+		move.l	#Obj_GameOver,(Dynamic_object_RAM).w
 		move.b	#0,(Reserved_object_3+mapping_frame).w
 		move.b	#1,(Dynamic_object_RAM+mapping_frame).w
 		move.w	a0,(Reserved_object_3+objoff_3E).w
@@ -21533,8 +21533,8 @@ loc_132F0:
 		tst.b	(Time_over_flag).w
 		beq.s	locret_1331E
 		move.w	#0,$3E(a0)
-		move.l	#loc_2C9AC,(Reserved_object_3).w
-		move.l	#loc_2C9AC,(Dynamic_object_RAM).w
+		move.l	#Obj_GameOver,(Reserved_object_3).w
+		move.l	#Obj_GameOver,(Dynamic_object_RAM).w
 		move.b	#2,(Reserved_object_3+mapping_frame).w
 		move.b	#3,(Dynamic_object_RAM+mapping_frame).w
 		move.w	a0,(Reserved_object_3+objoff_3E).w
@@ -52566,7 +52566,7 @@ loc_2C9A6:
 		jmp	(Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2C9AC:
+Obj_GameOver:
 		tst.l	(Nem_decomp_queue).w
 		beq.s	loc_2C9B4
 		rts
@@ -79974,7 +79974,7 @@ loc_44A72:
 loc_44A78:
 		movea.w	$46(a0),a1
 		btst	#7,$2A(a1)
-		bne.s	loc_44A9E
+		bne.s	CutsceneKnux_Delete
 		move.b	#8,7(a0)
 		moveq	#$13,d1
 		move.w	#$20,d2
@@ -79983,7 +79983,7 @@ loc_44A78:
 		jmp	(SolidObjectFull2).l
 ; ---------------------------------------------------------------------------
 
-loc_44A9E:
+CutsceneKnux_Delete:
 		jmp	(Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
