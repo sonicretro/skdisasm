@@ -118968,13 +118968,13 @@ ArtNem_DiagonalSpring:
 ArtNem_HUDText:	binclude "General/Sprites/HUD Icon/HUD Text.bin"
 		even
 ArtNem_SonicLifeIcon:
-		binclude "General/Sprites/HUD Icon/Sonic life icon.bin"
+		binclude "General/Sprites/HUD Icon/Sonic Life icon.bin"
 		even
 ArtNem_TailsLifeIcon:
 		binclude "General/Sprites/HUD Icon/Tails Life Icon.bin"
 		even
 ArtNem_KnucklesLifeIcon:
-		binclude "General/Sprites/HUD Icon/Knuckles life icon.bin"
+		binclude "General/Sprites/HUD Icon/Knuckles Life icon.bin"
 		even
 ArtNem_Ring:	binclude "General/Sprites/Ring/Ring.bin"
 		even
@@ -119330,7 +119330,7 @@ Map_LBZFinalBoss1:
 		include "Levels/LBZ/Misc Object Data/Map - Final Boss 1.asm"
 Map_LBZDeathEggSmall:
 		include "Levels/LBZ/Misc Object Data/Map - Death Egg Small.asm"
-Pal_MGZFadeCNZ:	binclude "Levels/Misc/Palettes/MGZ Fade to CNZ.bin"
+Pal_MGZFadeCNZ:	binclude "Levels/MGZ/Palettes/Fade to CNZ.bin"
 		even
 Map_LBZFinalBoss2:
 		include "Levels/LBZ/Misc Object Data/Map - Final Boss 2.asm"
@@ -119737,7 +119737,7 @@ Pal_SaveMenuBG:	binclude "General/Save Menu/Palettes/BG.bin"
 Pal_CompetitionMenuBG:
 		binclude "General/Competition Menu/Palettes/BG.bin"
 		even
-MapEni_S3MenuBG:binclude "General/Title/Enigma Map/S3 Menu BG.bin"
+MapEni_S3MenuBG:binclude "General/Save Menu/Enigma Map/Menu BG.bin"
 		even
 ArtKos_S3MenuBG:binclude "General/Save Menu/Kosinski Art/Menu BG.bin"
 		even

@@ -690,7 +690,7 @@ Map_LBZFinalBoss1:		include "Levels/LBZ/Misc Object Data/Map - Final Boss 1.asm"
 
 Map_LBZDeathEggSmall:		include "Levels/LBZ/Misc Object Data/Map - Death Egg Small.asm"
 
-Pal_MGZFadeCNZ:			binclude "Levels/Misc/Palettes/MGZ Fade to CNZ.bin"
+Pal_MGZFadeCNZ:			binclude "Levels/MGZ/Palettes/Fade to CNZ.bin"
 	even
 Map_LBZFinalBoss2:		include "Levels/LBZ/Misc Object Data/Map - Final Boss 2.asm"
 
@@ -920,7 +920,7 @@ Pal_SaveMenuBG:			binclude "General/Save Menu/Palettes/BG.bin"
 	even
 Pal_CompetitionMenuBG:		binclude "General/Competition Menu/Palettes/BG.bin"
 	even
-MapEni_S3MenuBG:		binclude "General/Title/Enigma Map/S3 Menu BG.bin"
+MapEni_S3MenuBG:		binclude "General/Save Menu/Enigma Map/Menu BG.bin"
 	even
 ArtKos_S3MenuBG:		binclude "General/Save Menu/Kosinski Art/Menu BG.bin"
 	even
