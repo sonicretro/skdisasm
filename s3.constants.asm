@@ -1,13 +1,13 @@
 	phase Level_layout_header+$400
-SStage_extra_sprites :=		*			; some extra sprite info for special stages
-				ds.b $70		; Sonic & Knuckles has a different address... So uh... Yes
+SStage_extra_sprites :=		*		; Sonic & Knuckles uses a different address
+				ds.b $70		; some extra sprite info for special stages
 			ds.b $390			; unused
-SStage_collision_response_list := *			; some extra sprite info for special stages
-			ds.b $100			; unused
-SStage_unkA500 :=		*			; unknown special stage array
-			ds.b $100			; Sonic & Knuckles has a different address... So uh... Yes
-SStage_unkA600 :=		*			; unknown special stage array
-			ds.b $100			; Sonic & Knuckles has a different address... So uh... Yes
+SStage_collision_response_list := *		; Sonic & Knuckles uses a different address
+			ds.b $100			; some extra sprite info for special stages
+SStage_unkA500 :=		*		; Sonic & Knuckles uses a different address
+			ds.b $100			; unknown special stage array
+SStage_unkA600 :=		*		; Sonic & Knuckles uses a different address
+			ds.b $100			; unknown special stage array
 	dephase
 
 	phase Stat_table+$12
@@ -39,22 +39,22 @@ _unkFF98 =			_tempFF98		; word ; unused
 	dephase
 
 	phase Demo_mode_flag
-Level_select_flag :=		*
-				ds.b 1			; Sonic & Knuckles has a different address... So uh... Yes
-Slow_motion_flag :=		*
-				ds.b 1			; Sonic & Knuckles has a different address... So uh... Yes
-Debug_cheat_flag :=		*			; set if the debug cheat's been entered
-				ds.w 1			; Sonic & Knuckles has a different address... So uh... Yes
-Level_select_cheat_counter :=	*			; progress entering level select cheat, unused
-				ds.w 1			; Sonic & Knuckles has a different address... So uh... Yes
-Debug_mode_cheat_counter :=	*			; progress entering debug mode cheat, unused
-				ds.w 1			; Sonic & Knuckles has a different address... So uh... Yes
-Competition_mode :=		*
-				ds.w 1			; Sonic & Knuckles has a different address... So uh... Yes
-P1_character :=			*			; 0 := Sonic, 1 := Tails, 2 := Knuckles
-				ds.b 1			; Sonic & Knuckles has a different address... So uh... Yes
-P2_character :=			*
-				ds.b 1			; Sonic & Knuckles has a different address... So uh... Yes
+Level_select_flag :=		*		; Sonic & Knuckles uses a different address
+				ds.b 1
+Slow_motion_flag :=		*		; Sonic & Knuckles uses a different address
+				ds.b 1
+Debug_cheat_flag :=		*		; Sonic & Knuckles uses a different address
+				ds.w 1			; set if the debug cheat's been entered
+Level_select_cheat_counter :=	*		; Sonic & Knuckles uses a different address
+				ds.w 1			; progress entering level select cheat, unused
+Debug_mode_cheat_counter :=	*		; Sonic & Knuckles uses a different address
+				ds.w 1			; progress entering debug mode cheat, unused
+Competition_mode :=		*		; Sonic & Knuckles uses a different address
+				ds.w 1
+P1_character :=			*		; Sonic & Knuckles uses a different address
+				ds.b 1			; 0 = Sonic, 1 = Tails, 2 = Knuckles
+P2_character :=			*		; Sonic & Knuckles uses a different address
+				ds.b 1
 _dbgFFDC			ds.b 1			; seems like a leftover constant. Existed in Sonic 1 and Sonic 2 as well
 _dbgFFDD			ds.b 1			; seems like a leftover constant. Existed in Sonic 1 and Sonic 2 as well
 _dbgFFDE			ds.b 1			; seems like a leftover constant. Existed in Sonic 1 and Sonic 2 as well
@@ -62,20 +62,20 @@ _dbgFFDF			ds.b 1			; seems like a leftover constant. Existed in Sonic 1 and Son
 	dephase
 
 	phase V_int_jump
-Demo_mode_flag :=		*
-				ds.w 1			; Sonic & Knuckles has a different address... So uh... Yes
-Next_demo_number :=		*
-				ds.w 1			; Sonic & Knuckles has a different address... So uh... Yes
+Demo_mode_flag :=		*		; Sonic & Knuckles uses a different address
+				ds.w 1
+Next_demo_number :=		*		; Sonic & Knuckles uses a different address
+				ds.w 1
 Ending_demo_number		ds.w 1			; zone for the ending demos, unused
-V_blank_cycles :=		*			; the number of cycles between V-blanks
-				ds.w 1			; Sonic & Knuckles has a different address... So uh... Yes
-Graphics_flags :=		*			; bit 7 set := English system, bit 6 set := PAL system
-				ds.b 1			; Sonic & Knuckles has a different address... So uh... Yes
+V_blank_cycles :=		*		; Sonic & Knuckles uses a different address
+				ds.w 1			; the number of cycles between V-blanks
+Graphics_flags :=		*		; Sonic & Knuckles uses a different address
+				ds.b 1			; bit 7 set = English system, bit 6 set = PAL system
 			ds.b 1				; unused
-Debug_mode_flag :=		*
-				ds.w 1			; Sonic 3 has a different address... So uh... Yes
-Checksum_string :=		*			; set to 'init' once the checksum routine has run
-				ds.l 1			; Sonic & Knuckles has a different address... So uh... Yes
+Debug_mode_flag :=		*		; Sonic & Knuckles uses a different address
+				ds.w 1
+Checksum_string :=		*		; Sonic & Knuckles uses a different address
+				ds.l 1			; set to 'init' once the checksum routine has run
 	dephase
 	!org 0
 

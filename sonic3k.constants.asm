@@ -289,13 +289,13 @@ Pos_table_P2			ds.b $100		; used by Player 2 in competition mode
 Pos_table 			ds.b $100		;
 Competition_saved_data		ds.b $54		; saved data from Competition Mode
 			ds.b $C				; unused
-Save_pointer :=			*			; pointer to the active save slot in 1 player mode
-				ds.l 1			; Sonic 3 has a different address... So uh... Yes
+Save_pointer :=			*		; S3 uses a different address
+				ds.l 1			; pointer to the active save slot in 1 player mode
 			ds.w 1				; unused
 Emerald_flicker_flag		ds.w 1			; controls the emerald flicker in save screen and special stage results.
 			ds.b $44			; unused
-Saved_data :=			*			; saved data from 1 player mode
-				ds.b $54		; Sonic 3 has a different address... So uh... Yes
+Saved_data :=			*		; S3 uses a different address
+				ds.b $54		; saved data from 1 player mode
 Ring_status_table		ds.b $400		; 1 word per ring
 Object_respawn_table		ds.b $300		; 1 byte per object, every object in the level gets an entry
 
@@ -906,47 +906,47 @@ Next_extra_life_score_P2	ds.l 1			; left over from Sonic 2
 			ds.w 1				; unused
 Debug_P1_mappings		ds.l 1			; player 1 mappings while in debug mode
 Debug_P2_mappings		ds.w 1			; long! ; player 2 mappings while in debug mode
-Demo_mode_flag :=		*
-				ds.w 1			; Sonic 3 has a different address... So uh... Yes
-Next_demo_number :=		*
-				ds.w 1			; Sonic 3 has a different address... So uh... Yes
-Blue_spheres_stage_flag :=	*			; set if a Blue Sphere special stage is being run
-				ds.b 1			; Sonic 3 has a different address... So uh... Yes
+Demo_mode_flag :=		*		; S3 uses a different address
+				ds.w 1
+Next_demo_number :=		*		; S3 uses a different address
+				ds.w 1
+Blue_spheres_stage_flag :=	*		; S3 uses a different address
+				ds.b 1			; set if a Blue Sphere special stage is being run
 			ds.b 1				; unused
-V_blank_cycles :=		*			; the number of cycles between V-blanks
-				ds.w 1			; Sonic 3 has a different address... So uh... Yes
-Graphics_flags :=		*			; bit 7 set := English system, bit 6 set := PAL system
-				ds.b 1			; Sonic 3 has a different address... So uh... Yes
+V_blank_cycles :=		*		; S3 uses a different address
+				ds.w 1			; the number of cycles between V-blanks
+Graphics_flags :=		*		; S3 uses a different address
+				ds.b 1			; bit 7 set = English system, bit 6 set = PAL system
 			ds.b 1				; unused
-Debug_mode_flag :=		*
-				ds.w 1			; Sonic 3 has a different address... So uh... Yes
+Debug_mode_flag :=		*		; S3 uses a different address
+				ds.w 1
 			ds.l 1				; unused
-Level_select_flag :=		*
-				ds.b 1			; Sonic 3 has a different address... So uh... Yes
-Slow_motion_flag :=		*
-				ds.b 1			; Sonic 3 has a different address... So uh... Yes
-Debug_cheat_flag :=		*			; set if the debug cheat's been entered
-				ds.w 1			; Sonic 3 has a different address... So uh... Yes
-Level_select_cheat_counter :=	*			; progress entering level select cheat, unused
-				ds.w 1			; Sonic 3 has a different address... So uh... Yes
-Debug_mode_cheat_counter :=	*			; progress entering debug mode cheat, unused
-				ds.w 1			; Sonic 3 has a different address... So uh... Yes
-Competition_mode :=		*
-				ds.w 1			; Sonic 3 has a different address... So uh... Yes
-P1_character :=			*			; 0 := Sonic, 1 := Tails, 2 := Knuckles
-				ds.b 1			; Sonic 3 has a different address... So uh... Yes
-P2_character :=			*
-				ds.b 1			; Sonic 3 has a different address... So uh... Yes
+Level_select_flag :=		*		; S3 uses a different address
+				ds.b 1
+Slow_motion_flag :=		*		; S3 uses a different address
+				ds.b 1
+Debug_cheat_flag :=		*		; S3 uses a different address
+				ds.w 1			; set if the debug cheat's been entered
+Level_select_cheat_counter :=	*		; S3 uses a different address
+				ds.w 1			; progress entering level select cheat, unused
+Debug_mode_cheat_counter :=	*		; S3 uses a different address
+				ds.w 1			; progress entering debug mode cheat, unused
+Competition_mode :=		*		; S3 uses a different address
+				ds.w 1
+P1_character :=			*		; S3 uses a different address
+				ds.b 1			; 0 := Sonic, 1 := Tails, 2 := Knuckles
+P2_character :=			*		; S3 uses a different address
+				ds.b 1
 			ds.l 1				; unused
 
-V_int_jump :=			*			; contains an instruction to jump to the V-int handler
-				ds.b 6			; Sonic 3 has a different address... So uh... Yes
+V_int_jump :=			*		; S3 uses a different address
+				ds.b 6			; contains an instruction to jump to the V-int handler
 V_int_addr :=			V_int_jump+2		; long
-H_int_jump :=			*			; contains an instruction to jump to the H-int handler
-				ds.b 6			; Sonic 3 has a different address... So uh... Yes
+H_int_jump :=			*		; S3 uses a different address
+				ds.b 6			; contains an instruction to jump to the H-int handler
 H_int_addr :=			H_int_jump+2		; long
-Checksum_string :=		*			; set to 'SM&K' once the checksum routine has run
-				ds.l 1			; Sonic 3 has a different address... So uh... Yes
+Checksum_string :=		*		; S3 uses a different address
+				ds.l 1			; set to 'SM&K' once the checksum routine has run
 
 .check =	(*)&$FFFFFF
 	if (.check>0)&(.check<$FF0000)
@@ -997,8 +997,8 @@ Special_stage_emerald_timer	ds.b 1			; counts down when the emerald appears, whe
 Special_stage_interact		ds.w 1			; address of the last bumper touched, or the emerald at the end of the stage
 Special_stage_started		ds.b 1			; set when the player begins moving at the start of the stage
 			ds.b $2F			; unused
-SStage_extra_sprites :=		*			; some extra sprite info for special stages
-				ds.b $70		; Sonic 3 has a different address... So uh... Yes
+SStage_extra_sprites :=		*		; S3 uses a different address
+				ds.b $70		; some extra sprite info for special stages
 	dephase
 ; ---------------------------------------------------------------------------
 ; Art tile stuff
