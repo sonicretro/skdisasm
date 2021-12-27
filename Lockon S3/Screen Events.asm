@@ -110,19 +110,19 @@ ALZ_BackgroundEvent:
 
 BPZ_BackgroundEvent:
 		jsr	BPZ_Deformation(pc)
-		lea	BPZ_DeformArray(pc),a4
+		lea	BPZ_BGDeformArray(pc),a4
 		bra.s	loc_23A764
 ; ---------------------------------------------------------------------------
 
 CGZ_BackgroundEvent:
 		jsr	CGZ_Deformation(pc)
-		lea	CGZ_DeformArray(pc),a4
+		lea	CGZ_BGDeformArray(pc),a4
 		bra.s	loc_23A764
 ; ---------------------------------------------------------------------------
 
 EMZ_BackgroundEvent:
 		jsr	EMZ_Deformation(pc)
-		lea	EMZ_DeformArray(pc),a4
+		lea	EMZ_BGDeformArray(pc),a4
 
 loc_23A764:
 		lea	(H_scroll_buffer).w,a1
@@ -438,9 +438,12 @@ Comp_ScreenInitArray:
 		dc.w  $3FF, $1FF, $1F0,   $C, $100, $100,   $F,  $40
 ALZ_BGDeformArray:
 		dc.w  $18,   8,   8,   8,   8,   8, $2E,   6,  $D,$803F,$7FFF
-BPZ_DeformArray:dc.w  $88, $16,  $A, $28, $10,   8,$7FFF
-CGZ_DeformArray:dc.w  $50,   8, $10, $10,$7FFF
-EMZ_DeformArray:dc.w  $10, $10, $10, $10,   8,  $C, $24, $38, $20,$7FFF
+BPZ_BGDeformArray:
+		dc.w  $88, $16,  $A, $28, $10,   8,$7FFF
+CGZ_BGDeformArray:
+		dc.w  $50,   8, $10, $10,$7FFF
+EMZ_BGDeformArray:
+		dc.w  $10, $10, $10, $10,   8,  $C, $24, $38, $20,$7FFF
 ; ---------------------------------------------------------------------------
 
 AIZ_TreeReveal:
@@ -1615,7 +1618,7 @@ Gumball_ScreenInit:
 		lea	Gumball_VScrollArray(pc),a4
 		lea	(HScroll_table).w,a5
 		move.w	(Camera_X_pos_rounded).w,d0
-		jmp	(RefreshPlaneDirectVScroll).l
+		jmp	(Refresh_PlaneDirectVScroll).l
 ; ---------------------------------------------------------------------------
 
 Gumball_ScreenEvent:
