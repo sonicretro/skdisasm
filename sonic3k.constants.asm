@@ -189,9 +189,9 @@ Status_BublShield   = 6
 
 ; ---------------------------------------------------------------------------
 ; Elemental Shield DPLC variables
-LastLoadedDPLC      = $34
-Art_Address         = $38
-DPLC_Address        = $3C
+shield_prev_frame   = $34
+shield_art          = $38
+shield_plc          = $3C
 
 ; ---------------------------------------------------------------------------
 ; Address equates
@@ -434,7 +434,7 @@ Not_ghost_flag			ds.b 1			; set if Player 2 in competition mode isn't a ghost of
 Competition_menu_zone		ds.b 1			; competition mode zone id. This is different from the zone order in game
 Dataselect_entry		ds.b 1			; the selected save entry in data select menu. This includes no save and delete options, too
 Dataselect_nosave_player	ds.w 1			; Player mode for NO SAVE option in data select menu
-Competition_menu_monitors	ds.b 1			; 0 = Enabled, FF = Disabled
+Competition_menu_items		ds.b 1			; 0 = Enabled, FF = Disabled
 			ds.b 1				; unused
 Demo_start_button		ds.b 1			; keeps track of whether controller 1 has pressed the start button. May be used by the demo data itself
 			ds.b 1				; unused
@@ -661,10 +661,10 @@ _unkFA8A			ds.w 1
 _unkFA8C			ds.w 1			; unused?
 _unkFA8E			ds.w 1
 _unkFA90			ds.w 1
-Target_camera_max_X_pos		ds.w 1			; the target camera maximum x-position
-Target_camera_min_X_pos		ds.w 1			; the target camera minimum x-position
-Target_camera_min_Y_pos		ds.w 1			; the target camera minimum y-position
-Target_camera_max_Y_pos		ds.w 1			; the target camera maximum y-position
+Camera_stored_max_X_pos		ds.w 1			; the target camera maximum x-position
+Camera_stored_min_X_pos		ds.w 1			; the target camera minimum x-position
+Camera_stored_min_Y_pos		ds.w 1			; the target camera minimum y-position
+Camera_stored_max_Y_pos		ds.w 1			; the target camera maximum y-position
 Slotted_object_bits		ds.w 1			; bits to determine which slots are used for slotted objects
 			ds.b 6				; unused
 _unkFAA2			ds.b 1
@@ -865,12 +865,13 @@ Sound_test_sound		ds.w 1
 Title_screen_option		ds.b 1
 			ds.b 1				; unused
 _tempFF88		ds.w 1				; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles and Sonic 3 Complete
-Competition_mode_monitors	ds.b 1			; 0 = Enabled, FF = Disabled.
-Competition_mode_type		ds.b 1			; 0 = grand prix, 3 = match race, -1 = time attack
+Competition_settings =		*			; both items and game type
+Competition_items		ds.b 1			; 0 = Enabled, FF = Disabled.
+Competition_type		ds.b 1			; 0 = grand prix, 3 = match race, -1 = time attack
 _tempFF8C		ds.b 1				; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles and Sonic 3 Complete
 			ds.b 1				; unused
 Total_bonus_countup		ds.w 1			; the total points to be added due to various bonuses this frame in the end of level results screen
-Level_music			ds.w 1
+Current_music			ds.w 1
 Collected_special_ring_array	ds.l 1			; each bit indicates a special stage entry ring in the current zone
 Saved2_status_secondary		ds.b 1
 Respawn_table_keep		ds.b 1			; if set, respawn table is not reset during level load
@@ -887,9 +888,9 @@ Blue_spheres_current_level	ds.l 1			; number shown at the top of the full game m
 Blue_spheres_option		ds.b 1			; 0 = level, 1 = start, 2 = code
 Blue_spheres_progress_flag	ds.b 1			; 0 = normal, -1 = disabled (single stage mode or using a code from single stage mode)
 Blue_spheres_difficulty		ds.b 1			; value currently displayed
-Blue_spheres_target_difficulty	ds.b 1			; byte ; value read from the layout
+Blue_spheres_target_difficulty	ds.b 1			; value read from the layout
 SK_alone_flag			ds.w 1			; -1 if Sonic 3 isn't locked on
-Emerald_count =			*			; both chaos and super emeralds
+Emerald_counts =		*			; both chaos and super emeralds
 Chaos_emerald_count		ds.b 1
 Super_emerald_count		ds.b 1
 Collected_emeralds_array	ds.b 7			; 1 byte per emerald, 0 = not collected, 1 = chaos emerald collected, 2 = grey super emerald, 3 = super emerald collected
@@ -904,8 +905,8 @@ Title_anim_frame		ds.b 1			; title animation frame number
 Next_extra_life_score		ds.l 1
 Next_extra_life_score_P2	ds.l 1			; left over from Sonic 2
 			ds.w 1				; unused
-Debug_P1_mappings		ds.l 1			; player 1 mappings while in debug mode
-Debug_P2_mappings		ds.w 1			; long! ; player 2 mappings while in debug mode
+Debug_saved_mappings		ds.l 1			; player 1 mappings before entering debug mode
+Debug_saved_art_tile		ds.w 1			; player 1 art_tile before entering debug mode
 Demo_mode_flag :=		*		; S3 uses a different address
 				ds.w 1
 Next_demo_number :=		*		; S3 uses a different address
@@ -946,7 +947,8 @@ H_int_jump :=			*		; S3 uses a different address
 				ds.b 6			; contains an instruction to jump to the H-int handler
 H_int_addr :=			H_int_jump+2		; long
 Checksum_string :=		*		; S3 uses a different address
-				ds.l 1			; set to 'SM&K' once the checksum routine has run
+				ds.l 1			; set to Ref_Checksum_String once the checksum routine has run
+Ref_Checksum_String := 'SM&K'
 
 .check =	(*)&$FFFFFF
 	if (.check>0)&(.check<$FF0000)
@@ -984,7 +986,7 @@ Special_stage_prev_Y_pos	ds.w 1
 Special_stage_spheres_left	ds.w 1
 Special_stage_ring_count	ds.w 1
 Special_stage_sphere_HUD_flag	ds.b 1
-Special_stage_extra_life_flags	ds.b 1			; byte ; when bit 7 is set, the ring HUD is updated
+Special_stage_extra_life_flags	ds.b 1			; when bit 7 is set, the ring HUD is updated
 Special_stage_rate_timer	ds.w 1			; when this reaches 0, the special stage speeds up
 Special_stage_jumping_P2	ds.b 1			; $80 = normal jump, $81 = spring
 			ds.b 1				; unused
@@ -1054,7 +1056,7 @@ mus_Stop			ds.b 1		; $E2 - stop music and sound effects
 mus_MutePSG			ds.b 1		; $E3 - mute all PSG channels
 mus_StopSFX			ds.b 1		; $E4 - stop all sound effects
 mus_FadeOut2			ds.b 1		; $E5 - fade out music (duplicate)
-Mus__EndCmd =			*		; next ID after last sound command
+mus__EndCmd =			*		; next ID after last sound command
 
 mus_S2SEGA =			$FA		; $FA - SEGA sound ID in Sonic 2
 mus_StopSEGA =			$FE		; $FE - Stop SEGA sound
@@ -1064,7 +1066,7 @@ mus_SEGA =			$FF		; $FF - Play SEGA sound
 ; Music ID's list. These do not affect the sound driver, be careful.
 
 	phase $01
-Mus__First =			*		; ID of the first music
+mus__First =			*		; ID of the first music
 mus_AIZ1			ds.b 1		; $01
 mus_AIZ2			ds.b 1		; $02
 mus_HCZ1			ds.b 1		; $03
@@ -1084,16 +1086,16 @@ mus_MHZ2			ds.b 1		; $10
 mus_SOZ1			ds.b 1		; $11
 mus_SOZ2			ds.b 1		; $12
 mus_LRZ1			ds.b 1		; $13
-mus_HPZ				ds.b 1		; $14
+mus_LRZ2			ds.b 1		; $14
 mus_SSZ				ds.b 1		; $15
 mus_DEZ1			ds.b 1		; $16
 mus_DEZ2			ds.b 1		; $17
 mus_MinibossK			ds.b 1		; $18
 mus_EndBoss			ds.b 1		; $19
 mus_DDZ				ds.b 1		; $1A
-mus_MagneticOrbs		ds.b 1		; $1B
+mus_Pachinko			ds.b 1		; $1B
 mus_SpecialStage		ds.b 1		; $1C
-mus_SlotMachine			ds.b 1		; $1D
+mus_Slots			ds.b 1		; $1D
 mus_Gumball			ds.b 1		; $1E
 mus_Knuckles			ds.b 1		; $1F
 mus_ALZ				ds.b 1		; $20
@@ -1115,14 +1117,14 @@ mus_DataSelect			ds.b 1		; $2F
 mus_FinalBoss			ds.b 1		; $30
 mus_Drowning			ds.b 1		; $31
 mus_Ending			ds.b 1		; $32
-Mus__End =			*		; next ID after last music
+mus__End =			*		; next ID after last music
 	dephase
 
 ; ---------------------------------------------------------------------------
 ; Sound effect ID's list. These do not affect the sound driver, be careful.
 
 	phase $33
-sfx_First =			*		; ID of the first sound effect
+sfx__First =			*		; ID of the first sound effect
 sfx_RingRight			ds.b 1		; $33
 sfx_RingLeft			ds.b 1		; $34
 sfx_Death			ds.b 1		; $35
@@ -1137,12 +1139,12 @@ sfx_Break			ds.b 1		; $3D
 sfx_FireShield			ds.b 1		; $3E
 sfx_BubbleShield		ds.b 1		; $3F
 sfx_UnknownShield		ds.b 1		; $40
-sfx_ElectricShield		ds.b 1		; $41
+sfx_LightningShield		ds.b 1		; $41
 sfx_InstaAttack			ds.b 1		; $42
 sfx_FireAttack			ds.b 1		; $43
 sfx_BubbleAttack		ds.b 1		; $44
 sfx_ElectricAttack		ds.b 1		; $45
-sfx_SuperAlt			ds.b 1		; $46
+sfx_Whistle			ds.b 1		; $46
 sfx_SandwallRise		ds.b 1		; $47
 sfx_Blast			ds.b 1		; $48
 sfx_Thump			ds.b 1		; $49
@@ -1164,7 +1166,7 @@ sfx_FanLatch			ds.b 1		; $58
 sfx_Collapse			ds.b 1		; $59
 sfx_UnknownCharge		ds.b 1		; $5A
 sfx_Switch			ds.b 1		; $5B
-sfx_MetalSpark			ds.b 1		; $5C
+sfx_MechaSpark			ds.b 1		; $5C
 sfx_FloorThump			ds.b 1		; $5D
 sfx_Lazer			ds.b 1		; $5E
 sfx_Crash			ds.b 1		; $5F
@@ -1222,7 +1224,7 @@ sfx_GhostAppear			ds.b 1		; $92
 sfx_BossRecovery		ds.b 1		; $93
 sfx_ChainTick			ds.b 1		; $94
 sfx_BossHand			ds.b 1		; $95
-sfx_MetalLand			ds.b 1		; $96
+sfx_MechaLand			ds.b 1		; $96
 sfx_EnemyBreath			ds.b 1		; $97
 sfx_BossProjectile		ds.b 1		; $98
 sfx_UnknownPlink		ds.b 1		; $99
@@ -1236,7 +1238,7 @@ sfx_MissileShoot		ds.b 1		; $A0
 sfx_UnknownOminous		ds.b 1		; $A1
 sfx_FloorLauncher		ds.b 1		; $A2
 sfx_GravityLift			ds.b 1		; $A3
-sfx_MetalTransform		ds.b 1		; $A4
+sfx_MechaTransform		ds.b 1		; $A4
 sfx_UnknownRise			ds.b 1		; $A5
 sfx_LaunchGrab			ds.b 1		; $A6
 sfx_LaunchReady			ds.b 1		; $A7
@@ -1263,7 +1265,7 @@ sfx_FlyTired			ds.b 1		; $BB
 sfx__FirstContinuous =		*		; ID of the first continuous sound effect
 sfx_SlideSkidLoud		ds.b 1		; $BC
 sfx_LargeShip			ds.b 1		; $BD
-sfx_EggmanSiren			ds.b 1		; $BE
+sfx_RobotnikSiren		ds.b 1		; $BE
 sfx_BossRotate			ds.b 1		; $BF
 sfx_FanBig			ds.b 1		; $C0
 sfx_FanSmall			ds.b 1		; $C1

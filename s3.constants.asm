@@ -75,7 +75,8 @@ Graphics_flags :=		*		; Sonic & Knuckles uses a different address
 Debug_mode_flag :=		*		; Sonic & Knuckles uses a different address
 				ds.w 1
 Checksum_string :=		*		; Sonic & Knuckles uses a different address
-				ds.l 1			; set to 'init' once the checksum routine has run
+				ds.l 1			; set to Ref_Checksum_String once the checksum routine has run
+Ref_Checksum_String := 'init'
 	dephase
 	!org 0
 
