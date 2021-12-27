@@ -4088,7 +4088,7 @@ loc_33B8:
 ; =============== S U B R O U T I N E =======================================
 
 
-Pal_FromBlackWhite:
+Pal_FadeFromWhite:
 		move.w	#$3F,(Palette_fade_info).w
 		moveq	#0,d0
 		lea	(Normal_palette).w,a0
@@ -4109,7 +4109,7 @@ loc_33E0:
 		bsr.w	Process_Nem_Queue_Init
 		dbf	d4,loc_33E0
 		rts
-; End of function Pal_FromBlackWhite
+; End of function Pal_FadeFromWhite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -8831,7 +8831,7 @@ loc_7770:
 		move.w	(VDP_reg_1_command).w,d0
 		ori.b	#$40,d0
 		move.w	d0,(VDP_control_port).l
-		bsr.w	Pal_FromBlackWhite
+		bsr.w	Pal_FadeFromWhite
 
 loc_77D2:
 		bsr.w	Pause_Game
@@ -52746,7 +52746,7 @@ loc_2CB84:
 		st	(Update_HUD_ring_count).w
 		move.b	#$1E,(Player_1+air_left).w
 		move.b	#$1E,(Player_2+air_left).w
-		jsr	(Obj_PlayLevelMusic).l
+		jsr	(Restore_LevelMusic).l
 
 loc_2CBC0:
 		clr.w	$48(a0)
@@ -68139,7 +68139,7 @@ loc_39B8C:
 
 ; ---------------------------------------------------------------------------
 
-RefreshPlaneDirectVScroll:
+Refresh_PlaneDirectVScroll:
 		move.w	(a4)+,d2
 		moveq	#$1F,d3
 
@@ -68163,13 +68163,13 @@ loc_39BB8:
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_39BD6:
+Refresh_PlaneFull_Competition:
 		movem.l	d0-d2/d6/a0,-(sp)
 		jsr	sub_39B20(pc)
 		jsr	sub_39690(pc)
 		movem.l	(sp)+,d0-d2/d6/a0
 		addi.w	#$10,d0
-		dbf	d2,loc_39BD6
+		dbf	d2,Refresh_PlaneFull_Competition
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -69119,7 +69119,7 @@ Comp_ScreenInit:
 		move.w	(a1)+,d6
 		moveq	#0,d1
 		move.w	#$8000,d7
-		jmp	loc_39BD6(pc)
+		jmp	Refresh_PlaneFull_Competition(pc)
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -69201,7 +69201,7 @@ Comp_BackgroundInit:
 		moveq	#0,d0
 		moveq	#0,d1
 		move.w	#$A000,d7
-		jmp	loc_39BD6(pc)
+		jmp	Refresh_PlaneFull_Competition(pc)
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -69214,19 +69214,19 @@ ALZ_BackgroundEvent:
 
 BPZ_BackgroundEvent:
 		jsr	BPZ_Deformation(pc)
-		lea	BPZ_DeformArray(pc),a4
+		lea	BPZ_BGDeformArray(pc),a4
 		bra.s	loc_3A764
 ; ---------------------------------------------------------------------------
 
 CGZ_BackgroundEvent:
 		jsr	CGZ_Deformation(pc)
-		lea	CGZ_DeformArray(pc),a4
+		lea	CGZ_BGDeformArray(pc),a4
 		bra.s	loc_3A764
 ; ---------------------------------------------------------------------------
 
 EMZ_BackgroundEvent:
 		jsr	EMZ_Deformation(pc)
-		lea	EMZ_DeformArray(pc),a4
+		lea	EMZ_BGDeformArray(pc),a4
 
 loc_3A764:
 		lea	(H_scroll_buffer).w,a1
@@ -69615,9 +69615,12 @@ Comp_ScreenInitArray:
 		dc.w  $3FF, $1FF, $1F0,   $C, $100, $100,   $F,  $40
 ALZ_BGDeformArray:
 		dc.w  $18,   8,   8,   8,   8,   8, $2E,   6,  $D,$803F,$7FFF
-BPZ_DeformArray:dc.w  $88, $16,  $A, $28, $10,   8,$7FFF
-CGZ_DeformArray:dc.w  $50,   8, $10, $10,$7FFF
-EMZ_DeformArray:dc.w  $10, $10, $10, $10,   8,  $C, $24, $38, $20,$7FFF
+BPZ_BGDeformArray:
+		dc.w  $88, $16,  $A, $28, $10,   8,$7FFF
+CGZ_BGDeformArray:
+		dc.w  $50,   8, $10, $10,$7FFF
+EMZ_BGDeformArray:
+		dc.w  $10, $10, $10, $10,   8,  $C, $24, $38, $20,$7FFF
 ; ---------------------------------------------------------------------------
 
 AIZ1_ScreenInit:
@@ -76002,7 +76005,7 @@ Gumball_ScreenInit:
 		lea	Gumball_VScrollArray(pc),a4
 		lea	(HScroll_table).w,a5
 		move.w	(Camera_X_pos_rounded).w,d0
-		jmp	RefreshPlaneDirectVScroll(pc)
+		jmp	Refresh_PlaneDirectVScroll(pc)
 ; ---------------------------------------------------------------------------
 
 Gumball_ScreenEvent:
@@ -82415,7 +82418,7 @@ loc_465E0:
 
 loc_465F2:
 		clr.b	(Boss_flag).w
-		jsr	(Obj_PlayLevelMusic).l
+		jsr	(Restore_LevelMusic).l
 		lea	(PLC_Monitors).l,a1
 		jsr	(Load_PLC_Raw).l
 		jmp	(Go_Delete_Sprite_2).l
@@ -83762,7 +83765,7 @@ loc_47390:
 loc_47396:
 		st	(_unkFAA8).w
 		clr.b	(Boss_flag).w
-		jsr	(Obj_PlayLevelMusic).l
+		jsr	(Restore_LevelMusic).l
 		lea	(PLC_EggCapsule).l,a1
 		jsr	(Load_PLC_Raw).l
 		lea	ChildObjDat_47BE2(pc),a2
@@ -86419,7 +86422,7 @@ loc_48F3C:
 		bclr	#7,4(a0)
 		st	(_unkFAA8).w
 		clr.b	(Boss_flag).w
-		jsr	(Obj_PlayLevelMusic).l
+		jsr	(Restore_LevelMusic).l
 		move.w	#$4230,(Camera_stored_max_X_pos).w
 		lea	(Child6_IncLevX).l,a2
 		jmp	(CreateChild6_Simple).l
@@ -88077,7 +88080,7 @@ loc_4A04A:
 		bset	#5,$38(a0)
 		clr.b	(Boss_flag).w
 		move.l	#Delete_Current_Sprite,(a0)
-		jsr	(Obj_PlayLevelMusic).l
+		jsr	(Restore_LevelMusic).l
 		lea	(MGZ_8x8_Primary_KosM).l,a1
 		move.w	#0,d2
 		jsr	(Queue_Kos_Module).l
@@ -90261,7 +90264,7 @@ Obj_CNZMinibossEnd:
 Obj_CNZMinibossEndGo:
 		move.l	#Obj_EndSignControlAwaitStart,(a0)
 		clr.b	(Boss_flag).w
-		jsr	(Obj_PlayLevelMusic).l
+		jsr	(Restore_LevelMusic).l
 		jsr	AfterBoss_Cleanup(pc)
 		lea	(PLC_EndSignStuff).l,a1
 		jmp	(Load_PLC_Raw).l
@@ -91254,7 +91257,7 @@ loc_4C21A:
 		move.l	#loc_4C240,(a0)
 		st	(_unkFAA8).w
 		clr.b	(Boss_flag).w
-		jsr	(Obj_PlayLevelMusic).l
+		jsr	(Restore_LevelMusic).l
 		move.w	#$48F0,(Camera_stored_max_X_pos).w
 		lea	(Child6_IncLevX).l,a2
 		jmp	(CreateChild6_Simple).l
@@ -94008,7 +94011,7 @@ loc_4DD66:
 		st	(_unkFAA8).w
 		move.w	#$7F,$2E(a0)
 		move.l	#loc_4DD8A,$34(a0)
-		jmp	(Obj_PlayLevelMusic).l
+		jmp	(Restore_LevelMusic).l
 ; ---------------------------------------------------------------------------
 
 loc_4DD8A:
@@ -95691,7 +95694,7 @@ loc_4EEA4:
 		move.l	#loc_4EECE,(a0)
 		st	(_unkFAA8).w
 		clr.b	(Boss_flag).w
-		jsr	(Obj_PlayLevelMusic).l
+		jsr	(Restore_LevelMusic).l
 		move.w	#$44C0,(Camera_stored_max_X_pos).w
 		jsr	(Create_New_Sprite).l
 		bne.s	locret_4EECC
@@ -98053,7 +98056,7 @@ loc_50594:
 		bset	#5,$38(a0)
 		bclr	#7,4(a0)
 		clr.b	(Boss_flag).w
-		jsr	Obj_PlayLevelMusic(pc)
+		jsr	Restore_LevelMusic(pc)
 		lea	(Player_2).w,a1
 		bclr	#4,$2A(a1)
 		move.l	#Go_Delete_Sprite_2,(a0)
@@ -104244,7 +104247,7 @@ Obj_Song_Fade_ToLevelMusic:
 loc_54048:
 		subq.w	#1,$2E(a0)
 		bpl.w	locret_529CE
-		bsr.w	Obj_PlayLevelMusic
+		bsr.w	Restore_LevelMusic
 		jmp	(Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -104264,7 +104267,7 @@ loc_5406E:
 ; =============== S U B R O U T I N E =======================================
 
 
-Obj_PlayLevelMusic:
+Restore_LevelMusic:
 		moveq	#0,d0
 		lea	(Apparent_zone_and_act).w,a1
 		move.b	(a1)+,d0
@@ -104278,7 +104281,7 @@ Obj_PlayLevelMusic:
 
 loc_540A4:
 		jmp	(Play_Sound).l
-; End of function Obj_PlayLevelMusic
+; End of function Restore_LevelMusic
 
 ; ---------------------------------------------------------------------------
 PlayLevelMusic_Playlist:
@@ -104337,7 +104340,7 @@ Obj_EndSignControlWait:
 Obj_EndSignControlDoSign:
 		move.l	#Obj_EndSignControlAwaitStart,(a0)
 		clr.b	(Boss_flag).w
-		jsr	Obj_PlayLevelMusic(pc)
+		jsr	Restore_LevelMusic(pc)
 		lea	Child6_EndSign(pc),a2
 		jsr	CreateChild6_Simple(pc)
 		lea	PLC_EndSignStuff(pc),a1
