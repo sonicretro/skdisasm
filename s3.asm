@@ -31655,7 +31655,7 @@ loc_1AB0C:
 		bne.s	loc_1AB42
 		jsr	(Create_New_Sprite).l
 		bne.s	loc_1AB42
-		move.l	#Obj_AIZ_Miniboss,(a1)
+		move.l	#Obj_AIZMiniboss,(a1)
 		move.w	#$11F0,$10(a1)
 		move.w	#$289,$14(a1)
 
@@ -31895,7 +31895,7 @@ loc_1AD2A:
 		move.w	d0,(Camera_target_min_X_pos).w
 		jsr	(Create_New_Sprite).l
 		bne.s	loc_1AD5E
-		move.l	#Obj_A1_1_MGZ2_Boss,(a1)
+		move.l	#Obj_MGZEndBoss,(a1)
 		move.w	#$3D20,$10(a1)
 		move.w	#$668,$14(a1)
 
@@ -34066,7 +34066,7 @@ loc_1C384:
 Map_Explosion:	include "General/Sprites/Enemy Misc/Map - Explosion S3.asm"
 ; ---------------------------------------------------------------------------
 
-Obj_09_1:
+Obj_AIZ1Tree:
 		move.l	#Map_AIZ1Tree,$C(a0)
 		move.w	#$180,8(a0)
 		move.b	#8,7(a0)
@@ -34080,7 +34080,7 @@ loc_1C3E2:
 Map_AIZ1Tree:	include "Levels/AIZ/Misc Object Data/Map - Act 1 Tree.asm"
 ; ---------------------------------------------------------------------------
 
-Obj_0A_1:
+Obj_AIZ1ZiplinePeg:
 		move.l	#Map_AIZ1ZiplinePeg,$C(a0)
 		move.w	#$380,8(a0)
 		move.b	#$20,7(a0)
@@ -34095,7 +34095,7 @@ Map_AIZ1ZiplinePeg:
 		include "Levels/AIZ/Misc Object Data/Map - Act 1 Zipline Peg.asm"
 ; ---------------------------------------------------------------------------
 
-Obj_26:
+Obj_AutoSpin:
 		move.l	#Map_PathSwap,$C(a0)
 		move.w	#ArtTile_Ring,$A(a0)
 		ori.b	#4,4(a0)
@@ -34354,14 +34354,14 @@ byte_1C700:	dc.b $96
 		dc.b 0
 ; ---------------------------------------------------------------------------
 
-Obj_27:
+Obj_S2LavaMarker:
 		moveq	#0,d0
 		move.b	$2C(a0),d0
 		move.b	byte_1C700(pc,d0.w),$28(a0)
-		move.l	#Map_Obj27,$C(a0)
+		move.l	#Map_S2LavaMarker,$C(a0)
 		tst.w	(Debug_placement_mode).w
 		beq.s	loc_1C726
-		move.l	#Map_Obj27_2,$C(a0)
+		move.l	#Map_S2LavaMarkerDebug,$C(a0)
 
 loc_1C726:
 		move.w	#make_art_tile(ArtTile_Ring,0,1),$A(a0)
@@ -34399,11 +34399,13 @@ loc_1C778:
 loc_1C784:
 		jmp	(Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
-Map_Obj27:	include "General/Sprites/Unused/Map - Obj27 Unused.asm"
-Map_Obj27_2:	include "General/Sprites/Unused/Map - Obj27 Unused 2.asm"
+Map_S2LavaMarker:
+		include "General/Sprites/Level Misc/Map - Lava Marker S2.asm"
+Map_S2LavaMarkerDebug:
+		include "General/Sprites/Level Misc/Map - Lava Marker S2 Debug.asm"
 ; ---------------------------------------------------------------------------
 
-Obj_28_Invisible_Barrier:
+Obj_InvisibleBlock:
 		move.l	#Map_InvisibleBlock,$C(a0)
 		move.w	#make_art_tile(ArtTile_Ring,0,1),$A(a0)
 		ori.b	#4,4(a0)
@@ -34478,8 +34480,8 @@ byte_1C8E2:	dc.b $14
 		dc.b 2
 ; ---------------------------------------------------------------------------
 
-Obj_BreakableBar:
-		move.l	#Map_BreakableBar,$C(a0)
+Obj_HCZBreakableBar:
+		move.l	#Map_HCZBreakableBar,$C(a0)
 		move.w	#$43CA,$A(a0)
 		move.b	#4,4(a0)
 		move.w	#$200,8(a0)
@@ -34908,7 +34910,7 @@ loc_1CDC2:
 ; End of function sub_1CD50
 
 ; ---------------------------------------------------------------------------
-Map_BreakableBar:
+Map_HCZBreakableBar:
 		include "Levels/HCZ/Misc Object Data/Map - Breakable Bar.asm"
 ; ---------------------------------------------------------------------------
 
@@ -41909,7 +41911,7 @@ Map_SphereTest:
 		include "General/Special Stage/Map - Eosian Spheres.asm"
 ; ---------------------------------------------------------------------------
 
-Obj_0E:
+Obj_TwistedRamp:
 		lea	(Player_1).w,a1
 		bsr.s	sub_23CA2
 		lea	(Player_2).w,a1
@@ -42530,13 +42532,13 @@ Map_LBZMovingPlatform:
 		include "Levels/LBZ/Misc Object Data/Map - Moving Platform.asm"
 ; ---------------------------------------------------------------------------
 
-Obj_1D_1:
+Obj_LBZUnusedBarPlatform:
 		jsr	(Create_New_Sprite3).l
 		bne.w	loc_242B4
 		move.w	$10(a0),$10(a1)
 		move.w	$14(a0),$14(a1)
 		move.b	$2A(a0),$2A(a1)
-		move.l	#Map_LBZPlatformUndersideUnused,$C(a1)
+		move.l	#Map_LBZUnusedBarPlatform,$C(a1)
 		move.w	#$42EA,$A(a1)
 		move.b	#4,4(a1)
 		move.w	#$180,8(a1)
@@ -42660,8 +42662,8 @@ locret_243DE:
 ; End of function sub_242F0
 
 ; ---------------------------------------------------------------------------
-Map_LBZPlatformUndersideUnused:
-		include "Levels/LBZ/Misc Object Data/Map - Floating Platform Underside (Unused).asm"
+Map_LBZUnusedBarPlatform:
+		include "Levels/LBZ/Misc Object Data/Map - Unused Bar Platform.asm"
 byte_243F0:	dc.b $20
 		dc.b $20
 		dc.b 0
@@ -42926,7 +42928,7 @@ byte_2471C:	dc.b $10
 		dc.b $68
 ; ---------------------------------------------------------------------------
 
-Obj_12_1:
+Obj_LBZUnusedElevator:
 		move.l	#Map_LBZUnusedElevator,$C(a0)
 		move.w	#$43C3,$A(a0)
 		move.b	#4,4(a0)
@@ -44909,8 +44911,8 @@ Map_LBZCupElevator:
 		include "Levels/LBZ/Misc Object Data/Map - Cup Elevator.asm"
 ; ---------------------------------------------------------------------------
 
-Obj_1A_1:
-		move.l	#Map_LBZUnusedUnknown,$C(a0)
+Obj_LBZUnusedTiltingBridge:
+		move.l	#Map_LBZUnusedTiltingBridge,$C(a0)
 		move.w	#$43C3,$A(a0)
 		ori.b	#4,4(a0)
 		move.b	#$40,7(a0)
@@ -44921,7 +44923,7 @@ Obj_1A_1:
 		jsr	(Create_New_Sprite3).l
 		bne.w	loc_2628C
 		move.l	#loc_262DC,(a1)
-		move.l	#Map_LBZUnusedUnknown,$C(a1)
+		move.l	#Map_LBZUnusedTiltingBridge,$C(a1)
 		move.w	#$43C3,$A(a1)
 		ori.b	#4,4(a1)
 		move.b	#$40,7(a1)
@@ -45198,8 +45200,8 @@ loc_264C4:
 locret_264DE:
 		rts
 ; ---------------------------------------------------------------------------
-Map_LBZUnusedUnknown:
-		include "Levels/LBZ/Misc Object Data/Map - Unused Unknown.asm"
+Map_LBZUnusedTiltingBridge:
+		include "Levels/LBZ/Misc Object Data/Map - Unused Tilting Bridge.asm"
 ; ---------------------------------------------------------------------------
 
 Obj_LBZPipePlug:
@@ -45468,8 +45470,8 @@ word_26814:	dc.w   $100, $FDC0
 Map_LBZPipePlug:include "Levels/LBZ/Misc Object Data/Map - PipePlug.asm"
 ; ---------------------------------------------------------------------------
 
-Obj_1C_1:
-		move.l	#Map_LBZUnusedUnknown_2,$C(a0)
+Obj_LBZUnusedSolidHurt:
+		move.l	#Map_LBZUnusedSolidHurt,$C(a0)
 		move.w	#$42EA,$A(a0)
 		move.b	#$10,7(a0)
 		move.b	#$10,6(a0)
@@ -45534,7 +45536,7 @@ loc_269C0:
 		bsr.w	sub_228EC
 
 loc_269CE:
-		lea	(Ani_LBZUnusedUnknown_2).l,a1
+		lea	(Ani_LBZUnusedSolidHurt).l,a1
 		jsr	(Animate_Sprite).l
 		jmp	(Sprite_OnScreen_Test).l
 
@@ -45548,10 +45550,10 @@ sub_269E0:
 ; End of function sub_269E0
 
 ; ---------------------------------------------------------------------------
-Ani_LBZUnusedUnknown_2:
-		include "Levels/LBZ/Misc Object Data/Anim - Unused Unknown 2.asm"
-Map_LBZUnusedUnknown_2:
-		include "Levels/LBZ/Misc Object Data/Map - Unused Unknown 2.asm"
+Ani_LBZUnusedSolidHurt:
+		include "Levels/LBZ/Misc Object Data/Anim - Unused Solid Hurt.asm"
+Map_LBZUnusedSolidHurt:
+		include "Levels/LBZ/Misc Object Data/Map - Unused Solid Hurt.asm"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -47820,7 +47822,7 @@ Map_LBZGateLaser:
 		include "Levels/LBZ/Misc Object Data/Map - Gate Laser.asm"
 ; ---------------------------------------------------------------------------
 
-Obj_22_1:
+Obj_LBZAlarm:
 		move.b	#4,4(a0)
 		move.b	#$10,7(a0)
 		move.b	#$10,6(a0)
@@ -47899,7 +47901,7 @@ word_2847A:	dc.w $C0, $FFA0
 		dc.w $FF40, $FFA0
 ; ---------------------------------------------------------------------------
 
-Obj_23_1:
+Obj_LBZUnusedForceFall:
 		move.b	#4,4(a0)
 		move.b	#$10,7(a0)
 		move.b	#$80,6(a0)
@@ -51364,7 +51366,7 @@ word_2B994:	dc.w $4438
 Map_AIZ2FGTree:	include "Levels/AIZ/Misc Object Data/Map - Act 2 Foreground Tree.asm"
 ; ---------------------------------------------------------------------------
 
-Obj_31_1:
+Obj_LBZRollingDrum:
 		moveq	#0,d0
 		move.b	$2C(a0),d0
 		move.w	d0,$32(a0)
@@ -54481,7 +54483,7 @@ Ani_Bubbler:	include "General/Sprites/Bubbles/Anim - Bubbler.asm"
 Map_Bubbler:	include "General/Sprites/Bubbles/Map - Bubbler.asm"
 ; ---------------------------------------------------------------------------
 
-Obj_37_1:
+Obj_HCZWaterRush:
 		move.l	#Map_HCZWaterRush,$C(a0)
 		ori.b	#4,4(a0)
 		move.w	#$437A,$A(a0)
@@ -57255,7 +57257,7 @@ locret_3100E:
 Map_CNZHoverFan:include "Levels/CNZ/Misc Object Data/Map - Hover Fan.asm"
 ; ---------------------------------------------------------------------------
 
-Obj_48_1:
+Obj_CNZVacuumTube:
 		move.b	$2C(a0),d0
 		beq.s	loc_310B6
 		add.b	d0,d0
@@ -58170,7 +58172,7 @@ Map_HCZSpinningColumn:
 		include "Levels/HCZ/Misc Object Data/Map - Spinning Column.asm"
 ; ---------------------------------------------------------------------------
 
-Obj_49_1:
+Obj_CNZGiantWheel:
 		move.b	#$60,$32(a0)
 		move.l	#loc_31B60,(a0)
 
@@ -58267,7 +58269,7 @@ locret_31C1E:
 
 ; ---------------------------------------------------------------------------
 
-Obj_4B_1:
+Obj_CNZTriangleBumpers:
 		moveq	#0,d0
 		move.b	$2C(a0),d0
 		move.w	d0,$34(a0)
@@ -58346,7 +58348,7 @@ loc_31CEA:
 
 ; ---------------------------------------------------------------------------
 
-Obj_4F_1:
+Obj_SinkingMud:
 		move.b	$2C(a0),d0
 		lsl.w	#3,d0
 		move.b	d0,7(a0)
@@ -58535,7 +58537,7 @@ loc_31EE4:
 		rts
 ; ---------------------------------------------------------------------------
 
-Obj_5D_1:
+Obj_CGZTriangleBumpers:
 		move.b	#8,7(a0)
 		move.b	#$40,6(a0)
 		move.b	$2C(a0),d0
@@ -58860,7 +58862,7 @@ Map_Bumper:	include "General/Sprites/Level Misc/Map - Bumper.asm"
 Map_2PBumper:	include "General/2P Zone/Map - 2P Bumper.asm"
 ; ---------------------------------------------------------------------------
 
-Obj_4C_1:
+Obj_CNZSpiralTube:
 		lea	(Player_1).w,a1
 		lea	$30(a0),a4
 		bsr.s	sub_32328
@@ -59625,7 +59627,7 @@ loc_32A5E:
 
 ; ---------------------------------------------------------------------------
 
-Obj_4E_1:
+Obj_CNZWireCage:
 		moveq	#0,d0
 		move.b	$2C(a0),d0
 		lsl.w	#3,d0
@@ -59999,7 +60001,7 @@ loc_32EAE:
 
 ; ---------------------------------------------------------------------------
 
-Obj_50_1:
+Obj_MGZTwistingLoop:
 		moveq	#0,d0
 		move.b	$2C(a0),d0
 		lsl.w	#4,d0
@@ -66207,7 +66209,7 @@ word_3863A:	dc.w $840
 		dc.l byte_3860C
 ; ---------------------------------------------------------------------------
 
-Obj_69_1:
+Obj_HCZTwistingLoop:
 		move.b	$2C(a0),d0
 		andi.w	#$7F,d0
 		lsl.w	#3,d0
@@ -72382,7 +72384,7 @@ MGZ2_QuakeEvent1:
 		st	(Screen_shake_flag).w
 		jsr	(Create_New_Sprite).l
 		bne.s	locret_3CCD2
-		move.l	#Obj_MGZ2DrillingEggman,(a1)
+		move.l	#Obj_MGZ2DrillingRobotnik,(a1)
 		move.w	#$8E0,$10(a1)
 		move.w	#$690,$14(a1)
 
@@ -72403,7 +72405,7 @@ MGZ2_QuakeEvent2:
 		st	(Screen_shake_flag).w
 		jsr	(Create_New_Sprite).l
 		bne.s	locret_3CD1C
-		move.l	#Obj_MGZ2DrillingEggman,(a1)
+		move.l	#Obj_MGZ2DrillingRobotnik,(a1)
 		bset	#0,4(a1)
 		move.w	#$2FA0,$10(a1)
 		move.w	#$2D0,$14(a1)
@@ -72425,7 +72427,7 @@ MGZ2_QuakeEvent3:
 		st	(Screen_shake_flag).w
 		jsr	(Create_New_Sprite).l
 		bne.s	locret_3CD64
-		move.l	#Obj_MGZ2DrillingEggman,(a1)
+		move.l	#Obj_MGZ2DrillingRobotnik,(a1)
 		bset	#0,4(a1)
 		move.w	#$3300,$10(a1)
 		move.w	#$790,$14(a1)
@@ -78583,7 +78585,7 @@ loc_4380A:
 
 ; ---------------------------------------------------------------------------
 
-Obj_86:
+Obj_GumballMachine:
 		lea	ObjDat3_43F7C(pc),a1
 		jsr	(SetUp_ObjAttributes).l
 		move.l	#loc_43892,(a0)
@@ -78820,7 +78822,7 @@ loc_43B02:
 		jmp	(Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-Obj_87:
+Obj_GumballTriangleBumper:
 		lea	ObjDat3_43F70(pc),a1
 		jsr	(SetUp_ObjAttributes).l
 		move.l	#loc_43B18,(a0)
@@ -80813,7 +80815,7 @@ loc_45410:
 		jmp	(Sprite_CheckDeleteXY).l
 ; ---------------------------------------------------------------------------
 
-Obj_C8_1:
+Obj_LBZKnuxPillar:
 		lea	ObjDat3_45712(pc),a1
 		jsr	(SetUp_ObjAttributes).l
 		bclr	#1,4(a0)
@@ -80837,7 +80839,7 @@ Map_LBZKnuxPillar:
 		include "Levels/LBZ/Misc Object Data/Map - Knuckles Pillar.asm"
 ; ---------------------------------------------------------------------------
 
-Obj_83:
+Obj_CutsceneButton:
 		lea	ObjDat3_456EE(pc),a1
 		jsr	(SetUp_ObjAttributes).l
 		move.l	#loc_454C2,(a0)
@@ -80939,7 +80941,7 @@ loc_4558A:
 		move.b	#-$78,(a1)
 		jsr	(Create_New_Sprite).l
 		bne.s	loc_455D2
-		move.l	#Obj_48_1,(a1)
+		move.l	#Obj_CNZVacuumTube,(a1)
 		move.w	#$4740,$10(a1)
 		move.w	#$828,$14(a1)
 		move.b	#$4C,$2C(a1)
@@ -80947,7 +80949,7 @@ loc_4558A:
 loc_455D2:
 		jsr	(Create_New_Sprite).l
 		bne.s	locret_455F2
-		move.l	#Obj_48_1,(a1)
+		move.l	#Obj_CNZVacuumTube,(a1)
 		move.w	#$4740,$10(a1)
 		move.w	#$A28,$14(a1)
 		move.b	#$20,$2C(a1)
@@ -80956,7 +80958,7 @@ locret_455F2:
 		rts
 ; ---------------------------------------------------------------------------
 
-Obj_88:
+Obj_CNZWaterLevelCorkFloor:
 		jsr	(Obj_WaitOffscreen).l
 		move.l	#loc_45624,(a0)
 		jsr	(Create_New_Sprite3).l
@@ -80984,7 +80986,7 @@ loc_45646:
 		jmp	(Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-Obj_89:
+Obj_CNZWaterLevelButton:
 		lea	ObjDat3_456EE(pc),a1
 		jsr	(SetUp_ObjAttributes).l
 		move.l	#loc_4566A,(a0)
@@ -82262,7 +82264,7 @@ AniRaw_RobotnikHead:dc.b 5
 		dc.b $FC
 ; ---------------------------------------------------------------------------
 
-Obj_AIZ_Miniboss_Cutscene:
+Obj_AIZMinibossCutscene:
 		moveq	#0,d0
 		move.b	5(a0),d0
 		move.w	off_46454(pc,d0.w),d1
@@ -82740,7 +82742,7 @@ word_46968:	dc.w 0
 		dc.w 8
 ; ---------------------------------------------------------------------------
 
-Obj_AIZ_Miniboss:
+Obj_AIZMiniboss:
 		moveq	#0,d0
 		move.b	5(a0),d0
 		move.w	off_46986(pc,d0.w),d1
@@ -83527,7 +83529,7 @@ Pal_AIZMiniboss:binclude "Levels/AIZ/Palettes/Miniboss.bin"
 		even
 ; ---------------------------------------------------------------------------
 
-Obj_AIZ_EndBoss:
+Obj_AIZEndBoss:
 		move.w	#$4880,d0
 		cmp.w	(Camera_X_pos).w,d0
 		bls.s	loc_470BE
@@ -83539,7 +83541,7 @@ loc_470BE:
 		move.w	d0,(Camera_max_X_pos).w
 		move.l	#Obj_Wait,(a0)
 		move.w	#$78,$2E(a0)
-		move.l	#Obj_AIZ_EndBossMusic,$34(a0)
+		move.l	#Obj_AIZEndBossMusic,$34(a0)
 		moveq	#signextendB(mus_FadeOut),d0
 		jsr	(Play_Music).l
 		move.b	#1,(Boss_flag).w
@@ -83553,14 +83555,14 @@ loc_470BE:
 		jmp	(PalLoad_Line1).l
 ; ---------------------------------------------------------------------------
 
-Obj_AIZ_EndBossMusic:
-		move.l	#Obj_AIZ_EndBossMain,(a0)
+Obj_AIZEndBossMusic:
+		move.l	#Obj_AIZEndBossMain,(a0)
 		moveq	#signextendB(mus_EndBoss),d0
 		jsr	(Play_Music).l
 		rts
 ; ---------------------------------------------------------------------------
 
-Obj_AIZ_EndBossMain:
+Obj_AIZEndBossMain:
 		moveq	#0,d0
 		move.b	5(a0),d0
 		move.w	AIZ_EndBossIndex(pc,d0.w),d1
@@ -83569,7 +83571,7 @@ Obj_AIZ_EndBossMain:
 		bne.w	locret_47246
 		jmp	(Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
-AIZ_EndBossIndex:dc.w Obj_AIZ_EndBossInit-AIZ_EndBossIndex
+AIZ_EndBossIndex:dc.w Obj_AIZEndBossInit-AIZ_EndBossIndex
 		dc.w loc_471C2-AIZ_EndBossIndex
 		dc.w loc_4720C-AIZ_EndBossIndex
 		dc.w loc_47248-AIZ_EndBossIndex
@@ -83579,7 +83581,7 @@ AIZ_EndBossIndex:dc.w Obj_AIZ_EndBossInit-AIZ_EndBossIndex
 		dc.w loc_47348-AIZ_EndBossIndex
 ; ---------------------------------------------------------------------------
 
-Obj_AIZ_EndBossInit:
+Obj_AIZEndBossInit:
 		lea	ObjDat_AIZEndBoss(pc),a1
 		jsr	(SetUp_ObjAttributes).l
 		move.b	#8,$29(a0)
@@ -84548,7 +84550,7 @@ ChildObjDat_47BBC:dc.w 5
 		dc.l loc_47880
 		dc.w $C18
 ChildObjDat_47BE2:dc.w 0
-		dc.l Obj_81
+		dc.l Obj_EggCapsule
 ChildObjDat_47BE8:dc.w 0
 		dc.l Obj_CutsceneKnuckles
 byte_47BEE:	dc.b  $2B,   0
@@ -87828,11 +87830,11 @@ Pal_HCZEndBoss:	binclude "Levels/HCZ/Palettes/End Boss.bin"
 		even
 ; ---------------------------------------------------------------------------
 
-Obj_MGZ2DrillingEggman:
+Obj_MGZ2DrillingRobotnik:
 		move.l	#Obj_Wait,(a0)
 		move.b	#1,(Boss_flag).w
 		move.w	#$78,$2E(a0)
-		move.l	#Obj_MGZ2DrillingEggmanGo,$34(a0)
+		move.l	#Obj_MGZ2DrillingRobotnikGo,$34(a0)
 		clr.b	$2C(a0)
 		moveq	#signextendB(mus_FadeOut),d0
 		jsr	(Play_Music).l
@@ -87848,8 +87850,8 @@ Obj_MGZ2DrillingEggman:
 		jmp	(PalLoad_Line1).l
 ; ---------------------------------------------------------------------------
 
-Obj_MGZ2DrillingEggmanGo:
-		move.l	#Obj_MGZ2DrillingEggmanStart,(a0)
+Obj_MGZ2DrillingRobotnikGo:
+		move.l	#Obj_MGZ2DrillingRobotnikStart,(a0)
 		moveq	#signextendB(mus_EndBoss),d0
 		jsr	(Play_Music).l
 
@@ -87857,7 +87859,7 @@ locret_49DD8:
 		rts
 ; ---------------------------------------------------------------------------
 
-Obj_MGZ2DrillingEggmanStart:
+Obj_MGZ2DrillingRobotnikStart:
 		moveq	#0,d0
 		move.b	5(a0),d0
 		move.w	off_49DF2(pc,d0.w),d1
@@ -88117,7 +88119,7 @@ loc_4A0EC:
 		jmp	(Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-Obj_A1_1_MGZ2_Boss:
+Obj_MGZEndBoss:
 		moveq	#0,d0
 		move.b	5(a0),d0
 		move.w	off_4A110(pc,d0.w),d1
@@ -88386,7 +88388,7 @@ loc_4A442:
 		rts
 ; ---------------------------------------------------------------------------
 
-Obj_A2_1:
+Obj_MGZEndBossKnux:
 		moveq	#0,d0
 		move.b	5(a0),d0
 		move.w	off_4A476(pc,d0.w),d1
@@ -88545,7 +88547,7 @@ loc_4A616:
 		lea	word_4B396(pc),a1
 		jsr	(SetUp_ObjAttributes3).l
 		movea.w	$46(a0),a1
-		cmpi.l	#Obj_A1_1_MGZ2_Boss,(a1)
+		cmpi.l	#Obj_MGZEndBoss,(a1)
 		bne.s	loc_4A632
 		bclr	#7,$A(a0)
 
@@ -89005,7 +89007,7 @@ loc_4AB4E:
 		beq.s	loc_4AB84
 		move.w	#$380,8(a0)
 		movea.w	$46(a0),a1
-		cmpi.l	#Obj_A1_1_MGZ2_Boss,(a1)
+		cmpi.l	#Obj_MGZEndBoss,(a1)
 		bne.s	loc_4AB84
 		bclr	#7,$A(a0)
 
@@ -91983,7 +91985,7 @@ Pal_CNZEndBoss:	binclude "Levels/CNZ/Palettes/End Boss.bin"
 		even
 ; ---------------------------------------------------------------------------
 
-Obj_AA_1_FBZ1_Boss:
+Obj_FBZMiniboss:
 		lea	word_4C96E(pc),a1
 		jsr	(Check_CameraInRange).l
 		moveq	#0,d0
@@ -93257,7 +93259,7 @@ word_4D540:	palscriptptr .header, .data
 	palscriptrun
 ; ---------------------------------------------------------------------------
 
-Obj_AB_1_FBZ_Laser_Boss:
+Obj_FBZ2Subboss:
 		moveq	#0,d0
 		move.b	5(a0),d0
 		move.w	off_4D56E(pc,d0.w),d1
@@ -96851,7 +96853,7 @@ Pal_LBZMiniboss:binclude "Levels/LBZ/Palettes/Miniboss.bin"
 		even
 ; ---------------------------------------------------------------------------
 
-Obj_LBZ_FinalBoss1:
+Obj_LBZFinalBoss1:
 		moveq	#0,d0
 		move.b	5(a0),d0
 		move.w	off_4F9C2(pc,d0.w),d1
@@ -97008,7 +97010,7 @@ loc_4FB0A:
 		bclr	#7,$A(a0)
 		jsr	(Create_New_Sprite).l
 		bne.s	loc_4FB46
-		move.l	#Obj_LBZ_FinalBoss2,(a1)
+		move.l	#Obj_LBZFinalBoss2,(a1)
 		move.w	$10(a0),$10(a1)
 		move.w	$14(a0),$14(a1)
 
@@ -97915,7 +97917,7 @@ Pal_LBZFinalBoss1:
 		even
 ; ---------------------------------------------------------------------------
 
-Obj_LBZ_EndBoss:
+Obj_LBZEndBoss:
 		lea	word_5043C(pc),a1
 		jsr	(Check_CameraInRange).l
 		moveq	#0,d0
@@ -98775,7 +98777,7 @@ Pal_LBZEndBoss:	binclude "Levels/LBZ/Palettes/End Boss.bin"
 		even
 ; ---------------------------------------------------------------------------
 
-Obj_LBZ_FinalBoss2:
+Obj_LBZFinalBoss2:
 		moveq	#0,d0
 		move.b	5(a0),d0
 		move.w	off_50CC2(pc,d0.w),d1
@@ -100086,7 +100088,7 @@ loc_51B3C:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-Obj_FleeingRobotnik_Unused:
+Obj_LBZ2UnusedRobotnik:
 		lea	ObjDat3_51F9C(pc),a1
 		jsr	SetUp_ObjAttributes(pc)
 		move.l	#loc_51BB6,(a0)
@@ -100104,7 +100106,7 @@ Obj_FleeingRobotnik_Unused:
 		move.w	#$800,$18(a0)
 		move.w	#-$3C0,$1A(a0)
 		move.b	#4,$40(a0)
-		move.l	#ArtScaled_FleeingRobotnik,$42(a0)
+		move.l	#ArtScaled_LBZ2UnusedRobotnik,$42(a0)
 		move.b	#1,$3E(a0)
 		bsr.w	Perform_Art_Scaling
 		jmp	(Draw_Sprite).l
@@ -100423,13 +100425,13 @@ word_51E86:	dc.w $20
 		dc.w 8
 		dc.w 8
 		dc.w $200
-off_51E94:	dc.l ArtScaled_FleeingRobotnik
-		dc.l ArtScaled_FleeingRobotnik
-		dc.l ArtScaled_FleeingRobotnik+$1000
-		dc.l ArtScaled_FleeingRobotnik+$2000
-		dc.l ArtScaled_FleeingRobotnik+$3000
-		dc.l ArtScaled_FleeingRobotnik+$4000
-		dc.l ArtScaled_FleeingRobotnik+$5000
+off_51E94:	dc.l ArtScaled_LBZ2UnusedRobotnik
+		dc.l ArtScaled_LBZ2UnusedRobotnik
+		dc.l ArtScaled_LBZ2UnusedRobotnik+$1000
+		dc.l ArtScaled_LBZ2UnusedRobotnik+$2000
+		dc.l ArtScaled_LBZ2UnusedRobotnik+$3000
+		dc.l ArtScaled_LBZ2UnusedRobotnik+$4000
+		dc.l ArtScaled_LBZ2UnusedRobotnik+$5000
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -104786,7 +104788,7 @@ loc_544CC:
 		jmp	(Play_Music).l
 ; ---------------------------------------------------------------------------
 
-Obj_81:
+Obj_EggCapsule:
 		moveq	#0,d0
 		move.b	5(a0),d0
 		move.w	off_54504(pc,d0.w),d1
@@ -107953,7 +107955,7 @@ byte_56239:	dc.b    0, $7F
 		dc.b  $FC
 ; ---------------------------------------------------------------------------
 
-Obj_MGZMiniBoss:
+Obj_Tunnelbot:
 		jsr	(Obj_WaitOffscreen).l
 		moveq	#0,d0
 		move.b	5(a0),d0
@@ -108053,7 +108055,7 @@ loc_56346:
 		jmp	(Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-Obj_9F_1:
+Obj_MGZMiniboss:
 		lea	word_56388(pc),a1
 		jsr	(Check_CameraInRange).l
 		moveq	#0,d0
@@ -108531,7 +108533,7 @@ loc_56880:
 word_568A2:	dc.w Normal_palette_line_2+$18, Normal_palette_line_2+$1A, Normal_palette_line_2+$1C
 word_568A8:	dc.w   $CAA,  $866,  $644
 		dc.w   $EEE,  $EEE,  $EEE
-ObjDat3_568B4:	dc.l Map_MGZMiniBoss
+ObjDat3_568B4:	dc.l Map_MGZMiniboss
 		dc.w $254F
 		dc.w $280
 		dc.b $28
@@ -110594,7 +110596,7 @@ loc_57B40:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-Obj_BB_1:
+Obj_ICZIceBlock:
 		jsr	(Obj_WaitOffscreen).l
 		lea	ObjDat3_57BF8(pc),a1
 		jsr	SetUp_ObjAttributes(pc)
@@ -112572,7 +112574,7 @@ ChildObjDat_58CE2:dc.w $B
 		dc.l loc_589E8
 ; ---------------------------------------------------------------------------
 
-Obj_ICZ_SnowPile:
+Obj_ICZSnowPile:
 		jsr	Obj_WaitOffscreen(pc)
 		moveq	#0,d0
 		move.b	$2C(a0),d0
@@ -112912,7 +112914,7 @@ ChildObjDat_59018:dc.w 3
 		dc.w $808
 ; ---------------------------------------------------------------------------
 
-Obj_ICZ_TensionPlatform:
+Obj_ICZTensionPlatform:
 		lea	ObjDat3_59254(pc),a1
 		jsr	SetUp_ObjAttributes(pc)
 		move.l	#loc_5904E,(a0)
@@ -115005,7 +115007,7 @@ byte_5A2B5:	dc.b 3
 		dc.b 0
 ; ---------------------------------------------------------------------------
 
-Obj_C3_1:
+Obj_LBZ1Robotnik:
 		lea	word_5A2F0(pc),a1
 		jsr	Check_CameraInRange(pc)
 		moveq	#0,d0
@@ -115209,7 +115211,7 @@ loc_5A4F8:
 		jmp	Go_Delete_Sprite_2(pc)
 ; ---------------------------------------------------------------------------
 
-Obj_C4_1:
+Obj_LBZMinibossBox:
 		tst.b	(_unkFAAB).w
 		bne.s	loc_5A572
 		move.l	#loc_5A57A,(a0)
@@ -115523,7 +115525,7 @@ byte_5A830:	dc.b 0
 		dc.b $F4
 ; ---------------------------------------------------------------------------
 
-Obj_C6_1:
+Obj_LBZ2RobotnikShip:
 		move.w	a0,(Events_bg+$00).w
 		lea	ObjDat3_5AAEE(pc),a1
 		jsr	(SetUp_ObjAttributes).l
@@ -115681,7 +115683,7 @@ loc_5AA18:
 		clr.b	$40(a1)
 		jsr	(Create_New_Sprite).l
 		bne.s	loc_5AA78
-		move.l	#Obj_LBZ_FinalBoss1,(a1)
+		move.l	#Obj_LBZFinalBoss1,(a1)
 		move.w	#$44A0,$10(a1)
 		move.w	#$780,$14(a1)
 
@@ -115753,7 +115755,7 @@ ObjDat3_5AAEE:	dc.l Map_RobotnikShip
 		dc.b $A
 		dc.b $CA
 		dc.w 0
-		dc.l Obj_C6_1
+		dc.l Obj_LBZ2RobotnikShip
 		dc.w 0
 		dc.b 0
 		dc.b 5
@@ -119109,7 +119111,7 @@ Map_FBZEndBossFlame:
 Map_Bloominator:include "General/Sprites/Bloominator/Map - Bloominator.asm"
 Map_MonkeyDude:	include "General/Sprites/Monkey Dude/Map - Monkey Dude.asm"
 Map_SOZMiniboss:include "Levels/SOZ/Misc Object Data/Map - Miniboss.asm"
-Map_MGZMiniBoss:include "Levels/MGZ/Misc Object Data/Map - Miniboss.asm"
+Map_MGZMiniboss:include "Levels/MGZ/Misc Object Data/Map - Miniboss.asm"
 Map_CaterKillerJr:
 		include "General/Sprites/Caterkiller Jr/Map - Caterkiller Jr.asm"
 DPLC_Clamer:	include "General/Sprites/Clamer/DPLC - Clamer.asm"
@@ -119490,7 +119492,7 @@ ArtNem_LBZKnuxBomb:
 ArtKosM_LBZ2DeathEggSmall:
 		binclude "Levels/LBZ/KosinskiM Art/Act 2 Death Egg Small.bin"
 		even
-ArtScaled_FleeingRobotnik:
+ArtScaled_LBZ2UnusedRobotnik:
 		binclude "General/Sprites/Robotnik/Robotnik Fly Scaled.bin"
 		even
 ArtKosM_LBZ2DeathEgg2_8x8:

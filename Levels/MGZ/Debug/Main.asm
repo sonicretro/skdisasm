@@ -10,7 +10,7 @@
 	dbglistobj Obj_Spring,			Map_Spring,			 $40,  $A, make_art_tile($478,0,0)
 	dbglistobj Obj_Spikes,			Map_Spikes,			   0,   0, make_art_tile($49C,0,0)
 	dbglistobj Obj_Spikes,			Map_Spikes,			 $40,   4, make_art_tile($494,0,0)
-	dbglistobj Obj_MGZMiniBoss,		Map_MGZMiniBoss,		   0,   0, make_art_tile($54F,1,0)
+	dbglistobj Obj_Tunnelbot,		Map_MGZMiniboss,		   0,   0, make_art_tile($54F,1,0)
 	dbglistobj Obj_BubblesBadnik,		Map_BubblesBadnik,		   0,   0, make_art_tile($500,1,0)
 	dbglistobj Obj_Spiker,			Map_Spiker,			   0,   0, make_art_tile($530,1,0)
 	dbglistobj Obj_Mantis,			Map_Mantis,			   0,   0, make_art_tile($54F,1,0)

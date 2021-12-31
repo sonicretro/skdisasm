@@ -18,7 +18,7 @@
 	dbglistobj Obj_FBZFloatingPlatform,	Map_FBZFloatingPlatform,	 $10,   0, make_art_tile($383,1,0)
 	dbglistobj Obj_FBZFloatingPlatform,	Map_FBZFloatingPlatform,	 $30,   0, make_art_tile($383,1,0)
 	dbglistobj Obj_FBZFloatingPlatform,	Map_FBZFloatingPlatform,	 $40,   0, make_art_tile($383,1,0)
-	dbglistobj Obj_FBZ_ChainLink,		Map_FBZChainLink,		 $1A,   0, make_art_tile($379,2,0)
+	dbglistobj Obj_FBZChainLink,		Map_FBZChainLink,		 $1A,   0, make_art_tile($379,2,0)
 	dbglistobj Obj_StillSprite,		Map_StillSprites,		 $27, $27, make_art_tile($379,2,0)
 	dbglistobj Obj_StillSprite,		Map_StillSprites,		 $28, $28, make_art_tile($379,2,0)
 	dbglistobj Obj_StillSprite,		Map_StillSprites,		 $29, $29, make_art_tile($379,2,0)

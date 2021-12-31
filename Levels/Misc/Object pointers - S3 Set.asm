@@ -7,16 +7,16 @@
 		dc.l Obj_AIZRideVine			; 6
 		dc.l Obj_Spring				; 7
 		dc.l Obj_Spikes				; 8
-		dc.l Obj_09_1				; 9
-		dc.l Obj_0A_1				; 10
+		dc.l Obj_AIZ1Tree			; 9
+		dc.l Obj_AIZ1ZiplinePeg			; 10
 		dc.l Obj_SphereTest			; 11
 		dc.l Obj_AIZGiantRideVine		; 12
 		dc.l Obj_BreakableWall			; 13
-		dc.l Obj_0E				; 14
+		dc.l Obj_TwistedRamp			; 14
 		dc.l Obj_CollapsingBridge		; 15
 		dc.l Obj_LBZTubeElevator		; 16
 		dc.l Obj_LBZMovingPlatform		; 17
-		dc.l Obj_12_1				; 18
+		dc.l Obj_LBZUnusedElevator		; 18
 		dc.l Obj_LBZExplodingTrigger		; 19
 		dc.l Obj_LBZTriggerBridge		; 20
 		dc.l Obj_LBZPlayerLauncher		; 21
@@ -24,21 +24,21 @@
 		dc.l Obj_LBZRideGrapple			; 23
 		dc.l Obj_LBZCupElevator			; 24
 		dc.l Obj_LBZCupElevatorPole		; 25
-		dc.l Obj_1A_1				; 26
+		dc.l Obj_LBZUnusedTiltingBridge		; 26
 		dc.l Obj_LBZPipePlug			; 27
-		dc.l Obj_1C_1				; 28
-		dc.l Obj_1D_1				; 29
+		dc.l Obj_LBZUnusedSolidHurt		; 28
+		dc.l Obj_LBZUnusedBarPlatform		; 29
 		dc.l Obj_LBZSpinLauncher		; 30
 		dc.l Obj_LBZLoweringGrapple		; 31
 		dc.l Obj_MGZLBZSmashingPillar		; 32
 		dc.l Obj_LBZGateLaser			; 33
-		dc.l Obj_22_1				; 34
-		dc.l Obj_23_1				; 35
+		dc.l Obj_LBZAlarm			; 34
+		dc.l Obj_LBZUnusedForceFall		; 35
 		dc.l Obj_AutomaticTunnel		; 36
 		dc.l Obj_Ring				; 37
-		dc.l Obj_26				; 38
-		dc.l Obj_27				; 39
-		dc.l Obj_28_Invisible_Barrier		; 40
+		dc.l Obj_AutoSpin			; 38
+		dc.l Obj_S2LavaMarker			; 39
+		dc.l Obj_InvisibleBlock			; 40
 		dc.l Obj_AIZDisappearingFloor		; 41
 		dc.l Obj_CorkFloor			; 42
 		dc.l Obj_AIZFlippingBridge		; 43
@@ -47,13 +47,13 @@
 		dc.l Obj_AIZSpikedLog			; 46
 		dc.l Obj_StillSprite			; 47
 		dc.l Obj_AnimatedStillSprite		; 48
-		dc.l Obj_31_1				; 49
+		dc.l Obj_LBZRollingDrum			; 49
 		dc.l Obj_AIZDrawBridge			; 50
 		dc.l Obj_Button				; 51
 		dc.l Obj_StarPost			; 52
 		dc.l Obj_AIZForegroundPlant		; 53
-		dc.l Obj_BreakableBar			; 54
-		dc.l Obj_37_1				; 55
+		dc.l Obj_HCZBreakableBar		; 54
+		dc.l Obj_HCZWaterRush			; 55
 		dc.l Obj_HCZCGZFan			; 56
 		dc.l Obj_HCZLargeFan			; 57
 		dc.l Obj_HCZHandLauncher		; 58
@@ -70,15 +70,15 @@
 		dc.l Obj_CNZLightBulb			; 69
 		dc.l Obj_CNZHoverFan			; 70
 		dc.l Obj_CNZCylinder			; 71
-		dc.l Obj_48_1				; 72
-		dc.l Obj_49_1				; 73
+		dc.l Obj_CNZVacuumTube			; 72
+		dc.l Obj_CNZGiantWheel			; 73
 		dc.l Obj_Bumper				; 74
-		dc.l Obj_4B_1				; 75
-		dc.l Obj_4C_1				; 76
+		dc.l Obj_CNZTriangleBumpers		; 75
+		dc.l Obj_CNZSpiralTube			; 76
 		dc.l Obj_CNZBarberPoleSprite		; 77
-		dc.l Obj_4E_1				; 78
-		dc.l Obj_4F_1				; 79
-		dc.l Obj_50_1				; 80
+		dc.l Obj_CNZWireCage			; 78
+		dc.l Obj_SinkingMud			; 79
+		dc.l Obj_MGZTwistingLoop		; 80
 		dc.l Obj_FloatingPlatform		; 81
 		dc.l Obj_MGZLBZSmashingPillar		; 82
 		dc.l Obj_MGZSwingingPlatform		; 83
@@ -91,7 +91,7 @@
 		dc.l Obj_MGZPulley			; 90
 		dc.l Obj_MGZTopPlatform			; 91
 		dc.l Obj_MGZTopLauncher			; 92
-		dc.l Obj_5D_1				; 93
+		dc.l Obj_CGZTriangleBumpers		; 93
 		dc.l Obj_CGZBladePlatform		; 94
 		dc.l Obj_2PRetractingSpring		; 95
 		dc.l Obj_BPZElephantBlock		; 96
@@ -103,7 +103,7 @@
 		dc.l Obj_EMZDripper			; 102
 		dc.l Obj_HCZSnakeBlocks			; 103
 		dc.l Obj_HCZSpinningColumn		; 104
-		dc.l Obj_69_1				; 105
+		dc.l Obj_HCZTwistingLoop		; 105
 		dc.l Obj_InvisibleHurtBlockHorizontal	; 106
 		dc.l Obj_InvisibleHurtBlockVertical	; 107
 		dc.l Obj_TensionBridge			; 108
@@ -126,22 +126,22 @@
 		dc.l Obj_Ring				; 125
 		dc.l Obj_Ring				; 126
 		dc.l Obj_Ring				; 127
-		dc.l Obj_AIZ_Miniboss_Cutscene		; 128
+		dc.l Obj_AIZMinibossCutscene		; 128
 		dc.l Obj_Bloominator			; 129
 		dc.l Obj_Rhinobot			; 130
 		dc.l Obj_MonkeyDude			; 131
 		dc.l Delete_Current_Sprite		; 132
 		dc.l Obj_LBZMiniboss			; 133
-		dc.l Obj_LBZ_FinalBoss1			; 134
+		dc.l Obj_LBZFinalBoss1			; 134
 		dc.l Obj_SnaleBlaster			; 135
 		dc.l Obj_Ribot				; 136
 		dc.l Obj_Orbinaut			; 137
 		dc.l Obj_Corkey				; 138
 		dc.l Obj_Flybot767			; 139
-		dc.l Obj_LBZ_EndBoss			; 140
+		dc.l Obj_LBZEndBoss			; 140
 		dc.l Obj_CNZEndBoss			; 141
 		dc.l Obj_CNZMiniboss			; 142
-		dc.l Obj_AA_1_FBZ1_Boss			; 143
+		dc.l Obj_FBZMiniboss			; 143
 		dc.l Delete_Current_Sprite		; 144
 		dc.l Delete_Current_Sprite		; 145
 		dc.l Delete_Current_Sprite		; 146
@@ -162,26 +162,26 @@
 		dc.l Obj_Sparkle			; 161
 		dc.l Obj_Batbot				; 162
 		dc.l Obj_BubblesBadnik			; 163
-		dc.l Obj_MGZMiniBoss			; 164
+		dc.l Obj_Tunnelbot			; 164
 		dc.l Obj_Spiker				; 165
 		dc.l Obj_Mantis				; 166
 		dc.l Obj_Blaster			; 167
 		dc.l Obj_TechnoSqueek			; 168
-		dc.l Obj_AIZ_EndBoss			; 169
+		dc.l Obj_AIZEndBoss			; 169
 		dc.l Obj_Penguinator			; 170
 		dc.l Obj_StarPointer			; 171
-		dc.l Obj_AIZ_Miniboss			; 172
+		dc.l Obj_AIZMiniboss			; 172
 		dc.l Obj_HCZMiniboss			; 173
-		dc.l Obj_C3_1				; 174
-		dc.l Obj_MGZ2DrillingEggman		; 175
-		dc.l Obj_A1_1_MGZ2_Boss			; 176
-		dc.l Obj_A2_1				; 177
+		dc.l Obj_LBZ1Robotnik			; 174
+		dc.l Obj_MGZ2DrillingRobotnik		; 175
+		dc.l Obj_MGZEndBoss			; 176
+		dc.l Obj_MGZEndBossKnux			; 177
 		dc.l Obj_ICZEndBoss			; 178
 		dc.l Obj_ICZMiniboss			; 179
 		dc.l Obj_FBZEndBoss			; 180
 		dc.l Obj_HCZEndBoss			; 181
-		dc.l Obj_AB_1_FBZ_Laser_Boss		; 182
-		dc.l Obj_C6_1				; 183
+		dc.l Obj_FBZ2Subboss			; 182
+		dc.l Obj_LBZ2RobotnikShip		; 183
 		dc.l Obj_ICZCrushingColumn		; 184
 		dc.l Obj_ICZPathFollowPlatform		; 185
 		dc.l Obj_ICZBreakableWall		; 186
@@ -192,21 +192,21 @@
 		dc.l Obj_ICZIceCube			; 191
 		dc.l Obj_ICZIceSpikes			; 192
 		dc.l Obj_ICZHarmfulIce			; 193
-		dc.l Obj_ICZ_SnowPile			; 194
-		dc.l Obj_ICZ_TensionPlatform		; 195
-		dc.l Obj_9F_1				; 196
+		dc.l Obj_ICZSnowPile			; 194
+		dc.l Obj_ICZTensionPlatform		; 195
+		dc.l Obj_MGZMiniboss			; 196
 		dc.l Obj_HiddenMonitor			; 197
-		dc.l Obj_81				; 198
+		dc.l Obj_EggCapsule			; 198
 		dc.l Obj_CutsceneKnuckles		; 199
-		dc.l Obj_BB_1				; 200
-		dc.l Obj_83				; 201
+		dc.l Obj_ICZIceBlock			; 200
+		dc.l Obj_CutsceneButton			; 201
 		dc.l Obj_AIZPlaneIntro			; 202
 		dc.l Obj_SSEntryRing			; 203
-		dc.l Obj_C4_1				; 204
-		dc.l Obj_FleeingRobotnik_Unused		; 205
-		dc.l Obj_86				; 206
-		dc.l Obj_87				; 207
-		dc.l Obj_LBZ_FinalBoss2			; 208
-		dc.l Obj_88				; 209
-		dc.l Obj_89				; 210
-		dc.l Obj_C8_1				; 211
+		dc.l Obj_LBZMinibossBox			; 204
+		dc.l Obj_LBZ2UnusedRobotnik		; 205
+		dc.l Obj_GumballMachine			; 206
+		dc.l Obj_GumballTriangleBumper		; 207
+		dc.l Obj_LBZFinalBoss2			; 208
+		dc.l Obj_CNZWaterLevelCorkFloor		; 209
+		dc.l Obj_CNZWaterLevelButton		; 210
+		dc.l Obj_LBZKnuxPillar			; 211

@@ -1,8 +1,8 @@
-		dc.w word_26A04-Map_LBZUnusedUnknown_2
-		dc.w word_26A1E-Map_LBZUnusedUnknown_2
-		dc.w word_26A38-Map_LBZUnusedUnknown_2
-		dc.w word_26A58-Map_LBZUnusedUnknown_2
-		dc.w word_26A72-Map_LBZUnusedUnknown_2
+Map_Obj1C_01:	dc.w word_26A04-Map_Obj1C_01
+		dc.w word_26A1E-Map_Obj1C_01
+		dc.w word_26A38-Map_Obj1C_01
+		dc.w word_26A58-Map_Obj1C_01
+		dc.w word_26A72-Map_Obj1C_01
 word_26A04:	dc.w 4
 		dc.b  $E8,   7,   0, $10, $FF, $F0
 		dc.b  $E8,   7,   8, $10,   0,   0
