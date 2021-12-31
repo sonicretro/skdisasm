@@ -5227,31 +5227,31 @@ Map_TitleSonicAnim:
 Map_TitleTailsPlane:
 		include "General/Title/Map - S3 Tails Plane.asm"
 LevelMusic_Playlist:
-	dc.b mus_AIZ1,		mus_AIZ2	; ANGEL ISLAND ZONE
-	dc.b mus_HCZ1,		mus_HCZ2	; HYDROCITY ZONE
-	dc.b mus_MGZ1,		mus_MGZ2	; MARBLE GARDEN ZONE
-	dc.b mus_CNZ1,		mus_CNZ2	; CARNIVAL NIGHT ZONE
-	dc.b mus_FBZ1,		mus_FBZ2	; FLYING BATTERY ZONE
-	dc.b mus_ICZ1,		mus_ICZ2	; ICECAP ZONE
-	dc.b mus_LBZ1,		mus_LBZ2	; LAUNCH BASE ZONE
-	dc.b mus_MHZ1,		mus_MHZ2	; MUSHROOM HILL ZONE
-	dc.b mus_SOZ1,		mus_SOZ2	; SANDOPOLIS ZONE
-	dc.b mus_LRZ1,		mus_LRZ2	; LAVA REEF ZONE
-	dc.b mus_SSZ,		mus_DEZ1	; SKY SANCTUARY ZONE
-	dc.b mus_DEZ2,		mus_DEZ2	; DEATH EGG ZONE
-	dc.b mus_DDZ,		mus_DDZ		; DOOMSDAY ZONE
-	dc.b mus_SpecialStage, 	mus_SpecialStage; AIZ INTRO & ENDING
-	dc.b mus_ALZ,		mus_ALZ		; AZURE LAKE ZONE
-	dc.b mus_BPZ,		mus_BPZ		; BALLOON PARK ZONE
-	dc.b mus_DPZ,		mus_DPZ		; DESERT PALACE ZONE
-	dc.b mus_CGZ,		mus_CGZ		; CHROME GADGET ZONE
-	dc.b mus_EMZ,		mus_EMZ		; ENDLESS MINE ZONE
-	dc.b mus_Gumball,	mus_Gumball	; GUMBALL
-	dc.b mus_Slots,		mus_Slots	; PACHINKO
-	dc.b mus_Gumball,	mus_Gumball	; SLOTS
-	dc.b mus_SpecialStage, 	mus_SpecialStage; LAVA REEF ZONE BOSS & HIDDEN PALACE ZONE
-	dc.b mus_SpecialStage, 	mus_SpecialStage; FINAL BOSS & SPECIAL STAGE HUB
-	even
+		dc.b mus_AIZ1,		mus_AIZ2	; ANGEL ISLAND ZONE
+		dc.b mus_HCZ1,		mus_HCZ2	; HYDROCITY ZONE
+		dc.b mus_MGZ1,		mus_MGZ2	; MARBLE GARDEN ZONE
+		dc.b mus_CNZ1,		mus_CNZ2	; CARNIVAL NIGHT ZONE
+		dc.b mus_FBZ1,		mus_FBZ2	; FLYING BATTERY ZONE
+		dc.b mus_ICZ1,		mus_ICZ2	; ICECAP ZONE
+		dc.b mus_LBZ1,		mus_LBZ2	; LAUNCH BASE ZONE
+		dc.b mus_MHZ1,		mus_MHZ2	; MUSHROOM HILL ZONE
+		dc.b mus_SOZ1,		mus_SOZ2	; SANDOPOLIS ZONE
+		dc.b mus_LRZ1,		mus_LRZ2	; LAVA REEF ZONE
+		dc.b mus_SSZ,		mus_DEZ1	; SKY SANCTUARY ZONE
+		dc.b mus_DEZ2,		mus_DEZ2	; DEATH EGG ZONE
+		dc.b mus_DDZ,		mus_DDZ		; DOOMSDAY ZONE
+		dc.b mus_SpecialStage, 	mus_SpecialStage; AIZ INTRO & ENDING
+		dc.b mus_ALZ,		mus_ALZ		; AZURE LAKE ZONE
+		dc.b mus_BPZ,		mus_BPZ		; BALLOON PARK ZONE
+		dc.b mus_DPZ,		mus_DPZ		; DESERT PALACE ZONE
+		dc.b mus_CGZ,		mus_CGZ		; CHROME GADGET ZONE
+		dc.b mus_EMZ,		mus_EMZ		; ENDLESS MINE ZONE
+		dc.b mus_Gumball,	mus_Gumball	; GUMBALL
+		dc.b mus_Slots,		mus_Slots	; PACHINKO
+		dc.b mus_Gumball,	mus_Gumball	; SLOTS
+		dc.b mus_SpecialStage, 	mus_SpecialStage; LAVA REEF ZONE BOSS & HIDDEN PALACE ZONE
+		dc.b mus_SpecialStage, 	mus_SpecialStage; FINAL BOSS & SPECIAL STAGE HUB
+		even
 ; ---------------------------------------------------------------------------
 
 Level:
@@ -93153,11 +93153,9 @@ ChildObjDat_4D4F6:dc.w 4
 		dc.b $FC
 Pal_FBZMiniboss:binclude "Levels/FBZ/Palettes/S3 Miniboss.bin"
 		even
-
 word_4D540:	palscriptptr .header, .data
 		dc.w 0
 .header	palscripthdr	Normal_palette_line_2+$1E, 1, 7-1
-
 .data	palscriptdata	1, $EEE
 	palscriptdata	4, $644
 	palscriptrun
@@ -95427,7 +95425,6 @@ Pal_ICZMiniboss:binclude "Levels/ICZ/Palettes/Miniboss.bin"
 		even
 word_4EBE2:	palscriptptr .header, .data
 		dc.w 0
-
 .header	palscripthdr	Normal_palette_line_4+$02, 10, 2-1
 .data	palscriptdata	8, $EEC, $CC6, $C80, $C60, $C40, $A40, $820, $620, $200, $600
 	palscriptdata	8, $EEC, $CC6, $C82, $C80, $C40, $A40, $820, $820, $200, $600
@@ -100630,9 +100627,10 @@ Pal_SuperSonicEndPose:
 		even
 Map_SonicTailsEndPoses:
 		include "General/Ending/Map - Sonic Tails Ending Poses S3.asm"
-PalSPtr_LBZFinalBoss2_FadeIn:	palscriptptr .header, .data
-		dc.w 0
 
+PalSPtr_LBZFinalBoss2_FadeIn:
+		palscriptptr .header, .data
+		dc.w 0
 .header	palscripthdr	Normal_palette_line_4+$16, 4, 2-1
 .data	palscriptdata	16, $ECE, $E8A, $E48, $E46
 	palscriptdata	16, $CAC, $C68, $C46, $A44
@@ -100640,9 +100638,9 @@ PalSPtr_LBZFinalBoss2_FadeIn:	palscriptptr .header, .data
 	palscriptdata	16, $844, $622, $400, $200
 	palscriptrun
 
-PalSPtr_LBZFinalBoss2_FadeOut:	palscriptptr .header, .data
+PalSPtr_LBZFinalBoss2_FadeOut:
+		palscriptptr .header, .data
 		dc.w 0
-
 .header	palscripthdr	Normal_palette_line_4+$16, 4, 2-1
 .data	palscriptdata	16, $844, $622, $400, $200
 	palscriptdata	16, $A88, $A46, $824, $622
@@ -119071,62 +119069,57 @@ Map_HCZMinibossSplash:
 DPLC_HCZMinibossSplash:
 		include "Levels/HCZ/Misc Object Data/DPLC - Miniboss Splash.asm"
 Map_ICZEndBoss:	include "Levels/ICZ/Misc Object Data/Map - End Boss.asm"
-PalSPtr_CNZMinibossNormal:	palscriptptr .header, .data
+
+PalSPtr_CNZMinibossNormal:
+		palscriptptr .header, .data
 		dc.w 0
 .header	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
-
 .data	palscriptdata	1, $EEE
 	palscriptdata	1, $A22
 	palscriptdata	6, $020
 	palscriptloop	.headr2
-
 .headr2	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
 	palscriptdata	1, $EEE
 	palscriptdata	1, $A22
 	palscriptdata	4, $020
 	palscriptloop	.headr3
-
 .headr3	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
 	palscriptdata	1, $EEE
 	palscriptdata	1, $A22
 	palscriptdata	2, $020
 	palscriptloop	.headr4
-
 .headr4	palscripthdr	Normal_palette_line_2+$14, 1, $B-1
 	palscriptdata	1, $EEE
 	palscriptdata	1, $A22
 	palscriptdata	1, $020
 	palscriptrun
 
-PalSPtr_CNZMinibossSparks:	palscriptptr .header, .data
+PalSPtr_CNZMinibossSparks:
+		palscriptptr .header, .data
 		dc.w 0
 .header	palscripthdr	Normal_palette_line_2+$14, 1, $31-1
-
 .data	palscriptdata	1, $EEE
 	palscriptdata	1, $A22
 	palscriptdata	1, $020
 	palscriptloop	.headr2
-
 .headr2	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
 	palscriptdata	1, $EEE
 	palscriptdata	1, $A22
 	palscriptdata	2, $020
 	palscriptloop	.headr3
-
 .headr3	palscripthdr	Normal_palette_line_2+$14, 1, 4-1
 	palscriptdata	1, $EEE
 	palscriptdata	1, $A22
 	palscriptdata	4, $020
 	palscriptloop	.headr4
-
 .headr4	palscripthdr	Normal_palette_line_2+$14, 1, 2-1
 	palscriptdata	96, $020
 	palscriptloop	PalSPtr_CNZMinibossNormal.headr3
 
-PalSPtr_CNZMinibossOpen:	palscriptptr .header, .data
+PalSPtr_CNZMinibossOpen:
+		palscriptptr .header, .data
 		dc.w 0
 .header	palscripthdr	Normal_palette_line_2+$14, 1, 0
-
 .data	palscriptdata	1, $EEE
 	palscriptdata	1, $A22
 	palscriptdata	2, $020
@@ -119139,33 +119132,29 @@ PalSPtr_CNZMinibossOpen:	palscriptptr .header, .data
 	palscriptrept
 
 Map_CNZMiniboss:include "Levels/CNZ/Misc Object Data/Map - Miniboss.asm"
+
 word_16322C:	palscriptptr .header, .data
 		dc.w 0
-
 .header	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
 .data	palscriptdata	8, $222
 	palscriptdata	1, $C22
 	palscriptdata	1, $EE0
 	palscriptloop	.headr2
-
 .headr2	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
 	palscriptdata	6, $222
 	palscriptdata	1, $C22
 	palscriptdata	1, $EE0
 	palscriptloop	.headr3
-
 .headr3	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
 	palscriptdata	4, $222
 	palscriptdata	1, $C22
 	palscriptdata	1, $EE0
 	palscriptloop	.headr4
-
 .headr4	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
 	palscriptdata	2, $222
 	palscriptdata	1, $C22
 	palscriptdata	1, $EE0
 	palscriptloop	.headr5
-
 .headr5	palscripthdr	Normal_palette_line_2+$14, 1, 0
 	palscriptdata	1, $222
 	palscriptdata	1, $C22
@@ -119174,36 +119163,32 @@ word_16322C:	palscriptptr .header, .data
 
 word_163298:	palscriptptr .header, .data
 		dc.w 0
-
 .header	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
 .data	palscriptdata	2, $222
 	palscriptdata	1, $C22
 	palscriptdata	1, $EE0
 	palscriptloop	.headr2
-
 .headr2	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
 	palscriptdata	4, $222
 	palscriptdata	1, $C22
 	palscriptdata	1, $EE0
 	palscriptloop	.headr3
-
 .headr3	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
 	palscriptdata	6, $222
 	palscriptdata	1, $C22
 	palscriptdata	1, $EE0
 	palscriptloop	.headr4
-
 .headr4	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
 	palscriptdata	8, $222
 	palscriptdata	1, $C22
 	palscriptdata	1, $EE0
 	palscriptloop	.headr5
-
 .headr5	palscripthdr	Normal_palette_line_2+$14, 1, 5-1
 	palscriptdata	10,$222
 	palscriptdata	1, $C22
 	palscriptdata	1, $EE0
 	palscriptrun
+
 ICZMiniboss_OrbAngleLookup:
 		dc.b    0,   1,   2,   4,   5,   6,   7,   8,   9,  $B,  $C,  $D,  $E,  $F, $10, $11
 		dc.b  $12, $13, $15, $16, $17, $18, $19, $1A, $1B, $1C, $1D, $1E, $1E, $1F, $20, $21
