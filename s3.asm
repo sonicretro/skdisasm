@@ -430,7 +430,7 @@ loc_6EA:
 		move.l	d7,(a6)+
 		dbf	d6,loc_6EA
 		move.b	(HW_Version).l,d0
-		andi.b	#-$40,d0
+		andi.b	#$C0,d0
 		move.b	d0,(Graphics_flags).w
 		move.l	#Ref_Checksum_String,(Checksum_string).w
 
@@ -5023,18 +5023,8 @@ loc_4066:
 locret_406C:
 		rts
 ; ---------------------------------------------------------------------------
-OldDebugCodeDat:dc.b $20
-		dc.b $30
-		dc.b $70
-		dc.b $10
-		dc.b $50
-		dc.b $70
-		dc.b $40
-		dc.b $60
-		dc.b $70
-		dc.b $71
-		dc.b $72
-		dc.b 0
+OldDebugCodeDat:dc.b  $20, $30, $70, $10, $50, $70, $40, $60, $70, $71, $72,    0
+		even
 ; ---------------------------------------------------------------------------
 
 Obj_TitleCopyright:
@@ -5207,16 +5197,8 @@ locret_42C8:
 ; End of function S3_Level_Select_Code
 
 ; ---------------------------------------------------------------------------
-LSelect3CodeDat:dc.b 1
-		dc.b 1
-		dc.b 2
-		dc.b 2
-		dc.b 1
-		dc.b 1
-		dc.b 1
-		dc.b 1
-		dc.b 0
-		dc.b 0
+LSelect3CodeDat:dc.b    1,   1,   2,   2,   1,   1,   1,   1,   0
+		even
 Map_TitleScreenText:
 		include "General/Title/Map - S3 Screen Text.asm"
 ArtNem_TitleScreenText:
@@ -5294,6 +5276,9 @@ loc_4712:
 
 loc_471E:
 		move.w	(Current_zone_and_act).w,d0
+
+		; Useless code. Player_mode has not been set yet, and even if none of
+		; these branches get taken, level $D00 has the same PLCs as level 0.
 		bne.s	loc_4736
 		cmpi.w	#2,(Player_mode).w
 		beq.s	loc_4732
@@ -14843,7 +14828,8 @@ locret_C7BC:
 byte_C7BE:	dc.b  $2B, $2C,   0, $30, $1E, $33, $22, $FF, $21, $22, $29, $22, $31, $22, $FF
 byte_C7CD:	dc.b    0,   0,   0,   0,   0, $FF
 byte_C7D3:	dc.b  $37, $2C, $2B, $22,   0, $FF
-byte_C7D9:	dc.b  $20, $29, $22, $1E, $2F, $FF,   0
+byte_C7D9:	dc.b  $20, $29, $22, $1E, $2F, $FF
+		even
 ArtKos_SaveScreenS3Zone:
 		binclude "General/Save Menu/Kosinski Art/Zone Art.bin"
 		even
@@ -28110,7 +28096,7 @@ Obj_FireShield_Destroy:
 Obj_LightningShield:
 		move.l	#ArtUnc_LightningShield_Sparks,d1
 		move.w	#tiles_to_bytes(ArtTile_Shield_Sparks),d2
-		move.w	#$50,d3
+		move.w	#(ArtUnc_LightningShield_Sparks_end-ArtUnc_LightningShield_Sparks)/2,d3
 		jsr	(Add_To_DMA_Queue).l
 		move.l	#Map_LightningShield,$C(a0)
 		move.l	#DPLC_LightningShield,$3C(a0)
@@ -30764,8 +30750,8 @@ Get_LevelSizeStart:
 		move.w	#-1,(Screen_Y_wrap_value).w
 		bra.w	loc_1A374
 ; ---------------------------------------------------------------------------
-;		      xstart    xend  ystart yend	; Level
-LevelSizes:	dc.w   $1308,  $6000,      0,   $390 	; AIZ1
+;		      xstart    xend  ystart    yend	; Level
+LevelSizes:	dc.w   $1308,  $6000,      0,   $390	; AIZ1
 		dc.w       0,  $4640,      0,   $590	; AIZ2
 		dc.w       0,  $6000,      0,  $1000	; HCZ1
 		dc.w       0,  $6000,      0,  $1000	; HCZ2
@@ -69056,9 +69042,7 @@ Comp_ScreenInit:
 		moveq	#0,d1
 		move.w	#$8000,d7
 		jmp	Refresh_PlaneFull_Competition(pc)
-
-; =============== S U B R O U T I N E =======================================
-
+; ---------------------------------------------------------------------------
 
 Comp_ScreenEvent:
 		jsr	Update_CameraPositionP2(pc)
@@ -69071,8 +69055,6 @@ Comp_ScreenEvent:
 		jsr	Adjust_BGDuringLoop(pc)
 		move.w	(Camera_X_pos_P2_copy).w,d0
 		jmp	Adjust_BGDuringLoop(pc)
-; End of function Comp_ScreenEvent
-
 ; ---------------------------------------------------------------------------
 
 CGZ_ScreenEvent:
@@ -69138,9 +69120,7 @@ Comp_BackgroundInit:
 		moveq	#0,d1
 		move.w	#$A000,d7
 		jmp	Refresh_PlaneFull_Competition(pc)
-
-; =============== S U B R O U T I N E =======================================
-
+; ---------------------------------------------------------------------------
 
 ALZ_BackgroundEvent:
 		jsr	ALZ_Deformation(pc)
@@ -69180,11 +69160,7 @@ loc_3A764:
 		moveq	#$73,d1
 		jsr	ApplyDeformation2(pc)
 		jmp	Update_VScrollValueP2(pc)
-; End of function ALZ_BackgroundEvent
-
-
-; =============== S U B R O U T I N E =======================================
-
+; ---------------------------------------------------------------------------
 
 DPZ_BackgroundEvent:
 		jsr	DPZ_Deformation(pc)
@@ -69198,8 +69174,6 @@ DPZ_BackgroundEvent:
 		moveq	#$1C,d2
 		bsr.s	sub_3A7BA
 		jmp	Update_VScrollValueP2(pc)
-; End of function DPZ_BackgroundEvent
-
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -73654,11 +73628,7 @@ loc_3DA1E:
 		jmp	(Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 CNZ1_BGDeformArray:
-		dc.w $80
-		dc.w $30
-		dc.w $60
-		dc.w $C0
-		dc.w $7FFF
+		dc.w $80, $30, $60, $C0, $7FFF
 ; ---------------------------------------------------------------------------
 
 CNZ2_ScreenInit:
@@ -74099,11 +74069,6 @@ ICZ1_SetIntroPal:
 
 loc_3DE92:
 		lea	(Target_palette_line_4+2).w,a1
-; End of function ICZ1_SetIntroPal
-
-
-; =============== S U B R O U T I N E =======================================
-
 
 sub_3DE96:
 		move.l	#$EEE0EEC,(a1)+
@@ -74115,7 +74080,7 @@ sub_3DE96:
 		move.l	#$AEC0CEA,(a1)+
 		move.w	#$E80,(a1)
 		rts
-; End of function sub_3DE96
+; End of function ICZ1_SetIntroPal
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -74129,11 +74094,6 @@ ICZ1_SetIndoorPal:
 
 loc_3DED2:
 		lea	(Target_palette_line_4+2).w,a1
-; End of function ICZ1_SetIndoorPal
-
-
-; =============== S U B R O U T I N E =======================================
-
 
 sub_3DED6:
 		move.l	#$EC00E40,(a1)+
@@ -74143,7 +74103,7 @@ sub_3DED6:
 		move.l	#$E240A02,(a1)+
 		move.w	#$402,(a1)
 		rts
-; End of function sub_3DED6
+; End of function ICZ1_SetIndoorPal
 
 ; ---------------------------------------------------------------------------
 ICZ1_IntroBGDeformArray:
@@ -74447,11 +74407,6 @@ ICZ2_SetOutdoorsPal:
 
 loc_3E1B6:
 		lea	(Target_palette_line_4+2).w,a1
-; End of function ICZ2_SetOutdoorsPal
-
-
-; =============== S U B R O U T I N E =======================================
-
 
 sub_3E1BA:
 		move.l	#$EEE0EEA,(a1)+
@@ -74460,7 +74415,7 @@ sub_3E1BA:
 		move.l	#$C400E20,(a1)+
 		move.l	#$A000E00,(a1)
 		rts
-; End of function sub_3E1BA
+; End of function ICZ2_SetOutdoorsPal
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -74474,11 +74429,6 @@ ICZ2_SetIndoorsPal:
 
 loc_3E1E6:
 		lea	(Target_palette_line_4+2).w,a1
-; End of function ICZ2_SetIndoorsPal
-
-
-; =============== S U B R O U T I N E =======================================
-
 
 sub_3E1EA:
 		move.l	#$EE20E24,(a1)+
@@ -74488,7 +74438,7 @@ sub_3E1EA:
 		move.l	#$E400840,(a1)+
 		move.w	#$600,(a1)
 		rts
-; End of function sub_3E1EA
+; End of function ICZ2_SetIndoorsPal
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -74502,11 +74452,6 @@ ICZ2_SetICZ1Pal:
 
 loc_3E21A:
 		lea	(Target_palette_line_4+2).w,a1
-; End of function ICZ2_SetICZ1Pal
-
-
-; =============== S U B R O U T I N E =======================================
-
 
 sub_3E21E:
 		move.l	#$EEC0CC6,(a1)+
@@ -74515,7 +74460,7 @@ sub_3E21E:
 		move.l	#$8200620,(a1)+
 		move.l	#$2000600,(a1)
 		rts
-; End of function sub_3E21E
+; End of function ICZ2_SetICZ1Pal
 
 ; ---------------------------------------------------------------------------
 ICZ2_OutBGDeformArray:
@@ -74778,8 +74723,6 @@ loc_3E48A:
 		move.w	d2,(Events_bg+$00).w
 		lsr.w	#1,d2
 		jmp	LBZ1_LayoutModBranch-2(pc,d2.w)
-; End of function LBZ1_CheckLayoutMod
-
 ; ---------------------------------------------------------------------------
 
 LBZ1_LayoutModBranch:
@@ -74884,6 +74827,9 @@ loc_3E536:
 		adda.w	d0,a1
 		dbf	d1,loc_3E536
 		rts
+
+; End of function LBZ1_CheckLayoutMod
+
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -75993,11 +75939,6 @@ Gumball_SetUpVScroll:
 		subi.w	#$C8,d1
 		sub.w	d0,d1
 		neg.w	d1
-; End of function Gumball_SetUpVScroll
-
-
-; =============== S U B R O U T I N E =======================================
-
 
 Gumball_VScroll:
 		lea	(HScroll_table).w,a1
@@ -76008,7 +75949,7 @@ Gumball_VScroll:
 		move.w	d1,4(a1)
 		move.w	d1,$E(a1)
 		rts
-; End of function Gumball_VScroll
+; End of function Gumball_SetUpVScroll
 
 ; ---------------------------------------------------------------------------
 Gumball_VScrollArray:
@@ -99313,9 +99254,9 @@ loc_510F8:
 		move.w	a0,(_unkFAA4).w
 		clr.w	(Ctrl_1_logical).w
 		st	(Ctrl_1_locked).w
-		move.b	#-$80,(Player_1+object_control).w
+		move.b	#$80,(Player_1+object_control).w
 		lea	(ArtKosM_LBZ2DeathEggSmall).l,a1
-		move.w	#-$6A40,d2
+		move.w	#$95C0,d2
 		jsr	(Queue_Kos_Module).l
 
 loc_51142:
@@ -103976,7 +103917,7 @@ loc_53D88:
 		move.w	word_53DE8(pc,d0.w),d0
 		cmpi.w	#$20,(Chain_bonus_counter).w
 		bcs.s	loc_53DA2
-		move.w	#$3E8,d0
+		move.w	#1000,d0
 		move.w	#$A,$3E(a0)
 
 loc_53DA2:
@@ -104002,10 +103943,10 @@ loc_53DDC:
 		subi.w	#$100,$1A(a0)
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-word_53DE8:	dc.w $A
-		dc.w $14
-		dc.w $32
-		dc.w $64
+word_53DE8:	dc.w 10
+		dc.w 20
+		dc.w 50
+		dc.w 100
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -119081,6 +119022,7 @@ ArtUnc_LightningShield:
 		even
 ArtUnc_LightningShield_Sparks:
 		binclude "General/Sprites/Shields/Sparks.bin"
+ArtUnc_LightningShield_Sparks_end:
 		even
 ArtUnc_BubbleShield:
 		binclude "General/Sprites/Shields/Bubble Shield.bin"
