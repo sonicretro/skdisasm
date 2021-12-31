@@ -62,7 +62,7 @@ Map_AIZ1Tree:			include "Levels/AIZ/Misc Object Data/Map - Act 1 Tree.asm"
 
 Map_AIZ1ZiplinePeg:		include "Levels/AIZ/Misc Object Data/Map - Act 1 Zipline Peg.asm"
 
-Map_BreakableBar:		include "Levels/HCZ/Misc Object Data/Map - Breakable Bar.asm"
+Map_HCZBreakableBar:		include "Levels/HCZ/Misc Object Data/Map - Breakable Bar.asm"
 
 Map_HCZBlock:			include "Levels/HCZ/Misc Object Data/Map - Block.asm"
 
@@ -110,7 +110,7 @@ Map_LBZFlameThrower:		include "Levels/LBZ/Misc Object Data/Map - Flame Thrower.a
 
 Map_LBZCupElevator:		include "Levels/LBZ/Misc Object Data/Map - Cup Elevator.asm"
 
-Map_LBZUnusedUnknown:		include "Levels/LBZ/Misc Object Data/Map - Unused Unknown.asm"
+Map_LBZUnusedTiltingBridge:	include "Levels/LBZ/Misc Object Data/Map - Unused Tilting Bridge.asm"
 
 Map_LBZPipePlug:		include "Levels/LBZ/Misc Object Data/Map - PipePlug.asm"
 
@@ -602,7 +602,7 @@ Map_Bloominator:		include "General/Sprites/Bloominator/Map - Bloominator.asm"
 
 Map_MonkeyDude:			include "General/Sprites/Monkey Dude/Map - Monkey Dude.asm"
 
-Map_MGZMiniBoss:		include "Levels/MGZ/Misc Object Data/Map - Miniboss.asm"
+Map_MGZMiniboss:		include "Levels/MGZ/Misc Object Data/Map - Miniboss.asm"
 
 Map_CaterKillerJr:		include "General/Sprites/Caterkiller Jr/Map - Caterkiller Jr.asm"
 

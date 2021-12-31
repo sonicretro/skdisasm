@@ -57,7 +57,7 @@ MapUnc_CompetitionENDLESSMINE:ds.b $1326
 ArtKos_SaveScreenS3Zone:ds.b $FC08
 Map_AIZ1Tree:	ds.b $42
 Map_AIZ1ZiplinePeg:	ds.b $9A0
-Map_BreakableBar:ds.b $280
+Map_HCZBreakableBar:	ds.b $280
 
 Map_HCZBlock:	ds.b $C92
 
@@ -102,7 +102,7 @@ Map_LBZPlayerLauncher:ds.b $102
 Map_LBZFlameThrower:ds.b $D4C
 Map_LBZCupElevator:ds.b	$346
 
-Map_LBZUnusedUnknown:	ds.b $374
+Map_LBZUnusedTiltingBridge:ds.b $374
 
 Map_LBZPipePlug:ds.b $136E
 
@@ -598,7 +598,7 @@ Map_Bloominator:ds.b $B6
 
 Map_MonkeyDude:	ds.b $1FC
 
-Map_MGZMiniBoss:ds.b $A6
+Map_MGZMiniboss:ds.b $A6
 
 Map_CaterKillerJr:ds.b $60
 
