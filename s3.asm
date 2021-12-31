@@ -67182,14 +67182,14 @@ LevelSetup:
 		move.w	(Current_zone_and_act).w,d0
 		ror.b	#2,d0
 		lsr.w	#3,d0
-		movea.l	Offs_ScreenInit(pc,d0.w),a1
+		movea.l	LevelSetupArray(pc,d0.w),a1
 		jsr	(a1)
 		addq.w	#2,a3
 		move.w	#$E000,d7
 		move.w	(Current_zone_and_act).w,d0
 		ror.b	#2,d0
 		lsr.w	#3,d0
-		movea.l	Offs_BackgroundInit(pc,d0.w),a1
+		movea.l	LevelSetupArray+4(pc,d0.w),a1
 		jsr	(a1)
 		move.w	(Camera_Y_pos_copy).w,(V_scroll_value).w
 		move.w	(Camera_Y_pos_BG_copy).w,(V_scroll_value_BG).w
@@ -67208,14 +67208,14 @@ ScreenEvents:
 		move.w	(Current_zone_and_act).w,d0
 		ror.b	#2,d0
 		lsr.w	#3,d0
-		movea.l	Offs_ScreenEvent(pc,d0.w),a1
+		movea.l	LevelEventArray(pc,d0.w),a1
 		jsr	(a1)
 		addq.w	#2,a3
 		move.w	#$E000,d7
 		move.w	(Current_zone_and_act).w,d0
 		ror.b	#2,d0
 		lsr.w	#3,d0
-		movea.l	Offs_BackgroundEvent(pc,d0.w),a1
+		movea.l	LevelEventArray+4(pc,d0.w),a1
 		jsr	(a1)
 		move.w	(Camera_Y_pos_copy).w,(V_scroll_value).w
 		move.w	(Camera_Y_pos_BG_copy).w,(V_scroll_value_BG).w
@@ -67223,198 +67223,102 @@ ScreenEvents:
 ; End of function ScreenEvents
 
 ; ---------------------------------------------------------------------------
-Offs_ScreenInit:dc.l AIZ1_ScreenInit
-Offs_BackgroundInit:dc.l AIZ1_BackgroundInit
-		dc.l AIZ2_ScreenInit
-		dc.l AIZ2_BackgroundInit
-Offs_ScreenEvent:dc.l AIZ1_ScreenEvent
-Offs_BackgroundEvent:dc.l AIZ1_BackgroundEvent
-		dc.l AIZ2_ScreenEvent
-		dc.l AIZ2_BackgroundEvent
-		dc.l HCZ1_ScreenInit
-		dc.l HCZ1_BackgroundInit
-		dc.l HCZ2_ScreenInit
-		dc.l HCZ2_BackgroundInit
-		dc.l HCZ1_ScreenEvent
-		dc.l HCZ1_BackgroundEvent
-		dc.l HCZ2_ScreenEvent
-		dc.l HCZ2_BackgroundEvent
-		dc.l MGZ1_ScreenInit
-		dc.l MGZ1_BackgroundInit
-		dc.l MGZ2_ScreenInit
-		dc.l MGZ2_BackgroundInit
-		dc.l MGZ1_ScreenEvent
-		dc.l MGZ1_BackgroundEvent
-		dc.l MGZ2_ScreenEvent
-		dc.l MGZ2_BackgroundEvent
-		dc.l CNZ1_ScreenInit
-		dc.l CNZ1_BackgroundInit
-		dc.l CNZ2_ScreenInit
-		dc.l CNZ2_BackgroundInit
-		dc.l CNZ1_ScreenEvent
-		dc.l CNZ1_BackgroundEvent
-		dc.l CNZ2_ScreenEvent
-		dc.l CNZ2_BackgroundEvent
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l ICZ1_ScreenInit
-		dc.l ICZ1_BackgroundInit
-		dc.l ICZ2_ScreenInit
-		dc.l ICZ2_BackgroundInit
-		dc.l ICZ1_ScreenEvent
-		dc.l ICZ1_BackgroundEvent
-		dc.l ICZ2_ScreenEvent
-		dc.l ICZ2_BackgroundEvent
-		dc.l LBZ1_ScreenInit
-		dc.l LBZ1_BackgroundInit
-		dc.l LBZ2_ScreenInit
-		dc.l LBZ2_BackgroundInit
-		dc.l LBZ1_ScreenEvent
-		dc.l LBZ1_BackgroundEvent
-		dc.l LBZ2_ScreenEvent
-		dc.l LBZ2_BackgroundEvent
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l Comp_ScreenInit
-		dc.l ALZ_BackgroundInit
-		dc.l Comp_ScreenInit
-		dc.l ALZ_BackgroundInit
-		dc.l Comp_ScreenEvent
-		dc.l ALZ_BackgroundEvent
-		dc.l Comp_ScreenEvent
-		dc.l ALZ_BackgroundEvent
-		dc.l Comp_ScreenInit
-		dc.l BPZ_BackgroundInit
-		dc.l Comp_ScreenInit
-		dc.l BPZ_BackgroundInit
-		dc.l Comp_ScreenEvent
-		dc.l BPZ_BackgroundEvent
-		dc.l Comp_ScreenEvent
-		dc.l BPZ_BackgroundEvent
-		dc.l Comp_ScreenInit
-		dc.l DPZ_BackgroundInit
-		dc.l Comp_ScreenInit
-		dc.l DPZ_BackgroundInit
-		dc.l Comp_ScreenEvent
-		dc.l DPZ_BackgroundEvent
-		dc.l Comp_ScreenEvent
-		dc.l DPZ_BackgroundEvent
-		dc.l Comp_ScreenInit
-		dc.l CGZ_BackgroundInit
-		dc.l Comp_ScreenInit
-		dc.l CGZ_BackgroundInit
-		dc.l CGZ_ScreenEvent
-		dc.l CGZ_BackgroundEvent
-		dc.l CGZ_ScreenEvent
-		dc.l CGZ_BackgroundEvent
-		dc.l Comp_ScreenInit
-		dc.l EMZ_BackgroundInit
-		dc.l Comp_ScreenInit
-		dc.l EMZ_BackgroundInit
-		dc.l Comp_ScreenEvent
-		dc.l EMZ_BackgroundEvent
-		dc.l Comp_ScreenEvent
-		dc.l EMZ_BackgroundEvent
-		dc.l Gumball_ScreenInit
-		dc.l Gumball_BackgroundInit
-		dc.l Gumball_ScreenInit
-		dc.l Gumball_BackgroundInit
-		dc.l Gumball_ScreenEvent
-		dc.l Gumball_BackgroundEvent
-		dc.l Gumball_ScreenEvent
-		dc.l Gumball_BackgroundEvent
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenInit
-		dc.l NoBackgroundInit
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
-		dc.l NoScreenEvent
-		dc.l NoBackgroundEvent
+LevelSetupArray:dc.l	AIZ1_ScreenInit,	AIZ1_BackgroundInit
+		dc.l	AIZ2_ScreenInit,	AIZ2_BackgroundInit
+LevelEventArray:dc.l	AIZ1_ScreenEvent,	AIZ1_BackgroundEvent
+		dc.l	AIZ2_ScreenEvent,	AIZ2_BackgroundEvent
+		dc.l	HCZ1_ScreenInit,	HCZ1_BackgroundInit
+		dc.l	HCZ2_ScreenInit,	HCZ2_BackgroundInit
+		dc.l	HCZ1_ScreenEvent,	HCZ1_BackgroundEvent
+		dc.l	HCZ2_ScreenEvent,	HCZ2_BackgroundEvent
+		dc.l	MGZ1_ScreenInit,	MGZ1_BackgroundInit
+		dc.l	MGZ2_ScreenInit,	MGZ2_BackgroundInit
+		dc.l	MGZ1_ScreenEvent,	MGZ1_BackgroundEvent
+		dc.l	MGZ2_ScreenEvent,	MGZ2_BackgroundEvent
+		dc.l	CNZ1_ScreenInit,	CNZ1_BackgroundInit
+		dc.l	CNZ2_ScreenInit,	CNZ2_BackgroundInit
+		dc.l	CNZ1_ScreenEvent,	CNZ1_BackgroundEvent
+		dc.l	CNZ2_ScreenEvent,	CNZ2_BackgroundEvent
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	ICZ1_ScreenInit,	ICZ1_BackgroundInit
+		dc.l	ICZ2_ScreenInit,	ICZ2_BackgroundInit
+		dc.l	ICZ1_ScreenEvent,	ICZ1_BackgroundEvent
+		dc.l	ICZ2_ScreenEvent,	ICZ2_BackgroundEvent
+		dc.l	LBZ1_ScreenInit,	LBZ1_BackgroundInit
+		dc.l	LBZ2_ScreenInit,	LBZ2_BackgroundInit
+		dc.l	LBZ1_ScreenEvent,	LBZ1_BackgroundEvent
+		dc.l	LBZ2_ScreenEvent,	LBZ2_BackgroundEvent
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	Comp_ScreenInit,	ALZ_BackgroundInit
+		dc.l	Comp_ScreenInit,	ALZ_BackgroundInit
+		dc.l	Comp_ScreenEvent,	ALZ_BackgroundEvent
+		dc.l	Comp_ScreenEvent,	ALZ_BackgroundEvent
+		dc.l	Comp_ScreenInit,	BPZ_BackgroundInit
+		dc.l	Comp_ScreenInit,	BPZ_BackgroundInit
+		dc.l	Comp_ScreenEvent,	BPZ_BackgroundEvent
+		dc.l	Comp_ScreenEvent,	BPZ_BackgroundEvent
+		dc.l	Comp_ScreenInit,	DPZ_BackgroundInit
+		dc.l	Comp_ScreenInit,	DPZ_BackgroundInit
+		dc.l	Comp_ScreenEvent,	DPZ_BackgroundEvent
+		dc.l	Comp_ScreenEvent,	DPZ_BackgroundEvent
+		dc.l	Comp_ScreenInit,	CGZ_BackgroundInit
+		dc.l	Comp_ScreenInit,	CGZ_BackgroundInit
+		dc.l	CGZ_ScreenEvent,	CGZ_BackgroundEvent
+		dc.l	CGZ_ScreenEvent,	CGZ_BackgroundEvent
+		dc.l	Comp_ScreenInit,	EMZ_BackgroundInit
+		dc.l	Comp_ScreenInit,	EMZ_BackgroundInit
+		dc.l	Comp_ScreenEvent,	EMZ_BackgroundEvent
+		dc.l	Comp_ScreenEvent,	EMZ_BackgroundEvent
+		dc.l	Gumball_ScreenInit,	Gumball_BackgroundInit
+		dc.l	Gumball_ScreenInit,	Gumball_BackgroundInit
+		dc.l	Gumball_ScreenEvent,	Gumball_BackgroundEvent
+		dc.l	Gumball_ScreenEvent,	Gumball_BackgroundEvent
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenInit,		NoBackgroundInit
+		dc.l	NoScreenEvent,		NoBackgroundEvent
+		dc.l	NoScreenEvent,		NoBackgroundEvent
 
 ; =============== S U B R O U T I N E =======================================
 
