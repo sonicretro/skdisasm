@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Rhinobot" Image="img" Depth="5">
+  <Images>
+    <ImageFromMappings id="img">
+      <ArtFile filename="../General/Sprites/Rhinobot/Rhinobot.bin" compression="Uncompressed" />
+      <MapFile type="ASM" filename="../General/Sprites/Rhinobot/Map - Rhinobot.asm" startpal="1" />
+    </ImageFromMappings>
+  </Images>
+</ObjDef>

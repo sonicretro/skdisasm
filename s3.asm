@@ -54120,7 +54120,7 @@ off_2DF60:	dc.w PLCKosM_AIZ-off_2DF60
 PLCKosM_AIZ:	dc.w 2
 		dc.l ArtKosM_AIZ_MonkeyDude
 		dc.w $A900
-		dc.l ArtKosM_AIZ_Tulipon
+		dc.l ArtKosM_AIZ_Bloominator
 		dc.w $A540
 		dc.l ArtKosM_AIZ_CaterkillerJr
 		dc.w $ABE0
@@ -54174,7 +54174,7 @@ PLCKosM_ICZ:	dc.w 1
 		dc.l ArtKosM_StarPointer
 		dc.w $A900
 PLCKosM_LBZ:	dc.w 3
-		dc.l ArtKosM_SnailBlaster
+		dc.l ArtKosM_SnaleBlaster
 		dc.w $A480
 		dc.l ArtKosM_Orbinaut
 		dc.w $ADC0
@@ -105484,7 +105484,7 @@ loc_54B5A:
 		jmp	(Sprite_CheckDeleteTouchXY).l
 ; ---------------------------------------------------------------------------
 
-Obj_Tulipon:
+Obj_Bloominator:
 		jsr	(Obj_WaitOffscreen).l
 		moveq	#0,d0
 		move.b	5(a0),d0
@@ -105549,14 +105549,14 @@ loc_54BF8:
 		move.l	#loc_54BAA,$34(a0)
 		rts
 ; ---------------------------------------------------------------------------
-ObjDat3_54C0E:	dc.l Map_Tulipon
+ObjDat3_54C0E:	dc.l Map_Bloominator
 		dc.w $252A
 		dc.w $200
 		dc.b $C
 		dc.b $18
 		dc.b 0
 		dc.b $23
-ObjDat3_54C1A:	dc.l Map_Tulipon
+ObjDat3_54C1A:	dc.l Map_Bloominator
 		dc.w $252A
 		dc.w $280
 		dc.b 8
@@ -105584,7 +105584,7 @@ byte_54C3E:	dc.b    0,   7
 		dc.b  $F4,   0
 ; ---------------------------------------------------------------------------
 
-Obj_RhinoBot:
+Obj_Rhinobot:
 		jsr	(Obj_WaitOffscreen).l
 		moveq	#0,d0
 		move.b	5(a0),d0
@@ -105878,7 +105878,7 @@ ObjDat4_54EFA:	dc.w 1
 		dc.w $2500
 		dc.w $15
 		dc.w 0
-		dc.l Map_RhinoBot
+		dc.l Map_Rhinobot
 		dc.w $280
 		dc.b $14
 		dc.b $10
@@ -105888,7 +105888,7 @@ ObjDat4_54F0C:	dc.w 1
 		dc.w $44A
 		dc.w 6
 		dc.w 2
-		dc.l Map_RhinoBot
+		dc.l Map_Rhinobot
 		dc.w $200
 		dc.b $C
 		dc.b 8
@@ -105900,8 +105900,8 @@ ChildObjDat_54F1E:dc.w 0
 ChildObjDat_54F26:dc.w 0
 		dc.l loc_54CF8
 		dc.w $1008
-DPLCPtr_54F2E:	dc.l ArtUnc_AIZRhino
-		dc.l DPLC_RhinoBot
+DPLCPtr_54F2E:	dc.l ArtUnc_AIZRhinobot
+		dc.l DPLC_Rhinobot
 byte_54F36:	dc.b    2,   4
 		dc.b    4,   5
 		dc.b    6,   7
@@ -107470,7 +107470,7 @@ Map_TurboSpikerHidden:
 		include "General/Sprites/Turbo Spiker/Map - Turbo Spiker Hidden.asm"
 ; ---------------------------------------------------------------------------
 
-Obj_MegaChomper:
+Obj_MegaChopper:
 		jsr	(Obj_WaitOffscreen).l
 		moveq	#0,d0
 		move.b	5(a0),d0
@@ -107762,7 +107762,7 @@ loc_56044:
 ; End of function sub_55FEA
 
 ; ---------------------------------------------------------------------------
-ObjDat3_56058:	dc.l Map_MegaChomper
+ObjDat3_56058:	dc.l Map_MegaChopper
 		dc.w $254D
 		dc.w $280
 		dc.b $20
@@ -109295,7 +109295,7 @@ byte_56F39:	dc.b    0,   2
 		dc.b  $F4
 ; ---------------------------------------------------------------------------
 
-Obj_CNZBlastoid:
+Obj_Sparkle:
 		jsr	(Obj_WaitOffscreen).l
 		moveq	#0,d0
 		move.b	5(a0),d0
@@ -109475,7 +109475,7 @@ loc_570DC:
 loc_570E8:
 		jmp	(MoveSprite2).l
 ; ---------------------------------------------------------------------------
-ObjDat3_570EE:	dc.l Map_CNZBlastoid
+ObjDat3_570EE:	dc.l Map_Sparkle
 		dc.w $A524
 		dc.w $280
 		dc.b $C
@@ -114957,8 +114957,8 @@ ObjDat4_5A27A:	dc.w 2
 		dc.b $10
 		dc.b 0
 		dc.b $1A
-DPLCPtr_5A28C:	dc.l ArtUnc_Flybot
-		dc.l DPLC_Flybot
+DPLCPtr_5A28C:	dc.l ArtUnc_Flybot767
+		dc.l DPLC_Flybot767
 byte_5A294:	dc.b 4
 		dc.b 0
 		dc.b 1
@@ -119048,12 +119048,12 @@ Map_LBZMiniboss:
 Map_LBZMinibossBox:
 		include "Levels/LBZ/Misc Object Data/Map - Miniboss Box.asm"
 Map_SnaleBlaster:
-		include "General/Sprites/Snail Blaster/Map - Snail Blaster.asm"
+		include "General/Sprites/Snale Blaster/Map - Snale Blaster.asm"
 Map_Orbinaut:	include "General/Sprites/Orbinaut/Map - Orbinaut.asm"
 Map_Ribot:	include "General/Sprites/Ribot/Map - Ribot.asm"
 Map_Corkey:	include "General/Sprites/Corkey/Map - Corkey.asm"
-Map_Flybot767:	include "General/Sprites/Flybot/Map - Flybot.asm"
-DPLC_Flybot:	include "General/Sprites/Flybot/DPLC - Flybot.asm"
+Map_Flybot767:	include "General/Sprites/Flybot767/Map - Flybot767.asm"
+DPLC_Flybot767:	include "General/Sprites/Flybot767/DPLC - Flybot767.asm"
 Map_LBZEndBoss:
 		include "Levels/LBZ/Misc Object Data/Map - End Boss.asm"
 Map_CNZEndBoss:
@@ -119075,7 +119075,7 @@ Map_Blastoid:	include "General/Sprites/Blastoid/Map - Blastoid.asm"
 Map_Toxomister:	include "General/Sprites/Toxomister/Map - Toxomister S3.asm"
 Map_Poindexter:	include "General/Sprites/Pointdexter/Map - Pointdexter.asm"
 Map_Buggernaut:	include "General/Sprites/Buggernaut/Map - Buggernaut.asm"
-Map_MegaChomper:include "General/Sprites/Mega Chomper/Map - Mega Chomper.asm"
+Map_MegaChopper:include "General/Sprites/Mega Chopper/Map - Mega Chopper.asm"
 Map_Dragonfly:	include "General/Sprites/Dragonfly/Map - Dragonfly.asm"
 DPLC_Cluckoid:	include "General/Sprites/Cluckoid/DPLC - Cluckoid.asm"
 Map_CluckoidArrow:
@@ -119093,8 +119093,8 @@ Map_Jawz:	include "General/Sprites/Jawz/Map - Jawz.asm"
 Map_Mushmeanie:	include "General/Sprites/Mushmeanie/Map - Mushmeanie.asm"
 Map_Madmole:	include "General/Sprites/Madmole/Map - Madmole S3.asm"
 Map_Iwamodoki:	include "General/Sprites/Iwamodoki/Map - Iwamodoki S3.asm"
-DPLC_RhinoBot:	include "General/Sprites/Rhino/DPLC - RhinoBot.asm"
-Map_RhinoBot:	include "General/Sprites/Rhino/Map - RhinoBot.asm"
+DPLC_Rhinobot:	include "General/Sprites/Rhinobot/DPLC - Rhinobot.asm"
+Map_Rhinobot:	include "General/Sprites/Rhinobot/Map - Rhinobot.asm"
 		dc.w $A
 		dc.w $1C
 		dc.w $24
@@ -119106,7 +119106,7 @@ Map_AIZMinibossFlame:
 		include "Levels/AIZ/Misc Object Data/Map - Miniboss Flame.asm"
 Map_FBZEndBossFlame:
 		include "Levels/FBZ/Misc Object Data/Map - End Boss Flame.asm"
-Map_Tulipon:	include "General/Sprites/Tulipon/Map - Tulipon.asm"
+Map_Bloominator:include "General/Sprites/Bloominator/Map - Bloominator.asm"
 Map_MonkeyDude:	include "General/Sprites/Monkey Dude/Map - Monkey Dude.asm"
 Map_SOZMiniboss:include "Levels/SOZ/Misc Object Data/Map - Miniboss.asm"
 Map_MGZMiniBoss:include "Levels/MGZ/Misc Object Data/Map - Miniboss.asm"
@@ -119114,7 +119114,7 @@ Map_CaterKillerJr:
 		include "General/Sprites/Caterkiller Jr/Map - Caterkiller Jr.asm"
 DPLC_Clamer:	include "General/Sprites/Clamer/DPLC - Clamer.asm"
 Map_Clamer:	include "General/Sprites/Clamer/Map - Clamer.asm"
-Map_CNZBlastoid:include "Levels/CNZ/Misc Object Data/Map - Blastoid.asm"
+Map_Sparkle:	include "General/Sprites/Sparkle/Map - Sparkle.asm"
 Map_Batbot:	include "General/Sprites/Batbot/Map - Batbot.asm"
 DPLC_BubblesBadnik:
 		include "General/Sprites/Bubbles Badnik/DPLC - Bubbles Badnik.asm"
@@ -119346,10 +119346,11 @@ ArtKosM_AIZEndBoss:
 ArtNem_AIZMinibossSmall:
 		binclude "Levels/AIZ/Nemesis Art/Miniboss Small.bin"
 		even
-ArtUnc_AIZRhino:binclude "General/Sprites/Rhino/Rhino.bin"
+ArtUnc_AIZRhinobot:
+		binclude "General/Sprites/Rhinobot/Rhinobot.bin"
 		even
-ArtKosM_AIZ_Tulipon:
-		binclude "General/Sprites/Tulipon/Tulipon.bin"
+ArtKosM_AIZ_Bloominator:
+		binclude "General/Sprites/Bloominator/Bloominator.bin"
 		even
 ArtKosM_AIZ_MonkeyDude:
 		binclude "General/Sprites/Monkey Dude/Monkey Dude.bin"
@@ -119470,8 +119471,8 @@ ArtKosM_LBZEndBoss:
 ArtKosM_LBZFinalBoss2:
 		binclude "Levels/LBZ/KosinskiM Art/Final Boss 2.bin"
 		even
-ArtKosM_SnailBlaster:
-		binclude "General/Sprites/Snail Blaster/Snail Blaster.bin"
+ArtKosM_SnaleBlaster:
+		binclude "General/Sprites/Snale Blaster/Snale Blaster.bin"
 		even
 ArtKosM_Ribot:	binclude "General/Sprites/Ribot/Ribot.bin"
 		even
@@ -119480,7 +119481,8 @@ ArtKosM_Orbinaut:
 		even
 ArtKosM_Corkey:	binclude "General/Sprites/Corkey/Corkey.bin"
 		even
-ArtUnc_Flybot:	binclude "General/Sprites/Flybot/Flybot.bin"
+ArtUnc_Flybot767:
+		binclude "General/Sprites/Flybot767/Flybot767.bin"
 		even
 ArtNem_LBZKnuxBomb:
 		binclude "Levels/LBZ/Nemesis Art/Knuckles Bomb.bin"

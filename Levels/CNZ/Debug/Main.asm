@@ -9,7 +9,7 @@
 	dbglistobj Obj_Spikes,			Map_Spikes,		   0,   0, make_art_tile($49C,0,0)
 	dbglistobj Obj_Spikes,			Map_Spikes,		 $40,   4, make_art_tile($494,0,0)
 	dbglistobj Obj_Clamer,			Map_Clamer,		   0,   0, make_art_tile($500,1,0)
-	dbglistobj Obj_CNZBlastoid,		Map_CNZBlastoid,	   0,   0, make_art_tile($524,1,0)
+	dbglistobj Obj_Sparkle,			Map_Sparkle,		   0,   0, make_art_tile($524,1,0)
 	dbglistobj Obj_Batbot,			Map_Batbot,		   0,   0, make_art_tile($552,1,0)
 	dbglistobj Obj_Door,			Map_HCZCNZDEZDoor,	   1,   1, make_art_tile($416,2,0)
 	dbglistobj Obj_Bumper,			Map_Bumper,		   0,   0, make_art_tile($364,2,0)
