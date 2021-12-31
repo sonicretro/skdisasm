@@ -1727,22 +1727,22 @@ loc_15B0:
 
 ; ---------------------------------------------------------------------------
 Z80_DefaultVariables:
-		dc.b    0	; Unused 1
-		dc.b    0	; Unused 2
-		dc.b    0	; zPalFlag
-		dc.b    0	; Unused 3
-		dc.b    0	; zPalDblUpdCounter
-		dc.b    0	; zSoundQueue0
-		dc.b    0	; zSoundQueue1
-		dc.b    0	; zSoundQueue2
-		dc.b    0	; zTempoSpeedup
-		dc.b    0	; zNextSound
-		dc.b    0	; zMusicNumber
-		dc.b    0	; zSFXNumber0
-		dc.b    0	; zSFXNumber1
-		dc.b    0	; zFadeOutTimeout
-		dc.b    0	; zFadeDelay
-		dc.b    0	; zFadeDelayTimeout
+		dc.b 0	; Unused 1
+		dc.b 0	; Unused 2
+		dc.b 0	; zPalFlag
+		dc.b 0	; Unused 3
+		dc.b 0	; zPalDblUpdCounter
+		dc.b 0	; zSoundQueue0
+		dc.b 0	; zSoundQueue1
+		dc.b 0	; zSoundQueue2
+		dc.b 0	; zTempoSpeedup
+		dc.b 0	; zNextSound
+		dc.b 0	; zMusicNumber
+		dc.b 0	; zSFXNumber0
+		dc.b 0	; zSFXNumber1
+		dc.b 0	; zFadeOutTimeout
+		dc.b 0	; zFadeDelay
+		dc.b 0	; zFadeDelayTimeout
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -6724,7 +6724,8 @@ loc_572E:
 byte_573A:	dc.b  $F8, $F8,   8,   8, $F4, $F4, $F4,  $C,  $C,  $C
 		dc.b  $1C, $72, $83, $84, $8B, $91, $9F, $A0, $A5, $A6
 byte_574E:	dc.b  $2E, $C6, $33, $C5, $24, $2A, $44, $1F, $27, $2B
-WaterTransition_AIZ1:dc.w $F
+WaterTransition_AIZ1:
+		dc.w $F
 		dc.w 2
 		dc.w $68
 		dc.w $62
@@ -6741,7 +6742,8 @@ WaterTransition_AIZ1:dc.w $F
 		dc.w $3A
 		dc.w $2E
 		dc.w $28
-WaterTransition_AIZ2:dc.w $12
+WaterTransition_AIZ2:
+		dc.w $12
 		dc.w $6E
 		dc.w $68
 		dc.w 2
@@ -6761,53 +6763,56 @@ WaterTransition_AIZ2:dc.w $12
 		dc.w $3A
 		dc.w $2E
 		dc.w $28
-WaterTransition_CNZ2ICZ2:dc.w $13
-		dc.w $6E
-		dc.w $68
-		dc.w $7A
-		dc.w $74
-		dc.w $62
-		dc.w 2
-		dc.w $42
-		dc.w $48
-		dc.w $4E
-		dc.w $5A
-		dc.w 8
-		dc.w $E
-		dc.w $14
-		dc.w $1A
-		dc.w $34
-		dc.w $22
-		dc.w $3A
-		dc.w $2E
-		dc.w $28
-		dc.w $54
-WaterTransition_HCZLBZ1:dc.w $13
-		dc.w 2
-		dc.w $74
-		dc.w $62
-		dc.w $68
-		dc.w $6E
-		dc.w $42
-		dc.w $48
-		dc.w $7A
-		dc.w $5A
-		dc.w $54
-		dc.w 8
-		dc.w $E
-		dc.w $14
-		dc.w $1A
-		dc.w $2E
-		dc.w $34
-		dc.w $28
-		dc.w $3A
-		dc.w $22
-		dc.w $4E
-WaterTransition_LBZ2:dc.w $13
-		dc.w 2
+WaterTransition_CNZ2ICZ2:
+		dc.w $13
 		dc.w $6E
 		dc.w $68
 		dc.w $7A
+		dc.w $74
+		dc.w $62
+		dc.w 2
+		dc.w $42
+		dc.w $48
+		dc.w $4E
+		dc.w $5A
+		dc.w 8
+		dc.w $E
+		dc.w $14
+		dc.w $1A
+		dc.w $34
+		dc.w $22
+		dc.w $3A
+		dc.w $2E
+		dc.w $28
+		dc.w $54
+WaterTransition_HCZLBZ1:
+		dc.w $13
+		dc.w 2
+		dc.w $74
+		dc.w $62
+		dc.w $68
+		dc.w $6E
+		dc.w $42
+		dc.w $48
+		dc.w $7A
+		dc.w $5A
+		dc.w $54
+		dc.w 8
+		dc.w $E
+		dc.w $14
+		dc.w $1A
+		dc.w $2E
+		dc.w $34
+		dc.w $28
+		dc.w $3A
+		dc.w $22
+		dc.w $4E
+WaterTransition_LBZ2:
+		dc.w $13
+		dc.w 2
+		dc.w $6E
+		dc.w $68
+		dc.w $7A
 		dc.w $62
 		dc.w $74
 		dc.w $42
@@ -6824,7 +6829,8 @@ WaterTransition_LBZ2:dc.w $13
 		dc.w $3A
 		dc.w $22
 		dc.w $4E
-WaterTransition_Unk:dc.w $13
+WaterTransition_Unk:
+		dc.w $13
 		dc.w 2
 		dc.w 8
 		dc.w $E
@@ -8630,7 +8636,8 @@ MapEni_S2LevSel:binclude "General/Sprites/S2Menu/Enigma Map/Level Select.bin"
 MapEni_S2LevSelIcon:
 		binclude "General/Sprites/S2Menu/Enigma Map/Level Select Icons.bin"
 		even
-AniPLC_SONICMILES:dc.w 0
+AniPLC_SONICMILES:
+		dc.w 0
 		dc.l ArtUnc_SONICMILES+$FF000000
 		dc.w $20
 		dc.b    6,  $A
@@ -11799,7 +11806,8 @@ sub_9F48:
 ; End of function sub_9F48
 
 ; ---------------------------------------------------------------------------
-VRAMDatList_CompetitionLevelSelect:dc.w	$18
+VRAMDatList_CompetitionLevelSelect:
+		dc.w $18
 		dc.l RAM_start
 		dc.w $C098
 		dc.w $1A
@@ -11900,7 +11908,8 @@ VRAMDatList_CompetitionLevelSelect:dc.w	$18
 		dc.w $D3D0
 		dc.w 8
 		dc.w 1
-ObjDat_CompetitionMatchRace:dc.w $B
+ObjDat_CompetitionMatchRace:
+		dc.w $B
 		dc.l Obj_Competition_ZoneSelect
 		dc.w $F4
 		dc.w 0
@@ -11973,7 +11982,8 @@ ObjDat_CompetitionMatchRace:dc.w $B
 		dc.w $2000
 		dc.b 5
 		dc.b 0
-ObjDat_CompetitionTimeAttack:dc.w 5
+ObjDat_CompetitionTimeAttack:
+		dc.w 5
 		dc.l Obj_Competition_ZoneSelect
 		dc.w $F4
 		dc.w $30
@@ -12851,7 +12861,8 @@ ObjDat_ADA4:	dc.w 7
 		dc.w 0
 		dc.b 0
 		dc.b 1
-VRAMDatList_AE06:dc.w 8
+VRAMDatList_AE06:
+		dc.w 8
 		dc.l RAM_start
 		dc.w $E000
 		dc.w $27
@@ -13190,7 +13201,8 @@ ObjDat_B28C:	dc.w 4
 		dc.w 0
 		dc.b 0
 		dc.b 2
-VRAMDatList_B2CA:dc.w 8
+VRAMDatList_B2CA:
+		dc.w 8
 		dc.l RAM_start
 		dc.w $E000
 		dc.w $27
@@ -13639,7 +13651,8 @@ locret_B80E:
 ; End of function SaveGame
 
 ; ---------------------------------------------------------------------------
-SaveGame_NextLevel:dc.b    1,   2,   3,   5,   5,   6,   7,   0
+SaveGame_NextLevel:
+		dc.b    1,   2,   3,   5,   5,   6,   7,   0
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -14019,7 +14032,8 @@ word_BD16:	dc.w 7
 		dc.w $A
 		dc.w $B
 Map_SaveScreen:	include "General/Save Menu/Map - Save Screen General S3.asm"
-ObjDat_SaveScreen:dc.w 9
+ObjDat_SaveScreen:
+		dc.w 9
 		dc.l Draw_Sprite
 		dc.w $120
 		dc.w $14C
@@ -15861,7 +15875,8 @@ S2_SpecialCNZBumpers:
 ; End of function S2_SpecialCNZBumpers
 
 ; ---------------------------------------------------------------------------
-SpecialCNZBumpers_Index:dc.w SpecialCNZBumpers_Init-SpecialCNZBumpers_Index
+SpecialCNZBumpers_Index:
+		dc.w SpecialCNZBumpers_Init-SpecialCNZBumpers_Index
 		dc.w SpecialCNZBumpers_Main-SpecialCNZBumpers_Index
 ; ---------------------------------------------------------------------------
 
@@ -26873,7 +26888,8 @@ Obj_Air_CountDown:
 		move.w	AirCountdown_Index(pc,d0.w),d1
 		jmp	AirCountdown_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
-AirCountdown_Index:dc.w	AirCountdown_Init-AirCountdown_Index
+AirCountdown_Index:
+		dc.w AirCountdown_Init-AirCountdown_Index
 		dc.w AirCountdown_Animate-AirCountdown_Index
 		dc.w AirCountdown_ChkWater-AirCountdown_Index
 		dc.w AirCountdown_Display-AirCountdown_Index
@@ -27284,7 +27300,8 @@ Obj_S2Shield:
 		move.w	Obj_S2Shield_Index(pc,d0.w),d1
 		jmp	Obj_S2Shield_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
-Obj_S2Shield_Index:dc.w Obj_S2Shield_Init-Obj_S2Shield_Index
+Obj_S2Shield_Index:
+		dc.w Obj_S2Shield_Init-Obj_S2Shield_Index
 		dc.w Obj_S2Shield_Main-Obj_S2Shield_Index
 ; ---------------------------------------------------------------------------
 
@@ -31422,7 +31439,8 @@ loc_1A89C:
 ; End of function Do_ResizeEvents
 
 ; ---------------------------------------------------------------------------
-LevelResizeArray:dc.w AIZ1_Resize-LevelResizeArray
+LevelResizeArray:
+		dc.w AIZ1_Resize-LevelResizeArray
 		dc.w AIZ2_Resize-LevelResizeArray
 		dc.w HCZ1_Resize-LevelResizeArray
 		dc.w HCZ2_Resize-LevelResizeArray
@@ -41907,8 +41925,7 @@ GetScalars:
 ; ---------------------------------------------------------------------------
 ScalarTable:	binclude "General/Special Stage/Scalars.bin"
 		even
-Map_SphereTest:
-		include "General/Special Stage/Map - Eosian Spheres.asm"
+Map_SphereTest:	include "General/Special Stage/Map - Eosian Spheres.asm"
 ; ---------------------------------------------------------------------------
 
 Obj_TwistedRamp:
@@ -42076,7 +42093,8 @@ loc_23E3C:
 loc_23E48:
 		jmp	(Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
-LBZMovingPlatformIndex:dc.w Platform_Stationary-LBZMovingPlatformIndex
+LBZMovingPlatformIndex:
+		dc.w Platform_Stationary-LBZMovingPlatformIndex
 		dc.w Platform_Horizontal64-LBZMovingPlatformIndex
 		dc.w Platform_Horizontal128-LBZMovingPlatformIndex
 		dc.w Platform_Vertical64-LBZMovingPlatformIndex
@@ -42091,7 +42109,8 @@ LBZMovingPlatformIndex:dc.w Platform_Stationary-LBZMovingPlatformIndex
 		dc.w Platform_Horizontal256-LBZMovingPlatformIndex
 		dc.w Platform_FallingDelayed-LBZMovingPlatformIndex
 		dc.w Platform_Falling-LBZMovingPlatformIndex
-FloatingPlatformIndex:dc.w Platform_Stationary-FloatingPlatformIndex
+FloatingPlatformIndex:
+		dc.w Platform_Stationary-FloatingPlatformIndex
 		dc.w Platform_Horizontal64-FloatingPlatformIndex
 		dc.w Platform_Horizontal128-FloatingPlatformIndex
 		dc.w Platform_Vertical64-FloatingPlatformIndex
@@ -48000,7 +48019,8 @@ sub_28580:
 ; End of function sub_28580
 
 ; ---------------------------------------------------------------------------
-AutoTunnel_Index:dc.w Obj_AutoTunnelInit-AutoTunnel_Index
+AutoTunnel_Index:
+		dc.w Obj_AutoTunnelInit-AutoTunnel_Index
 		dc.w Obj_AutoTunnelRun-AutoTunnel_Index
 		dc.w Obj_AutoTunnelLastMove-AutoTunnel_Index
 ; ---------------------------------------------------------------------------
@@ -48709,7 +48729,8 @@ LBZTubeElevator_Action:
 ; End of function LBZTubeElevator_Action
 
 ; ---------------------------------------------------------------------------
-LBZTubeElevator_Index:dc.w LBZTubeElevator_WaitPlayer-LBZTubeElevator_Index
+LBZTubeElevator_Index:
+		dc.w LBZTubeElevator_WaitPlayer-LBZTubeElevator_Index
 		dc.w LBZTubeElevator_StartSpin-LBZTubeElevator_Index
 		dc.w LBZTubeElevator_MovePath-LBZTubeElevator_Index
 		dc.w LBZTubeElevator_SlowSpin-LBZTubeElevator_Index
@@ -49075,7 +49096,8 @@ loc_2915E:
 		movea.l	(sp)+,a2
 		rts
 ; ---------------------------------------------------------------------------
-LBZTubeElevator_PlayerFrame:dc.b $55
+LBZTubeElevator_PlayerFrame:
+		dc.b $55
 		dc.b $59
 		dc.b $5A
 		dc.b $5B
@@ -49087,7 +49109,8 @@ LBZTubeElevator_PlayerFrame:dc.b $55
 		dc.b $58
 		dc.b $57
 		dc.b $56
-LBZTubeElevator_PlayerFlip:dc.b	0
+LBZTubeElevator_PlayerFlip:
+		dc.b 0
 		dc.b 1
 		dc.b 1
 		dc.b 0
@@ -52900,7 +52923,8 @@ loc_2CD06:
 loc_2CD1C:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-TitleCard_LevelGfx:dc.l	ArtKosM_AIZTitleCard
+TitleCard_LevelGfx:
+		dc.l ArtKosM_AIZTitleCard
 		dc.l ArtKosM_HCZTitleCard
 		dc.l ArtKosM_MGZTitleCard
 		dc.l ArtKosM_CNZTitleCard
@@ -52922,7 +52946,8 @@ TitleCard_LevelGfx:dc.l	ArtKosM_AIZTitleCard
 		dc.l ArtKosM_BonusTitleCard
 		dc.l ArtKosM_BonusTitleCard
 		dc.l ArtKosM_BonusTitleCard
-ObjArray_TtlCard:dc.l Obj_TitleCardName
+ObjArray_TtlCard:
+		dc.l Obj_TitleCardName
 		dc.w $120
 		dc.w $260
 		dc.w $E0
@@ -52950,14 +52975,16 @@ ObjArray_TtlCard:dc.l Obj_TitleCardName
 		dc.b 1
 		dc.b 0
 		dc.w 1
-ObjArray_TtlCard2:dc.l Obj_TitleCardElement2
+ObjArray_TtlCard2:
+		dc.l Obj_TitleCardElement2
 		dc.w $15C
 		dc.w $21C
 		dc.w $BC
 		dc.b $12
 		dc.b $80
 		dc.w 1
-ObjArray_TtlCardBonus:dc.l Obj_TitleCardElement
+ObjArray_TtlCardBonus:
+		dc.l Obj_TitleCardElement
 		dc.w $C8
 		dc.w $188
 		dc.w $E8
@@ -52979,7 +53006,8 @@ Obj_LevelResults:
 		move.w	LevelResults_Index(pc,d0.w),d1
 		jmp	LevelResults_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
-LevelResults_Index:dc.w	Obj_LevelResultsInit-LevelResults_Index
+LevelResults_Index:
+		dc.w Obj_LevelResultsInit-LevelResults_Index
 		dc.w Obj_LevelResultsCreate-LevelResults_Index
 		dc.w Obj_LevelResultsWait-LevelResults_Index
 		dc.w Obj_LevelResultsWait2-LevelResults_Index
@@ -53358,7 +53386,8 @@ TimeBonus:	dc.w 5000
 		dc.w 300
 		dc.w 100
 		dc.w 10
-ObjArray_LevResults:dc.l Obj_LevResultsCharName
+ObjArray_LevResults:
+		dc.l Obj_LevResultsCharName
 		dc.w $E0
 		dc.w $FDE0
 		dc.w $B8
@@ -57927,7 +57956,8 @@ loc_3176A:
 ; End of function sub_3161A
 
 ; ---------------------------------------------------------------------------
-PlayerTwistFrames:dc.b $55
+PlayerTwistFrames:
+		dc.b $55
 		dc.b $59
 		dc.b $5A
 		dc.b $5B
@@ -70251,9 +70281,12 @@ AIZ1_IntroDrawArray:
 AIZ1_IntroDeformArray:
 		dc.w $3E0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
 		dc.w 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, $7FFF
-AIZ1_BGDrawArray:dc.w $220, $7FFF
-AIZ1_DeformArray:dc.w $D0, $20, $30, $30, $10, $10, $10, $800D, $F, 6, $E, $50, $20, $7FFF
-AIZ_FlameVScroll:dc.b 0, $FF, $FE, $FB, $F8, $F6, $F3, $F2, $F1, $F2, $F3, $F6, $F9, $FB, $FE, $FF
+AIZ1_BGDrawArray:
+		dc.w $220, $7FFF
+AIZ1_DeformArray:
+		dc.w $D0, $20, $30, $30, $10, $10, $10, $800D, $F, 6, $E, $50, $20, $7FFF
+AIZ_FlameVScroll:
+		dc.b 0, $FF, $FE, $FB, $F8, $F6, $F3, $F2, $F1, $F2, $F3, $F6, $F9, $FB, $FE, $FF
 ; ---------------------------------------------------------------------------
 
 AIZ2_ScreenInit:
@@ -70371,9 +70404,11 @@ HInt6:
 		move.w	(Camera_Y_pos_copy).w,(VDP_data_port).l
 		rte
 ; ---------------------------------------------------------------------------
-AIZ2SE_BGShipDrawArray1:dc.w $180
+AIZ2SE_BGShipDrawArray1:
+		dc.w $180
 		dc.w $7FFF
-AIZ2SE_BGShipDrawArray2:dc.w $A80
+AIZ2SE_BGShipDrawArray2:
+		dc.w $A80
 		dc.w $7FFF
 ; ---------------------------------------------------------------------------
 
@@ -71590,7 +71625,8 @@ locret_3C58E:
 ; End of function HCZ1_Deform
 
 ; ---------------------------------------------------------------------------
-HCZ1_BGDeformArray:dc.w $40, 8, 8, 5, 5, 6, $F0, 6, 5, 5, 8, 8, $30, $80C0, $7FFF
+HCZ1_BGDeformArray:
+		dc.w $40, 8, 8, 5, 5, 6, $F0, 6, 5, 5, 8, 8, $30, $80C0, $7FFF
 ; ---------------------------------------------------------------------------
 
 HCZ2_ScreenInit:
@@ -71820,9 +71856,11 @@ loc_3C7AC:
 ; End of function HCZ2_Deform
 
 ; ---------------------------------------------------------------------------
-HCZ2_BGDeformArray:dc.w 8, 8, $90, $10, 8, $30, $18, 8, 8, $A8, $30, $18
+HCZ2_BGDeformArray:
+		dc.w 8, 8, $90, $10, 8, $30, $18, 8, 8, $A8, $30, $18
 		dc.w 8, 8, $A8, $30, $18, 8, 8, $B0, $10, 8, $7FFF
-HCZ2_BGDeformIndex:dc.b   3, $A
+HCZ2_BGDeformIndex:
+		dc.b   3, $A
 		dc.b $14,$1E
 		dc.b $2C,  2
 		dc.b  $C,$16
@@ -72008,7 +72046,8 @@ locret_3C9F6:
 ; End of function Do_ShakeSound
 
 ; ---------------------------------------------------------------------------
-MGZ1_BGDeformArray:dc.w $10, 4, 4, 8, 8, 8, $D, $13, 8, 8, 8, 8, $18, $7FFF
+MGZ1_BGDeformArray:
+		dc.w $10, 4, 4, 8, 8, 8, $D, $13, 8, 8, 8, 8, $18, $7FFF
 ; ---------------------------------------------------------------------------
 
 MGZ2_ScreenInit:
@@ -72575,7 +72614,8 @@ MGZ2_ChunkEventArray:
 		dc.w   $F68,  $F78,  $500,  $580,  $F00,  $500
 		dc.w  $3680, $3700,  $2F0,  $380, $3700,  $280
 		dc.w  $3000, $3080,  $770,  $800, $3080,  $700
-MGZ2_ScreenRedrawArray:dc.w   $40,    3
+MGZ2_ScreenRedrawArray:
+		dc.w   $40,    3
 		dc.w   $50,    3
 		dc.w   $50,    4
 		dc.w   $60,    4
@@ -72598,7 +72638,8 @@ MGZ2_ScreenRedrawArray:dc.w   $40,    3
 		dc.w   $C0,    3
 		dc.w   $D0,    2
 		dc.w   $E0,    1
-MGZ2_ChunkReplaceArray:dc.w  $100, $500
+MGZ2_ChunkReplaceArray:
+		dc.w  $100, $500
 		dc.w  $180, $580
 		dc.w  $200, $600
 		dc.w  $280, $680
@@ -72622,8 +72663,10 @@ MGZ2_ChunkReplaceArray:dc.w  $100, $500
 		dc.w     0, $F80
 		dc.w     0,$1000
 		dc.w   $80, $480
-MGZ2_CollapseScrollDelay:dc.w    $A,  $10,    2,    8,   $E,    6,    0,   $C,  $12,    4
-MGZ2_FGVScrollArray:dc.w $3CA0,  $20,  $20,  $20,  $20,  $20,  $20,  $20,  $20,$7FFF
+MGZ2_CollapseScrollDelay:
+		dc.w    $A,  $10,    2,    8,   $E,    6,    0,   $C,  $12,    4
+MGZ2_FGVScrollArray:
+		dc.w $3CA0,  $20,  $20,  $20,  $20,  $20,  $20,  $20,  $20,$7FFF
 ; ---------------------------------------------------------------------------
 
 MGZ2_BackgroundInit:
@@ -73089,11 +73132,15 @@ loc_3D484:
 		sub.w	d1,(Player_2+y_pos).w
 		rts
 ; ---------------------------------------------------------------------------
-MGZ2_BGDrawArray:dc.w $200, $7FFF
-MGZ2_BGDeformArray:dc.w $10, $10, $10, $10, $10, $18, 8, $10, 8, 8, $10, 8
+MGZ2_BGDrawArray:
+		dc.w $200, $7FFF
+MGZ2_BGDeformArray:
+		dc.w $10, $10, $10, $10, $10, $18, 8, $10, 8, 8, $10, 8
 		dc.w 8, 8, 5, $2B, $C, 6, 6, 8, 8, $18, $D8, $7FFF
-MGZ2_BGDeformIndex:dc.w  $1C, $18, $1A,  $C,   6, $14,   2, $10, $16, $12,  $A,   0,   8,   4,  $E
-MGZ2_BGDeformOffset:dc.w   -5,  -8,   9,  $A,   2, -$C,   3, $10,  -1,  $D, -$F,   6, -$B,  -4,  $E
+MGZ2_BGDeformIndex:
+		dc.w  $1C, $18, $1A,  $C,   6, $14,   2, $10, $16, $12,  $A,   0,   8,   4,  $E
+MGZ2_BGDeformOffset:
+		dc.w   -5,  -8,   9,  $A,   2, -$C,   3, $10,  -1,  $D, -$F,   6, -$B,  -4,  $E
 		dc.w   -8, $10,   8,   0,  -8, $10,   8,   0
 ; ---------------------------------------------------------------------------
 
@@ -73606,7 +73653,8 @@ loc_3DA1E:
 		st	(Events_fg_5).w
 		jmp	(Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
-CNZ1_BGDeformArray:dc.w $80
+CNZ1_BGDeformArray:
+		dc.w $80
 		dc.w $30
 		dc.w $60
 		dc.w $C0
@@ -74098,7 +74146,8 @@ sub_3DED6:
 ; End of function sub_3DED6
 
 ; ---------------------------------------------------------------------------
-ICZ1_IntroBGDeformArray:dc.w $44, $C, $B, $D, $18, $50, 2, 6, 8, $10, $18, $20, $28, $7FFF
+ICZ1_IntroBGDeformArray:
+		dc.w $44, $C, $B, $D, $18, $50, 2, 6, 8, $10, $18, $20, $28, $7FFF
 ; ---------------------------------------------------------------------------
 
 ICZ2_ScreenInit:
@@ -74469,8 +74518,10 @@ sub_3E21E:
 ; End of function sub_3E21E
 
 ; ---------------------------------------------------------------------------
-ICZ2_OutBGDeformArray:dc.w $5A, $26, $8030, $7FFF
-ICZ2_InBGDeformArray:dc.w $1A0, $40, $20, $18, $40, 8, 8, $18, $7FFF
+ICZ2_OutBGDeformArray:
+		dc.w $5A, $26, $8030, $7FFF
+ICZ2_InBGDeformArray:
+		dc.w $1A0, $40, $20, $18, $40, 8, 8, $18, $7FFF
 ; ---------------------------------------------------------------------------
 
 LBZ1_ScreenInit:
@@ -74871,16 +74922,20 @@ loc_3E56E:
 		move.w	#$100,d3
 		jmp	(SolidObjectFull2).l
 ; ---------------------------------------------------------------------------
-LBZ1_FGVScrollArray:dc.w $3B60, $10, $10, $10, $10, $10, $10, $10, $10, $10, $10, $7FFF
-LBZ1_LayoutModRange:dc.w $13E0,$16A0, $100, $580
+LBZ1_FGVScrollArray:
+		dc.w $3B60, $10, $10, $10, $10, $10, $10, $10, $10, $10, $10, $7FFF
+LBZ1_LayoutModRange:
+		dc.w $13E0,$16A0, $100, $580
 		dc.w $2160,$2520,    0, $700
 		dc.w $3A60,$3BA0,    0, $600
 		dc.w $3DE0,$3FA0,    0, $300
-LBZ1_LayoutModExitRange:dc.w $1376,$170A
+LBZ1_LayoutModExitRange:
+		dc.w $1376,$170A
 		dc.w $20F6,$258A
 		dc.w $39F6,$3C0A
 		dc.w $3D76,$400A
-LBZ1_CollapseScrollSpeed:dc.w  $1EE, $1F2,  $C7, $1B3, $1B7, $198,   $E, $139
+LBZ1_CollapseScrollSpeed:
+		dc.w  $1EE, $1F2,  $C7, $1B3, $1B7, $198,   $E, $139
 ; ---------------------------------------------------------------------------
 
 LBZ1_BackgroundInit:
@@ -75037,8 +75092,10 @@ loc_3E79A:
 ; End of function LBZ1_Deform
 
 ; ---------------------------------------------------------------------------
-LBZ1_BGDrawArray:dc.w $D0, $7FFF
-LBZ1_BGDeformArray:dc.w $D0
+LBZ1_BGDrawArray:
+		dc.w $D0, $7FFF
+LBZ1_BGDeformArray:
+		dc.w $D0
 		dc.w $18
 		dc.w 8
 		dc.w 8
@@ -75886,12 +75943,16 @@ locret_3EEDE:
 ; End of function LBZ2_EndFallingAccel
 
 ; ---------------------------------------------------------------------------
-LBZ2_BGDeformArray:dc.w $C0, $40, $38, $18, $28, $10, $10, $10, $18, $40, $20, $10, $20
+LBZ2_BGDeformArray:
+		dc.w $C0, $40, $38, $18, $28, $10, $10, $10, $18, $40, $20, $10, $20
 		dc.w $70, $30, $80E0, $20, $7FFF
-LBZ2_DEBGDeformArray:dc.w $38, $18, $28, $10, $10, $10, $18, $40, $38, $18, $28, $10, $10
+LBZ2_DEBGDeformArray:
+		dc.w $38, $18, $28, $10, $10, $10, $18, $40, $38, $18, $28, $10, $10
 		dc.w $10, $18, $40, $20, $10, $20, $70, $60, $10, $805F, $7FFF
-LBZ2_CloudDeformArray:dc.w  $16,  $E,  $A, $14,  $C,   6, $18, $10, $12,   2,   8,   4,   0
-LBZ2_BGUWDeformRange:dc.w    7,   1,   3,   1,   7
+LBZ2_CloudDeformArray:
+		dc.w  $16,  $E,  $A, $14,  $C,   6, $18, $10, $12,   2,   8,   4,   0
+LBZ2_BGUWDeformRange:
+		dc.w    7,   1,   3,   1,   7
 ; ---------------------------------------------------------------------------
 
 Gumball_ScreenInit:
@@ -75950,7 +76011,8 @@ Gumball_VScroll:
 ; End of function Gumball_VScroll
 
 ; ---------------------------------------------------------------------------
-Gumball_VScrollArray:dc.w $C0, $80, $7FFF
+Gumball_VScrollArray:
+		dc.w $C0, $80, $7FFF
 ; ---------------------------------------------------------------------------
 
 Gumball_BackgroundInit:
@@ -76513,7 +76575,8 @@ loc_3F664:
 ; End of function sub_3F650
 
 ; ---------------------------------------------------------------------------
-ChildObjDat_3F66E:dc.w 0
+ChildObjDat_3F66E:
+		dc.w 0
 		dc.l Obj_3F58E
 off_3F674:	dc.l byte_3F834
 		dc.l byte_3F834
@@ -76809,11 +76872,13 @@ loc_4065C:
 		jsr	(Wait_VSync).l
 		jmp	(Pal_FadeFromBlack).l
 ; ---------------------------------------------------------------------------
-Child6_EndingS3Logo:dc.w 2
+Child6_EndingS3Logo:
+		dc.w 2
 		dc.l loc_4069E
 		dc.l loc_4078C
 		dc.l loc_407FC
-Child6_EndingTryAgain:dc.w 1
+Child6_EndingTryAgain:
+		dc.w 1
 		dc.l loc_40896
 		dc.l loc_409A2
 ; ---------------------------------------------------------------------------
@@ -77225,11 +77290,13 @@ locret_40B1A:
 ; End of function sub_40A5C
 
 ; ---------------------------------------------------------------------------
-S3CreditsText_TryAgain:dc.w 0
+S3CreditsText_TryAgain:
+		dc.w 0
 		dc.w $996
 		dc.b "TRY  AGAIN",0
 		even
-S3CreditsText_Main:dc.w	word_40B7C-S3CreditsText_Main
+S3CreditsText_Main:
+		dc.w word_40B7C-S3CreditsText_Main
 		dc.w word_40B94-S3CreditsText_Main
 		dc.w word_40BC2-S3CreditsText_Main
 		dc.w word_40BEC-S3CreditsText_Main
@@ -77599,7 +77666,8 @@ word_4134C:	dc.w 1
 		dc.w $78A
 		dc.b "          SEGA           ",0
 		even
-S3CreditsText_Dummy:dc.w word_4138C-S3CreditsText_Dummy
+S3CreditsText_Dummy:
+		dc.w word_4138C-S3CreditsText_Dummy
 		dc.w word_41396-S3CreditsText_Dummy
 		dc.w word_413A0-S3CreditsText_Dummy
 		dc.w word_413AA-S3CreditsText_Dummy
@@ -77675,7 +77743,8 @@ S3Credits_PlaneMapSmall:
 		dc.w  $23, $18
 		dc.w  $24,  $F
 		dc.w  $25, $26
-S3Credits_PlaneMapLarge:dc.w word_4146C-S3Credits_PlaneMapLarge
+S3Credits_PlaneMapLarge:
+		dc.w word_4146C-S3Credits_PlaneMapLarge
 		dc.w word_4147A-S3Credits_PlaneMapLarge
 		dc.w word_41488-S3Credits_PlaneMapLarge
 		dc.w word_41496-S3Credits_PlaneMapLarge
@@ -77778,7 +77847,8 @@ Pal_EndingS3LogoFlash:
 		even
 Map_EndingGraphics:
 		include "General/Ending/Map - S3 Ending Graphics.asm"
-ChildObjDat_4192A:dc.w 0
+ChildObjDat_4192A:
+		dc.w 0
 		dc.l loc_40854
 		dc.w $1008
 AniRaw_41932:	dc.b   $F,   1,   2, $FC
@@ -79240,7 +79310,8 @@ ObjDat3_43FB8:	dc.l Map_GumballBonus
 		dc.b $10
 		dc.b $17
 		dc.b 0
-ChildObjDat_43FC4:dc.w 6
+ChildObjDat_43FC4:
+		dc.w 6
 		dc.l loc_43932
 		dc.b 0
 		dc.b 0
@@ -79275,11 +79346,14 @@ word_43FF0:	dc.w 3
 		dc.l loc_43986
 		dc.b $30
 		dc.b $E8
-ChildObjDat_4400A:dc.w $F
+ChildObjDat_4400A:
+		dc.w $F
 		dc.l loc_43BF8
-ChildObjDat_44010:dc.w 0
+ChildObjDat_44010:
+		dc.w 0
 		dc.l loc_43A94
-ChildObjDat_44016:dc.w 0
+ChildObjDat_44016:
+		dc.w 0
 		dc.l loc_43C84
 byte_4401C:	dc.b 3
 		dc.b 5
@@ -79341,7 +79415,8 @@ loc_44248:
 		jsr	SSEntryRing_Index(pc,d1.w)
 		bra.w	SSEntryRing_Display
 ; ---------------------------------------------------------------------------
-SSEntryRing_Index:dc.w SSEntryRing_Init-SSEntryRing_Index
+SSEntryRing_Index:
+		dc.w SSEntryRing_Init-SSEntryRing_Index
 		dc.w SSEntryRing_Main-SSEntryRing_Index
 		dc.w SSEntryRing_Animate-SSEntryRing_Index
 ; ---------------------------------------------------------------------------
@@ -79419,7 +79494,8 @@ Obj_SSEntryFlash:
 		jsr	(Perform_DPLC).l
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-SSEntryFlash_Index:dc.w	SSEntryFlash_Init-SSEntryFlash_Index
+SSEntryFlash_Index:
+		dc.w SSEntryFlash_Init-SSEntryFlash_Index
 		dc.w SSEntryFlash_Main-SSEntryFlash_Index
 ; ---------------------------------------------------------------------------
 
@@ -79504,7 +79580,8 @@ loc_4443C:
 		jsr	(Queue_Kos_Module).l
 		jmp	(Go_Delete_SpriteSlotted).l
 ; ---------------------------------------------------------------------------
-ObjSlot_SSEntryRing:dc.w 0
+ObjSlot_SSEntryRing:
+		dc.w 0
 		dc.w make_art_tile($5A0,1,0)
 		dc.w $40
 		dc.w 4
@@ -79515,7 +79592,8 @@ ObjSlot_SSEntryRing:dc.w 0
 		dc.b $20
 		dc.b 0
 		dc.b 0
-ObjSlot_SSEntryFlash:dc.w 0
+ObjSlot_SSEntryFlash:
+		dc.w 0
 		dc.w make_art_tile(ArtTile_Player_1,1,0)
 		dc.w $18
 		dc.w 6
@@ -79526,13 +79604,17 @@ ObjSlot_SSEntryFlash:dc.w 0
 		dc.b $20
 		dc.b 0
 		dc.b 0
-ChildObjDat_44476:dc.w 0
+ChildObjDat_44476:
+		dc.w 0
 		dc.l Obj_SSEntryFlash
-DPLCPtr_SSEntryRing:dc.l ArtUnc_SSEntryRing
+DPLCPtr_SSEntryRing:
+		dc.l ArtUnc_SSEntryRing
 		dc.l DPLC_SSEntryRing
-DPLCPtr_SSEntryFlash:dc.l ArtUnc_SSEntryFlash
+DPLCPtr_SSEntryFlash:
+		dc.l ArtUnc_SSEntryFlash
 		dc.l DPLC_SSEntryFlash
-AniRaw_SSEntryRing:dc.b	4
+AniRaw_SSEntryRing:
+		dc.b 4
 		dc.b 0
 		dc.b 0
 		dc.b 1
@@ -79550,7 +79632,8 @@ AniRaw_SSEntryRing:dc.b	4
 		dc.b 8
 		dc.b $B
 		dc.b $FC
-AniRaw_SSEntryFlash:dc.b 0
+AniRaw_SSEntryFlash:
+		dc.b 0
 		dc.b 0
 		dc.b 0
 		dc.b 1
@@ -79994,7 +80077,8 @@ loc_44BE0:
 		jsr	(Remove_From_TrackingSlot).l
 		jmp	(Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
-ChildObjDat_44BEC:dc.w 1
+ChildObjDat_44BEC:
+		dc.w 1
 		dc.l Obj_DecLevStartYGradual
 		dc.w 0
 		dc.l Obj_IncLevEndXGradual
@@ -80132,7 +80216,8 @@ loc_44DB8:
 		jsr	(Remove_From_TrackingSlot).l
 		jmp	(Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
-ChildObjDat_44DC4:dc.w 2
+ChildObjDat_44DC4:
+		dc.w 2
 		dc.l Obj_DecLevStartYGradual
 		dc.w 0
 		dc.l Obj_DecLevStartXGradual
@@ -80983,24 +81068,31 @@ ObjDat3_4571E:	dc.l Map_AIZCorkFloor
 		dc.b $18
 		dc.b 0
 		dc.b 0
-ChildObjDat_4572A:dc.w 0
+ChildObjDat_4572A:
+		dc.w 0
 		dc.l loc_44A78
-ChildObjDat_45730:dc.w 0
+ChildObjDat_45730:
+		dc.w 0
 		dc.l loc_44DD8
 		dc.w $E094
-ChildObjDat_45738:dc.w 0
+ChildObjDat_45738:
+		dc.w 0
 		dc.l loc_45136
 		dc.w $C000
-ChildObjDat_45740:dc.w 0
+ChildObjDat_45740:
+		dc.w 0
 		dc.l loc_4519E
 		dc.w $F8F0
-ChildObjDat_45748:dc.w 3
+ChildObjDat_45748:
+		dc.w 3
 		dc.l loc_451CE
-ChildObjDat_4574E:dc.w 3
+ChildObjDat_4574E:
+		dc.w 3
 		dc.l loc_45330
 		dc.b 2
 		dc.b $24
-ChildObjDat_45756:dc.w 0
+ChildObjDat_45756:
+		dc.w 0
 		dc.l loc_448EE
 		dc.w $18
 DPLCPtr_4575E:	dc.l ArtUnc_CutsceneKnux
@@ -81552,20 +81644,25 @@ ObjDat3_45E2A:	dc.l Map_AIZIntroEmeralds
 		dc.b 4
 		dc.b 1
 		dc.b 0
-ChildObjDat_45E36:dc.w 0
+ChildObjDat_45E36:
+		dc.w 0
 		dc.l loc_45B56
 		dc.w $DE2C
-ChildObjDat_45E3E:dc.w 1
+ChildObjDat_45E3E:
+		dc.w 1
 		dc.l loc_45C00
 		dc.w $3804
 		dc.l loc_45C3E
 		dc.w $1818
-ChildObjDat_45E4C:dc.w 0
+ChildObjDat_45E4C:
+		dc.w 0
 		dc.l loc_45C7C
 		dc.w $18
-ChildObjDat_45E54:dc.w 0
+ChildObjDat_45E54:
+		dc.w 0
 		dc.l Obj_CutsceneKnuckles
-ChildObjDat_45E5A:dc.w 6
+ChildObjDat_45E5A:
+		dc.w 6
 		dc.l loc_45CDC
 byte_45E60:	dc.b    3,   8
 		dc.b  $97, $96
@@ -81613,7 +81710,8 @@ Obj_RobotnikHead:
 		jsr	RobotnikHead_Index(pc,d1.w)
 		jmp	(Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
-RobotnikHead_Index:dc.w	Obj_RobotnikHeadInit-RobotnikHead_Index
+RobotnikHead_Index:
+		dc.w Obj_RobotnikHeadInit-RobotnikHead_Index
 		dc.w Obj_RobotnikHeadMain-RobotnikHead_Index
 		dc.w Obj_RobotnikHeadEnd-RobotnikHead_Index
 ; ---------------------------------------------------------------------------
@@ -81664,7 +81762,8 @@ Obj_RobotnikHead2:
 		bne.w	locret_45EE0
 		jmp	(Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
-RobotnikHead2_Index:dc.w Obj_RobotnikHeadInit-RobotnikHead2_Index
+RobotnikHead2_Index:
+		dc.w Obj_RobotnikHeadInit-RobotnikHead2_Index
 		dc.w Obj_RobotnikHeadMain-RobotnikHead2_Index
 		dc.w Obj_RobotnikHeadEnd-RobotnikHead2_Index
 ; ---------------------------------------------------------------------------
@@ -81678,7 +81777,8 @@ Obj_FBZRobotnikHead:
 		jsr	(Child_GetPriority).l
 		jmp	(Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
-FBZRobotnikHead_Index:dc.w Obj_FBZRobotnikHeadInit-FBZRobotnikHead_Index
+FBZRobotnikHead_Index:
+		dc.w Obj_FBZRobotnikHeadInit-FBZRobotnikHead_Index
 		dc.w Obj_FBZRobotnikHeadMain-FBZRobotnikHead_Index
 		dc.w Obj_RobotnikHeadEnd-FBZRobotnikHead_Index
 ; ---------------------------------------------------------------------------
@@ -81730,7 +81830,8 @@ Obj_RobotnikHead3:
 		jsr	RobotnikHead3_Index(pc,d1.w)
 		jmp	(Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
-RobotnikHead3_Index:dc.w Obj_RobotnikHead3Init-RobotnikHead3_Index
+RobotnikHead3_Index:
+		dc.w Obj_RobotnikHead3Init-RobotnikHead3_Index
 		dc.w Obj_RobotnikHead3Main-RobotnikHead3_Index
 		dc.w Obj_RobotnikHeadEnd-RobotnikHead3_Index
 ; ---------------------------------------------------------------------------
@@ -81783,7 +81884,8 @@ loc_46048:
 loc_46074:
 		jmp	(Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
-RobotnikHead4_Index:dc.w Obj_RobotnikHead3Init-RobotnikHead4_Index
+RobotnikHead4_Index:
+		dc.w Obj_RobotnikHead3Init-RobotnikHead4_Index
 		dc.w Obj_RobotnikHead3Main-RobotnikHead4_Index
 		dc.w Obj_RobotnikHeadEnd-RobotnikHead4_Index
 ; ---------------------------------------------------------------------------
@@ -81797,7 +81899,8 @@ Obj_RobotnikShip:
 		bne.w	locret_45EE0
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-RobotnikShip_Index:dc.w	loc_460A6-RobotnikShip_Index
+RobotnikShip_Index:
+		dc.w loc_460A6-RobotnikShip_Index
 		dc.w loc_460C2-RobotnikShip_Index
 		dc.w loc_460F8-RobotnikShip_Index
 		dc.w loc_4612A-RobotnikShip_Index
@@ -81867,7 +81970,8 @@ Obj_RobotnikShip2:
 		jsr	RobotnikShip2_Index(pc,d1.w)
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-RobotnikShip2_Index:dc.w Obj_RobotnikShipInit-RobotnikShip2_Index
+RobotnikShip2_Index:
+		dc.w Obj_RobotnikShipInit-RobotnikShip2_Index
 		dc.w Obj_RobotnikShipMain-RobotnikShip2_Index
 		dc.w Obj_RobotnikShip2Wait-RobotnikShip2_Index
 		dc.w Obj_RobotnikShipReady-RobotnikShip2_Index
@@ -81897,7 +82001,8 @@ Obj_RobotnikShip3:
 		bne.s	loc_461AC
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-RobotnikShip3_Index:dc.w Obj_RobotnikShipInit-RobotnikShip3_Index
+RobotnikShip3_Index:
+		dc.w Obj_RobotnikShipInit-RobotnikShip3_Index
 		dc.w Obj_RobotnikShipMain-RobotnikShip3_Index
 		dc.w Obj_RobotnikShipWait-RobotnikShip3_Index
 		dc.w Obj_RobotnikShipReady-RobotnikShip3_Index
@@ -81990,7 +82095,8 @@ Obj_RobotnikShip4:
 		jsr	RobotnikShip4_Index(pc,d1.w)
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-RobotnikShip4_Index:dc.w Obj_RobotnikShipInit-RobotnikShip4_Index
+RobotnikShip4_Index:
+		dc.w Obj_RobotnikShipInit-RobotnikShip4_Index
 		dc.w Obj_RobotnikShipMain-RobotnikShip4_Index
 		dc.w Obj_RobotnikShipWait-RobotnikShip4_Index
 		dc.w Obj_RobotnikShipReady-RobotnikShip4_Index
@@ -82004,7 +82110,8 @@ Obj_FBZRobotnikShip:
 		jsr	FBZRobotnikShip_Index(pc,d1.w)
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-FBZRobotnikShip_Index:dc.w Obj_FBZRobotnikShipInit-FBZRobotnikShip_Index
+FBZRobotnikShip_Index:
+		dc.w Obj_FBZRobotnikShipInit-FBZRobotnikShip_Index
 		dc.w Obj_FBZRobotnikShipMain-FBZRobotnikShip_Index
 		dc.w Obj_FBZRobotnikShipWait-FBZRobotnikShip_Index
 		dc.w Obj_FBZRobotnikShipFall-FBZRobotnikShip_Index
@@ -82103,45 +82210,54 @@ Obj_RobotnikShipFlameMain:
 loc_463B6:
 		jmp	(Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
-ObjDat_RobotnikHead:dc.l Map_RobotnikShip
+ObjDat_RobotnikHead:
+		dc.l Map_RobotnikShip
 		dc.w $52E
 		dc.w $280
 		dc.b $10
 		dc.b 8
 		dc.b 0
 		dc.b 0
-ObjDat_FBZRobotnikHead:dc.l Map_FBZRobotnikHead
+ObjDat_FBZRobotnikHead:
+		dc.l Map_FBZRobotnikHead
 		dc.w $410
 		dc.w $280
 		dc.b $10
 		dc.b 8
 		dc.b 0
 		dc.b 0
-ObjDat_RobotnikShip:dc.l Map_RobotnikShip
+ObjDat_RobotnikShip:
+		dc.l Map_RobotnikShip
 		dc.w $52E
 		dc.w $280
 		dc.b $1C
 		dc.b $20
 		dc.b 8
 		dc.b 0
-ObjDat2_RoboShipFlame:dc.w $280
+ObjDat2_RoboShipFlame:
+		dc.w $280
 		dc.b 8
 		dc.b 4
 		dc.b 6
 		dc.b 0
-Child1_MakeRoboHead:dc.w 0
+Child1_MakeRoboHead:
+		dc.w 0
 		dc.l Obj_RobotnikHead
 		dc.w $E4
-Child1_MakeRoboHead2:dc.w 0
+Child1_MakeRoboHead2:
+		dc.w 0
 		dc.l Obj_RobotnikHead2
 		dc.w $E4
-Child1_MakeFBZRoboHead:dc.w 0
+Child1_MakeFBZRoboHead:
+		dc.w 0
 		dc.l Obj_FBZRobotnikHead
 		dc.w $E4
-Child1_MakeRoboHead3:dc.w 0
+Child1_MakeRoboHead3:
+		dc.w 0
 		dc.l Obj_RobotnikHead3
 		dc.w $E4
-Child1_MakeRoboHead4:dc.w 0
+Child1_MakeRoboHead4:
+		dc.w 0
 		dc.l loc_46048
 		dc.w $E4
 word_4640E:	dc.w 0
@@ -82150,19 +82266,24 @@ word_4640E:	dc.w 0
 		dc.w 0
 		dc.l Obj_RobotnikShip2
 		dc.w 0
-Child1_MakeRoboShip3:dc.w 0
+Child1_MakeRoboShip3:
+		dc.w 0
 		dc.l Obj_RobotnikShip3
 		dc.w $FA04
-ChildObjDat_46426:dc.w 0
+ChildObjDat_46426:
+		dc.w 0
 		dc.l Obj_RobotnikShip4
 		dc.w $F8
-ChildObjDat_4642E:dc.w 0
+ChildObjDat_4642E:
+		dc.w 0
 		dc.l Obj_FBZRobotnikShip
 		dc.w 4
-Child1_MakeRoboShipFlame:dc.w 0
+Child1_MakeRoboShipFlame:
+		dc.w 0
 		dc.l Obj_RobotnikShipFlame
 		dc.w $1E00
-AniRaw_RobotnikHead:dc.b 5
+AniRaw_RobotnikHead:
+		dc.b 5
 		dc.b 0
 		dc.b 1
 		dc.b $FC
@@ -83272,39 +83393,46 @@ word_46F6C:	dc.w $200
 		dc.b $14
 		dc.b 0
 		dc.b 0
-ChildObjDat_46F72:dc.w 1
+ChildObjDat_46F72:
+		dc.w 1
 		dc.l loc_4660E
 		dc.w $20
 		dc.l loc_4665A
 		dc.w $DC08
-ChildObjDat_46F80:dc.w 5
+ChildObjDat_46F80:
+		dc.w 5
 		dc.l loc_46D18
 		dc.w 0
-ChildObjDat_46F88:dc.w 2
+ChildObjDat_46F88:
+		dc.w 2
 		dc.l loc_4667C
 		dc.w $E0
 		dc.l loc_4667C
 		dc.w $9E4
 		dc.l loc_4667C
 		dc.w $12E8
-ChildObjDat_46F9C:dc.w 2
+ChildObjDat_46F9C:
+		dc.w 2
 		dc.l loc_46B54
 		dc.w $E0
 		dc.l loc_46B54
 		dc.w $9E4
 		dc.l loc_46B54
 		dc.w $12E8
-ChildObjDat_46FB0:dc.w 1
+ChildObjDat_46FB0:
+		dc.w 1
 		dc.l loc_4675A
 		dc.w 4
 		dc.l loc_46794
 		dc.w 4
-ChildObjDat_46FBE:dc.w 1
+ChildObjDat_46FBE:
+		dc.w 1
 		dc.l loc_4675A
 		dc.w 4
 		dc.l loc_46BD8
 		dc.w 4
-Child1_AIZ_MinibossFlames:dc.w 3
+Child1_AIZ_MinibossFlames:
+		dc.w 3
 		dc.l Obj_AIZMiniboss_Flame
 		dc.w $9C04
 		dc.l Obj_AIZMiniboss_Flame
@@ -83313,10 +83441,12 @@ Child1_AIZ_MinibossFlames:dc.w 3
 		dc.w $BC04
 		dc.l Obj_AIZMiniboss_Flame
 		dc.w $D403
-ChildObjDat_46FE6:dc.w 0
+ChildObjDat_46FE6:
+		dc.w 0
 		dc.l loc_468E4
 		dc.w 0
-ChildObjDat_46FEE:dc.w 6
+ChildObjDat_46FEE:
+		dc.w 6
 		dc.l loc_46CAE
 		dc.w $DC
 		dc.l loc_46CAE
@@ -83331,10 +83461,12 @@ ChildObjDat_46FEE:dc.w 6
 		dc.w $4FC
 		dc.l loc_46CAE
 		dc.w $FCFC
-ChildObjDat_4701A:dc.w 0
+ChildObjDat_4701A:
+		dc.w 0
 		dc.l Obj_BossExplosionSpecial
 		dc.w 0
-ChildObjDat_47022:dc.w 3
+ChildObjDat_47022:
+		dc.w 3
 		dc.l loc_46DB6
 		dc.w $F0F8
 		dc.l loc_46DB6
@@ -83475,7 +83607,8 @@ Obj_AIZEndBossMain:
 		bne.w	locret_47246
 		jmp	(Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
-AIZ_EndBossIndex:dc.w Obj_AIZEndBossInit-AIZ_EndBossIndex
+AIZ_EndBossIndex:
+		dc.w Obj_AIZEndBossInit-AIZ_EndBossIndex
 		dc.w loc_471C2-AIZ_EndBossIndex
 		dc.w loc_4720C-AIZ_EndBossIndex
 		dc.w loc_47248-AIZ_EndBossIndex
@@ -84361,7 +84494,8 @@ loc_47B08:
 ; End of function sub_47AFA
 
 ; ---------------------------------------------------------------------------
-ObjDat_AIZEndBoss:dc.l Map_AIZEndBoss
+ObjDat_AIZEndBoss:
+		dc.l Map_AIZEndBoss
 		dc.w $A180
 		dc.w $280
 		dc.b $28
@@ -84399,7 +84533,8 @@ word_47B54:	dc.w $8180
 		dc.b $30
 		dc.b $24
 		dc.b 0
-ObjDat_AIZEndBoss2:dc.l	Map_AIZEndBoss
+ObjDat_AIZEndBoss2:
+		dc.l Map_AIZEndBoss
 		dc.w $8180
 		dc.w $100
 		dc.b $18
@@ -84411,36 +84546,46 @@ word_47B68:	dc.w $180
 		dc.b $10
 		dc.b 0
 		dc.b 0
-ChildObjDat_47B6E:dc.w 1
+ChildObjDat_47B6E:
+		dc.w 1
 		dc.l loc_47486
 		dc.w $14FC
 		dc.l loc_47486
 		dc.w $ECFC
-ChildObjDat_47B7C:dc.w 0
+ChildObjDat_47B7C:
+		dc.w 0
 		dc.l loc_4759C
 		dc.w $E400
-ChildObjDat_47B84:dc.w 0
+ChildObjDat_47B84:
+		dc.w 0
 		dc.l loc_47806
 		dc.w 0
-ChildObjDat_47B8C:dc.w 0
+ChildObjDat_47B8C:
+		dc.w 0
 		dc.l loc_477DC
 		dc.w $D0
-ChildObjDat_47B94:dc.w 0
+ChildObjDat_47B94:
+		dc.w 0
 		dc.l loc_4768A
 		dc.w $305
-ChildObjDat_47B9C:dc.w 0
+ChildObjDat_47B9C:
+		dc.w 0
 		dc.l loc_4768A
 		dc.w 7
-ChildObjDat_47BA4:dc.w 0
+ChildObjDat_47BA4:
+		dc.w 0
 		dc.l loc_4768A
 		dc.w $FD05
-ChildObjDat_47BAC:dc.w 0
+ChildObjDat_47BAC:
+		dc.w 0
 		dc.l loc_47718
 		dc.w 0
-ChildObjDat_47BB4:dc.w 0
+ChildObjDat_47BB4:
+		dc.w 0
 		dc.l loc_477A0
 		dc.w 0
-ChildObjDat_47BBC:dc.w 5
+ChildObjDat_47BBC:
+		dc.w 5
 		dc.l loc_47880
 		dc.w $F0F0
 		dc.l loc_47880
@@ -84453,9 +84598,11 @@ ChildObjDat_47BBC:dc.w 5
 		dc.w $F418
 		dc.l loc_47880
 		dc.w $C18
-ChildObjDat_47BE2:dc.w 0
+ChildObjDat_47BE2:
+		dc.w 0
 		dc.l Obj_EggCapsule
-ChildObjDat_47BE8:dc.w 0
+ChildObjDat_47BE8:
+		dc.w 0
 		dc.l Obj_CutsceneKnuckles
 byte_47BEE:	dc.b  $2B,   0
 		dc.b  $2B,   0
@@ -86015,7 +86162,8 @@ byte_48B8C:	dc.b 2
 		dc.b $24
 		dc.b 0
 		dc.b 0
-Child1_HCZMiniboss_RocketsEngine:dc.w 4
+Child1_HCZMiniboss_RocketsEngine:
+		dc.w 4
 		dc.l Obj_HCZMiniboss_Rockets
 		dc.w $1818
 		dc.l Obj_HCZMiniboss_Rockets
@@ -86026,28 +86174,35 @@ Child1_HCZMiniboss_RocketsEngine:dc.w 4
 		dc.w $18E8
 		dc.l Obj_HCZMiniboss_Engine
 		dc.w $24
-ChildObjDat_48BB2:dc.w 0
+ChildObjDat_48BB2:
+		dc.w 0
 		dc.l loc_48362
 		dc.w 0
-ChildObjDat_48BBA:dc.w 0
+ChildObjDat_48BBA:
+		dc.w 0
 		dc.l loc_482B0
 		dc.w 0
-ChildObjDat_48BC2:dc.w 2
+ChildObjDat_48BC2:
+		dc.w 2
 		dc.l loc_4830C
 		dc.w 0
 		dc.l loc_4830C
 		dc.w $F000
 		dc.l loc_4830C
 		dc.w $1000
-ChildObjDat_48BD6:dc.w $1D
+ChildObjDat_48BD6:
+		dc.w $1D
 		dc.l loc_484A0
-ChildObjDat_48BDC:dc.w 0
+ChildObjDat_48BDC:
+		dc.w 0
 		dc.l loc_48554
 word_48BE2:	dc.w 0
 		dc.l loc_48608
-ChildObjDat_48BE8:dc.w 1
+ChildObjDat_48BE8:
+		dc.w 1
 		dc.l loc_48608
-ChildObjDat_48BEE:dc.w 3
+ChildObjDat_48BEE:
+		dc.w 3
 		dc.l loc_4870A
 		dc.w $F4F4
 		dc.l loc_4870A
@@ -86056,7 +86211,8 @@ ChildObjDat_48BEE:dc.w 3
 		dc.w $CF4
 		dc.l loc_4870A
 		dc.w $C0C
-ChildObjDat_48C08:dc.w 4
+ChildObjDat_48C08:
+		dc.w 4
 		dc.l loc_48732
 		dc.w $DC
 		dc.l loc_48732
@@ -87568,7 +87724,8 @@ ObjDat3_49BC0:	dc.l Map_HCZWaterWall
 		dc.b $60
 		dc.b 1
 		dc.b 0
-ChildObjDat_49BCC:dc.w 4
+ChildObjDat_49BCC:
+		dc.w 4
 		dc.l loc_493CE
 		dc.w $2312
 		dc.l loc_493CE
@@ -87583,31 +87740,40 @@ word_49BEC:	dc.w 0
 		dc.l loc_493CE
 		dc.b $13
 		dc.b $A
-ChildObjDat_49BF4:dc.w 0
+ChildObjDat_49BF4:
+		dc.w 0
 		dc.l loc_49586
 		dc.w 0
-ChildObjDat_49BFC:dc.w 0
+ChildObjDat_49BFC:
+		dc.w 0
 		dc.l loc_49078
 		dc.w 0
-ChildObjDat_49C04:dc.w 0
+ChildObjDat_49C04:
+		dc.w 0
 		dc.l loc_491E8
 		dc.w 0
-ChildObjDat_49C0C:dc.w 1
+ChildObjDat_49C0C:
+		dc.w 1
 		dc.l loc_49260
 		dc.w $FC00
 		dc.l loc_49260
 		dc.w $400
-ChildObjDat_49C1A:dc.w 0
+ChildObjDat_49C1A:
+		dc.w 0
 		dc.l loc_492AC
 		dc.w 0
-ChildObjDat_49C22:dc.w 4
+ChildObjDat_49C22:
+		dc.w 4
 		dc.l loc_492CE
-ChildObjDat_49C28:dc.w $13
+ChildObjDat_49C28:
+		dc.w $13
 		dc.l loc_49316
-ChildObjDat_49C2E:dc.w 0
+ChildObjDat_49C2E:
+		dc.w 0
 		dc.l Obj_RobotnikShip2
 		dc.w $C
-ChildObjDat_49C36:dc.w 0
+ChildObjDat_49C36:
+		dc.w 0
 		dc.l loc_495C6
 byte_49C3C:	dc.b 7
 		dc.b 8
@@ -89726,7 +89892,8 @@ byte_4B380:	dc.b 6
 		dc.b 4
 		dc.b 8
 		dc.b 6
-ObjDat_MGZDrillBoss:dc.l Map_MGZEndBoss
+ObjDat_MGZDrillBoss:
+		dc.l Map_MGZEndBoss
 		dc.w $233F
 		dc.w $300
 		dc.b $24
@@ -89783,7 +89950,8 @@ ObjDat3_4B3C8:	dc.l Map_ScaledArt
 		dc.b $20
 		dc.b 0
 		dc.b 0
-ChildObjDat_4B3D4:dc.w 3
+ChildObjDat_4B3D4:
+		dc.w 3
 		dc.l loc_4A8D6
 		dc.w $EC0F
 		dc.l loc_4A5FC
@@ -89792,41 +89960,52 @@ ChildObjDat_4B3D4:dc.w 3
 		dc.w $818
 		dc.l loc_4AB4E
 		dc.w $F418
-ChildObjDat_4B3EE:dc.w 0
+ChildObjDat_4B3EE:
+		dc.w 0
 		dc.l loc_4A69C
 		dc.w $E900
-ChildObjDat_4B3F6:dc.w 0
+ChildObjDat_4B3F6:
+		dc.w 0
 		dc.l loc_4ABBE
 		dc.w $10
-ChildObjDat_4B3FE:dc.w 9
+ChildObjDat_4B3FE:
+		dc.w 9
 		dc.l loc_4AC36
 		dc.w $18C0
-ChildObjDat_4B406:dc.w 9
+ChildObjDat_4B406:
+		dc.w 9
 		dc.l loc_4AC36
 		dc.w $E8C0
-ChildObjDat_4B40E:dc.w 0
+ChildObjDat_4B40E:
+		dc.w 0
 		dc.l loc_4A902
 		dc.w $C00
-ChildObjDat_4B416:dc.w 7
+ChildObjDat_4B416:
+		dc.w 7
 		dc.l loc_4AA86
 		dc.w $F000
-ChildObjDat_4B41E:dc.w 7
+ChildObjDat_4B41E:
+		dc.w 7
 		dc.l loc_4AA86
 		dc.w $1000
-ChildObjDat_4B426:dc.w 0
+ChildObjDat_4B426:
+		dc.w 0
 		dc.l loc_4A976
 		dc.w 0
-ChildObjDat_4B42E:dc.w 0
+ChildObjDat_4B42E:
+		dc.w 0
 		dc.l loc_4A9CC
 		dc.w 0
-ChildObjDat_4B436:dc.w 2
+ChildObjDat_4B436:
+		dc.w 2
 		dc.l loc_4ACC6
 		dc.w $CEC
 		dc.l loc_4ACC6
 		dc.w $F008
 		dc.l loc_4ACC6
 		dc.w $1408
-ChildObjDat_4B44A:dc.w 0
+ChildObjDat_4B44A:
+		dc.w 0
 		dc.l loc_4ACFC
 		dc.w 0
 		dc.b    0,   5
@@ -90043,7 +90222,8 @@ Obj_CNZMinibossStart:
 		bsr.w	CNZMiniboss_CheckTopHit
 		jmp	(Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
-CNZMiniboss_Index:dc.w Obj_CNZMinibossInit-CNZMiniboss_Index
+CNZMiniboss_Index:
+		dc.w Obj_CNZMinibossInit-CNZMiniboss_Index
 		dc.w Obj_CNZMinibossLower-CNZMiniboss_Index
 		dc.w Obj_CNZMinibossMove-CNZMiniboss_Index
 		dc.w Obj_CNZMinibossMove-CNZMiniboss_Index
@@ -90183,7 +90363,8 @@ loc_4B7E8:
 		jsr	CNZMinibossTop_Index(pc,d1.w)
 		jmp	(Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
-CNZMinibossTop_Index:dc.w Obj_CNZMinibossTopInit-CNZMinibossTop_Index
+CNZMinibossTop_Index:
+		dc.w Obj_CNZMinibossTopInit-CNZMinibossTop_Index
 		dc.w Obj_CNZMinibossTopWait-CNZMinibossTop_Index
 		dc.w Obj_CNZMinibossTopWait2-CNZMinibossTop_Index
 		dc.w Obj_CNZMinibossTopMain-CNZMinibossTop_Index
@@ -90557,7 +90738,8 @@ word_4BC26:	dc.w $F000
 		dc.w $34
 		dc.w $3C
 		dc.w $48
-CNZMinibossDebris_Frames:dc.b  $12, $13, $14, $14, $14, $14, $14, $14, $15,   0
+CNZMinibossDebris_Frames:
+		dc.b  $12, $13, $14, $14, $14, $14, $14, $14, $15,   0
 ; ---------------------------------------------------------------------------
 
 SetUp_CNZMinibossSwing:
@@ -90817,47 +90999,57 @@ loc_4BE7C:
 ; End of function CNZMinibossTop_CheckHitBase
 
 ; ---------------------------------------------------------------------------
-CNZMiniboss_BaseRange:dc.w  $FFE8,   $30
+CNZMiniboss_BaseRange:
+		dc.w  $FFE8,   $30
 		dc.w  $FFF0,   $20
-CNZMiniboss_CoilRange:dc.w  $FFF4,   $18
+CNZMiniboss_CoilRange:
+		dc.w  $FFF4,   $18
 		dc.w    $10,   $18
-CNZMiniboss_CoilOpenRange:dc.w  $FFF4,   $18
+CNZMiniboss_CoilOpenRange:
+		dc.w  $FFF4,   $18
 		dc.w    $10,   $38
-ObjDat_CNZMiniboss:dc.l	Map_CNZMiniboss
+ObjDat_CNZMiniboss:
+		dc.l Map_CNZMiniboss
 		dc.w $A52E
 		dc.w $280
 		dc.b $18
 		dc.b $30
 		dc.b 0
 		dc.b $C
-ObjDat3_CNZMinibossTop:dc.w $200
+ObjDat3_CNZMinibossTop:
+		dc.w $200
 		dc.b $18
 		dc.b $10
 		dc.b 7
 		dc.b $AA
-ObjDat3_CNZMinibossSpark:dc.w $200
+ObjDat3_CNZMinibossSpark:
+		dc.w $200
 		dc.b $C
 		dc.b $18
 		dc.b $A
 		dc.b $92
-ObjDat3_CNZMbossBounceEffect:dc.w $100
+ObjDat3_CNZMbossBounceEffect:
+		dc.w $100
 		dc.b 8
 		dc.b 8
 		dc.b $C
 		dc.b 0
-ObjDat_CNZMinibossDebris:dc.l Map_CNZMiniboss
+ObjDat_CNZMinibossDebris:
+		dc.l Map_CNZMiniboss
 		dc.w $A52E
 		dc.w $100
 		dc.b $10
 		dc.b $10
 		dc.b 0
 		dc.b 0
-Child1_CNZMinibossMakeTop:dc.w 1
+Child1_CNZMinibossMakeTop:
+		dc.w 1
 		dc.l loc_4B7E8
 		dc.w $2C
 		dc.l Obj_CNZMinibossCoil
 		dc.w $1C
-Child1_CNZMinibossTimedSparks:dc.w 1
+Child1_CNZMinibossTimedSparks:
+		dc.w 1
 		dc.l Obj_CNZMinibossTimedSparks
 		dc.w $EC18
 		dc.l Obj_CNZMinibossTimedSparks
@@ -90865,22 +91057,27 @@ Child1_CNZMinibossTimedSparks:dc.w 1
 		dc.w 0
 		dc.l loc_4BAF2
 		dc.w $FC
-Child1_CNZCoilOpenSparks:dc.w 2
+Child1_CNZCoilOpenSparks:
+		dc.w 2
 		dc.l loc_4BB70
 		dc.w $FC28
 		dc.l loc_4BB70
 		dc.w $42C
 		dc.l loc_4BB70
 		dc.w $FC3C
-Child1_CNZBounceEffect:dc.w 0
+Child1_CNZBounceEffect:
+		dc.w 0
 		dc.l Obj_CNZMinibossBounceEffect
 		dc.w $FC
-Child1_CNZMinibossExplosion:dc.w 0
+Child1_CNZMinibossExplosion:
+		dc.w 0
 		dc.l Obj_CreateBossExplosion
 		dc.w 0
-Child6_CNZMinibossMakeDebris:dc.w 8
+Child6_CNZMinibossMakeDebris:
+		dc.w 8
 		dc.l Obj_CNZMinibossDebris
-AniRaw_CNZMinibossOpening:dc.b    0,   3
+AniRaw_CNZMinibossOpening:
+		dc.b    0,   3
 		dc.b    1,   3
 		dc.b    2,   3
 		dc.b    3,   3
@@ -90888,7 +91085,8 @@ AniRaw_CNZMinibossOpening:dc.b    0,   3
 		dc.b    5,   3
 		dc.b    6,   3
 		dc.b  $F4
-AniRaw_CNZMinibossClosing:dc.b    6,   3
+AniRaw_CNZMinibossClosing:
+		dc.b    6,   3
 		dc.b    5,   3
 		dc.b    4,   3
 		dc.b    3,   3
@@ -90896,35 +91094,43 @@ AniRaw_CNZMinibossClosing:dc.b    6,   3
 		dc.b    1,   3
 		dc.b    0,   3
 		dc.b  $F4
-AniRaw_CNZMinibossTop:dc.b    7,   8,   7,   8,   9, $FC
-AniRaw_CNZMinibossTop2:dc.b    0,   7,   8,   9, $FC
-AniRaw_CNZMinibossTimedSparkLeft:dc.b   $A,   0
+AniRaw_CNZMinibossTop:
+		dc.b    7,   8,   7,   8,   9, $FC
+AniRaw_CNZMinibossTop2:
+		dc.b    0,   7,   8,   9, $FC
+AniRaw_CNZMinibossTimedSparkLeft:
+		dc.b   $A,   0
 		dc.b  $11,   2
 		dc.b   $B,   0
 		dc.b  $11,   2
 		dc.b  $FC
-AniRaw_CNZMinibossTimedSparkRight:dc.b   $F,   0
+AniRaw_CNZMinibossTimedSparkRight:
+		dc.b   $F,   0
 		dc.b  $11,   2
 		dc.b  $10,   0
 		dc.b  $11,   2
 		dc.b  $FC
-AniRaw_CNZMinibossSparks1:dc.b   $A,   0
+AniRaw_CNZMinibossSparks1:
+		dc.b   $A,   0
 		dc.b  $11,   7
 		dc.b   $B,   0
 		dc.b  $11,   7
 		dc.b  $FC
-AniRaw_CNZMinibossSparks2:dc.b  $11,   0
+AniRaw_CNZMinibossSparks2:
+		dc.b  $11,   0
 		dc.b   $F,   0
 		dc.b  $11,   7
 		dc.b  $10,   0
 		dc.b  $11,   9
 		dc.b  $FC
-AniRaw_CNZMinibossSparks3:dc.b   $A,   0
+AniRaw_CNZMinibossSparks3:
+		dc.b   $A,   0
 		dc.b  $11,   7
 		dc.b   $B,   0
 		dc.b  $11,  $B
 		dc.b  $FC
-AniRaw_CNZMBossBoundEffect:dc.b   $C,   0,  $D,   1,  $E,   1, $F4,   0
+AniRaw_CNZMBossBoundEffect:
+		dc.b   $C,   0,  $D,   1,  $E,   1, $F4,   0
 Pal_CNZMiniboss:binclude "Levels/CNZ/Palettes/Miniboss.bin"
 		even
 ; ---------------------------------------------------------------------------
@@ -91833,26 +92039,32 @@ ObjDat3_4C896:	dc.l Map_CNZEndBoss
 		dc.b $40
 		dc.b 6
 		dc.b $AB
-ChildObjDat_4C8A2:dc.w 0
+ChildObjDat_4C8A2:
+		dc.w 0
 		dc.l loc_4C33C
 		dc.w $14
-ChildObjDat_4C8AA:dc.w 3
+ChildObjDat_4C8AA:
+		dc.w 3
 		dc.l loc_4C45C
 		dc.w 8
-ChildObjDat_4C8B2:dc.w 0
+ChildObjDat_4C8B2:
+		dc.w 0
 		dc.l loc_4C5C6
 		dc.w $4C
-ChildObjDat_4C8BA:dc.w 1
+ChildObjDat_4C8BA:
+		dc.w 1
 		dc.l loc_4C5C6
 		dc.w $F454
 		dc.l loc_4C5C6
 		dc.w $C54
-ChildObjDat_4C8C8:dc.w 1
+ChildObjDat_4C8C8:
+		dc.w 1
 		dc.l loc_4C43A
 		dc.w $F800
 		dc.l loc_4C43A
 		dc.w $800
-ChildObjDat_4C8D6:dc.w 1
+ChildObjDat_4C8D6:
+		dc.w 1
 		dc.l loc_4C688
 		dc.w $EC00
 		dc.l loc_4C688
@@ -93108,7 +93320,8 @@ ObjDat3_4D4AA:	dc.l Map_EggCapsule
 		dc.b $20
 		dc.b 1
 		dc.b 0
-ChildObjDat_4D4B6:dc.w 6
+ChildObjDat_4D4B6:
+		dc.w 6
 		dc.l loc_4CB84
 		dc.w $F0F8
 		dc.l loc_4CB84
@@ -93125,12 +93338,15 @@ ChildObjDat_4D4B6:dc.w 6
 		dc.w 0
 word_4D4E2:	dc.w 4
 		dc.l loc_4CE44
-ChildObjDat_4D4E8:dc.w 0
+ChildObjDat_4D4E8:
+		dc.w 0
 		dc.l loc_4CB46
 		dc.w $F8
-ChildObjDat_4D4F0:dc.w 0
+ChildObjDat_4D4F0:
+		dc.w 0
 		dc.l loc_4D188
-ChildObjDat_4D4F6:dc.w 4
+ChildObjDat_4D4F6:
+		dc.w 4
 		dc.l loc_54776
 		dc.w $FC
 		dc.l loc_54776
@@ -93714,18 +93930,22 @@ ObjDat3_4DB22:	dc.l Map_FBZRobotnikStand
 		dc.b $20
 		dc.b 0
 		dc.b 0
-ChildObjDat_4DB2E:dc.w 3
+ChildObjDat_4DB2E:
+		dc.w 3
 		dc.l loc_4D74E
 		dc.w 0
-ChildObjDat_4DB36:dc.w 1
+ChildObjDat_4DB36:
+		dc.w 1
 		dc.l loc_4D7CA
 		dc.w 0
 		dc.l loc_4D814
 		dc.w 0
-ChildObjDat_4DB44:dc.w 1
+ChildObjDat_4DB44:
+		dc.w 1
 		dc.l loc_4D8BE
 		dc.w 0
-ChildObjDat_4DB4C:dc.w 0
+ChildObjDat_4DB4C:
+		dc.w 0
 		dc.l loc_4D936
 		dc.w 8
 byte_4DB54:	dc.b    0,   7
@@ -94475,22 +94695,27 @@ ObjDat3_4E2B4:	dc.l Map_FBZEndBossFlame
 		dc.b $10
 		dc.b 0
 		dc.b $8B
-ChildObjDat_4E2C0:dc.w 2
+ChildObjDat_4E2C0:
+		dc.w 2
 		dc.l loc_4DDDC
 		dc.w $D0B8
 		dc.l loc_4DDDC
 		dc.w $30B8
 		dc.l loc_4DF98
 		dc.w $D8
-ChildObjDat_4E2D4:dc.w 0
+ChildObjDat_4E2D4:
+		dc.w 0
 		dc.l loc_4DEB2
 		dc.w $20
-ChildObjDat_4E2DC:dc.w 3
+ChildObjDat_4E2DC:
+		dc.w 3
 		dc.l loc_4DF44
 		dc.w 0
-ChildObjDat_4E2E4:dc.w 8
+ChildObjDat_4E2E4:
+		dc.w 8
 		dc.l loc_4E00E
-ChildObjDat_4E2EA:dc.w 3
+ChildObjDat_4E2EA:
+		dc.w 3
 		dc.l loc_4E032
 		dc.w $EC08
 		dc.l loc_4E032
@@ -95380,7 +95605,8 @@ word_4EB66:	dc.w $180
 		dc.b $C
 		dc.b $B
 		dc.b 0
-ChildObjDat_4EB6C:dc.w 5
+ChildObjDat_4EB6C:
+		dc.w 5
 		dc.l loc_4E658
 		dc.w $F2F5
 		dc.l loc_4E658
@@ -95393,9 +95619,11 @@ ChildObjDat_4EB6C:dc.w 5
 		dc.w $EF5
 		dc.l loc_4E658
 		dc.w $E
-ChildObjDat_4EB92:dc.w 7
+ChildObjDat_4EB92:
+		dc.w 7
 		dc.l loc_4E6C2
-ChildObjDat_4EB98:dc.w 3
+ChildObjDat_4EB98:
+		dc.w 3
 		dc.l loc_4E886
 		dc.w $F4F4
 		dc.l loc_4E886
@@ -96134,26 +96362,33 @@ word_4F3C4:	dc.w $180
 		dc.b $10
 		dc.b 0
 		dc.b 0
-ChildObjDat_4F3CA:dc.w 0
+ChildObjDat_4F3CA:
+		dc.w 0
 		dc.l Obj_RobotnikShip4
 		dc.w 0
-ChildObjDat_4F3D2:dc.w 2
+ChildObjDat_4F3D2:
+		dc.w 2
 		dc.l loc_4EF0A
 		dc.w $1807
 		dc.l loc_4EF70
 		dc.w $B
 		dc.l loc_4F010
 		dc.w $2D
-ChildObjDat_4F3E6:dc.w 5
+ChildObjDat_4F3E6:
+		dc.w 5
 		dc.l loc_4F0CE
-ChildObjDat_4F3EC:dc.w 6
+ChildObjDat_4F3EC:
+		dc.w 6
 		dc.l loc_4F0CE
-ChildObjDat_4F3F2:dc.w 3
+ChildObjDat_4F3F2:
+		dc.w 3
 		dc.l loc_4F0CE
-ChildObjDat_4F3F8:dc.w 0
+ChildObjDat_4F3F8:
+		dc.w 0
 		dc.l loc_4F166
 		dc.w 8
-ChildObjDat_4F400:dc.w 2
+ChildObjDat_4F400:
+		dc.w 2
 		dc.l loc_4F190
 		dc.w $EC04
 		dc.l loc_4F190
@@ -96731,12 +96966,15 @@ word_4F95A:	dc.w $180
 		dc.b 8
 		dc.b 6
 		dc.b $98
-ChildObjDat_4F960:dc.w 0
+ChildObjDat_4F960:
+		dc.w 0
 		dc.l loc_4F5C0
 		dc.w 0
-ChildObjDat_4F968:dc.w 5
+ChildObjDat_4F968:
+		dc.w 5
 		dc.l loc_4F616
-ChildObjDat_4F96E:dc.w 5
+ChildObjDat_4F96E:
+		dc.w 5
 		dc.l loc_4F610
 byte_4F974:	dc.b   $F,   0
 		dc.b    1,   0
@@ -97723,20 +97961,24 @@ ObjDat3_50312:	dc.l Map_LBZFinalBoss1
 		dc.b $C
 		dc.b $10
 		dc.b 0
-ChildObjDat_5031E:dc.w 0
+ChildObjDat_5031E:
+		dc.w 0
 		dc.l loc_4FEF2
 		dc.w $10
-ChildObjDat_50326:dc.w 0
+ChildObjDat_50326:
+		dc.w 0
 		dc.l loc_4FF0A
 		dc.w 8
-ChildObjDat_5032E:dc.w 2
+ChildObjDat_5032E:
+		dc.w 2
 		dc.l loc_4FC30
 		dc.w 8
 		dc.l loc_4FC90
 		dc.w $30
 		dc.l loc_4FC98
 		dc.w $5C
-ChildObjDat_50342:dc.w 3
+ChildObjDat_50342:
+		dc.w 3
 		dc.l loc_4FCC8
 		dc.w $F0FC
 		dc.l loc_4FCC8
@@ -97745,7 +97987,8 @@ ChildObjDat_50342:dc.w 3
 		dc.w $F010
 		dc.l loc_4FCC8
 		dc.w $1010
-ChildObjDat_5035C:dc.w 5
+ChildObjDat_5035C:
+		dc.w 5
 		dc.l loc_4FCC8
 		dc.w $F0F8
 		dc.l loc_4FCC8
@@ -97758,30 +98001,37 @@ ChildObjDat_5035C:dc.w 5
 		dc.w $ECE0
 		dc.l loc_4FCC8
 		dc.w $14E0
-ChildObjDat_50382:dc.w 1
+ChildObjDat_50382:
+		dc.w 1
 		dc.l loc_4FD52
 		dc.w 0
-ChildObjDat_5038A:dc.w 0
+ChildObjDat_5038A:
+		dc.w 0
 		dc.l loc_4FD98
 		dc.w $F800
 		dc.w 0
 		dc.l loc_4FD98
 		dc.w $800
-ChildObjDat_5039A:dc.w 0
+ChildObjDat_5039A:
+		dc.w 0
 		dc.l loc_4FEAA
 		dc.w $2000
-ChildObjDat_503A2:dc.w 1
+ChildObjDat_503A2:
+		dc.w 1
 		dc.l loc_4FECE
 		dc.w $EC30
 		dc.l loc_4FECE
 		dc.w $1430
-ChildObjDat_503B0:dc.w 0
+ChildObjDat_503B0:
+		dc.w 0
 		dc.l loc_4FF80
 		dc.w 0
-ChildObjDat_503B8:dc.w 0
+ChildObjDat_503B8:
+		dc.w 0
 		dc.l loc_4FCF0
 		dc.w $EC
-ChildObjDat_503C0:dc.w 1
+ChildObjDat_503C0:
+		dc.w 1
 		dc.l loc_4FD1A
 		dc.w $F000
 		dc.l loc_4FD1A
@@ -98599,37 +98849,45 @@ ObjDat3_50BCC:	dc.l Map_LBZEndBoss
 		dc.b 8
 		dc.b $E
 		dc.b 0
-ChildObjDat_50BD8:dc.w 1
+ChildObjDat_50BD8:
+		dc.w 1
 		dc.l loc_508EC
 		dc.w $F8
 		dc.l loc_5097A
 		dc.w $E8F0
-ChildObjDat_50BE6:dc.w 0
+ChildObjDat_50BE6:
+		dc.w 0
 		dc.l loc_5086A
 		dc.w $60E8
-ChildObjDat_50BEE:dc.w 2
+ChildObjDat_50BEE:
+		dc.w 2
 		dc.l loc_50710
 		dc.w $E838
 		dc.l loc_50710
 		dc.w $1838
 		dc.l loc_50710
 		dc.w $38
-ChildObjDat_50C02:dc.w 2
+ChildObjDat_50C02:
+		dc.w 2
 		dc.l loc_50780
 		dc.w $E8
 		dc.l loc_50780
 		dc.w $F8
 		dc.l loc_50780
 		dc.w 8
-ChildObjDat_50C16:dc.w 3
+ChildObjDat_50C16:
+		dc.w 3
 		dc.l loc_507AC
-ChildObjDat_50C1C:dc.w 0
+ChildObjDat_50C1C:
+		dc.w 0
 		dc.l loc_505BA
 		dc.w 0
-ChildObjDat_50C24:dc.w 0
+ChildObjDat_50C24:
+		dc.w 0
 		dc.l loc_506AC
 		dc.w $10
-ChildObjDat_50C2C:dc.w $B
+ChildObjDat_50C2C:
+		dc.w $B
 		dc.l loc_506FE
 		dc.w $F8F8
 		dc.l loc_506FE
@@ -100480,7 +100738,8 @@ ObjDat3_51FA8:	dc.l Map_SonicTailsEndPoses
 		dc.b $40
 		dc.b 0
 		dc.b 0
-ChildObjDat_51FB4:dc.w 3
+ChildObjDat_51FB4:
+		dc.w 3
 		dc.l loc_511E8
 		dc.w $1424
 		dc.l loc_511CE
@@ -100489,10 +100748,12 @@ ChildObjDat_51FB4:dc.w 3
 		dc.w $E8
 		dc.l loc_513AC
 		dc.w $38EC
-ChildObjDat_51FCE:dc.w 0
+ChildObjDat_51FCE:
+		dc.w 0
 		dc.l loc_513E8
 		dc.w $4CC
-ChildObjDat_51FD6:dc.w 3
+ChildObjDat_51FD6:
+		dc.w 3
 		dc.l loc_512FC
 		dc.w $D6FE
 		dc.l loc_512FC
@@ -100501,7 +100762,8 @@ ChildObjDat_51FD6:dc.w 3
 		dc.w 0
 		dc.l loc_5140A
 		dc.w $C0FE
-ChildObjDat_51FF0:dc.w 4
+ChildObjDat_51FF0:
+		dc.w 4
 		dc.l loc_514F6
 		dc.w $F4D4
 		dc.l loc_514F6
@@ -100512,9 +100774,11 @@ ChildObjDat_51FF0:dc.w 4
 		dc.w $F4FC
 		dc.l loc_514F6
 		dc.w $14FC
-ChildObjDat_52010:dc.w 1
+ChildObjDat_52010:
+		dc.w 1
 		dc.l loc_51524
-ChildObjDat_52016:dc.w 6
+ChildObjDat_52016:
+		dc.w 6
 		dc.l loc_516A4
 		dc.w 0
 		dc.l loc_516A4
@@ -100529,13 +100793,17 @@ ChildObjDat_52016:dc.w 6
 		dc.w $DCF8
 		dc.l loc_516A4
 		dc.w $B01C
-ChildObjDat_52042:dc.w 0
+ChildObjDat_52042:
+		dc.w 0
 		dc.l loc_51AB8
-ChildObjDat_52048:dc.w 0
+ChildObjDat_52048:
+		dc.w 0
 		dc.l loc_51B18
-ChildObjDat_5204E:dc.w 0
+ChildObjDat_5204E:
+		dc.w 0
 		dc.l loc_542B8
-ChildObjDat_52054:dc.w 0
+ChildObjDat_52054:
+		dc.w 0
 		dc.l loc_54322
 byte_5205A:	dc.b 9
 		dc.b 7
@@ -100704,7 +100972,8 @@ loc_52366:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 word_52392:	dc.w  $FFF2,   $1C, $FF80,   $C0
-ObjDat_HiddenMonitor:dc.l Map_Monitor
+ObjDat_HiddenMonitor:
+		dc.l Map_Monitor
 		dc.w ArtTile_Monitors
 		dc.w $180
 		dc.b $E
@@ -100809,7 +101078,8 @@ loc_524AA:
 		move.w	#-$200,$1A(a0)
 		rts
 ; ---------------------------------------------------------------------------
-FrameArray_EndSign:dc.b   0,  0,  1,  2
+FrameArray_EndSign:
+		dc.b   0,  0,  1,  2
 ; ---------------------------------------------------------------------------
 
 Obj_EndSignResults:
@@ -100841,7 +101111,8 @@ loc_52500:
 		jsr	Remove_From_TrackingSlot(pc)
 		jmp	Go_Delete_Sprite(pc)
 ; ---------------------------------------------------------------------------
-PLC_SpikesSprings:dc.w 0
+PLC_SpikesSprings:
+		dc.w 0
 		dc.l ArtNem_SpikesSprings
 		dc.w $9280
 ; ---------------------------------------------------------------------------
@@ -100984,33 +101255,39 @@ locret_52658:
 ; End of function EndSign_CheckWall
 
 ; ---------------------------------------------------------------------------
-ObjSlot_EndSigns:dc.w 0, $4AC, $C, 0
+ObjSlot_EndSigns:
+		dc.w 0, $4AC, $C, 0
 		dc.l Map_EndSigns
 		dc.w $100
 		dc.b $18
 		dc.b $10
 		dc.b 0
 		dc.b 0
-ObjDat_SignpostStub:dc.l Map_SignpostStub
+ObjDat_SignpostStub:
+		dc.l Map_SignpostStub
 		dc.w $69E
 		dc.w $100
 		dc.b 4
 		dc.b 8
 		dc.b 0
 		dc.b 0
-ObjDat_SignpostSparkle:dc.l Map_Ring
+ObjDat_SignpostSparkle:
+		dc.l Map_Ring
 		dc.w make_art_tile(ArtTile_Ring,1,0)
 		dc.w $80
 		dc.b 8
 		dc.b 8
 		dc.b 4
 		dc.b 0
-Child1_EndSignStub:dc.w	0
+Child1_EndSignStub:
+		dc.w 0
 		dc.l Obj_SignpostStub
 		dc.w $18
-Child6_EndSignSparkle:dc.w 0
+Child6_EndSignSparkle:
+		dc.w 0
 		dc.l Obj_SignpostSparkle
-Child6_EndSignScore:dc.w 0
+Child6_EndSignScore:
+		dc.w 0
 		dc.l Obj_EnemyScore
 PLCPtr_EndSigns:dc.l ArtUnc_EndSigns
 		dc.l DPLC_EndSigns
@@ -101023,7 +101300,8 @@ AniRaw_EndSigns:dc.b    1,   0
 		dc.b    6,   3
 		dc.b    4,   5
 		dc.b    6, $FC
-AniRaw_SignpostSparkle:dc.b    1,   4
+AniRaw_SignpostSparkle:
+		dc.b    1,   4
 		dc.b    5,   6
 		dc.b    7, $FC
 
@@ -101256,20 +101534,21 @@ loc_528BA:
 		move.b	(a1)+,5(a0)
 		rts
 ; ---------------------------------------------------------------------------
-CreateBossExpParameterIndex:dc.w CreateBossExp_00-CreateBossExpParameterIndex
-		dc.w CreateBossExp_02-CreateBossExpParameterIndex
-		dc.w CreateBossExp_04-CreateBossExpParameterIndex
-		dc.w CreateBossExp_06-CreateBossExpParameterIndex
-		dc.w CreateBossExp_08-CreateBossExpParameterIndex
-		dc.w CreateBossExp_0A-CreateBossExpParameterIndex
-		dc.w CreateBossExp_0C-CreateBossExpParameterIndex
-CreateBossExp_00:dc.b  $20, $20, $20,   2
-CreateBossExp_02:dc.b  $28, $80, $80,   2
-CreateBossExp_04:dc.b  $80, $20, $20,   4
-CreateBossExp_06:dc.b    4,   8,   8,   2
-CreateBossExp_08:dc.b    8, $20, $20,   2
-CreateBossExp_0A:dc.b  $20, $20, $20,   2
-CreateBossExp_0C:dc.b  $40, $80, $20,   2
+CreateBossExpParameterIndex:
+		dc.w CreateBossExp00-CreateBossExpParameterIndex
+		dc.w CreateBossExp02-CreateBossExpParameterIndex
+		dc.w CreateBossExp04-CreateBossExpParameterIndex
+		dc.w CreateBossExp06-CreateBossExpParameterIndex
+		dc.w CreateBossExp08-CreateBossExpParameterIndex
+		dc.w CreateBossExp0A-CreateBossExpParameterIndex
+		dc.w CreateBossExp0C-CreateBossExpParameterIndex
+CreateBossExp00:dc.b  $20, $20, $20,   2
+CreateBossExp02:dc.b  $28, $80, $80,   2
+CreateBossExp04:dc.b  $80, $20, $20,   4
+CreateBossExp06:dc.b    4,   8,   8,   2
+CreateBossExp08:dc.b    8, $20, $20,   2
+CreateBossExp0A:dc.b  $20, $20, $20,   2
+CreateBossExp0C:dc.b  $40, $80, $20,   2
 ; ---------------------------------------------------------------------------
 
 Obj_BossExplosionSpecial:
@@ -101315,14 +101594,16 @@ loc_5296A:
 		jsr	Animate_RawMultiDelay(pc)
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-ObjDat_BossExplosion:dc.l Map_BossExplosion
+ObjDat_BossExplosion:
+		dc.l Map_BossExplosion
 		dc.w $8500
 		dc.w 0
 		dc.b $C
 		dc.b $C
 		dc.b 0
 		dc.b 0
-AniRaw_BossExplosion:dc.b    0,   0
+AniRaw_BossExplosion:
+		dc.b    0,   0
 		dc.b    0,   1
 		dc.b    1,   1
 		dc.b    2,   2
@@ -101330,13 +101611,16 @@ AniRaw_BossExplosion:dc.b    0,   0
 		dc.b    4,   4
 		dc.b    5,   4
 		dc.b  $F4,   0
-Child6_MakeBossExplosion1:dc.w 0
+Child6_MakeBossExplosion1:
+		dc.w 0
 		dc.l loc_52940
 		dc.w 0
-Child6_CreateBossExplosion:dc.w	0
+Child6_CreateBossExplosion:
+		dc.w 0
 		dc.l Obj_CreateBossExplosion
 		dc.w 0
-Child6_MakeNormalExplosion:dc.w	0
+Child6_MakeNormalExplosion:
+		dc.w 0
 		dc.l Obj_Explosion
 		dc.w 0
 
@@ -102609,7 +102893,8 @@ MoveSprite_AtAngleLookup:
 ; End of function MoveSprite_AtAngleLookup
 
 ; ---------------------------------------------------------------------------
-AtAngle_LookupIndex:dc.w AtAngle_00_3F-AtAngle_LookupIndex
+AtAngle_LookupIndex:
+		dc.w AtAngle_00_3F-AtAngle_LookupIndex
 		dc.w AtAngle_40_7F-AtAngle_LookupIndex
 		dc.w AtAngle_80_BF-AtAngle_LookupIndex
 		dc.w AtAngle_C0_FF-AtAngle_LookupIndex
@@ -102716,7 +103001,8 @@ MoveSprite_AngleYLookup:
 ; End of function MoveSprite_AngleYLookup
 
 ; ---------------------------------------------------------------------------
-AngleY_LookupIndex:dc.w	loc_534B4-AngleY_LookupIndex
+AngleY_LookupIndex:
+		dc.w loc_534B4-AngleY_LookupIndex
 		dc.w loc_534BC-AngleY_LookupIndex
 		dc.w loc_534C6-AngleY_LookupIndex
 		dc.w loc_534D0-AngleY_LookupIndex
@@ -102761,7 +103047,8 @@ MoveSprite_AngleXLookupOffset:
 ; End of function MoveSprite_AngleXLookupOffset
 
 ; ---------------------------------------------------------------------------
-AngleX_LookupIndex:dc.w	loc_534F6-AngleX_LookupIndex
+AngleX_LookupIndex:
+		dc.w loc_534F6-AngleX_LookupIndex
 		dc.w loc_534FE-AngleX_LookupIndex
 		dc.w loc_5350A-AngleX_LookupIndex
 		dc.w loc_5351A-AngleX_LookupIndex
@@ -103292,7 +103579,8 @@ locret_53A1C:
 ; End of function Set_IndexedVelocity
 
 ; ---------------------------------------------------------------------------
-Obj_VelocityIndex:dc.w	$FF00, $FF00
+Obj_VelocityIndex:
+		dc.w  $FF00, $FF00
 		dc.w   $100, $FF00
 		dc.w  $FE00, $FE00
 		dc.w   $200, $FE00
@@ -104229,7 +104517,8 @@ Obj_EndSignControl:
 ; End of function Obj_EndSignControl
 
 ; ---------------------------------------------------------------------------
-PLC_EndSignStuff:dc.w 1
+PLC_EndSignStuff:
+		dc.w 1
 		dc.l ArtNem_SignpostStub
 		dc.w $D3C0
 		dc.l ArtNem_Monitors
@@ -104382,7 +104671,8 @@ Make_LevelSizeObj:
 ; End of function Make_LevelSizeObj
 
 ; ---------------------------------------------------------------------------
-Child1_Act2LevelSize:dc.w 2
+Child1_Act2LevelSize:
+		dc.w 2
 		dc.l Obj_IncLevEndXGradual
 		dc.w 0
 		dc.l Obj_DecLevStartYGradual
@@ -105315,18 +105605,22 @@ word_54AA0:	dc.w $200
 		dc.b 4
 		dc.b 6
 		dc.b 0
-ChildObjDat_54AA6:dc.w 0
+ChildObjDat_54AA6:
+		dc.w 0
 		dc.l loc_54672
 		dc.w $D8
-ChildObjDat_54AAE:dc.w 0
+ChildObjDat_54AAE:
+		dc.w 0
 		dc.l loc_546AE
 		dc.w $28
-ChildObjDat_54AB6:dc.w 1
+ChildObjDat_54AB6:
+		dc.w 1
 		dc.l loc_54758
 		dc.w $ECDC
 		dc.l loc_54758
 		dc.w $14DC
-ChildObjDat_54AC4:dc.w 4
+ChildObjDat_54AC4:
+		dc.w 4
 		dc.l loc_5472C
 		dc.w $F8
 		dc.l loc_5472C
@@ -105337,7 +105631,8 @@ ChildObjDat_54AC4:dc.w 4
 		dc.w $E8F8
 		dc.l loc_5472C
 		dc.w $18F8
-ChildObjDat_54AE4:dc.w 8
+ChildObjDat_54AE4:
+		dc.w 8
 		dc.l loc_54776
 		dc.w $FC
 		dc.l loc_54776
@@ -105467,7 +105762,8 @@ ObjDat3_54C1A:	dc.l Map_Bloominator
 		dc.b 8
 		dc.b 4
 		dc.b $98
-ChildObjDat_54C26:dc.w 0
+ChildObjDat_54C26:
+		dc.w 0
 		dc.l loc_54B46
 		dc.l ObjDat3_54C1A
 		dc.l 0
@@ -105798,10 +106094,12 @@ ObjDat4_54F0C:	dc.w 1
 		dc.b 8
 		dc.b 4
 		dc.b 0
-ChildObjDat_54F1E:dc.w 0
+ChildObjDat_54F1E:
+		dc.w 0
 		dc.l loc_54CF8
 		dc.w $C08
-ChildObjDat_54F26:dc.w 0
+ChildObjDat_54F26:
+		dc.w 0
 		dc.l loc_54CF8
 		dc.w $1008
 DPLCPtr_54F2E:	dc.l ArtUnc_AIZRhinobot
@@ -106413,9 +106711,11 @@ ObjDat3_55470:	dc.l Map_MonkeyDude
 		dc.b $20
 		dc.b 6
 		dc.b $98
-ChildObjDat_5547C:dc.w 4
+ChildObjDat_5547C:
+		dc.w 4
 		dc.l loc_5504A
-ChildObjDat_55482:dc.w 4
+ChildObjDat_55482:
+		dc.w 4
 		dc.l loc_55044
 		dc.w 0
 		dc.l loc_5504A
@@ -106423,7 +106723,8 @@ ChildObjDat_55482:dc.w 4
 		dc.w 0
 		dc.l loc_5527C
 		dc.w 0
-ChildObjDat_55498:dc.w 0
+ChildObjDat_55498:
+		dc.w 0
 		dc.l loc_54B46
 		dc.l ObjDat3_55470
 		dc.w 0
@@ -106640,10 +106941,12 @@ word_5568E:	dc.w $200
 		dc.b $10
 		dc.b 3
 		dc.b 0
-ChildObjDat_55694:dc.w 5
+ChildObjDat_55694:
+		dc.w 5
 		dc.l loc_55588
 		dc.w 0
-ChildObjDat_5569C:dc.w 0
+ChildObjDat_5569C:
+		dc.w 0
 		dc.l loc_55606
 		dc.w 0
 byte_556A4:	dc.b    3,   2
@@ -106788,7 +107091,8 @@ ObjDat3_557D2:	dc.l Map_Blastoid
 		dc.b 4
 		dc.b 2
 		dc.b $98
-ChildObjDat_557DE:dc.w 0
+ChildObjDat_557DE:
+		dc.w 0
 		dc.l loc_54B46
 		dc.l ObjDat3_557D2
 		dc.l byte_55805
@@ -106985,7 +107289,8 @@ word_55992:	dc.w $280
 		dc.b $C
 		dc.b 3
 		dc.b 0
-ChildObjDat_55998:dc.w 0
+ChildObjDat_55998:
+		dc.w 0
 		dc.l Obj_Buggernaught_Baby
 		dc.w $2000
 byte_559A0:	dc.b    0,   0
@@ -107332,16 +107637,20 @@ ObjDat3_55CC0:	dc.l Map_TurboSpikerHidden
 		dc.b $10
 		dc.b 0
 		dc.b 0
-ChildObjDat_55CCC:dc.w 0
+ChildObjDat_55CCC:
+		dc.w 0
 		dc.l loc_55B32
 		dc.w $400
-ChildObjDat_55CD4:dc.w 0
+ChildObjDat_55CD4:
+		dc.w 0
 		dc.l loc_55B94
 		dc.w $FC14
-ChildObjDat_55CDC:dc.w 0
+ChildObjDat_55CDC:
+		dc.w 0
 		dc.l loc_55C00
 		dc.w 4
-ChildObjDat_55CE4:dc.w 4
+ChildObjDat_55CE4:
+		dc.w 4
 		dc.l loc_55C2E
 		dc.w $4F8
 		dc.l loc_55C2E
@@ -107352,7 +107661,8 @@ ChildObjDat_55CE4:dc.w 4
 		dc.w $F800
 		dc.l loc_55C2E
 		dc.w $800
-ChildObjDat_55D04:dc.w 0
+ChildObjDat_55D04:
+		dc.w 0
 		dc.l loc_55C76
 		dc.w 0
 byte_55D0C:	dc.b    5,   0
@@ -108468,15 +108778,18 @@ ObjDat3_568DE:	dc.l Map_MGZMovingSpikePlatform
 		dc.b $30
 		dc.b 0
 		dc.b 0
-ChildObjDat_568EA:dc.w 1
+ChildObjDat_568EA:
+		dc.w 1
 		dc.l loc_565C2
 		dc.w $E4EA
 		dc.l loc_565C2
 		dc.w $1CEA
-ChildObjDat_568F8:dc.w 0
+ChildObjDat_568F8:
+		dc.w 0
 		dc.l loc_565EC
 		dc.w 0
-ChildObjDat_56900:dc.w 4
+ChildObjDat_56900:
+		dc.w 4
 		dc.l loc_56718
 		dc.w 0
 		dc.l loc_56718
@@ -108487,7 +108800,8 @@ ChildObjDat_56900:dc.w 4
 		dc.w $E4EA
 		dc.l loc_56718
 		dc.w $1CEA
-ChildObjDat_56920:dc.w 0
+ChildObjDat_56920:
+		dc.w 0
 		dc.l loc_56630
 		dc.w 0
 		dc.b    0,   5
@@ -108501,7 +108815,8 @@ byte_56931:	dc.b    5,   4
 byte_56937:	dc.b    0,   0
 		dc.b    1,   2
 		dc.b  $FC
-Map_MGZMinibossSpires:dc.w word_5693E-Map_MGZMinibossSpires
+Map_MGZMinibossSpires:
+		dc.w word_5693E-Map_MGZMinibossSpires
 word_5693E:	dc.w 1
 		dc.b  $F0,   3,   0,   0, $FF, $FC
 PLC_56946:	dc.w 1
@@ -108806,14 +109121,16 @@ ObjDat3_56BD0:	dc.l Map_Spiker
 		dc.b 4
 		dc.b 5
 		dc.b $98
-ChildObjDat_56BDC:dc.w 2
+ChildObjDat_56BDC:
+		dc.w 2
 		dc.l loc_56A3A
 		dc.w $F00C
 		dc.l loc_56A3A
 		dc.w $100C
 		dc.l loc_56AEE
 		dc.w $F4
-ChildObjDat_56BF0:dc.w 0
+ChildObjDat_56BF0:
+		dc.w 0
 		dc.l loc_54B46
 		dc.l ObjDat3_56BD0
 		dc.l byte_56C1A
@@ -108984,7 +109301,8 @@ word_56D54:	dc.w $200
 		dc.b 4
 		dc.b 5
 		dc.b 0
-ChildObjDat_56D5A:dc.w 0
+ChildObjDat_56D5A:
+		dc.w 0
 		dc.l loc_56D0E
 		dc.w $F7F5
 byte_56D62:	dc.b    0,   0
@@ -109162,10 +109480,12 @@ ObjDat3_56EF0:	dc.l Map_Clamer
 		dc.b 8
 		dc.b 9
 		dc.b $98
-ChildObjDat_56EFC:dc.w 0
+ChildObjDat_56EFC:
+		dc.w 0
 		dc.l loc_56E4A
 		dc.w $F8
-ChildObjDat_56F04:dc.w 0
+ChildObjDat_56F04:
+		dc.w 0
 		dc.l loc_54B46
 		dc.l ObjDat3_56EF0
 		dc.l 0
@@ -109396,10 +109716,12 @@ word_57100:	dc.w $280
 		dc.b 8
 		dc.b 6
 		dc.b $98
-ChildObjDat_57106:dc.w 0
+ChildObjDat_57106:
+		dc.w 0
 		dc.l loc_5700A
 		dc.w 0
-ChildObjDat_5710E:dc.w 1
+ChildObjDat_5710E:
+		dc.w 1
 		dc.l loc_57054
 		dc.w 0
 byte_57116:	dc.b    9, $10
@@ -109539,7 +109861,8 @@ word_5721A:	dc.w $200
 		dc.b 4
 		dc.b 5
 		dc.b 0
-ChildObjDat_57220:dc.w 1
+ChildObjDat_57220:
+		dc.w 1
 		dc.l loc_5719C
 		dc.w $10
 		dc.l loc_571E2
@@ -109775,10 +110098,12 @@ ObjDat3_57456:	dc.l Map_Blaster
 		dc.b 4
 		dc.b 7
 		dc.b 0
-ChildObjDat_57462:dc.w 0
+ChildObjDat_57462:
+		dc.w 0
 		dc.l loc_573EA
 		dc.w $E5EA
-ChildObjDat_5746A:dc.w 0
+ChildObjDat_5746A:
+		dc.w 0
 		dc.l loc_54B46
 		dc.l ObjDat3_5744A
 		dc.l byte_574AD
@@ -109787,7 +110112,8 @@ ChildObjDat_5746A:dc.w 0
 		dc.b $E0
 		dc.w $FE00
 		dc.w $FC00
-ChildObjDat_57482:dc.w 0
+ChildObjDat_57482:
+		dc.w 0
 		dc.l loc_54B46
 		dc.l ObjDat3_57456
 		dc.l byte_574B1
@@ -110039,7 +110365,8 @@ word_5770A:	dc.w $280
 		dc.b 4
 		dc.b 2
 		dc.b 0
-ChildObjDat_57710:dc.w 0
+ChildObjDat_57710:
+		dc.w 0
 		dc.l loc_5764C
 		dc.w $1404
 byte_57718:	dc.b    0,   0
@@ -110642,11 +110969,14 @@ ObjDat3_57C28:	dc.l Map_ICZPlatforms
 		dc.b $C
 		dc.b $1C
 		dc.b 0
-ChildObjDat_57C34:dc.w 5
+ChildObjDat_57C34:
+		dc.w 5
 		dc.l loc_579FA
-ChildObjDat_57C3A:dc.w 8
+ChildObjDat_57C3A:
+		dc.w 8
 		dc.l loc_57A32
-ChildObjDat_57C40:dc.w 0
+ChildObjDat_57C40:
+		dc.w 0
 		dc.l loc_57B1A
 		dc.w $F010
 byte_57C48:	dc.b    2, $23
@@ -110873,7 +111203,8 @@ word_57E2A:	dc.w $280
 		dc.b $40
 		dc.b $D
 		dc.b 0
-ChildObjDat_57E30:dc.w 0
+ChildObjDat_57E30:
+		dc.w 0
 		dc.l loc_57DFC
 		dc.w 0
 ; ---------------------------------------------------------------------------
@@ -111334,22 +111665,28 @@ ObjDat3_5828C:	dc.l Map_ICZPlatforms
 		dc.b 4
 		dc.b $C
 		dc.b 0
-ChildObjDat_58298:dc.w 0
+ChildObjDat_58298:
+		dc.w 0
 		dc.l loc_57F14
 		dc.w $C
-ChildObjDat_582A0:dc.w 0
+ChildObjDat_582A0:
+		dc.w 0
 		dc.l loc_57F14
 		dc.w $F4
-ChildObjDat_582A8:dc.w 0
+ChildObjDat_582A8:
+		dc.w 0
 		dc.l loc_57F40
 		dc.w $30
-ChildObjDat_582B0:dc.w 0
+ChildObjDat_582B0:
+		dc.w 0
 		dc.l loc_57F40
 		dc.w $D0
-ChildObjDat_582B8:dc.w 0
+ChildObjDat_582B8:
+		dc.w 0
 		dc.l loc_57FA6
 		dc.w 0
-ChildObjDat_582C0:dc.w $B
+ChildObjDat_582C0:
+		dc.w $B
 		dc.l loc_580B2
 		dc.w $F4F8
 		dc.l loc_580B2
@@ -111548,10 +111885,12 @@ word_584A6:	dc.w $280
 		dc.b $10
 		dc.b $A
 		dc.b 0
-ChildObjDat_584AC:dc.w 2
+ChildObjDat_584AC:
+		dc.w 2
 		dc.l loc_58344
 		dc.w 0
-ChildObjDat_584B4:dc.w 3
+ChildObjDat_584B4:
+		dc.w 3
 		dc.l loc_58344
 		dc.w 0
 ; ---------------------------------------------------------------------------
@@ -112092,21 +112431,25 @@ word_58916:	dc.w $300
 		dc.b 8
 		dc.b $27
 		dc.b 0
-ChildObjDat_5891C:dc.w 2
+ChildObjDat_5891C:
+		dc.w 2
 		dc.l loc_5865C
 		dc.w 8
 		dc.l loc_5868C
 		dc.w $1CF8
 		dc.l loc_586A2
 		dc.w 0
-ChildObjDat_58930:dc.w 7
+ChildObjDat_58930:
+		dc.w 7
 		dc.l loc_586F6
-ChildObjDat_58936:dc.w 1
+ChildObjDat_58936:
+		dc.w 1
 		dc.l Obj_ICZSnowdust
 		dc.w $1C10
 		dc.l Obj_ICZSnowdust
 		dc.w $1410
-ChildObjDat_58944:dc.w 0
+ChildObjDat_58944:
+		dc.w 0
 		dc.l Obj_ICZSnowdust
 		dc.w $1C10
 ; ---------------------------------------------------------------------------
@@ -112214,7 +112557,8 @@ ObjDat3_58A3E:	dc.l Map_ICZPlatforms
 		dc.b 4
 		dc.b $F
 		dc.b 0
-ChildObjDat_58A4A:dc.w $B
+ChildObjDat_58A4A:
+		dc.w $B
 		dc.l loc_589E8
 		dc.w $27
 		dc.b   $F, $27
@@ -112299,10 +112643,12 @@ ObjDat3_58B08:	dc.l Map_ICZWallAndColumn
 		dc.b $10
 		dc.b 5
 		dc.b 0
-ChildObjDat_58B14:dc.w 0
+ChildObjDat_58B14:
+		dc.w 0
 		dc.l loc_58AE8
 		dc.w $C
-ChildObjDat_58B1C:dc.w 0
+ChildObjDat_58B1C:
+		dc.w 0
 		dc.l loc_58AE8
 		dc.w $F4
 ; ---------------------------------------------------------------------------
@@ -112394,7 +112740,8 @@ word_58C18:	dc.w $C3B6
 		dc.b $20
 		dc.b $12
 		dc.b 0
-ChildObjDat_58C20:dc.w $B
+ChildObjDat_58C20:
+		dc.w $B
 		dc.l loc_58BD2
 		dc.w $F8
 		dc.l loc_58BD2
@@ -112472,7 +112819,8 @@ ObjDat3_58CD6:	dc.l Map_ICZPlatforms
 		dc.b $10
 		dc.b 4
 		dc.b $D7
-ChildObjDat_58CE2:dc.w $B
+ChildObjDat_58CE2:
+		dc.w $B
 		dc.l loc_589E8
 ; ---------------------------------------------------------------------------
 
@@ -112787,7 +113135,8 @@ word_58FDC:	dc.w $43B6
 		dc.b 8
 		dc.b 9
 		dc.b 0
-ChildObjDat_58FE4:dc.w 5
+ChildObjDat_58FE4:
+		dc.w 5
 		dc.l loc_58F00
 		dc.w $F8F8
 		dc.l loc_58F00
@@ -112800,12 +113149,14 @@ ChildObjDat_58FE4:dc.w 5
 		dc.w $800
 		dc.l loc_58F00
 		dc.w $1800
-ChildObjDat_5900A:dc.w 1
+ChildObjDat_5900A:
+		dc.w 1
 		dc.l loc_58F00
 		dc.w $F8
 		dc.l loc_58F00
 		dc.w 8
-ChildObjDat_59018:dc.w 3
+ChildObjDat_59018:
+		dc.w 3
 		dc.l loc_58F00
 		dc.w $F8F8
 		dc.l loc_58F00
@@ -113100,7 +113451,8 @@ word_59260:	dc.w $43B6
 		dc.b $40
 		dc.b 8
 		dc.b 0
-ChildObjDat_59268:dc.w 1
+ChildObjDat_59268:
+		dc.w 1
 		dc.l loc_5905A
 		dc.w $C800
 		dc.l loc_5905A
@@ -113414,7 +113766,8 @@ ObjDat3_59586:	dc.l Map_ICZSnowdust
 		dc.b $18
 		dc.b 0
 		dc.b 0
-ChildObjDat_59592:dc.w 0
+ChildObjDat_59592:
+		dc.w 0
 		dc.l Obj_ICZSnowdust
 		dc.w $C
 DPLCPtr_5959A:	dc.l ArtUnc_Penguinator
@@ -113582,7 +113935,8 @@ word_59732:	dc.w $280
 		dc.b 8
 		dc.b 1
 		dc.b $8B
-ChildObjDat_59738:dc.w 3
+ChildObjDat_59738:
+		dc.w 3
 		dc.l loc_59648
 		dc.w 0
 byte_59740:	dc.b    3,   1,   2,   3, $F4,   0
@@ -113900,7 +114254,8 @@ word_59A1C:	dc.w 2
 		dc.w $F807
 		dc.l loc_598B6
 		dc.w $F804
-ChildObjDat_59A30:dc.w 0
+ChildObjDat_59A30:
+		dc.w 0
 		dc.l loc_54B46
 		dc.l ObjDat3_59A10
 		dc.l 0
@@ -114287,29 +114642,36 @@ word_59D5C:	dc.w $200
 		dc.b 4
 		dc.b 6
 		dc.b 0
-ChildObjDat_59D62:dc.w 1
+ChildObjDat_59D62:
+		dc.w 1
 		dc.l loc_59AFA
 		dc.w $F40C
 		dc.l loc_59AFA
 		dc.w $C0C
-ChildObjDat_59D70:dc.w 1
+ChildObjDat_59D70:
+		dc.w 1
 		dc.l loc_59AFA
 		dc.w $E800
 		dc.l loc_59AFA
 		dc.w $1800
-ChildObjDat_59D7E:dc.w 0
+ChildObjDat_59D7E:
+		dc.w 0
 		dc.l loc_59AFA
 		dc.w $F0
-ChildObjDat_59D86:dc.w 2
+ChildObjDat_59D86:
+		dc.w 2
 		dc.l loc_59C8A
 		dc.w $F4
-ChildObjDat_59D8E:dc.w 2
+ChildObjDat_59D8E:
+		dc.w 2
 		dc.l loc_59C8A
 		dc.w $C00
-ChildObjDat_59D96:dc.w 2
+ChildObjDat_59D96:
+		dc.w 2
 		dc.l loc_59C8A
 		dc.w $F400
-ChildObjDat_59D9E:dc.w 2
+ChildObjDat_59D9E:
+		dc.w 2
 		dc.l loc_59C8A
 		dc.w 0
 byte_59DA6:	dc.b 7
@@ -114423,7 +114785,8 @@ word_59E7A:	dc.w $280
 		dc.b 8
 		dc.b 1
 		dc.b $8B
-ChildObjDat_59E80:dc.w 3
+ChildObjDat_59E80:
+		dc.w 3
 		dc.l loc_59E10
 		dc.w $10
 		dc.l loc_59E10
@@ -114639,16 +115002,20 @@ word_5A07A:	dc.w $558
 		dc.b $50
 		dc.b 0
 		dc.b $A0
-ChildObjDat_5A082:dc.w 0
+ChildObjDat_5A082:
+		dc.w 0
 		dc.l loc_59F5A
 		dc.w $C
-ChildObjDat_5A08A:dc.w 0
+ChildObjDat_5A08A:
+		dc.w 0
 		dc.l loc_5A03C
 		dc.w $FC54
-ChildObjDat_5A092:dc.w 0
+ChildObjDat_5A092:
+		dc.w 0
 		dc.l loc_5A03C
 		dc.w $454
-ChildObjDat_5A09A:dc.w 0
+ChildObjDat_5A09A:
+		dc.w 0
 		dc.l loc_5A03C
 		dc.w $54
 byte_5A0A2:	dc.b 7
@@ -115388,13 +115755,16 @@ ObjDat3_5A7F4:	dc.l Map_LBZMinibossBox
 		dc.b $14
 		dc.b 0
 		dc.b 0
-ChildObjDat_5A800:dc.w 0
+ChildObjDat_5A800:
+		dc.w 0
 		dc.l loc_5A4AA
 		dc.w $34
-ChildObjDat_5A808:dc.w 9
+ChildObjDat_5A808:
+		dc.w 9
 		dc.l loc_5A5BC
 		dc.w 0
-ChildObjDat_5A810:dc.w 0
+ChildObjDat_5A810:
+		dc.w 0
 		dc.l Obj_LBZMiniboss
 		dc.w 0
 byte_5A818:	dc.b 0
@@ -116769,7 +117139,8 @@ AutoTunnel_00:	dc.w $C
 		dc.w   $F60,  $578
 		dc.w   $F60,  $548
 		dc.w   $F60,  $378
-AutoTunnel_01_02:dc.w $38
+AutoTunnel_01_02:
+		dc.w $38
 		dc.w   $D40,  $770
 		dc.w   $D48,  $770
 		dc.w   $D50,  $770
@@ -117215,8 +117586,10 @@ Gumball2_Sprites:
 Gumball1_Rings:	dc.w   $200,  $200, $FFFF
 Gumball2_Rings:	dc.w    $80, $7100, $FFFF
 SpriteTerminatM:dc.w  $FFFF,     0,     0
-Pachinko1_Sprites:dc.w    $80,   $80,     0, $FFFF,     0,     0
-Pachinko2_Sprites:dc.w    $80,   $80,     0, $FFFF,     0,     0
+Pachinko1_Sprites:
+		dc.w    $80,   $80,     0, $FFFF,     0,     0
+Pachinko2_Sprites:
+		dc.w    $80,   $80,     0, $FFFF,     0,     0
 Pachinko1_Rings:dc.w    $80, $7100, $FFFF
 Pachinko2_Rings:dc.w    $80, $7100, $FFFF
 SpriteTerminatN:dc.w  $FFFF,     0,     0
@@ -118245,7 +118618,8 @@ DAC_B6_Setup2:	dc.b $C
 DAC_B7_Setup2:	dc.b $18
 		dc.w 0
 		dc.w 0
-DAC_B8_B9_Setup2:dc.b $C
+DAC_B8_B9_Setup2:
+		dc.b $C
 		dc.w 0
 		dc.w 0
 DAC_BA_Setup2:	dc.b $18
@@ -118469,7 +118843,8 @@ DAC_B6_Setup3:	dc.b $C
 DAC_B7_Setup3:	dc.b $18
 		dc.w $B104
 		dc.w $3FCE
-DAC_B8_B9_Setup3:dc.b $C
+DAC_B8_B9_Setup3:
+		dc.b $C
 		dc.w $3A06
 		dc.w $F0D2
 DAC_BA_Setup3:	dc.b $18
@@ -118958,10 +119333,8 @@ Map_Ribot:	include "General/Sprites/Ribot/Map - Ribot.asm"
 Map_Corkey:	include "General/Sprites/Corkey/Map - Corkey.asm"
 Map_Flybot767:	include "General/Sprites/Flybot767/Map - Flybot767.asm"
 DPLC_Flybot767:	include "General/Sprites/Flybot767/DPLC - Flybot767.asm"
-Map_LBZEndBoss:
-		include "Levels/LBZ/Misc Object Data/Map - End Boss.asm"
-Map_CNZEndBoss:
-		include "Levels/CNZ/Misc Object Data/Map - End Boss.asm"
+Map_LBZEndBoss:	include "Levels/LBZ/Misc Object Data/Map - End Boss.asm"
+Map_CNZEndBoss:	include "Levels/CNZ/Misc Object Data/Map - End Boss.asm"
 CNZEndBossMagnet_AngleX:
 		dc.b    0,   1,   2,   3,   4,   5,   6,   8,   9,  $A,  $B,  $C,  $D,  $E,  $F, $10
 		dc.b  $11, $12, $13, $14, $15, $16, $17, $18, $18, $19, $1A, $1B, $1C, $1D, $1E, $1E

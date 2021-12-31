@@ -733,9 +733,12 @@ AIZ1_IntroDrawArray:
 AIZ1_IntroDeformArray:
 		dc.w $3E0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
 		dc.w 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, $7FFF
-AIZ1_BGDrawArray:dc.w $220, $7FFF
-AIZ1_DeformArray:dc.w $D0, $20, $30, $30, $10, $10, $10, $800D, $F, 6, $E, $50, $20, $7FFF
-AIZ_FlameVScroll:dc.b 0, $FF, $FE, $FB, $F8, $F6, $F3, $F2, $F1, $F2, $F3, $F6, $F9, $FB, $FE, $FF
+AIZ1_BGDrawArray:
+		dc.w $220, $7FFF
+AIZ1_DeformArray:
+		dc.w $D0, $20, $30, $30, $10, $10, $10, $800D, $F, 6, $E, $50, $20, $7FFF
+AIZ_FlameVScroll:
+		dc.b 0, $FF, $FE, $FB, $F8, $F6, $F3, $F2, $F1, $F2, $F3, $F6, $F9, $FB, $FE, $FF
 ; ---------------------------------------------------------------------------
 
 AIZ2_Deform:
@@ -965,11 +968,13 @@ Map_AIZ2BGTree:
 		include "Levels/AIZ/Misc Object Data/Map - Act 2 Background Tree.asm"
 Map_AIZ2BossSmall:
 		include "Levels/AIZ/Misc Object Data/Map - Act 2 Boss Small.asm"
-
-HCZ1_BGDeformArray:dc.w $40, 8, 8, 5, 5, 6, $F0, 6, 5, 5, 8, 8, $30, $80C0, $7FFF
-HCZ2_BGDeformArray:dc.w 8, 8, $90, $10, 8, $30, $18, 8, 8, $A8, $30, $18
+HCZ1_BGDeformArray:
+		dc.w $40, 8, 8, 5, 5, 6, $F0, 6, 5, 5, 8, 8, $30, $80C0, $7FFF
+HCZ2_BGDeformArray:
+		dc.w 8, 8, $90, $10, 8, $30, $18, 8, 8, $A8, $30, $18
 		dc.w 8, 8, $A8, $30, $18, 8, 8, $B0, $10, 8, $7FFF
-HCZ2_BGDeformIndex:dc.b   3, $A
+HCZ2_BGDeformIndex:
+		dc.b   3, $A
 		dc.b $14,$1E
 		dc.b $2C,  2
 		dc.b  $C,$16
@@ -1023,7 +1028,8 @@ loc_23C9AA:
 		move.w	d0,-4(a1)
 		rts
 ; ---------------------------------------------------------------------------
-MGZ1_BGDeformArray:dc.w $10, 4, 4, 8, 8, 8, $D, $13, 8, 8, 8, 8, $18, $7FFF
+MGZ1_BGDeformArray:
+		dc.w $10, 4, 4, 8, 8, 8, $D, $13, 8, 8, 8, 8, $18, $7FFF
 MGZ2_QuakeEventArray:
 		dc.w   $780,  $7C0,  $580,  $600,  $5A0,  $7E0  ; Player X boundaries, Player Y boundaries, Level size reset val
 		dc.w  $31C0, $3200,  $1C0,  $280,  $1E0, $2F60
@@ -1032,7 +1038,8 @@ MGZ2_ChunkEventArray:
 		dc.w   $F68,  $F78,  $500,  $580,  $F00,  $500  ; Player X boundaries, Player Y boundaries, Screen redraw area
 		dc.w  $3680, $3700,  $2F0,  $380, $3700,  $280
 		dc.w  $3000, $3080,  $770,  $800, $3080,  $700
-MGZ2_ScreenRedrawArray:dc.w   $40,    3
+MGZ2_ScreenRedrawArray:
+		dc.w   $40,    3
 		dc.w   $50,    3
 		dc.w   $50,    4
 		dc.w   $60,    4
@@ -1055,7 +1062,8 @@ MGZ2_ScreenRedrawArray:dc.w   $40,    3
 		dc.w   $C0,    3
 		dc.w   $D0,    2
 		dc.w   $E0,    1
-MGZ2_ChunkReplaceArray:dc.w  $100, $500
+MGZ2_ChunkReplaceArray:
+		dc.w  $100, $500
 		dc.w  $180, $580
 		dc.w  $200, $600
 		dc.w  $280, $680
@@ -1079,8 +1087,10 @@ MGZ2_ChunkReplaceArray:dc.w  $100, $500
 		dc.w     0, $F80
 		dc.w     0,$1000
 		dc.w   $80, $480
-MGZ2_CollapseScrollDelay:dc.w    $A,  $10,    2,    8,   $E,    6,    0,   $C,  $12,    4
-MGZ2_FGVScrollArray:dc.w $3CA0,  $20,  $20,  $20,  $20,  $20,  $20,  $20,  $20,$7FFF
+MGZ2_CollapseScrollDelay:
+		dc.w    $A,  $10,    2,    8,   $E,    6,    0,   $C,  $12,    4
+MGZ2_FGVScrollArray:
+		dc.w $3CA0,  $20,  $20,  $20,  $20,  $20,  $20,  $20,  $20,$7FFF
 ; ---------------------------------------------------------------------------
 
 MGZ2_BGDeform:
@@ -1195,11 +1205,15 @@ loc_23D2B4:
 		dbf	d0,loc_23D2B4
 		rts
 ; ---------------------------------------------------------------------------
-MGZ2_BGDrawArray:dc.w $200, $7FFF
-MGZ2_BGDeformArray:dc.w $10, $10, $10, $10, $10, $18, 8, $10, 8, 8, $10, 8
+MGZ2_BGDrawArray:
+		dc.w $200, $7FFF
+MGZ2_BGDeformArray:
+		dc.w $10, $10, $10, $10, $10, $18, 8, $10, 8, 8, $10, 8
 		dc.w 8, 8, 5, $2B, $C, 6, 6, 8, 8, $18, $D8, $7FFF
-MGZ2_BGDeformIndex:dc.w  $1C, $18, $1A,  $C,   6, $14,   2, $10, $16, $12,  $A,   0,   8,   4,  $E
-MGZ2_BGDeformOffset:dc.w   -5,  -8,   9,  $A,   2, -$C,   3, $10,  -1,  $D, -$F,   6, -$B,  -4,  $E
+MGZ2_BGDeformIndex:
+		dc.w  $1C, $18, $1A,  $C,   6, $14,   2, $10, $16, $12,  $A,   0,   8,   4,  $E
+MGZ2_BGDeformOffset:
+		dc.w   -5,  -8,   9,  $A,   2, -$C,   3, $10,  -1,  $D, -$F,   6, -$B,  -4,  $E
 		dc.w   -8, $10,   8,   0,  -8, $10,   8,   0
 ; ---------------------------------------------------------------------------
 
@@ -1242,7 +1256,8 @@ sub_23DED6:
 		move.w	#$402,(a1)
 		rts
 ; ---------------------------------------------------------------------------
-ICZ1_IntroBGDeformArray:dc.w $44, $C, $B, $D, $18, $50, 2, 6, 8, $10, $18, $20, $28, $7FFF
+ICZ1_IntroBGDeformArray:
+		dc.w $44, $C, $B, $D, $18, $50, 2, 6, 8, $10, $18, $20, $28, $7FFF
 ; ---------------------------------------------------------------------------
 
 ICZ2_OutDeform:
@@ -1395,8 +1410,10 @@ sub_23E21E:
 		move.l	#$2000600,(a1)
 		rts
 ; ---------------------------------------------------------------------------
-ICZ2_OutBGDeformArray:dc.w $5A, $26, $8030, $7FFF
-ICZ2_InBGDeformArray:dc.w $1A0, $40, $20, $18, $40, 8, 8, $18, $7FFF
+ICZ2_OutBGDeformArray:
+		dc.w $5A, $26, $8030, $7FFF
+ICZ2_InBGDeformArray:
+		dc.w $1A0, $40, $20, $18, $40, 8, 8, $18, $7FFF
 ; ---------------------------------------------------------------------------
 
 LBZ1_CheckLayoutMod:
@@ -1537,16 +1554,20 @@ loc_23E536:
 		dbf	d1,loc_23E536
 		rts
 ; ---------------------------------------------------------------------------
-LBZ1_FGVScrollArray:dc.w $3B60, $10, $10, $10, $10, $10, $10, $10, $10, $10, $10, $7FFF
-LBZ1_LayoutModRange:dc.w $13E0,$16A0, $100, $580
+LBZ1_FGVScrollArray:
+		dc.w $3B60, $10, $10, $10, $10, $10, $10, $10, $10, $10, $10, $7FFF
+LBZ1_LayoutModRange:
+		dc.w $13E0,$16A0, $100, $580
 		dc.w $2160,$2520,    0, $700
 		dc.w $3A60,$3BA0,    0, $600
 		dc.w $3DE0,$3FA0,    0, $300
-LBZ1_LayoutModExitRange:dc.w $1376,$170A
+LBZ1_LayoutModExitRange:
+		dc.w $1376,$170A
 		dc.w $20F6,$258A
 		dc.w $39F6,$3C0A
 		dc.w $3D76,$400A
-LBZ1_CollapseScrollSpeed:dc.w  $1EE, $1F2,  $C7, $1B3, $1B7, $198,   $E, $139
+LBZ1_CollapseScrollSpeed:
+		dc.w  $1EE, $1F2,  $C7, $1B3, $1B7, $198,   $E, $139
 ; ---------------------------------------------------------------------------
 
 LBZ1_Deform:
@@ -1593,12 +1614,16 @@ loc_23E79A:
 		addq.w	#7,(a1)
 		rts
 ; ---------------------------------------------------------------------------
-LBZ2_BGDeformArray:dc.w $C0, $40, $38, $18, $28, $10, $10, $10, $18, $40, $20, $10, $20
+LBZ2_BGDeformArray:
+		dc.w $C0, $40, $38, $18, $28, $10, $10, $10, $18, $40, $20, $10, $20
 		dc.w $70, $30, $80E0, $20, $7FFF
-LBZ2_DEBGDeformArray:dc.w $38, $18, $28, $10, $10, $10, $18, $40, $38, $18, $28, $10, $10
+LBZ2_DEBGDeformArray:
+		dc.w $38, $18, $28, $10, $10, $10, $18, $40, $38, $18, $28, $10, $10
 		dc.w $10, $18, $40, $20, $10, $20, $70, $60, $10, $805F, $7FFF
-LBZ2_CloudDeformArray:dc.w  $16,  $E,  $A, $14,  $C,   6, $18, $10, $12,   2,   8,   4,   0
-LBZ2_BGUWDeformRange:dc.w    7,   1,   3,   1,   7
+LBZ2_CloudDeformArray:
+		dc.w  $16,  $E,  $A, $14,  $C,   6, $18, $10, $12,   2,   8,   4,   0
+LBZ2_BGUWDeformRange:
+		dc.w    7,   1,   3,   1,   7
 ; ---------------------------------------------------------------------------
 
 Gumball_ScreenInit:
@@ -1648,7 +1673,8 @@ Gumball_VScroll:
 		move.w	d1,$E(a1)
 		rts
 ; ---------------------------------------------------------------------------
-Gumball_VScrollArray:dc.w $C0, $80, $7FFF
+Gumball_VScrollArray:
+		dc.w $C0, $80, $7FFF
 ; ---------------------------------------------------------------------------
 
 Gumball_BackgroundInit:
