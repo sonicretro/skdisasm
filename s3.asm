@@ -79614,37 +79614,10 @@ DPLCPtr_SSEntryFlash:
 		dc.l ArtUnc_SSEntryFlash
 		dc.l DPLC_SSEntryFlash
 AniRaw_SSEntryRing:
-		dc.b 4
-		dc.b 0
-		dc.b 0
-		dc.b 1
-		dc.b 2
-		dc.b 3
-		dc.b 4
-		dc.b 5
-		dc.b 6
-		dc.b 7
-		dc.b $F8
-		dc.b $C
-		dc.b 6
-		dc.b $A
-		dc.b 9
-		dc.b 8
-		dc.b $B
-		dc.b $FC
+		dc.b    4,   0,   0,   1,   2,   3,   4,   5,   6,   7, $F8,  $C,   6,  $A,   9,   8,  $B, $FC
 AniRaw_SSEntryFlash:
-		dc.b 0
-		dc.b 0
-		dc.b 0
-		dc.b 1
-		dc.b 2
-		dc.b $43
-		dc.b 3
-		dc.b 2
-		dc.b 1
-		dc.b 0
-		dc.b $F4
-		dc.b 0
+		dc.b    0,   0,   0,   1,   2, $43,   3,   2,   1,   0, $F4
+		even
 Map_SSEntryRing:
 		include "General/Sprites/SS Entry/Map - Entry Ring.asm"
 DPLC_SSEntryRing:
@@ -82283,10 +82256,7 @@ Child1_MakeRoboShipFlame:
 		dc.l Obj_RobotnikShipFlame
 		dc.w $1E00
 AniRaw_RobotnikHead:
-		dc.b 5
-		dc.b 0
-		dc.b 1
-		dc.b $FC
+		dc.b    5,   0,   1, $FC
 ; ---------------------------------------------------------------------------
 
 Obj_AIZMinibossCutscene:
@@ -91077,60 +91047,26 @@ Child6_CNZMinibossMakeDebris:
 		dc.w 8
 		dc.l Obj_CNZMinibossDebris
 AniRaw_CNZMinibossOpening:
-		dc.b    0,   3
-		dc.b    1,   3
-		dc.b    2,   3
-		dc.b    3,   3
-		dc.b    4,   3
-		dc.b    5,   3
-		dc.b    6,   3
-		dc.b  $F4
+		dc.b    0,   3,   1,   3,   2,   3,   3,   3,   4,   3,   5,   3,   6,   3, $F4
 AniRaw_CNZMinibossClosing:
-		dc.b    6,   3
-		dc.b    5,   3
-		dc.b    4,   3
-		dc.b    3,   3
-		dc.b    2,   3
-		dc.b    1,   3
-		dc.b    0,   3
-		dc.b  $F4
+		dc.b    6,   3,   5,   3,   4,   3,   3,   3,   2,   3,   1,   3,   0,   3, $F4
 AniRaw_CNZMinibossTop:
 		dc.b    7,   8,   7,   8,   9, $FC
 AniRaw_CNZMinibossTop2:
 		dc.b    0,   7,   8,   9, $FC
 AniRaw_CNZMinibossTimedSparkLeft:
-		dc.b   $A,   0
-		dc.b  $11,   2
-		dc.b   $B,   0
-		dc.b  $11,   2
-		dc.b  $FC
+		dc.b   $A,   0, $11,   2,  $B,   0, $11,   2, $FC
 AniRaw_CNZMinibossTimedSparkRight:
-		dc.b   $F,   0
-		dc.b  $11,   2
-		dc.b  $10,   0
-		dc.b  $11,   2
-		dc.b  $FC
+		dc.b   $F,   0, $11,   2, $10,   0, $11,   2, $FC
 AniRaw_CNZMinibossSparks1:
-		dc.b   $A,   0
-		dc.b  $11,   7
-		dc.b   $B,   0
-		dc.b  $11,   7
-		dc.b  $FC
+		dc.b   $A,   0, $11,   7,  $B,   0, $11,   7, $FC
 AniRaw_CNZMinibossSparks2:
-		dc.b  $11,   0
-		dc.b   $F,   0
-		dc.b  $11,   7
-		dc.b  $10,   0
-		dc.b  $11,   9
-		dc.b  $FC
+		dc.b  $11,   0,  $F,   0, $11,   7, $10,   0, $11,   9, $FC
 AniRaw_CNZMinibossSparks3:
-		dc.b   $A,   0
-		dc.b  $11,   7
-		dc.b   $B,   0
-		dc.b  $11,  $B
-		dc.b  $FC
+		dc.b   $A,   0, $11,   7,  $B,   0, $11,  $B, $FC
 AniRaw_CNZMBossBoundEffect:
-		dc.b   $C,   0,  $D,   1,  $E,   1, $F4,   0
+		dc.b   $C,   0,  $D,   1,  $E,   1, $F4
+		even
 Pal_CNZMiniboss:binclude "Levels/CNZ/Palettes/Miniboss.bin"
 		even
 ; ---------------------------------------------------------------------------
@@ -101291,19 +101227,10 @@ Child6_EndSignScore:
 		dc.l Obj_EnemyScore
 PLCPtr_EndSigns:dc.l ArtUnc_EndSigns
 		dc.l DPLC_EndSigns
-AniRaw_EndSigns:dc.b    1,   0
-		dc.b    4,   5
-		dc.b    6,   1
-		dc.b    4,   5
-		dc.b    6,   2
-		dc.b    4,   5
-		dc.b    6,   3
-		dc.b    4,   5
-		dc.b    6, $FC
+AniRaw_EndSigns:
+		dc.b    1,   0,   4,   5,   6,   1,   4,   5,   6,   2,   4,   5,   6,   3,   4,   5,   6, $FC
 AniRaw_SignpostSparkle:
-		dc.b    1,   4
-		dc.b    5,   6
-		dc.b    7, $FC
+		dc.b    1,   4,   5,   6,   7, $FC
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -101603,14 +101530,8 @@ ObjDat_BossExplosion:
 		dc.b 0
 		dc.b 0
 AniRaw_BossExplosion:
-		dc.b    0,   0
-		dc.b    0,   1
-		dc.b    1,   1
-		dc.b    2,   2
-		dc.b    3,   3
-		dc.b    4,   4
-		dc.b    5,   4
-		dc.b  $F4,   0
+		dc.b    0,   0,   0,   1,   1,   1,   2,   2,   3,   3,   4,   4,   5,   4, $F4
+		even
 Child6_MakeBossExplosion1:
 		dc.w 0
 		dc.l loc_52940
