@@ -10,7 +10,7 @@
 	dbglistobj Obj_Blastoid,			Map_Blastoid,			   0,   0, make_art_tile($539,1,0)
 	dbglistobj Obj_Poindexter,			Map_Poindexter,			 $20,   0, make_art_tile($559,1,0)
 	dbglistobj Obj_Buggernaut,			Map_Buggernaut,			   0,   0, make_art_tile($44C,1,0)
-	dbglistobj Obj_MegaChomper,			Map_MegaChomper,		   0,   0, make_art_tile($54D,1,0)
+	dbglistobj Obj_MegaChopper,			Map_MegaChopper,		   0,   0, make_art_tile($54D,1,0)
 	dbglistobj Obj_TurboSpiker,			Map_TurboSpiker,		   0,   0, make_art_tile($500,1,0)
 	dbglistobj Obj_Jawz,				Map_Jawz,			   0,   0, make_art_tile($539,1,0)
 	dbglistobj Obj_Button,				Map_Button2,			 $20,   2, make_art_tile($426,1,0)

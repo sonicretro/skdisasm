@@ -555,7 +555,7 @@ Map_LBZMiniboss:		include "Levels/LBZ/Misc Object Data/Map - Miniboss.asm"
 
 Map_LBZMinibossBox:		include "Levels/LBZ/Misc Object Data/Map - Miniboss Box.asm"
 
-Map_SnaleBlaster:		include "General/Sprites/Snail Blaster/Map - Snail Blaster.asm"
+Map_SnaleBlaster:		include "General/Sprites/Snale Blaster/Map - Snale Blaster.asm"
 
 Map_Orbinaut:			include "General/Sprites/Orbinaut/Map - Orbinaut.asm"
 
@@ -563,9 +563,9 @@ Map_Ribot:			include "General/Sprites/Ribot/Map - Ribot.asm"
 
 Map_Corkey:			include "General/Sprites/Corkey/Map - Corkey.asm"
 
-Map_Flybot767:			include "General/Sprites/Flybot/Map - Flybot.asm"
+Map_Flybot767:			include "General/Sprites/Flybot767/Map - Flybot767.asm"
 
-DPLC_Flybot:			include "General/Sprites/Flybot/DPLC - Flybot.asm"
+DPLC_Flybot767:			include "General/Sprites/Flybot767/DPLC - Flybot767.asm"
 
 Map_LBZEndBoss:			include "Levels/LBZ/Misc Object Data/Map - End Boss.asm"
 
@@ -586,19 +586,19 @@ Map_Poindexter:			include "General/Sprites/Pointdexter/Map - Pointdexter.asm"
 
 Map_Buggernaut:			include "General/Sprites/Buggernaut/Map - Buggernaut.asm"
 
-Map_MegaChomper:		include "General/Sprites/Mega Chomper/Map - Mega Chomper.asm"
+Map_MegaChopper:		include "General/Sprites/Mega Chopper/Map - Mega Chopper.asm"
 
 Map_TurboSpiker:		include "General/Sprites/Turbo Spiker/Map - Turbo Spiker.asm"
 
 Map_Jawz:			include "General/Sprites/Jawz/Map - Jawz.asm"
 
-DPLC_RhinoBot:			include "General/Sprites/Rhino/DPLC - RhinoBot.asm"
+DPLC_Rhinobot:			include "General/Sprites/Rhinobot/DPLC - Rhinobot.asm"
 
-Map_RhinoBot:			include "General/Sprites/Rhino/Map - RhinoBot.asm"
+Map_Rhinobot:			include "General/Sprites/Rhinobot/Map - Rhinobot.asm"
 
 Map_AIZMinibossFlame:		include "Levels/AIZ/Misc Object Data/Map - Miniboss Flame.asm"
 
-Map_Tulipon:			include "General/Sprites/Tulipon/Map - Tulipon.asm"
+Map_Bloominator:		include "General/Sprites/Bloominator/Map - Bloominator.asm"
 
 Map_MonkeyDude:			include "General/Sprites/Monkey Dude/Map - Monkey Dude.asm"
 
@@ -610,7 +610,7 @@ DPLC_Clamer:			include "General/Sprites/Clamer/DPLC - Clamer.asm"
 
 Map_Clamer:			include "General/Sprites/Clamer/Map - Clamer.asm"
 
-Map_CNZBlastoid:		include "Levels/CNZ/Misc Object Data/Map - Blastoid.asm"
+Map_Sparkle:			include "General/Sprites/Sparkle/Map - Sparkle.asm"
 
 Map_Batbot:			include "General/Sprites/Batbot/Map - Batbot.asm"
 
@@ -700,9 +700,9 @@ ArtKosM_AIZEndBoss:		binclude "Levels/AIZ/KosinskiM Art/End Boss.bin"
 	even
 ArtNem_AIZMinibossSmall:	binclude "Levels/AIZ/Nemesis Art/Miniboss Small.bin"
 	even
-ArtUnc_AIZRhino:		binclude "General/Sprites/Rhino/Rhino.bin"
+ArtUnc_AIZRhinobot:		binclude "General/Sprites/Rhinobot/Rhinobot.bin"
 	even
-ArtKosM_AIZ_Tulipon:		binclude "General/Sprites/Tulipon/Tulipon.bin"
+ArtKosM_AIZ_Bloominator:	binclude "General/Sprites/Bloominator/Bloominator.bin"
 	even
 ArtKosM_AIZ_MonkeyDude:		binclude "General/Sprites/Monkey Dude/Monkey Dude.bin"
 	even
@@ -780,7 +780,7 @@ ArtKosM_LBZEndBoss:		binclude "Levels/LBZ/KosinskiM Art/End Boss.bin"
 	even
 ArtKosM_LBZFinalBoss2:		binclude "Levels/LBZ/KosinskiM Art/Final Boss 2.bin"
 	even
-ArtKosM_SnailBlaster:		binclude "General/Sprites/Snail Blaster/Snail Blaster.bin"
+ArtKosM_SnaleBlaster:		binclude "General/Sprites/Snale Blaster/Snale Blaster.bin"
 	even
 ArtKosM_Ribot:			binclude "General/Sprites/Ribot/Ribot.bin"
 	even
@@ -788,7 +788,7 @@ ArtKosM_Orbinaut:		binclude "General/Sprites/Orbinaut/Orbinaut.bin"
 	even
 ArtKosM_Corkey:			binclude "General/Sprites/Corkey/Corkey.bin"
 	even
-ArtUnc_Flybot:			binclude "General/Sprites/Flybot/Flybot.bin"
+ArtUnc_Flybot767:		binclude "General/Sprites/Flybot767/Flybot767.bin"
 	even
 ArtNem_LBZKnuxBomb:		binclude "Levels/LBZ/Nemesis Art/Knuckles Bomb.bin"
 	even

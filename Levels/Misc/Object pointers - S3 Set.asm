@@ -127,8 +127,8 @@
 		dc.l Obj_Ring				; 126
 		dc.l Obj_Ring				; 127
 		dc.l Obj_AIZ_Miniboss_Cutscene		; 128
-		dc.l Obj_Tulipon			; 129
-		dc.l Obj_RhinoBot			; 130
+		dc.l Obj_Bloominator			; 129
+		dc.l Obj_Rhinobot			; 130
 		dc.l Obj_MonkeyDude			; 131
 		dc.l Delete_Current_Sprite		; 132
 		dc.l Obj_LBZMiniboss			; 133
@@ -155,11 +155,11 @@
 		dc.l Obj_Blastoid			; 154
 		dc.l Obj_Buggernaut			; 155
 		dc.l Obj_TurboSpiker			; 156
-		dc.l Obj_MegaChomper			; 157
+		dc.l Obj_MegaChopper			; 157
 		dc.l Obj_Poindexter			; 158
 		dc.l Obj_CaterKillerJr			; 159
 		dc.l Obj_Clamer				; 160
-		dc.l Obj_CNZBlastoid			; 161
+		dc.l Obj_Sparkle			; 161
 		dc.l Obj_Batbot				; 162
 		dc.l Obj_BubblesBadnik			; 163
 		dc.l Obj_MGZMiniBoss			; 164

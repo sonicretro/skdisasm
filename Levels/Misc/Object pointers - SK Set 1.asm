@@ -138,8 +138,8 @@
 		dc.l Obj_89				; 137
 		dc.l Obj_8A				; 138
 		dc.l Obj_8B				; 139
-		dc.l Obj_Tulipon			; 140
-		dc.l Obj_RhinoBot			; 141
+		dc.l Obj_Bloominator			; 140
+		dc.l Obj_Rhinobot			; 141
 		dc.l Obj_MonkeyDude			; 142
 		dc.l Obj_CaterKillerJr			; 143
 		dc.l Obj_AIZ_Miniboss_Cutscene		; 144
@@ -149,7 +149,7 @@
 		dc.l Obj_Blastoid			; 148
 		dc.l Obj_Buggernaut			; 149
 		dc.l Obj_TurboSpiker			; 150
-		dc.l Obj_MegaChomper			; 151
+		dc.l Obj_MegaChopper			; 151
 		dc.l Obj_Poindexter			; 152
 		dc.l Obj_HCZMiniboss			; 153
 		dc.l Obj_HCZEndBoss			; 154
@@ -162,7 +162,7 @@
 		dc.l Obj_A1_1_MGZ2_Boss			; 161
 		dc.l Obj_A2_1				; 162
 		dc.l Obj_Clamer				; 163
-		dc.l Obj_CNZBlastoid			; 164
+		dc.l Obj_Sparkle			; 164
 		dc.l Obj_Batbot				; 165
 		dc.l Obj_CNZMiniboss			; 166
 		dc.l Obj_CNZEndBoss			; 167

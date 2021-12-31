@@ -570,7 +570,7 @@ Map_Corkey:	ds.b $98
 
 Map_Flybot767:	ds.b $192
 
-DPLC_Flybot:	ds.b $AA
+DPLC_Flybot767:	ds.b $AA
 Map_LBZEndBoss:	ds.b $114
 
 Map_CNZEndBoss:	ds.b $11E
@@ -584,17 +584,17 @@ Map_Poindexter:	ds.b $42
 
 Map_Buggernaut:	ds.b $72
 
-Map_MegaChomper:ds.b $2EC
+Map_MegaChopper:ds.b $2EC
 
 Map_TurboSpiker:ds.b $152
 
 Map_Jawz:	ds.b $20A
 
-DPLC_RhinoBot:	ds.b $3A
-Map_RhinoBot:	ds.b $B4
+DPLC_Rhinobot:	ds.b $3A
+Map_Rhinobot:	ds.b $B4
 
 Map_AIZMinibossFlame:	ds.b $64
-Map_Tulipon:	ds.b $B6
+Map_Bloominator:ds.b $B6
 
 Map_MonkeyDude:	ds.b $1FC
 
@@ -605,7 +605,7 @@ Map_CaterKillerJr:ds.b $60
 DPLC_Clamer:	ds.b $44
 Map_Clamer:	ds.b $78
 
-Map_CNZBlastoid:ds.b $9C
+Map_Sparkle:	ds.b $9C
 
 Map_Batbot:	ds.b $70
 
@@ -691,8 +691,8 @@ Map_LBZFinalBoss2:	ds.b $15C
 ArtNem_AIZMiniboss:	ds.b $66E
 ArtKosM_AIZEndBoss:	ds.b $1F42
 ArtNem_AIZMinibossSmall:	ds.b $188
-ArtUnc_AIZRhino:	ds.b $AA0
-ArtKosM_AIZ_Tulipon:ds.b $242
+ArtUnc_AIZRhinobot:	ds.b $AA0
+ArtKosM_AIZ_Bloominator:ds.b $242
 ArtKosM_AIZ_MonkeyDude:ds.b $1F2
 ArtKosM_AIZ_CaterkillerJr:ds.b $202
 ArtNem_HCZMiniboss:	ds.b $E9E
@@ -741,11 +741,11 @@ ArtKosM_LBZMinibossBox:	ds.b $322
 ArtNem_LBZFinalBoss1:	ds.b $BA6
 ArtKosM_LBZEndBoss:	ds.b $332
 ArtKosM_LBZFinalBoss2:	ds.b $1122
-ArtKosM_SnailBlaster:ds.b	$252
+ArtKosM_SnaleBlaster:ds.b	$252
 ArtKosM_Ribot:ds.b	$132
 ArtKosM_Orbinaut:ds.b	$E2
 ArtKosM_Corkey:ds.b	$C2
-ArtUnc_Flybot:	ds.b $1320
+ArtUnc_Flybot767:	ds.b $1320
 ArtNem_LBZKnuxBomb:	ds.b $3E
 ArtKosM_LBZ2DeathEggSmall:	ds.b $64D2
 ArtKosM_LBZ2DeathEgg2_8x8:ds.b $462
