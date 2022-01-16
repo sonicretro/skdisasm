@@ -404,18 +404,18 @@ PLC_SuperSonic: dc.w word_143290-PLC_SuperSonic
 		dc.w word_143442-PLC_SuperSonic
 		dc.w word_14344A-PLC_SuperSonic
 		dc.w word_143454-PLC_SuperSonic
-		dc.w word_14344A-PLC_SuperSonic
+		dc.w word_14344A-PLC_SuperSonic		; word_14345E is the proper pointer here
 		dc.w word_143454-PLC_SuperSonic
 		dc.w word_14344A-PLC_SuperSonic
-		dc.w word_143454-PLC_SuperSonic
+		dc.w word_143454-PLC_SuperSonic		; word_14345E is the proper pointer here
 		dc.w word_14344A-PLC_SuperSonic
 		dc.w word_143454-PLC_SuperSonic
-		dc.w word_14344A-PLC_SuperSonic
+		dc.w word_14344A-PLC_SuperSonic		; word_14345E is the proper pointer here
 		dc.w word_143214-PLC_SuperSonic
 		dc.w word_14321E-PLC_SuperSonic
 		dc.w word_143454-PLC_SuperSonic
 		dc.w word_14344A-PLC_SuperSonic
-		dc.w word_143454-PLC_SuperSonic
+		dc.w word_143454-PLC_SuperSonic		; word_14345E is the proper pointer here
 		dc.w word_143244-PLC_SuperSonic
 		dc.w word_14324C-PLC_SuperSonic
 		dc.w word_143254-PLC_SuperSonic
@@ -1495,7 +1495,7 @@ word_143454:	dc.w 4
 		dc.w $7FE0
 		dc.w $2FE8
 		dc.w $FEB
-		dc.w 3
+word_14345E:	dc.w 3			; unused PLCs for Super Sonic's third idle frame
 		dc.w $8E01
 		dc.w $BFEC
 		dc.w $FF8
