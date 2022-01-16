@@ -21522,7 +21522,7 @@ loc_1328A:
 
 loc_132D0:
 		clr.b	(Update_HUD_timer).w
-		clr.b	(_unkFEC7).w
+		clr.b	(Update_HUD_timer_P2).w
 		move.b	#8,5(a0)
 		move.w	#mus_GameOver,d0
 		jsr	(Play_Music).l
@@ -63772,7 +63772,7 @@ Obj_2PGoalMarker:
 		clr.w	(Events_bg+$14).w
 		clr.b	(Update_HUD_timer).w
 		clr.l	(Timer).w
-		clr.b	(_unkFEC7).w
+		clr.b	(Update_HUD_timer_P2).w
 		clr.l	(Timer_P2).w
 		clr.w	(Ring_count).w
 		clr.w	(Ring_count_P2).w
@@ -63860,7 +63860,7 @@ loc_36352:
 		clr.w	(Competition_current_lap).w
 		clr.b	(Update_HUD_timer).w
 		clr.l	(Timer).w
-		clr.b	(_unkFEC7).w
+		clr.b	(Update_HUD_timer_P2).w
 		clr.l	(Timer_P2).w
 		clr.b	(Ctrl_1_locked).w
 		clr.b	(Ctrl_2_locked).w
@@ -64210,7 +64210,7 @@ loc_3676A:
 		cmpi.b	#3,$22(a0)
 		bne.s	locret_36784
 		move.b	#1,(Update_HUD_timer).w
-		move.b	#1,(_unkFEC7).w
+		move.b	#1,(Update_HUD_timer_P2).w
 		move.b	#1,$3A(a0)
 
 locret_36784:
@@ -64260,7 +64260,7 @@ loc_367E8:
 		move.b	#6,$20(a0)
 		bclr	#3,4(a0)
 		move.w	#$78,(Events_bg+$16).w
-		move.b	#$80,(_unkFEC7).w
+		move.b	#$80,(Update_HUD_timer_P2).w
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -64281,7 +64281,7 @@ loc_36824:
 		move.w	#$168,(Events_bg+$16).w
 
 loc_3684E:
-		move.b	#$80,(_unkFEC7).w
+		move.b	#$80,(Update_HUD_timer_P2).w
 		bsr.w	sub_36998
 		moveq	#signextendB(sfx_Goal),d0
 		jsr	(Play_SFX).l
@@ -64299,7 +64299,7 @@ loc_36862:
 		bpl.s	locret_36898
 		tst.b	(Not_ghost_flag).w
 		beq.s	loc_36880
-		tst.b	(_unkFEC7).w
+		tst.b	(Update_HUD_timer_P2).w
 		bpl.s	locret_36898
 
 loc_36880:
@@ -64349,7 +64349,7 @@ loc_368CE:
 		move.l	#$93B63,(a1,d0.w)
 
 loc_368FC:
-		tst.b	(_unkFEC7).w
+		tst.b	(Update_HUD_timer_P2).w
 		bmi.s	loc_3690A
 		move.l	#$93B63,$14(a1,d0.w)
 
@@ -64398,11 +64398,11 @@ loc_36966:
 		move.b	(Competition_total_laps).w,d0
 		cmp.b	(Competition_current_lap_2P).w,d0
 		bcc.s	locret_36996
-		tst.b	(_unkFEC7).w
+		tst.b	(Update_HUD_timer_P2).w
 		bmi.s	locret_36996
 		move.b	#5,$20(a0)
 		bset	#4,4(a0)
-		move.b	#-$80,(_unkFEC7).w
+		move.b	#-$80,(Update_HUD_timer_P2).w
 		move.w	#$78,(Events_bg+$16).w
 		moveq	#signextendB(sfx_Goal),d0
 		jsr	(Play_SFX).l
@@ -64569,7 +64569,7 @@ loc_372EC:
 		lea	(Timer_minute_P2).w,a3
 		moveq	#0,d1
 		move.b	(Competition_lap_count_2P).w,d1
-		lea	(_unkFEC7).w,a4
+		lea	(Update_HUD_timer_P2).w,a4
 		lea	(Competition_time_record_P2).w,a5
 		lea	($FF7840).l,a6
 
