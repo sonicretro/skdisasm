@@ -76328,7 +76328,7 @@ loc_3F47E:
 		move.b	5(a0),d0
 		move.w	off_3F49E(pc,d0.w),d1
 		jsr	off_3F49E(pc,d1.w)
-		lea	(DPLCPtr_4575E).l,a2
+		lea	(DPLCPtr_CutsceneKnux).l,a2
 		jsr	(Perform_DPLC).l
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -79591,7 +79591,7 @@ CutsceneKnux_AIZ1:
 		move.b	5(a0),d0
 		move.w	off_4473E(pc,d0.w),d1
 		jsr	off_4473E(pc,d1.w)
-		lea	DPLCPtr_4575E(pc),a2
+		lea	DPLCPtr_CutsceneKnux(pc),a2
 		jsr	(Perform_DPLC).l
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -79756,7 +79756,7 @@ CutsceneKnux_AIZ2:
 		move.b	5(a0),d0
 		move.w	off_44944(pc,d0.w),d1
 		jsr	off_44944(pc,d1.w)
-		lea	DPLCPtr_4575E(pc),a2
+		lea	DPLCPtr_CutsceneKnux(pc),a2
 		jsr	(Perform_DPLC).l
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -79895,7 +79895,7 @@ CutsceneKnux_HCZ2:
 		move.b	5(a0),d0
 		move.w	off_44ACC(pc,d0.w),d1
 		jsr	off_44ACC(pc,d1.w)
-		lea	DPLCPtr_4575E(pc),a2
+		lea	DPLCPtr_CutsceneKnux(pc),a2
 		jsr	(Perform_DPLC).l
 		jmp	(Sprite_CheckDeleteTouchSlotted).l
 ; ---------------------------------------------------------------------------
@@ -80006,7 +80006,7 @@ CutsceneKnux_CNZ2A:
 		move.b	5(a0),d0
 		move.w	off_44C22(pc,d0.w),d1
 		jsr	off_44C22(pc,d1.w)
-		lea	DPLCPtr_4575E(pc),a2
+		lea	DPLCPtr_CutsceneKnux(pc),a2
 		jsr	(Perform_DPLC).l
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -80217,7 +80217,7 @@ CutsceneKnux_CNZ2B:
 		move.b	5(a0),d0
 		move.w	off_44E8A(pc,d0.w),d1
 		jsr	off_44E8A(pc,d1.w)
-		lea	DPLCPtr_4575E(pc),a2
+		lea	DPLCPtr_CutsceneKnux(pc),a2
 		jsr	(Perform_DPLC).l
 		jmp	(Sprite_CheckDeleteTouchSlotted).l
 ; ---------------------------------------------------------------------------
@@ -80338,7 +80338,7 @@ CutsceneKnux_LBZ1:
 		move.b	5(a0),d0
 		move.w	off_44FD8(pc,d0.w),d1
 		jsr	off_44FD8(pc,d1.w)
-		lea	DPLCPtr_4575E(pc),a2
+		lea	DPLCPtr_CutsceneKnux(pc),a2
 		jsr	(Perform_DPLC).l
 		jmp	(Sprite_CheckDeleteTouchSlotted).l
 ; ---------------------------------------------------------------------------
@@ -80539,7 +80539,7 @@ CutsceneKnux_LBZ2:
 		move.b	5(a0),d0
 		move.w	off_45234(pc,d0.w),d1
 		jsr	off_45234(pc,d1.w)
-		lea	DPLCPtr_4575E(pc),a2
+		lea	DPLCPtr_CutsceneKnux(pc),a2
 		jsr	(Perform_DPLC).l
 		jmp	(Sprite_CheckDeleteTouchSlotted).l
 ; ---------------------------------------------------------------------------
@@ -81009,7 +81009,7 @@ ChildObjDat_45756:
 		dc.w 0
 		dc.l loc_448EE
 		dc.w $18
-DPLCPtr_4575E:	dc.l ArtUnc_CutsceneKnux
+DPLCPtr_CutsceneKnux:	dc.l ArtUnc_CutsceneKnux
 		dc.l DPLC_CutsceneKnux
 byte_45766:	dc.b 7
 		dc.b 1
@@ -85192,7 +85192,7 @@ loc_48338:
 loc_48348:
 		lea	byte_48C7F(pc),a1
 		jsr	(Animate_RawNoSST).l
-		lea	DPLCPtr_48C28(pc),a2
+		lea	DPLCPtr_HCZMinibossSplash(pc),a2
 		jsr	(Perform_DPLC).l
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -86134,7 +86134,7 @@ ChildObjDat_48C08:
 		dc.w $F430
 		dc.l loc_48732
 		dc.w $C30
-DPLCPtr_48C28:	dc.l ArtUnc_DashDust
+DPLCPtr_HCZMinibossSplash:	dc.l ArtUnc_DashDust
 		dc.l DPLC_HCZMinibossSplash
 byte_48C30:	dc.b  $16,   7
 		dc.b  $17,   7
@@ -105652,7 +105652,7 @@ Obj_Rhinobot:
 		move.b	5(a0),d0
 		move.w	off_54C72(pc,d0.w),d1
 		jsr	off_54C72(pc,d1.w)
-		lea	DPLCPtr_54F2E(pc),a2
+		lea	DPLCPtr_AIZRhinobot(pc),a2
 		jsr	Perform_DPLC(pc)
 		jmp	Sprite_CheckDeleteTouchSlotted(pc)
 ; ---------------------------------------------------------------------------
@@ -105713,7 +105713,7 @@ loc_54CF8:
 		move.b	5(a0),d0
 		move.w	off_54D1E(pc,d0.w),d1
 		jsr	off_54D1E(pc,d1.w)
-		lea	DPLCPtr_54F2E(pc),a2
+		lea	DPLCPtr_AIZRhinobot(pc),a2
 		jsr	Perform_DPLC(pc)
 		jmp	Child_Remember_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
@@ -105964,7 +105964,7 @@ ChildObjDat_54F26:
 		dc.w 0
 		dc.l loc_54CF8
 		dc.w $1008
-DPLCPtr_54F2E:	dc.l ArtUnc_AIZRhinobot
+DPLCPtr_AIZRhinobot:	dc.l ArtUnc_AIZRhinobot
 		dc.l DPLC_Rhinobot
 byte_54F36:	dc.b    2,   4
 		dc.b    4,   5
@@ -107931,7 +107931,7 @@ Obj_BubblesBadnik:
 		move.b	#$86,$28(a0)
 
 loc_5614A:
-		lea	PLCPtr_56222(pc),a2
+		lea	PLCPtr_BubblesBadnik(pc),a2
 		jsr	Perform_DPLC(pc)
 		jmp	Sprite_CheckDeleteTouchSlotted(pc)
 ; ---------------------------------------------------------------------------
@@ -108010,7 +108010,7 @@ ObjDat4_56210:	dc.w 1
 		dc.b $18
 		dc.b 0
 		dc.b 0
-PLCPtr_56222:	dc.l ArtUnc_BubblesBadnik
+PLCPtr_BubblesBadnik:	dc.l ArtUnc_BubblesBadnik
 		dc.l DPLC_BubblesBadnik
 byte_5622A:	dc.b    0,  $F
 		dc.b    0, $77
@@ -109184,7 +109184,7 @@ Obj_Clamer:
 		move.b	5(a0),d0
 		move.w	off_56D92(pc,d0.w),d1
 		jsr	off_56D92(pc,d1.w)
-		lea	PLCPtr_56F1C(pc),a2
+		lea	PLCPtr_Clamer(pc),a2
 		jsr	Perform_DPLC(pc)
 		jmp	Sprite_CheckDeleteTouchSlotted(pc)
 ; ---------------------------------------------------------------------------
@@ -109356,7 +109356,7 @@ ChildObjDat_56F04:
 		dc.b 2
 		dc.w $FE00
 		dc.w 0
-PLCPtr_56F1C:	dc.l ArtUnc_Clamer
+PLCPtr_Clamer:	dc.l ArtUnc_Clamer
 		dc.l DPLC_Clamer
 byte_56F24:	dc.b    1,   1
 		dc.b    0, $5F
@@ -113327,7 +113327,7 @@ Obj_Penguinator:
 		move.b	5(a0),d0
 		move.w	off_59296(pc,d0.w),d1
 		jsr	off_59296(pc,d1.w)
-		lea	DPLCPtr_5959A(pc),a2
+		lea	DPLCPtr_Penguinator(pc),a2
 		jsr	Perform_DPLC(pc)
 		jmp	Sprite_CheckDeleteTouchSlotted(pc)
 ; ---------------------------------------------------------------------------
@@ -113632,7 +113632,7 @@ ChildObjDat_59592:
 		dc.w 0
 		dc.l Obj_ICZSnowdust
 		dc.w $C
-DPLCPtr_5959A:	dc.l ArtUnc_Penguinator
+DPLCPtr_Penguinator:	dc.l ArtUnc_Penguinator
 		dc.l DPLC_Penguinator
 byte_595A2:	dc.b    7, $10
 		dc.b    0,   1
@@ -114944,7 +114944,7 @@ Obj_Flybot767:
 		move.b	5(a0),d0
 		move.w	off_5A0FC(pc,d0.w),d1
 		jsr	off_5A0FC(pc,d1.w)
-		lea	DPLCPtr_5A28C(pc),a2
+		lea	DPLCPtr_Flybot767(pc),a2
 		jsr	Perform_DPLC(pc)
 		jmp	(Sprite_CheckDeleteTouchSlotted).l
 ; ---------------------------------------------------------------------------
@@ -115090,7 +115090,7 @@ ObjDat4_5A27A:	dc.w 2
 		dc.b $10
 		dc.b 0
 		dc.b $1A
-DPLCPtr_5A28C:	dc.l ArtUnc_Flybot767
+DPLCPtr_Flybot767:	dc.l ArtUnc_Flybot767
 		dc.l DPLC_Flybot767
 byte_5A294:	dc.b 4
 		dc.b 0
