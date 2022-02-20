@@ -118971,11 +118971,11 @@ ArtUnc_Knuckles2P:
 		binclude "General/Sprites/Knuckles/Art/Knuckles 2P.bin"
 		even
 Map_Sonic:	include "General/Sprites/Sonic/Map - Sonic S3.asm"
-PLC_Sonic:	include "General/Sprites/Sonic/Sonic pattern load cues S3.asm"
+PLC_Sonic:	include "General/Sprites/Sonic/DPLC - Sonic S3.asm"
 Map_Tails:	include "General/Sprites/Tails/Map - Tails S3.asm"
-PLC_Tails:	include "General/Sprites/Tails/Tails pattern load cues S3.asm"
+PLC_Tails:	include "General/Sprites/Tails/DPLC - Tails S3.asm"
 Map_Tails_Tail:	include "General/Sprites/Tails/Map - Tails tails.asm"
-PLC_Tails_Tail:	include "General/Sprites/Tails/Tails tails pattern load cues.asm"
+PLC_Tails_Tail:	include "General/Sprites/Tails/DPLC - Tails tails.asm"
 ICZSnowboard_Slope1:
 		binclude "Levels/ICZ/Misc/ICZ Snowboard Slope 1.bin"
 		even

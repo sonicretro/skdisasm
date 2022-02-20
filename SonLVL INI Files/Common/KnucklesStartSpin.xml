@@ -3,6 +3,6 @@
   <ImageFromMappings>
     <ArtFile filename="../General/Sprites/Knuckles/Art/Knuckles.bin" compression="Uncompressed" />
     <MapFile type="ASM" filename="../General/Sprites/Knuckles/Map - Knuckles.asm"
-      dplcfile="../General/Sprites/Knuckles/Knuckles pattern load cues.asm" dplcver="S2" frame="150" startpal="4" />
+      dplcfile="../General/Sprites/Knuckles/DPLC - Knuckles.asm" dplcver="S2" frame="150" startpal="4" />
   </ImageFromMappings>
 </StartPosDef>
