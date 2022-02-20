@@ -808,8 +808,7 @@ Slot_machine_peppermint_frame_timer			ds.b 1
 Slot_machine_peppermint_frame			ds.b 1
 Ring_spill_anim_counter		ds.b 1
 Ring_spill_anim_frame		ds.b 1
-Ring_spill_anim_accum		ds.b 1
-			ds.b 1				; unused
+Ring_spill_anim_accum		ds.w 1
 AIZ_vine_angle			ds.w 1			; controls the angle of AIZ giant vines
 			ds.w 1				; unused
 _unkFEBE			ds.b 1			; unused
@@ -935,7 +934,7 @@ Debug_mode_cheat_counter :=	*		; S3 uses a different address
 Competition_mode :=		*		; S3 uses a different address
 				ds.w 1
 P1_character :=			*		; S3 uses a different address
-				ds.b 1			; 0 := Sonic, 1 := Tails, 2 := Knuckles
+				ds.b 1			; 0 = Sonic, 1 = Tails, 2 = Knuckles
 P2_character :=			*		; S3 uses a different address
 				ds.b 1
 			ds.l 1				; unused
@@ -1158,7 +1157,7 @@ sfx_BossActivate		ds.b 1		; $50
 sfx_MissileThrow		ds.b 1		; $51
 sfx_SpikeMove			ds.b 1		; $52
 sfx_Charging			ds.b 1		; $53
-sfx_BossLazer			ds.b 1		; $54
+sfx_BossLaser			ds.b 1		; $54
 sfx_BlockConveyor		ds.b 1		; $55
 sfx_FlipBridge			ds.b 1		; $56
 sfx_Geyser			ds.b 1		; $57
@@ -1168,7 +1167,7 @@ sfx_UnknownCharge		ds.b 1		; $5A
 sfx_Switch			ds.b 1		; $5B
 sfx_MechaSpark			ds.b 1		; $5C
 sfx_FloorThump			ds.b 1		; $5D
-sfx_Lazer			ds.b 1		; $5E
+sfx_Laser			ds.b 1		; $5E
 sfx_Crash			ds.b 1		; $5F
 sfx_BossZoom			ds.b 1		; $60
 sfx_BossHitFloor		ds.b 1		; $61
