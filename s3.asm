@@ -19585,7 +19585,7 @@ Sonic_InWater:
 		addq.b	#1,(Water_entered_counter).w
 		movea.l	a0,a1
 		bsr.w	Player_ResetAirTimer
-		move.l	#Obj_Air_CountDown,(Breathing_bubbles).w
+		move.l	#Obj_AirCountdown,(Breathing_bubbles).w
 		move.b	#$81,(Breathing_bubbles+subtype).w
 		move.l	a0,(Breathing_bubbles+$40).w
 		move.w	#$300,(a4)
@@ -24162,7 +24162,7 @@ loc_1528C:
 		addq.b	#1,(Water_entered_counter).w
 		movea.l	a0,a1
 		bsr.w	Player_ResetAirTimer
-		move.l	#Obj_Air_CountDown,(Breathing_bubbles_P2).w
+		move.l	#Obj_AirCountdown,(Breathing_bubbles_P2).w
 		move.b	#$81,(Breathing_bubbles_P2+subtype).w
 		move.l	a0,(Breathing_bubbles_P2+$40).w
 		move.w	#$300,(a4)
@@ -26868,7 +26868,7 @@ locret_16EFA:
 		rts
 ; ---------------------------------------------------------------------------
 
-Obj_Air_CountDown:
+Obj_AirCountdown:
 		moveq	#0,d0
 		move.b	5(a0),d0
 		move.w	AirCountdown_Index(pc,d0.w),d1
@@ -26912,7 +26912,7 @@ loc_16F64:
 		move.w	#-$100,$1A(a0)
 
 AirCountdown_Animate:
-		lea	(Ani_Shields).l,a1
+		lea	(Ani_AirCountdown).l,a1
 		jsr	(Animate_Sprite).l
 
 AirCountdown_ChkWater:
@@ -26955,7 +26955,7 @@ loc_16FE6:
 
 AirCountdown_Display:
 		bsr.s	AirCountdown_ShowNumber
-		lea	(Ani_Shields).l,a1
+		lea	(Ani_AirCountdown).l,a1
 		jsr	(Animate_Sprite).l
 		bsr.w	AirCountdown_Load_Art
 		jmp	(Draw_Sprite).l
@@ -26977,7 +26977,7 @@ AirCountdown_AirLeft:
 ; ---------------------------------------------------------------------------
 
 AirCountdown_Display2:
-		lea	(Ani_Shields).l,a1
+		lea	(Ani_AirCountdown).l,a1
 		jsr	(Animate_Sprite).l
 		bsr.w	AirCountdown_Load_Art
 		tst.b	4(a0)
@@ -26994,7 +26994,7 @@ AirCountdown_DisplayNumber:
 		cmpi.b	#$C,$2C(a2)
 		bhi.s	AirCountdown_Delete
 		bsr.s	AirCountdown_ShowNumber
-		lea	(Ani_Shields).l,a1
+		lea	(Ani_AirCountdown).l,a1
 		jsr	(Animate_Sprite).l
 		jmp	(Draw_Sprite).l
 
@@ -27062,7 +27062,7 @@ AirCountdown_Load_Art:
 		add.w	d1,d1
 		add.w	d0,d1
 		lsl.w	#6,d1
-		addi.l	#ArtUnc_AirCountDown,d1
+		addi.l	#ArtUnc_AirCountdown,d1
 		move.w	#tiles_to_bytes(ArtTile_DashDust),d2
 		tst.b	$43(a0)
 		beq.s	loc_171F2
@@ -27277,7 +27277,8 @@ loc_1744C:
 ; End of function Player_ResetAirTimer
 
 ; ---------------------------------------------------------------------------
-Ani_Shields:	include "General/Sprites/Shields/Anim - Shields.asm"
+Ani_AirCountdown:
+		include "General/Sprites/Dash Dust/Anim - Air Countdown.asm"
 ; ---------------------------------------------------------------------------
 
 Obj_S2Shield:
@@ -117756,8 +117757,8 @@ Pal_Slot_Special:
 ArtUnc_CNZCannon:
 		binclude "General/Sprites/CNZ Cannon/CNZ Cannon.bin"
 		even
-ArtUnc_AirCountDown:
-		binclude "General/Sprites/Bubbles/Air Countdown.bin"
+ArtUnc_AirCountdown:
+		binclude "General/Sprites/Dash Dust/Air Countdown.bin"
 		even
 ArtUnc_SONICMILES:
 		binclude "General/Sprites/S2Menu/SONICMILES.bin"

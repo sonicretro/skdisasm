@@ -238,7 +238,7 @@
 #split	0x0000E18A,0x0000E48A,General\Sprites\HUD Icon\HUD Digits.bin
 #split	0x0000E48A,0x0000E5CA,General\Sprites\HUD Icon\Lives Digits.bin
 #split	0x0000E5CA,0x0000E8AA,General\Sprites\HUD Icon\Debug Digits.bin
-#split	0x000A9DFC,0x000AA57C,General\Sprites\Bubbles\Air Countdown.bin
+#split	0x000A9DFC,0x000AA57C,General\Sprites\Dash Dust\Air Countdown.bin
 #split	0x000AA57C,0x000AAA7C,General\Sprites\S2Menu\SONICMILES.bin
 #split	0x000AAA7C,0x000ABDFC,General\Sprites\Sonic\Art\SStage Sonic.bin
 #split	0x000ABF22,0x000AD302,General\Sprites\Knuckles\Art\SStage Knuckles.bin

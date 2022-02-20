@@ -1,18 +1,18 @@
-		dc.w byte_186E2-Ani_Shields
-		dc.w byte_186EB-Ani_Shields
-		dc.w byte_186F4-Ani_Shields
-		dc.w byte_186FD-Ani_Shields
-		dc.w byte_18706-Ani_Shields
-		dc.w byte_1870F-Ani_Shields
-		dc.w byte_18718-Ani_Shields
-		dc.w byte_1871D-Ani_Shields
-		dc.w byte_18725-Ani_Shields
-		dc.w byte_1872D-Ani_Shields
-		dc.w byte_18735-Ani_Shields
-		dc.w byte_1873D-Ani_Shields
-		dc.w byte_18745-Ani_Shields
-		dc.w byte_1874D-Ani_Shields
-		dc.w byte_1874F-Ani_Shields
+		dc.w byte_186E2-Ani_AirCountdown
+		dc.w byte_186EB-Ani_AirCountdown
+		dc.w byte_186F4-Ani_AirCountdown
+		dc.w byte_186FD-Ani_AirCountdown
+		dc.w byte_18706-Ani_AirCountdown
+		dc.w byte_1870F-Ani_AirCountdown
+		dc.w byte_18718-Ani_AirCountdown
+		dc.w byte_1871D-Ani_AirCountdown
+		dc.w byte_18725-Ani_AirCountdown
+		dc.w byte_1872D-Ani_AirCountdown
+		dc.w byte_18735-Ani_AirCountdown
+		dc.w byte_1873D-Ani_AirCountdown
+		dc.w byte_18745-Ani_AirCountdown
+		dc.w byte_1874D-Ani_AirCountdown
+		dc.w byte_1874F-Ani_AirCountdown
 byte_186E2:	dc.b	5,   0,	  1,   2,   3,	 4,   9,  $D, $FC 
 byte_186EB:	dc.b	5,   0,	  1,   2,   3,	 4,  $C, $12, $FC 
 byte_186F4:	dc.b	5,   0,	  1,   2,   3,	 4,  $C, $11, $FC 
