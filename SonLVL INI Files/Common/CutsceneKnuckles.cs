@@ -182,7 +182,7 @@ namespace S3KObjectDefinitions.Common
 
 			art = LevelData.ReadFile("../General/Sprites/Knuckles/Art/Knuckles.bin", CompressionType.Uncompressed);
 			map = LevelData.ASMToBin("../General/Sprites/Knuckles/Map - Knuckles.asm", EngineVersion.S3K);
-			plc = LevelData.ASMToBin("../General/Sprites/Knuckles/Knuckles pattern load cues.asm", EngineVersion.S2);
+			plc = LevelData.ASMToBin("../General/Sprites/Knuckles/DPLC - Knuckles.asm", EngineVersion.S2);
 
 			subtypeNames[9] = "Lava Reef 2";
 			sprites[10] = BuildFlippedSprites(ObjectHelper.MapDPLCToBmp(

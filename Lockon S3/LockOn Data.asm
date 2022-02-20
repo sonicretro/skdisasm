@@ -585,7 +585,7 @@ ArtUnc_Knuckles2P:
 Map_Tails_Tail:
 		include "General/Sprites/Tails/Map - Tails tails.asm"
 PLC_Tails_Tail:
-		include "General/Sprites/Tails/Tails tails pattern load cues.asm"
+		include "General/Sprites/Tails/DPLC - Tails tails.asm"
 
 ICZSnowboard_Slope1:
 		binclude "Levels/ICZ/Misc/ICZ Snowboard Slope 1.bin"

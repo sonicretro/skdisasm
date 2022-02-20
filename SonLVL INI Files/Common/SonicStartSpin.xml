@@ -3,6 +3,6 @@
   <ImageFromMappings>
     <ArtFile filename="../General/Sprites/Sonic/Art/Sonic.bin" compression="Uncompressed" />
     <MapFile type="ASM" filename="../General/Sprites/Sonic/Map - Sonic.asm"
-      dplcfile="../General/Sprites/Sonic/Sonic pattern load cues.asm" dplcver="S2" frame="151" />
+      dplcfile="../General/Sprites/Sonic/DPLC - Sonic.asm" dplcver="S2" frame="151" />
   </ImageFromMappings>
 </StartPosDef>
