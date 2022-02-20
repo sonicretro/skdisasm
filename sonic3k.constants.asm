@@ -817,7 +817,7 @@ Max_speed_P2			ds.w 1
 Acceleration_P2			ds.w 1
 Deceleration_P2			ds.w 1
 Life_count_P2			ds.b 1			; left over from Sonic 2
-Update_HUD_timer_P2			ds.b 1			; used in competition mode
+Update_HUD_timer_P2		ds.b 1			; used in competition mode
 Total_ring_count		ds.w 1			; left over from Sonic 2
 Total_ring_count_P2		ds.w 1			; left over from Sonic 2
 Monitors_broken			ds.w 1			; left over from Sonic 2. Apparently Sonic 3 developers liked copypasting, since gaining a life from rings also increments this counter

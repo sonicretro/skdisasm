@@ -81012,7 +81012,8 @@ ChildObjDat_45756:
 		dc.w 0
 		dc.l loc_448EE
 		dc.w $18
-DPLCPtr_CutsceneKnux:	dc.l ArtUnc_CutsceneKnux
+DPLCPtr_CutsceneKnux:
+		dc.l ArtUnc_CutsceneKnux
 		dc.l DPLC_CutsceneKnux
 byte_45766:	dc.b 7
 		dc.b 1
@@ -86137,7 +86138,8 @@ ChildObjDat_48C08:
 		dc.w $F430
 		dc.l loc_48732
 		dc.w $C30
-DPLCPtr_HCZMinibossSplash:	dc.l ArtUnc_DashDust
+DPLCPtr_HCZMinibossSplash:
+		dc.l ArtUnc_DashDust
 		dc.l DPLC_HCZMinibossSplash
 byte_48C30:	dc.b  $16,   7
 		dc.b  $17,   7
@@ -105967,7 +105969,8 @@ ChildObjDat_54F26:
 		dc.w 0
 		dc.l loc_54CF8
 		dc.w $1008
-DPLCPtr_AIZRhinobot:	dc.l ArtUnc_AIZRhinobot
+DPLCPtr_AIZRhinobot:
+		dc.l ArtUnc_AIZRhinobot
 		dc.l DPLC_Rhinobot
 byte_54F36:	dc.b    2,   4
 		dc.b    4,   5
@@ -108013,7 +108016,8 @@ ObjDat4_56210:	dc.w 1
 		dc.b $18
 		dc.b 0
 		dc.b 0
-PLCPtr_BubblesBadnik:	dc.l ArtUnc_BubblesBadnik
+PLCPtr_BubblesBadnik:
+		dc.l ArtUnc_BubblesBadnik
 		dc.l DPLC_BubblesBadnik
 byte_5622A:	dc.b    0,  $F
 		dc.b    0, $77
@@ -113635,7 +113639,8 @@ ChildObjDat_59592:
 		dc.w 0
 		dc.l Obj_ICZSnowdust
 		dc.w $C
-DPLCPtr_Penguinator:	dc.l ArtUnc_Penguinator
+DPLCPtr_Penguinator:
+		dc.l ArtUnc_Penguinator
 		dc.l DPLC_Penguinator
 byte_595A2:	dc.b    7, $10
 		dc.b    0,   1
@@ -115093,7 +115098,8 @@ ObjDat4_5A27A:	dc.w 2
 		dc.b $10
 		dc.b 0
 		dc.b $1A
-DPLCPtr_Flybot767:	dc.l ArtUnc_Flybot767
+DPLCPtr_Flybot767:
+		dc.l ArtUnc_Flybot767
 		dc.l DPLC_Flybot767
 byte_5A294:	dc.b 4
 		dc.b 0
