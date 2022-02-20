@@ -27489,8 +27489,10 @@ byte_17782:	dc.b    8,   7,   6,   5,   4,   3,   2,   3,   4,   5,   6,   7, $F
 		dc.b    7,   6,   5,   4,   3
 byte_1779B:	dc.b    7,   6,   5,   4,   3,   2,   1,   2,   3,   4,   5,   6, $FF,   1,   2,   3,   4,   5,   6,   7
 		dc.b    6,   5,   4,   3,   2
-Ani_S2Shield:	include "General/Sprites/Shields/Anim - Shield S2.asm"
-Map_S2Shield:	include "General/Sprites/Shields/Map - Shield S2.asm"
+Ani_S2Shield:
+		include "General/Sprites/Shields/Anim - S2 Shield.asm"
+Map_S2Shield:
+		include "General/Sprites/Shields/Map - S2 Shield.asm"
 Map_Invincibility:
 		include "General/Sprites/Shields/Map - Invincibility.asm"
 ; ---------------------------------------------------------------------------
