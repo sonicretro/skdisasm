@@ -97307,7 +97307,7 @@ loc_4FE2E:
 		move.l	#loc_4FE6A,(a0)
 		tst.b	4(a0)
 		bpl.s	loc_4FE42
-		moveq	#signextendB(sfx_Lazer),d0
+		moveq	#signextendB(sfx_Laser),d0
 		jsr	(Play_SFX).l
 
 loc_4FE42:
@@ -114838,7 +114838,7 @@ loc_5A03C:
 		jsr	(SetUp_ObjAttributes2).l
 		move.l	#loc_5A05C,(a0)
 		move.l	#Go_Delete_Sprite,$34(a0)
-		moveq	#signextendB(sfx_Lazer),d0
+		moveq	#signextendB(sfx_Laser),d0
 		jsr	(Play_SFX).l
 
 loc_5A05C:
