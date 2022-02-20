@@ -32025,7 +32025,7 @@ loc_1AE0E:
 		move.w	#0,d2
 		jsr	(Queue_Kos_Module).l
 		lea	(ArtKosM_LBZ2DeathEgg2_8x8).l,a1
-		move.w	#$B400,d2
+		move.w	#tiles_to_bytes(ArtTile_Explosion),d2
 		jsr	(Queue_Kos_Module).l
 
 locret_1AE64:
@@ -33986,7 +33986,7 @@ loc_1C24C:
 		move.l	#Map_Explosion,$C(a0)
 		move.w	$A(a0),d0
 		andi.w	#$8000,d0
-		ori.w	#$5A0,d0
+		ori.w	#ArtTile_Explosion,d0
 		move.w	d0,$A(a0)
 		move.b	#4,4(a0)
 		move.w	#$80,8(a0)
@@ -34013,7 +34013,7 @@ loc_1C2BA:
 
 Obj_FireShield_Dissipate:
 		move.l	#Map_Explosion,$C(a0)
-		move.w	#$5A0,$A(a0)
+		move.w	#ArtTile_Explosion,$A(a0)
 		move.b	#4,4(a0)
 		move.w	#$280,8(a0)
 		move.b	#$C,7(a0)
@@ -34037,7 +34037,7 @@ loc_1C318:
 
 loc_1C31E:
 		move.l	#Map_Explosion,$C(a0)
-		move.w	#$85A0,$A(a0)
+		move.w	#make_art_tile(ArtTile_Explosion,0,1),$A(a0)
 		move.b	#4,4(a0)
 		move.w	#$100,8(a0)
 		move.b	#$C,7(a0)
@@ -52147,7 +52147,7 @@ sub_2C2DC:
 
 Obj_EnemyScore:
 		move.l	#Map_EnemyScore,$C(a0)
-		move.w	#$85E4,$A(a0)
+		move.w	#make_art_tile(ArtTile_StarPost,0,1),$A(a0)
 		move.b	#4,4(a0)
 		move.w	#$80,8(a0)
 		move.b	#8,7(a0)
@@ -52185,7 +52185,7 @@ off_2C42C:	dc.w loc_2C436-off_2C42C
 loc_2C436:
 		addq.b	#2,5(a0)
 		move.l	#Map_StarPost,$C(a0)
-		move.w	#$5EC,$A(a0)
+		move.w	#ArtTile_StarPost+8,$A(a0)
 		move.b	#4,4(a0)
 		move.b	#8,7(a0)
 		move.b	#$28,6(a0)
@@ -52449,7 +52449,7 @@ loc_2C842:
 		bne.s	locret_2C8AC
 		move.l	(a0),(a1)
 		move.l	#Map_StarpostStars,$C(a1)
-		move.w	#$5EC,$A(a1)
+		move.w	#ArtTile_StarPost+8,$A(a1)
 		move.b	#4,4(a1)
 		move.b	#8,5(a1)
 		move.w	$10(a0),d0
@@ -53026,7 +53026,7 @@ loc_2CE4C:
 		move.w	#$B000,d2
 		tst.b	(Apparent_act).w
 		beq.s	loc_2CE5A
-		move.w	#$B400,d2
+		move.w	#tiles_to_bytes(ArtTile_Explosion),d2
 
 loc_2CE5A:
 		jsr	(Queue_Kos_Module).l
@@ -79523,7 +79523,7 @@ loc_4443C:
 ; ---------------------------------------------------------------------------
 ObjSlot_SSEntryRing:
 		dc.w 0
-		dc.w make_art_tile($5A0,1,0)
+		dc.w make_art_tile(ArtTile_Explosion,1,0)
 		dc.w $40
 		dc.w 4
 		dc.l Map_SSEntryRing
@@ -80962,14 +80962,14 @@ ObjDat3_456FA:	dc.l Map_LBZKnuxBomb
 		dc.b 0
 		dc.b 0
 ObjDat3_45706:	dc.l Map_LBZKnuxPillar
-		dc.w $45A0
+		dc.w make_art_tile(ArtTile_Explosion,2,0)
 		dc.w $280
 		dc.b $10
 		dc.b $10
 		dc.b 0
 		dc.b 0
 ObjDat3_45712:	dc.l Map_LBZKnuxPillar
-		dc.w $45A0
+		dc.w make_art_tile(ArtTile_Explosion,2,0)
 		dc.w $280
 		dc.b $10
 		dc.b $80
@@ -87615,7 +87615,7 @@ ObjDat3_49B9C:	dc.l Map_HCZEndBoss
 		dc.b 8
 		dc.b 0
 ObjDat3_49BA8:	dc.l Map_Explosion
-		dc.w $85A0
+		dc.w make_art_tile(ArtTile_Explosion,0,1)
 		dc.w $80
 		dc.b $C
 		dc.b $C
@@ -101279,7 +101279,7 @@ PLC_Monitors:	dc.w 0
 PLC_AnimalsAndExplosion:
 		dc.w 2
 		dc.l ArtNem_Explosion
-		dc.w $B400
+		dc.w tiles_to_bytes(ArtTile_Explosion)
 		dc.l ArtNem_Squirrel
 		dc.w $B000
 		dc.l ArtNem_BlueFlicky
@@ -101290,7 +101290,7 @@ PLC_BossExplosion:
 		dc.w $A000
 PLC_Explosion:	dc.w 0
 		dc.l ArtNem_Explosion
-		dc.w $B400
+		dc.w tiles_to_bytes(ArtTile_Explosion)
 PLC_EggCapsule:	dc.w 0
 		dc.l ArtNem_EggCapsule
 		dc.w $9280
@@ -116079,7 +116079,7 @@ Offs_PLC:	dc.w PLC_00-Offs_PLC
 PLC_00: plrlistheader
 		plreq $7D4, ArtNem_SonicLifeIcon
 		plreq ArtTile_Ring, ArtNem_RingHUDText
-		plreq $5E4, ArtNem_EnemyPtsStarPost
+		plreq ArtTile_StarPost, ArtNem_EnemyPtsStarPost
 		plreq ArtTile_Monitors, ArtNem_Monitors
 PLC_00_End
 
@@ -116087,11 +116087,11 @@ PLC_01: plrlistheader
 		plreq $7D4, ArtNem_SonicLifeIcon
 		plreq ArtTile_Monitors, ArtNem_Monitors
 		plreq ArtTile_Ring, ArtNem_RingHUDText
-		plreq $5E4, ArtNem_EnemyPtsStarPost
+		plreq ArtTile_StarPost, ArtNem_EnemyPtsStarPost
 PLC_01_End
 
 PLC_02: plrlistheader
-		plreq $5A0, ArtNem_Explosion
+		plreq ArtTile_Explosion, ArtNem_Explosion
 		plreq $580, ArtNem_Squirrel
 		plreq $592, ArtNem_BlueFlicky
 PLC_02_End
@@ -116118,7 +116118,7 @@ PLC_07: plrlistheader
 		plreq $7D4, ArtNem_TailsLifeIcon
 		plreq ArtTile_Monitors, ArtNem_Monitors
 		plreq ArtTile_Ring, ArtNem_RingHUDText
-		plreq $5E4, ArtNem_EnemyPtsStarPost
+		plreq ArtTile_StarPost, ArtNem_EnemyPtsStarPost
 PLC_07_End
 
 PLC_08: plrlistheader

@@ -1036,6 +1036,8 @@ ArtTile_ArtKos_Save_Extra             = $0454
 ; Universal (used on all standard levels).
 ArtTile_Monitors                      = $04C4
 ArtTile_CutsceneKnux                  = $04DA
+ArtTile_Explosion                     = $05A0
+ArtTile_StarPost                      = $05E4
 ArtTile_Player_1                      = $0680
 ArtTile_Player_2                      = $06A0
 ArtTile_Player_2_Tail                 = $06B0
