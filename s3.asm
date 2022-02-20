@@ -28394,7 +28394,7 @@ Obj_RingInit:
 
 Obj_RingAnimate:
 		move.b	(Rings_frame).w,$22(a0)
-		bra.w	loc_19CC4
+		bra.w	Sprite_CheckDeleteTouch3
 ; ---------------------------------------------------------------------------
 
 Obj_RingCollect:
@@ -30162,7 +30162,7 @@ loc_19CC0:
 		bra.w	Delete_Current_Sprite
 ; ---------------------------------------------------------------------------
 
-loc_19CC4:
+Sprite_CheckDeleteTouch3:
 		move.w	$10(a0),d0
 
 loc_19CC8:
@@ -43146,7 +43146,7 @@ loc_2496C:
 		bsr.s	sub_24980
 
 loc_2497A:
-		jmp	(loc_19CC4).l
+		jmp	(Sprite_CheckDeleteTouch3).l
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -43804,7 +43804,7 @@ loc_25422:
 		move.w	#$7FFF,$10(a0)
 
 loc_2543A:
-		jmp	(loc_19CC4).l
+		jmp	(Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 Ani_LBZFlameThrower:
 		include "Levels/LBZ/Misc Object Data/Anim - Flame Thrower.asm"
@@ -48561,7 +48561,7 @@ loc_28BAA:
 		bsr.s	sub_28BBE
 
 loc_28BB8:
-		jmp	(loc_19CC4).l
+		jmp	(Sprite_CheckDeleteTouch3).l
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -52571,7 +52571,7 @@ loc_2C972:
 
 loc_2C99C:
 		move.b	d0,$22(a0)
-		jmp	(loc_19CC4).l
+		jmp	(Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 
 loc_2C9A6:
@@ -56651,7 +56651,7 @@ loc_303F2:
 		asr.w	#5,d0
 		add.w	$32(a0),d0
 		move.w	d0,$14(a0)
-		jmp	(loc_19CC4).l
+		jmp	(Sprite_CheckDeleteTouch3).l
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -60496,7 +60496,7 @@ loc_33486:
 		jsr	(Play_SFX).l
 
 loc_334AE:
-		jmp	(loc_19CC4).l
+		jmp	(Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 
 loc_334B4:
@@ -60710,7 +60710,7 @@ loc_337B4:
 		jsr	(Play_SFX).l
 
 loc_337BC:
-		jmp	(loc_19CC4).l
+		jmp	(Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 
 loc_337C2:
@@ -106344,14 +106344,14 @@ loc_5527C:
 		move.b	#8,$1E(a0)
 		move.w	#-$200,$18(a0)
 		move.w	#-$400,$1A(a0)
-		jmp	(loc_19CC4).l
+		jmp	(Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 
 loc_552B2:
 		jsr	(MoveSprite_LightGravity).l
 		jsr	Animate_RawMultiDelay(pc)
 		jsr	ObjHitFloor_DoRoutine(pc)
-		jmp	(loc_19CC4).l
+		jmp	(Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 
 loc_552C6:
@@ -106360,7 +106360,7 @@ loc_552C6:
 ; ---------------------------------------------------------------------------
 
 loc_552CE:
-		jmp	(loc_19CC4).l
+		jmp	(Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 		movea.w	$46(a0),a1
 		move.b	4(a1),d0
