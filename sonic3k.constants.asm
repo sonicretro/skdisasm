@@ -594,7 +594,7 @@ Ctrl_1_pressed_title		ds.b 1
 _unkF74A			ds.b 1
 _unkF74B			ds.b 1
 _unkF74C			ds.w 1
-_unkF74E			ds.b 1
+Gliding_collision_flags		ds.b 1
 Disable_wall_grab		ds.b 1			; if set, disables Knuckles wall grab
 			ds.b $10			; unused
 Max_speed			ds.w 1
