@@ -110,6 +110,7 @@ bool buildRom(FILE* from, FILE* to)
 	unsigned char scratch [scratchSize];
 	bool lastSegmentCompressed = false;
 
+	// KiS2: Fill the spaces between segments with $FF, instead of $00 like the regular Sonic 2 ROM.
 	int check_size = 0;
 	bool done=false;
 
