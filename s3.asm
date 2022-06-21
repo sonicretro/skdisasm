@@ -13685,18 +13685,9 @@ SaveScreen:
 		andi.b	#$BF,d0
 		move.w	d0,(VDP_control_port).l
 		jsr	(Clear_DisplayData).l
-		lea	(VDP_control_port).l,a5
-		move.w	#$8F01,(a5)
-		move.l	#$940F93FF,(a5)
-		move.w	#$9780,(a5)
-		move.l	#$50000083,(a5)
-		move.w	#0,(VDP_data_port).l
 
-loc_B89C:
-		move.w	(a5),d1
-		btst	#1,d1
-		bne.s	loc_B89C
-		move.w	#$8F02,(a5)
+		dmaFillVRAM 0,$D000,$1000
+
 		lea	(VDP_control_port).l,a6
 		move.w	#$8004,(a6)
 		move.w	#$8238,(a6)
