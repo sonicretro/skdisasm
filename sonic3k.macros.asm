@@ -302,14 +302,8 @@ DAC_Setup macro rate,dacptr
 	dc.w	dacptr_Ptr
     endm
 
-; A "null" DAC sample.
-DAC_Invalid:
-DAC_Invalid_Len := 0
-DAC_Invalid_Ptr := 0
-DAC_Invalid_Bank := 0
-
 ; Setup a null entry for a DAC sample.
-DAC_Null_Setup macro rate,dacptr
+DAC_Null_Setup macro rate
 	dc.b	rate
 	dc.w 	$0000,$0000
     endm
@@ -318,7 +312,7 @@ DAC_Null_Setup macro rate,dacptr
 ; The sample's length is correctly stored for the sample,
 ; while the pointer (usually) goes towards the DAC pointer
 ; entry of another DAC sample setup.
-DAC_Null_Chain macro rate,dacptr,linkptr
+DAC_Null_Chain macro rate,linkptr
 	dc.b	rate
-	dc.w 	dacptr_Len,k68z80Pointer(linkptr+3-soundBankStart)
+	dc.w 	$0000,k68z80Pointer(linkptr+3-soundBankStart)
     endm
