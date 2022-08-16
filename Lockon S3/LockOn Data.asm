@@ -1386,7 +1386,7 @@ DAC_97_Setup2:			DAC_Null_Chain $12,DAC_Invalid,DAC_96_Setup2
 DAC_98_Setup2:			DAC_Null_Setup $0B,DAC_98_99_9A_Data
 DAC_99_Setup2:			DAC_Null_Chain $13,DAC_Invalid,DAC_98_Setup2
 DAC_9A_Setup2:			DAC_Null_Chain $16,DAC_Invalid,DAC_99_Setup2
-DAC_9B_Setup2:			DAC_Null_Chain $0C,DAC_9B_Data,Bank2_Filler-3
+DAC_9B_Setup2:			DAC_Setup $0C,DAC_9B_Data
 DAC_A2_Setup2:			DAC_Setup $0A,DAC_A2_Data
 DAC_A3_Setup2:			DAC_Setup $18,DAC_A3_Data
 DAC_A4_Setup2:			DAC_Setup $18,DAC_A4_Data
@@ -1567,8 +1567,8 @@ DAC_AE_Setup3:			DAC_Setup $18,DAC_AD_AE_Data
 DAC_AF_Setup3:			DAC_Setup $09,DAC_AF_Data
 DAC_B0_Setup3:			DAC_Setup $12,DAC_AF_Data
 DAC_B1_Setup3:			DAC_Setup $18,DAC_B1_Data
-DAC_B2_Setup3:			DAC_Null_Chain $16,DAC_B2_B3_Data,Bank3_Filler2-3
-DAC_B3_Setup3:			DAC_Null_Chain $20,DAC_B2_B3_Data,Bank3_Filler2-3
+DAC_B2_Setup3:			DAC_Setup $16,DAC_B2_B3_Data
+DAC_B3_Setup3:			DAC_Setup $20,DAC_B2_B3_Data
 DAC_B4_Setup3:			DAC_Setup $0C,DAC_B4_C1_C2_C3_C4_Data
 DAC_B5_Setup3:			DAC_Setup $0C,DAC_B5_Data
 DAC_B6_Setup3:			DAC_Setup $0C,DAC_B6_Data

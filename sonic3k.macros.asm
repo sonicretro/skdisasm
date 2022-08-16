@@ -258,3 +258,67 @@ palscriptloop	macro header
 palscriptrun	macro header
 	dc.w -$C
     endm
+
+; Function to make a little endian (z80) pointer
+k68z80Pointer function addr,((((addr&$7FFF)+$8000)<<8)&$FF00)+(((addr&$7FFF)+$8000)>>8)
+
+little_endian function x,(x)<<8&$FF00|(x)>>8&$FF
+
+startBank macro {INTLABEL}
+	align	$8000
+__LABEL__ label *
+soundBankStart := __LABEL__
+soundBankName := "__LABEL__"
+    endm
+
+DebugSoundbanks := 0
+
+finishBank macro
+	if * > soundBankStart + $8000
+		fatal "soundBank \{soundBankName} must fit in $8000 bytes but was $\{*-soundBankStart}. Try moving something to the other bank."
+	elseif (DebugSoundbanks<>0)&&(MOMPASS=1)
+		message "soundBank \{soundBankName} has $\{$8000+soundBankStart-*} bytes free at end."
+	endif
+    endm
+
+; macro to declare an entry in an offset table rooted at a bank
+offsetBankTableEntry macro ptr
+	dc.ATTRIBUTE k68z80Pointer(ptr-soundBankStart)
+    endm
+
+; Special BINCLUDE wrapper function
+DACBINCLUDE macro file,{INTLABEL}
+__LABEL__ label *
+	BINCLUDE file
+__LABEL___Len  := little_endian(*-__LABEL__)
+__LABEL___Ptr  := k68z80Pointer(__LABEL__-soundBankStart)
+__LABEL___Bank := soundBankStart
+    endm
+
+; Setup macro for DAC samples.
+DAC_Setup macro rate,dacptr
+	dc.b	rate
+	dc.w	dacptr_Len
+	dc.w	dacptr_Ptr
+    endm
+
+; A "null" DAC sample.
+DAC_Invalid:
+DAC_Invalid_Len := 0
+DAC_Invalid_Ptr := 0
+DAC_Invalid_Bank := 0
+
+; Setup a null entry for a DAC sample.
+DAC_Null_Setup macro rate,dacptr
+	dc.b	rate
+	dc.w 	$0000,$0000
+    endm
+
+; Setup a chain-linked invalid entry for a DAC sample.
+; The sample's length is correctly stored for the sample,
+; while the pointer (usually) goes towards the DAC pointer
+; entry of another DAC sample setup.
+DAC_Null_Chain macro rate,dacptr,linkptr
+	dc.b	rate
+	dc.w 	dacptr_Len,k68z80Pointer(linkptr+3-soundBankStart)
+    endm
