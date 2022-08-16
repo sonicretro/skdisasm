@@ -1,36 +1,34 @@
-Sound_9B_Header:
+S3_Sound_9B_Header:
 	smpsHeaderStartSong 3
-	smpsHeaderVoice     Sound_9B_Voices
+	smpsHeaderVoice     S3_Sound_9B_Voices
 	smpsHeaderTempoSFX  $01
-	smpsHeaderChanSFX   $02 ; In S3, the third channel was used.
+	smpsHeaderChanSFX   $03 ; In S&K, the third channel was disabled.
 
-	smpsHeaderSFXChannel cFM4, Sound_9B_FM4,	$F2, $00
-	smpsHeaderSFXChannel cFM5, Sound_9B_FM5,	$F9, $00 ; These parameters were $02 $06 in S3.
-; Unused header:
-	smpsHeaderSFXChannel cFM3, Sound_9B_FM3,	$F9, $08
+	smpsHeaderSFXChannel cFM4, S3_Sound_9B_FM4,	$F2, $00
+	smpsHeaderSFXChannel cFM5, S3_Sound_9B_FM5,	$02, $06 ; These parameters were changed to $F9 $00 in S&K.
+	smpsHeaderSFXChannel cFM3, S3_Sound_9B_FM3,	$F9, $08
 
-; Unused track data:
 ; FM3 Data
-Sound_9B_FM3:
+S3_Sound_9B_FM3:
 	smpsSetvoice        $01
-	smpsJump            Sound_9B_Loop00
+	smpsJump            S3_Sound_9B_Loop00
 	
 ; FM5 Data
-Sound_9B_FM5:
+S3_Sound_9B_FM5:
 	dc.b	nRst, $02
 
 ; FM4 Data
-Sound_9B_FM4:
+S3_Sound_9B_FM4:
 	smpsSetvoice        $00
 	smpsModSet          $01, $01, $74, $29
 
-Sound_9B_Loop00:
+S3_Sound_9B_Loop00:
 	dc.b	nD1, $07, nRst, $02, nD1, $09, nRst
 	smpsFMAlterVol      $11
-	smpsLoop            $00, $04, Sound_9B_Loop00
+	smpsLoop            $00, $04, S3_Sound_9B_Loop00
 	smpsStop
 
-Sound_9B_Voices:
+S3_Sound_9B_Voices:
 ;	Voice $00
 ;	$38
 ;	$70, $30, $10, $30, 	$1F, $1D, $15, $1F, 	$00, $0C, $0E, $07
@@ -49,7 +47,6 @@ Sound_9B_Voices:
 	smpsVcReleaseRate   $08, $07, $02, $04
 	smpsVcTotalLevel    $00, $0C, $07, $10
 
-; Unused voice:
 ;	Voice $01
 ;	$38
 ;	$01, $31, $10, $30, 	$1F, $1D, $15, $1F, 	$25, $1C, $0E, $07
@@ -67,4 +64,3 @@ Sound_9B_Voices:
 	smpsVcDecayLevel    $01, $00, $00, $00
 	smpsVcReleaseRate   $08, $07, $04, $03
 	smpsVcTotalLevel    $00, $02, $22, $17
-
