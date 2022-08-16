@@ -1276,7 +1276,7 @@ Snd_DPZ:	include "Sound/Music/Desert Palace.asm"
 Snd_CGZ:	include "Sound/Music/Chrome Gadget.asm"
 Snd_EMZ:	include "Sound/Music/Endless Mine.asm"
 	org	soundBankStart+$6587
-Snd_S3Credits:	include "Sound/Music/Sonic 3 Credits.asm"
+Snd_S3Credits:	include "Sound/Music/Credits (Sonic 3).asm"
 	org	soundBankStart+$75E4
 Snd_2PMenu:	include "Sound/Music/Competition Menu.asm"
 Snd_Drown:	include "Sound/Music/Countdown.asm"
