@@ -19,10 +19,6 @@
 ; ---------------------------------------------------------------------------
 ; Include SMPS2ASM, for expressing SMPS bytecode in a portable and human-readable form.
 SonicDriverVer = 3 ; Tell SMPS2ASM that we are targetting Sonic 3's sound driver
-use_s2_samples = 0
-use_s3_samples = 1 ; Select the correct DAC sample set.
-use_sk_samples = 0
-use_s3d_samples = 0
 		include "Sound/_smps2asm_inc.asm"
 
 ; TODO: Remove these when they're no longer needed.
@@ -118058,8 +118054,8 @@ DemoDat_MGZ:	binclude "Levels/MGZ/Demodata/1.bin"
 		even
 
 		org $C71A0
-Snd_Minib:	binclude "Sound/Music/Sonic 3/Sonic 3 Miniboss.bin"
-Snd_FinalBoss:	binclude "Sound/Music/Sonic 3/Final Boss.bin"
+Snd_Minib:	include "Sound/Music/Sonic 3/Miniboss (Sonic 3).asm"
+Snd_FinalBoss:	include "Sound/Music/Final Boss.asm"
 		align $1000
 Snd_AIZ1:	include "Sound/Music/AIZ1.asm"
 Snd_AIZ2:	include "Sound/Music/AIZ2.asm"
@@ -118069,48 +118065,48 @@ Snd_MGZ1:	include "Sound/Music/MGZ1.asm"
 Snd_MGZ2:	include "Sound/Music/MGZ2.asm"
 Snd_CNZ2:	include "Sound/Music/CNZ2.asm"
 Snd_CNZ1:	include "Sound/Music/CNZ1.asm"
-Snd_FBZ1:	binclude "Sound/Music/Sonic 3/FBZ1.bin"
-Snd_FBZ2:	binclude "Sound/Music/Sonic 3/FBZ2.bin"
-Snd_DDZ:	binclude "Sound/Music/Sonic 3/DDZ.bin"
+Snd_FBZ1:	include "Sound/Music/Sonic 3/FBZ1.asm"
+Snd_FBZ2:	include "Sound/Music/FBZ2.asm"
+Snd_DDZ:	include "Sound/Music/DDZ.asm"
 		align $1000
 Snd_ICZ2:	include "Sound/Music/ICZ2.asm"
 Snd_ICZ1:	include "Sound/Music/ICZ1.asm"
 Snd_LBZ2:	include "Sound/Music/LBZ2.asm"
 Snd_LBZ1:	include "Sound/Music/LBZ1.asm"
-Snd_MHZ1:	binclude "Sound/Music/Sonic 3/MHZ1.bin"
-Snd_MHZ2:	binclude "Sound/Music/Sonic 3/MHZ2.bin"
-Snd_SOZ1:	binclude "Sound/Music/Sonic 3/SOZ1.bin"
-Snd_SOZ2:	binclude "Sound/Music/Sonic 3/SOZ2.bin"
-Snd_LRZ1:	binclude "Sound/Music/Sonic 3/LRZ1.bin"
-Snd_LRZ2:	binclude "Sound/Music/Sonic 3/LRZ2.bin"
-Snd_SSZ:	binclude "Sound/Music/Sonic 3/SSZ.bin"
-Snd_DEZ1:	binclude "Sound/Music/Sonic 3/DEZ1.bin"
-Snd_DEZ2:	binclude "Sound/Music/Sonic 3/DEZ2.bin"
-Snd_Minib_SK:	binclude "Sound/Music/Sonic 3/Miniboss.bin"
-Snd_Boss:	binclude "Sound/Music/Sonic 3/Zone Boss.bin"
-Snd_PachBonus:	binclude "Sound/Music/Sonic 3/Pachinko.bin"
-Snd_SpecialS:	binclude "Sound/Music/Sonic 3/Special Stage.bin"
-Snd_Results:	binclude "Sound/Music/Sonic 3/Level Outro.bin"
-Snd_Menu:	binclude "Sound/Music/Sonic 3/Menu.bin"
+Snd_MHZ1:	include "Sound/Music/MHZ1.asm"
+Snd_MHZ2:	include "Sound/Music/MHZ2.asm"
+Snd_SOZ1:	include "Sound/Music/SOZ1.asm"
+Snd_SOZ2:	include "Sound/Music/SOZ2.asm"
+Snd_LRZ1:	include "Sound/Music/LRZ1.asm"
+Snd_LRZ2:	include "Sound/Music/LRZ2.asm"
+Snd_SSZ:	include "Sound/Music/Sonic 3/SSZ.asm"
+Snd_DEZ1:	include "Sound/Music/DEZ1.asm"
+Snd_DEZ2:	include "Sound/Music/DEZ2.asm"
+Snd_Minib_SK:	include "Sound/Music/Miniboss.asm"
+Snd_Boss:	include "Sound/Music/Zone Boss.asm"
+Snd_PachBonus:	include "Sound/Music/Pachinko.asm"
+Snd_SpecialS:	include "Sound/Music/Special Stage.asm"
+Snd_Results:	include "Sound/Music/Level Outro.asm"
+Snd_Menu:	include "Sound/Music/Sonic 3/Menu.asm"
 		align $1000
-Snd_SlotBonus:	binclude "Sound/Music/Sonic 3/Slots.bin"
+Snd_SlotBonus:	include "Sound/Music/Slots.asm"
 Snd_GumBonus:	include "Sound/Music/Gum Ball Machine.asm"
-Snd_Knux:	binclude "Sound/Music/Sonic 3/Sonic 3 Knuckles.bin"
+Snd_Knux:	include "Sound/Music/Sonic 3/Knuckles (Sonic 3).asm"
 Snd_ALZ:	include "Sound/Music/Azure Lake.asm"
 Snd_BPZ:	include "Sound/Music/Balloon Park.asm"
 Snd_DPZ:	include "Sound/Music/Desert Palace.asm"
 Snd_CGZ:	include "Sound/Music/Chrome Gadget.asm"
 Snd_EMZ:	include "Sound/Music/Endless Mine.asm"
-Snd_Title:	binclude "Sound/Music/Sonic 3/Sonic 3 Title.bin"
+Snd_Title:	include "Sound/Music/Sonic 3/Title (Sonic 3).asm"
 Snd_S3Credits:	include "Sound/Music/Sonic 3 Credits.asm"
-Snd_GameOver:	binclude "Sound/Music/Sonic 3/Game Over.bin"
-Snd_Continue:	binclude "Sound/Music/Sonic 3/Sonic 3 Continue.bin"
-Snd_1UP:	binclude "Sound/Music/Sonic 3/Sonic 3 1UP.bin"
-Snd_Emerald:	binclude "Sound/Music/Sonic 3/Chaos Emerald.bin"
-Snd_Invic:	binclude "Sound/Music/Sonic 3/Sonic 3 Invincible.bin"
+Snd_GameOver:	include "Sound/Music/Game Over.asm"
+Snd_Continue:	include "Sound/Music/Sonic 3/Continue (Sonic 3).asm"
+Snd_1UP:	include "Sound/Music/Sonic 3/1UP (Sonic 3).asm"
+Snd_Emerald:	include "Sound/Music/Chaos Emerald.asm"
+Snd_Invic:	include "Sound/Music/Sonic 3/Invincible (Sonic 3).asm"
 Snd_2PMenu:	include "Sound/Music/Competition Menu.asm"
 Snd_Drown:	include "Sound/Music/Countdown.asm"
-Snd_PresSega:	binclude "Sound/Music/Sonic 3/Sonic 3 Game Complete.bin"
+Snd_PresSega:	include "Sound/Music/Sonic 3/Game Complete (Sonic 3).asm"
 		align $1000
 DacBank1:	dc.w  $8880, $8D80, $9280, $9780, $9C80, $A180, $A680, $AB80, $B080, $B580, $BA80, $BF80
 		dc.w  $C480, $C980, $CE80, $D380, $D880, $DD80, $E280, $E780, $EC80, $F180, $F680, $FB80
