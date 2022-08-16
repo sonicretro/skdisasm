@@ -2983,7 +2983,7 @@ zFadeInToPrevious:
 zPSGFrequencies:
 		; This table differs from the one in Sonic 1 and 2's drivers by
 		; having an extra octave at the start and two extra notes at
-		; the end, allowing it to span notes c-0 to b-7.
+		; the end, allowing it to span notes c-0 to b-6.
 		dw 3FFh,3FFh,3FFh,3FFh,3FFh,3FFh,3FFh,3FFh,3FFh,3F7h,3BEh,388h
 		dw 356h,326h,2F9h,2CEh,2A5h,280h,25Ch,23Ah,21Ah,1FBh,1DFh,1C4h
 		dw 1ABh,193h,17Dh,167h,153h,140h,12Eh,11Dh,10Dh,0FEh,0EFh,0E2h
