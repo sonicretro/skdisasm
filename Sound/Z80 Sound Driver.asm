@@ -420,7 +420,6 @@ zNextSound:			ds.b 1
 zMusicNumber:		ds.b 1	; Play_Sound
 zSFXNumber0:		ds.b 1	; Play_Sound_2
 zSFXNumber1:		ds.b 1	; Play_Sound_2
-	shared zMusicNumber,zSFXNumber0,zSFXNumber1
 
 zTempVariablesStart:
 

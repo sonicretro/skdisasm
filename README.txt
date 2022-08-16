@@ -79,18 +79,15 @@ heavily modify Sonic 3 and Knuckles, then keeping the macro Sonic3_Complete at 1
 =========================================================
 REGARDING BUILDING THE DISASSEMBLY
 =========================================================
-The 'BuildScripts' directory contains two sets of build scripts - the windows batch files (*.bat), and the python scripts (*.py).
-The .bat ones are the simplest to use but will only work on windows. The python scripts are cross platform (windows and mac) but
-require python to be installed.
+The base directory contains two sets of build scripts - the Windows Batch files (*.bat), and the Lua scripts (*.lua).
+The .bat ones are the simplest to use but will only work on Windows. The Lua scripts are cross platform (Windows, Mac, Linux,
+FreeBSD) but require Lua to be installed. The Batch files are ran by double-clicking them, while the Lua scripts are ran on the
+command line with 'lua nameOfScript'.
 
-Batch files: (double click to run)
-buildSK.bat          - builds a byte-perfect copy of the Sonic And Knuckles rom in the base dir.
-buildS3Complete.bat  - builds a combined Sonic 3 And Knuckles rom (using the SONIC3_COMPLETE macro detailed above).
-
-Python files: (run with 'python nameOfScript')
-buildSK.py             - builds a byte-perfect copy of the Sonic And Knuckles rom in the base dir. Output and errors go in the 'Builds' sub dir.
-buildS3Complete.py     - builds a combined Sonic 3 And Knuckles rom (using the SONIC3_COMPLETE macro detailed above). Output and errors go in the 'Builds' sub dir.
-buildAndVerify.py      - builds both a S&K rom and a S3 Complete rom, then verifies that the S&K rom is byte identical to the original rom. Output and errors go in the 'Builds' sub dir.
+buildS3         - builds a byte-perfect copy of the Sonic 3 ROM.
+buildSK         - builds a byte-perfect copy of the Sonic & Knuckles ROM.
+buildS3Complete - builds a combined Sonic 3 & Knuckles ROM (using the SONIC3_COMPLETE macro detailed above).
+chkbitperfect   - builds both an S3 ROM and an S&K ROM, then verifies that they are byte-identical to the original ROMs.
 
 =========================================================
 REGARDING EDITING WITH SONED2

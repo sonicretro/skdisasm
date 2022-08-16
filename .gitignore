@@ -1,20 +1,13 @@
 SonLVL INI Files/dllcache
 SonLVL INI Files/SonLVL.log
 SonLVL INI Files/SonPLN.log
-sonic3k.[ph]
 s3built.bin
 s3built.prev.bin
 skbuilt.bin
 skbuilt.prev.bin
 sonic3k.bin
 sonic3k.prev.bin
+s3.log
+s3.lst
+sonic3k.log
 sonic3k.lst
-Build/s3builtBinaryOutput.txt
-Build/s3builtErrors.txt
-Build/s3builtOutput.txt
-Build/skbuiltBinaryOutput.txt
-Build/skbuiltErrors.txt
-Build/skbuiltOutput.txt
-Build/sonic3kBinaryOutput.txt
-Build/sonic3kErrors.txt
-Build/sonic3kOutput.txt

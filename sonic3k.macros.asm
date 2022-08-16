@@ -50,9 +50,9 @@ dmaFillVRAM macro byte,addr,length
 	move.w	#$9780,(a5) ; VRAM fill
 	move.l	#$40000080|(((addr)&$3FFF)<<16)|(((addr)&$C000)>>14),(a5) ; Start at ...
 	move.w	#(byte)<<8,(VDP_data_port).l ; Fill with byte
-loop:	move.w	(a5),d1
+.loop:	move.w	(a5),d1
 	btst	#1,d1
-	bne.s	loop	; busy loop until the VDP is finished filling...
+	bne.s	.loop	; busy loop until the VDP is finished filling...
 	move.w	#$8F02,(a5) ; VRAM pointer increment: $0002
     endm
 
@@ -93,8 +93,8 @@ clearRAM macro addr,length
 ; tells the Z80 to stop, and waits for it to finish stopping (acquire bus)
 stopZ80 macro
 	move.w	#$100,(Z80_bus_request).l ; stop the Z80
-loop:	btst	#0,(Z80_bus_request).l
-	bne.s	loop ; loop until it says it's stopped
+.loop:	btst	#0,(Z80_bus_request).l
+	bne.s	.loop ; loop until it says it's stopped
     endm
 
 ; tells the Z80 to start again
