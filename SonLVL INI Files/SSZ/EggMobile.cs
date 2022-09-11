@@ -72,7 +72,7 @@ namespace S3KObjectDefinitions.SSZ
 				"../General/Sprites/Robotnik/Map - Robotnik Ship.asm", 10, 0, true);
 
 			var head = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../General/Sprites/Robotnik/Egg Robo Head.bin", CompressionType.Kosinski),
+				"../General/Sprites/Robotnik/Egg Robo Head.bin", CompressionType.KosinskiM),
 				"../General/Sprites/Robotnik/Map - Egg Robo Head.asm", 0, 0, true);
 
 			var mecha = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
