@@ -118991,13 +118991,13 @@ ArtNem_DiagonalSpring:
 ArtNem_HUDText:	binclude "General/Sprites/HUD Icon/HUD Text.bin"
 		even
 ArtNem_SonicLifeIcon:
-		binclude "General/Sprites/HUD Icon/Sonic Life icon.bin"
+		binclude "General/Sprites/HUD Icon/Sonic Life Icon.bin"
 		even
 ArtNem_TailsLifeIcon:
 		binclude "General/Sprites/HUD Icon/Tails Life Icon.bin"
 		even
 ArtNem_KnucklesLifeIcon:
-		binclude "General/Sprites/HUD Icon/Knuckles Life icon.bin"
+		binclude "General/Sprites/HUD Icon/Knuckles Life Icon.bin"
 		even
 ArtNem_Ring:	binclude "General/Sprites/Ring/Ring.bin"
 		even

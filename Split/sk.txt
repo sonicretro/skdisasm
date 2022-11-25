@@ -368,8 +368,8 @@
 #split	0x0018A110,0x0018A204,General\Sprites\HUD Icon\Miles Life Icon.bin
 #split	0x00190AC4,0x00190B4C,General\Sprites\Buttons\Gray Button.bin
 #split	0x00190B4C,0x00190D34,General\Sprites\Level Misc\Diagonal Spring.bin
-#split	0x00190D34,0x00190E4C,General\Sprites\HUD Icon\Sonic life icon.bin
-#split	0x00190E4C,0x00190F4A,General\Sprites\HUD Icon\Knuckles life icon.bin
+#split	0x00190D34,0x00190E4C,General\Sprites\HUD Icon\Sonic Life Icon.bin
+#split	0x00190E4C,0x00190F4A,General\Sprites\HUD Icon\Knuckles Life Icon.bin
 #split	0x00190F4A,0x001913A4,General\Sprites\Monitors\Monitors.bin
 #split	0x001913A4,0x00191B46,General\Sprites\S2Menu\Signpost.bin
 #split	0x00191B46,0x00191DE4,General\Sprites\Bubbles\Bubbles.bin
