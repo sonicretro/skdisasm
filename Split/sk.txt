@@ -428,7 +428,7 @@
 #split	0x0014C652,0x0014C7D4,General\Sprites\Sonic\Art\Hyper Sonic Stars.bin
 #split	0x0014C7D4,0x0014C926,General\Sprites\Tails\Art\Super Tails birds.bin
 #split	0x001541B0,0x00154552,Levels\SSZ\KosinskiM Art\Spiral Ramp.bin
-#split	0x00159CAE,0x00159CD0,Levels\SSZ\KosinskiM Art\Teleporter Beam.bin
+#split	0x00159CAE,0x00159CD0,Levels\CNZ\KosinskiM Art\Teleporter Beam.bin
 #split	0x00159CFE,0x00159F10,Levels\MHZ\KosinskiM Art\End Boss Pillar.bin
 #split	0x00159F10,0x0015A112,Levels\MHZ\KosinskiM Art\Ship Propeller.bin
 #split	0x0015A112,0x0015A674,Levels\LRZ\KosinskiM Art\BG Death Egg.bin
