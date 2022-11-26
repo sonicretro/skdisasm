@@ -76008,7 +76008,7 @@ ContinueScreen:
 		lea	(ArtNem_ContinueDigits).l,a0
 		jsr	(Nem_Decomp).l
 		move.l	#$45200000,(VDP_control_port).l
-		lea	(ArtNem_ContinueText).l,a0
+		lea	(ArtNem_S3CreditsText).l,a0
 		jsr	(Nem_Decomp).l
 		move.l	#$51800000,(VDP_control_port).l
 		lea	(ArtNem_ContinueSprites).l,a0
@@ -76642,7 +76642,7 @@ loc_403FE:
 		lea	(ArtNem_S38x16Font).l,a0
 		jsr	(Nem_Decomp).l
 		move.l	#$45200000,(VDP_control_port).l
-		lea	(ArtNem_ContinueText).l,a0
+		lea	(ArtNem_S3CreditsText).l,a0
 		jsr	(Nem_Decomp).l
 		move.l	#$51C00000,(VDP_control_port).l
 		lea	(ArtNem_EndingGraphics).l,a0
@@ -77666,63 +77666,63 @@ word_413BE:	dc.w 1
 		dc.b "F",0
 		even
 S3Credits_PlaneMapSmall:
-		dc.w    1,   2
-		dc.w    3,   4
-		dc.w    5,   6
-		dc.w    7,   8
-		dc.w    9,  $A
-		dc.w    9,  $B
-		dc.w   $C,   6
-		dc.w   $D,   2
-		dc.w   $E,  $F
-		dc.w  $10,   6
-		dc.w  $11, $12
-		dc.w  $13, $14
-		dc.w  $15, $16
-		dc.w  $17, $18
-		dc.w  $19,   6
-		dc.w  $1A,  $B
-		dc.w  $1B, $1C
-		dc.w    3,   2
-		dc.w  $1D,   6
-		dc.w  $1E,  $F
-		dc.w  $1F,   6
-		dc.w  $1F, $20
-		dc.w  $21, $22
-		dc.w  $23, $18
-		dc.w  $24,  $F
-		dc.w  $25, $26
+		dc.w    1,   2	; a
+		dc.w    3,   4	; b
+		dc.w    5,   6	; c
+		dc.w    7,   8	; d
+		dc.w    9,  $A	; e
+		dc.w    9,  $B	; f
+		dc.w   $C,   6	; g
+		dc.w   $D,   2	; h
+		dc.w   $E,  $F	; i
+		dc.w  $10,   6	; j
+		dc.w  $11, $12	; k
+		dc.w  $13, $14	; l
+		dc.w  $15, $16	; m
+		dc.w  $17, $18	; n
+		dc.w  $19,   6	; o
+		dc.w  $1A,  $B	; p
+		dc.w  $1B, $1C	; q
+		dc.w    3,   2	; r
+		dc.w  $1D,   6	; s
+		dc.w  $1E,  $F	; t
+		dc.w  $1F,   6	; u
+		dc.w  $1F, $20	; v
+		dc.w  $21, $22	; w
+		dc.w  $23, $18	; x
+		dc.w  $24,  $F	; y
+		dc.w  $25, $26	; z
 S3Credits_PlaneMapLarge:
-		dc.w word_4146C-S3Credits_PlaneMapLarge
-		dc.w word_4147A-S3Credits_PlaneMapLarge
-		dc.w word_41488-S3Credits_PlaneMapLarge
-		dc.w word_41496-S3Credits_PlaneMapLarge
-		dc.w word_414A4-S3Credits_PlaneMapLarge
-		dc.w word_414B2-S3Credits_PlaneMapLarge
-		dc.w word_414C0-S3Credits_PlaneMapLarge
-		dc.w word_414CE-S3Credits_PlaneMapLarge
-		dc.w word_414DC-S3Credits_PlaneMapLarge
-		dc.w word_414E4-S3Credits_PlaneMapLarge
-		dc.w word_414EC-S3Credits_PlaneMapLarge
-		dc.w word_414FA-S3Credits_PlaneMapLarge
-		dc.w word_41502-S3Credits_PlaneMapLarge
-		dc.w word_41516-S3Credits_PlaneMapLarge
-		dc.w word_41524-S3Credits_PlaneMapLarge
-		dc.w word_41538-S3Credits_PlaneMapLarge
-		dc.w word_41546-S3Credits_PlaneMapLarge
-		dc.w word_4155A-S3Credits_PlaneMapLarge
-		dc.w word_41568-S3Credits_PlaneMapLarge
-		dc.w word_41576-S3Credits_PlaneMapLarge
-		dc.w word_41584-S3Credits_PlaneMapLarge
-		dc.w word_41592-S3Credits_PlaneMapLarge
-		dc.w word_415A0-S3Credits_PlaneMapLarge
-		dc.w word_415B4-S3Credits_PlaneMapLarge
-		dc.w word_415C2-S3Credits_PlaneMapLarge
-		dc.w word_415D0-S3Credits_PlaneMapLarge
-		dc.w word_415DE-S3Credits_PlaneMapLarge
-		dc.w word_415E6-S3Credits_PlaneMapLarge
-		dc.w word_415F4-S3Credits_PlaneMapLarge
-		dc.w word_41602-S3Credits_PlaneMapLarge
+		dc.w word_4146C-S3Credits_PlaneMapLarge	; A
+		dc.w word_4147A-S3Credits_PlaneMapLarge	; B
+		dc.w word_41488-S3Credits_PlaneMapLarge	; C
+		dc.w word_41496-S3Credits_PlaneMapLarge	; D
+		dc.w word_414A4-S3Credits_PlaneMapLarge	; E
+		dc.w word_414B2-S3Credits_PlaneMapLarge	; F
+		dc.w word_414C0-S3Credits_PlaneMapLarge	; G
+		dc.w word_414CE-S3Credits_PlaneMapLarge	; H
+		dc.w word_414DC-S3Credits_PlaneMapLarge	; I
+		dc.w word_414E4-S3Credits_PlaneMapLarge	; J
+		dc.w word_414EC-S3Credits_PlaneMapLarge	; K
+		dc.w word_414FA-S3Credits_PlaneMapLarge	; L
+		dc.w word_41502-S3Credits_PlaneMapLarge	; M
+		dc.w word_41516-S3Credits_PlaneMapLarge	; N
+		dc.w word_41524-S3Credits_PlaneMapLarge	; O
+		dc.w word_41538-S3Credits_PlaneMapLarge	; P
+		dc.w word_41546-S3Credits_PlaneMapLarge	; Q
+		dc.w word_4155A-S3Credits_PlaneMapLarge	; R
+		dc.w word_41568-S3Credits_PlaneMapLarge	; S
+		dc.w word_41576-S3Credits_PlaneMapLarge	; T
+		dc.w word_41584-S3Credits_PlaneMapLarge	; U
+		dc.w word_41592-S3Credits_PlaneMapLarge	; V
+		dc.w word_415A0-S3Credits_PlaneMapLarge	; W
+		dc.w word_415B4-S3Credits_PlaneMapLarge	; X
+		dc.w word_415C2-S3Credits_PlaneMapLarge	; Y
+		dc.w word_415D0-S3Credits_PlaneMapLarge	; Z
+		dc.w word_415DE-S3Credits_PlaneMapLarge	; .
+		dc.w word_415E6-S3Credits_PlaneMapLarge	; (
+		dc.w word_415F4-S3Credits_PlaneMapLarge	; )
+		dc.w word_41602-S3Credits_PlaneMapLarge	; space
 word_4146C:	dc.w 1
 		dc.w  $2029, $202A, $202B, $202C, $202D, $202C
 word_4147A:	dc.w 1
@@ -119560,7 +119560,7 @@ ArtKosM_TailsEndPose:
 ArtKosM_SuperSonicEndPose:
 		binclude "General/Ending/KosinskiM Art/Sonic 3 Super Sonic Ending Pose.bin"
 		even
-ArtNem_ContinueText:
+ArtNem_S3CreditsText:
 		binclude "General/Ending/Nemesis Art/S3 Large Text.bin"
 		even
 ArtNem_S38x16Font:
