@@ -336,7 +336,7 @@
 #split	0x000DC2E0,0x000DC6C2,Levels\FBZ\Nemesis Art\End Boss.bin
 #split	0x000DD976,0x000DD990,General\Sprites\Signpost\Stub.bin
 #split	0x000DD990,0x000DDE34,General\Sprites\Robotnik\Egg Capsule.bin
-#split	0x000DDE34,0x000DDFE6,General\Blue Sphere\Nemesis Art\Large Text.bin
+#split	0x000DDE34,0x000DDFE6,General\Ending\Nemesis Art\Large Text.bin
 #split	0x000DDFE6,0x000DE362,Levels\FBZ\Nemesis Art\End Boss Flame.bin
 #split	0x000DEA00,0x000DF370,General\Ending\Nemesis Art\Knuckles Ending Pose.bin
 #split	0x0014C926,0x0014DBC0,Levels\FBZ\Nemesis Art\Misc Art 1.bin
@@ -368,8 +368,8 @@
 #split	0x0018A110,0x0018A204,General\Sprites\HUD Icon\Miles Life Icon.bin
 #split	0x00190AC4,0x00190B4C,General\Sprites\Buttons\Gray Button.bin
 #split	0x00190B4C,0x00190D34,General\Sprites\Level Misc\Diagonal Spring.bin
-#split	0x00190D34,0x00190E4C,General\Sprites\HUD Icon\Sonic life icon.bin
-#split	0x00190E4C,0x00190F4A,General\Sprites\HUD Icon\Knuckles life icon.bin
+#split	0x00190D34,0x00190E4C,General\Sprites\HUD Icon\Sonic Life Icon.bin
+#split	0x00190E4C,0x00190F4A,General\Sprites\HUD Icon\Knuckles Life Icon.bin
 #split	0x00190F4A,0x001913A4,General\Sprites\Monitors\Monitors.bin
 #split	0x001913A4,0x00191B46,General\Sprites\S2Menu\Signpost.bin
 #split	0x00191B46,0x00191DE4,General\Sprites\Bubbles\Bubbles.bin
@@ -428,7 +428,7 @@
 #split	0x0014C652,0x0014C7D4,General\Sprites\Sonic\Art\Hyper Sonic Stars.bin
 #split	0x0014C7D4,0x0014C926,General\Sprites\Tails\Art\Super Tails birds.bin
 #split	0x001541B0,0x00154552,Levels\SSZ\KosinskiM Art\Spiral Ramp.bin
-#split	0x00159CAE,0x00159CD0,Levels\SSZ\KosinskiM Art\Teleporter Beam.bin
+#split	0x00159CAE,0x00159CD0,Levels\CNZ\KosinskiM Art\Teleporter Beam.bin
 #split	0x00159CFE,0x00159F10,Levels\MHZ\KosinskiM Art\End Boss Pillar.bin
 #split	0x00159F10,0x0015A112,Levels\MHZ\KosinskiM Art\Ship Propeller.bin
 #split	0x0015A112,0x0015A674,Levels\LRZ\KosinskiM Art\BG Death Egg.bin
