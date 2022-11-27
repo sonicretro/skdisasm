@@ -108,8 +108,7 @@
 #split	0x00066912,0x00066932,General\Sprites\Knuckles\Cutscene\Pal.bin
 #split	0x00066932,0x000669B2,Levels\CNZ\Palettes\Flash.bin
 #split	0x000669B2,0x000669D2,General\Sprites\Knuckles\Palettes\SSZ End.bin
-#split	0x000669D2,0x000669F2,Levels\HPZ\Palettes\2_A.bin
-#split	0x000669F2,0x00066A32,Levels\HPZ\Palettes\2_B.bin
+#split	0x000669D2,0x00066A32,Levels\HPZ\Palettes\Main.bin
 #split	0x00066A32,0x00066A52,General\Sprites\Knuckles\Cutscene\Intro Bomb Pal.bin
 #split	0x00067AAA,0x00067ACA,Levels\AIZ\Palettes\Intro Emeralds.bin
 #split	0x0006917C,0x0006919C,Levels\AIZ\Palettes\Miniboss.bin
@@ -192,8 +191,7 @@
 #split	0x000A967C,0x000A96DC,Levels\LRZ\Palettes\1.bin
 #split	0x000A96DC,0x000A973C,Levels\LRZ\Palettes\2.bin
 #split	0x000A973C,0x000A979C,Levels\SSZ\Palettes\1.bin
-#split	0x000A979C,0x000A97BC,Levels\SSZ\Palettes\2.bin
-#split	0x000A97BC,0x000A97FC,General\Ending\Palettes\Objects.bin
+#split	0x000A979C,0x000A97FC,Levels\SSZ\Palettes\2.bin
 #split	0x000A97FC,0x000A985C,General\Ending\Palettes\Ending 1.bin
 #split	0x000A985C,0x000A98BC,General\Ending\Palettes\Ending 2.bin
 #split	0x000A98BC,0x000A991C,Levels\DEZ\Palettes\1.bin
@@ -208,8 +206,7 @@
 #split	0x000A9C1C,0x000A9C7C,Levels\Pachinko\Palettes\Main.bin
 #split	0x000A9C7C,0x000A9CDC,Levels\Slots\Palettes\Main.bin
 #split	0x000A9CDC,0x000A9D3C,Levels\LRZ\Palettes\Boss Act.bin
-#split	0x000A9D3C,0x000A9D5C,Levels\HPZ\Palettes\1_A.bin
-#split	0x000A9D5C,0x000A9D9C,Levels\HPZ\Palettes\1_B.bin
+#split	0x000A9D3C,0x000A9D9C,Levels\HPZ\Palettes\Intro.bin
 #split	0x000A9D9C,0x000A9DFC,Levels\DEZ\Palettes\Boss.bin
 #split	0x001578F8,0x00157AE8,Levels\Pachinko\Palettes\Compressed Pal.bin
 

@@ -189,7 +189,7 @@
 		dc.l Pal_LRZBoss
 		dc.w Normal_palette_line_2&$FFFF
 		dc.w $17
-		dc.l Pal_HPZ_A
+		dc.l Pal_HPZIntro
 		dc.w Normal_palette_line_2&$FFFF
 		dc.w $17
 		dc.l Pal_DEZBoss
