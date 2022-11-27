@@ -284,58 +284,6 @@
 #split	0x0019CD1C,0x0019CF1E,Levels\DPZ\KosinskiM Art\Title Card.bin
 #split	0x0019CF1E,0x0019D100,Levels\EMZ\KosinskiM Art\Title Card.bin
 
-/* Music */
-#split	0x000C71A0,0x000C7A61,Sound\Music\Sonic 3\Sonic 3 Miniboss.bin
-#split	0x000C7A61,0x000C7FF3,Sound\Music\Sonic 3\Final Boss.bin
-#split	0x000C8000,0x000C9B6D,Sound\Music\AIZ1.bin
-#split	0x000C9B6D,0x000CB0BC,Sound\Music\AIZ2.bin
-#split	0x000CB0BC,0x000CC0C6,Sound\Music\HCZ1.bin
-#split	0x000CC0C6,0x000CD364,Sound\Music\HCZ2.bin
-#split	0x000CD364,0x000CD97B,Sound\Music\MGZ1.bin
-#split	0x000CD97B,0x000CDDA9,Sound\Music\MGZ2.bin
-#split	0x000CDDA9,0x000CE48F,Sound\Music\CNZ2.bin
-#split	0x000CE48F,0x000CEBF1,Sound\Music\CNZ1.bin
-#split	0x000CEBF1,0x000CF189,Sound\Music\Sonic 3\FBZ1.bin
-#split	0x000CF189,0x000CF6F0,Sound\Music\Sonic 3\FBZ2.bin
-#split	0x000CF6F0,0x000CFFD3,Sound\Music\Sonic 3\DDZ.bin
-#split	0x000D0000,0x000D06AA,Sound\Music\ICZ2.bin
-#split	0x000D06AA,0x000D0DC8,Sound\Music\ICZ1.bin
-#split	0x000D0DC8,0x000D1345,Sound\Music\LBZ2.bin
-#split	0x000D1345,0x000D17A7,Sound\Music\LBZ1.bin
-#split	0x000D17A7,0x000D1DAF,Sound\Music\Sonic 3\MHZ1.bin
-#split	0x000D1DAF,0x000D2331,Sound\Music\Sonic 3\MHZ2.bin
-#split	0x000D2331,0x000D299B,Sound\Music\Sonic 3\SOZ1.bin
-#split	0x000D299B,0x000D2F8E,Sound\Music\Sonic 3\SOZ2.bin
-#split	0x000D2F8E,0x000D399C,Sound\Music\Sonic 3\LRZ1.bin
-#split	0x000D399C,0x000D4B29,Sound\Music\Sonic 3\LRZ2.bin
-#split	0x000D4B29,0x000D4F4F,Sound\Music\Sonic 3\SSZ.bin
-#split	0x000D4F4F,0x000D543A,Sound\Music\Sonic 3\DEZ1.bin
-#split	0x000D543A,0x000D584C,Sound\Music\Sonic 3\DEZ2.bin
-#split	0x000D584C,0x000D5B7C,Sound\Music\Sonic 3\Miniboss.bin
-#split	0x000D5B7C,0x000D6078,Sound\Music\Sonic 3\Zone Boss.bin
-#split	0x000D6078,0x000D65DB,Sound\Music\Sonic 3\Pachinko.bin
-#split	0x000D65DB,0x000D6E73,Sound\Music\Sonic 3\Special Stage.bin
-#split	0x000D6E73,0x000D7027,Sound\Music\Sonic 3\Level Outro.bin
-#split	0x000D7027,0x000D7FC4,Sound\Music\Sonic 3\Menu.bin
-#split	0x000D8000,0x000D8AE8,Sound\Music\Sonic 3\Slots.bin
-#split	0x000D8AE8,0x000D97FD,Sound\Music\Gum Ball Machine.bin
-#split	0x000D97FD,0x000D99F7,Sound\Music\Sonic 3\Sonic 3 Knuckles.bin
-#split	0x000D99F7,0x000DA4FD,Sound\Music\Azure Lake.bin
-#split	0x000DA4FD,0x000DB0EC,Sound\Music\Balloon Park.bin
-#split	0x000DB0EC,0x000DC324,Sound\Music\Desert Palace.bin
-#split	0x000DC324,0x000DDA47,Sound\Music\Chrome Gadget.bin
-#split	0x000DDA47,0x000DE18F,Sound\Music\Endless Mine.bin
-#split	0x000DE18F,0x000DE587,Sound\Music\Sonic 3\Sonic 3 Title.bin
-#split	0x000DE587,0x000DEA20,Sound\Music\Sonic 3 Credits.bin
-#split	0x000DEA20,0x000DEC7B,Sound\Music\Sonic 3\Game Over.bin
-#split	0x000DEC7B,0x000DF095,Sound\Music\Sonic 3\Sonic 3 Continue.bin
-#split	0x000DF095,0x000DF298,Sound\Music\Sonic 3\Sonic 3 1UP.bin
-#split	0x000DF298,0x000DF364,Sound\Music\Sonic 3\Chaos Emerald.bin
-#split	0x000DF364,0x000DF5E4,Sound\Music\Sonic 3\Sonic 3 Invincible.bin
-#split	0x000DF5E4,0x000DFABE,Sound\Music\Competition Menu.bin
-#split	0x000DFABE,0x000DFBFE,Sound\Music\Countdown.bin
-#split	0x000DFBFE,0x000DFEAC,Sound\Music\Sonic 3\Sonic 3 Game Complete.bin
-
 /* Uncompressed plane mappings */
 #split	0x0000A130,0x0000A164,General\Competition Menu\Uncompressed Map\Numbers.bin
 #split	0x0000AE7C,0x0000AEA4,General\Competition Menu\Uncompressed Map\Results Letters.bin
@@ -578,7 +526,7 @@
 #split	0x000F1218,0x000F1584,sound\DAC\AF.bin
 #split	0x000F1584,0x000F28E0,sound\DAC\B0.bin
 #split	0x000F28E0,0x000F3465,sound\DAC\B1.bin
-#split	0x000F3465,0x000F3CAD,sound\DAC\Sonic 3 B2-B3.bin
+#split	0x000F3465,0x000F3CAD,sound\DAC\B2-B3 (Sonic 3).bin
 #split	0x000F3CAD,0x000F42AA,sound\DAC\B4C1-C4.bin
 #split	0x000F42AA,0x000F48EA,sound\DAC\B5.bin
 #split	0x000F48EA,0x000F4E3F,sound\DAC\B6.bin
@@ -591,7 +539,3 @@
 #split	0x000F6E08,0x000F7518,sound\DAC\BE.bin
 #split	0x000F7518,0x000F76F4,sound\DAC\BF.bin
 #split	0x000F76F4,0x000F7F2A,sound\DAC\C0.bin
-
-/* Sound Effects */
-#split	0x000FF0AF,0x000FF114,Sound\SFX\Sonic 3 9B.bin
-#split	0x000FF49C,0x000FF4AB,Sound\SFX\Sonic 3 AD.bin
