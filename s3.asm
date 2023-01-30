@@ -119569,7 +119569,7 @@ ArtKosM_BadnikExplosion:
 		binclude "General/Sprites/SS Entry/Badnik Explosion.bin"
 		even
 ArtNem_BonusStage:
-		binclude "General/Sprites/Bonus/Bonus Stage.bin"
+		binclude "Levels/Gumball/Nemesis Art/Gumball Bonus.bin"
 		even
 ArtKosM_SonicEndPose:
 		binclude "General/Ending/KosinskiM Art/Sonic 3 Sonic Ending Pose.bin"

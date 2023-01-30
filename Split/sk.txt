@@ -384,7 +384,7 @@
 #split	0x00193456,0x001935A8,General\Sprites\Animals\Penguin.bin
 #split	0x001935A8,0x00193706,General\Sprites\Animals\Squirrel.bin
 #split	0x00193706,0x0019385A,General\Sprites\Animals\Rabbit.bin
-#split	0x0019385A,0x00194388,General\Sprites\Bonus\Bonus Stage.bin
+#split	0x0019385A,0x00194388,Levels\Gumball\Nemesis Art\Gumball Bonus.bin
 
 /* Kosinski-Compressed Art */
 #split	0x000CC6A0,0x000CCA20,General\Title\Kosinski Art\SK Big SEGA.bin
