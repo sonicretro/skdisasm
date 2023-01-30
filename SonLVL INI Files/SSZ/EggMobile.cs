@@ -72,8 +72,8 @@ namespace S3KObjectDefinitions.SSZ
 				"../General/Sprites/Robotnik/Map - Robotnik Ship.asm", 10, 0, true);
 
 			var head = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../General/Sprites/Robotnik/Egg Robo Head.bin", CompressionType.KosinskiM),
-				"../General/Sprites/Robotnik/Map - Egg Robo Head.asm", 0, 0, true);
+				"../General/Sprites/Egg Robo/Egg Robo Head.bin", CompressionType.KosinskiM),
+				"../General/Sprites/Egg Robo/Map - Egg Robo Head.asm", 0, 0, true);
 
 			var mecha = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
 				"../General/Sprites/Mecha Sonic/Mecha Sonic.bin", CompressionType.Uncompressed),

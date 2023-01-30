@@ -65,16 +65,16 @@ namespace S3KObjectDefinitions.SSZ
 		public override void Init(ObjectData data)
 		{
 			var art = LevelData.ReadFile(
-				"../General/Sprites/Egg Robo Badnik/Egg Robo Badnik.bin", CompressionType.KosinskiM);
+				"../General/Sprites/Egg Robo/Egg Robo Badnik.bin", CompressionType.KosinskiM);
 			var map = LevelData.ASMToBin(
-				"../General/Sprites/Robotnik/Map - Eggrobo.asm", LevelData.Game.MappingsVersion);
+				"../General/Sprites/Egg Robo/Map - Egg Robo Badnik.asm", LevelData.Game.MappingsVersion);
 
 			properties = new PropertySpec[2];
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);
 			sprites = new Sprite[4][];
 
 			sprites[0] = BuildFlippedSprites(
-				ReadScaledArt("../General/Sprites/Robotnik/Egg Robo Fly Scaled.bin", 0, 1, true));
+				ReadScaledArt("../General/Sprites/Egg Robo/Egg Robo Fly Scaled.bin", 0, 1, true));
 
 			var arm = ObjectHelper.MapToBmp(art, map, 2, 0);
 			var body = ObjectHelper.MapToBmp(art, map, 3, 0, true);

@@ -12,7 +12,7 @@
 #split	0x000B2E36,0x000B6946,General\Special Stage\Layout\Perspective Maps.bin
 #split	0x000CAD06,0x000CB81A,Levels\LRZ\Misc\Act 1 Rock Placement.bin
 #split	0x000CB820,0x000CB860,Levels\LRZ\Misc\Act 2 Rock Placement.bin
-#split	0x0017B6E0,0x0017C6E0,General\Sprites\Robotnik\Egg Robo Fly Scaled.bin
+#split	0x0017B6E0,0x0017C6E0,General\Sprites\Egg Robo\Egg Robo Fly Scaled.bin
 #split	0x001FCF2A,0x001FD5CA,General\Special Stage\Layout\SK Set 1.bin
 #split	0x001FD5CA,0x001FF41A,General\Special Stage\Layout\SK Set 2.bin
 
@@ -355,8 +355,8 @@
 #split	0x001561C0,0x00156C08,Levels\Pachinko\Nemesis Art\Main.bin
 #split	0x00157AE8,0x00158CAE,Levels\Slots\Nemesis Art\Blocks.bin
 #split	0x00159CD0,0x00159CFE,Levels\ICZ\Nemesis Art\Teleporter Beam.bin
-#split	0x0015FFBE,0x00160340,General\Sprites\Robotnik\Egg Robo Run.bin
-#split	0x00160340,0x001607D8,General\Sprites\Robotnik\Egg Robo Stand.bin
+#split	0x0015FFBE,0x00160340,General\Sprites\Egg Robo\Egg Robo Run.bin
+#split	0x00160340,0x001607D8,General\Sprites\Egg Robo\Egg Robo Stand.bin
 #split	0x00165C6C,0x00165E80,Levels\FBZ\Nemesis Art\Egg Capsule.bin
 #split	0x00174B28,0x001757B4,Levels\HPZ\Nemesis Art\Emerald Misc Art.bin
 #split	0x001757B4,0x0017588A,Levels\HPZ\Nemesis Art\Gray Emerald.bin
@@ -443,7 +443,7 @@
 #split	0x0015C9BC,0x0015CA9E,Levels\DEZ\KosinskiM Art\Title Card.bin
 #split	0x0015CA9E,0x0015CC30,Levels\DDZ\KosinskiM Art\Title Card.bin
 #split	0x0015CC30,0x0015CD62,Levels\HPZ\KosinskiM Art\Title Card.bin
-#split	0x0015FDDC,0x0015FFBE,General\Sprites\Robotnik\Egg Robo Head.bin
+#split	0x0015FDDC,0x0015FFBE,General\Sprites\Egg Robo\Egg Robo Head.bin
 #split	0x001607D8,0x00160AAA,General\Sprites\Robotnik\Robotnik Ship Crane.bin
 #split	0x00160AAA,0x00160D8C,General\Ending\KosinskiM Art\Island Lift Animated Tiles.bin
 #split	0x00160D8C,0x0016118E,General\Ending\KosinskiM Art\Pelican and Dolphin.bin
@@ -492,7 +492,7 @@
 #split	0x00174A86,0x00174B28,Levels\HPZ\KosinskiM Art\Knuckles Dizzy Stars.bin
 #split	0x0017588A,0x001759AC,General\Sprites\Teleporter\Teleporter.bin
 #split	0x001759AC,0x00175A9E,Levels\HPZ\KosinskiM Art\Special Stage Emeralds.bin
-#split	0x0017B17E,0x0017B6E0,General\Sprites\Egg Robo Badnik\Egg Robo Badnik.bin
+#split	0x0017B17E,0x0017B6E0,General\Sprites\Egg Robo\Egg Robo Badnik.bin
 #split	0x0017C6E0,0x0017C802,General\Sprites\Mecha Sonic\Mecha Sonic Head.bin
 #split	0x0017DBC2,0x0017E274,Levels\SSZ\KosinskiM Art\Death Egg Small.bin
 #split	0x0017EDB4,0x0017EFA6,Levels\SSZ\KosinskiM Art\GHZ Ball and Chain.bin
