@@ -2,12 +2,12 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Egg Capsule" Image="main" Depth="4">
   <Images>
     <ImageFromMappings id="main">
-      <ArtFile filename="../General/Sprites/Robotnik/Egg Capsule.bin" />
-      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Egg Capsule.asm" frame="0" />
+      <ArtFile filename="../General/Sprites/Egg Capsule/Egg Capsule.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Egg Capsule/Map - Egg Capsule.asm" frame="0" />
     </ImageFromMappings>
     <ImageFromMappings id="button">
-      <ArtFile filename="../General/Sprites/Robotnik/Egg Capsule.bin" />
-      <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Egg Capsule.asm" frame="5" />
+      <ArtFile filename="../General/Sprites/Egg Capsule/Egg Capsule.bin" />
+      <MapFile type="ASM" filename="../General/Sprites/Egg Capsule/Map - Egg Capsule.asm" frame="5" />
     </ImageFromMappings>
   </Images>
   <Display>

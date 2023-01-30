@@ -332,7 +332,7 @@
 #split	0x000DBDDE,0x000DC2E0,Levels\FBZ\Nemesis Art\Act 2 Subboss.bin
 #split	0x000DC2E0,0x000DC6C2,Levels\FBZ\Nemesis Art\End Boss.bin
 #split	0x000DD976,0x000DD990,General\Sprites\Signpost\Stub.bin
-#split	0x000DD990,0x000DDE34,General\Sprites\Robotnik\Egg Capsule.bin
+#split	0x000DD990,0x000DDE34,General\Sprites\Egg Capsule\Egg Capsule.bin
 #split	0x000DDE34,0x000DDFE6,General\Ending\Nemesis Art\Large Text.bin
 #split	0x000DDFE6,0x000DE362,Levels\FBZ\Nemesis Art\End Boss Flame.bin
 #split	0x000DEA00,0x000DF370,General\Ending\Nemesis Art\Knuckles Ending Pose.bin
