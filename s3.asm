@@ -119080,9 +119080,9 @@ ArtNem_Rabbit:	binclude "General/Sprites/Animals/Rabbit.bin"
 Map_RobotnikShip:
 		include "General/Sprites/Robotnik/Map - Robotnik Ship.asm"
 Map_FBZRobotnikRun:
-		include "Levels/FBZ/Misc Object Data/Map - Robotnik Run.asm"
+		include "General/Sprites/Robotnik/Map - FBZ Robotnik Run.asm"
 Map_FBZRobotnikHead:
-		include "Levels/FBZ/Misc Object Data/Map - Robotnik Head.asm"
+		include "General/Sprites/Robotnik/Map - FBZ Robotnik Head.asm"
 Map_LBZMiniboss:
 		include "Levels/LBZ/Misc Object Data/Map - Miniboss.asm"
 Map_LBZMinibossBox:
@@ -119335,7 +119335,7 @@ Map_MGZEndBossDebris:
 		include "Levels/MGZ/Misc Object Data/Map - End Boss Debris.asm"
 Map_FBZ2Subboss:include "Levels/FBZ/Misc Object Data/Map - Act 2 Subboss S3.asm"
 Map_FBZRobotnikStand:
-		include "Levels/FBZ/Misc Object Data/Map - Robotnik Stand.asm"
+		include "General/Sprites/Robotnik/Map - FBZ Robotnik Stand.asm"
 Map_ICZWallAndColumn:
 		include "Levels/ICZ/Misc Object Data/Map - Wall and Column.asm"
 Map_ICZPlatforms:
