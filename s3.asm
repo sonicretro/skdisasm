@@ -5037,7 +5037,19 @@ loc_4066:
 locret_406C:
 		rts
 ; ---------------------------------------------------------------------------
-OldDebugCodeDat:dc.b  $20, $30, $70, $10, $50, $70, $40, $60, $70, $71, $72,    0
+OldDebugCodeDat:
+		dc.b button_C_mask
+		dc.b button_C_mask|button_B_mask
+		dc.b button_C_mask|button_B_mask|button_A_mask
+		dc.b button_B_mask
+		dc.b button_B_mask|button_A_mask
+		dc.b button_B_mask|button_A_mask|button_C_mask
+		dc.b button_A_mask
+		dc.b button_A_mask|button_C_mask
+		dc.b button_A_mask|button_C_mask|button_B_mask
+		dc.b button_A_mask|button_C_mask|button_B_mask|button_up_mask
+		dc.b button_A_mask|button_C_mask|button_B_mask|button_down_mask
+		dc.b 0
 		even
 ; ---------------------------------------------------------------------------
 
@@ -5211,7 +5223,15 @@ locret_42C8:
 ; End of function S3_Level_Select_Code
 
 ; ---------------------------------------------------------------------------
-LSelect3CodeDat:dc.b    1,   1,   2,   2,   1,   1,   1,   1,   0
+LSelect3CodeDat:dc.b button_up_mask
+		dc.b button_up_mask
+		dc.b button_down_mask
+		dc.b button_down_mask
+		dc.b button_up_mask
+		dc.b button_up_mask
+		dc.b button_up_mask
+		dc.b button_up_mask
+		dc.b 0
 		even
 Map_TitleScreenText:
 		include "General/Title/Map - S3 Screen Text.asm"
