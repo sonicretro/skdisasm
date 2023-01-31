@@ -861,7 +861,7 @@ ArtNem_HCZEndBoss:
 		binclude "Levels/HCZ/Nemesis Art/End Boss.bin"
 		even
 ArtNem_HCZDragonfly:
-		binclude "Levels/HCZ/Nemesis Art/Dragonfly.bin"
+		binclude "General/Sprites/Buggernaut/Buggernaut.bin"
 		even
 ArtKosM_Jawz:
 		binclude "General/Sprites/Jawz/Jawz.bin"

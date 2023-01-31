@@ -161,7 +161,7 @@
 #split	0x001671A2,0x0016732A,Levels\AIZ\Nemesis Art\Miniboss Small.bin
 #split	0x00168400,0x0016929E,Levels\HCZ\Nemesis Art\Miniboss.bin
 #split	0x0016929E,0x0016A3E0,Levels\HCZ\Nemesis Art\End Boss.bin
-#split	0x0016A3E0,0x0016A552,Levels\HCZ\Nemesis Art\Dragonfly.bin
+#split	0x0016A3E0,0x0016A552,General\Sprites\Buggernaut\Buggernaut.bin
 #split	0x0016B2CE,0x0016B340,Levels\MGZ\Nemesis Art\Spire.bin
 #split	0x0016E548,0x0016EA04,Levels\CNZ\Nemesis Art\Miniboss.bin
 #split	0x0016EA04,0x0016EF18,Levels\CNZ\Nemesis Art\End Boss.bin
