@@ -498,7 +498,7 @@
 #split	0x0017EDB4,0x0017EFA6,Levels\SSZ\KosinskiM Art\GHZ Ball and Chain.bin
 #split	0x0017EFA6,0x0017F738,Levels\SSZ\KosinskiM Art\MTZ Orbs.bin
 #split	0x0017F738,0x0017FCBA,General\Sprites\Mecha Sonic\Mecha Sonic Extra Art.bin
-#split	0x0017FCBA,0x0018008C,General\Ending\KosinskiM Art\Master Emerald.bin
+#split	0x0017FCBA,0x0018008C,General\Sprites\SSZ Master Emerald\Master Emerald.bin
 #split	0x0018008C,0x001803EE,General\Sprites\Spikebonker\Spikebonker.bin
 #split	0x001803EE,0x001805A0,General\Sprites\Chainspike\Chainspike.bin
 #split	0x001805A0,0x00181002,Levels\DEZ\KosinskiM Art\Miniboss Misc Art.bin
