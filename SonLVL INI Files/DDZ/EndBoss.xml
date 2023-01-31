@@ -22,7 +22,7 @@
       <MapFile type="ASM" filename="../Levels/DDZ/Misc Object Data/Map - Missile Asteroid.asm" frame="61" startpal="2" />
     </ImageFromMappings>
     <ImageFromMappings id="emerald">
-      <ArtFile filename="../General/Sprites/Master Emerald/Master Emerald.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/DEZ/KosinskiM Art/Final Boss Master Emerald.bin" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/DEZ/Misc Object Data/Map - Final Boss Master Emerald.asm" startpal="3" />
     </ImageFromMappings>
   </Images>
