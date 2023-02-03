@@ -119345,7 +119345,7 @@ Map_EndSigns:	include "General/Sprites/Signpost/Map - End Signs.asm"
 Map_SignpostStub:
 		include "General/Sprites/Signpost/Map - Signpost Stub.asm"
 Map_EggCapsule:	include "General/Sprites/Egg Capsule/Map - Egg Capsule S3.asm"
-Map_LBZKnuxBomb:include "Levels/LBZ/Misc Object Data/Map - Knuckles Bomb.asm"
+Map_LBZKnuxBomb:include "General/Sprites/Knuckles/Cutscene/Map - Knuckles Bomb.asm"
 Map_CutsceneKnux:
 		include "General/Sprites/Knuckles/Cutscene/Map - Cutscene Knuckles.asm"
 DPLC_CutsceneKnux:
@@ -119510,7 +119510,7 @@ ArtUnc_Flybot767:
 		binclude "General/Sprites/Flybot767/Flybot767.bin"
 		even
 ArtNem_LBZKnuxBomb:
-		binclude "Levels/LBZ/Nemesis Art/Knuckles Bomb.bin"
+		binclude "General/Sprites/Knuckles/Cutscene/Knuckles Bomb.bin"
 		even
 ArtKosM_LBZ2DeathEggSmall:
 		binclude "Levels/LBZ/KosinskiM Art/Act 2 Death Egg Small.bin"

@@ -171,7 +171,7 @@
 #split	0x00172F1E,0x00173CCC,Levels\ICZ\Nemesis Art\End Boss.bin
 #split	0x00173CCC,0x00174154,Levels\ICZ\Nemesis Art\Miniboss.bin
 #split	0x0017599C,0x00176542,Levels\LBZ\Nemesis Art\Final Boss 1.bin
-#split	0x001791DE,0x0017921C,Levels\LBZ\Nemesis Art\Knuckles Bomb.bin
+#split	0x001791DE,0x0017921C,General\Sprites\Knuckles\Cutscene\Knuckles Bomb.bin
 #split	0x0017FB50,0x001800A2,Levels\AIZ\Nemesis Art\Miniboss Fire.bin
 #split	0x0018CF6E,0x0018D3E0,General\Ending\Nemesis Art\S3 Large Text.bin
 #split	0x0018D3E0,0x0018D586,General\Ending\Nemesis Art\S3 8x16 Font.bin

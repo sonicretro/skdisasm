@@ -177,7 +177,7 @@ namespace S3KObjectDefinitions.Common
 
 			extraSprites[9] = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
 				"../General/Sprites/Knuckles/Cutscene/Knuckles MHZ Switch.bin", CompressionType.KosinskiM),
-				"../Levels/MHZ/Misc Object Data/Map - Act 2 Knuckles Switch.asm", 0, startpal, true);
+				"../General/Sprites/Knuckles/Cutscene/Map - Act 2 Knuckles Switch.asm", 0, startpal, true);
 			extraSprites[9].Offset(-8, 0);
 
 			art = LevelData.ReadFile("../General/Sprites/Knuckles/Art/Knuckles.bin", CompressionType.Uncompressed);
