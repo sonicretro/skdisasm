@@ -118896,10 +118896,10 @@ ArtNem_AIZIntroSprites:
 		binclude "Levels/AIZ/Nemesis Art/Intro Waves.bin"
 		even
 ArtNem_SurfboardSplash:
-		binclude "Levels/AIZ/Nemesis Art/Surfboard Splash.bin"
+		binclude "General/Sprites/Surfboard/Surfboard Splash.bin"
 		even
 ArtNem_Surfboard:
-		binclude "Levels/AIZ/Nemesis Art/Surfboard.bin"
+		binclude "General/Sprites/Surfboard/Surfboard.bin"
 		even
 ArtUnc_Invincibility:
 		binclude "General/Sprites/Shields/Invincibility.bin"

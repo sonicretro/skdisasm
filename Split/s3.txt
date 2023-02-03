@@ -143,8 +143,8 @@
 #split	0x000C3B72,0x000C49CC,General\S2Menu\Nemesis Art\Level Select Icons.bin
 #split	0x000C49CC,0x000C5624,General\Title\Nemesis Art\S3 Sonic Sprites.bin
 #split	0x001481A0,0x001486E0,Levels\AIZ\Nemesis Art\Intro Waves.bin
-#split	0x001486E0,0x00148978,Levels\AIZ\Nemesis Art\Surfboard Splash.bin
-#split	0x00148978,0x00148D22,Levels\AIZ\Nemesis Art\Surfboard.bin
+#split	0x001486E0,0x00148978,General\Sprites\Surfboard\Surfboard Splash.bin
+#split	0x00148978,0x00148D22,General\Sprites\Surfboard\Surfboard.bin
 #split	0x0014F5E2,0x0014F6A0,General\2P Zone\Nemesis Art\Spindash Dust.bin
 #split	0x0015026C,0x00150D26,General\Title\Nemesis Art\S3 Banner.bin
 #split	0x0015C988,0x0015CACE,General\Sprites\Level Misc\Vertical Spring.bin
