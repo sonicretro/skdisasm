@@ -104,7 +104,7 @@ namespace S3KObjectDefinitions.Common
 			properties = new PropertySpec[2];
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);
 			sprite = BuildFlippedSprites(ObjectHelper.MapASMToBmp(art,
-				"../Levels/SSZ/Misc Object Data/Map - (&HPZ) Teleporter.asm", frame, startpal));
+				"../General/Sprites/Teleporter/Map - Teleporter.asm", frame, startpal));
 
 			properties[0] = new PropertySpec("Distance", typeof(int), "Extended",
 				"Vertical distance the player will travel, in pixels.", null,
