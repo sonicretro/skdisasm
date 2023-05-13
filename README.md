@@ -57,7 +57,7 @@ Inside the 'SonLVL INI Files' directory are project files for SonLVL. SonLVL can
 ## Editing with SonED2
 
 The disassembly also comes with a 'SonED Projects' folder, which contains prebuilt project files for use with SonEd2 v. 11.02.24,
-recently released and available at [Stealth's site](http://www.headcannon.com/hchc/SonED/)
+recently released and available at [Stealth's site](https://www.headcannon.com/hchc/SonED/).
 
 
 ## The Disassembly's Completion
