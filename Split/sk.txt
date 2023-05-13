@@ -12,7 +12,7 @@
 #split	0x000B2E36,0x000B6946,General\Special Stage\Layout\Perspective Maps.bin
 #split	0x000CAD06,0x000CB81A,Levels\LRZ\Misc\Act 1 Rock Placement.bin
 #split	0x000CB820,0x000CB860,Levels\LRZ\Misc\Act 2 Rock Placement.bin
-#split	0x0017B6E0,0x0017C6E0,General\Sprites\Robotnik\Egg Robo Fly Scaled.bin
+#split	0x0017B6E0,0x0017C6E0,General\Sprites\Egg Robo\Egg Robo Fly Scaled.bin
 #split	0x001FCF2A,0x001FD5CA,General\Special Stage\Layout\SK Set 1.bin
 #split	0x001FD5CA,0x001FF41A,General\Special Stage\Layout\SK Set 2.bin
 
@@ -154,11 +154,11 @@
 #split	0x00083CFA,0x00083D1A,Levels\AIZ\Palettes\Miniboss After.bin
 #split	0x00083D1A,0x00083D3A,Levels\ICZ\Palettes\Miniboss After.bin
 #split	0x00090680,0x000906A0,Levels\LRZ\Palettes\Rock Crusher.bin
-#split	0x000A893C,0x000A89BC,General\Sprites\S2Menu\Palettes\Sega Screen.bin
-#split	0x000A89BC,0x000A89DC,General\Sprites\S2Menu\Palettes\Title Screen SK.bin
-#split	0x000A89DC,0x000A8A3C,General\Sprites\S2Menu\Palettes\Proto Level Select SK.bin
+#split	0x000A893C,0x000A89BC,General\S2Menu\Palettes\Sega Screen.bin
+#split	0x000A89BC,0x000A89DC,General\S2Menu\Palettes\Title Screen SK.bin
+#split	0x000A89DC,0x000A8A3C,General\S2Menu\Palettes\Proto Level Select SK.bin
 #split	0x000A8A3C,0x000A8A7C,General\Sprites\Sonic\Palettes\SonicAndTails.bin
-#split	0x000A8A7C,0x000A8AFC,General\Sprites\S2Menu\Palettes\Main.bin
+#split	0x000A8A7C,0x000A8AFC,General\S2Menu\Palettes\Main.bin
 #split	0x000A8AFC,0x000A8B1C,General\Sprites\Knuckles\Palettes\Main.bin
 #split	0x000A8B1C,0x000A8B7C,Levels\AIZ\Palettes\Intro.bin
 #split	0x000A8B7C,0x000A8BDC,Levels\AIZ\Palettes\Main.bin
@@ -236,7 +236,7 @@
 #split	0x0000E48A,0x0000E5CA,General\Sprites\HUD Icon\Lives Digits.bin
 #split	0x0000E5CA,0x0000E8AA,General\Sprites\HUD Icon\Debug Digits.bin
 #split	0x000A9DFC,0x000AA57C,General\Sprites\Dash Dust\Air Countdown.bin
-#split	0x000AA57C,0x000AAA7C,General\Sprites\S2Menu\SONICMILES.bin
+#split	0x000AA57C,0x000AAA7C,General\S2Menu\Uncompressed Art\SONICMILES.bin
 #split	0x000AAA7C,0x000ABDFC,General\Sprites\Sonic\Art\SStage Sonic.bin
 #split	0x000ABF22,0x000AD302,General\Sprites\Knuckles\Art\SStage Knuckles.bin
 #split	0x000B69C0,0x000B89C0,Levels\FBZ\Animated Tiles\0.bin
@@ -321,7 +321,7 @@
 #split	0x000ADF60,0x000AE3EC,General\Special Stage\Nemesis Art\Ring.bin
 #split	0x000AEED0,0x000AEF54,General\Special Stage\Nemesis Art\BG.bin
 #split	0x000B07B8,0x000B2E36,General\Special Stage\Nemesis Art\Layout.bin
-#split	0x000CA5E0,0x000CAB54,General\Sprites\S2Menu\2P Options.bin
+#split	0x000CA5E0,0x000CAB54,General\S2Menu\Nemesis Art\2P Options.bin
 #split	0x000D6498,0x000D67F0,General\Title\Nemesis Art\SK ANDKnuckles.bin
 #split	0x000D73CE,0x000D771E,General\Sprites\Boss Explosion\Boss Explosion.bin
 #split	0x000D771E,0x000D7C7A,General\Sprites\Robotnik\Ship.bin
@@ -332,7 +332,7 @@
 #split	0x000DBDDE,0x000DC2E0,Levels\FBZ\Nemesis Art\Act 2 Subboss.bin
 #split	0x000DC2E0,0x000DC6C2,Levels\FBZ\Nemesis Art\End Boss.bin
 #split	0x000DD976,0x000DD990,General\Sprites\Signpost\Stub.bin
-#split	0x000DD990,0x000DDE34,General\Sprites\Robotnik\Egg Capsule.bin
+#split	0x000DD990,0x000DDE34,General\Sprites\Egg Capsule\Egg Capsule.bin
 #split	0x000DDE34,0x000DDFE6,General\Ending\Nemesis Art\Large Text.bin
 #split	0x000DDFE6,0x000DE362,Levels\FBZ\Nemesis Art\End Boss Flame.bin
 #split	0x000DEA00,0x000DF370,General\Ending\Nemesis Art\Knuckles Ending Pose.bin
@@ -355,8 +355,8 @@
 #split	0x001561C0,0x00156C08,Levels\Pachinko\Nemesis Art\Main.bin
 #split	0x00157AE8,0x00158CAE,Levels\Slots\Nemesis Art\Blocks.bin
 #split	0x00159CD0,0x00159CFE,Levels\ICZ\Nemesis Art\Teleporter Beam.bin
-#split	0x0015FFBE,0x00160340,General\Sprites\Robotnik\Egg Robo Run.bin
-#split	0x00160340,0x001607D8,General\Sprites\Robotnik\Egg Robo Stand.bin
+#split	0x0015FFBE,0x00160340,General\Sprites\Egg Robo\Egg Robo Run.bin
+#split	0x00160340,0x001607D8,General\Sprites\Egg Robo\Egg Robo Stand.bin
 #split	0x00165C6C,0x00165E80,Levels\FBZ\Nemesis Art\Egg Capsule.bin
 #split	0x00174B28,0x001757B4,Levels\HPZ\Nemesis Art\Emerald Misc Art.bin
 #split	0x001757B4,0x0017588A,Levels\HPZ\Nemesis Art\Gray Emerald.bin
@@ -368,12 +368,12 @@
 #split	0x00190D34,0x00190E4C,General\Sprites\HUD Icon\Sonic Life Icon.bin
 #split	0x00190E4C,0x00190F4A,General\Sprites\HUD Icon\Knuckles Life Icon.bin
 #split	0x00190F4A,0x001913A4,General\Sprites\Monitors\Monitors.bin
-#split	0x001913A4,0x00191B46,General\Sprites\S2Menu\Signpost.bin
+#split	0x001913A4,0x00191B46,General\S2Menu\Nemesis Art\Signpost.bin
 #split	0x00191B46,0x00191DE4,General\Sprites\Bubbles\Bubbles.bin
 #split	0x00191DE4,0x0019200A,General\Sprites\Game Over\GameOver.bin
 #split	0x0019200A,0x001923B0,General\Sprites\Enemy Misc\Explosion.bin
-#split	0x001923B0,0x0019269C,General\Sprites\S2Menu\Tails Continue Sprites.bin
-#split	0x0019269C,0x001927FE,General\Sprites\S2Menu\Sonic Continue Icon.bin
+#split	0x001923B0,0x0019269C,General\S2Menu\Nemesis Art\Tails Continue Sprites.bin
+#split	0x0019269C,0x001927FE,General\S2Menu\Nemesis Art\Sonic Continue Icon.bin
 #split	0x001927FE,0x00192AEE,General\Sprites\Level Misc\SpikesSprings.bin
 #split	0x00192AEE,0x00192D2A,General\Sprites\Ring\RingHUDText.bin
 #split	0x00192D2A,0x00192F6E,General\Sprites\Enemy Misc\EnemyPtsStarpost.bin
@@ -384,7 +384,7 @@
 #split	0x00193456,0x001935A8,General\Sprites\Animals\Penguin.bin
 #split	0x001935A8,0x00193706,General\Sprites\Animals\Squirrel.bin
 #split	0x00193706,0x0019385A,General\Sprites\Animals\Rabbit.bin
-#split	0x0019385A,0x00194388,General\Sprites\Bonus\Bonus Stage.bin
+#split	0x0019385A,0x00194388,Levels\Gumball\Nemesis Art\Gumball Bonus.bin
 
 /* Kosinski-Compressed Art */
 #split	0x000CC6A0,0x000CCA20,General\Title\Kosinski Art\SK Big SEGA.bin
@@ -443,7 +443,7 @@
 #split	0x0015C9BC,0x0015CA9E,Levels\DEZ\KosinskiM Art\Title Card.bin
 #split	0x0015CA9E,0x0015CC30,Levels\DDZ\KosinskiM Art\Title Card.bin
 #split	0x0015CC30,0x0015CD62,Levels\HPZ\KosinskiM Art\Title Card.bin
-#split	0x0015FDDC,0x0015FFBE,General\Sprites\Robotnik\Egg Robo Head.bin
+#split	0x0015FDDC,0x0015FFBE,General\Sprites\Egg Robo\Egg Robo Head.bin
 #split	0x001607D8,0x00160AAA,General\Sprites\Robotnik\Robotnik Ship Crane.bin
 #split	0x00160AAA,0x00160D8C,General\Ending\KosinskiM Art\Island Lift Animated Tiles.bin
 #split	0x00160D8C,0x0016118E,General\Ending\KosinskiM Art\Pelican and Dolphin.bin
@@ -492,19 +492,19 @@
 #split	0x00174A86,0x00174B28,Levels\HPZ\KosinskiM Art\Knuckles Dizzy Stars.bin
 #split	0x0017588A,0x001759AC,General\Sprites\Teleporter\Teleporter.bin
 #split	0x001759AC,0x00175A9E,Levels\HPZ\KosinskiM Art\Special Stage Emeralds.bin
-#split	0x0017B17E,0x0017B6E0,General\Sprites\Egg Robo Badnik\Egg Robo Badnik.bin
+#split	0x0017B17E,0x0017B6E0,General\Sprites\Egg Robo\Egg Robo Badnik.bin
 #split	0x0017C6E0,0x0017C802,General\Sprites\Mecha Sonic\Mecha Sonic Head.bin
 #split	0x0017DBC2,0x0017E274,Levels\SSZ\KosinskiM Art\Death Egg Small.bin
 #split	0x0017EDB4,0x0017EFA6,Levels\SSZ\KosinskiM Art\GHZ Ball and Chain.bin
 #split	0x0017EFA6,0x0017F738,Levels\SSZ\KosinskiM Art\MTZ Orbs.bin
 #split	0x0017F738,0x0017FCBA,General\Sprites\Mecha Sonic\Mecha Sonic Extra Art.bin
-#split	0x0017FCBA,0x0018008C,General\Ending\KosinskiM Art\Master Emerald.bin
+#split	0x0017FCBA,0x0018008C,General\Sprites\SSZ Master Emerald\Master Emerald.bin
 #split	0x0018008C,0x001803EE,General\Sprites\Spikebonker\Spikebonker.bin
 #split	0x001803EE,0x001805A0,General\Sprites\Chainspike\Chainspike.bin
 #split	0x001805A0,0x00181002,Levels\DEZ\KosinskiM Art\Miniboss Misc Art.bin
 #split	0x00181002,0x00181D44,Levels\DEZ\KosinskiM Art\End Boss.bin
 #split	0x00181D44,0x00182BE6,Levels\DEZ\KosinskiM Art\Final Boss Misc Art.bin
-#split	0x00182BE6,0x00182ED8,General\Sprites\Master Emerald\Master Emerald.bin
+#split	0x00182BE6,0x00182ED8,Levels\DEZ\KosinskiM Art\Final Boss Master Emerald.bin
 #split	0x00182ED8,0x0018322A,Levels\DEZ\KosinskiM Art\Final Boss Debris.bin
 #split	0x0018322A,0x00184D9C,Levels\DDZ\KosinskiM Art\Misc Art.bin
 #split	0x00187B8A,0x00187BEC,General\Sprites\Starpost\Starpost Stars 1.bin
@@ -621,7 +621,7 @@
 /* Enigma Compressed plane mappings */
 #split	0x000AEDB0,0x000AEED0,General\Special Stage\Enigma Map\BG.bin
 #split	0x000AEF54,0x000B07B8,General\Special Stage\Enigma Map\Layout.bin
-#split	0x000CAB54,0x000CAD00,General\Sprites\S2Menu\Enigma Map\2P Options.bin
+#split	0x000CAB54,0x000CAD00,General\S2Menu\Enigma Map\2P Options.bin
 #split	0x000CBA68,0x000CBB32,General\Title\Enigma Map\SK SEGA.bin
 #split	0x000CBB32,0x000CBCE0,General\Title\Enigma Map\SK SonicKnux Frame 1.bin
 #split	0x000CBCE0,0x000CBF3E,General\Title\Enigma Map\SK SonicKnux Frame 2.bin

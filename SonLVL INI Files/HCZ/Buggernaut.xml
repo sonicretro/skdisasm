@@ -2,11 +2,11 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Buggernaut" Image="parent" Depth="5">
   <Images>
     <ImageFromMappings id="parent">
-      <ArtFile filename="../Levels/HCZ/Nemesis Art/Dragonfly.bin" />
+      <ArtFile filename="../General/Sprites/Buggernaut/Buggernaut.bin" />
       <MapFile type="ASM" filename="../General/Sprites/Buggernaut/Map - Buggernaut.asm" frame="1" startpal="1" />
     </ImageFromMappings>
     <ImageFromMappings id="child">
-      <ArtFile filename="../Levels/HCZ/Nemesis Art/Dragonfly.bin" />
+      <ArtFile filename="../General/Sprites/Buggernaut/Buggernaut.bin" />
       <MapFile type="ASM" filename="../General/Sprites/Buggernaut/Map - Buggernaut.asm" frame="4" startpal="1" />
     </ImageFromMappings>
   </Images>

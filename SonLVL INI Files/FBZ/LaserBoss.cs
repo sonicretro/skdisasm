@@ -79,7 +79,7 @@ namespace S3KObjectDefinitions.FBZ
 
 			var eggman = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
 				"../General/Sprites/Robotnik/FBZ Robotnik Stand.bin", CompressionType.Nemesis),
-				"../Levels/FBZ/Misc Object Data/Map - Robotnik Stand.asm", 0, 0, true);
+				"../General/Sprites/Robotnik/Map - FBZ Robotnik Stand.asm", 0, 0, true);
 			eggman.Offset(216, 116);
 
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);

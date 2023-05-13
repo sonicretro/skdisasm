@@ -25,7 +25,7 @@
 #split	0x000C6524,0x000C6CA4,Levels\MGZ\Demodata\1.bin
 
 /* Palette Data */
-#split	0x000070BC,0x0000729C,General\Sprites\S2Menu\Palettes\Level Select Icons.bin
+#split	0x000070BC,0x0000729C,General\S2Menu\Palettes\Level Select Icons.bin
 #split	0x00007BB0,0x00007BD6,General\Special Stage\Palettes\3-8 S3.bin
 #split	0x00008B5A,0x00008B9A,General\Special Stage\Palettes\Emeralds S3.bin
 #split	0x00009818,0x00009878,General\Competition Menu\Palettes\1.bin
@@ -44,12 +44,12 @@
 #split	0x0004164A,0x0004168A,General\Ending\Palettes\S3 Logo.bin
 #split	0x0004168A,0x000416CA,General\Ending\Palettes\S3 Knuckles Eyecatch.bin
 #split	0x000416CA,0x0004178A,General\Ending\Palettes\S3 Logo Flash.bin
-#split	0x000433FA,0x0004346A,General\Sprites\S2Menu\Palettes\Sega Screen 2.bin
-#split	0x00043470,0x000434E0,General\Sprites\S2Menu\Palettes\Sega Screen 3.bin
+#split	0x000433FA,0x0004346A,General\S2Menu\Palettes\Sega Screen 2.bin
+#split	0x00043470,0x000434E0,General\S2Menu\Palettes\Sega Screen 3.bin
 #split	0x0004D520,0x0004D540,Levels\FBZ\Palettes\S3 Miniboss.bin
 #split	0x0005215C,0x0005217C,General\Ending\Palettes\S3 Super Sonic End Pose.bin
-#split	0x0008C1B4,0x0008C1D4,General\Sprites\S2Menu\Palettes\Title Screen.bin
-#split	0x0008C1D4,0x0008C234,General\Sprites\S2Menu\Palettes\Proto Level Select.bin
+#split	0x0008C1B4,0x0008C1D4,General\S2Menu\Palettes\Title Screen.bin
+#split	0x0008C1D4,0x0008C234,General\S2Menu\Palettes\Proto Level Select.bin
 #split	0x0008CDB4,0x0008CE14,Levels\Pachinko\Palettes\S3.bin
 #split	0x0008CE14,0x0008CE74,Levels\Slots\Palettes\S3.bin
 #split	0x00164896,0x00164A96,Levels\MGZ\Palettes\Fade to CNZ.bin
@@ -138,13 +138,13 @@
 /* Nemesis-Compressed Art */
 #split	0x00041960,0x0004313E,General\Ending\Nemesis Art\S3 Ending Graphics.bin
 #split	0x000911CE,0x00091B2E,General\Special Stage\Nemesis Art\Eosian Spheres.bin
-#split	0x000C3774,0x000C3946,General\Sprites\S2Menu\1P 2P Wins.bin
-#split	0x000C3AF2,0x000C3B72,General\Sprites\S2Menu\Menu Box.bin
-#split	0x000C3B72,0x000C49CC,General\Sprites\S2Menu\Level Select Icons.bin
+#split	0x000C3774,0x000C3946,General\S2Menu\Nemesis Art\1P 2P Wins.bin
+#split	0x000C3AF2,0x000C3B72,General\S2Menu\Nemesis Art\Menu Box.bin
+#split	0x000C3B72,0x000C49CC,General\S2Menu\Nemesis Art\Level Select Icons.bin
 #split	0x000C49CC,0x000C5624,General\Title\Nemesis Art\S3 Sonic Sprites.bin
 #split	0x001481A0,0x001486E0,Levels\AIZ\Nemesis Art\Intro Waves.bin
-#split	0x001486E0,0x00148978,Levels\AIZ\Nemesis Art\Surfboard Splash.bin
-#split	0x00148978,0x00148D22,Levels\AIZ\Nemesis Art\Surfboard.bin
+#split	0x001486E0,0x00148978,General\Sprites\Surfboard\Surfboard Splash.bin
+#split	0x00148978,0x00148D22,General\Sprites\Surfboard\Surfboard.bin
 #split	0x0014F5E2,0x0014F6A0,General\2P Zone\Nemesis Art\Spindash Dust.bin
 #split	0x0015026C,0x00150D26,General\Title\Nemesis Art\S3 Banner.bin
 #split	0x0015C988,0x0015CACE,General\Sprites\Level Misc\Vertical Spring.bin
@@ -156,12 +156,12 @@
 #split	0x0015D794,0x0015D7FC,General\Sprites\Level Misc\Horizontal Spikes.bin
 #split	0x0015D7FC,0x0015D8A2,General\Sprites\Enemy Misc\Enemy Points.bin
 #split	0x0015D8A2,0x0015DA5A,General\Sprites\Starpost\Starpost.bin
-#split	0x0015EEB4,0x0015EFFC,General\Sprites\S2Menu\Tails Continue Icon.bin
+#split	0x0015EEB4,0x0015EFFC,General\S2Menu\Nemesis Art\Tails Continue Icon.bin
 #split	0x00164BF2,0x00165260,Levels\AIZ\Nemesis Art\Miniboss.bin
 #split	0x001671A2,0x0016732A,Levels\AIZ\Nemesis Art\Miniboss Small.bin
 #split	0x00168400,0x0016929E,Levels\HCZ\Nemesis Art\Miniboss.bin
 #split	0x0016929E,0x0016A3E0,Levels\HCZ\Nemesis Art\End Boss.bin
-#split	0x0016A3E0,0x0016A552,Levels\HCZ\Nemesis Art\Dragonfly.bin
+#split	0x0016A3E0,0x0016A552,General\Sprites\Buggernaut\Buggernaut.bin
 #split	0x0016B2CE,0x0016B340,Levels\MGZ\Nemesis Art\Spire.bin
 #split	0x0016E548,0x0016EA04,Levels\CNZ\Nemesis Art\Miniboss.bin
 #split	0x0016EA04,0x0016EF18,Levels\CNZ\Nemesis Art\End Boss.bin
@@ -171,7 +171,7 @@
 #split	0x00172F1E,0x00173CCC,Levels\ICZ\Nemesis Art\End Boss.bin
 #split	0x00173CCC,0x00174154,Levels\ICZ\Nemesis Art\Miniboss.bin
 #split	0x0017599C,0x00176542,Levels\LBZ\Nemesis Art\Final Boss 1.bin
-#split	0x001791DE,0x0017921C,Levels\LBZ\Nemesis Art\Knuckles Bomb.bin
+#split	0x001791DE,0x0017921C,General\Sprites\Knuckles\Cutscene\Knuckles Bomb.bin
 #split	0x0017FB50,0x001800A2,Levels\AIZ\Nemesis Art\Miniboss Fire.bin
 #split	0x0018CF6E,0x0018D3E0,General\Ending\Nemesis Art\S3 Large Text.bin
 #split	0x0018D3E0,0x0018D586,General\Ending\Nemesis Art\S3 8x16 Font.bin
@@ -310,10 +310,10 @@
 #split	0x001A231E,0x001A23AA,General\Save Menu\Uncompressed Map\Static 4.bin
 
 /* Enigma Mappings */
-#split	0x0000729C,0x000072EE,General\Sprites\S2Menu\Enigma Map\Level Select 2P.bin
-#split	0x000072EE,0x0000731A,General\Sprites\S2Menu\Enigma Map\Options Screen.bin
-#split	0x0000731A,0x0000746E,General\Sprites\S2Menu\Enigma Map\Level Select.bin
-#split	0x0000746E,0x000074A0,General\Sprites\S2Menu\Enigma Map\Level Select Icons.bin
+#split	0x0000729C,0x000072EE,General\S2Menu\Enigma Map\Level Select 2P.bin
+#split	0x000072EE,0x0000731A,General\S2Menu\Enigma Map\Options Screen.bin
+#split	0x0000731A,0x0000746E,General\S2Menu\Enigma Map\Level Select.bin
+#split	0x0000746E,0x000074A0,General\S2Menu\Enigma Map\Level Select Icons.bin
 #split	0x0000AE62,0x0000AE7C,General\Competition Menu\Enigma Map\Menu.bin
 #split	0x0014F6A0,0x0014F75C,General\Title\Enigma Map\S3 Sonic 1.bin
 #split	0x0014F75C,0x0014F81E,General\Title\Enigma Map\S3 Sonic 2.bin
