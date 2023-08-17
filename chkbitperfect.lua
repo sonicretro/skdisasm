@@ -11,16 +11,16 @@ local co
 
 -- Sonic 3
 co = coroutine.create(function() dofile("buildS3.lua") end)
-local _, exit_code_s3 = assert(coroutine.resume(co))
+local _, _, abort_s3 = assert(coroutine.resume(co))
 
 -- Sonic & Knuckles
 co = coroutine.create(function() dofile("buildSK.lua") end)
-local _, exit_code_sk = assert(coroutine.resume(co))
+local _, _, abort_sk = assert(coroutine.resume(co))
 
 -- Restore os.exit back to normal.
 os.exit = os_exit
 
-if exit_code_s3 ~= false and exit_code_sk ~= false then
+if not abort_s3 and not abort_sk then
 	-- Hash the ROMs.
 	local s3_hash = clownmd5.HashFile("s3built.bin")
 	local sk_hash = clownmd5.HashFile("skbuilt.bin")
