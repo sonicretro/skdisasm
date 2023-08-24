@@ -601,6 +601,8 @@ VInt_0:
 
 VInt_0_Main:
 		addq.w	#1,(Lag_frame_count).w
+
+		; branch if a level or demo is running
 		cmpi.b	#$88,(Game_mode).w
 		beq.s	VInt_0_Level
 		cmpi.b	#$8C,(Game_mode).w
@@ -609,14 +611,10 @@ VInt_0_Main:
 		beq.s	VInt_0_Level
 		cmpi.b	#$C,(Game_mode).w
 		beq.s	VInt_0_Level
-		move.w	#$100,(Z80_bus_request).l
-
-loc_8B2:
-		btst	#0,(Z80_bus_request).l
-		bne.s	loc_8B2
+		stopZ80
 		bsr.w	sndDriverInput
-		move.w	#0,(Z80_bus_request).l
-		bra.s	VInt_Done
+		startZ80
+		bra.s	VInt_Done	; otherwise, return from V-int
 ; ---------------------------------------------------------------------------
 
 VInt_0_Level:
@@ -624,92 +622,66 @@ VInt_0_Level:
 		beq.w	VInt_0_NoWater
 		move.w	(VDP_control_port).l,d0
 		btst	#6,(Graphics_flags).w
-		beq.s	loc_8E8
+		beq.s	+	; branch if it isn't a PAL system
 		move.w	#$700,d0
-
-loc_8E4:
-		dbf	d0,loc_8E4
-
-loc_8E8:
+-
+		dbf	d0,-	; otherwise waste a bit of time here
++
 		move.w	#1,(H_int_flag).w
-		move.w	#$100,(Z80_bus_request).l
-
-loc_8F6:
-		btst	#0,(Z80_bus_request).l
-		bne.s	loc_8F6
+		stopZ80
 		tst.b	(Water_full_screen_flag).w
 		bne.s	VInt_0_FullyUnderwater
-		lea	(VDP_control_port).l,a5
-		move.l	#-$6BFF6CC0,(a5)
-		move.l	#-$69016B00,(a5)
-		move.w	#-$6881,(a5)
-		move.w	#-$4000,(a5)
-		move.w	#$80,(DMA_trigger_word).w
-		move.w	(DMA_trigger_word).w,(a5)
+		dma68kToVDP Normal_palette,$0000,$80,CRAM
 		bra.s	VInt_0_Water_Cont
 ; ---------------------------------------------------------------------------
 
 VInt_0_FullyUnderwater:
-		lea	(VDP_control_port).l,a5
-		move.l	#-$6BFF6CC0,(a5)
-		move.l	#-$69076AC0,(a5)
-		move.w	#-$6881,(a5)
-		move.w	#-$4000,(a5)
-		move.w	#$80,(DMA_trigger_word).w
-		move.w	(DMA_trigger_word).w,(a5)
+		dma68kToVDP Water_palette,$0000,$80,CRAM
 
 VInt_0_Water_Cont:
 		move.w	(H_int_counter_command).w,(a5)
 		bsr.w	sndDriverInput
-		move.w	#0,(Z80_bus_request).l
+		startZ80
 		bra.w	VInt_Done
 ; ---------------------------------------------------------------------------
 
 VInt_0_NoWater:
 		move.w	(VDP_control_port).l,d0
 		btst	#6,(Graphics_flags).w
-		beq.s	loc_97A
+		beq.s	+	; branch if it isn't a PAL system
 		move.w	#$700,d0
-
-loc_976:
-		dbf	d0,loc_976
-
-loc_97A:
+-
+		dbf	d0,-	; otherwise, waste a bit of time here
++
 		move.w	#1,(H_int_flag).w
 		move.w	(H_int_counter_command).w,(VDP_control_port).l
-		move.w	#$100,(Z80_bus_request).l
+		stopZ80
 
-loc_990:
-		btst	#0,(Z80_bus_request).l
-		bne.s	loc_990
+		; In Competition Mode, we have to update the sprite table
+		; even during a lag frame so that the top half of the screen
+		; shows the correct sprites.
 		tst.w	(Competition_mode).w
 		beq.s	VInt_0_Done
-		move.l	#$40000010,(VDP_control_port).l
-		move.l	(V_scroll_value).w,(VDP_data_port).l
-		tst.w	(Use_normal_sprite_table).w
-		beq.s	loc_9DE
-		lea	(VDP_control_port).l,a5
-		move.l	#-$6BFE6CC0,(a5)
-		move.l	#-$69036B00,(a5)
-		move.w	#-$6881,(a5)
-		move.w	#$7800,(a5)
-		move.w	#$83,(DMA_trigger_word).w
-		move.w	(DMA_trigger_word).w,(a5)
-		bra.s	VInt_0_Done
-; ---------------------------------------------------------------------------
 
-loc_9DE:
-		lea	(VDP_control_port).l,a5
-		move.l	#-$6BFE6CC0,(a5)
-		move.l	#-$69436AC0,(a5)
-		move.w	#-$6881,(a5)
-		move.w	#$7800,(a5)
-		move.w	#$83,(DMA_trigger_word).w
-		move.w	(DMA_trigger_word).w,(a5)
+		; Update V-Scroll.
+		move.l	#vdpComm($0000,VSRAM,WRITE),(VDP_control_port).l
+		move.l	(V_scroll_value).w,(VDP_data_port).l
+
+		; Unlike in Sonic 2, the sprite tables are page-flipped in two-player mode.
+		; This fixes a race-condition where incomplete sprite tables can be uploaded
+		; to the VDP on lag frames.
+
+		; Upload the front buffer.
+		tst.w	(Current_sprite_table_page).w
+		beq.s	+
+		dma68kToVDP Sprite_table,$F800,$280,VRAM
+		bra.s	VInt_0_Done
++
+		dma68kToVDP Sprite_table_alternate,$F800,$280,VRAM
 
 VInt_0_Done:
 		bsr.w	sndDriverInput
-		move.w	#0,(Z80_bus_request).l
+		startZ80
 		bra.w	VInt_Done
 ; ---------------------------------------------------------------------------
 
@@ -775,88 +747,54 @@ VInt_10:
 		beq.w	VInt_1C
 
 VInt_8:
-		move.w	#$100,(Z80_bus_request).l
-
-loc_ABC:
-		btst	#0,(Z80_bus_request).l
-		bne.s	loc_ABC
+		stopZ80
 		bsr.w	Poll_Controllers
+
 		tst.b	(Water_full_screen_flag).w
-		bne.s	loc_AF6
-		lea	(VDP_control_port).l,a5
-		move.l	#-$6BFF6CC0,(a5)
-		move.l	#-$69016B00,(a5)
-		move.w	#-$6881,(a5)
-		move.w	#-$4000,(a5)
-		move.w	#$80,(DMA_trigger_word).w
-		move.w	(DMA_trigger_word).w,(a5)
-		bra.s	loc_B1A
-; ---------------------------------------------------------------------------
-
-loc_AF6:
-		lea	(VDP_control_port).l,a5
-		move.l	#-$6BFF6CC0,(a5)
-		move.l	#-$69076AC0,(a5)
-		move.w	#-$6881,(a5)
-		move.w	#-$4000,(a5)
-		move.w	#$80,(DMA_trigger_word).w
-		move.w	(DMA_trigger_word).w,(a5)
-
-loc_B1A:
+		bne.s	+
+		dma68kToVDP Normal_palette,$0000,$80,CRAM
+		bra.s	++
++
+		dma68kToVDP Water_palette,$0000,$80,CRAM
++
 		move.w	(H_int_counter_command).w,(a5)
-		lea	(VDP_control_port).l,a5
-		move.l	#-$6BFE6C40,(a5)
-		move.l	#-$690F6B00,(a5)
-		move.w	#-$6881,(a5)
-		move.w	#$7000,(a5)
-		move.w	#$83,(DMA_trigger_word).w
-		move.w	(DMA_trigger_word).w,(a5)
+
+		dma68kToVDP H_scroll_buffer,$F000,$380,VRAM
+
 		tst.w	(Competition_mode).w
-		beq.s	loc_B84
-		tst.w	(Switch_sprite_table).w
-		beq.s	loc_B58
-		clr.w	(Switch_sprite_table).w
-		eori.w	#-1,(Use_normal_sprite_table).w
+		beq.s	++
+		; Unlike in Sonic 2, the sprite tables are page-flipped in two-player mode.
+		; This fixes a race-condition where incomplete sprite tables can be uploaded
+		; to the VDP on lag frames.
 
-loc_B58:
-		tst.w	(Use_normal_sprite_table).w
-		bne.s	loc_B84
-		lea	(VDP_control_port).l,a5
-		move.l	#-$6BFE6CC0,(a5)
-		move.l	#-$69436AC0,(a5)
-		move.w	#-$6881,(a5)
-		move.w	#$7800,(a5)
-		move.w	#$83,(DMA_trigger_word).w
-		move.w	(DMA_trigger_word).w,(a5)
-		bra.s	loc_BA8
-; ---------------------------------------------------------------------------
-
-loc_B84:
-		lea	(VDP_control_port).l,a5
-		move.l	#-$6BFE6CC0,(a5)
-		move.l	#-$69036B00,(a5)
-		move.w	#-$6881,(a5)
-		move.w	#$7800,(a5)
-		move.w	#$83,(DMA_trigger_word).w
-		move.w	(DMA_trigger_word).w,(a5)
-
-loc_BA8:
+		; Perform page-flipping.
+		tst.w	(Sprite_table_page_flip_pending).w
+		beq.s	+
+		clr.w	(Sprite_table_page_flip_pending).w
+		eori.w	#$FFFF,(Current_sprite_table_page).w	; a not.w would've accomplished the same thing ...
++
+		; Upload the front buffer.
+		tst.w	(Current_sprite_table_page).w
+		bne.s	+
+		dma68kToVDP Sprite_table_alternate,$F800,$280,VRAM
+		bra.s	++
++
+		dma68kToVDP Sprite_table,$F800,$280,VRAM
++
 		bsr.w	Process_DMA_Queue
 		move.l	(V_scroll_value_P2).w,(V_scroll_value_P2_copy).w
 		jsr	(SpecialVInt_Function).l
 		jsr	(VInt_DrawLevel).l
 		bsr.w	sndDriverInput
-		move.w	#0,(Z80_bus_request).l
+		startZ80
 		move	#$2300,sr
 		tst.b	(Water_flag).w
-		beq.s	loc_BE8
-		cmpi.b	#$5C,(H_int_counter).w
-		bcc.s	loc_BE8
+		beq.s	+
+		cmpi.b	#92,(H_int_counter).w	; is H-int occuring on or below line 92?
+		bhs.s	+	; if it is, branch
 		move.b	#1,(Do_Updates_in_H_int).w
 		jmp	(Set_Kos_Bookmark).l
-; ---------------------------------------------------------------------------
-
-loc_BE8:
++
 		bsr.s	Do_Updates
 		jmp	(Set_Kos_Bookmark).l
 
@@ -878,76 +816,42 @@ locret_C0C:
 ; ---------------------------------------------------------------------------
 
 VInt_A_C:
-		move.w	#$100,(Z80_bus_request).l
-
-loc_C16:
-		btst	#0,(Z80_bus_request).l
-		bne.s	loc_C16
+		stopZ80
 		bsr.w	Poll_Controllers
 		tst.b	(Water_full_screen_flag).w
-		bne.s	loc_C50
-		lea	(VDP_control_port).l,a5
-		move.l	#-$6BFF6CC0,(a5)
-		move.l	#-$69016B00,(a5)
-		move.w	#-$6881,(a5)
-		move.w	#-$4000,(a5)
-		move.w	#$80,(DMA_trigger_word).w
-		move.w	(DMA_trigger_word).w,(a5)
-		bra.s	loc_C74
-; ---------------------------------------------------------------------------
-
-loc_C50:
-		lea	(VDP_control_port).l,a5
-		move.l	#-$6BFF6CC0,(a5)
-		move.l	#-$69076AC0,(a5)
-		move.w	#-$6881,(a5)
-		move.w	#-$4000,(a5)
-		move.w	#$80,(DMA_trigger_word).w
-		move.w	(DMA_trigger_word).w,(a5)
-
-loc_C74:
+		bne.s	+
+		dma68kToVDP Normal_palette,$0000,$80,CRAM
+		bra.s	++
++
+		dma68kToVDP Water_palette,$0000,$80,CRAM
++
 		move.w	(H_int_counter_command).w,(a5)
-		lea	(VDP_control_port).l,a5
-		move.l	#-$6BFE6C40,(a5)
-		move.l	#-$690F6B00,(a5)
-		move.w	#-$6881,(a5)
-		move.w	#$7000,(a5)
-		move.w	#$83,(DMA_trigger_word).w
-		move.w	(DMA_trigger_word).w,(a5)
+		dma68kToVDP H_scroll_buffer,$F000,$380,VRAM
+
 		tst.w	(Competition_mode).w
-		beq.s	loc_CDE
-		tst.w	(Switch_sprite_table).w
-		beq.s	loc_CB2
-		clr.w	(Switch_sprite_table).w
-		eori.w	#-1,(Use_normal_sprite_table).w
+		beq.s	++
+		; Unlike in Sonic 2, the sprite tables are page-flipped in two-player mode.
+		; This fixes a race-condition where incomplete sprite tables can be uploaded
+		; to the VDP on lag frames.
 
-loc_CB2:
-		tst.w	(Use_normal_sprite_table).w
-		bne.s	loc_CDE
-		lea	(VDP_control_port).l,a5
-		move.l	#-$6BFE6CC0,(a5)
-		move.l	#-$69436AC0,(a5)
-		move.w	#-$6881,(a5)
-		move.w	#$7800,(a5)
-		move.w	#$83,(DMA_trigger_word).w
-		move.w	(DMA_trigger_word).w,(a5)
-		bra.s	loc_D02
-; ---------------------------------------------------------------------------
-
-loc_CDE:
-		lea	(VDP_control_port).l,a5
-		move.l	#-$6BFE6CC0,(a5)
-		move.l	#-$69036B00,(a5)
-		move.w	#-$6881,(a5)
-		move.w	#$7800,(a5)
-		move.w	#$83,(DMA_trigger_word).w
-		move.w	(DMA_trigger_word).w,(a5)
-
-loc_D02:
+		; Perform page-flipping.
+		tst.w	(Sprite_table_page_flip_pending).w
+		beq.s	+
+		clr.w	(Sprite_table_page_flip_pending).w
+		eori.w	#$FFFF,(Current_sprite_table_page).w	; a not.w would've accomplished the same thing ...
++
+		; Upload the front buffer.
+		tst.w	(Current_sprite_table_page).w
+		bne.s	+
+		dma68kToVDP Sprite_table_alternate,$F800,$280,VRAM
+		bra.s	++
++
+		dma68kToVDP Sprite_table,$F800,$280,VRAM
++
 		bsr.w	Process_DMA_Queue
 		move.l	(V_scroll_value_P2).w,(V_scroll_value_P2_copy).w
 		jsr	(sndDriverInput).l
-		move.w	#0,(Z80_bus_request).l
+		startZ80
 		bsr.w	Process_Nem_Queue
 		jmp	(Set_Kos_Bookmark).l
 ; ---------------------------------------------------------------------------
@@ -1138,54 +1042,40 @@ HInt:
 		move.w	#0,(H_int_flag).w
 		move.l	a5,-(sp)
 		move.l	d0,-(sp)
-
-loc_FB4:
+-
 		move.w	(VDP_control_port).l,d0
-		andi.w	#4,d0
-		beq.s	loc_FB4
+		andi.w	#4,d0	; is horizontal blanking occuring?
+		beq.s	-	; if not, wait until it is
+
 		move.w	(VDP_reg_1_command).w,d0
 		andi.b	#-$41,d0
-		move.w	d0,(VDP_control_port).l
-		move.l	#$40000010,(VDP_control_port).l
+		move.w	d0,(VDP_control_port).l	; blank the display
+
+		; Update V-Scroll.
+		move.l	#vdpComm($0000,VSRAM,WRITE),(VDP_control_port).l
 		move.l	(V_scroll_value_P2_copy).w,(VDP_data_port).l
-		move.w	#$100,(Z80_bus_request).l
 
-loc_FE8:
-		btst	#0,(Z80_bus_request).l
-		bne.s	loc_FE8
-		tst.w	(Use_normal_sprite_table).w
-		beq.s	loc_101E
-		lea	(VDP_control_port).l,a5
-		move.l	#-$6BFE6CC0,(a5)
-		move.l	#-$69426A80,(a5)
+		stopZ80
+		; Unlike in Sonic 2, the sprite tables are page-flipped in two-player mode.
+		; This fixes a race-condition where incomplete sprite tables can be uploaded
+		; to the VDP on lag frames.
 
-loc_100A:
-		move.w	#-$6881,(a5)
-		move.w	#$7800,(a5)
-		move.w	#$83,(DMA_trigger_word).w
-		move.w	(DMA_trigger_word).w,(a5)
-		bra.s	loc_1042
-; ---------------------------------------------------------------------------
-
-loc_101E:
-		lea	(VDP_control_port).l,a5
-		move.l	#-$6BFE6CC0,(a5)
-		move.l	#-$69416A40,(a5)
-		move.w	#-$6881,(a5)
-		move.w	#$7800,(a5)
-		move.w	#$83,(DMA_trigger_word).w
-		move.w	(DMA_trigger_word).w,(a5)
-
-loc_1042:
-		move.w	#0,(Z80_bus_request).l
-
-loc_104A:
+		; Upload the front buffer.
+		tst.w	(Current_sprite_table_page).w
+		beq.s	+
+		dma68kToVDP Sprite_table_P2,$F800,$280,VRAM
+		bra.s	++
++
+		dma68kToVDP Sprite_table_P2_alternate,$F800,$280,VRAM
++
+		startZ80
+-
 		move.w	(VDP_control_port).l,d0
-		andi.w	#4,d0
-		beq.s	loc_104A
+		andi.w	#4,d0	; is a horizontal blank occuring?
+		beq.s	-	; if not, wait
 		move.w	(VDP_reg_1_command).w,d0
 		ori.b	#$40,d0
-		move.w	d0,(VDP_control_port).l
+		move.w	d0,(VDP_control_port).l	; enable display
 		move.l	(sp)+,d0
 		movea.l	(sp)+,a5
 
@@ -1488,6 +1378,7 @@ HInt2_Do_Updates:
 
 
 sndDriverInput:
+		; Dummy leftover from Sonic 2.
 		rts
 ; End of function sndDriverInput
 
@@ -1680,7 +1571,7 @@ loc_1524:
 Clear_DisplayData_Cont:
 		clr.l	(V_scroll_value).w
 		clr.l	(_unkF61A).w
-		lea	(Sprite_table_buffer).w,a1
+		lea	(Sprite_table).w,a1
 		moveq	#0,d0
 		move.w	#$A0,d1
 
@@ -10071,7 +9962,7 @@ loc_87FA:
 		movea.l	(a1,d0.w),a1
 		lea	(Level_layout_header).w,a2
 		lea	(SStage_extra_sprites).w,a4
-		lea	(Sprite_table_buffer).w,a6
+		lea	(Sprite_table).w,a6
 		moveq	#$4F,d7
 		moveq	#0,d6
 		move.b	(Sprites_drawn).w,d6
@@ -10150,7 +10041,7 @@ loc_88BC:
 		movea.l	(a1,d0.w),a1
 		lea	(Level_layout_header).w,a2
 		lea	(SStage_extra_sprites).w,a4
-		lea	(Sprite_table_buffer).w,a6
+		lea	(Sprite_table).w,a6
 		moveq	#$4F,d7
 		moveq	#0,d6
 		move.b	(Sprites_drawn).w,d6
@@ -28771,23 +28662,28 @@ Map_Ring:	include "General/Sprites/Ring/Map - Ring.asm"
 
 Init_SpriteTable:
 		clr.w	(Spritemask_flag).w
-		clr.l	(Use_normal_sprite_table).w
+	if Sprite_table_page_flip_pending<>(Current_sprite_table_page+2)
+		clr.w	(Current_sprite_table_page).w
+		clr.w	(Sprite_table_page_flip_pending).w
+	else
+		clr.l	(Current_sprite_table_page).w ; Clears both Current_sprite_table_page and Sprite_table_page_flip_pending!
+	endif
 		tst.w	(Competition_mode).w
 		beq.s	loc_19162
-		lea	(Sprite_table_buffer).w,a0
+		lea	(Sprite_table).w,a0
 		bsr.s	Init_SpriteTable2
 		bsr.s	Init_SpriteTable_2Player
-		lea	(Sprite_table_buffer_2).l,a0
+		lea	(Sprite_table_alternate).l,a0
 		bsr.s	Init_SpriteTable2
 		bsr.s	Init_SpriteTable_2Player
-		lea	(Sprite_table_buffer_P2).l,a0
+		lea	(Sprite_table_P2).l,a0
 		bsr.s	Init_SpriteTable2
-		lea	(Sprite_table_buffer_P2_2).l,a0
+		lea	(Sprite_table_P2_alternate).l,a0
 		bra.s	Init_SpriteTable2
 ; ---------------------------------------------------------------------------
 
 loc_19162:
-		lea	(Sprite_table_buffer).w,a0
+		lea	(Sprite_table).w,a0
 ; End of function Init_SpriteTable
 
 
@@ -29126,7 +29022,7 @@ Render_Sprites:
 		moveq	#0,d6
 		lea	(Sprite_table_input).w,a5
 		lea	(Camera_X_pos_copy).w,a3
-		lea	(Sprite_table_buffer).w,a6
+		lea	(Sprite_table).w,a6
 		tst.b	(Level_started_flag).w
 		beq.s	loc_193B8
 		jsr	(Render_HUD).l
@@ -29220,7 +29116,7 @@ loc_19486:
 		tst.w	(Spritemask_flag).w
 		beq.s	locret_194B8
 		clr.w	(Spritemask_flag).w
-		lea	(Sprite_table_buffer-4).w,a0
+		lea	(Sprite_table-4).w,a0
 		move.w	#$7C0,d0
 		moveq	#$4F,d1
 
@@ -29730,10 +29626,15 @@ Render_Sprites_CompetitionMode:
 		moveq	#0,d6
 		lea	(Sprite_table_input).w,a5
 		lea	(Camera_X_pos_copy).w,a3
-		lea	(Sprite_table_buffer+$10).w,a6
-		tst.w	(Use_normal_sprite_table).w
+		; Unlike in Sonic 2, the sprite tables are page-flipped in two-player mode.
+		; This fixes a race-condition where incomplete sprite tables can be uploaded
+		; to the VDP on lag frames.
+
+		; Modify the back buffer.
+		lea	(Sprite_table+$10).w,a6
+		tst.w	(Current_sprite_table_page).w
 		beq.s	loc_19872
-		lea	(Sprite_table_buffer_2+$10).l,a6
+		lea	(Sprite_table_alternate+$10).l,a6
 
 loc_19872:
 		tst.b	(Level_started_flag).w
@@ -29829,10 +29730,15 @@ loc_19958:
 		moveq	#$4F,d7
 		lea	(Sprite_table_input).w,a5
 		lea	(Camera_X_pos_P2_copy).w,a3
-		lea	(Sprite_table_buffer_P2).l,a6
-		tst.w	(Use_normal_sprite_table).w
+		; Unlike in Sonic 2, the sprite tables are page-flipped in two-player mode.
+		; This fixes a race-condition where incomplete sprite tables can be uploaded
+		; to the VDP on lag frames.
+
+		; Modify the back buffer.
+		lea	(Sprite_table_P2).l,a6
+		tst.w	(Current_sprite_table_page).w
 		beq.s	loc_19974
-		lea	(Sprite_table_buffer_P2_2).l,a6
+		lea	(Sprite_table_P2_alternate).l,a6
 
 loc_19974:
 		tst.b	(Level_started_flag).w
@@ -29918,7 +29824,7 @@ loc_19A40:
 		dbf	d7,loc_19A40
 
 loc_19A48:
-		st	(Switch_sprite_table).w
+		st.b	(Sprite_table_page_flip_pending).w
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -76602,7 +76508,7 @@ S3Credits:
 		andi.b	#$BF,d0
 		move.w	d0,(VDP_control_port).l
 		jsr	(Clear_DisplayData).l
-		lea	(Sprite_table_buffer).w,a1
+		lea	(Sprite_table).w,a1
 		moveq	#0,d0
 		move.w	#$A0,d1
 
