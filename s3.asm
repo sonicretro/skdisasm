@@ -6201,7 +6201,7 @@ loc_52C2:
 		cmpi.w	#$2900,(Camera_X_pos).w
 		bcc.s	loc_52EC
 		move.w	#-1,(Screen_shake_flag).w
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_52EC
 		move.l	#Obj_5308,(a1)
 		move.b	#$B4,$24(a1)
@@ -9006,34 +9006,37 @@ MapUnc_SSNum000:binclude "General/Special Stage/Uncompressed Map/HUD.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
-
-Create_New_Sprite2:
+; Create_New_Sprite2:
+AllocateObjectAfterCurrent_SpecialStage:
 		movea.l	a0,a1
-		move.w	#Wave_Splash,d0
+		move.w	#Object_RAM_end-object_size,d0
 		sub.w	a0,d0
 		lsr.w	#6,d0
-		move.b	Find_First_Sprite_Table(pc,d0.w),d0
-		bmi.s	locret_7CEE
+		move.b	.lookup(pc,d0.w),d0
+		bmi.s	.return
 
-loc_7CE4:
-		lea	$4A(a1),a1
+.loop:
+		lea	next_object(a1),a1
 		tst.l	(a1)
-		dbeq	d0,loc_7CE4
+		dbeq	d0,.loop
 
-locret_7CEE:
+.return:
 		rts
-; End of function Create_New_Sprite2
 
-; ---------------------------------------------------------------------------
-Find_First_Sprite_Table:
-.a		set	Object_RAM
-.b		set	Object_RAM_end+object_size
-.c		set	.b			; begin from bottom of array and decrease backwards
-		rept	(.b-.a)/$40		; repeat for all slots, minus exception
-.c		set	.c-$40			; address for previous $40 (also skip last part)
-		dc.b	(.b-.c-1)/object_size-1	; write possible slots according to object_size division + hack + dbf hack
+.lookup:
+.a		set	Object_RAM-object_size*2	; Oddly, this does too many object slots.
+.b		set	Object_RAM_end-object_size
+.c		set	.b				; begin from bottom of array and decrease backwards
+		; There's a mistake here: this division should be rounded up,
+		; otherwise the first object slot might not get an entry.
+		; In this case, the aforementioned surplus entries counteract this problem.
+		rept	(.b-.a)/$40			; repeat for all slots, minus exception
+.c		set	.c-$40				; address for previous $40 (also skip last part)
+		dc.b	(.b-.c-1)/object_size-1		; write possible slots according to object_size division + hack + dbf hack
 		endm
 		even
+; End of function AllocateObjectAfterCurrent_SpecialStage
+
 ; ---------------------------------------------------------------------------
 
 Obj_SStage_7D70:
@@ -9053,7 +9056,7 @@ Map_SSIcons:	include "General/Special Stage/Map - Icons.asm"
 ; ---------------------------------------------------------------------------
 
 Obj_SStage_7DB8:
-		jsr	(Create_New_Sprite2).l
+		jsr	(AllocateObjectAfterCurrent_SpecialStage).l
 		bne.w	loc_7DD4
 		move.l	#loc_7DD4,(a1)
 		bset	#0,$2A(a1)
@@ -9165,7 +9168,7 @@ Obj_SStage_7F1C:
 		bne.s	loc_7F6C
 		move.l	#Map_SStageTails,$C(a0)
 		move.w	#$A7EB,$A(a0)
-		jsr	(Create_New_Sprite2).l
+		jsr	(AllocateObjectAfterCurrent_SpecialStage).l
 		bne.w	loc_7F6C
 		move.l	#Obj_SStage_82EE,(a1)
 		move.w	a0,$3E(a1)
@@ -9332,7 +9335,7 @@ Obj_SStage_8148:
 		move.w	#-$20,$38(a0)
 		move.b	#$FF,$3A(a0)
 		bsr.w	sub_82CE
-		jsr	(Create_New_Sprite2).l
+		jsr	(AllocateObjectAfterCurrent_SpecialStage).l
 		bne.w	loc_81AA
 		move.l	#Obj_SStage_82EE,(a1)
 		move.w	a0,$3E(a1)
@@ -14189,7 +14192,7 @@ loc_C248:
 ; ---------------------------------------------------------------------------
 
 Obj_SaveScreen_Save_Slot:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	loc_C25E
 		move.l	#Obj_SaveScreen_Emeralds,(a1)
 		move.w	a0,$48(a1)
@@ -15645,7 +15648,7 @@ sub_F78C:
 
 Test_Ring_Collisions_AttractRing:
 		movea.l	a1,a3
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.w	loc_F7BC
 		move.l	#Obj_Attracted_Ring,(a1)
 		move.w	(a3),$10(a1)
@@ -18521,7 +18524,7 @@ loc_114CC:
 		bmi.s	loc_11504
 		tst.w	d0
 		beq.w	Kill_Character
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_114FE
 		move.l	#Obj_Bouncing_Ring,(a1)
 		move.w	$10(a0),$10(a1)
@@ -27098,7 +27101,7 @@ AirCountdown_MakeItem:
 		andi.w	#$F,d0
 		addq.w	#8,d0
 		move.w	d0,$3E(a0)
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.w	locret_17410
 		move.l	(a0),(a1)
 		move.w	$10(a2),$10(a1)
@@ -27542,7 +27545,7 @@ loc_17A3A:
 		subq.b	#1,$36(a0)
 		bpl.s	loc_17AB2
 		move.b	#3,$36(a0)
-		bsr.w	Create_New_Sprite
+		bsr.w	AllocateObject
 		bne.s	loc_17AB2
 		move.l	(a0),(a1)
 		move.w	$10(a2),$10(a1)
@@ -27716,7 +27719,7 @@ loc_17DCA:
 		subq.b	#1,$36(a0)
 		bpl.s	locret_17E3C
 		move.b	#3,$36(a0)
-		bsr.w	Create_New_Sprite
+		bsr.w	AllocateObject
 		bne.s	locret_17E3C
 		move.l	(a0),(a1)
 		move.w	$10(a2),$10(a1)
@@ -27829,7 +27832,7 @@ sub_17F82:
 		move.w	#$488,d4
 
 loc_17F92:
-		bsr.w	Create_New_Sprite
+		bsr.w	AllocateObject
 		bne.w	locret_1800A
 		move.l	#Obj_SuperSonic_Stars_Timer,(a1)
 		move.w	$10(a2),$10(a1)
@@ -28000,7 +28003,7 @@ locret_18236:
 
 Obj_FireShield_DestroyUnderwater:
 		andi.b	#-$72,$2B(a2)
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.w	Obj_FireShield_Destroy
 		move.l	#Obj_FireShield_Dissipate,(a1)
 		move.w	$10(a0),$10(a1)
@@ -28108,7 +28111,7 @@ Obj_LightningShield_CreateSpark:
 		moveq	#3,d1
 
 loc_183AE:
-		bsr.w	Create_New_Sprite
+		bsr.w	AllocateObject
 		bne.s	locret_183FC
 		move.l	#Obj_LightningShield_Spark,(a1)
 		move.w	$10(a0),$10(a1)
@@ -28434,7 +28437,7 @@ loc_18E58:
 ; ---------------------------------------------------------------------------
 
 loc_18E60:
-		bsr.w	Create_New_Sprite3
+		bsr.w	AllocateObjectAfterCurrent
 		bne.w	loc_18EEE
 
 loc_18E68:
@@ -30160,7 +30163,7 @@ loc_19D24:
 
 loc_19D44:
 		addq.b	#8,(Object_load_routine).w
-		jsr	Create_New_Sprite(pc)
+		jsr	AllocateObject(pc)
 		bne.s	loc_19D66
 		lea	(_unkF712).w,a3
 		lea	(Sprite_Listing).l,a4
@@ -30274,7 +30277,7 @@ loc_19E34:
 		movea.w	(Object_respawn_index_back).w,a3
 		subi.w	#$80,d6
 		bcs.s	loc_19E78
-		jsr	Create_New_Sprite(pc)
+		jsr	AllocateObject(pc)
 		bne.s	loc_19E78
 
 loc_19E62:
@@ -30318,7 +30321,7 @@ loc_19EA2:
 		movea.l	(Object_load_addr_front).w,a0
 		movea.w	(Object_respawn_index_front).w,a3
 		addi.w	#$280,d6
-		jsr	Create_New_Sprite(pc)
+		jsr	AllocateObject(pc)
 		bne.s	loc_19EC2
 
 loc_19EB8:
@@ -30397,7 +30400,7 @@ loc_19F48:
 		bhi.s	loc_19FCA
 
 loc_19F52:
-		jsr	Create_New_Sprite(pc)
+		jsr	AllocateObject(pc)
 		bne.s	loc_19FCA
 		move.w	d3,d4
 		addi.w	#$80,d4
@@ -30577,44 +30580,41 @@ locret_1A0C0:
 
 ; =============== S U B R O U T I N E =======================================
 
-
-Create_New_Sprite:
+; Create_New_Sprite:
+AllocateObject:
 		lea	(Dynamic_object_RAM).w,a1
 		moveq	#((Dynamic_object_RAM_end-Dynamic_object_RAM)/object_size)-1,d0
-		bra.s	loc_1A0DA
-; End of function Create_New_Sprite
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-Create_New_Sprite3:
+		bra.s	AllocateObjectAfterCurrent.loop
+; ---------------------------------------------------------------------------
+; Create_New_Sprite3:
+AllocateObjectAfterCurrent:
 		movea.l	a0,a1
 		move.w	#Dynamic_object_RAM_end,d0
 		sub.w	a0,d0
-		lsr.w	#6,d0
-		move.b	byte_1A0E6(pc,d0.w),d0
-		bmi.s	locret_1A0E4
+		lsr.w	#6,d0			; Divide by $40... even though SSTs are $4A bytes long in this game
+		move.b	.lookup(pc,d0.w),d0	; Use a look-up table to get the right loop counter
+		bmi.s	.return
 
-loc_1A0DA:
+.loop:
 		lea	next_object(a1),a1
 		tst.l	(a1)
-		dbeq	d0,loc_1A0DA
+		dbeq	d0,.loop
 
-locret_1A0E4:
+.return:
 		rts
-; End of function Create_New_Sprite3
 
-; ---------------------------------------------------------------------------
-byte_1A0E6:
+.lookup:
 .a		set	Dynamic_object_RAM
 .b		set	Dynamic_object_RAM_end
 .c		set	.b			; begin from bottom of array and decrease backwards
-		rept	(.b-.a)/$40		; repeat for all slots, minus exception
+		; There's a mistake here: this division should be rounded up,
+		; otherwise the first object slot might not get an entry.
+		rept	(.b-.a)/$40	; repeat for all slots, minus exception
 .c		set	.c-$40			; address for previous $40 (also skip last part)
 		dc.b	(.b-.c-1)/object_size-1	; write possible slots according to object_size division + hack + dbf hack
 		endm
 		even
+; End of function AllocateObject
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -31591,7 +31591,7 @@ loc_1AB0C:
 		move.w	#$F50,(Camera_min_X_pos).w
 		tst.w	(Debug_placement_mode).w
 		bne.s	loc_1AB42
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_1AB42
 		move.l	#Obj_AIZMiniboss,(a1)
 		move.w	#$11F0,$10(a1)
@@ -31831,7 +31831,7 @@ loc_1AD2A:
 		bhi.s	locret_1AD82
 		move.w	d0,(Camera_min_X_pos).w
 		move.w	d0,(Camera_target_min_X_pos).w
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_1AD5E
 		move.l	#Obj_MGZEndBoss,(a1)
 		move.w	#$3D20,$10(a1)
@@ -32617,7 +32617,7 @@ loc_1B59E:
 		clr.b	$2A(a0)
 		addq.b	#2,5(a0)
 		move.b	#0,$28(a0)
-		bsr.w	Create_New_Sprite
+		bsr.w	AllocateObject
 		bne.s	loc_1B5D0
 		move.l	#Obj_MonitorContents,(a1)
 		move.w	$10(a0),$10(a1)
@@ -32626,7 +32626,7 @@ loc_1B59E:
 		move.w	$42(a0),$42(a1)
 
 loc_1B5D0:
-		bsr.w	Create_New_Sprite
+		bsr.w	AllocateObject
 		bne.s	loc_1B5EC
 		move.l	#Obj_Explosion,(a1)
 		addq.b	#2,5(a1)
@@ -33908,7 +33908,7 @@ off_1C222:	dc.w loc_1C228-off_1C222
 
 loc_1C228:
 		addq.b	#2,5(a0)
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_1C24C
 		move.l	#Obj_Animal,(a1)
 		move.w	$10(a0),$10(a1)
@@ -34817,7 +34817,7 @@ sub_1CD50:
 ; ---------------------------------------------------------------------------
 
 loc_1CD60:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	loc_1CDC2
 
 loc_1CD68:
@@ -35363,7 +35363,7 @@ sub_1D44C:
 		move.b	#0,$20(a1)
 		cmpa.w	#Player_1,a1
 		bne.s	locret_1D4D8
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_1D4C6
 		move.l	#Obj_AIZ1TreeRevealControl,(a1)
 
@@ -35696,7 +35696,7 @@ loc_1D886:
 
 
 sub_1D8A0:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	locret_1D8C8
 		moveq	#$48,d0
 
@@ -35989,7 +35989,7 @@ sub_1DB60:
 ; ---------------------------------------------------------------------------
 
 loc_1DB82:
-		bsr.w	Create_New_Sprite3
+		bsr.w	AllocateObjectAfterCurrent
 		bne.s	loc_1DBE2
 
 loc_1DB88:
@@ -36733,7 +36733,7 @@ loc_1E41C:
 ; ---------------------------------------------------------------------------
 
 loc_1E440:
-		bsr.w	Create_New_Sprite3
+		bsr.w	AllocateObjectAfterCurrent
 		bne.s	loc_1E47E
 		addq.w	#6,a3
 
@@ -37044,7 +37044,7 @@ sub_1F98C:
 ; ---------------------------------------------------------------------------
 
 loc_1F9B0:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	loc_1F9FA
 		addq.w	#6,a3
 
@@ -37435,7 +37435,7 @@ Obj_AIZRideVine:
 		move.w	d1,$46(a0)
 		moveq	#3,d1
 		addq.w	#1,d1
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2013E
 		move.w	a1,$3E(a0)
 		move.l	#loc_203C0,(a1)
@@ -37444,7 +37444,7 @@ Obj_AIZRideVine:
 ; ---------------------------------------------------------------------------
 
 loc_200F8:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2013E
 		move.l	#loc_20454,(a1)
 		move.w	a2,$3C(a1)
@@ -38046,7 +38046,7 @@ Obj_AIZGiantRideVine:
 		move.w	$14(a0),d3
 		move.b	$2C(a0),d1
 		andi.w	#$F,d1
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_20802
 		move.w	#-$1B0,$44(a1)
 		move.w	#$800,$38(a1)
@@ -38060,7 +38060,7 @@ Obj_AIZGiantRideVine:
 ; ---------------------------------------------------------------------------
 
 loc_207BC:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_20802
 		move.l	#loc_20908,(a1)
 		move.w	a2,$3C(a1)
@@ -38276,7 +38276,7 @@ Obj_AIZSurfboardIntro:
 		move.b	#3,$2E(a1)
 
 loc_20B78:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	Obj_AIZSurfboardIntro_Main
 		move.l	#Obj_SurfboardSplash,(a1)
 		move.w	a0,$30(a1)
@@ -38289,7 +38289,7 @@ Obj_AIZSurfboardIntro_Main:
 		addi.w	#8,$10(a0)
 		cmpi.w	#$900,$10(a1)
 		bcs.s	loc_20BFC
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_20BD0
 		move.l	#Obj_Surfboard,(a1)
 		move.w	$10(a0),$10(a1)
@@ -38449,7 +38449,7 @@ loc_20D98:
 		subq.w	#1,$2E(a0)
 		bpl.s	locret_20DCA
 		move.w	#5,$2E(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	locret_20DCA
 		move.l	#Obj_SurfboardWaves,(a1)
 		move.w	a0,$30(a1)
@@ -38542,7 +38542,7 @@ Ani_SurfboardWaves:
 Obj_SurfboardSplash:
 		movea.l	a0,a1
 		bsr.s	SurfboardSplash_Init
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2102A
 		bsr.s	SurfboardSplash2_Init
 		move.l	#Obj_SurfboardSplash2_Main,(a1)
@@ -39756,7 +39756,7 @@ byte_221A6:	dc.b   $C,   8,   0,   1
 ; ---------------------------------------------------------------------------
 
 Obj_2PRetractingSpring:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2229C
 		move.l	#loc_2255E,(a1)
 		move.l	#Map_2PRetractingSpring,$C(a1)
@@ -41344,7 +41344,7 @@ loc_23398:
 ; ---------------------------------------------------------------------------
 
 loc_233CC:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_234E0
 
 loc_233D6:
@@ -41368,7 +41368,7 @@ loc_233DC:
 		moveq	#$D,d3
 
 loc_23412:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_234E0
 		move.l	#Obj_EosianSphere,(a1)
 		bsr.w	sub_23500
@@ -41388,7 +41388,7 @@ loc_23412:
 		moveq	#$D,d3
 
 loc_23458:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_234E0
 		move.l	#Obj_EosianSphere,(a1)
 		bsr.w	sub_23500
@@ -41408,7 +41408,7 @@ loc_23458:
 		moveq	#$D,d3
 
 loc_2349E:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_234E0
 		move.l	#Obj_EosianSphere,(a1)
 		bsr.w	sub_23500
@@ -41490,7 +41490,7 @@ loc_23556:
 ; ---------------------------------------------------------------------------
 
 loc_2358A:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2364C
 
 loc_23594:
@@ -41513,7 +41513,7 @@ loc_2359A:
 		moveq	#$F,d3
 
 loc_235CC:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2364C
 		move.l	#Obj_EosianSphere,(a1)
 		bsr.w	sub_2366C
@@ -41532,7 +41532,7 @@ loc_235CC:
 		moveq	#$F,d3
 
 loc_2360E:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2364C
 		move.l	#Obj_EosianSphere,(a1)
 		bsr.w	sub_2366C
@@ -42472,7 +42472,7 @@ Map_LBZMovingPlatform:
 ; ---------------------------------------------------------------------------
 
 Obj_LBZUnusedBarPlatform:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_242B4
 		move.w	$10(a0),$10(a1)
 		move.w	$14(a0),$14(a1)
@@ -43362,7 +43362,7 @@ loc_24CFE:
 		addq.b	#1,$22(a0)
 		move.w	#7,$38(a0)
 		addq.w	#2,$36(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	locret_24D56
 		move.l	#Obj_LBZTriggerBridge,(a1)
 		move.w	$30(a0),$10(a1)
@@ -43417,7 +43417,7 @@ loc_24D8C:
 		addq.b	#1,$22(a0)
 		move.w	#7,$38(a0)
 		addq.w	#2,$36(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	locret_24DE4
 		move.l	#Obj_LBZTriggerBridge,(a1)
 		move.w	$30(a0),$10(a1)
@@ -43505,7 +43505,7 @@ sub_25194:
 		tst.w	(a2)
 		bne.s	loc_251C2
 		move.l	a1,-(sp)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_251C0
 		move.l	#loc_2523E,(a1)
 		move.w	$10(a0),$10(a1)
@@ -43694,7 +43694,7 @@ loc_2539E:
 		add.b	$2C(a0),d0
 		andi.b	#$7F,d0
 		bne.s	loc_253FE
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_253FE
 		move.l	#loc_25422,(a1)
 		bsr.s	sub_2536C
@@ -43769,7 +43769,7 @@ Obj_LBZRideGrapple:
 		move.l	LBZRideGrapple_Range(pc,d0.w),$34(a0)
 		move.l	#Map_LBZRideGrapple,$C(a0)
 		move.w	#$2433,$A(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	loc_2562A
 		move.l	#loc_25752,(a1)
 		move.w	$10(a0),$10(a1)
@@ -44192,7 +44192,7 @@ Obj_LBZCupElevator:
 		move.b	#$10,6(a0)
 		move.w	$10(a0),$30(a0)
 		move.w	$14(a0),$32(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_25AFE
 		move.l	#Obj_LBZCupElevatorAttach,(a1)
 		move.l	#Map_LBZCupElevator,$C(a1)
@@ -44213,7 +44213,7 @@ Obj_LBZCupElevator:
 loc_25AA6:
 		move.w	a0,$40(a1)
 		move.w	a1,$42(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_25AFE
 		move.l	#Obj_LBZCupElevatorBase,(a1)
 		move.l	#Map_LBZCupElevator,$C(a1)
@@ -44859,7 +44859,7 @@ Obj_LBZUnusedTiltingBridge:
 		move.w	#$200,8(a0)
 		move.b	#$80,$42(a0)
 		move.b	#1,$22(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2628C
 		move.l	#loc_262DC,(a1)
 		move.l	#Map_LBZUnusedTiltingBridge,$C(a1)
@@ -45235,7 +45235,7 @@ loc_2661E:
 		beq.s	loc_26686
 		cmpi.b	#$1F,d1
 		beq.s	loc_2665A
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_26686
 		move.l	#Obj_AutomaticTunnelDelayed,(a1)
 		move.w	$10(a0),$10(a1)
@@ -45245,7 +45245,7 @@ loc_2661E:
 		move.b	d1,$2C(a1)
 
 loc_2665A:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_26686
 		move.l	#Obj_TunnelExhaustControl,(a1)
 		move.w	$10(a0),$10(a1)
@@ -45314,7 +45314,7 @@ sub_266EE:
 		moveq	#$B,d1
 
 loc_26714:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_267CC
 		move.l	d4,(a1)
 		move.l	a3,$C(a1)
@@ -45351,7 +45351,7 @@ loc_26714:
 ; ---------------------------------------------------------------------------
 
 loc_2678E:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	loc_267CC
 		addq.w	#6,a3
 
@@ -47702,10 +47702,10 @@ loc_282D4:
 		subq.w	#1,$30(a0)
 		bpl.s	loc_28318
 		move.w	$32(a0),$30(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_28318
 		bsr.s	sub_2831E
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_28318
 		bsr.s	sub_2831E
 		move.w	#$80,8(a1)
@@ -47791,7 +47791,7 @@ loc_283F0:
 
 
 sub_2840E:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	locret_28446
 		move.l	#Obj_Flybot767,(a1)
 		lea	(Player_1).w,a2
@@ -48030,7 +48030,7 @@ loc_2869E:
 		btst	#5,$2C(a0)
 		beq.s	loc_286DA
 		movea.l	a1,a2
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_286D8
 		move.l	#Obj_TunnelExhaustControl,(a1)
 		move.w	$10(a2),$10(a1)
@@ -48229,7 +48229,7 @@ Obj_TunnelExhaustControlMain:
 		subq.w	#1,$2E(a0)
 		bpl.s	loc_288F2
 		move.w	#3,$2E(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_288F2
 		move.l	#Obj_TunnelExhaustUp,(a1)
 		move.w	$10(a0),$10(a1)
@@ -48357,7 +48357,7 @@ Obj_TunnelExContinuous:
 		move.b	(Level_frame_counter+1).w,d0
 		andi.b	#3,d0
 		bne.s	loc_28A2A
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_28A2A
 		move.l	#Obj_TunnelExhaustTimed,(a1)
 		move.w	$10(a0),$10(a1)
@@ -48403,7 +48403,7 @@ Obj_TunnelExSmoke:
 		move.b	(Level_frame_counter+1).w,d0
 		andi.b	#3,d0
 		bne.s	loc_28A9C
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_28A9C
 		move.l	#Obj_FireShield_Dissipate,(a1)
 		move.w	$10(a0),$10(a1)
@@ -48434,7 +48434,7 @@ loc_28AE0:
 		subq.w	#1,$2E(a0)
 		bpl.s	loc_28B5A
 		move.w	#3,$2E(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_28B5A
 		move.l	#loc_28B72,(a1)
 		move.w	$10(a0),$10(a1)
@@ -48538,7 +48538,7 @@ Obj_LBZTubeElevator:
 ; ---------------------------------------------------------------------------
 
 loc_28C5E:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_28CAA
 		move.l	#loc_28D5E,(a1)
 		move.w	$10(a0),$10(a1)
@@ -49127,7 +49127,7 @@ loc_293E4:
 		tst.b	$36(a0)
 		bne.s	loc_2944A
 		move.b	#1,$36(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2944A
 		move.l	#loc_29450,(a1)
 		move.w	$10(a0),$10(a1)
@@ -49646,7 +49646,7 @@ loc_29FC2:
 
 loc_29FEA:
 		move.b	d1,$36(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2A084
 		move.l	#loc_2A0AC,(a1)
 		move.l	#Map_AIZFlippingBridge,$C(a1)
@@ -49951,7 +49951,7 @@ Obj_AIZCollapsingLogBridge:
 		move.b	#8,6(a0)
 		move.b	#4,4(a0)
 		move.w	#$200,8(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2A466
 		move.l	#loc_2A57C,(a1)
 		move.l	#Map_AIZCollapsingLogBridge,$C(a1)
@@ -49998,7 +49998,7 @@ loc_2A470:
 		move.b	#8,6(a0)
 		move.b	#4,4(a0)
 		move.w	#$200,8(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2A52E
 		move.l	#loc_2A57C,(a1)
 		move.l	#Map_AIZDrawBridgeFire,$C(a1)
@@ -50202,7 +50202,7 @@ sub_2A6C6:
 ; ---------------------------------------------------------------------------
 
 loc_2A6DE:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	loc_2A724
 
 loc_2A6E6:
@@ -50262,7 +50262,7 @@ loc_2A84E:
 
 loc_2A85C:
 		move.w	d1,$34(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2A92E
 		move.l	#loc_2AA48,(a1)
 		move.l	$C(a0),$C(a1)
@@ -50288,7 +50288,7 @@ loc_2A8AE:
 		move.w	$30(a1),$10(a1)
 		move.w	$32(a1),$14(a1)
 		move.w	a1,$3C(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	loc_2A92E
 		move.l	#loc_2AA48,(a1)
 		move.l	$C(a0),$C(a1)
@@ -50563,7 +50563,7 @@ sub_2AB76:
 ; ---------------------------------------------------------------------------
 
 loc_2AB90:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	loc_2ABFC
 
 loc_2AB98:
@@ -50581,7 +50581,7 @@ loc_2AB98:
 		move.b	d0,$22(a1)
 		move.b	(a4)+,$34(a1)
 		movea.l	a1,a5
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	loc_2ABFC
 		move.l	#loc_1C31E,(a1)
 		move.w	$10(a5),$10(a1)
@@ -50669,7 +50669,7 @@ loc_2AC9C:
 		add.w	$34(a0),d0
 		and.w	$32(a0),d0
 		bne.w	loc_2AD62
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2AD62
 		move.l	#loc_2AD68,(a1)
 		move.w	$10(a0),$10(a1)
@@ -50687,7 +50687,7 @@ loc_2ACEA:
 		move.b	#4,4(a1)
 		move.w	#$280,8(a1)
 		movea.l	a1,a2
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2AD62
 		move.l	#loc_2ADF4,(a1)
 		move.w	$10(a0),$10(a1)
@@ -50802,7 +50802,7 @@ Obj_AIZSpikedLog:
 		move.w	#$200,8(a0)
 		move.w	$14(a0),$30(a0)
 		move.b	(Water_entered_counter).w,$36(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2AF76
 		move.l	#loc_2B0B6,(a1)
 		move.b	#4,4(a1)
@@ -51780,7 +51780,7 @@ loc_2BF4A:
 		move.w	#-$400,$1A(a0)
 		tst.b	$38(a0)
 		bne.s	loc_2BFD4
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_2BFCE
 		move.l	#Obj_EnemyScore,(a1)
 		move.w	$10(a0),$10(a1)
@@ -52167,7 +52167,7 @@ sub_2C49E:
 		bcc.w	locret_2C55E
 		moveq	#signextendB(sfx_Starpost),d0
 		jsr	(Play_SFX).l
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_2C546
 		move.l	#Obj_StarPost,(a1)
 		move.b	#6,5(a1)
@@ -52379,7 +52379,7 @@ sub_2C83E:
 		moveq	#0,d2
 
 loc_2C842:
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_2C8AC
 		move.l	(a0),(a1)
 		move.l	#Map_StarpostStars,$C(a1)
@@ -52628,7 +52628,7 @@ loc_2CAB8:
 Obj_TitleCardCreate:
 		tst.b	(Kos_modules_left).w
 		bne.w	locret_2CB76
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	locret_2CB76
 		lea	ObjArray_TtlCardBonus(pc),a2
 		moveq	#1,d1
@@ -53002,7 +53002,7 @@ loc_2CE98:
 Obj_LevelResultsCreate:
 		tst.b	(Kos_modules_left).w
 		bne.s	locret_2CF24
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	locret_2CF24
 		lea	ObjArray_LevResults(pc),a2
 		moveq	#$B,d1
@@ -53601,7 +53601,7 @@ loc_2D506:
 loc_2D512:
 		cmpi.w	#50,(Special_stage_ring_count).w
 		bcs.s	loc_2D536
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	loc_2D536
 		move.l	#loc_2D83C,(a1)
 		move.w	#$10E,$2E(a0)
@@ -54271,7 +54271,7 @@ loc_2E1D0:
 		jsr	(Random_Number).l
 		andi.w	#$1F,d0
 		move.w	d0,$38(a0)
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_2E24A
 		move.l	(a0),(a1)
 		move.w	$10(a0),$10(a1)
@@ -54441,7 +54441,7 @@ Obj_HCZWaterRush:
 		move.b	#$40,7(a0)
 		move.b	#$20,6(a0)
 		move.b	#2,$22(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2E53E
 		move.l	#loc_2E5C8,(a1)
 		move.w	$10(a0),$10(a1)
@@ -54585,7 +54585,7 @@ loc_2E80C:
 		moveq	#7,d1
 
 loc_2E83E:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	loc_2E896
 		move.l	#loc_2E9AA,(a1)
 		move.l	#Map_HCZWaterWallDebris,$C(a1)
@@ -54651,7 +54651,7 @@ loc_2E8CC:
 		addq.w	#8,$10(a0)
 
 loc_2E8DA:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2E958
 		move.l	#loc_2EA6E,(a1)
 		move.l	$C(a0),$C(a1)
@@ -54728,7 +54728,7 @@ loc_2E9C0:
 		asr	$18(a0)
 		asr	$18(a0)
 		move.l	#loc_2EA38,(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2EA32
 		move.l	#loc_2EACE,(a1)
 		move.l	#Map_HCZWaterWall,$C(a1)
@@ -54874,7 +54874,7 @@ loc_2EBD6:
 		moveq	#7,d1
 
 loc_2EC20:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	locret_2EC78
 		move.l	#loc_2E9AA,(a1)
 		move.l	#Map_HCZWaterWallDebris,$C(a1)
@@ -54957,7 +54957,7 @@ loc_2ED00:
 		subi.w	#$A,(Player_2+y_pos).w
 		jsr	(MoveSprite2).l
 		addi.w	#$48,$1A(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2ED64
 		jsr	(Random_Number).l
 		move.w	d0,d1
@@ -54969,7 +54969,7 @@ loc_2ED00:
 		move.w	d1,$18(a1)
 		move.w	#-$700,$1A(a1)
 		move.w	d0,d2
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2ED64
 		bsr.s	sub_2ED6A
 		subi.w	#$10,$10(a1)
@@ -55044,7 +55044,7 @@ Obj_HCZCGZFan:
 		movea.l	a0,a1
 		tst.b	$2C(a0)
 		bpl.s	loc_2EFE0
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	locret_2F02A
 		move.l	#loc_2F22E,(a0)
 		move.w	$10(a0),$10(a1)
@@ -55154,7 +55154,7 @@ loc_2F0EA:
 		move.b	(Level_frame_counter+1).w,d0
 		andi.b	#3,d0
 		bne.s	loc_2F152
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_2F152
 		move.l	#loc_2F212,(a1)
 		move.l	#Map_Bubbler,$C(a1)
@@ -55473,7 +55473,7 @@ Obj_HCZHandLauncher:
 		move.b	#6,$22(a0)
 		move.w	#$50,$30(a0)
 		bset	#7,$2A(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	loc_2F6D2
 		move.l	#loc_2F96C,(a1)
 		move.l	#Map_HCZHandLauncher,$C(a1)
@@ -56624,7 +56624,7 @@ locret_3047A:
 
 
 sub_3047C:
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_304B6
 		move.l	#Obj_Bubbler,(a1)
 		move.w	$10(a0),$10(a1)
@@ -56727,7 +56727,7 @@ loc_30844:
 		move.b	(Level_frame_counter+1).w,d0
 		andi.b	#3,d0
 		bne.s	locret_3088C
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	locret_3088C
 		move.l	#Obj_FireShield_Dissipate,(a1)
 		move.w	$10(a0),$10(a1)
@@ -58717,7 +58717,7 @@ loc_321B4:
 		moveq	#1,d0
 		movea.w	a1,a3
 		jsr	(HUD_AddToScore).l
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_321DE
 		move.l	#Obj_EnemyScore,(a1)
 		move.w	$10(a0),$10(a1)
@@ -60224,7 +60224,7 @@ Obj_MGZSwingingPlatform:
 		move.w	$10(a0),$30(a0)
 		move.w	$14(a0),$32(a0)
 		move.b	#2,$22(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_33268
 		move.l	#loc_332BA,(a1)
 		move.l	#Map_MGZSwingingPlatform,$C(a1)
@@ -60332,7 +60332,7 @@ Obj_MGZSwingingSpikeBall:
 		move.w	$14(a0),$32(a0)
 		move.b	#3,$22(a0)
 		move.b	#$8F,$28(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_333F0
 		move.l	#loc_334B4,(a1)
 		move.l	#Map_MGZSwingingSpikeBall,$C(a1)
@@ -60576,7 +60576,7 @@ loc_33670:
 
 loc_33690:
 		move.w	#$3C,$32(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_3371E
 		move.l	#loc_337E0,(a1)
 		tst.b	$29(a0)
@@ -60614,7 +60614,7 @@ loc_33726:
 		tst.b	5(a0)
 		beq.w	loc_337BC
 		clr.b	5(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_337BC
 		move.l	#loc_337C2,(a1)
 		move.w	$10(a0),$10(a1)
@@ -60893,7 +60893,7 @@ Obj_MGZPulley:
 		lsl.w	#3,d0
 		move.w	d0,$40(a0)
 		move.w	d0,$3C(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_33DC2
 		move.l	#loc_340B6,(a1)
 		move.l	$C(a0),$C(a1)
@@ -62536,7 +62536,7 @@ Obj_MGZTopLauncher:
 
 loc_34F60:
 		move.w	d0,$18(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	loc_34F7C
 		move.l	#Obj_MGZTopPlatform,(a1)
 		move.b	#1,$2C(a1)
@@ -62601,7 +62601,7 @@ Obj_CGZBladePlatform:
 		move.b	#8,6(a0)
 		move.w	$14(a0),$32(a0)
 		bset	#7,$2A(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_350A2
 		move.l	#loc_35122,(a1)
 		move.w	$10(a0),$10(a1)
@@ -62610,7 +62610,7 @@ Obj_CGZBladePlatform:
 		addi.w	#$C,$14(a1)
 		move.b	#$A6,$28(a1)
 		move.w	a0,$3E(a1)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_350A2
 		move.l	#loc_35138,(a1)
 		move.w	$10(a0),$10(a1)
@@ -63666,7 +63666,7 @@ loc_35FC4:
 
 
 sub_35FCA:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	locret_35FE8
 		moveq	#$2C,d0
 
@@ -63711,32 +63711,32 @@ Obj_2PGoalMarker:
 		clr.w	(Ring_count).w
 		clr.w	(Ring_count_P2).w
 		jsr	sub_364EC(pc)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_36276
 		move.l	#loc_37454,(a1)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_36276
 		move.l	#loc_37454,(a1)
 		move.b	#1,$2C(a1)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_36276
 		move.l	#loc_365CC,(a1)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_36276
 		move.l	#loc_365CC,(a1)
 		move.b	#1,$2C(a1)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_36276
 		move.l	#loc_366CC,(a1)
 		move.w	#$120,$10(a1)
 		move.w	#$B8,$14(a1)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_36276
 		move.l	#loc_37220,(a1)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_36276
 		move.l	#loc_37292,(a1)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_36276
 		move.l	#locret_3780C,(a1)
 
@@ -63884,7 +63884,7 @@ loc_3642E:
 		move.w	#$78,$3C(a0)
 		st	(Events_bg+$14).w
 		movea.l	a1,a6
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	locret_3648C
 		move.l	#loc_36A4A,(a1)
 		move.b	#8,4(a1)
@@ -64350,7 +64350,7 @@ locret_36996:
 
 
 sub_36998:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	locret_369C0
 		move.l	#loc_366CC,(a1)
 		move.w	#$120,$10(a1)
@@ -64791,7 +64791,7 @@ loc_376E2:
 		add.b	$2C(a0),d0
 		andi.b	#$7F,d0
 		bne.s	loc_3771A
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_3771A
 		moveq	#$2C,d0
 
@@ -64845,7 +64845,7 @@ loc_3777E:
 
 
 sub_37784:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	locret_377C4
 		moveq	#$2C,d0
 
@@ -64910,7 +64910,7 @@ loc_3784C:
 		move.w	d0,$30(a0)
 		tst.b	4(a0)
 		bpl.s	loc_37888
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_37888
 		moveq	#$2C,d0
 
@@ -65309,7 +65309,7 @@ loc_37D50:
 
 
 sub_37D54:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	locret_37DB2
 		move.l	#loc_37E7A,(a1)
 		move.w	$10(a0),$10(a1)
@@ -65595,7 +65595,7 @@ sub_37FDC:
 ; ---------------------------------------------------------------------------
 
 loc_37FF6:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	loc_38062
 
 loc_37FFE:
@@ -65613,7 +65613,7 @@ loc_37FFE:
 		move.b	d0,$22(a1)
 		move.b	(a4)+,$34(a1)
 		movea.l	a1,a5
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	loc_38062
 		move.l	#loc_1C31E,(a1)
 		move.w	$10(a5),$10(a1)
@@ -66489,7 +66489,7 @@ loc_389EC:
 		move.b	#4,4(a0)
 		move.b	#6,$22(a0)
 		move.w	#1,$20(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_38A32
 		move.l	#loc_38EDE,(a1)
 		move.w	a0,$30(a1)
@@ -66783,7 +66783,7 @@ loc_38DF8:
 		bcs.s	loc_38E3C
 		move.b	#0,$22(a2)
 		move.b	#2,$2E(a2)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_38E34
 		move.l	#loc_389EC,(a1)
 		move.w	$10(a2),$10(a1)
@@ -66883,7 +66883,7 @@ locret_38F20:
 
 
 sub_38F22:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	locret_38FA2
 		move.l	#loc_38FA4,(a1)
 		move.w	#$6B8,$A(a1)
@@ -69843,7 +69843,7 @@ loc_3AE1C:
 		lea	(PLC_SpikesSprings).l,a1
 		jsr	(Load_PLC_Raw).l
 		movem.l	(sp)+,d7-a0/a2-a3
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_3AEB8
 		move.l	#Obj_AIZTransitionFloor,(a1)
 		move.w	#$2FB0,$10(a1)
@@ -70251,7 +70251,7 @@ AIZ2SE_ShipRefresh:
 		and.w	(Camera_Y_pos_mask).w,d0
 		move.w	d0,(_unkEE9C).w
 		move.w	d0,(_unkEEA2).w
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_3B332
 		move.l	#Obj_AIZBattleship,(a1)
 
@@ -70732,7 +70732,7 @@ Obj_AIZBattleship:
 		moveq	#1,d2
 
 loc_3B7F8:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	loc_3B812
 		move.l	#Obj_BattleshipPropeller,(a1)
 		move.w	d1,$2E(a1)
@@ -70755,7 +70755,7 @@ Obj_AIZBattleshipMain:
 		bpl.s	loc_3B84E
 		move.l	#Obj_AIZ2BossSmall,(a0)
 		st	(Events_fg_4).w
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	locret_3B84C
 		move.l	#Obj_AIZ2MakeTree,(a1)
 
@@ -70796,7 +70796,7 @@ loc_3B88E:
 		movea.l	$2E(a0),a2
 		move.w	(a2)+,$32(a0)
 		bmi.s	locret_3B8B4
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	locret_3B8B4
 		move.l	#Obj_AIZShipBomb,(a1)
 		move.w	(a2)+,$2E(a1)
@@ -70888,7 +70888,7 @@ AIZShipBomb_Drop:
 		move.w	#$10,(Screen_shake_flag).w
 		moveq	#signextendB(sfx_MissileExplode),d0
 		jsr	(Play_SFX).l
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	loc_3B9FE
 		lea	AIZBombExplodeDat(pc),a2
 		moveq	#7,d1
@@ -70997,7 +70997,7 @@ loc_3BACA:
 		sub.w	$2E(a0),d0
 		cmp.w	(a2)+,d0
 		bcs.s	locret_3BAEC
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	locret_3BAEC
 		move.l	#Obj_AIZ2BGTree,(a1)
 		move.w	(a2)+,8(a1)
@@ -72056,7 +72056,7 @@ loc_3CAEE:
 		clr.l	(a5)+
 		clr.l	(a6)+
 		dbf	d1,loc_3CAEE
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_3CB54
 		move.w	#$3C90,d1
 		move.l	#$5C00790,d2
@@ -72233,7 +72233,7 @@ MGZ2_QuakeEvent1:
 		st	(Events_bg+$12).w
 		addi.w	#$C,(Events_bg+$10).w
 		st	(Screen_shake_flag).w
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_3CCD2
 		move.l	#Obj_MGZ2DrillingRobotnik,(a1)
 		move.w	#$8E0,$10(a1)
@@ -72254,7 +72254,7 @@ MGZ2_QuakeEvent2:
 		st	(Events_bg+$13).w
 		addi.w	#$C,(Events_bg+$10).w
 		st	(Screen_shake_flag).w
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_3CD1C
 		move.l	#Obj_MGZ2DrillingRobotnik,(a1)
 		bset	#0,4(a1)
@@ -72276,7 +72276,7 @@ MGZ2_QuakeEvent3:
 		st	(Events_bg+$14).w
 		addi.w	#$C,(Events_bg+$10).w
 		st	(Screen_shake_flag).w
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_3CD64
 		move.l	#Obj_MGZ2DrillingRobotnik,(a1)
 		bset	#0,4(a1)
@@ -72619,7 +72619,7 @@ loc_3D0E6:
 ; ---------------------------------------------------------------------------
 
 loc_3D102:
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_3D10C
 		move.l	d1,(a1)
 
@@ -72936,7 +72936,7 @@ loc_3D396:
 loc_3D3B0:
 		move.w	d0,(Events_bg+$00).w
 		clr.w	(Events_bg+$02).w
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_3D3C2
 		move.l	d1,(a1)
 
@@ -73311,7 +73311,7 @@ CNZ1BGE_FGRefresh2:
 loc_3D798:
 		addq.w	#2,a3
 		move.w	#-$2000,d7
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_3D7B2
 		move.l	#Obj_EndSign,(a1)
 		move.w	#$32C0,$10(a1)
@@ -74429,7 +74429,7 @@ loc_3E286:
 		beq.s	loc_3E2B0
 		cmpi.w	#$3B60,(Camera_X_pos_copy).w
 		bcs.s	loc_3E2B4
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_3E2B0
 		move.l	#Obj_LBZ1InvisibleBarrier,(a1)
 
@@ -74543,7 +74543,7 @@ LBZ1_EventVScroll:
 		bpl.s	loc_3E3A6
 		move.w	#1,(Events_fg_4).w
 		move.w	#4,(Special_V_int_routine).w
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_3E3A6
 		move.l	#Obj_LBZ1InvisibleBarrier,(a1)
 
@@ -77035,7 +77035,7 @@ loc_40A02:
 loc_40A0C:
 		tst.b	(a2)+
 		bne.s	loc_40A42
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_40A42
 		move.l	#loc_40930,(a1)
 		move.b	d1,$22(a1)
@@ -78854,7 +78854,7 @@ loc_43CEC:
 loc_43CFC:
 		tst.b	($FF2022).l
 		bne.s	locret_43CD0
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	locret_43CD0
 		move.l	#loc_43932,(a1)
 		st	($FF2022).l
@@ -79634,7 +79634,7 @@ loc_4487A:
 		move.b	#$C,5(a0)
 		move.l	#word_45775,$30(a0)
 		move.w	#$600,$18(a0)
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_4489C
 		move.l	#Obj_Song_Fade_ToLevelMusic,(a1)
 
@@ -79654,7 +79654,7 @@ loc_448B0:
 		clr.b	(Ctrl_1_locked).w
 		jsr	(AfterBoss_Cleanup).l
 		jsr	(Remove_From_TrackingSlot).l
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_448D2
 		move.l	#Obj_TitleCard,(a1)
 
@@ -79917,7 +79917,7 @@ loc_44BAE:
 		jsr	(PalLoad_Line1).l
 		lea	ChildObjDat_44BEC(pc),a2
 		jsr	(CreateChild1_Normal).l
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_44BE0
 		move.l	#Obj_Song_Fade_ToLevelMusic,(a1)
 
@@ -80056,7 +80056,7 @@ loc_44D6E:
 		lea	ChildObjDat_44DC4(pc),a2
 		jsr	(CreateChild1_Normal).l
 		move.w	(Camera_stored_max_Y_pos).w,(Camera_target_max_Y_pos).w
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_44DB8
 		move.l	#Obj_Song_Fade_ToLevelMusic,(a1)
 
@@ -80244,7 +80244,7 @@ loc_44F5C:
 		clr.b	(Player_1+object_control).w
 		lea	(Pal_CNZ).l,a1
 		jsr	(PalLoad_Line1).l
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_44F92
 		move.l	#Obj_Song_Fade_ToLevelMusic,(a1)
 
@@ -80547,7 +80547,7 @@ loc_452DC:
 		move.b	#9,$22(a0)
 		move.w	#$200,$18(a0)
 		move.w	#-$100,$1A(a0)
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_45308
 		move.l	#Obj_Song_Fade_ToLevelMusic,(a1)
 
@@ -80756,7 +80756,7 @@ loc_45556:
 		st	(_unkFAA3).w
 		moveq	#signextendB(sfx_Geyser),d0
 		jsr	(Play_SFX).l
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_45588
 		move.l	#loc_44E04,(a1)
 
@@ -80776,7 +80776,7 @@ loc_4558A:
 		move.b	#$F,(a1)
 		adda.w	d0,a1
 		move.b	#-$78,(a1)
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_455D2
 		move.l	#Obj_CNZVacuumTube,(a1)
 		move.w	#$4740,$10(a1)
@@ -80784,7 +80784,7 @@ loc_4558A:
 		move.b	#$4C,$2C(a1)
 
 loc_455D2:
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_455F2
 		move.l	#Obj_CNZVacuumTube,(a1)
 		move.w	#$4740,$10(a1)
@@ -80798,7 +80798,7 @@ locret_455F2:
 Obj_CNZWaterLevelCorkFloor:
 		jsr	(Obj_WaitOffscreen).l
 		move.l	#loc_45624,(a0)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	loc_45624
 		move.l	#Obj_CorkFloor,(a1)
 		move.w	$10(a0),$10(a1)
@@ -80849,7 +80849,7 @@ loc_4566A:
 		move.w	#$A58,(Target_water_level).w
 		moveq	#signextendB(sfx_Geyser),d0
 		jsr	(Play_SFX).l
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_456C0
 		move.l	#loc_44E04,(a1)
 		st	$2C(a1)
@@ -80861,7 +80861,7 @@ loc_456C0:
 
 
 sub_456C6:
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_456DA
 		move.l	#Obj_Song_Fade_Transition,(a1)
 		move.b	#mus_Knuckles,$2C(a1)
@@ -84877,7 +84877,7 @@ loc_48066:
 loc_4807A:
 		st	(_unkFAA2).w
 		jsr	(Obj_EndSignControl).l
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_48092
 		move.l	#loc_4809C,(a1)
 
@@ -87469,7 +87469,7 @@ sub_49AF4:
 		moveq	#7,d1
 
 loc_49B08:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	locret_49B60
 		move.l	#loc_2E9AA,(a1)
 		move.l	#Map_HCZWaterWallDebris,$C(a1)
@@ -88173,7 +88173,7 @@ loc_4A294:
 		st	(Disable_death_plane).w
 		moveq	#signextendB(sfx_BossHitFloor),d0
 		jsr	(Play_SFX).l
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_4A2C6
 		move.l	#Obj_MGZ2_BossTransition,(a1)
 
@@ -88436,7 +88436,7 @@ loc_4A5D6:
 		bne.w	locret_49DD8
 		move.l	#locret_4A5FA,(a0)
 		bset	#4,$38(a0)
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_4A5F8
 		move.l	#loc_4AE36,(a1)
 
@@ -90050,7 +90050,7 @@ Obj_CNZMinibossGo:
 		move.l	#Obj_CNZMinibossStart,(a0)
 		moveq	#signextendB(mus_Miniboss),d0
 		jsr	(Play_Music).l
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_4B628
 		move.l	#Obj_CNZMinibossScrollControl,(a1)
 
@@ -91212,7 +91212,7 @@ loc_4C28C:
 		lea	(ArtKosM_BadnikExplosion).l,a1
 		move.w	#-$4C00,d2
 		jsr	(Queue_Kos_Module).l
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_4C2C8
 		move.w	a1,$44(a0)
 		move.l	#Obj_CNZCannon,(a1)
@@ -94816,7 +94816,7 @@ loc_4E606:
 		bset	#5,$38(a1)
 
 loc_4E61E:
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_4E62C
 		move.l	#loc_4E634,(a1)
 
@@ -95640,7 +95640,7 @@ loc_4EEA4:
 		clr.b	(Boss_flag).w
 		jsr	(Restore_LevelMusic).l
 		move.w	#$44C0,(Camera_stored_max_X_pos).w
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_4EECC
 		move.l	#Obj_IncLevEndXGradual,(a1)
 
@@ -96830,7 +96830,7 @@ loc_4F9CE:
 		move.l	#loc_4FA32,$34(a0)
 		moveq	#$71,d0
 		jsr	(Load_PLC).l
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_4FA0C
 		move.l	#Obj_Song_Fade_Transition,(a1)
 		move.b	#mus_EndBoss,$2C(a1)
@@ -96960,7 +96960,7 @@ loc_4FB0A:
 		move.w	d1,$14(a0)
 		bclr	#0,4(a0)
 		bclr	#7,$A(a0)
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_4FB46
 		move.l	#Obj_LBZFinalBoss2,(a1)
 		move.w	$10(a0),$10(a1)
@@ -98809,13 +98809,13 @@ loc_50D3C:
 		move.b	#4,5(a0)
 		move.w	#$9F,$2E(a0)
 		move.l	#loc_50D78,$34(a0)
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_50D64
 		move.l	#Obj_Song_Fade_Transition,(a1)
 		move.b	#mus_FinalBoss,$2C(a1)
 
 loc_50D64:
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_50D72
 		move.l	#loc_517FE,(a1)
 
@@ -99235,7 +99235,7 @@ loc_5117A:
 		bclr	#0,$2A(a1)
 		move.w	#$101,(Ctrl_1_logical).w
 		st	(Ctrl_1_locked).w
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_511C4
 		move.l	#loc_5182E,(a1)
 		lea	(Player_1).w,a2
@@ -99589,7 +99589,7 @@ loc_51590:
 loc_515AC:
 		tst.b	$2C(a0)
 		bne.s	loc_515DE
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_515DE
 		move.l	#loc_515E2,(a1)
 		move.w	(Camera_X_pos).w,d0
@@ -99617,7 +99617,7 @@ loc_515F8:
 		bcc.s	loc_5161A
 		move.w	$3A(a0),$2E(a0)
 		addq.w	#1,$3A(a0)
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_51618
 		move.l	#loc_5165C,(a1)
 
@@ -99639,7 +99639,7 @@ loc_5162E:
 		bset	#0,(_unkFA88).w
 		clr.b	$39(a0)
 		clr.w	$2E(a0)
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_51650
 		move.l	#loc_517FE,(a1)
 		move.b	#4,$2C(a1)
@@ -100901,7 +100901,7 @@ Obj_EndSignResults:
 		bne.s	locret_524E6
 		move.b	#8,5(a0)
 		jsr	Set_PlayerEndingPose(pc)
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_524E6
 		move.l	#Obj_LevelResults,(a1)
 
@@ -101453,7 +101453,7 @@ CreateChild1_Normal:
 		move.w	(a2)+,d6
 
 loc_529D4:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	locret_52A1E
 		move.w	a0,$46(a1)
 		move.l	$C(a0),$C(a1)
@@ -101489,7 +101489,7 @@ CreateChild2_Complex:
 		move.w	(a2)+,d6
 
 loc_52A24:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	locret_52A82
 		move.w	a0,$46(a1)
 		move.l	$C(a0),$C(a1)
@@ -101531,7 +101531,7 @@ CreateChild3_NormalRepeated:
 
 loc_52A88:
 		movea.l	a2,a3
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	locret_52AD4
 		move.w	a0,$46(a1)
 		move.l	$C(a0),$C(a1)
@@ -101568,7 +101568,7 @@ CreateChild4_LinkListRepeated:
 		move.w	(a2)+,d6
 
 loc_52ADC:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	locret_52B14
 		move.w	a3,$46(a1)
 		move.w	a1,$44(a3)
@@ -101596,7 +101596,7 @@ CreateChild5_ComplexAdjusted:
 		move.w	(a2)+,d6
 
 loc_52B1A:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	locret_52B8E
 		move.w	a0,$46(a1)
 		move.l	$C(a0),$C(a1)
@@ -101648,7 +101648,7 @@ CreateChild6_Simple:
 		move.w	(a2)+,d6
 
 loc_52B94:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	locret_52BBA
 		move.w	a0,$46(a1)
 		move.l	(a2),(a1)
@@ -101672,7 +101672,7 @@ CreateChild7_Normal2:
 		move.w	(a2)+,d6
 
 loc_52BC0:
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_52C0A
 		move.w	a0,$46(a1)
 		move.l	$C(a0),$C(a1)
@@ -101707,7 +101707,7 @@ CreateChild8_TreeListRepeated:
 		move.w	(a2)+,d6
 
 loc_52C12:
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	locret_52C4A
 		move.w	a3,$46(a1)
 		move.w	a0,$44(a1)
@@ -105138,7 +105138,7 @@ sub_5484E:
 		bcc.s	locret_54886
 		move.b	d0,5(a0)
 		bsr.w	Set_PlayerEndingPose
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_54886
 		move.l	#Obj_LevelResults,(a1)
 
@@ -105193,7 +105193,7 @@ sub_548DA:
 loc_54900:
 		move.w	#-$100,$18(a0)
 		move.b	d0,5(a0)
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_54918
 		move.l	#Obj_LevelResults,(a1)
 
@@ -108103,7 +108103,7 @@ loc_56390:
 		bset	#1,$38(a0)
 		lea	PLC_56946(pc),a1
 		jsr	(Load_PLC_Raw).l
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_563E8
 		move.l	#Obj_Song_Fade_Transition,(a1)
 		move.b	#mus_Miniboss,$2C(a1)
@@ -110384,7 +110384,7 @@ loc_578DC:
 		beq.w	locret_57866
 		lea	ChildObjDat_57C34(pc),a2
 		jsr	CreateChild6_Simple(pc)
-		jsr	(Create_New_Sprite3).l
+		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	loc_57912
 		move.l	#Obj_Spring,(a1)
 		move.w	#$5D5A,$10(a1)
@@ -112759,7 +112759,7 @@ loc_58DF8:
 		cmpi.b	#$3C,d0
 		bhi.s	locret_58E3E
 		move.b	d0,(_unkFAAD).w
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	locret_58E3E
 		move.l	#loc_58E46,(a1)
 
@@ -115268,7 +115268,7 @@ loc_5A4E0:
 ; ---------------------------------------------------------------------------
 
 loc_5A4E4:
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_5A4F8
 		move.l	#Obj_Song_Fade_Transition,(a1)
 		move.b	#mus_Miniboss,$2C(a1)
@@ -115296,7 +115296,7 @@ Obj_LBZMinibossBox:
 		jsr	(Queue_Kos_Module).l
 		lea	PLC_BossExplosion(pc),a1
 		jsr	(Load_PLC_Raw).l
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_5A568
 		move.l	#Obj_Song_Fade_Transition,(a1)
 		move.b	#mus_Miniboss,$2C(a1)
@@ -115634,7 +115634,7 @@ loc_5A84E:
 		lea	(Child1_MakeRoboShipFlame).l,a2
 		jsr	CreateChild1_Normal(pc)
 		st	(Ctrl_2_locked).w
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_5A8DE
 		move.l	#loc_5AAAE,(a1)
 
@@ -115755,7 +115755,7 @@ loc_5AA18:
 		move.w	#-$600,$1A(a1)
 		move.b	#2,$20(a1)
 		clr.b	$40(a1)
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_5AA78
 		move.l	#Obj_LBZFinalBoss1,(a1)
 		move.w	#$44A0,$10(a1)
@@ -116510,7 +116510,7 @@ loc_5B6B8:
 loc_5B6BC:
 		btst	#5,(Ctrl_1_pressed).w
 		beq.s	loc_5B708
-		jsr	(Create_New_Sprite).l
+		jsr	(AllocateObject).l
 		bne.s	loc_5B708
 		move.w	$10(a0),$10(a1)
 		move.w	$14(a0),$14(a1)
