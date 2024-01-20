@@ -25,8 +25,8 @@ dma68kToVDP macro source,dest,length,type
 	move.l	#(($9400|((((length)>>1)&$FF00)>>8))<<16)|($9300|(((length)>>1)&$FF)),(a5)
 	move.l	#(($9600|((((source)>>1)&$FF00)>>8))<<16)|($9500|(((source)>>1)&$FF)),(a5)
 	move.w	#$9700|(((((source)>>1)&$FF0000)>>16)&$7F),(a5)
-	move.w	#((vdpComm(dest,type,DMA)>>16)&$FFFF),(a5)
-	move.w	#(vdpComm(dest,type,DMA)&$FFFF),(DMA_trigger_word).w
+	move.w	#(vdpComm(dest,type,DMA)>>16)&$FFFF,(a5)
+	move.w	#vdpComm(dest,type,DMA)&$FFFF,(DMA_trigger_word).w
 	move.w	(DMA_trigger_word).w,(a5)
 	; From '  § 7  DMA TRANSFER' of https://emu-docs.org/Genesis/sega2f.htm:
 	;
@@ -48,7 +48,7 @@ dmaFillVRAM macro byte,addr,length
 	move.w	#$8F01,(a5) ; VRAM pointer increment: $0001
 	move.l	#(($9400|((((length)-1)&$FF00)>>8))<<16)|($9300|(((length)-1)&$FF)),(a5) ; DMA length ...
 	move.w	#$9780,(a5) ; VRAM fill
-	move.l	#$40000080|(((addr)&$3FFF)<<16)|(((addr)&$C000)>>14),(a5) ; Start at ...
+	move.l	#vdpComm(addr,VRAM,DMA),(a5) ; Start at ...
 	move.w	#(byte)<<8,(VDP_data_port).l ; Fill with byte
 .loop:	move.w	(a5),d1
 	btst	#1,d1

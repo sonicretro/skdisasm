@@ -1,16 +1,17 @@
-Ani_3750E:		dc.w byte_3751E-Ani_3750E
-		dc.w byte_37522-Ani_3750E
-		dc.w byte_3754D-Ani_3750E
-		dc.w byte_37550-Ani_3750E
-		dc.w byte_37572-Ani_3750E
-		dc.w byte_37594-Ani_3750E
-		dc.w byte_375B6-Ani_3750E
-		dc.w byte_375D8-Ani_3750E
-byte_3751E:	dc.b  $3B, $12,	$FD,   1
+Ani_2PNeonDisplay_:
+		dc.w byte_3751E-Ani_2PNeonDisplay_
+		dc.w byte_37522-Ani_2PNeonDisplay_
+		dc.w byte_3754D-Ani_2PNeonDisplay_
+		dc.w byte_37550-Ani_2PNeonDisplay_
+		dc.w byte_37572-Ani_2PNeonDisplay_
+		dc.w byte_37594-Ani_2PNeonDisplay_
+		dc.w byte_375B6-Ani_2PNeonDisplay_
+		dc.w byte_375D8-Ani_2PNeonDisplay_
+byte_3751E:	dc.b  $3B, $12, $FD,   1
 byte_37522:	dc.b    5,   0,   9,   0,   9,   0,   9,   0,   9,   0,   9,   1,  $A,   1,  $A,   1,  $A,   1,  $A,   1
 		dc.b   $A,   2,  $B,   2,  $B,   2,  $B,   2,  $B,   2,  $B,   3,  $C,   3,  $C,   3,  $C,   3,  $C,   3
 		dc.b   $C, $FD,   2
-byte_3754D:	dc.b  $3B, $12,	$FF
+byte_3754D:	dc.b  $3B, $12, $FF
 byte_37550:	dc.b    5,   4,  $D,   4,  $D,   4,  $D,   4,  $D,   4,  $D,   4,  $D,   4,  $D,   4,  $D,   4,  $D,   4
 		dc.b   $D,   4,  $D,   4,  $D,   4,  $D,   4,  $D,   4,  $D, $FD,   2, $FF
 byte_37572:	dc.b    5,   5,  $E,   5,  $E,   5,  $E,   5,  $E,   5,  $E,   5,  $E,   5,  $E,   5,  $E,   5,  $E,   5

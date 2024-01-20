@@ -1,16 +1,17 @@
-PLC_347F8A:	dc.w Frame_347FA4-PLC_347F8A
-		dc.w Frame_347FA6-PLC_347F8A
-		dc.w Frame_347FB0-PLC_347F8A
-		dc.w Frame_347FBA-PLC_347F8A
-		dc.w Frame_347FC4-PLC_347F8A
-		dc.w Frame_347FCE-PLC_347F8A
-		dc.w Frame_347FD8-PLC_347F8A
-		dc.w Frame_347FE0-PLC_347F8A
-		dc.w Frame_347FEA-PLC_347F8A
-		dc.w Frame_347FF4-PLC_347F8A
-		dc.w Frame_347FFE-PLC_347F8A
-		dc.w Frame_348008-PLC_347F8A
-		dc.w Frame_348014-PLC_347F8A
+DPLC_SonicSnowboard_:
+		dc.w Frame_347FA4-DPLC_SonicSnowboard_
+		dc.w Frame_347FA6-DPLC_SonicSnowboard_
+		dc.w Frame_347FB0-DPLC_SonicSnowboard_
+		dc.w Frame_347FBA-DPLC_SonicSnowboard_
+		dc.w Frame_347FC4-DPLC_SonicSnowboard_
+		dc.w Frame_347FCE-DPLC_SonicSnowboard_
+		dc.w Frame_347FD8-DPLC_SonicSnowboard_
+		dc.w Frame_347FE0-DPLC_SonicSnowboard_
+		dc.w Frame_347FEA-DPLC_SonicSnowboard_
+		dc.w Frame_347FF4-DPLC_SonicSnowboard_
+		dc.w Frame_347FFE-DPLC_SonicSnowboard_
+		dc.w Frame_348008-DPLC_SonicSnowboard_
+		dc.w Frame_348014-DPLC_SonicSnowboard_
 Frame_347FA4:	dc.w 0
 Frame_347FA6:	dc.w 4
 		dc.w $F000
@@ -45,12 +46,12 @@ Frame_347FE0:	dc.w 4
 		dc.w $F09C
 		dc.w $30AC
 		dc.w $20B0
-		dc.w $B3
+		dc.w $00B3
 Frame_347FEA:	dc.w 4
 		dc.w $F0B4
 		dc.w $10C4
 		dc.w $30C6
-		dc.w $CA
+		dc.w $00CA
 Frame_347FF4:	dc.w 4
 		dc.w $B0CB
 		dc.w $50D7
@@ -63,9 +64,9 @@ Frame_347FFE:	dc.w 4
 		dc.w $5107
 Frame_348008:	dc.w 5
 		dc.w $F10D
-		dc.w $11D
+		dc.w $011D
 		dc.w $311E
-		dc.w $122
+		dc.w $0122
 		dc.w $3123
 Frame_348014:	dc.w 5
 		dc.w $2127

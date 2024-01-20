@@ -1,10 +1,11 @@
-		dc.w word_21250-Map_SurfboardSplash
-		dc.w word_2125E-Map_SurfboardSplash
-		dc.w word_2126C-Map_SurfboardSplash
-		dc.w word_2127A-Map_SurfboardSplash
-		dc.w word_21288-Map_SurfboardSplash
-		dc.w word_21296-Map_SurfboardSplash
-		dc.w word_212A4-Map_SurfboardSplash
+Map_SurfboardSplash_:
+		dc.w word_21250-Map_SurfboardSplash_
+		dc.w word_2125E-Map_SurfboardSplash_
+		dc.w word_2126C-Map_SurfboardSplash_
+		dc.w word_2127A-Map_SurfboardSplash_
+		dc.w word_21288-Map_SurfboardSplash_
+		dc.w word_21296-Map_SurfboardSplash_
+		dc.w word_212A4-Map_SurfboardSplash_
 word_21250:	dc.w 2
 		dc.b  $F0,   9,   0,   0,   0,   0
 		dc.b  $F8,  $C,   0,   6,   0, $18

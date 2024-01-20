@@ -1,12 +1,13 @@
-		dc.w word_1787C-Map_Invincibility
-		dc.w word_1787E-Map_Invincibility
-		dc.w word_17886-Map_Invincibility
-		dc.w word_1788E-Map_Invincibility
-		dc.w word_17896-Map_Invincibility
-		dc.w word_1789E-Map_Invincibility
-		dc.w word_178A6-Map_Invincibility
-		dc.w word_178AE-Map_Invincibility
-		dc.w word_178B6-Map_Invincibility
+Map_Invincibility_:
+		dc.w word_1787C-Map_Invincibility_
+		dc.w word_1787E-Map_Invincibility_
+		dc.w word_17886-Map_Invincibility_
+		dc.w word_1788E-Map_Invincibility_
+		dc.w word_17896-Map_Invincibility_
+		dc.w word_1789E-Map_Invincibility_
+		dc.w word_178A6-Map_Invincibility_
+		dc.w word_178AE-Map_Invincibility_
+		dc.w word_178B6-Map_Invincibility_
 word_1787C:	dc.w 0
 word_1787E:	dc.w 1
 		dc.b  $F8,   0,   0,   0, $FF, $FC

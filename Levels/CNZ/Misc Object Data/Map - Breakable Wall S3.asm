@@ -1,7 +1,8 @@
-		dc.w word_1FE80-Map_CNZBreakableWall
-		dc.w word_1FE9A-Map_CNZBreakableWall
-		dc.w word_1FECC-Map_CNZBreakableWall
-		dc.w word_1FEE6-Map_CNZBreakableWall
+Map_CNZBreakableWall_:
+		dc.w word_1FE80-Map_CNZBreakableWall_
+		dc.w word_1FE9A-Map_CNZBreakableWall_
+		dc.w word_1FECC-Map_CNZBreakableWall_
+		dc.w word_1FEE6-Map_CNZBreakableWall_
 word_1FE80:	dc.w 4
 		dc.b  $E0,  $D,   0,   0, $FF, $F0
 		dc.b  $F0,  $D,   0,   0, $FF, $F0

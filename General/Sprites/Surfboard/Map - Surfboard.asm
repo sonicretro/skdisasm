@@ -1,8 +1,9 @@
-		dc.w word_21368-Map_Surfboard
-		dc.w word_2136A-Map_Surfboard
-		dc.w word_2137E-Map_Surfboard
-		dc.w word_2139E-Map_Surfboard
-		dc.w word_213B8-Map_Surfboard
+Map_Surfboard_:
+		dc.w word_21368-Map_Surfboard_
+		dc.w word_2136A-Map_Surfboard_
+		dc.w word_2137E-Map_Surfboard_
+		dc.w word_2139E-Map_Surfboard_
+		dc.w word_213B8-Map_Surfboard_
 word_21368:	dc.w 0
 word_2136A:	dc.w 3
 		dc.b  $FC,  $D,   0,   0, $FF, $E0

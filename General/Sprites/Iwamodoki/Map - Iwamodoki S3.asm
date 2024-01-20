@@ -1,13 +1,14 @@
-		dc.w word_1614E2-Map_Iwamodoki
-		dc.w word_1614EA-Map_Iwamodoki
-		dc.w word_1614FE-Map_Iwamodoki
-		dc.w word_161512-Map_Iwamodoki
-		dc.w word_161526-Map_Iwamodoki
-		dc.w word_16153A-Map_Iwamodoki
-		dc.w word_16154E-Map_Iwamodoki
-		dc.w word_161556-Map_Iwamodoki
-		dc.w word_16155E-Map_Iwamodoki
-		dc.w word_161566-Map_Iwamodoki
+Map_Iwamodoki_:
+		dc.w word_1614E2-Map_Iwamodoki_
+		dc.w word_1614EA-Map_Iwamodoki_
+		dc.w word_1614FE-Map_Iwamodoki_
+		dc.w word_161512-Map_Iwamodoki_
+		dc.w word_161526-Map_Iwamodoki_
+		dc.w word_16153A-Map_Iwamodoki_
+		dc.w word_16154E-Map_Iwamodoki_
+		dc.w word_161556-Map_Iwamodoki_
+		dc.w word_16155E-Map_Iwamodoki_
+		dc.w word_161566-Map_Iwamodoki_
 word_1614E2:	dc.w 1
 		dc.b  $F4,  $A, $60,   0, $FF, $F4
 word_1614EA:	dc.w 3

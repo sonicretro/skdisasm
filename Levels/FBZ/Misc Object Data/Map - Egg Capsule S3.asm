@@ -1,11 +1,13 @@
-		dc.w word_160D5C-Map_FBZEggCapsule
-		dc.w word_160D82-Map_FBZEggCapsule
-		dc.w word_160DA8-Map_FBZEggCapsule
-		dc.w word_160DB0-Map_FBZEggCapsule
-		dc.w word_160DB8-Map_FBZEggCapsule
-		dc.w word_160DC0-Map_FBZEggCapsule
-		dc.w word_160DC8-Map_FBZEggCapsule
-		dc.w word_160DC8-Map_FBZEggCapsule
+; FBZ Egg Capsule mappings
+Map_FBZEggCapsule_:
+		dc.w word_160D5C-Map_FBZEggCapsule_
+		dc.w word_160D82-Map_FBZEggCapsule_
+		dc.w word_160DA8-Map_FBZEggCapsule_
+		dc.w word_160DB0-Map_FBZEggCapsule_
+		dc.w word_160DB8-Map_FBZEggCapsule_
+		dc.w word_160DC0-Map_FBZEggCapsule_
+		dc.w word_160DC8-Map_FBZEggCapsule_
+		dc.w word_160DC8-Map_FBZEggCapsule_
 word_160D5C:	dc.w 6
 		dc.b  $E0,   8,   0,   0, $FF, $E8
 		dc.b  $E0,   8,   8,   0,   0,   0

@@ -1,8 +1,9 @@
-		dc.w word_1C394-Map_Explosion
-		dc.w word_1C39C-Map_Explosion
-		dc.w word_1C3A4-Map_Explosion
-		dc.w word_1C3AC-Map_Explosion
-		dc.w word_1C3B4-Map_Explosion
+Map_Explosion_:
+		dc.w word_1C394-Map_Explosion_
+		dc.w word_1C39C-Map_Explosion_
+		dc.w word_1C3A4-Map_Explosion_
+		dc.w word_1C3AC-Map_Explosion_
+		dc.w word_1C3B4-Map_Explosion_
 word_1C394:	dc.w 1
 		dc.b  $F8,   5,   0,   0, $FF, $F8
 word_1C39C:	dc.w 1

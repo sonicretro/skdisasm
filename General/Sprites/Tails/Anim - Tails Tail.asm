@@ -1,16 +1,17 @@
-		dc.w AniTails_Tail00-AniTails_Tail
-		dc.w AniTails_Tail01-AniTails_Tail
-		dc.w AniTails_Tail02-AniTails_Tail
-		dc.w AniTails_Tail03-AniTails_Tail
-		dc.w AniTails_Tail04-AniTails_Tail
-		dc.w AniTails_Tail05-AniTails_Tail
-		dc.w AniTails_Tail06-AniTails_Tail
-		dc.w AniTails_Tail07-AniTails_Tail
-		dc.w AniTails_Tail08-AniTails_Tail
-		dc.w AniTails_Tail09-AniTails_Tail
-		dc.w AniTails_Tail0A-AniTails_Tail
-		dc.w AniTails_Tail0B-AniTails_Tail
-		dc.w AniTails_Tail0C-AniTails_Tail
+AniTails_Tail_:
+		dc.w AniTails_Tail00-AniTails_Tail_
+		dc.w AniTails_Tail01-AniTails_Tail_
+		dc.w AniTails_Tail02-AniTails_Tail_
+		dc.w AniTails_Tail03-AniTails_Tail_
+		dc.w AniTails_Tail04-AniTails_Tail_
+		dc.w AniTails_Tail05-AniTails_Tail_
+		dc.w AniTails_Tail06-AniTails_Tail_
+		dc.w AniTails_Tail07-AniTails_Tail_
+		dc.w AniTails_Tail08-AniTails_Tail_
+		dc.w AniTails_Tail09-AniTails_Tail_
+		dc.w AniTails_Tail0A-AniTails_Tail_
+		dc.w AniTails_Tail0B-AniTails_Tail_
+		dc.w AniTails_Tail0C-AniTails_Tail_
 AniTails_Tail00:dc.b  $20,   0, $FF
 AniTails_Tail01:dc.b    7, $22, $23, $24, $25, $26, $FF
 AniTails_Tail02:dc.b    3, $22, $23, $24, $25, $26, $FD,   1
