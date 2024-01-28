@@ -1,4 +1,5 @@
-Map_HUD_:	dc.w word_DBC2-Map_HUD_
+Map_HUD_:
+		dc.w word_DBC2-Map_HUD_
 		dc.w word_DC00-Map_HUD_
 		dc.w word_DC32-Map_HUD_
 		dc.w word_DC6A-Map_HUD_

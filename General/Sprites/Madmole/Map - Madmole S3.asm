@@ -1,17 +1,19 @@
-		dc.w word_1613E6-Map_Madmole
-		dc.w word_161406-Map_Madmole
-		dc.w word_161426-Map_Madmole
-		dc.w word_161446-Map_Madmole
-		dc.w word_16145A-Map_Madmole
-		dc.w word_161468-Map_Madmole
-		dc.w word_161476-Map_Madmole
-		dc.w word_16147E-Map_Madmole
-		dc.w word_16148C-Map_Madmole
-		dc.w word_161494-Map_Madmole
-		dc.w word_1614A2-Map_Madmole
-		dc.w word_1614AA-Map_Madmole
-		dc.w word_1614B8-Map_Madmole
-		dc.w word_1614C0-Map_Madmole
+; Madmole mappings
+Map_Madmole_:
+		dc.w word_1613E6-Map_Madmole_
+		dc.w word_161406-Map_Madmole_
+		dc.w word_161426-Map_Madmole_
+		dc.w word_161446-Map_Madmole_
+		dc.w word_16145A-Map_Madmole_
+		dc.w word_161468-Map_Madmole_
+		dc.w word_161476-Map_Madmole_
+		dc.w word_16147E-Map_Madmole_
+		dc.w word_16148C-Map_Madmole_
+		dc.w word_161494-Map_Madmole_
+		dc.w word_1614A2-Map_Madmole_
+		dc.w word_1614AA-Map_Madmole_
+		dc.w word_1614B8-Map_Madmole_
+		dc.w word_1614C0-Map_Madmole_
 word_1613E6:	dc.w 5
 		dc.b  $F4,  $A, $20,   0, $FF, $FA
 		dc.b  $FC,   0, $20,   9, $FF, $F2

@@ -1,15 +1,16 @@
-PLC_348128:	dc.w Frame_348140-PLC_348128
-		dc.w Frame_348142-PLC_348128
-		dc.w Frame_348148-PLC_348128
-		dc.w Frame_348152-PLC_348128
-		dc.w Frame_348158-PLC_348128
-		dc.w Frame_348164-PLC_348128
-		dc.w Frame_34816A-PLC_348128
-		dc.w Frame_348174-PLC_348128
-		dc.w Frame_34817A-PLC_348128
-		dc.w Frame_348186-PLC_348128
-		dc.w Frame_34818C-PLC_348128
-		dc.w Frame_348196-PLC_348128
+DPLC_Snowboard_:
+		dc.w Frame_348140-DPLC_Snowboard_
+		dc.w Frame_348142-DPLC_Snowboard_
+		dc.w Frame_348148-DPLC_Snowboard_
+		dc.w Frame_348152-DPLC_Snowboard_
+		dc.w Frame_348158-DPLC_Snowboard_
+		dc.w Frame_348164-DPLC_Snowboard_
+		dc.w Frame_34816A-DPLC_Snowboard_
+		dc.w Frame_348174-DPLC_Snowboard_
+		dc.w Frame_34817A-DPLC_Snowboard_
+		dc.w Frame_348186-DPLC_Snowboard_
+		dc.w Frame_34818C-DPLC_Snowboard_
+		dc.w Frame_348196-DPLC_Snowboard_
 Frame_348140:	dc.w 0
 Frame_348142:	dc.w 2
 		dc.w $3000

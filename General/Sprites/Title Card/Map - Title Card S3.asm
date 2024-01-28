@@ -1,24 +1,25 @@
-		dc.w Map_TitleCard_Blank-Map_TitleCard
-		dc.w Map_TitleCard_Banner-Map_TitleCard
-		dc.w Map_TitleCard_Act-Map_TitleCard
-		dc.w Map_TitleCard_Zone-Map_TitleCard
-		dc.w Map_TitleCard_AIZ-Map_TitleCard
-		dc.w Map_TitleCard_HCZ-Map_TitleCard
-		dc.w Map_TitleCard_MGZ-Map_TitleCard
-		dc.w Map_TitleCard_CNZ-Map_TitleCard
-		dc.w Map_TitleCard_FBZ-Map_TitleCard
-		dc.w Map_TitleCard_ICZ-Map_TitleCard
-		dc.w Map_TitleCard_LBZ-Map_TitleCard
-		dc.w Map_TitleCard_Blank-Map_TitleCard
-		dc.w Map_TitleCard_Blank-Map_TitleCard
-		dc.w Map_TitleCard_Blank-Map_TitleCard
-		dc.w Map_TitleCard_Blank-Map_TitleCard
-		dc.w Map_TitleCard_Blank-Map_TitleCard
-		dc.w Map_TitleCard_Blank-Map_TitleCard
-		dc.w Map_TitleCard_Blank-Map_TitleCard
-		dc.w Map_TitleCard_Competition-Map_TitleCard
-		dc.w Map_TitleCard_Bonus-Map_TitleCard
-		dc.w Map_TitleCard_Stage-Map_TitleCard
+Map_TitleCard_:
+		dc.w Map_TitleCard_Blank-Map_TitleCard_
+		dc.w Map_TitleCard_Banner-Map_TitleCard_
+		dc.w Map_TitleCard_Act-Map_TitleCard_
+		dc.w Map_TitleCard_Zone-Map_TitleCard_
+		dc.w Map_TitleCard_AIZ-Map_TitleCard_
+		dc.w Map_TitleCard_HCZ-Map_TitleCard_
+		dc.w Map_TitleCard_MGZ-Map_TitleCard_
+		dc.w Map_TitleCard_CNZ-Map_TitleCard_
+		dc.w Map_TitleCard_FBZ-Map_TitleCard_
+		dc.w Map_TitleCard_ICZ-Map_TitleCard_
+		dc.w Map_TitleCard_LBZ-Map_TitleCard_
+		dc.w Map_TitleCard_Blank-Map_TitleCard_
+		dc.w Map_TitleCard_Blank-Map_TitleCard_
+		dc.w Map_TitleCard_Blank-Map_TitleCard_
+		dc.w Map_TitleCard_Blank-Map_TitleCard_
+		dc.w Map_TitleCard_Blank-Map_TitleCard_
+		dc.w Map_TitleCard_Blank-Map_TitleCard_
+		dc.w Map_TitleCard_Blank-Map_TitleCard_
+		dc.w Map_TitleCard_Competition-Map_TitleCard_
+		dc.w Map_TitleCard_Bonus-Map_TitleCard_
+		dc.w Map_TitleCard_Stage-Map_TitleCard_
 Map_TitleCard_Blank:dc.w 0
 Map_TitleCard_Banner:dc.w $10
 		dc.b  $58,   9, $85, $10, $FF, $E8

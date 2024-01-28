@@ -1,13 +1,14 @@
-		dc.w word_20F24-DPLC_SurfboardIntro
-		dc.w word_20F26-DPLC_SurfboardIntro
-		dc.w word_20F2E-DPLC_SurfboardIntro
-		dc.w word_20F36-DPLC_SurfboardIntro
-		dc.w word_20F40-DPLC_SurfboardIntro
-		dc.w word_20F48-DPLC_SurfboardIntro
-		dc.w word_20F50-DPLC_SurfboardIntro
-		dc.w word_20F5A-DPLC_SurfboardIntro
-		dc.w word_20F64-DPLC_SurfboardIntro
-		dc.w word_20F6C-DPLC_SurfboardIntro
+DPLC_SurfboardIntro_:
+		dc.w word_20F24-DPLC_SurfboardIntro_
+		dc.w word_20F26-DPLC_SurfboardIntro_
+		dc.w word_20F2E-DPLC_SurfboardIntro_
+		dc.w word_20F36-DPLC_SurfboardIntro_
+		dc.w word_20F40-DPLC_SurfboardIntro_
+		dc.w word_20F48-DPLC_SurfboardIntro_
+		dc.w word_20F50-DPLC_SurfboardIntro_
+		dc.w word_20F5A-DPLC_SurfboardIntro_
+		dc.w word_20F64-DPLC_SurfboardIntro_
+		dc.w word_20F6C-DPLC_SurfboardIntro_
 word_20F24:	dc.w 0
 word_20F26:	dc.w 3
 		dc.w $F000
@@ -38,7 +39,7 @@ word_20F50:	dc.w 4
 word_20F5A:	dc.w 4
 		dc.w $10D4
 		dc.w $F0D6
-		dc.w $E6
+		dc.w $00E6
 		dc.w $20E7
 word_20F64:	dc.w 3
 		dc.w $50EA

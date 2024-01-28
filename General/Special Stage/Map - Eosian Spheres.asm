@@ -1,19 +1,20 @@
-		dc.w word_23BF0-Map_SphereTest
-		dc.w word_23BF8-Map_SphereTest
-		dc.w word_23C00-Map_SphereTest
-		dc.w word_23C08-Map_SphereTest
-		dc.w word_23C10-Map_SphereTest
-		dc.w word_23C18-Map_SphereTest
-		dc.w word_23C20-Map_SphereTest
-		dc.w word_23C28-Map_SphereTest
-		dc.w word_23C30-Map_SphereTest
-		dc.w word_23C38-Map_SphereTest
-		dc.w word_23C40-Map_SphereTest
-		dc.w word_23C48-Map_SphereTest
-		dc.w word_23C50-Map_SphereTest
-		dc.w word_23C58-Map_SphereTest
-		dc.w word_23C60-Map_SphereTest
-		dc.w word_23C68-Map_SphereTest
+Map_SphereTest_:
+		dc.w word_23BF0-Map_SphereTest_
+		dc.w word_23BF8-Map_SphereTest_
+		dc.w word_23C00-Map_SphereTest_
+		dc.w word_23C08-Map_SphereTest_
+		dc.w word_23C10-Map_SphereTest_
+		dc.w word_23C18-Map_SphereTest_
+		dc.w word_23C20-Map_SphereTest_
+		dc.w word_23C28-Map_SphereTest_
+		dc.w word_23C30-Map_SphereTest_
+		dc.w word_23C38-Map_SphereTest_
+		dc.w word_23C40-Map_SphereTest_
+		dc.w word_23C48-Map_SphereTest_
+		dc.w word_23C50-Map_SphereTest_
+		dc.w word_23C58-Map_SphereTest_
+		dc.w word_23C60-Map_SphereTest_
+		dc.w word_23C68-Map_SphereTest_
 word_23BF0:	dc.w 1
 		dc.b  $F0,  $F,   0,   0, $FF, $F0
 word_23BF8:	dc.w 1

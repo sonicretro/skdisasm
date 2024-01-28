@@ -1,14 +1,15 @@
-		dc.w word_163814-Map_FBZ2Subboss
-		dc.w word_163822-Map_FBZ2Subboss
-		dc.w word_163830-Map_FBZ2Subboss
-		dc.w word_16383E-Map_FBZ2Subboss
-		dc.w word_16384C-Map_FBZ2Subboss
-		dc.w word_16387E-Map_FBZ2Subboss
-		dc.w word_16388C-Map_FBZ2Subboss
-		dc.w word_1638CA-Map_FBZ2Subboss
-		dc.w word_163908-Map_FBZ2Subboss
-		dc.w word_163946-Map_FBZ2Subboss
-		dc.w word_16394E-Map_FBZ2Subboss
+Map_FBZ2Subboss_:
+		dc.w word_163814-Map_FBZ2Subboss_
+		dc.w word_163822-Map_FBZ2Subboss_
+		dc.w word_163830-Map_FBZ2Subboss_
+		dc.w word_16383E-Map_FBZ2Subboss_
+		dc.w word_16384C-Map_FBZ2Subboss_
+		dc.w word_16387E-Map_FBZ2Subboss_
+		dc.w word_16388C-Map_FBZ2Subboss_
+		dc.w word_1638CA-Map_FBZ2Subboss_
+		dc.w word_163908-Map_FBZ2Subboss_
+		dc.w word_163946-Map_FBZ2Subboss_
+		dc.w word_16394E-Map_FBZ2Subboss_
 word_163814:	dc.w 2
 		dc.b  $F4,  $A,   0,   0, $FF, $E8
 		dc.b  $F4,  $A,   8,   0,   0,   0

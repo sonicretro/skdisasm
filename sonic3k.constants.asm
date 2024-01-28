@@ -111,7 +111,7 @@ next_subspr		= $6
 object_size =		$4A ; the size of an object's status table entry
 next_object =		object_size
 ; ---------------------------------------------------------------------------
-; unknown or inconsistently used offsets that are not applicable to sonic/tails:
+; unknown or inconsistently used offsets that are not applicable to Sonic/Tails:
 objoff_12 =		2+x_pos
 objoff_16 =		2+y_pos
 objoff_1C =		$1C
@@ -894,13 +894,13 @@ Blue_spheres_progress_flag	ds.b 1			; 0 = normal, -1 = disabled (single stage mo
 Blue_spheres_difficulty		ds.b 1			; value currently displayed
 Blue_spheres_target_difficulty	ds.b 1			; value read from the layout
 SK_alone_flag			ds.w 1			; -1 if Sonic 3 isn't locked on
-Emerald_counts =		*			; both chaos and super emeralds
+Emerald_counts =		*			; both Chaos and Super emeralds
 Chaos_emerald_count		ds.b 1
 Super_emerald_count		ds.b 1
-Collected_emeralds_array	ds.b 7			; 1 byte per emerald, 0 = not collected, 1 = chaos emerald collected, 2 = grey super emerald, 3 = super emerald collected
+Collected_emeralds_array	ds.b 7			; 1 byte per emerald, 0 = not collected, 1 = Chaos Emerald collected, 2 = grey Super Emerald, 3 = Super Emerald collected
 			ds.b 1				; unused
 
-Emeralds_converted_flag		ds.b 1			; set if at least one emerald has been converted to a super emerald
+Emeralds_converted_flag		ds.b 1			; set if at least one emerald has been converted to a Super Emerald
 SK_special_stage_flag		ds.b 1			; set if a Sonic & Knuckles special stage is being run
 Title_anim_buffer		ds.b 1			; status of the title animation buffer. Changes 2 different nametables in VDP while the other is being processed
 Title_anim_delay		ds.b 1			; title animation delay counter

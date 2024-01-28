@@ -1,439 +1,442 @@
-		dc.w word_142C14-PLC_Sonic
-		dc.w word_142C16-PLC_Sonic
-		dc.w word_142C1E-PLC_Sonic
-		dc.w word_142C26-PLC_Sonic
-		dc.w word_142C2E-PLC_Sonic
-		dc.w word_142C34-PLC_Sonic
-		dc.w word_142C3C-PLC_Sonic
-		dc.w word_142C44-PLC_Sonic
-		dc.w word_142C4C-PLC_Sonic
-		dc.w word_142C52-PLC_Sonic
-		dc.w word_142C5C-PLC_Sonic
-		dc.w word_142C66-PLC_Sonic
-		dc.w word_142C70-PLC_Sonic
-		dc.w word_142C7A-PLC_Sonic
-		dc.w word_142C84-PLC_Sonic
-		dc.w word_142C8E-PLC_Sonic
-		dc.w word_142C98-PLC_Sonic
-		dc.w word_142CA2-PLC_Sonic
-		dc.w word_142CAA-PLC_Sonic
-		dc.w word_142CB2-PLC_Sonic
-		dc.w word_142CBA-PLC_Sonic
-		dc.w word_142CC0-PLC_Sonic
-		dc.w word_142CC8-PLC_Sonic
-		dc.w word_142CD2-PLC_Sonic
-		dc.w word_142CDA-PLC_Sonic
-		dc.w word_142CE0-PLC_Sonic
-		dc.w word_142CEA-PLC_Sonic
-		dc.w word_142CF4-PLC_Sonic
-		dc.w word_142CFE-PLC_Sonic
-		dc.w word_142D08-PLC_Sonic
-		dc.w word_142D12-PLC_Sonic
-		dc.w word_142D1C-PLC_Sonic
-		dc.w word_142D26-PLC_Sonic
-		dc.w word_142D30-PLC_Sonic
-		dc.w word_142D36-PLC_Sonic
-		dc.w word_142D3C-PLC_Sonic
-		dc.w word_142D42-PLC_Sonic
-		dc.w word_142D48-PLC_Sonic
-		dc.w word_142D52-PLC_Sonic
-		dc.w word_142D58-PLC_Sonic
-		dc.w word_142D62-PLC_Sonic
-		dc.w word_142D68-PLC_Sonic
-		dc.w word_142D6E-PLC_Sonic
-		dc.w word_142D74-PLC_Sonic
-		dc.w word_142D7A-PLC_Sonic
-		dc.w word_142D80-PLC_Sonic
-		dc.w word_142D88-PLC_Sonic
-		dc.w word_142D8E-PLC_Sonic
-		dc.w word_142D96-PLC_Sonic
-		dc.w word_142D9C-PLC_Sonic
-		dc.w word_142DA4-PLC_Sonic
-		dc.w word_142DAE-PLC_Sonic
-		dc.w word_142DB8-PLC_Sonic
-		dc.w word_142DC2-PLC_Sonic
-		dc.w word_142DCC-PLC_Sonic
-		dc.w word_142DD4-PLC_Sonic
-		dc.w word_142DDA-PLC_Sonic
-		dc.w word_142DE0-PLC_Sonic
-		dc.w word_142DE8-PLC_Sonic
-		dc.w word_142DF2-PLC_Sonic
-		dc.w word_142DF8-PLC_Sonic
-		dc.w word_142DFE-PLC_Sonic
-		dc.w word_142E06-PLC_Sonic
-		dc.w word_142E0A-PLC_Sonic
-		dc.w word_142E12-PLC_Sonic
-		dc.w word_142E1C-PLC_Sonic
-		dc.w word_142E26-PLC_Sonic
-		dc.w word_142E30-PLC_Sonic
-		dc.w word_142E36-PLC_Sonic
-		dc.w word_142E3A-PLC_Sonic
-		dc.w word_142E40-PLC_Sonic
-		dc.w word_142E44-PLC_Sonic
-		dc.w word_142E4A-PLC_Sonic
-		dc.w word_142E52-PLC_Sonic
-		dc.w word_142E5C-PLC_Sonic
-		dc.w word_142E66-PLC_Sonic
-		dc.w word_142E6E-PLC_Sonic
-		dc.w word_142E76-PLC_Sonic
-		dc.w word_142E7E-PLC_Sonic
-		dc.w word_142E82-PLC_Sonic
-		dc.w word_142E8C-PLC_Sonic
-		dc.w word_142E96-PLC_Sonic
-		dc.w word_142E9C-PLC_Sonic
-		dc.w word_142EA4-PLC_Sonic
-		dc.w word_142EAC-PLC_Sonic
-		dc.w word_142EB2-PLC_Sonic
-		dc.w word_142EBC-PLC_Sonic
-		dc.w word_142EC4-PLC_Sonic
-		dc.w word_142ECA-PLC_Sonic
-		dc.w word_142ED0-PLC_Sonic
-		dc.w word_142EDA-PLC_Sonic
-		dc.w word_142EE2-PLC_Sonic
-		dc.w word_142EE8-PLC_Sonic
-		dc.w word_142EF0-PLC_Sonic
-		dc.w word_142EF4-PLC_Sonic
-		dc.w word_142EFA-PLC_Sonic
-		dc.w word_142F02-PLC_Sonic
-		dc.w word_142F06-PLC_Sonic
-		dc.w word_142F0C-PLC_Sonic
-		dc.w word_142F12-PLC_Sonic
-		dc.w word_142F1A-PLC_Sonic
-		dc.w word_142F1E-PLC_Sonic
-		dc.w word_142F24-PLC_Sonic
-		dc.w word_142F2C-PLC_Sonic
-		dc.w word_142F30-PLC_Sonic
-		dc.w word_142F36-PLC_Sonic
-		dc.w word_142F3C-PLC_Sonic
-		dc.w word_142F46-PLC_Sonic
-		dc.w word_142F4E-PLC_Sonic
-		dc.w word_142F56-PLC_Sonic
-		dc.w word_142F5C-PLC_Sonic
-		dc.w word_142F64-PLC_Sonic
-		dc.w word_142F6C-PLC_Sonic
-		dc.w word_142F74-PLC_Sonic
-		dc.w word_142F7A-PLC_Sonic
-		dc.w word_142F84-PLC_Sonic
-		dc.w word_142F8C-PLC_Sonic
-		dc.w word_142F94-PLC_Sonic
-		dc.w word_142F9A-PLC_Sonic
-		dc.w word_142FA2-PLC_Sonic
-		dc.w word_142FA6-PLC_Sonic
-		dc.w word_142FB0-PLC_Sonic
-		dc.w word_142FBA-PLC_Sonic
-		dc.w word_142FC2-PLC_Sonic
-		dc.w word_142FCC-PLC_Sonic
-		dc.w word_142FD6-PLC_Sonic
-		dc.w word_142FE0-PLC_Sonic
-		dc.w word_142FE8-PLC_Sonic
-		dc.w word_142FF2-PLC_Sonic
-		dc.w word_142FFC-PLC_Sonic
-		dc.w word_143006-PLC_Sonic
-		dc.w word_14300E-PLC_Sonic
-		dc.w word_143018-PLC_Sonic
-		dc.w word_143020-PLC_Sonic
-		dc.w word_143026-PLC_Sonic
-		dc.w word_14302E-PLC_Sonic
-		dc.w word_143034-PLC_Sonic
-		dc.w word_14303A-PLC_Sonic
-		dc.w word_143040-PLC_Sonic
-		dc.w word_143046-PLC_Sonic
-		dc.w word_14304C-PLC_Sonic
-		dc.w word_143054-PLC_Sonic
-		dc.w word_14305C-PLC_Sonic
-		dc.w word_143062-PLC_Sonic
-		dc.w word_14306A-PLC_Sonic
-		dc.w word_143074-PLC_Sonic
-		dc.w word_14307E-PLC_Sonic
-		dc.w word_143088-PLC_Sonic
-		dc.w word_14308E-PLC_Sonic
-		dc.w word_14309A-PLC_Sonic
-		dc.w word_1430A6-PLC_Sonic
-		dc.w word_1430AA-PLC_Sonic
-		dc.w word_1430AE-PLC_Sonic
-		dc.w word_1430B2-PLC_Sonic
-		dc.w word_1430B6-PLC_Sonic
-		dc.w word_1430BA-PLC_Sonic
-		dc.w word_1430C0-PLC_Sonic
-		dc.w word_1430C6-PLC_Sonic
-		dc.w word_1430D0-PLC_Sonic
-		dc.w word_1430DA-PLC_Sonic
-		dc.w word_1430E4-PLC_Sonic
-		dc.w word_1430EC-PLC_Sonic
-		dc.w word_1430F4-PLC_Sonic
-		dc.w word_1430FE-PLC_Sonic
-		dc.w word_143106-PLC_Sonic
-		dc.w word_143110-PLC_Sonic
-		dc.w word_143118-PLC_Sonic
-		dc.w word_143122-PLC_Sonic
-		dc.w word_14312A-PLC_Sonic
-		dc.w word_143132-PLC_Sonic
-		dc.w word_14313A-PLC_Sonic
-		dc.w word_143142-PLC_Sonic
-		dc.w word_14314A-PLC_Sonic
-		dc.w word_143154-PLC_Sonic
-		dc.w word_14315E-PLC_Sonic
-		dc.w word_143168-PLC_Sonic
-		dc.w word_143172-PLC_Sonic
-		dc.w word_143178-PLC_Sonic
-		dc.w word_143180-PLC_Sonic
-		dc.w word_143188-PLC_Sonic
-		dc.w word_143190-PLC_Sonic
-		dc.w word_143198-PLC_Sonic
-		dc.w word_1431A0-PLC_Sonic
-		dc.w word_1431A8-PLC_Sonic
-		dc.w word_1431B0-PLC_Sonic
-		dc.w word_1431B8-PLC_Sonic
-		dc.w word_1431C0-PLC_Sonic
-		dc.w word_1431CA-PLC_Sonic
-		dc.w word_1431D2-PLC_Sonic
-		dc.w word_1431DC-PLC_Sonic
-		dc.w word_1431E6-PLC_Sonic
-		dc.w word_1431F0-PLC_Sonic
-		dc.w word_1431FA-PLC_Sonic
-		dc.w word_143204-PLC_Sonic
-		dc.w word_14320A-PLC_Sonic
-		dc.w word_143214-PLC_Sonic
-		dc.w word_14321E-PLC_Sonic
-		dc.w word_143228-PLC_Sonic
-		dc.w word_143230-PLC_Sonic
-		dc.w word_14323A-PLC_Sonic
-		dc.w word_143244-PLC_Sonic
-		dc.w word_14324C-PLC_Sonic
-		dc.w word_143254-PLC_Sonic
-		dc.w word_14324C-PLC_Sonic
-		dc.w word_143244-PLC_Sonic
-		dc.w word_14325A-PLC_Sonic
-		dc.w word_143260-PLC_Sonic
-		dc.w word_14325A-PLC_Sonic
-		dc.w word_143266-PLC_Sonic
-		dc.w word_14326E-PLC_Sonic
-		dc.w word_143466-PLC_Sonic
-		dc.w word_14346A-PLC_Sonic
-		dc.w word_143472-PLC_Sonic
-		dc.w word_143478-PLC_Sonic
-		dc.w word_143480-PLC_Sonic
-		dc.w word_143276-PLC_Sonic
-		dc.w word_14327E-PLC_Sonic
-		dc.w word_143286-PLC_Sonic
-PLC_SuperSonic: dc.w word_143290-PLC_SuperSonic
-		dc.w word_143292-PLC_SuperSonic
-		dc.w word_14329A-PLC_SuperSonic
-		dc.w word_1432A2-PLC_SuperSonic
-		dc.w word_1432AA-PLC_SuperSonic
-		dc.w word_1432B2-PLC_SuperSonic
-		dc.w word_1432BC-PLC_SuperSonic
-		dc.w word_1432C6-PLC_SuperSonic
-		dc.w word_1432CE-PLC_SuperSonic
-		dc.w word_1432D4-PLC_SuperSonic
-		dc.w word_1432DE-PLC_SuperSonic
-		dc.w word_1432E8-PLC_SuperSonic
-		dc.w word_1432F2-PLC_SuperSonic
-		dc.w word_1432FC-PLC_SuperSonic
-		dc.w word_143306-PLC_SuperSonic
-		dc.w word_143310-PLC_SuperSonic
-		dc.w word_14331A-PLC_SuperSonic
-		dc.w word_143324-PLC_SuperSonic
-		dc.w word_14332C-PLC_SuperSonic
-		dc.w word_143334-PLC_SuperSonic
-		dc.w word_14333C-PLC_SuperSonic
-		dc.w word_143344-PLC_SuperSonic
-		dc.w word_14334E-PLC_SuperSonic
-		dc.w word_143358-PLC_SuperSonic
-		dc.w word_143360-PLC_SuperSonic
-		dc.w word_143366-PLC_SuperSonic
-		dc.w word_143370-PLC_SuperSonic
-		dc.w word_14337A-PLC_SuperSonic
-		dc.w word_143384-PLC_SuperSonic
-		dc.w word_14338E-PLC_SuperSonic
-		dc.w word_143398-PLC_SuperSonic
-		dc.w word_1433A2-PLC_SuperSonic
-		dc.w word_1433AC-PLC_SuperSonic
-		dc.w word_1433B6-PLC_SuperSonic
-		dc.w word_1433C0-PLC_SuperSonic
-		dc.w word_1433B6-PLC_SuperSonic
-		dc.w word_1433C0-PLC_SuperSonic
-		dc.w word_1433CA-PLC_SuperSonic
-		dc.w word_1433D4-PLC_SuperSonic
-		dc.w word_1433CA-PLC_SuperSonic
-		dc.w word_1433D4-PLC_SuperSonic
-		dc.w word_1433DE-PLC_SuperSonic
-		dc.w word_1433E8-PLC_SuperSonic
-		dc.w word_1433DE-PLC_SuperSonic
-		dc.w word_1433E8-PLC_SuperSonic
-		dc.w word_1433F2-PLC_SuperSonic
-		dc.w word_1433FC-PLC_SuperSonic
-		dc.w word_1433F2-PLC_SuperSonic
-		dc.w word_1433FC-PLC_SuperSonic
-		dc.w word_142D9C-PLC_SuperSonic
-		dc.w word_142DA4-PLC_SuperSonic
-		dc.w word_142DAE-PLC_SuperSonic
-		dc.w word_142DB8-PLC_SuperSonic
-		dc.w word_142DC2-PLC_SuperSonic
-		dc.w word_142DCC-PLC_SuperSonic
-		dc.w word_142DD4-PLC_SuperSonic
-		dc.w word_142DDA-PLC_SuperSonic
-		dc.w word_142DE0-PLC_SuperSonic
-		dc.w word_142DE8-PLC_SuperSonic
-		dc.w word_142DF2-PLC_SuperSonic
-		dc.w word_142DF8-PLC_SuperSonic
-		dc.w word_142DFE-PLC_SuperSonic
-		dc.w word_142E06-PLC_SuperSonic
-		dc.w word_142E0A-PLC_SuperSonic
-		dc.w word_142E12-PLC_SuperSonic
-		dc.w word_142E1C-PLC_SuperSonic
-		dc.w word_142E26-PLC_SuperSonic
-		dc.w word_142E30-PLC_SuperSonic
-		dc.w word_142E36-PLC_SuperSonic
-		dc.w word_142E3A-PLC_SuperSonic
-		dc.w word_142E40-PLC_SuperSonic
-		dc.w word_142E44-PLC_SuperSonic
-		dc.w word_142E4A-PLC_SuperSonic
-		dc.w word_142E52-PLC_SuperSonic
-		dc.w word_142E5C-PLC_SuperSonic
-		dc.w word_142E66-PLC_SuperSonic
-		dc.w word_142E6E-PLC_SuperSonic
-		dc.w word_142E76-PLC_SuperSonic
-		dc.w word_142E7E-PLC_SuperSonic
-		dc.w word_142E82-PLC_SuperSonic
-		dc.w word_142E8C-PLC_SuperSonic
-		dc.w word_142E96-PLC_SuperSonic
-		dc.w word_142E9C-PLC_SuperSonic
-		dc.w word_142EA4-PLC_SuperSonic
-		dc.w word_142EAC-PLC_SuperSonic
-		dc.w word_142EB2-PLC_SuperSonic
-		dc.w word_142EBC-PLC_SuperSonic
-		dc.w word_142EC4-PLC_SuperSonic
-		dc.w word_142ECA-PLC_SuperSonic
-		dc.w word_142ED0-PLC_SuperSonic
-		dc.w word_142EDA-PLC_SuperSonic
-		dc.w word_142EE2-PLC_SuperSonic
-		dc.w word_142EE8-PLC_SuperSonic
-		dc.w word_142EF0-PLC_SuperSonic
-		dc.w word_142EF4-PLC_SuperSonic
-		dc.w word_142EFA-PLC_SuperSonic
-		dc.w word_142F02-PLC_SuperSonic
-		dc.w word_142F06-PLC_SuperSonic
-		dc.w word_142F0C-PLC_SuperSonic
-		dc.w word_142F12-PLC_SuperSonic
-		dc.w word_142F1A-PLC_SuperSonic
-		dc.w word_142F1E-PLC_SuperSonic
-		dc.w word_142F24-PLC_SuperSonic
-		dc.w word_142F2C-PLC_SuperSonic
-		dc.w word_142F30-PLC_SuperSonic
-		dc.w word_142F36-PLC_SuperSonic
-		dc.w word_142F3C-PLC_SuperSonic
-		dc.w word_142F46-PLC_SuperSonic
-		dc.w word_142F4E-PLC_SuperSonic
-		dc.w word_142F56-PLC_SuperSonic
-		dc.w word_142F5C-PLC_SuperSonic
-		dc.w word_142F64-PLC_SuperSonic
-		dc.w word_142F6C-PLC_SuperSonic
-		dc.w word_142F74-PLC_SuperSonic
-		dc.w word_142F7A-PLC_SuperSonic
-		dc.w word_142F84-PLC_SuperSonic
-		dc.w word_142F8C-PLC_SuperSonic
-		dc.w word_142F94-PLC_SuperSonic
-		dc.w word_142F9A-PLC_SuperSonic
-		dc.w word_142FA2-PLC_SuperSonic
-		dc.w word_142FA6-PLC_SuperSonic
-		dc.w word_142FB0-PLC_SuperSonic
-		dc.w word_142FBA-PLC_SuperSonic
-		dc.w word_142FC2-PLC_SuperSonic
-		dc.w word_142FCC-PLC_SuperSonic
-		dc.w word_142FD6-PLC_SuperSonic
-		dc.w word_142FE0-PLC_SuperSonic
-		dc.w word_142FE8-PLC_SuperSonic
-		dc.w word_142FF2-PLC_SuperSonic
-		dc.w word_142FFC-PLC_SuperSonic
-		dc.w word_143006-PLC_SuperSonic
-		dc.w word_14300E-PLC_SuperSonic
-		dc.w word_143018-PLC_SuperSonic
-		dc.w word_143020-PLC_SuperSonic
-		dc.w word_143026-PLC_SuperSonic
-		dc.w word_14302E-PLC_SuperSonic
-		dc.w word_143034-PLC_SuperSonic
-		dc.w word_14303A-PLC_SuperSonic
-		dc.w word_143040-PLC_SuperSonic
-		dc.w word_143046-PLC_SuperSonic
-		dc.w word_14304C-PLC_SuperSonic
-		dc.w word_143054-PLC_SuperSonic
-		dc.w word_14305C-PLC_SuperSonic
-		dc.w word_143062-PLC_SuperSonic
-		dc.w word_14306A-PLC_SuperSonic
-		dc.w word_143074-PLC_SuperSonic
-		dc.w word_14307E-PLC_SuperSonic
-		dc.w word_143088-PLC_SuperSonic
-		dc.w word_14308E-PLC_SuperSonic
-		dc.w word_14309A-PLC_SuperSonic
-		dc.w word_1430A6-PLC_SuperSonic
-		dc.w word_1430AA-PLC_SuperSonic
-		dc.w word_1430AE-PLC_SuperSonic
-		dc.w word_1430B2-PLC_SuperSonic
-		dc.w word_1430B6-PLC_SuperSonic
-		dc.w word_143406-PLC_SuperSonic
-		dc.w word_143406-PLC_SuperSonic
-		dc.w word_1430C6-PLC_SuperSonic
-		dc.w word_1430D0-PLC_SuperSonic
-		dc.w word_1430DA-PLC_SuperSonic
-		dc.w word_1430E4-PLC_SuperSonic
-		dc.w word_14340C-PLC_SuperSonic
-		dc.w word_143416-PLC_SuperSonic
-		dc.w word_143420-PLC_SuperSonic
-		dc.w word_14340C-PLC_SuperSonic
-		dc.w word_143416-PLC_SuperSonic
-		dc.w word_143420-PLC_SuperSonic
-		dc.w word_143122-PLC_SuperSonic
-		dc.w word_14312A-PLC_SuperSonic
-		dc.w word_143132-PLC_SuperSonic
-		dc.w word_14313A-PLC_SuperSonic
-		dc.w word_143142-PLC_SuperSonic
-		dc.w word_14314A-PLC_SuperSonic
-		dc.w word_143154-PLC_SuperSonic
-		dc.w word_14315E-PLC_SuperSonic
-		dc.w word_143168-PLC_SuperSonic
-		dc.w word_143172-PLC_SuperSonic
-		dc.w word_143178-PLC_SuperSonic
-		dc.w word_143180-PLC_SuperSonic
-		dc.w word_143188-PLC_SuperSonic
-		dc.w word_143190-PLC_SuperSonic
-		dc.w word_143198-PLC_SuperSonic
-		dc.w word_14342A-PLC_SuperSonic
-		dc.w word_143432-PLC_SuperSonic
-		dc.w word_14343A-PLC_SuperSonic
-		dc.w word_143442-PLC_SuperSonic
-		dc.w word_14344A-PLC_SuperSonic
-		dc.w word_143454-PLC_SuperSonic
-		dc.w word_14344A-PLC_SuperSonic		; word_14345E is the proper pointer here
-		dc.w word_143454-PLC_SuperSonic
-		dc.w word_14344A-PLC_SuperSonic
-		dc.w word_143454-PLC_SuperSonic		; word_14345E is the proper pointer here
-		dc.w word_14344A-PLC_SuperSonic
-		dc.w word_143454-PLC_SuperSonic
-		dc.w word_14344A-PLC_SuperSonic		; word_14345E is the proper pointer here
-		dc.w word_143214-PLC_SuperSonic
-		dc.w word_14321E-PLC_SuperSonic
-		dc.w word_143454-PLC_SuperSonic
-		dc.w word_14344A-PLC_SuperSonic
-		dc.w word_143454-PLC_SuperSonic		; word_14345E is the proper pointer here
-		dc.w word_143244-PLC_SuperSonic
-		dc.w word_14324C-PLC_SuperSonic
-		dc.w word_143254-PLC_SuperSonic
-		dc.w word_14324C-PLC_SuperSonic
-		dc.w word_143244-PLC_SuperSonic
-		dc.w word_14325A-PLC_SuperSonic
-		dc.w word_143260-PLC_SuperSonic
-		dc.w word_14325A-PLC_SuperSonic
-		dc.w word_143266-PLC_SuperSonic
-		dc.w word_14326E-PLC_SuperSonic
-		dc.w word_143466-PLC_SuperSonic
-		dc.w word_14346A-PLC_SuperSonic
-		dc.w word_143472-PLC_SuperSonic
-		dc.w word_143478-PLC_SuperSonic
-		dc.w word_143480-PLC_SuperSonic
-		dc.w word_143276-PLC_SuperSonic
-		dc.w word_14327E-PLC_SuperSonic
-		dc.w word_143286-PLC_SuperSonic
+PLC_Sonic_:
+		dc.w word_142C14-PLC_Sonic_
+		dc.w word_142C16-PLC_Sonic_
+		dc.w word_142C1E-PLC_Sonic_
+		dc.w word_142C26-PLC_Sonic_
+		dc.w word_142C2E-PLC_Sonic_
+		dc.w word_142C34-PLC_Sonic_
+		dc.w word_142C3C-PLC_Sonic_
+		dc.w word_142C44-PLC_Sonic_
+		dc.w word_142C4C-PLC_Sonic_
+		dc.w word_142C52-PLC_Sonic_
+		dc.w word_142C5C-PLC_Sonic_
+		dc.w word_142C66-PLC_Sonic_
+		dc.w word_142C70-PLC_Sonic_
+		dc.w word_142C7A-PLC_Sonic_
+		dc.w word_142C84-PLC_Sonic_
+		dc.w word_142C8E-PLC_Sonic_
+		dc.w word_142C98-PLC_Sonic_
+		dc.w word_142CA2-PLC_Sonic_
+		dc.w word_142CAA-PLC_Sonic_
+		dc.w word_142CB2-PLC_Sonic_
+		dc.w word_142CBA-PLC_Sonic_
+		dc.w word_142CC0-PLC_Sonic_
+		dc.w word_142CC8-PLC_Sonic_
+		dc.w word_142CD2-PLC_Sonic_
+		dc.w word_142CDA-PLC_Sonic_
+		dc.w word_142CE0-PLC_Sonic_
+		dc.w word_142CEA-PLC_Sonic_
+		dc.w word_142CF4-PLC_Sonic_
+		dc.w word_142CFE-PLC_Sonic_
+		dc.w word_142D08-PLC_Sonic_
+		dc.w word_142D12-PLC_Sonic_
+		dc.w word_142D1C-PLC_Sonic_
+		dc.w word_142D26-PLC_Sonic_
+		dc.w word_142D30-PLC_Sonic_
+		dc.w word_142D36-PLC_Sonic_
+		dc.w word_142D3C-PLC_Sonic_
+		dc.w word_142D42-PLC_Sonic_
+		dc.w word_142D48-PLC_Sonic_
+		dc.w word_142D52-PLC_Sonic_
+		dc.w word_142D58-PLC_Sonic_
+		dc.w word_142D62-PLC_Sonic_
+		dc.w word_142D68-PLC_Sonic_
+		dc.w word_142D6E-PLC_Sonic_
+		dc.w word_142D74-PLC_Sonic_
+		dc.w word_142D7A-PLC_Sonic_
+		dc.w word_142D80-PLC_Sonic_
+		dc.w word_142D88-PLC_Sonic_
+		dc.w word_142D8E-PLC_Sonic_
+		dc.w word_142D96-PLC_Sonic_
+		dc.w word_142D9C-PLC_Sonic_
+		dc.w word_142DA4-PLC_Sonic_
+		dc.w word_142DAE-PLC_Sonic_
+		dc.w word_142DB8-PLC_Sonic_
+		dc.w word_142DC2-PLC_Sonic_
+		dc.w word_142DCC-PLC_Sonic_
+		dc.w word_142DD4-PLC_Sonic_
+		dc.w word_142DDA-PLC_Sonic_
+		dc.w word_142DE0-PLC_Sonic_
+		dc.w word_142DE8-PLC_Sonic_
+		dc.w word_142DF2-PLC_Sonic_
+		dc.w word_142DF8-PLC_Sonic_
+		dc.w word_142DFE-PLC_Sonic_
+		dc.w word_142E06-PLC_Sonic_
+		dc.w word_142E0A-PLC_Sonic_
+		dc.w word_142E12-PLC_Sonic_
+		dc.w word_142E1C-PLC_Sonic_
+		dc.w word_142E26-PLC_Sonic_
+		dc.w word_142E30-PLC_Sonic_
+		dc.w word_142E36-PLC_Sonic_
+		dc.w word_142E3A-PLC_Sonic_
+		dc.w word_142E40-PLC_Sonic_
+		dc.w word_142E44-PLC_Sonic_
+		dc.w word_142E4A-PLC_Sonic_
+		dc.w word_142E52-PLC_Sonic_
+		dc.w word_142E5C-PLC_Sonic_
+		dc.w word_142E66-PLC_Sonic_
+		dc.w word_142E6E-PLC_Sonic_
+		dc.w word_142E76-PLC_Sonic_
+		dc.w word_142E7E-PLC_Sonic_
+		dc.w word_142E82-PLC_Sonic_
+		dc.w word_142E8C-PLC_Sonic_
+		dc.w word_142E96-PLC_Sonic_
+		dc.w word_142E9C-PLC_Sonic_
+		dc.w word_142EA4-PLC_Sonic_
+		dc.w word_142EAC-PLC_Sonic_
+		dc.w word_142EB2-PLC_Sonic_
+		dc.w word_142EBC-PLC_Sonic_
+		dc.w word_142EC4-PLC_Sonic_
+		dc.w word_142ECA-PLC_Sonic_
+		dc.w word_142ED0-PLC_Sonic_
+		dc.w word_142EDA-PLC_Sonic_
+		dc.w word_142EE2-PLC_Sonic_
+		dc.w word_142EE8-PLC_Sonic_
+		dc.w word_142EF0-PLC_Sonic_
+		dc.w word_142EF4-PLC_Sonic_
+		dc.w word_142EFA-PLC_Sonic_
+		dc.w word_142F02-PLC_Sonic_
+		dc.w word_142F06-PLC_Sonic_
+		dc.w word_142F0C-PLC_Sonic_
+		dc.w word_142F12-PLC_Sonic_
+		dc.w word_142F1A-PLC_Sonic_
+		dc.w word_142F1E-PLC_Sonic_
+		dc.w word_142F24-PLC_Sonic_
+		dc.w word_142F2C-PLC_Sonic_
+		dc.w word_142F30-PLC_Sonic_
+		dc.w word_142F36-PLC_Sonic_
+		dc.w word_142F3C-PLC_Sonic_
+		dc.w word_142F46-PLC_Sonic_
+		dc.w word_142F4E-PLC_Sonic_
+		dc.w word_142F56-PLC_Sonic_
+		dc.w word_142F5C-PLC_Sonic_
+		dc.w word_142F64-PLC_Sonic_
+		dc.w word_142F6C-PLC_Sonic_
+		dc.w word_142F74-PLC_Sonic_
+		dc.w word_142F7A-PLC_Sonic_
+		dc.w word_142F84-PLC_Sonic_
+		dc.w word_142F8C-PLC_Sonic_
+		dc.w word_142F94-PLC_Sonic_
+		dc.w word_142F9A-PLC_Sonic_
+		dc.w word_142FA2-PLC_Sonic_
+		dc.w word_142FA6-PLC_Sonic_
+		dc.w word_142FB0-PLC_Sonic_
+		dc.w word_142FBA-PLC_Sonic_
+		dc.w word_142FC2-PLC_Sonic_
+		dc.w word_142FCC-PLC_Sonic_
+		dc.w word_142FD6-PLC_Sonic_
+		dc.w word_142FE0-PLC_Sonic_
+		dc.w word_142FE8-PLC_Sonic_
+		dc.w word_142FF2-PLC_Sonic_
+		dc.w word_142FFC-PLC_Sonic_
+		dc.w word_143006-PLC_Sonic_
+		dc.w word_14300E-PLC_Sonic_
+		dc.w word_143018-PLC_Sonic_
+		dc.w word_143020-PLC_Sonic_
+		dc.w word_143026-PLC_Sonic_
+		dc.w word_14302E-PLC_Sonic_
+		dc.w word_143034-PLC_Sonic_
+		dc.w word_14303A-PLC_Sonic_
+		dc.w word_143040-PLC_Sonic_
+		dc.w word_143046-PLC_Sonic_
+		dc.w word_14304C-PLC_Sonic_
+		dc.w word_143054-PLC_Sonic_
+		dc.w word_14305C-PLC_Sonic_
+		dc.w word_143062-PLC_Sonic_
+		dc.w word_14306A-PLC_Sonic_
+		dc.w word_143074-PLC_Sonic_
+		dc.w word_14307E-PLC_Sonic_
+		dc.w word_143088-PLC_Sonic_
+		dc.w word_14308E-PLC_Sonic_
+		dc.w word_14309A-PLC_Sonic_
+		dc.w word_1430A6-PLC_Sonic_
+		dc.w word_1430AA-PLC_Sonic_
+		dc.w word_1430AE-PLC_Sonic_
+		dc.w word_1430B2-PLC_Sonic_
+		dc.w word_1430B6-PLC_Sonic_
+		dc.w word_1430BA-PLC_Sonic_
+		dc.w word_1430C0-PLC_Sonic_
+		dc.w word_1430C6-PLC_Sonic_
+		dc.w word_1430D0-PLC_Sonic_
+		dc.w word_1430DA-PLC_Sonic_
+		dc.w word_1430E4-PLC_Sonic_
+		dc.w word_1430EC-PLC_Sonic_
+		dc.w word_1430F4-PLC_Sonic_
+		dc.w word_1430FE-PLC_Sonic_
+		dc.w word_143106-PLC_Sonic_
+		dc.w word_143110-PLC_Sonic_
+		dc.w word_143118-PLC_Sonic_
+		dc.w word_143122-PLC_Sonic_
+		dc.w word_14312A-PLC_Sonic_
+		dc.w word_143132-PLC_Sonic_
+		dc.w word_14313A-PLC_Sonic_
+		dc.w word_143142-PLC_Sonic_
+		dc.w word_14314A-PLC_Sonic_
+		dc.w word_143154-PLC_Sonic_
+		dc.w word_14315E-PLC_Sonic_
+		dc.w word_143168-PLC_Sonic_
+		dc.w word_143172-PLC_Sonic_
+		dc.w word_143178-PLC_Sonic_
+		dc.w word_143180-PLC_Sonic_
+		dc.w word_143188-PLC_Sonic_
+		dc.w word_143190-PLC_Sonic_
+		dc.w word_143198-PLC_Sonic_
+		dc.w word_1431A0-PLC_Sonic_
+		dc.w word_1431A8-PLC_Sonic_
+		dc.w word_1431B0-PLC_Sonic_
+		dc.w word_1431B8-PLC_Sonic_
+		dc.w word_1431C0-PLC_Sonic_
+		dc.w word_1431CA-PLC_Sonic_
+		dc.w word_1431D2-PLC_Sonic_
+		dc.w word_1431DC-PLC_Sonic_
+		dc.w word_1431E6-PLC_Sonic_
+		dc.w word_1431F0-PLC_Sonic_
+		dc.w word_1431FA-PLC_Sonic_
+		dc.w word_143204-PLC_Sonic_
+		dc.w word_14320A-PLC_Sonic_
+		dc.w word_143214-PLC_Sonic_
+		dc.w word_14321E-PLC_Sonic_
+		dc.w word_143228-PLC_Sonic_
+		dc.w word_143230-PLC_Sonic_
+		dc.w word_14323A-PLC_Sonic_
+		dc.w word_143244-PLC_Sonic_
+		dc.w word_14324C-PLC_Sonic_
+		dc.w word_143254-PLC_Sonic_
+		dc.w word_14324C-PLC_Sonic_
+		dc.w word_143244-PLC_Sonic_
+		dc.w word_14325A-PLC_Sonic_
+		dc.w word_143260-PLC_Sonic_
+		dc.w word_14325A-PLC_Sonic_
+		dc.w word_143266-PLC_Sonic_
+		dc.w word_14326E-PLC_Sonic_
+		dc.w word_143466-PLC_Sonic_
+		dc.w word_14346A-PLC_Sonic_
+		dc.w word_143472-PLC_Sonic_
+		dc.w word_143478-PLC_Sonic_
+		dc.w word_143480-PLC_Sonic_
+		dc.w word_143276-PLC_Sonic_
+		dc.w word_14327E-PLC_Sonic_
+		dc.w word_143286-PLC_Sonic_
+PLC_SuperSonic:
+PLC_SuperSonic_:
+		dc.w word_143290-PLC_SuperSonic_
+		dc.w word_143292-PLC_SuperSonic_
+		dc.w word_14329A-PLC_SuperSonic_
+		dc.w word_1432A2-PLC_SuperSonic_
+		dc.w word_1432AA-PLC_SuperSonic_
+		dc.w word_1432B2-PLC_SuperSonic_
+		dc.w word_1432BC-PLC_SuperSonic_
+		dc.w word_1432C6-PLC_SuperSonic_
+		dc.w word_1432CE-PLC_SuperSonic_
+		dc.w word_1432D4-PLC_SuperSonic_
+		dc.w word_1432DE-PLC_SuperSonic_
+		dc.w word_1432E8-PLC_SuperSonic_
+		dc.w word_1432F2-PLC_SuperSonic_
+		dc.w word_1432FC-PLC_SuperSonic_
+		dc.w word_143306-PLC_SuperSonic_
+		dc.w word_143310-PLC_SuperSonic_
+		dc.w word_14331A-PLC_SuperSonic_
+		dc.w word_143324-PLC_SuperSonic_
+		dc.w word_14332C-PLC_SuperSonic_
+		dc.w word_143334-PLC_SuperSonic_
+		dc.w word_14333C-PLC_SuperSonic_
+		dc.w word_143344-PLC_SuperSonic_
+		dc.w word_14334E-PLC_SuperSonic_
+		dc.w word_143358-PLC_SuperSonic_
+		dc.w word_143360-PLC_SuperSonic_
+		dc.w word_143366-PLC_SuperSonic_
+		dc.w word_143370-PLC_SuperSonic_
+		dc.w word_14337A-PLC_SuperSonic_
+		dc.w word_143384-PLC_SuperSonic_
+		dc.w word_14338E-PLC_SuperSonic_
+		dc.w word_143398-PLC_SuperSonic_
+		dc.w word_1433A2-PLC_SuperSonic_
+		dc.w word_1433AC-PLC_SuperSonic_
+		dc.w word_1433B6-PLC_SuperSonic_
+		dc.w word_1433C0-PLC_SuperSonic_
+		dc.w word_1433B6-PLC_SuperSonic_
+		dc.w word_1433C0-PLC_SuperSonic_
+		dc.w word_1433CA-PLC_SuperSonic_
+		dc.w word_1433D4-PLC_SuperSonic_
+		dc.w word_1433CA-PLC_SuperSonic_
+		dc.w word_1433D4-PLC_SuperSonic_
+		dc.w word_1433DE-PLC_SuperSonic_
+		dc.w word_1433E8-PLC_SuperSonic_
+		dc.w word_1433DE-PLC_SuperSonic_
+		dc.w word_1433E8-PLC_SuperSonic_
+		dc.w word_1433F2-PLC_SuperSonic_
+		dc.w word_1433FC-PLC_SuperSonic_
+		dc.w word_1433F2-PLC_SuperSonic_
+		dc.w word_1433FC-PLC_SuperSonic_
+		dc.w word_142D9C-PLC_SuperSonic_
+		dc.w word_142DA4-PLC_SuperSonic_
+		dc.w word_142DAE-PLC_SuperSonic_
+		dc.w word_142DB8-PLC_SuperSonic_
+		dc.w word_142DC2-PLC_SuperSonic_
+		dc.w word_142DCC-PLC_SuperSonic_
+		dc.w word_142DD4-PLC_SuperSonic_
+		dc.w word_142DDA-PLC_SuperSonic_
+		dc.w word_142DE0-PLC_SuperSonic_
+		dc.w word_142DE8-PLC_SuperSonic_
+		dc.w word_142DF2-PLC_SuperSonic_
+		dc.w word_142DF8-PLC_SuperSonic_
+		dc.w word_142DFE-PLC_SuperSonic_
+		dc.w word_142E06-PLC_SuperSonic_
+		dc.w word_142E0A-PLC_SuperSonic_
+		dc.w word_142E12-PLC_SuperSonic_
+		dc.w word_142E1C-PLC_SuperSonic_
+		dc.w word_142E26-PLC_SuperSonic_
+		dc.w word_142E30-PLC_SuperSonic_
+		dc.w word_142E36-PLC_SuperSonic_
+		dc.w word_142E3A-PLC_SuperSonic_
+		dc.w word_142E40-PLC_SuperSonic_
+		dc.w word_142E44-PLC_SuperSonic_
+		dc.w word_142E4A-PLC_SuperSonic_
+		dc.w word_142E52-PLC_SuperSonic_
+		dc.w word_142E5C-PLC_SuperSonic_
+		dc.w word_142E66-PLC_SuperSonic_
+		dc.w word_142E6E-PLC_SuperSonic_
+		dc.w word_142E76-PLC_SuperSonic_
+		dc.w word_142E7E-PLC_SuperSonic_
+		dc.w word_142E82-PLC_SuperSonic_
+		dc.w word_142E8C-PLC_SuperSonic_
+		dc.w word_142E96-PLC_SuperSonic_
+		dc.w word_142E9C-PLC_SuperSonic_
+		dc.w word_142EA4-PLC_SuperSonic_
+		dc.w word_142EAC-PLC_SuperSonic_
+		dc.w word_142EB2-PLC_SuperSonic_
+		dc.w word_142EBC-PLC_SuperSonic_
+		dc.w word_142EC4-PLC_SuperSonic_
+		dc.w word_142ECA-PLC_SuperSonic_
+		dc.w word_142ED0-PLC_SuperSonic_
+		dc.w word_142EDA-PLC_SuperSonic_
+		dc.w word_142EE2-PLC_SuperSonic_
+		dc.w word_142EE8-PLC_SuperSonic_
+		dc.w word_142EF0-PLC_SuperSonic_
+		dc.w word_142EF4-PLC_SuperSonic_
+		dc.w word_142EFA-PLC_SuperSonic_
+		dc.w word_142F02-PLC_SuperSonic_
+		dc.w word_142F06-PLC_SuperSonic_
+		dc.w word_142F0C-PLC_SuperSonic_
+		dc.w word_142F12-PLC_SuperSonic_
+		dc.w word_142F1A-PLC_SuperSonic_
+		dc.w word_142F1E-PLC_SuperSonic_
+		dc.w word_142F24-PLC_SuperSonic_
+		dc.w word_142F2C-PLC_SuperSonic_
+		dc.w word_142F30-PLC_SuperSonic_
+		dc.w word_142F36-PLC_SuperSonic_
+		dc.w word_142F3C-PLC_SuperSonic_
+		dc.w word_142F46-PLC_SuperSonic_
+		dc.w word_142F4E-PLC_SuperSonic_
+		dc.w word_142F56-PLC_SuperSonic_
+		dc.w word_142F5C-PLC_SuperSonic_
+		dc.w word_142F64-PLC_SuperSonic_
+		dc.w word_142F6C-PLC_SuperSonic_
+		dc.w word_142F74-PLC_SuperSonic_
+		dc.w word_142F7A-PLC_SuperSonic_
+		dc.w word_142F84-PLC_SuperSonic_
+		dc.w word_142F8C-PLC_SuperSonic_
+		dc.w word_142F94-PLC_SuperSonic_
+		dc.w word_142F9A-PLC_SuperSonic_
+		dc.w word_142FA2-PLC_SuperSonic_
+		dc.w word_142FA6-PLC_SuperSonic_
+		dc.w word_142FB0-PLC_SuperSonic_
+		dc.w word_142FBA-PLC_SuperSonic_
+		dc.w word_142FC2-PLC_SuperSonic_
+		dc.w word_142FCC-PLC_SuperSonic_
+		dc.w word_142FD6-PLC_SuperSonic_
+		dc.w word_142FE0-PLC_SuperSonic_
+		dc.w word_142FE8-PLC_SuperSonic_
+		dc.w word_142FF2-PLC_SuperSonic_
+		dc.w word_142FFC-PLC_SuperSonic_
+		dc.w word_143006-PLC_SuperSonic_
+		dc.w word_14300E-PLC_SuperSonic_
+		dc.w word_143018-PLC_SuperSonic_
+		dc.w word_143020-PLC_SuperSonic_
+		dc.w word_143026-PLC_SuperSonic_
+		dc.w word_14302E-PLC_SuperSonic_
+		dc.w word_143034-PLC_SuperSonic_
+		dc.w word_14303A-PLC_SuperSonic_
+		dc.w word_143040-PLC_SuperSonic_
+		dc.w word_143046-PLC_SuperSonic_
+		dc.w word_14304C-PLC_SuperSonic_
+		dc.w word_143054-PLC_SuperSonic_
+		dc.w word_14305C-PLC_SuperSonic_
+		dc.w word_143062-PLC_SuperSonic_
+		dc.w word_14306A-PLC_SuperSonic_
+		dc.w word_143074-PLC_SuperSonic_
+		dc.w word_14307E-PLC_SuperSonic_
+		dc.w word_143088-PLC_SuperSonic_
+		dc.w word_14308E-PLC_SuperSonic_
+		dc.w word_14309A-PLC_SuperSonic_
+		dc.w word_1430A6-PLC_SuperSonic_
+		dc.w word_1430AA-PLC_SuperSonic_
+		dc.w word_1430AE-PLC_SuperSonic_
+		dc.w word_1430B2-PLC_SuperSonic_
+		dc.w word_1430B6-PLC_SuperSonic_
+		dc.w word_143406-PLC_SuperSonic_
+		dc.w word_143406-PLC_SuperSonic_
+		dc.w word_1430C6-PLC_SuperSonic_
+		dc.w word_1430D0-PLC_SuperSonic_
+		dc.w word_1430DA-PLC_SuperSonic_
+		dc.w word_1430E4-PLC_SuperSonic_
+		dc.w word_14340C-PLC_SuperSonic_
+		dc.w word_143416-PLC_SuperSonic_
+		dc.w word_143420-PLC_SuperSonic_
+		dc.w word_14340C-PLC_SuperSonic_
+		dc.w word_143416-PLC_SuperSonic_
+		dc.w word_143420-PLC_SuperSonic_
+		dc.w word_143122-PLC_SuperSonic_
+		dc.w word_14312A-PLC_SuperSonic_
+		dc.w word_143132-PLC_SuperSonic_
+		dc.w word_14313A-PLC_SuperSonic_
+		dc.w word_143142-PLC_SuperSonic_
+		dc.w word_14314A-PLC_SuperSonic_
+		dc.w word_143154-PLC_SuperSonic_
+		dc.w word_14315E-PLC_SuperSonic_
+		dc.w word_143168-PLC_SuperSonic_
+		dc.w word_143172-PLC_SuperSonic_
+		dc.w word_143178-PLC_SuperSonic_
+		dc.w word_143180-PLC_SuperSonic_
+		dc.w word_143188-PLC_SuperSonic_
+		dc.w word_143190-PLC_SuperSonic_
+		dc.w word_143198-PLC_SuperSonic_
+		dc.w word_14342A-PLC_SuperSonic_
+		dc.w word_143432-PLC_SuperSonic_
+		dc.w word_14343A-PLC_SuperSonic_
+		dc.w word_143442-PLC_SuperSonic_
+		dc.w word_14344A-PLC_SuperSonic_
+		dc.w word_143454-PLC_SuperSonic_
+		dc.w word_14344A-PLC_SuperSonic_		; word_14345E is the proper pointer here
+		dc.w word_143454-PLC_SuperSonic_
+		dc.w word_14344A-PLC_SuperSonic_
+		dc.w word_143454-PLC_SuperSonic_		; word_14345E is the proper pointer here
+		dc.w word_14344A-PLC_SuperSonic_
+		dc.w word_143454-PLC_SuperSonic_
+		dc.w word_14344A-PLC_SuperSonic_		; word_14345E is the proper pointer here
+		dc.w word_143214-PLC_SuperSonic_
+		dc.w word_14321E-PLC_SuperSonic_
+		dc.w word_143454-PLC_SuperSonic_
+		dc.w word_14344A-PLC_SuperSonic_
+		dc.w word_143454-PLC_SuperSonic_		; word_14345E is the proper pointer here
+		dc.w word_143244-PLC_SuperSonic_
+		dc.w word_14324C-PLC_SuperSonic_
+		dc.w word_143254-PLC_SuperSonic_
+		dc.w word_14324C-PLC_SuperSonic_
+		dc.w word_143244-PLC_SuperSonic_
+		dc.w word_14325A-PLC_SuperSonic_
+		dc.w word_143260-PLC_SuperSonic_
+		dc.w word_14325A-PLC_SuperSonic_
+		dc.w word_143266-PLC_SuperSonic_
+		dc.w word_14326E-PLC_SuperSonic_
+		dc.w word_143466-PLC_SuperSonic_
+		dc.w word_14346A-PLC_SuperSonic_
+		dc.w word_143472-PLC_SuperSonic_
+		dc.w word_143478-PLC_SuperSonic_
+		dc.w word_143480-PLC_SuperSonic_
+		dc.w word_143276-PLC_SuperSonic_
+		dc.w word_14327E-PLC_SuperSonic_
+		dc.w word_143286-PLC_SuperSonic_
 word_142C14:	dc.w 0
 word_142C16:	dc.w 3
 		dc.w $7000
@@ -468,7 +471,7 @@ word_142C4C:	dc.w 2
 word_142C52:	dc.w 4
 		dc.w $B0AF
 		dc.w $70BB
-		dc.w $C3
+		dc.w $00C3
 		dc.w $30C4
 word_142C5C:	dc.w 4
 		dc.w $B0C8
@@ -484,7 +487,7 @@ word_142C70:	dc.w 4
 		dc.w $B0F3
 		dc.w $70FF
 		dc.w $1107
-		dc.w $109
+		dc.w $0109
 word_142C7A:	dc.w 4
 		dc.w $B10A
 		dc.w $7116
@@ -499,7 +502,7 @@ word_142C8E:	dc.w 4
 		dc.w $8143
 		dc.w $714C
 		dc.w $1154
-		dc.w $156
+		dc.w $0156
 word_142C98:	dc.w 4
 		dc.w $8157
 		dc.w $2160
@@ -516,7 +519,7 @@ word_142CAA:	dc.w 3
 word_142CB2:	dc.w 3
 		dc.w $821C
 		dc.w $5225
-		dc.w $22B
+		dc.w $022B
 word_142CBA:	dc.w 2
 		dc.w $B22C
 		dc.w $7238
@@ -528,11 +531,11 @@ word_142CC8:	dc.w 4
 		dc.w $124E
 		dc.w $B250
 		dc.w $525C
-		dc.w $262
+		dc.w $0262
 word_142CD2:	dc.w 3
 		dc.w $8263
 		dc.w $5225
-		dc.w $22B
+		dc.w $022B
 word_142CDA:	dc.w 2
 		dc.w $826C
 		dc.w $71FE
@@ -560,7 +563,7 @@ word_142D08:	dc.w 4
 		dc.w $B33E
 		dc.w $534A
 		dc.w $7350
-		dc.w $358
+		dc.w $0358
 word_142D12:	dc.w 4
 		dc.w $F359
 		dc.w $2369
@@ -590,7 +593,7 @@ word_142D42:	dc.w 2
 		dc.w $F457
 word_142D48:	dc.w 4
 		dc.w $B48B
-		dc.w $497
+		dc.w $0497
 		dc.w $3498
 		dc.w $249C
 word_142D52:	dc.w 2
@@ -598,7 +601,7 @@ word_142D52:	dc.w 2
 		dc.w $F4A2
 word_142D58:	dc.w 4
 		dc.w $B4B2
-		dc.w $4BE
+		dc.w $04BE
 		dc.w $34BF
 		dc.w $24C3
 word_142D62:	dc.w 2
@@ -663,7 +666,7 @@ word_142DD4:	dc.w 2
 		dc.w $264C
 word_142DDA:	dc.w 2
 		dc.w $B64F
-		dc.w $65B
+		dc.w $065B
 word_142DE0:	dc.w 3
 		dc.w $165C
 		dc.w $765E
@@ -680,7 +683,7 @@ word_142DF8:	dc.w 2
 		dc.w $B682
 		dc.w $268E
 word_142DFE:	dc.w 3
-		dc.w $691
+		dc.w $0691
 		dc.w $B692
 		dc.w $269E
 word_142E06:	dc.w 1
@@ -746,9 +749,9 @@ word_142E76:	dc.w 3
 word_142E7E:	dc.w 1
 		dc.w $F783
 word_142E82:	dc.w 4
-		dc.w $793
+		dc.w $0793
 		dc.w $7794
-		dc.w $79C
+		dc.w $079C
 		dc.w $779D
 word_142E8C:	dc.w 4
 		dc.w $17A5
@@ -763,12 +766,12 @@ word_142E9C:	dc.w 3
 		dc.w $77C7
 		dc.w $17CF
 word_142EA4:	dc.w 3
-		dc.w $7D1
+		dc.w $07D1
 		dc.w $87D2
 		dc.w $17DB
 word_142EAC:	dc.w 2
 		dc.w $F7DD
-		dc.w $7ED
+		dc.w $07ED
 word_142EB2:	dc.w 4
 		dc.w $2800
 		dc.w $7803
@@ -799,7 +802,7 @@ word_142EE2:	dc.w 2
 word_142EE8:	dc.w 3
 		dc.w $8872
 		dc.w $587B
-		dc.w $881
+		dc.w $0881
 word_142EF0:	dc.w 1
 		dc.w $B882
 word_142EF4:	dc.w 2
@@ -808,11 +811,11 @@ word_142EF4:	dc.w 2
 word_142EFA:	dc.w 3
 		dc.w $389D
 		dc.w $B8A1
-		dc.w $8AD
+		dc.w $08AD
 word_142F02:	dc.w 1
 		dc.w $B8AE
 word_142F06:	dc.w 2
-		dc.w $8BA
+		dc.w $08BA
 		dc.w $B8BB
 word_142F0C:	dc.w 2
 		dc.w $88C7
@@ -833,7 +836,7 @@ word_142F24:	dc.w 3
 word_142F2C:	dc.w 1
 		dc.w $B912
 word_142F30:	dc.w 2
-		dc.w $91E
+		dc.w $091E
 		dc.w $B91F
 word_142F36:	dc.w 2
 		dc.w $B92B
@@ -844,18 +847,18 @@ word_142F3C:	dc.w 4
 		dc.w $5940
 		dc.w $1946
 word_142F46:	dc.w 3
-		dc.w $948
+		dc.w $0948
 		dc.w $7949
 		dc.w $2951
 word_142F4E:	dc.w 3
-		dc.w $954
+		dc.w $0954
 		dc.w $7955
 		dc.w $295D
 word_142F56:	dc.w 2
 		dc.w $5960
 		dc.w $B966
 word_142F5C:	dc.w 3
-		dc.w $972
+		dc.w $0972
 		dc.w $8973
 		dc.w $397C
 word_142F64:	dc.w 3
@@ -867,12 +870,12 @@ word_142F6C:	dc.w 3
 		dc.w $3992
 		dc.w $1996
 word_142F74:	dc.w 2
-		dc.w $998
+		dc.w $0998
 		dc.w $B999
 word_142F7A:	dc.w 4
 		dc.w $19A5
-		dc.w $9A7
-		dc.w $9A8
+		dc.w $09A7
+		dc.w $09A8
 		dc.w $B9A9
 word_142F84:	dc.w 3
 		dc.w $19B5
@@ -883,7 +886,7 @@ word_142F8C:	dc.w 3
 		dc.w $79C8
 		dc.w $29D0
 word_142F94:	dc.w 2
-		dc.w $9D3
+		dc.w $09D3
 		dc.w $89D4
 word_142F9A:	dc.w 3
 		dc.w $29DD
@@ -931,7 +934,7 @@ word_142FE8:	dc.w 4
 		dc.w $FA43
 word_142FF2:	dc.w 4
 		dc.w $BA53
-		dc.w $A5F
+		dc.w $0A5F
 		dc.w $1A60
 		dc.w $5A62
 word_142FFC:	dc.w 4
@@ -944,7 +947,7 @@ word_143006:	dc.w 3
 		dc.w $3A7E
 		dc.w $BA82
 word_14300E:	dc.w 4
-		dc.w $A8E
+		dc.w $0A8E
 		dc.w $7A8F
 		dc.w $2A97
 		dc.w $5A9A
@@ -1002,7 +1005,7 @@ word_143074:	dc.w 4
 word_14307E:	dc.w 4
 		dc.w $2B6A
 		dc.w $BB6D
-		dc.w $B79
+		dc.w $0B79
 		dc.w $1B7A
 word_143088:	dc.w 2
 		dc.w $2B6A
@@ -1030,10 +1033,10 @@ word_1430B2:	dc.w 1
 word_1430B6:	dc.w 1
 		dc.w $FBE2
 word_1430BA:	dc.w 2
-		dc.w $BF2
+		dc.w $0BF2
 		dc.w $BBF3
 word_1430C0:	dc.w 2
-		dc.w $BFF
+		dc.w $0BFF
 		dc.w $BC00
 word_1430C6:	dc.w 4
 		dc.w $8C0C
@@ -1056,15 +1059,15 @@ word_1430E4:	dc.w 3
 		dc.w $2C46
 word_1430EC:	dc.w 3
 		dc.w $7C49
-		dc.w $C51
+		dc.w $0C51
 		dc.w $8C52
 word_1430F4:	dc.w 4
-		dc.w $C5B
+		dc.w $0C5B
 		dc.w $BC5C
-		dc.w $C68
+		dc.w $0C68
 		dc.w $5C69
 word_1430FE:	dc.w 3
-		dc.w $C6F
+		dc.w $0C6F
 		dc.w $FC70
 		dc.w $2C80
 word_143106:	dc.w 4
@@ -1074,7 +1077,7 @@ word_143106:	dc.w 4
 		dc.w $2C94
 word_143110:	dc.w 3
 		dc.w $FC97
-		dc.w $CA7
+		dc.w $0CA7
 		dc.w $2CA8
 word_143118:	dc.w 4
 		dc.w $2C83
@@ -1084,26 +1087,26 @@ word_143118:	dc.w 4
 word_143122:	dc.w 3
 		dc.w $2CBC
 		dc.w $FCBF
-		dc.w $CCF
+		dc.w $0CCF
 word_14312A:	dc.w 3
 		dc.w $2CD0
 		dc.w $FCD3
-		dc.w $CCF
+		dc.w $0CCF
 word_143132:	dc.w 3
 		dc.w $1CE3
 		dc.w $FCE5
-		dc.w $CCF
+		dc.w $0CCF
 word_14313A:	dc.w 3
 		dc.w $BCF5
-		dc.w $D01
+		dc.w $0D01
 		dc.w $5D02
 word_143142:	dc.w 3
 		dc.w $BD08
-		dc.w $D14
+		dc.w $0D14
 		dc.w $5D15
 word_14314A:	dc.w 4
 		dc.w $FD1B
-		dc.w $D2B
+		dc.w $0D2B
 		dc.w $1D2C
 		dc.w $1D2E
 word_143154:	dc.w 4
@@ -1164,7 +1167,7 @@ word_1431C0:	dc.w 4
 		dc.w $8E01
 		dc.w $2811
 		dc.w $3E0A
-		dc.w $815
+		dc.w $0815
 word_1431CA:	dc.w 3
 		dc.w $2E0E
 		dc.w $7E11
@@ -1233,13 +1236,13 @@ word_143244:	dc.w 3
 word_14324C:	dc.w 3
 		dc.w $5EBE
 		dc.w $3EC4
-		dc.w $EC8
+		dc.w $0EC8
 word_143254:	dc.w 2
 		dc.w $5EC9
 		dc.w $3ECF
 word_14325A:	dc.w 2
 		dc.w $BED3
-		dc.w $EDF
+		dc.w $0EDF
 word_143260:	dc.w 2
 		dc.w $5EE0
 		dc.w $3EE6
@@ -1261,7 +1264,7 @@ word_14327E:	dc.w 3
 		dc.w $2B22
 word_143286:	dc.w 4
 		dc.w $BD57
-		dc.w $D63
+		dc.w $0D63
 		dc.w $3D64
 		dc.w $2D68
 word_143290:	dc.w 0
@@ -1311,12 +1314,12 @@ word_1432DE:	dc.w 4
 word_1432E8:	dc.w 4
 		dc.w $80E0
 		dc.w $7192
-		dc.w $19A
+		dc.w $019A
 		dc.w $119B
 word_1432F2:	dc.w 4
 		dc.w $B0F3
 		dc.w $B19D
-		dc.w $1A9
+		dc.w $01A9
 		dc.w $31AA
 word_1432FC:	dc.w 4
 		dc.w $B10A
@@ -1336,7 +1339,7 @@ word_143310:	dc.w 4
 word_14331A:	dc.w 4
 		dc.w $8157
 		dc.w $71E3
-		dc.w $1EB
+		dc.w $01EB
 		dc.w $21EC
 word_143324:	dc.w 3
 		dc.w $51EF
@@ -1353,17 +1356,17 @@ word_143334:	dc.w 3
 word_14333C:	dc.w 3
 		dc.w $B22C
 		dc.w $82AF
-		dc.w $2B8
+		dc.w $02B8
 word_143344:	dc.w 4
 		dc.w $B242
 		dc.w $1240
 		dc.w $82B9
-		dc.w $2C2
+		dc.w $02C2
 word_14334E:	dc.w 4
 		dc.w $B2C3
 		dc.w $12CF
 		dc.w $82AF
-		dc.w $2B8
+		dc.w $02B8
 word_143358:	dc.w 3
 		dc.w $82D1
 		dc.w $82DA
@@ -1375,7 +1378,7 @@ word_143366:	dc.w 4
 		dc.w $B2E3
 		dc.w $539E
 		dc.w $B3A4
-		dc.w $3B0
+		dc.w $03B0
 word_143370:	dc.w 4
 		dc.w $B2FC
 		dc.w $73B1
@@ -1383,14 +1386,14 @@ word_143370:	dc.w 4
 		dc.w $13C1
 word_14337A:	dc.w 4
 		dc.w $8314
-		dc.w $3C3
+		dc.w $03C3
 		dc.w $13C4
 		dc.w $83C6
 word_143384:	dc.w 4
 		dc.w $B327
 		dc.w $33CF
 		dc.w $B3D3
-		dc.w $33A
+		dc.w $033A
 word_14338E:	dc.w 4
 		dc.w $B33E
 		dc.w $53DF
@@ -1399,13 +1402,13 @@ word_14338E:	dc.w 4
 word_143398:	dc.w 4
 		dc.w $F359
 		dc.w $33F4
-		dc.w $3F8
+		dc.w $03F8
 		dc.w $B3F9
 word_1433A2:	dc.w 4
 		dc.w $8376
 		dc.w $3405
 		dc.w $B409
-		dc.w $386
+		dc.w $0386
 word_1433AC:	dc.w 4
 		dc.w $838A
 		dc.w $3415
@@ -1424,22 +1427,22 @@ word_1433C0:	dc.w 4
 word_1433CA:	dc.w 4
 		dc.w $14D6
 		dc.w $74D8
-		dc.w $4E0
+		dc.w $04E0
 		dc.w $B4E1
 word_1433D4:	dc.w 4
 		dc.w $14ED
 		dc.w $74EF
-		dc.w $4F7
+		dc.w $04F7
 		dc.w $B4F8
 word_1433DE:	dc.w 4
 		dc.w $B54A
 		dc.w $1556
-		dc.w $558
+		dc.w $0558
 		dc.w $3559
 word_1433E8:	dc.w 4
 		dc.w $B55D
 		dc.w $1569
-		dc.w $56B
+		dc.w $056B
 		dc.w $356C
 word_1433F2:	dc.w 4
 		dc.w $35BB
@@ -1453,7 +1456,7 @@ word_1433FC:	dc.w 4
 		dc.w $35E2
 word_143406:	dc.w 2
 		dc.w $FFC3
-		dc.w $FD3
+		dc.w $0FD3
 word_14340C:	dc.w 4
 		dc.w $3EEA
 		dc.w $3EEE
@@ -1478,7 +1481,7 @@ word_143432:	dc.w 3
 		dc.w $FF88
 		dc.w $2F98
 word_14343A:	dc.w 3
-		dc.w $F9B
+		dc.w $0F9B
 		dc.w $FF9C
 		dc.w $3FAC
 word_143442:	dc.w 3
@@ -1489,16 +1492,16 @@ word_14344A:	dc.w 4
 		dc.w $8E01
 		dc.w $7FD4
 		dc.w $2FDC
-		dc.w $FDF
+		dc.w $0FDF
 word_143454:	dc.w 4
 		dc.w $8E01
 		dc.w $7FE0
 		dc.w $2FE8
-		dc.w $FEB
+		dc.w $0FEB
 word_14345E:	dc.w 3			; unused PLCs for Super Sonic's third idle frame
 		dc.w $8E01
 		dc.w $BFEC
-		dc.w $FF8
+		dc.w $0FF8
 word_143466:	dc.w 1
 		dc.w $BF1C
 word_14346A:	dc.w 3

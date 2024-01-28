@@ -130,14 +130,14 @@ loc_23A764:
 		lea	(HScroll_table).w,a5
 		move.w	(Camera_Y_pos_BG_copy).w,d0
 		move.w	(Camera_X_pos_copy).w,d3
-		moveq	#$6B,d1
+		moveq	#$6C-1,d1
 		jsr	(ApplyDeformation2).l
 		movea.l a6,a4
 		lea	(HScroll_table+$100).w,a5
 		move.w	(_unkEE74).w,d0
 		subq.w	#4,d0
 		move.w	(Camera_X_pos_P2_copy).w,d3
-		moveq	#$73,d1
+		moveq	#$74-1,d1
 		jsr	(ApplyDeformation2).l
 		jmp	(Update_VScrollValueP2).l
 ; ---------------------------------------------------------------------------
@@ -523,7 +523,7 @@ loc_23AFE2:
 		lea	(HScroll_table+$028).w,a1
 		cmpi.w	#$580,d0
 		blt.s	loc_23AFF8
-		moveq	#$24,d1
+		moveq	#$25-1,d1
 
 loc_23AFF0:
 		move.w	d0,(a1)+
@@ -538,7 +538,7 @@ loc_23AFF8:
 		clr.w	d0
 		move.l	d0,d1
 		asr.l	#5,d1
-		moveq	#$23,d2
+		moveq	#$24-1,d2
 
 loc_23B008:
 		add.l	d1,d0
@@ -558,7 +558,7 @@ loc_23B018:
 loc_23B026:
 		move.w	d0,(a5)
 		addq.w	#4,a5
-		moveq	#8,d0
+		moveq	#9-1,d0
 
 loc_23B02C:
 		move.w	(a1),d1
@@ -714,7 +714,7 @@ AIZTrans_WavyFlame:
 		move.w	(Camera_Y_pos_BG_copy).w,d1
 		move.w	(Level_frame_counter).w,d2
 		asr.w	#2,d2
-		moveq	#$13,d3
+		moveq	#$14-1,d3
 
 loc_23B1B0:
 		addq.w	#2,d2
@@ -869,7 +869,7 @@ loc_23B744:
 		lea	(H_scroll_buffer).w,a1		; This is for what I assume to be the flying battleship sequence.
 		move.w	(_unkEE98).w,d0			; Nullifies the top 8 tiles worth of FG waviness for this effect
 		neg.w	d0						; And replaces it with position data from the second BG camera.
-		moveq	#$F,d1
+		moveq	#$10-1,d1
 
 loc_23B75E:
 		move.w	d0,(a1)
@@ -889,14 +889,15 @@ AIZ2_BGDeformArray:
 		dc.w $10, $20, $38, $58, $28, $40, $38, $18, $18, $90, $48, $10, $18
 		dc.w $20, $38, $58, $28, $40, $38, $18, $18, $90, $48, $10, $7FFF
 AIZ2_BGDeformMake:
-		dc.b    1, $12, $2A
-		dc.b    3, $10, $14, $28, $2C
-		dc.b    3,  $E, $16, $26, $2E
-		dc.b    4,   0,  $C, $18, $24, $30
-		dc.b    3,   2,  $A, $1A, $22
-		dc.b    3,   4,   8, $1C, $20
-		dc.b    1,   6, $1E
-		dc.b  $FF,   0
+		dc.b  2-1, $12, $2A
+		dc.b  4-1, $10, $14, $28, $2C
+		dc.b  4-1,  $E, $16, $26, $2E
+		dc.b  5-1,   0,  $C, $18, $24, $30
+		dc.b  4-1,   2,  $A, $1A, $22
+		dc.b  4-1,   4,   8, $1C, $20
+		dc.b  2-1,   6, $1E
+		dc.b  $FF
+		even
 Pal_AIZBattleship:
 		binclude "Levels/AIZ/Palettes/Battleship.bin"
 		even
@@ -929,14 +930,14 @@ AIZBattleship_BombScript:
 		dc.w    $40, $3DEC
 		dc.w  $FFFF
 AIZBombExplodeDat:
-		dc.w      0, $FFC4,     0,    $A ; X offset, Y offset, animation number, animation delay
-		dc.w      0, $FFF4,  $101,     9
-		dc.w  $FFFC, $FFCC,     0,     8
-		dc.w     $C, $FFFC,  $101,     7
-		dc.w  $FFF4, $FFFC,  $101,     5
-		dc.w      8, $FFDC,     0,     4
-		dc.w  $FFF8, $FFE4,     0,     2
-		dc.w      0, $FFF4,     0,     0
+		dc.w      0,  -$3C, (0<<8)|0,    $A ; X offset, Y offset, animation number, animation delay
+		dc.w      0,   -$C, (1<<8)|1,     9
+		dc.w     -4,  -$34, (0<<8)|0,     8
+		dc.w     $C,    -4, (1<<8)|1,     7
+		dc.w    -$C,    -4, (1<<8)|1,     5
+		dc.w      8,  -$24, (0<<8)|0,     4
+		dc.w     -8,  -$1C, (0<<8)|0,     2
+		dc.w      0,   -$C, (0<<8)|0,     0
 AIZMakeTreeScript:
 		dc.w     0, $280
 		dc.w   $32, $380
@@ -974,22 +975,15 @@ HCZ2_BGDeformArray:
 		dc.w 8, 8, $90, $10, 8, $30, $18, 8, 8, $A8, $30, $18
 		dc.w 8, 8, $A8, $30, $18, 8, 8, $B0, $10, 8, $7FFF
 HCZ2_BGDeformIndex:
-		dc.b   3, $A
-		dc.b $14,$1E
-		dc.b $2C,  2
-		dc.b  $C,$16
-		dc.b $20,  5
-		dc.b   0,  8
-		dc.b  $E,$18
-		dc.b $22,$2A
-		dc.b   3,  2
-		dc.b $10,$1A
-		dc.b $24,  1
-		dc.b $12,$1C
-		dc.b   1,  6
-		dc.b $28,  1
-		dc.b   4,$26
-		dc.b $FF,  0
+		dc.b 4-1, $A,$14,$1E,$2C
+		dc.b 3-1, $C,$16,$20
+		dc.b 6-1,  0,  8, $E,$18,$22,$2A
+		dc.b 4-1,  2,$10,$1A,$24
+		dc.b 2-1,$12,$1C
+		dc.b 2-1,  6,$28
+		dc.b 2-1,  4,$26
+		dc.b $FF
+		even
 ; ---------------------------------------------------------------------------
 
 MGZ1_Deform:
@@ -1001,7 +995,7 @@ MGZ1_Deform:
 		move.l	d0,d1
 		asr.l	#4,d1
 		lea	(HScroll_table+$01C).w,a1
-		moveq	#8,d2
+		moveq	#9-1,d2
 
 loc_23C98A:
 		swap	d0
@@ -1013,7 +1007,7 @@ loc_23C98A:
 		move.l	(HScroll_table+$01C).w,d2
 		addi.l	#$500,(HScroll_table+$01C).w
 		asr.l	#1,d0
-		moveq	#4,d3
+		moveq	#5-1,d3
 
 loc_23C9AA:
 		add.l	d2,d0
@@ -1039,29 +1033,29 @@ MGZ2_ChunkEventArray:
 		dc.w  $3680, $3700,  $2F0,  $380, $3700,  $280
 		dc.w  $3000, $3080,  $770,  $800, $3080,  $700
 MGZ2_ScreenRedrawArray:
-		dc.w   $40,    3
-		dc.w   $50,    3
-		dc.w   $50,    4
-		dc.w   $60,    4
-		dc.w   $60,    3
-		dc.w   $70,    2
-		dc.w   $70,    3
-		dc.w   $80,    3
-		dc.w   $80,    3
-		dc.w   $80,    4
-		dc.w   $80,    4
-		dc.w   $80,    4
-		dc.w   $80,    5
-		dc.w   $90,    5
-		dc.w   $A0,    4
-		dc.w   $90,    6
-		dc.w   $80,    6
-		dc.w   $90,    6
-		dc.w   $A0,    5
-		dc.w   $B0,    4
-		dc.w   $C0,    3
-		dc.w   $D0,    2
-		dc.w   $E0,    1
+		dc.w   $40,  4-1
+		dc.w   $50,  4-1
+		dc.w   $50,  5-1
+		dc.w   $60,  5-1
+		dc.w   $60,  4-1
+		dc.w   $70,  3-1
+		dc.w   $70,  4-1
+		dc.w   $80,  4-1
+		dc.w   $80,  4-1
+		dc.w   $80,  5-1
+		dc.w   $80,  5-1
+		dc.w   $80,  5-1
+		dc.w   $80,  6-1
+		dc.w   $90,  6-1
+		dc.w   $A0,  5-1
+		dc.w   $90,  7-1
+		dc.w   $80,  7-1
+		dc.w   $90,  7-1
+		dc.w   $A0,  6-1
+		dc.w   $B0,  5-1
+		dc.w   $C0,  4-1
+		dc.w   $D0,  3-1
+		dc.w   $E0,  2-1
 MGZ2_ChunkReplaceArray:
 		dc.w  $100, $500
 		dc.w  $180, $580
@@ -1095,10 +1089,10 @@ MGZ2_FGVScrollArray:
 
 MGZ2_BGDeform:
 		move.w	(Events_bg+$00).w,d0
-		jmp	loc_23D1D8(pc,d0.w)
+		jmp	MGZ2_BGDeform_Index(pc,d0.w)
 ; ---------------------------------------------------------------------------
 
-loc_23D1D8:
+MGZ2_BGDeform_Index:
 		bra.w	loc_23D21E	; 0 - Normal
 ; ---------------------------------------------------------------------------
 		bra.w	loc_23D1F4	; 4 - Knuckles BG move event
@@ -1168,7 +1162,7 @@ loc_23D25C:
 		move.l	d1,d2
 		asr.l	#2,d2
 		lea	(HScroll_table+$036).w,a1
-		moveq	#7,d3
+		moveq	#8-1,d3
 
 loc_23D270:
 		swap	d0
@@ -1186,7 +1180,7 @@ loc_23D28A:
 		lea	MGZ2_BGDeformIndex(pc),a5
 		move.l	d2,d0
 		asr.l	#1,d2
-		moveq	#$E,d3
+		moveq	#$F-1,d3
 
 loc_23D29C:
 		move.w	(a5)+,d4
@@ -1197,7 +1191,7 @@ loc_23D29C:
 		add.l	d2,d0
 		dbf	d3,loc_23D29C
 		lea	MGZ2_BGDeformOffset(pc),a5
-		moveq	#$16,d0
+		moveq	#$17-1,d0
 
 loc_23D2B4:
 		move.w	(a5)+,d1
@@ -1273,7 +1267,7 @@ ICZ2_OutDeform:
 		move.l	d0,d1
 		asr.l	#6,d1
 		lea	(HScroll_table+$064).w,a1
-		moveq	#$27,d2
+		moveq	#$28-1,d2
 
 loc_23E0E8:
 		swap	d0
@@ -1303,7 +1297,7 @@ loc_23E0E8:
 		andi.w	#$3E,d1
 		lea	(AIZ2_ALZ_BGDeformDelta).l,a5
 		adda.w	d1,a5
-		moveq	#7,d1
+		moveq	#8-1,d1
 
 loc_23E12E:
 		move.w	(a5)+,d2
@@ -1418,7 +1412,7 @@ ICZ2_InBGDeformArray:
 
 LBZ1_CheckLayoutMod:
 		lea	LBZ1_LayoutModRange(pc),a1
-		moveq	#3,d3
+		moveq	#4-1,d3
 
 loc_23E45E:
 		lea	(a1),a5
@@ -1496,7 +1490,7 @@ LBZ1_DoMod4:
 		lea	$7A(a1),a1
 		move.w	-8(a3),d0
 		subq.w	#6,d0
-		moveq	#5,d1
+		moveq	#6-1,d1
 
 loc_23E4DE:
 		move.l	(a5)+,(a1)+
@@ -1512,7 +1506,7 @@ LBZ1_DoMod3:
 		lea	$74(a1),a1
 		move.w	-8(a3),d0
 		subq.w	#4,d0
-		moveq	#$B,d1
+		moveq	#$C-1,d1
 
 loc_23E4FA:
 		move.l	(a5)+,(a1)+
@@ -1527,7 +1521,7 @@ LBZ1_DoMod2:
 		lea	$42(a1),a1
 		move.w	-8(a3),d0
 		subi.w	#$A,d0
-		moveq	#$D,d1
+		moveq	#$E-1,d1
 
 loc_23E516:
 		move.l	(a5)+,(a1)+
@@ -1544,7 +1538,7 @@ LBZ1_DoMod1:
 		lea	$26(a1),a1
 		move.w	-8(a3),d0
 		subq.w	#8,d0
-		moveq	#8,d1
+		moveq	#9-1,d1
 
 loc_23E536:
 		move.l	(a5)+,(a1)+
@@ -1595,7 +1589,7 @@ LBZ1_Deform:
 		add.l	d0,d1
 		add.l	d0,d1
 		asr.l	#2,d0
-		moveq	#3,d2
+		moveq	#4-1,d2
 
 loc_23E79A:
 		swap	d1

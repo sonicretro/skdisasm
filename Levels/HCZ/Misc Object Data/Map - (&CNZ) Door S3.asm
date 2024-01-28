@@ -1,5 +1,6 @@
-		dc.w word_2FC00-Map_HCZCNZDoor
-		dc.w word_2FC0E-Map_HCZCNZDoor
+Map_HCZCNZDoor_:
+		dc.w word_2FC00-Map_HCZCNZDoor_
+		dc.w word_2FC0E-Map_HCZCNZDoor_
 word_2FC00:	dc.w 2
 		dc.b  $E0,  $F,   0,   0, $FF, $F0
 		dc.b    0,  $F,   0,   0, $FF, $F0

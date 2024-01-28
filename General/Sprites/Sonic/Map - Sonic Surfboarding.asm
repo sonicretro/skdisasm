@@ -1,13 +1,14 @@
-		dc.w word_20E48-Map_SurfboardIntro
-		dc.w word_20E4A-Map_SurfboardIntro
-		dc.w word_20E5E-Map_SurfboardIntro
-		dc.w word_20E72-Map_SurfboardIntro
-		dc.w word_20E8C-Map_SurfboardIntro
-		dc.w word_20EA0-Map_SurfboardIntro
-		dc.w word_20EB4-Map_SurfboardIntro
-		dc.w word_20ECE-Map_SurfboardIntro
-		dc.w word_20EE8-Map_SurfboardIntro
-		dc.w word_20EFC-Map_SurfboardIntro
+Map_SurfboardIntro_:
+		dc.w word_20E48-Map_SurfboardIntro_
+		dc.w word_20E4A-Map_SurfboardIntro_
+		dc.w word_20E5E-Map_SurfboardIntro_
+		dc.w word_20E72-Map_SurfboardIntro_
+		dc.w word_20E8C-Map_SurfboardIntro_
+		dc.w word_20EA0-Map_SurfboardIntro_
+		dc.w word_20EB4-Map_SurfboardIntro_
+		dc.w word_20ECE-Map_SurfboardIntro_
+		dc.w word_20EE8-Map_SurfboardIntro_
+		dc.w word_20EFC-Map_SurfboardIntro_
 word_20E48:	dc.w 0
 word_20E4A:	dc.w 3
 		dc.b  $E8,  $F,   0,   0, $FF, $E8

@@ -1,16 +1,17 @@
-DPLC_66B10:		dc.w word_66B18-DPLC_66B10
-		dc.w word_66B1E-DPLC_66B10
-		dc.w word_66B24-DPLC_66B10
-		dc.w word_66B2A-DPLC_66B10
-word_66B18:	dc.w 1			; DATA XREF: ROM:00066B10o
-		dc.w 5
-		dc.w $6B
-word_66B1E:	dc.w 1			; DATA XREF: ROM:00066B10o
-		dc.w $122
-		dc.w $15F
-word_66B24:	dc.w 1			; DATA XREF: ROM:00066B10o
-		dc.w $251
-		dc.w $27F
-word_66B2A:	dc.w 1			; DATA XREF: ROM:00066B10o
-		dc.w 5
-		dc.w $37B
+DPLC_MHZKnuxPress_:
+		dc.w word_66B18-DPLC_MHZKnuxPress_
+		dc.w word_66B1E-DPLC_MHZKnuxPress_
+		dc.w word_66B24-DPLC_MHZKnuxPress_
+		dc.w word_66B2A-DPLC_MHZKnuxPress_
+word_66B18:	dc.w 1
+		dc.w $0005
+		dc.w $006B
+word_66B1E:	dc.w 1
+		dc.w $0122
+		dc.w $015F
+word_66B24:	dc.w 1
+		dc.w $0251
+		dc.w $027F
+word_66B2A:	dc.w 1
+		dc.w $0005
+		dc.w $037B

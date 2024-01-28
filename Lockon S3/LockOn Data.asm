@@ -256,21 +256,29 @@ SStageLayoutPtrs:
 		dc.l SStage6_Layout
 		dc.l SStage7_Layout
 		dc.l SStage8_Layout
-SStage1_Layout:	binclude "General/Special Stage/Layout/S3 1.bin"
+SStage1_Layout:
+		binclude "General/Special Stage/Layout/S3 1.bin"
 		even
-SStage2_Layout:	binclude "General/Special Stage/Layout/S3 2.bin"
+SStage2_Layout:
+		binclude "General/Special Stage/Layout/S3 2.bin"
 		even
-SStage3_Layout:	binclude "General/Special Stage/Layout/S3 3.bin"
+SStage3_Layout:
+		binclude "General/Special Stage/Layout/S3 3.bin"
 		even
-SStage4_Layout:	binclude "General/Special Stage/Layout/S3 4.bin"
+SStage4_Layout:
+		binclude "General/Special Stage/Layout/S3 4.bin"
 		even
-SStage5_Layout:	binclude "General/Special Stage/Layout/S3 5.bin"
+SStage5_Layout:
+		binclude "General/Special Stage/Layout/S3 5.bin"
 		even
-SStage6_Layout:	binclude "General/Special Stage/Layout/S3 6.bin"
+SStage6_Layout:
+		binclude "General/Special Stage/Layout/S3 6.bin"
 		even
-SStage7_Layout:	binclude "General/Special Stage/Layout/S3 7.bin"
+SStage7_Layout:
+		binclude "General/Special Stage/Layout/S3 7.bin"
 		even
-SStage8_Layout:	binclude "General/Special Stage/Layout/S3 8.bin"
+SStage8_Layout:
+		binclude "General/Special Stage/Layout/S3 8.bin"
 		even
 HCZ_WaterlineScroll_Data:
 		binclude "Levels/HCZ/Misc/HCZ Waterline Scroll Data.bin"
@@ -278,74 +286,107 @@ HCZ_WaterlineScroll_Data:
 LBZ_WaterlineScroll_Data:
 		binclude "Levels/LBZ/Misc/LBZ Waterline Scroll Data.bin"
 		even
-Solid_AIZ1:	binclude "Levels/AIZ/Collision/1.bin"
+Solid_AIZ1:
+		binclude "Levels/AIZ/Collision/1.bin"
 		even
-Solid_AIZ2:	binclude "Levels/AIZ/Collision/2.bin"
+Solid_AIZ2:
+		binclude "Levels/AIZ/Collision/2.bin"
 		even
-Solid_HCZ1:	binclude "Levels/HCZ/Collision/1.bin"
+Solid_HCZ1:
+		binclude "Levels/HCZ/Collision/1.bin"
 		even
-Solid_HCZ2:	binclude "Levels/HCZ/Collision/2.bin"
+Solid_HCZ2:
+		binclude "Levels/HCZ/Collision/2.bin"
 		even
-Solid_MGZ1:	binclude "Levels/MGZ/Collision/1.bin"
+Solid_MGZ1:
+		binclude "Levels/MGZ/Collision/1.bin"
 		even
-Solid_MGZ2:	binclude "Levels/MGZ/Collision/2.bin"
+Solid_MGZ2:
+		binclude "Levels/MGZ/Collision/2.bin"
 		even
-Solid_CNZ:	binclude "Levels/CNZ/Collision/1.bin"
+Solid_CNZ:
+		binclude "Levels/CNZ/Collision/1.bin"
 		even
-Solid_ICZ1:	binclude "Levels/ICZ/Collision/1.bin"
+Solid_ICZ1:
+		binclude "Levels/ICZ/Collision/1.bin"
 		even
-Solid_ICZ2:	binclude "Levels/ICZ/Collision/2.bin"
+Solid_ICZ2:
+		binclude "Levels/ICZ/Collision/2.bin"
 		even
-Solid_LBZ1:	binclude "Levels/LBZ/Collision/1.bin"
+Solid_LBZ1:
+		binclude "Levels/LBZ/Collision/1.bin"
 		even
-Solid_LBZ2:	binclude "Levels/LBZ/Collision/2.bin"
+Solid_LBZ2:
+		binclude "Levels/LBZ/Collision/2.bin"
 		even
-Solid_ALZ:	binclude "Levels/ALZ/Collision/1.bin"
+Solid_ALZ:
+		binclude "Levels/ALZ/Collision/1.bin"
 		even
-Solid_BPZ:	binclude "Levels/BPZ/Collision/1.bin"
+Solid_BPZ:
+		binclude "Levels/BPZ/Collision/1.bin"
 		even
-Solid_DPZ:	binclude "Levels/DPZ/Collision/1.bin"
+Solid_DPZ:
+		binclude "Levels/DPZ/Collision/1.bin"
 		even
-Solid_CGZ:	binclude "Levels/CGZ/Collision/1.bin"
+Solid_CGZ:
+		binclude "Levels/CGZ/Collision/1.bin"
 		even
-Solid_EMZ:	binclude "Levels/EMZ/Collision/1.bin"
+Solid_EMZ:
+		binclude "Levels/EMZ/Collision/1.bin"
 		even
 Solid_Gumball_Special:
 		binclude "Levels/Gumball/Collision/1.bin"
 		even
-Layout_AIZ1:	binclude "Levels/AIZ/Layout/1.bin"
+Layout_AIZ1:
+		binclude "Levels/AIZ/Layout/1.bin"
 		even
-Layout_AIZ2:	binclude "Levels/AIZ/Layout/2.bin"
+Layout_AIZ2:
+		binclude "Levels/AIZ/Layout/2.bin"
 		even
-Layout_HCZ1:	binclude "Levels/HCZ/Layout/1.bin"
+Layout_HCZ1:
+		binclude "Levels/HCZ/Layout/1.bin"
 		even
-Layout_HCZ2:	binclude "Levels/HCZ/Layout/2.bin"
+Layout_HCZ2:
+		binclude "Levels/HCZ/Layout/2.bin"
 		even
-Layout_MGZ1:	binclude "Levels/MGZ/Layout/1.bin"
+Layout_MGZ1:
+		binclude "Levels/MGZ/Layout/1.bin"
 		even
-Layout_MGZ2:	binclude "Levels/MGZ/Layout/2.bin"
+Layout_MGZ2:
+		binclude "Levels/MGZ/Layout/2.bin"
 		even
-Layout_CNZ1:	binclude "Levels/CNZ/Layout/1.bin"
+Layout_CNZ1:
+		binclude "Levels/CNZ/Layout/1.bin"
 		even
-Layout_CNZ2:	binclude "Levels/CNZ/Layout/2.bin"
+Layout_CNZ2:
+		binclude "Levels/CNZ/Layout/2.bin"
 		even
-Layout_ICZ1:	binclude "Levels/ICZ/Layout/1.bin"
+Layout_ICZ1:
+		binclude "Levels/ICZ/Layout/1.bin"
 		even
-Layout_ICZ2:	binclude "Levels/ICZ/Layout/2.bin"
+Layout_ICZ2:
+		binclude "Levels/ICZ/Layout/2.bin"
 		even
-Layout_LBZ1:	binclude "Levels/LBZ/Layout/1.bin"
+Layout_LBZ1:
+		binclude "Levels/LBZ/Layout/1.bin"
 		even
-Layout_LBZ2:	binclude "Levels/LBZ/Layout/2.bin"
+Layout_LBZ2:
+		binclude "Levels/LBZ/Layout/2.bin"
 		even
-Layout_ALZ:	binclude "Levels/ALZ/Layout/1.bin"
+Layout_ALZ:
+		binclude "Levels/ALZ/Layout/1.bin"
 		even
-Layout_BPZ:	binclude "Levels/BPZ/Layout/1.bin"
+Layout_BPZ:
+		binclude "Levels/BPZ/Layout/1.bin"
 		even
-Layout_DPZ:	binclude "Levels/DPZ/Layout/1.bin"
+Layout_DPZ:
+		binclude "Levels/DPZ/Layout/1.bin"
 		even
-Layout_CGZ:	binclude "Levels/CGZ/Layout/1.bin"
+Layout_CGZ:
+		binclude "Levels/CGZ/Layout/1.bin"
 		even
-Layout_EMZ:	binclude "Levels/EMZ/Layout/1.bin"
+Layout_EMZ:
+		binclude "Levels/EMZ/Layout/1.bin"
 		even
 Layout_Gumball_Special:
 		binclude "Levels/Gumball/Layout/1.bin"
@@ -558,11 +599,14 @@ ArtUnc_SplashDrown:
 ArtNem_Title_SonicSprites:
 		binclude "General/Title/Nemesis Art/S3 Sonic Sprites.bin"
 		even
-DemoDat_AIZ:	binclude "Levels/AIZ/Demodata/1.bin"
+DemoDat_AIZ:
+		binclude "Levels/AIZ/Demodata/1.bin"
 		even
-DemoDat_HCZ:	binclude "Levels/HCZ/Demodata/1.bin"
+DemoDat_HCZ:
+		binclude "Levels/HCZ/Demodata/1.bin"
 		even
-DemoDat_MGZ:	binclude "Levels/MGZ/Demodata/1.bin"
+DemoDat_MGZ:
+		binclude "Levels/MGZ/Demodata/1.bin"
 		even
 ArtUnc_Tails:
 		binclude "General/Sprites/Tails/Art/Tails.bin"
@@ -716,6 +760,7 @@ LBZFinalBoss2_CircleLookup:
 		dc.b   $F, $10, $11, $12, $13, $14, $15, $15, $16, $17, $18, $19, $19, $1A, $1B, $1C
 		dc.b  $1C, $1D, $1E, $1E, $1F, $20, $20, $21, $21, $22, $22, $23, $23, $24, $24, $25
 		dc.b  $25, $25, $26, $26, $26, $27, $27, $27, $27, $27, $28, $28, $28, $28, $28, $28
+		even
 Map_Blastoid:
 		include "General/Sprites/Blastoid/Map - Blastoid.asm"
 Map_Poindexter:
@@ -779,15 +824,16 @@ HCZMiniboss_RocketTwistLookup:
 		dc.b  $16, $16, $16, $15, $15, $15, $15, $14, $14, $14, $13, $13, $13, $12, $12, $11
 		dc.b  $11, $11, $10, $10,  $F,  $F,  $E,  $E,  $D,  $D,  $C,  $C,  $B,  $B,  $A,  $A
 		dc.b    9,   9,   8,   8,   7,   6,   6,   5,   5,   4,   4,   3,   2,   2,   1,   1
-		dc.b    0, $FF, $FF, $FE, $FE, $FD, $FC, $FC, $FB, $FB, $FA, $FA, $F9, $F8, $F8, $F7
-		dc.b  $F7, $F6, $F6, $F5, $F5, $F4, $F4, $F3, $F3, $F2, $F2, $F1, $F1, $F0, $F0, $EF
-		dc.b  $EF, $EF, $EE, $EE, $ED, $ED, $ED, $EC, $EC, $EC, $EB, $EB, $EB, $EB, $EA, $EA
-		dc.b  $EA, $EA, $E9, $E9, $E9, $E9, $E9, $E9, $E8, $E8, $E8, $E8, $E8, $E8, $E8, $E8
+		dc.b    0,  -1,  -1,  -2,  -2,  -3,  -4,  -4,  -5,  -5,  -6,  -6,  -7,  -8,  -8,  -9
+		dc.b   -9, -$A, -$A, -$B, -$B, -$C, -$C, -$D, -$D, -$E, -$E, -$F, -$F,-$10,-$10,-$11
+		dc.b -$11,-$11,-$12,-$12,-$13,-$13,-$13,-$14,-$14,-$14,-$15,-$15,-$15,-$15,-$16,-$16
+		dc.b -$16,-$16,-$17,-$17,-$17,-$17,-$17,-$17,-$18,-$18,-$18,-$18,-$18,-$18,-$18,-$18
 LBZ2FinalBoss2_CircleLookup2:
 		dc.b    0,   0,   1,   1,   2,   2,   3,   3,   4,   4,   5,   5,   6,   6,   7,   7
 		dc.b    8,   8,   9,   9,   9,  $A,  $A,  $B,  $B,  $C,  $C,  $C,  $D,  $D,  $D,  $E
 		dc.b   $E,  $E,  $F,  $F,  $F, $10, $10, $10, $11, $11, $11, $11, $12, $12, $12, $12
 		dc.b  $12, $13, $13, $13, $13, $13, $13, $14, $14, $14, $14, $14, $14, $14, $14, $14
+		even
 Map_HCZMiniboss:
 		include "Levels/HCZ/Misc Object Data/Map - Miniboss.asm"
 Map_HCZMinibossSplash:
@@ -803,6 +849,7 @@ ICZMiniboss_OrbAngleLookup:
 		dc.b  $12, $13, $15, $16, $17, $18, $19, $1A, $1B, $1C, $1D, $1E, $1E, $1F, $20, $21
 		dc.b  $22, $23, $24, $24, $25, $26, $27, $27, $28, $29, $29, $2A, $2A, $2B, $2B, $2C
 		dc.b  $2C, $2D, $2D, $2E, $2E, $2E, $2F, $2F, $2F, $2F, $2F, $30, $30, $30, $30, $30
+		even
 Map_ICZMiniboss:
 		include "Levels/ICZ/Misc Object Data/Map - Miniboss.asm"
 Map_HCZEndBoss:
@@ -1785,35 +1832,50 @@ LBZ2_128x128_Kos:
 LBZ2_128x128_DeathEgg_Kos:
 		binclude "Levels/LBZ/Chunks/Act 2 Death Egg.bin"
 		even
-ALZ_16x16_Kos:	binclude "Levels/ALZ/Blocks/Primary.bin"
+ALZ_16x16_Kos:
+		binclude "Levels/ALZ/Blocks/Primary.bin"
 		even
-ALZ_8x8_KosM:	binclude "Levels/ALZ/Tiles/Primary.bin"
+ALZ_8x8_KosM:
+		binclude "Levels/ALZ/Tiles/Primary.bin"
 		even
-ALZ_128x128_Kos:binclude "Levels/ALZ/Chunks/Primary.bin"
+ALZ_128x128_Kos:
+		binclude "Levels/ALZ/Chunks/Primary.bin"
 		even
-BPZ_16x16_Kos:	binclude "Levels/BPZ/Blocks/Primary.bin"
+BPZ_16x16_Kos:
+		binclude "Levels/BPZ/Blocks/Primary.bin"
 		even
-BPZ_8x8_KosM:	binclude "Levels/BPZ/Tiles/Primary.bin"
+BPZ_8x8_KosM:
+		binclude "Levels/BPZ/Tiles/Primary.bin"
 		even
-BPZ_128x128_Kos:binclude "Levels/BPZ/Chunks/Primary.bin"
+BPZ_128x128_Kos:
+		binclude "Levels/BPZ/Chunks/Primary.bin"
 		even
-DPZ_16x16_Kos:	binclude "Levels/DPZ/Blocks/Primary.bin"
+DPZ_16x16_Kos:
+		binclude "Levels/DPZ/Blocks/Primary.bin"
 		even
-DPZ_8x8_KosM:	binclude "Levels/DPZ/Tiles/Primary.bin"
+DPZ_8x8_KosM:
+		binclude "Levels/DPZ/Tiles/Primary.bin"
 		even
-DPZ_128x128_Kos:binclude "Levels/DPZ/Chunks/Primary.bin"
+DPZ_128x128_Kos:
+		binclude "Levels/DPZ/Chunks/Primary.bin"
 		even
-CGZ_16x16_Kos:	binclude "Levels/CGZ/Blocks/Primary.bin"
+CGZ_16x16_Kos:
+		binclude "Levels/CGZ/Blocks/Primary.bin"
 		even
-CGZ_8x8_KosM:	binclude "Levels/CGZ/Tiles/Primary.bin"
+CGZ_8x8_KosM:
+		binclude "Levels/CGZ/Tiles/Primary.bin"
 		even
-CGZ_128x128_Kos:binclude "Levels/CGZ/Chunks/Primary.bin"
+CGZ_128x128_Kos:
+		binclude "Levels/CGZ/Chunks/Primary.bin"
 		even
-EMZ_16x16_Kos:	binclude "Levels/EMZ/Blocks/Primary.bin"
+EMZ_16x16_Kos:
+		binclude "Levels/EMZ/Blocks/Primary.bin"
 		even
-EMZ_8x8_KosM:	binclude "Levels/EMZ/Tiles/Primary.bin"
+EMZ_8x8_KosM:
+		binclude "Levels/EMZ/Tiles/Primary.bin"
 		even
-EMZ_128x128_Kos:binclude "Levels/EMZ/Chunks/Primary.bin"
+EMZ_128x128_Kos:
+		binclude "Levels/EMZ/Chunks/Primary.bin"
 		even
 Gumball_16x16_Kos:
 		binclude "Levels/Gumball/Blocks/Primary.bin"

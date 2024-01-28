@@ -1,8 +1,9 @@
-		dc.w word_52186-Map_SonicTailsEndPoses
-		dc.w word_521AC-Map_SonicTailsEndPoses
-		dc.w word_521DE-Map_SonicTailsEndPoses
-		dc.w word_521F8-Map_SonicTailsEndPoses
-		dc.w word_52242-Map_SonicTailsEndPoses
+Map_SonicTailsEndPoses_:
+		dc.w word_52186-Map_SonicTailsEndPoses_
+		dc.w word_521AC-Map_SonicTailsEndPoses_
+		dc.w word_521DE-Map_SonicTailsEndPoses_
+		dc.w word_521F8-Map_SonicTailsEndPoses_
+		dc.w word_52242-Map_SonicTailsEndPoses_
 word_52186:	dc.w 6
 		dc.b  $DC,  $F,   0,   0, $FF, $F0
 		dc.b  $E4,   1,   0, $10,   0, $10

@@ -1,9 +1,10 @@
-		dc.w word_192F2-Map_SuperSonic_Stars
-		dc.w word_192F4-Map_SuperSonic_Stars
-		dc.w word_192FC-Map_SuperSonic_Stars
-		dc.w word_19316-Map_SuperSonic_Stars
-		dc.w word_192FC-Map_SuperSonic_Stars
-		dc.w word_192F4-Map_SuperSonic_Stars
+Map_SuperSonic_Stars_:
+		dc.w word_192F2-Map_SuperSonic_Stars_
+		dc.w word_192F4-Map_SuperSonic_Stars_
+		dc.w word_192FC-Map_SuperSonic_Stars_
+		dc.w word_19316-Map_SuperSonic_Stars_
+		dc.w word_192FC-Map_SuperSonic_Stars_
+		dc.w word_192F4-Map_SuperSonic_Stars_
 Map_SuperSonic_Stars2:
 		dc.w word_19330-Map_SuperSonic_Stars2
 		dc.w word_19338-Map_SuperSonic_Stars2

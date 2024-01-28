@@ -1,11 +1,12 @@
-		dc.w word_160E20-Map_Toxomister
-		dc.w word_160E28-Map_Toxomister
-		dc.w word_160E42-Map_Toxomister
-		dc.w word_160E4A-Map_Toxomister
-		dc.w word_160E52-Map_Toxomister
-		dc.w word_160E5A-Map_Toxomister
-		dc.w word_160E62-Map_Toxomister
-		dc.w word_160E6A-Map_Toxomister
+Map_Toxomister_:
+		dc.w word_160E20-Map_Toxomister_
+		dc.w word_160E28-Map_Toxomister_
+		dc.w word_160E42-Map_Toxomister_
+		dc.w word_160E4A-Map_Toxomister_
+		dc.w word_160E52-Map_Toxomister_
+		dc.w word_160E5A-Map_Toxomister_
+		dc.w word_160E62-Map_Toxomister_
+		dc.w word_160E6A-Map_Toxomister_
 word_160E20:	dc.w 1
 		dc.b  $F8,   5,   0,   0, $FF, $F8
 word_160E28:	dc.w 4

@@ -1,8 +1,9 @@
-		dc.w word_43506-Map_SonicOnSegaScr
-		dc.w word_4352C-Map_SonicOnSegaScr
-		dc.w word_43552-Map_SonicOnSegaScr
-		dc.w word_43578-Map_SonicOnSegaScr
-		dc.w word_4359E-Map_SonicOnSegaScr
+Map_SonicOnSegaScr_:
+		dc.w word_43506-Map_SonicOnSegaScr_
+		dc.w word_4352C-Map_SonicOnSegaScr_
+		dc.w word_43552-Map_SonicOnSegaScr_
+		dc.w word_43578-Map_SonicOnSegaScr_
+		dc.w word_4359E-Map_SonicOnSegaScr_
 word_43506:	dc.w 6
 		dc.b  $D8,  $F,   0,   0, $FF, $F0
 		dc.b  $D8,   7,   0, $10,   0, $10

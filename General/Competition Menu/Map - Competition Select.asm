@@ -1,19 +1,20 @@
-Map_20A6E4:	dc.w Frame_20A704-Map_20A6E4 ; ...
-		dc.w Frame_20A74E-Map_20A6E4
-		dc.w Frame_20A798-Map_20A6E4
-		dc.w Frame_20A824-Map_20A6E4
-		dc.w Frame_20A832-Map_20A6E4
-		dc.w Frame_20A840-Map_20A6E4
-		dc.w Frame_20A84E-Map_20A6E4
-		dc.w Frame_20A868-Map_20A6E4
-		dc.w Frame_20A882-Map_20A6E4
-		dc.w Frame_20A89C-Map_20A6E4
-		dc.w Frame_20A8B6-Map_20A6E4
-		dc.w Frame_20A8D0-Map_20A6E4
-		dc.w Frame_20A8E4-Map_20A6E4
-		dc.w Frame_20A8F8-Map_20A6E4
-		dc.w Frame_20A90C-Map_20A6E4
-		dc.w Frame_20A950-Map_20A6E4
+Map_CompetitionSelect_:
+		dc.w Frame_20A704-Map_CompetitionSelect_
+		dc.w Frame_20A74E-Map_CompetitionSelect_
+		dc.w Frame_20A798-Map_CompetitionSelect_
+		dc.w Frame_20A824-Map_CompetitionSelect_
+		dc.w Frame_20A832-Map_CompetitionSelect_
+		dc.w Frame_20A840-Map_CompetitionSelect_
+		dc.w Frame_20A84E-Map_CompetitionSelect_
+		dc.w Frame_20A868-Map_CompetitionSelect_
+		dc.w Frame_20A882-Map_CompetitionSelect_
+		dc.w Frame_20A89C-Map_CompetitionSelect_
+		dc.w Frame_20A8B6-Map_CompetitionSelect_
+		dc.w Frame_20A8D0-Map_CompetitionSelect_
+		dc.w Frame_20A8E4-Map_CompetitionSelect_
+		dc.w Frame_20A8F8-Map_CompetitionSelect_
+		dc.w Frame_20A90C-Map_CompetitionSelect_
+		dc.w Frame_20A950-Map_CompetitionSelect_
 Frame_20A704:	dc.w $C
 		dc.b $D4,  1,  0,  0,$FF,$D4
 		dc.b $D4, $D,  0,  2,$FF,$DC
@@ -115,7 +116,7 @@ Frame_20A90C:	dc.w $B
 		dc.b $EC, $D,  0,  2,$FF,$DC
 		dc.b $EC, $D,  0,  2,$FF,$FC
 		dc.b $EC,  5,  0, $A,  0,$1C
-		dc.b $FC,  0,  0, $E,$FF,$D4 ; ...
+		dc.b $FC,  0,  0, $E,$FF,$D4
 		dc.b $FC,  0,  0,$12,  0,$1C
 		dc.b $FC,  0,  0,$16,  0,$24
 		dc.b   4,  1,  0,$1A,$FF,$D4
@@ -126,7 +127,7 @@ Frame_20A950:	dc.w $B
 		dc.b $EC,  1,  0,$28,$FF,$D4
 		dc.b $EC, $D,  0,$2A,$FF,$DC
 		dc.b $EC, $D,  0,$2A,$FF,$FC
-byte_A964:	dc.b $EC,  5,  0,$32,  0,$1C ; ...
+		dc.b $EC,  5,  0,$32,  0,$1C
 		dc.b $FC,  0,  0,$36,$FF,$D4
 		dc.b $FC,  0,  0,$3A,  0,$1C
 		dc.b $FC,  0,  0,$3E,  0,$24

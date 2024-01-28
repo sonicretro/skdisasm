@@ -1,10 +1,11 @@
-Map_2098C0:	dc.w Frame_2098CE-Map_2098C0 ; ...
-		dc.w Frame_209906-Map_2098C0
-		dc.w Frame_20993E-Map_2098C0
-		dc.w Frame_20997C-Map_2098C0
-		dc.w Frame_209996-Map_2098C0
-		dc.w Frame_20999E-Map_2098C0
-		dc.w Frame_2099A6-Map_2098C0
+Map_CompetitionObject_:
+		dc.w Frame_2098CE-Map_CompetitionObject_
+		dc.w Frame_209906-Map_CompetitionObject_
+		dc.w Frame_20993E-Map_CompetitionObject_
+		dc.w Frame_20997C-Map_CompetitionObject_
+		dc.w Frame_209996-Map_CompetitionObject_
+		dc.w Frame_20999E-Map_CompetitionObject_
+		dc.w Frame_2099A6-Map_CompetitionObject_
 Frame_2098CE:	dc.w 9
 		dc.b   0,  6,  0,$18,$FF,$BC
 		dc.b   0,  6,  0,$45,$FF,$CC

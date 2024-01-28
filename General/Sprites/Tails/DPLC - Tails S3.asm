@@ -1,212 +1,214 @@
-		dc.w word_1445F8-PLC_Tails
-		dc.w word_1445FA-PLC_Tails
-		dc.w word_144604-PLC_Tails
-		dc.w word_14460E-PLC_Tails
-		dc.w word_144616-PLC_Tails
-		dc.w word_144620-PLC_Tails
-		dc.w word_14462A-PLC_Tails
-		dc.w word_144634-PLC_Tails
-		dc.w word_14463C-PLC_Tails
-		dc.w word_144646-PLC_Tails
-		dc.w word_144650-PLC_Tails
-		dc.w word_144658-PLC_Tails
-		dc.w word_144662-PLC_Tails
-		dc.w word_14466A-PLC_Tails
-		dc.w word_144672-PLC_Tails
-		dc.w word_14467A-PLC_Tails
-		dc.w word_144682-PLC_Tails
-		dc.w word_14468C-PLC_Tails
-		dc.w word_144694-PLC_Tails
-		dc.w word_14469C-PLC_Tails
-		dc.w word_1446A4-PLC_Tails
-		dc.w word_1446AA-PLC_Tails
-		dc.w word_1446B2-PLC_Tails
-		dc.w word_1446B8-PLC_Tails
-		dc.w word_1446C0-PLC_Tails
-		dc.w word_1446C6-PLC_Tails
-		dc.w word_1446CE-PLC_Tails
-		dc.w word_1446D8-PLC_Tails
-		dc.w word_1446E2-PLC_Tails
-		dc.w word_1446EA-PLC_Tails
-		dc.w word_1446F2-PLC_Tails
-		dc.w word_1446FC-PLC_Tails
-		dc.w word_144704-PLC_Tails
-		dc.w word_14470E-PLC_Tails
-		dc.w word_144718-PLC_Tails
-		dc.w word_144722-PLC_Tails
-		dc.w word_14472C-PLC_Tails
-		dc.w word_144736-PLC_Tails
-		dc.w word_144740-PLC_Tails
-		dc.w word_14474A-PLC_Tails
-		dc.w word_144754-PLC_Tails
-		dc.w word_14475E-PLC_Tails
-		dc.w word_144768-PLC_Tails
-		dc.w word_144772-PLC_Tails
-		dc.w word_14477C-PLC_Tails
-		dc.w word_144786-PLC_Tails
-		dc.w word_144790-PLC_Tails
-		dc.w word_14479A-PLC_Tails
-		dc.w word_1447A4-PLC_Tails
-		dc.w word_1447AE-PLC_Tails
-		dc.w word_1447B2-PLC_Tails
-		dc.w word_1447B8-PLC_Tails
-		dc.w word_1447BC-PLC_Tails
-		dc.w word_1447C0-PLC_Tails
-		dc.w word_1447C6-PLC_Tails
-		dc.w word_1447CC-PLC_Tails
-		dc.w word_1447D2-PLC_Tails
-		dc.w word_1447D8-PLC_Tails
-		dc.w word_1447DE-PLC_Tails
-		dc.w word_1447E4-PLC_Tails
-		dc.w word_1447EA-PLC_Tails
-		dc.w word_1447F0-PLC_Tails
-		dc.w word_1447F6-PLC_Tails
-		dc.w word_1447FC-PLC_Tails
-		dc.w word_144800-PLC_Tails
-		dc.w word_144808-PLC_Tails
-		dc.w word_14480C-PLC_Tails
-		dc.w word_144810-PLC_Tails
-		dc.w word_144818-PLC_Tails
-		dc.w word_14481E-PLC_Tails
-		dc.w word_144824-PLC_Tails
-		dc.w word_14482A-PLC_Tails
-		dc.w word_144832-PLC_Tails
-		dc.w word_144838-PLC_Tails
-		dc.w word_144840-PLC_Tails
-		dc.w word_144846-PLC_Tails
-		dc.w word_14484E-PLC_Tails
-		dc.w word_144854-PLC_Tails
-		dc.w word_14485C-PLC_Tails
-		dc.w word_144866-PLC_Tails
-		dc.w word_144870-PLC_Tails
-		dc.w word_14487A-PLC_Tails
-		dc.w word_144882-PLC_Tails
-		dc.w word_14488A-PLC_Tails
-		dc.w word_144890-PLC_Tails
-		dc.w word_144896-PLC_Tails
-		dc.w word_14489E-PLC_Tails
-		dc.w word_1448A2-PLC_Tails
-		dc.w word_1448AA-PLC_Tails
-		dc.w word_1448AE-PLC_Tails
-		dc.w word_1448B2-PLC_Tails
-		dc.w word_1448BA-PLC_Tails
-		dc.w word_1448BE-PLC_Tails
-		dc.w word_1448C8-PLC_Tails
-		dc.w word_1448CC-PLC_Tails
-		dc.w word_1448D4-PLC_Tails
-		dc.w word_1448DA-PLC_Tails
-		dc.w word_1448DE-PLC_Tails
-		dc.w word_1448E2-PLC_Tails
-		dc.w word_1448EA-PLC_Tails
-		dc.w word_1448F4-PLC_Tails
-		dc.w word_1448F8-PLC_Tails
-		dc.w word_1448FE-PLC_Tails
-		dc.w word_144904-PLC_Tails
-		dc.w word_144908-PLC_Tails
-		dc.w word_14490C-PLC_Tails
-		dc.w word_144914-PLC_Tails
-		dc.w word_14491C-PLC_Tails
-		dc.w word_144922-PLC_Tails
-		dc.w word_144928-PLC_Tails
-		dc.w word_14492E-PLC_Tails
-		dc.w word_144934-PLC_Tails
-		dc.w word_14493A-PLC_Tails
-		dc.w word_144940-PLC_Tails
-		dc.w word_144946-PLC_Tails
-		dc.w word_14494A-PLC_Tails
-		dc.w word_144950-PLC_Tails
-		dc.w word_144954-PLC_Tails
-		dc.w word_144958-PLC_Tails
-		dc.w word_14495E-PLC_Tails
-		dc.w word_144964-PLC_Tails
-		dc.w word_14496E-PLC_Tails
-		dc.w word_144978-PLC_Tails
-		dc.w word_144982-PLC_Tails
-		dc.w word_14498C-PLC_Tails
-		dc.w word_144996-PLC_Tails
-		dc.w word_1449A0-PLC_Tails
-		dc.w word_1449AA-PLC_Tails
-		dc.w word_1449B4-PLC_Tails
-		dc.w word_1449BA-PLC_Tails
-		dc.w word_1449C4-PLC_Tails
-		dc.w word_1449CE-PLC_Tails
-		dc.w word_1449D6-PLC_Tails
-		dc.w word_1449DE-PLC_Tails
-		dc.w word_1449E8-PLC_Tails
-		dc.w word_1449EE-PLC_Tails
-		dc.w word_1449F4-PLC_Tails
-		dc.w word_1449FA-PLC_Tails
-		dc.w word_1449FE-PLC_Tails
-		dc.w word_144A02-PLC_Tails
-		dc.w word_144A08-PLC_Tails
-		dc.w word_144A0E-PLC_Tails
-		dc.w word_144A14-PLC_Tails
-		dc.w word_144A1C-PLC_Tails
-		dc.w word_144A24-PLC_Tails
-		dc.w word_144A2A-PLC_Tails
-		dc.w word_144A30-PLC_Tails
-		dc.w word_144A36-PLC_Tails
-		dc.w word_144A3A-PLC_Tails
-		dc.w word_144A42-PLC_Tails
-		dc.w word_144A4A-PLC_Tails
-		dc.w word_144A4E-PLC_Tails
-		dc.w word_144A52-PLC_Tails
-		dc.w word_144A56-PLC_Tails
-		dc.w word_144A5A-PLC_Tails
-		dc.w word_144A62-PLC_Tails
-		dc.w word_144A6A-PLC_Tails
-		dc.w word_144A6E-PLC_Tails
-		dc.w word_144A74-PLC_Tails
-		dc.w word_144A7C-PLC_Tails
-		dc.w word_144A84-PLC_Tails
-		dc.w word_144A8A-PLC_Tails
-		dc.w word_144A90-PLC_Tails
-		dc.w word_144A96-PLC_Tails
-		dc.w word_144A9C-PLC_Tails
-		dc.w word_144AA2-PLC_Tails
-		dc.w word_144AA6-PLC_Tails
-		dc.w word_144AB0-PLC_Tails
-		dc.w word_144AB6-PLC_Tails
-		dc.w word_144ABE-PLC_Tails
-		dc.w word_144AC4-PLC_Tails
-		dc.w word_144AC8-PLC_Tails
-		dc.w word_144ACC-PLC_Tails
-		dc.w word_144AD0-PLC_Tails
-		dc.w word_144AD4-PLC_Tails
-		dc.w word_144AD8-PLC_Tails
-		dc.w word_144ADC-PLC_Tails
-		dc.w word_144AE0-PLC_Tails
-		dc.w word_144AE4-PLC_Tails
-		dc.w word_144AE8-PLC_Tails
-		dc.w word_144AEC-PLC_Tails
-		dc.w word_144AF0-PLC_Tails
-		dc.w word_144AF8-PLC_Tails
-		dc.w word_144AFE-PLC_Tails
-		dc.w word_144B02-PLC_Tails
-		dc.w word_144AF0-PLC_Tails
-		dc.w word_144B08-PLC_Tails
-		dc.w word_144B10-PLC_Tails
-		dc.w word_144B08-PLC_Tails
-		dc.w word_144B16-PLC_Tails
-		dc.w word_144B1E-PLC_Tails
-		dc.w word_144B26-PLC_Tails
-		dc.w word_144B2C-PLC_Tails
-		dc.w word_144B36-PLC_Tails
-		dc.w word_144B3C-PLC_Tails
-		dc.w word_144B44-PLC_Tails
-		dc.w word_144B4E-PLC_Tails
-		dc.w word_144B58-PLC_Tails
-		dc.w word_144B62-PLC_Tails
-		dc.w word_144B6C-PLC_Tails
-		dc.w word_144B76-PLC_Tails
-		dc.w word_144B80-PLC_Tails
-		dc.w word_144B8A-PLC_Tails
-		dc.w word_144B94-PLC_Tails
-		dc.w word_144B98-PLC_Tails
-		dc.w word_144B9C-PLC_Tails
-		dc.w word_144BA4-PLC_Tails
-		dc.w word_144BAC-PLC_Tails
-		dc.w word_144BB2-PLC_Tails
+; Tails pattern load cues
+PLC_Tails_:
+		dc.w word_1445F8-PLC_Tails_
+		dc.w word_1445FA-PLC_Tails_
+		dc.w word_144604-PLC_Tails_
+		dc.w word_14460E-PLC_Tails_
+		dc.w word_144616-PLC_Tails_
+		dc.w word_144620-PLC_Tails_
+		dc.w word_14462A-PLC_Tails_
+		dc.w word_144634-PLC_Tails_
+		dc.w word_14463C-PLC_Tails_
+		dc.w word_144646-PLC_Tails_
+		dc.w word_144650-PLC_Tails_
+		dc.w word_144658-PLC_Tails_
+		dc.w word_144662-PLC_Tails_
+		dc.w word_14466A-PLC_Tails_
+		dc.w word_144672-PLC_Tails_
+		dc.w word_14467A-PLC_Tails_
+		dc.w word_144682-PLC_Tails_
+		dc.w word_14468C-PLC_Tails_
+		dc.w word_144694-PLC_Tails_
+		dc.w word_14469C-PLC_Tails_
+		dc.w word_1446A4-PLC_Tails_
+		dc.w word_1446AA-PLC_Tails_
+		dc.w word_1446B2-PLC_Tails_
+		dc.w word_1446B8-PLC_Tails_
+		dc.w word_1446C0-PLC_Tails_
+		dc.w word_1446C6-PLC_Tails_
+		dc.w word_1446CE-PLC_Tails_
+		dc.w word_1446D8-PLC_Tails_
+		dc.w word_1446E2-PLC_Tails_
+		dc.w word_1446EA-PLC_Tails_
+		dc.w word_1446F2-PLC_Tails_
+		dc.w word_1446FC-PLC_Tails_
+		dc.w word_144704-PLC_Tails_
+		dc.w word_14470E-PLC_Tails_
+		dc.w word_144718-PLC_Tails_
+		dc.w word_144722-PLC_Tails_
+		dc.w word_14472C-PLC_Tails_
+		dc.w word_144736-PLC_Tails_
+		dc.w word_144740-PLC_Tails_
+		dc.w word_14474A-PLC_Tails_
+		dc.w word_144754-PLC_Tails_
+		dc.w word_14475E-PLC_Tails_
+		dc.w word_144768-PLC_Tails_
+		dc.w word_144772-PLC_Tails_
+		dc.w word_14477C-PLC_Tails_
+		dc.w word_144786-PLC_Tails_
+		dc.w word_144790-PLC_Tails_
+		dc.w word_14479A-PLC_Tails_
+		dc.w word_1447A4-PLC_Tails_
+		dc.w word_1447AE-PLC_Tails_
+		dc.w word_1447B2-PLC_Tails_
+		dc.w word_1447B8-PLC_Tails_
+		dc.w word_1447BC-PLC_Tails_
+		dc.w word_1447C0-PLC_Tails_
+		dc.w word_1447C6-PLC_Tails_
+		dc.w word_1447CC-PLC_Tails_
+		dc.w word_1447D2-PLC_Tails_
+		dc.w word_1447D8-PLC_Tails_
+		dc.w word_1447DE-PLC_Tails_
+		dc.w word_1447E4-PLC_Tails_
+		dc.w word_1447EA-PLC_Tails_
+		dc.w word_1447F0-PLC_Tails_
+		dc.w word_1447F6-PLC_Tails_
+		dc.w word_1447FC-PLC_Tails_
+		dc.w word_144800-PLC_Tails_
+		dc.w word_144808-PLC_Tails_
+		dc.w word_14480C-PLC_Tails_
+		dc.w word_144810-PLC_Tails_
+		dc.w word_144818-PLC_Tails_
+		dc.w word_14481E-PLC_Tails_
+		dc.w word_144824-PLC_Tails_
+		dc.w word_14482A-PLC_Tails_
+		dc.w word_144832-PLC_Tails_
+		dc.w word_144838-PLC_Tails_
+		dc.w word_144840-PLC_Tails_
+		dc.w word_144846-PLC_Tails_
+		dc.w word_14484E-PLC_Tails_
+		dc.w word_144854-PLC_Tails_
+		dc.w word_14485C-PLC_Tails_
+		dc.w word_144866-PLC_Tails_
+		dc.w word_144870-PLC_Tails_
+		dc.w word_14487A-PLC_Tails_
+		dc.w word_144882-PLC_Tails_
+		dc.w word_14488A-PLC_Tails_
+		dc.w word_144890-PLC_Tails_
+		dc.w word_144896-PLC_Tails_
+		dc.w word_14489E-PLC_Tails_
+		dc.w word_1448A2-PLC_Tails_
+		dc.w word_1448AA-PLC_Tails_
+		dc.w word_1448AE-PLC_Tails_
+		dc.w word_1448B2-PLC_Tails_
+		dc.w word_1448BA-PLC_Tails_
+		dc.w word_1448BE-PLC_Tails_
+		dc.w word_1448C8-PLC_Tails_
+		dc.w word_1448CC-PLC_Tails_
+		dc.w word_1448D4-PLC_Tails_
+		dc.w word_1448DA-PLC_Tails_
+		dc.w word_1448DE-PLC_Tails_
+		dc.w word_1448E2-PLC_Tails_
+		dc.w word_1448EA-PLC_Tails_
+		dc.w word_1448F4-PLC_Tails_
+		dc.w word_1448F8-PLC_Tails_
+		dc.w word_1448FE-PLC_Tails_
+		dc.w word_144904-PLC_Tails_
+		dc.w word_144908-PLC_Tails_
+		dc.w word_14490C-PLC_Tails_
+		dc.w word_144914-PLC_Tails_
+		dc.w word_14491C-PLC_Tails_
+		dc.w word_144922-PLC_Tails_
+		dc.w word_144928-PLC_Tails_
+		dc.w word_14492E-PLC_Tails_
+		dc.w word_144934-PLC_Tails_
+		dc.w word_14493A-PLC_Tails_
+		dc.w word_144940-PLC_Tails_
+		dc.w word_144946-PLC_Tails_
+		dc.w word_14494A-PLC_Tails_
+		dc.w word_144950-PLC_Tails_
+		dc.w word_144954-PLC_Tails_
+		dc.w word_144958-PLC_Tails_
+		dc.w word_14495E-PLC_Tails_
+		dc.w word_144964-PLC_Tails_
+		dc.w word_14496E-PLC_Tails_
+		dc.w word_144978-PLC_Tails_
+		dc.w word_144982-PLC_Tails_
+		dc.w word_14498C-PLC_Tails_
+		dc.w word_144996-PLC_Tails_
+		dc.w word_1449A0-PLC_Tails_
+		dc.w word_1449AA-PLC_Tails_
+		dc.w word_1449B4-PLC_Tails_
+		dc.w word_1449BA-PLC_Tails_
+		dc.w word_1449C4-PLC_Tails_
+		dc.w word_1449CE-PLC_Tails_
+		dc.w word_1449D6-PLC_Tails_
+		dc.w word_1449DE-PLC_Tails_
+		dc.w word_1449E8-PLC_Tails_
+		dc.w word_1449EE-PLC_Tails_
+		dc.w word_1449F4-PLC_Tails_
+		dc.w word_1449FA-PLC_Tails_
+		dc.w word_1449FE-PLC_Tails_
+		dc.w word_144A02-PLC_Tails_
+		dc.w word_144A08-PLC_Tails_
+		dc.w word_144A0E-PLC_Tails_
+		dc.w word_144A14-PLC_Tails_
+		dc.w word_144A1C-PLC_Tails_
+		dc.w word_144A24-PLC_Tails_
+		dc.w word_144A2A-PLC_Tails_
+		dc.w word_144A30-PLC_Tails_
+		dc.w word_144A36-PLC_Tails_
+		dc.w word_144A3A-PLC_Tails_
+		dc.w word_144A42-PLC_Tails_
+		dc.w word_144A4A-PLC_Tails_
+		dc.w word_144A4E-PLC_Tails_
+		dc.w word_144A52-PLC_Tails_
+		dc.w word_144A56-PLC_Tails_
+		dc.w word_144A5A-PLC_Tails_
+		dc.w word_144A62-PLC_Tails_
+		dc.w word_144A6A-PLC_Tails_
+		dc.w word_144A6E-PLC_Tails_
+		dc.w word_144A74-PLC_Tails_
+		dc.w word_144A7C-PLC_Tails_
+		dc.w word_144A84-PLC_Tails_
+		dc.w word_144A8A-PLC_Tails_
+		dc.w word_144A90-PLC_Tails_
+		dc.w word_144A96-PLC_Tails_
+		dc.w word_144A9C-PLC_Tails_
+		dc.w word_144AA2-PLC_Tails_
+		dc.w word_144AA6-PLC_Tails_
+		dc.w word_144AB0-PLC_Tails_
+		dc.w word_144AB6-PLC_Tails_
+		dc.w word_144ABE-PLC_Tails_
+		dc.w word_144AC4-PLC_Tails_
+		dc.w word_144AC8-PLC_Tails_
+		dc.w word_144ACC-PLC_Tails_
+		dc.w word_144AD0-PLC_Tails_
+		dc.w word_144AD4-PLC_Tails_
+		dc.w word_144AD8-PLC_Tails_
+		dc.w word_144ADC-PLC_Tails_
+		dc.w word_144AE0-PLC_Tails_
+		dc.w word_144AE4-PLC_Tails_
+		dc.w word_144AE8-PLC_Tails_
+		dc.w word_144AEC-PLC_Tails_
+		dc.w word_144AF0-PLC_Tails_
+		dc.w word_144AF8-PLC_Tails_
+		dc.w word_144AFE-PLC_Tails_
+		dc.w word_144B02-PLC_Tails_
+		dc.w word_144AF0-PLC_Tails_
+		dc.w word_144B08-PLC_Tails_
+		dc.w word_144B10-PLC_Tails_
+		dc.w word_144B08-PLC_Tails_
+		dc.w word_144B16-PLC_Tails_
+		dc.w word_144B1E-PLC_Tails_
+		dc.w word_144B26-PLC_Tails_
+		dc.w word_144B2C-PLC_Tails_
+		dc.w word_144B36-PLC_Tails_
+		dc.w word_144B3C-PLC_Tails_
+		dc.w word_144B44-PLC_Tails_
+		dc.w word_144B4E-PLC_Tails_
+		dc.w word_144B58-PLC_Tails_
+		dc.w word_144B62-PLC_Tails_
+		dc.w word_144B6C-PLC_Tails_
+		dc.w word_144B76-PLC_Tails_
+		dc.w word_144B80-PLC_Tails_
+		dc.w word_144B8A-PLC_Tails_
+		dc.w word_144B94-PLC_Tails_
+		dc.w word_144B98-PLC_Tails_
+		dc.w word_144B9C-PLC_Tails_
+		dc.w word_144BA4-PLC_Tails_
+		dc.w word_144BAC-PLC_Tails_
+		dc.w word_144BB2-PLC_Tails_
 word_1445F8:	dc.w 0
 word_1445FA:	dc.w 4
 		dc.w $5062
@@ -263,7 +265,7 @@ word_144658:	dc.w 4
 word_144662:	dc.w 3
 		dc.w $10B4
 		dc.w $F0B6
-		dc.w $C6
+		dc.w $00C6
 word_14466A:	dc.w 3
 		dc.w $20C7
 		dc.w $70CA
@@ -277,7 +279,7 @@ word_14467A:	dc.w 3
 		dc.w $20EC
 		dc.w $B0EF
 word_144682:	dc.w 4
-		dc.w $FB
+		dc.w $00FB
 		dc.w $50FC
 		dc.w $3102
 		dc.w $3106
@@ -288,7 +290,7 @@ word_14468C:	dc.w 3
 word_144694:	dc.w 3
 		dc.w $5173
 		dc.w $B118
-		dc.w $124
+		dc.w $0124
 word_14469C:	dc.w 3
 		dc.w $5179
 		dc.w $2125
@@ -325,7 +327,7 @@ word_1446D8:	dc.w 4
 		dc.w $51B2
 		dc.w $51B8
 word_1446E2:	dc.w 3
-		dc.w $1BE
+		dc.w $01BE
 		dc.w $F1BF
 		dc.w $11CF
 word_1446EA:	dc.w 3
@@ -333,7 +335,7 @@ word_1446EA:	dc.w 3
 		dc.w $B1D3
 		dc.w $21DF
 word_1446F2:	dc.w 4
-		dc.w $1E2
+		dc.w $01E2
 		dc.w $11E3
 		dc.w $B1E5
 		dc.w $11F1
@@ -342,10 +344,10 @@ word_1446FC:	dc.w 3
 		dc.w $B1F6
 		dc.w $1202
 word_144704:	dc.w 4
-		dc.w $204
+		dc.w $0204
 		dc.w $B205
-		dc.w $211
-		dc.w $212
+		dc.w $0211
+		dc.w $0212
 word_14470E:	dc.w 4
 		dc.w $722B
 		dc.w $5213
@@ -437,7 +439,7 @@ word_1447BC:	dc.w 1
 		dc.w $830F
 word_1447C0:	dc.w 2
 		dc.w $8318
-		dc.w $321
+		dc.w $0321
 word_1447C6:	dc.w 2
 		dc.w $1322
 		dc.w $8324
@@ -455,7 +457,7 @@ word_1447DE:	dc.w 2
 		dc.w $1354
 word_1447E4:	dc.w 2
 		dc.w $8356
-		dc.w $35F
+		dc.w $035F
 word_1447EA:	dc.w 2
 		dc.w $5360
 		dc.w $3366
@@ -463,7 +465,7 @@ word_1447F0:	dc.w 2
 		dc.w $83D8
 		dc.w $13E1
 word_1447F6:	dc.w 2
-		dc.w $3CE
+		dc.w $03CE
 		dc.w $83CF
 word_1447FC:	dc.w 1
 		dc.w $83C5
@@ -480,11 +482,11 @@ word_144810:	dc.w 3
 		dc.w $139B
 		dc.w $539D
 word_144818:	dc.w 2
-		dc.w $38E
+		dc.w $038E
 		dc.w $838F
 word_14481E:	dc.w 2
 		dc.w $5387
-		dc.w $38D
+		dc.w $038D
 word_144824:	dc.w 2
 		dc.w $137F
 		dc.w $5381
@@ -498,7 +500,7 @@ word_144832:	dc.w 2
 word_144838:	dc.w 3
 		dc.w $23E3
 		dc.w $73E6
-		dc.w $3EE
+		dc.w $03EE
 word_144840:	dc.w 2
 		dc.w $23EF
 		dc.w $73F2
@@ -514,7 +516,7 @@ word_144854:	dc.w 3
 		dc.w $5410
 		dc.w $1416
 word_14485C:	dc.w 4
-		dc.w $418
+		dc.w $0418
 		dc.w $1419
 		dc.w $341B
 		dc.w $541F
@@ -527,7 +529,7 @@ word_144870:	dc.w 4
 		dc.w $1433
 		dc.w $3435
 		dc.w $5439
-		dc.w $43F
+		dc.w $043F
 word_14487A:	dc.w 3
 		dc.w $1440
 		dc.w $5442
@@ -571,8 +573,8 @@ word_1448C8:	dc.w 1
 		dc.w $B4CA
 word_1448CC:	dc.w 3
 		dc.w $B4D6
-		dc.w $4E2
-		dc.w $4E3
+		dc.w $04E2
+		dc.w $04E3
 word_1448D4:	dc.w 2
 		dc.w $B4E4
 		dc.w $54F0
@@ -604,7 +606,7 @@ word_144908:	dc.w 1
 word_14490C:	dc.w 3
 		dc.w $2571
 		dc.w $B574
-		dc.w $580
+		dc.w $0580
 word_144914:	dc.w 3
 		dc.w $1581
 		dc.w $7583
@@ -656,7 +658,7 @@ word_14496E:	dc.w 4
 		dc.w $1635
 		dc.w $5637
 word_144978:	dc.w 4
-		dc.w $63D
+		dc.w $063D
 		dc.w $563E
 		dc.w $5644
 		dc.w $364A
@@ -676,7 +678,7 @@ word_144996:	dc.w 4
 		dc.w $1635
 		dc.w $5637
 word_1449A0:	dc.w 4
-		dc.w $63D
+		dc.w $063D
 		dc.w $563E
 		dc.w $565E
 		dc.w $364A
@@ -700,7 +702,7 @@ word_1449C4:	dc.w 4
 		dc.w $3699
 word_1449CE:	dc.w 3
 		dc.w $F69D
-		dc.w $6AD
+		dc.w $06AD
 		dc.w $26AE
 word_1449D6:	dc.w 3
 		dc.w $56B1
@@ -807,10 +809,10 @@ word_144A9C:	dc.w 2
 word_144AA2:	dc.w 1
 		dc.w $B8F8
 word_144AA6:	dc.w 4
-		dc.w $904
+		dc.w $0904
 		dc.w $7905
 		dc.w $790D
-		dc.w $915
+		dc.w $0915
 word_144AB0:	dc.w 2
 		dc.w $7AD0
 		dc.w $8AD8
@@ -844,7 +846,7 @@ word_144AE8:	dc.w 1
 word_144AEC:	dc.w 1
 		dc.w $B99B
 word_144AF0:	dc.w 3
-		dc.w $9A7
+		dc.w $09A7
 		dc.w $79A8
 		dc.w $39B0
 word_144AF8:	dc.w 2
@@ -872,12 +874,12 @@ word_144B1E:	dc.w 3
 		dc.w $2A02
 word_144B26:	dc.w 2
 		dc.w $FA05
-		dc.w $A15
+		dc.w $0A15
 word_144B2C:	dc.w 4
 		dc.w $7A16
-		dc.w $A1E
+		dc.w $0A1E
 		dc.w $7A1F
-		dc.w $A27
+		dc.w $0A27
 word_144B36:	dc.w 2
 		dc.w $FA28
 		dc.w $1A38
@@ -932,11 +934,11 @@ word_144B98:	dc.w 1
 word_144B9C:	dc.w 3
 		dc.w $1AF2
 		dc.w $BAF4
-		dc.w $A48
+		dc.w $0A48
 word_144BA4:	dc.w 3
 		dc.w $1B00
 		dc.w $BB02
-		dc.w $A48
+		dc.w $0A48
 word_144BAC:	dc.w 2
 		dc.w $1B0E
 		dc.w $BB10

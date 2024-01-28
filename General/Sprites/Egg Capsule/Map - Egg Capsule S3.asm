@@ -1,15 +1,16 @@
-		dc.w word_163F3A-Map_EggCapsule
-		dc.w word_163F78-Map_EggCapsule
-		dc.w word_163FAA-Map_EggCapsule
-		dc.w word_163FB8-Map_EggCapsule
-		dc.w word_163FC0-Map_EggCapsule
-		dc.w word_163FC8-Map_EggCapsule
-		dc.w word_163FD6-Map_EggCapsule
-		dc.w word_163FE4-Map_EggCapsule
-		dc.w word_163FEC-Map_EggCapsule
-		dc.w word_163FF4-Map_EggCapsule
-		dc.w word_163FFC-Map_EggCapsule
-		dc.w word_164004-Map_EggCapsule
+Map_EggCapsule_:
+		dc.w word_163F3A-Map_EggCapsule_
+		dc.w word_163F78-Map_EggCapsule_
+		dc.w word_163FAA-Map_EggCapsule_
+		dc.w word_163FB8-Map_EggCapsule_
+		dc.w word_163FC0-Map_EggCapsule_
+		dc.w word_163FC8-Map_EggCapsule_
+		dc.w word_163FD6-Map_EggCapsule_
+		dc.w word_163FE4-Map_EggCapsule_
+		dc.w word_163FEC-Map_EggCapsule_
+		dc.w word_163FF4-Map_EggCapsule_
+		dc.w word_163FFC-Map_EggCapsule_
+		dc.w word_164004-Map_EggCapsule_
 word_163F3A:	dc.w $A
 		dc.b  $E0,  $D,   0,  $C, $FF, $E0
 		dc.b  $E0,  $D,   8,  $C,   0,   0

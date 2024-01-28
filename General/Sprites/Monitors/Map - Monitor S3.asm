@@ -1,15 +1,16 @@
-		dc.w word_1B970-Map_Monitor
-		dc.w word_1B978-Map_Monitor
-		dc.w word_1B986-Map_Monitor
-		dc.w word_1B994-Map_Monitor
-		dc.w word_1B9A2-Map_Monitor
-		dc.w word_1B9B0-Map_Monitor
-		dc.w word_1B9BE-Map_Monitor
-		dc.w word_1B9CC-Map_Monitor
-		dc.w word_1B9DA-Map_Monitor
-		dc.w word_1B9E8-Map_Monitor
-		dc.w word_1B9F6-Map_Monitor
-		dc.w word_1BA04-Map_Monitor
+Map_Monitor_:
+		dc.w word_1B970-Map_Monitor_
+		dc.w word_1B978-Map_Monitor_
+		dc.w word_1B986-Map_Monitor_
+		dc.w word_1B994-Map_Monitor_
+		dc.w word_1B9A2-Map_Monitor_
+		dc.w word_1B9B0-Map_Monitor_
+		dc.w word_1B9BE-Map_Monitor_
+		dc.w word_1B9CC-Map_Monitor_
+		dc.w word_1B9DA-Map_Monitor_
+		dc.w word_1B9E8-Map_Monitor_
+		dc.w word_1B9F6-Map_Monitor_
+		dc.w word_1BA04-Map_Monitor_
 word_1B970:	dc.w 1
 		dc.b  $F0,  $F,   0,   0, $FF, $F0
 word_1B978:	dc.w 2

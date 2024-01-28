@@ -1,11 +1,12 @@
-		dc.w word_3F728-Map_ContinueSprites
-		dc.w word_3F73C-Map_ContinueSprites
-		dc.w word_3F750-Map_ContinueSprites
-		dc.w word_3F76A-Map_ContinueSprites
-		dc.w word_3F784-Map_ContinueSprites
-		dc.w word_3F79E-Map_ContinueSprites
-		dc.w word_3F7AC-Map_ContinueSprites
-		dc.w word_3F7C0-Map_ContinueSprites
+Map_ContinueSprites_:
+		dc.w word_3F728-Map_ContinueSprites_
+		dc.w word_3F73C-Map_ContinueSprites_
+		dc.w word_3F750-Map_ContinueSprites_
+		dc.w word_3F76A-Map_ContinueSprites_
+		dc.w word_3F784-Map_ContinueSprites_
+		dc.w word_3F79E-Map_ContinueSprites_
+		dc.w word_3F7AC-Map_ContinueSprites_
+		dc.w word_3F7C0-Map_ContinueSprites_
 word_3F728:	dc.w 3
 		dc.b  $EC,  $A,   0,   0, $FF, $F4
 		dc.b    4,   5,   0,   9, $FF, $F4

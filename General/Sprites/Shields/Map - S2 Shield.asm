@@ -1,9 +1,10 @@
-		dc.w word_177CE-Map_S2Shield
-		dc.w word_177E8-Map_S2Shield
-		dc.w word_17802-Map_S2Shield
-		dc.w word_1781C-Map_S2Shield
-		dc.w word_17836-Map_S2Shield
-		dc.w word_17850-Map_S2Shield
+Map_S2Shield_:
+		dc.w word_177CE-Map_S2Shield_
+		dc.w word_177E8-Map_S2Shield_
+		dc.w word_17802-Map_S2Shield_
+		dc.w word_1781C-Map_S2Shield_
+		dc.w word_17836-Map_S2Shield_
+		dc.w word_17850-Map_S2Shield_
 word_177CE:	dc.w 4
 		dc.b  $F0,   5,   0,   0, $FF, $F0
 		dc.b  $F0,   5,   8,   0,   0,   0
