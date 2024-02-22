@@ -307,6 +307,7 @@ bankswitchToMusic macro
     endm
 
 bankswitchToMusicS3 macro
+		; Hardcoded to only support 4-bit bank values.
 		ld	(hl), a
 		rept 3
 			rra
@@ -2793,7 +2794,7 @@ zFMFrequencies:
 ; ===========================================================================
 
 	if SonicDriverVer==3
-zmakeSongBank function addr,zmake68kBank(addr)&0Fh
+zmakeSongBank function addr,zmake68kBank(addr)&0Fh ; See bankswitchToMusicS3
 	else
 zmakeSongBank function addr,zmake68kBank(addr)
 	endif
