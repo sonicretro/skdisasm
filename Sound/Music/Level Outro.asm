@@ -75,7 +75,11 @@ Snd_Results_Jump01:
 ; FM5 Data
 Snd_Results_FM5:
 	smpsAlterNote       $FD
+    if ~~FixMusicAndSFXDataBugs
+	; This command is for PSG, not FM!
+	; S3K's driver just ignores this, but other drivers may break.
 	smpsPSGvoice        sTone_03
+    endif
 	dc.b	nRst, $01
 	smpsSetvoice        $01
 	smpsJump            Snd_Results_Jump00

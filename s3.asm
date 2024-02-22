@@ -18,6 +18,7 @@
 		include "s3.constants.asm"		; RAM addresses moved around between S3 and S&K
 ; ---------------------------------------------------------------------------
 ; Include SMPS2ASM, for expressing SMPS bytecode in a portable and human-readable form.
+FixMusicAndSFXDataBugs = 0
 SonicDriverVer = 3 ; Tell SMPS2ASM that we are targetting Sonic 3's sound driver
 		include "Sound/_smps2asm_inc.asm"
 

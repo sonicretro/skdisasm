@@ -5,6 +5,9 @@ Snd_S3_Miniboss_Header:
 	smpsHeaderTempo     $01, $44
 
 	smpsHeaderDAC       Snd_S3_Miniboss_DAC
+    if FixMusicAndSFXDataBugs
+	smpsHeaderFM        Snd_S3_Miniboss_FM1,	$02, $03
+    else
 	; The transposition of $C2 is too low, causing the octave calculation to underflow.
 	; In drivers that don't calculate the octave (such as Sonic 1's and Sonic 2's
 	; drivers, which are derived from SMPS 68k Type 1b), this invalid transpose causes
@@ -19,6 +22,7 @@ Snd_S3_Miniboss_Header:
 	; with are in the low octaves, so the sum will never exceed $60. Because of this,
 	; $02 is the correct displacement.
 	smpsHeaderFM        Snd_S3_Miniboss_FM1,	$C2, $03
+    endif
 	smpsHeaderFM        Snd_S3_Miniboss_FM2,	$0C, $0B
 	smpsHeaderFM        Snd_S3_Miniboss_FM3,	$0C, $10
 	smpsHeaderFM        Snd_S3_Miniboss_FM4,	$00, $14
