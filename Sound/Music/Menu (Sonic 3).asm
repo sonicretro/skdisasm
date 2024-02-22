@@ -428,7 +428,14 @@ Snd_Menu_Jump00:
 	dc.b	nG2, nRst, nD3, nRst, nEb2, nRst, nA2, nRst, nG2, nRst, nD3, nEb2
 	dc.b	nRst, nBb2, nRst, $0C, nC3, $06, nRst, $0C, nD3, $06, nRst, $0C
 	smpsSetvoice        $10
+    if FixMusicAndSFXDataBugs
+	smpsFMAlterVol      $06
+    else
+	; This is too high; the following smpsFMAlterVol only does -6.
+	; This causes that one well-known bug where the song break after about 40 minutes.
+	; This is fixed in Sonic & Knuckles.
 	smpsFMAlterVol      $08
+    endif
 	dc.b	nG4, $06, nG5, nG4, nRst, $18
 	smpsFMAlterVol      $FA
 	smpsSetvoice        $0B
