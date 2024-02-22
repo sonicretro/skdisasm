@@ -364,10 +364,8 @@ zmake68kBank function addr,(((addr&3F8000h)/zROMWindow))
 		im	1								; set interrupt mode 1
 		jp	zInitAudioDriver
 ; ---------------------------------------------------------------------------
-	if SonicDriverVer<>3
-	if fix_sndbugs=0
+	if (SonicDriverVer<>3)&&(fix_sndbugs=0)
 		db 0F2h								; Filler; broken jp p,loc?
-	endif
 	endif
 
 ; =============== S U B	R O U T	I N E =======================================
@@ -494,7 +492,8 @@ zVInt:	rsttarget
 		ld	(zPalDblUpdCounter), a			; Store it
 
 .not_pal:
-	if SonicDriverVer==3
+	if (SonicDriverVer==3)&&(fix_sndbugs=0)
+		; Unused variable
 		xor	a
 		ld	(unk_1C21), a
 	endif
@@ -526,7 +525,8 @@ zInitAudioDriver:
 		jr	z, .loop						; Loop if c = 0
 
 		call	zStopAllSound					; Stop all music
-	if SonicDriverVer==3
+	if (SonicDriverVer==3)&&(fix_sndbugs=0)
+		; Nonsensical junk values.
 		ld	a, 80h
 		ld	a, 6
 	else
@@ -4373,7 +4373,8 @@ zPlaySEGAPCM:
 	endif
 		jp	zPlayDigitalAudio				; Go back to normal DAC code
 ; ---------------------------------------------------------------------------
-	if SonicDriverVer<>3
+	if (SonicDriverVer<>3)&&(fix_sndbugs=0)
+		; Junk
 		db 0
 	endif
 
