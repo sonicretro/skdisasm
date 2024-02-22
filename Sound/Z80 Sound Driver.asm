@@ -146,7 +146,9 @@ zFadeToPrevFlag:	ds.b 1
 unk_1C17:			ds.b 1	; Set once, never read
 unk_1C18:			ds.b 1	; Set twice, never read
 zUpdatingSFX:		ds.b 1
-					ds.b $A	; unused
+					ds.b 7	; unused
+unk_1C21:			ds.b 1	; Set once, never read
+					ds.b 2	; unused
 zCurrentTempo:		ds.b 1
 zContinuousSFX:		ds.b 1
 zContinuousSFXFlag:	ds.b 1
@@ -304,6 +306,38 @@ bankswitchToMusic macro
 	endif
     endm
 
+bankswitchToMusicS3 macro
+		ld	(hl), a
+		rept 3
+			rra
+			ld	(hl), a
+		endm
+		xor	a
+		ld	d, 1
+		ld	(hl), d
+		ld	(hl), a
+		ld	(hl), a
+		ld	(hl), a
+		ld	(hl), a
+    endm
+
+bankswitchToSFX macro
+	if SonicDriverVer==3
+		ld	hl,zBankRegister
+		xor	a	; a = 0
+		ld	e,1	; e = 1
+.cnt	:= 0
+		rept 9
+			; this is either ld (hl),a or ld (hl),e
+			db (73h|((((SndBank)&(1<<(15+.cnt)))==0)<<2))
+.cnt		:= (.cnt+1)
+		endm
+	else
+		ld	a, zmake68kBank(SndBank)	; Get SFX bank ID
+		bankswitch2				; Bank switch to SFX
+	endif
+    endm
+
 ; macro to make a certain error message clearer should you happen to get it...
 rsttarget macro {INTLABEL}
 	if ($&7)||($>38h)
@@ -330,8 +364,10 @@ zmake68kBank function addr,(((addr&3F8000h)/zROMWindow))
 		im	1								; set interrupt mode 1
 		jp	zInitAudioDriver
 ; ---------------------------------------------------------------------------
+	if SonicDriverVer<>3
 	if fix_sndbugs=0
 		db 0F2h								; Filler; broken jp p,loc?
+	endif
 	endif
 
 ; =============== S U B	R O U T	I N E =======================================
@@ -444,7 +480,12 @@ zVInt:	rsttarget
 		ld	a, (zPalDblUpdCounter)			; Get PAL double-update timeout counter
 		or	a								; Is it zero?
 		jr	nz, .pal_timer					; Branch if not
+	if (SonicDriverVer==3)&&(fix_sndbugs=0)
+		; This is wrong, making music too slow on PAL consoles.
+		ld	a, 6							; Set it back to 6...
+	else
 		ld	a, 5							; Set it back to 5...
+	endif
 		ld	(zPalDblUpdCounter), a			; ... and save it
 		jp	.doupdate						; Go again
 
@@ -453,6 +494,11 @@ zVInt:	rsttarget
 		ld	(zPalDblUpdCounter), a			; Store it
 
 .not_pal:
+	if SonicDriverVer==3
+		xor	a
+		ld	(unk_1C21), a
+	endif
+
 		ld	a, (zDACIndex)					; Get index of playing DAC sample
 		and	7Fh								; Strip 'DAC playing' bit
 		ld	c, a							; c = a
@@ -480,7 +526,12 @@ zInitAudioDriver:
 		jr	z, .loop						; Loop if c = 0
 
 		call	zStopAllSound					; Stop all music
+	if SonicDriverVer==3
+		ld	a, 80h
+		ld	a, 6
+	else
 		ld	a, zmake68kBank(Snd_Bank2_Start)		; Set song bank to second music bank (default value)
+	endif
 		ld	(zSongBank), a					; Store it
 		xor	a								; a = 0
 		ld	(zSpindashRev), a				; Reset spindash rev
@@ -635,8 +686,14 @@ zUpdateMusic:
 		call	zCycleSoundQueue			; Cycle queue and play third entry
 
 .update_music:
+	if SonicDriverVer==3
+		ld	hl, zBankRegister
+		ld	a, (zSongBank)					; Get bank ID for music
+		bankswitchToMusicS3
+	else
 		ld	a, (zSongBank)					; Get bank ID for music
 		bankswitch2							; Bank switch to it
+	endif
 		xor	a								; a = 0
 		ld	(zUpdatingSFX), a				; Updating music
 		ld	a, (zFadeToPrevFlag)			; Get fade-to-previous flag
@@ -655,8 +712,7 @@ zUpdateMusic:
 zUpdateSFXTracks:
 		ld	a, 1							; a = 1
 		ld	(zUpdatingSFX), a				; Updating SFX
-		ld	a, zmake68kBank(SndBank)		; Get SFX bank ID
-		bankswitch2							; Bank switch to SFX
+		bankswitchToSFX
 		ld	ix, zTracksSFXStart				; ix = start of SFX track RAM
 		ld	b, (zTracksSFXEnd-zTracksSFXStart)/zTrack.len	; Number of channels
 
@@ -1565,8 +1621,10 @@ zCycleSoundQueue:
 ; TypeCheck:
 ;sub_4FB
 zPlaySoundByIndex:
+	if SonicDriverVer<>3
 		cp	mus_CreditsK					; Is this the credits music?
 		jp	z, zPlayMusicCredits			; Branch if yes
+	endif
 		cp	mus_SEGA						; Is this the SEGA sound?
 		jp	z, zPlaySegaSound				; Branch if yes
 		cp	mus__End						; Is this a music?
@@ -1628,12 +1686,13 @@ zSilenceStopTrack:
 		jp	cfSilenceStopTrack				; Silence FM channel and stop track
 ; End of function zSilenceStopTrack
 ; ---------------------------------------------------------------------------
-
+	if SonicDriverVer<>3
 ;loc_552
 zPlayMusicCredits:
 		ld	a, 32h							; Credits music is the last entry on the music table
 		push	af							; Save af
 		jp	zPlayMusic_DoFade				; Continue as music
+	endif
 ; ---------------------------------------------------------------------------
 
 ;loc_558
@@ -1728,7 +1787,12 @@ loc_5EB:
 		ld	a, (z80_MusicBanks)				; self-modified code; a is set to correct bank for the song to play
 	endif
 		ld	(zSongBank), a					; Save the song's bank...
+	if SonicDriverVer==3
+		ld	hl, zBankRegister
+		bankswitchToMusicS3
+	else
 		bankswitch2							; ... then bank switch to it
+	endif
 		ld	a, 0B6h							; Set Panning / AMS / FMS
 		ld	(zYM2612_A1), a					; Write destination address to YM2612 address register
 		nop
@@ -1845,8 +1909,7 @@ zPlaySound_CheckRing:
 ;loc_6B7
 zPlaySound_Bankswitch:
 		ex	af, af'							; Save af
-		ld	a, zmake68kBank(SndBank)		; Load SFX sound bank address
-		bankswitch2							; Bank switch to it
+		bankswitchToSFX
 		xor	a								; a = 0
 		ld	c, zID_SFXPointers				; SFX table index
 		ld	(zUpdatingSFX), a				; Clear flag to update SFX
@@ -2273,7 +2336,12 @@ zDoMusicFadeOut:
 	endif
 		jp	z, zStopAllSound					; Stop all music if it is zero
 		ld	a, (zSongBank)					; a = current music bank ID
+	if SonicDriverVer==3
+		ld	hl, zBankRegister
+		bankswitchToMusicS3
+	else
 		bankswitch2							; Bank switch to music bank
+	endif
 		ld	ix, zTracksStart				; ix = pointer to track RAM
 		ld	b, (zSongPSG1-zTracksStart)/zTrack.len	; Number of FM+DAC tracks
 
@@ -2309,7 +2377,12 @@ zDoMusicFadeIn:
 		or	a								; Is music being faded?
 		ret	z								; Return if not
 		ld	a, (zSongBank)					; Get current music bank
+	if SonicDriverVer==3
+		ld	hl, zBankRegister
+		bankswitchToMusicS3
+	else
 		bankswitch2							; Bank switch to music
+	endif
 	if fix_sndbugs
 		ld	hl, zFadeDelay					; Get fade delay
 		dec	(hl)							; Decrement it
@@ -2540,6 +2613,8 @@ zFillSoundQueue:
 		ldi									; *de++ = *hl++
 		ldi									; *de++ = *hl++
 		ldi									; *de++ = *hl++
+
+zClearSoundQueue:
 		xor	a								; a = 0
 		dec	hl								; Point to zSFXNumber1
 		ld	(hl), a							; Clear it
@@ -2638,9 +2713,16 @@ zFadeInToPrevious:
 		ld	(zTempoSpeedup), a				; Restore it
 		ld	hl, (zVoiceTblPtrSave)			; Get saved voice pointer
 		ld	(zVoiceTblPtr), hl				; Restore it
+	if SonicDriverVer==3
+		ld	hl, zBankRegister
+		ld	a, (zSongBankSave)				; Get saved song bank ID
+		ld	(zSongBank), a					; Restore it
+		bankswitchToMusicS3
+	else
 		ld	a, (zSongBankSave)				; Get saved song bank ID
 		ld	(zSongBank), a					; Restore it
 		bankswitch2							; Bank switch to previous song's bank
+	endif
 		ld	hl, zTracksSaveStart			; Start of saved track data
 		ld	de, zTracksStart				; Start of track data
 		ld	bc, zTracksSaveEnd-zTracksSaveStart	; Number of bytes to copy
@@ -2709,24 +2791,37 @@ zFMFrequencies:
 ; ===========================================================================
 ; MUSIC BANKS
 ; ===========================================================================
+
+	if SonicDriverVer==3
+zmakeSongBank function addr,zmake68kBank(addr)&0Fh
+	else
+zmakeSongBank function addr,zmake68kBank(addr)
+	endif
+
 z80_MusicBanks:
-		db  zmake68kBank(Snd_AIZ1),zmake68kBank(Snd_AIZ2),zmake68kBank(Snd_HCZ1),zmake68kBank(Snd_HCZ2)
-		db  zmake68kBank(Snd_MGZ1),zmake68kBank(Snd_MGZ2),zmake68kBank(Snd_CNZ1),zmake68kBank(Snd_CNZ2)
-		db  zmake68kBank(Snd_FBZ1),zmake68kBank(Snd_FBZ2),zmake68kBank(Snd_ICZ1),zmake68kBank(Snd_ICZ2)
-		db  zmake68kBank(Snd_LBZ1),zmake68kBank(Snd_LBZ2),zmake68kBank(Snd_MHZ1),zmake68kBank(Snd_MHZ2)
+		db  zmakeSongBank(Snd_AIZ1),zmakeSongBank(Snd_AIZ2),zmakeSongBank(Snd_HCZ1),zmakeSongBank(Snd_HCZ2)
+		db  zmakeSongBank(Snd_MGZ1),zmakeSongBank(Snd_MGZ2),zmakeSongBank(Snd_CNZ1),zmakeSongBank(Snd_CNZ2)
+		db  zmakeSongBank(Snd_FBZ1),zmakeSongBank(Snd_FBZ2),zmakeSongBank(Snd_ICZ1),zmakeSongBank(Snd_ICZ2)
+		db  zmakeSongBank(Snd_LBZ1),zmakeSongBank(Snd_LBZ2),zmakeSongBank(Snd_MHZ1),zmakeSongBank(Snd_MHZ2)
 
-		db  zmake68kBank(Snd_SOZ1),zmake68kBank(Snd_SOZ2),zmake68kBank(Snd_LRZ1),zmake68kBank(Snd_LRZ2)
-		db  zmake68kBank(Snd_SSZ),zmake68kBank(Snd_DEZ1),zmake68kBank(Snd_DEZ2),zmake68kBank(Snd_Minib_SK)
-		db  zmake68kBank(Snd_Boss),zmake68kBank(Snd_DDZ),zmake68kBank(Snd_PachBonus),zmake68kBank(Snd_SpecialS)
-		db  zmake68kBank(Snd_SlotBonus),zmake68kBank(Snd_GumBonus),zmake68kBank(Snd_Knux),zmake68kBank(Snd_ALZ)
+		db  zmakeSongBank(Snd_SOZ1),zmakeSongBank(Snd_SOZ2),zmakeSongBank(Snd_LRZ1),zmakeSongBank(Snd_LRZ2)
+		db  zmakeSongBank(Snd_SSZ),zmakeSongBank(Snd_DEZ1),zmakeSongBank(Snd_DEZ2),zmakeSongBank(Snd_Minib_SK)
+		db  zmakeSongBank(Snd_Boss),zmakeSongBank(Snd_DDZ),zmakeSongBank(Snd_PachBonus),zmakeSongBank(Snd_SpecialS)
+		db  zmakeSongBank(Snd_SlotBonus),zmakeSongBank(Snd_GumBonus),zmakeSongBank(Snd_Knux),zmakeSongBank(Snd_ALZ)
 
-		db  zmake68kBank(Snd_BPZ),zmake68kBank(Snd_DPZ),zmake68kBank(Snd_CGZ),zmake68kBank(Snd_EMZ)
-		db  zmake68kBank(Snd_Title),zmake68kBank(Snd_S3Credits),zmake68kBank(Snd_GameOver),zmake68kBank(Snd_Continue)
-		db  zmake68kBank(Snd_Results),zmake68kBank(Snd_1UP),zmake68kBank(Snd_Emerald),zmake68kBank(Snd_Invic)
-		db  zmake68kBank(Snd_2PMenu),zmake68kBank(Snd_Minib_SK),zmake68kBank(Snd_Menu),zmake68kBank(Snd_FinalBoss)
-
-		db  zmake68kBank(Snd_Drown),zmake68kBank(Snd_PresSega),zmake68kBank(Snd_SKCredits)
-
+		db  zmakeSongBank(Snd_BPZ),zmakeSongBank(Snd_DPZ),zmakeSongBank(Snd_CGZ),zmakeSongBank(Snd_EMZ)
+		db  zmakeSongBank(Snd_Title),zmakeSongBank(Snd_S3Credits),zmakeSongBank(Snd_GameOver),zmakeSongBank(Snd_Continue)
+		db  zmakeSongBank(Snd_Results),zmakeSongBank(Snd_1UP),zmakeSongBank(Snd_Emerald),zmakeSongBank(Snd_Invic)
+		db  zmakeSongBank(Snd_2PMenu)
+	if SonicDriverVer==3
+		db  zmakeSongBank(Snd_Minib)
+	else
+		db  zmakeSongBank(Snd_Minib_SK)
+	endif
+		db  zmakeSongBank(Snd_Menu),zmakeSongBank(Snd_FinalBoss),zmakeSongBank(Snd_Drown),zmakeSongBank(Snd_PresSega)
+	if SonicDriverVer<>3
+		db  zmakeSongBank(Snd_SKCredits)
+	endif
 
 ; =============== S U B	R O U T	I N E =======================================
 ;
@@ -3313,7 +3408,11 @@ cfStopTrack:
 		call	zGetSFXChannelPointers		; ix = track pointer, hl = overridden track pointer
 		ld	a, (zUpdatingSFX)				; Get flag
 		or	a								; Are we updating SFX?
+	if SonicDriverVer==3
+		jr	z, zStopCleanExit				; Exit if not
+	else
 		jp	z, zStopCleanExit				; Exit if not
+	endif
 	if fix_sndbugs=0
 		xor	a								; a = 0
 		ld	(unk_1C18), a					; Set otherwise unused value to zero
@@ -3347,12 +3446,17 @@ cfStopTrack:
 .switch_to_music:
 		ld	b, a							; b = FM instrument
 		push	hl							; Save hl
+	if SonicDriverVer==3
+		ld	hl, zBankRegister
+		ld	a, (zSongBank)
+		bankswitchToMusicS3					; Bank switch to song bank
+	else
 		bankswitchToMusic					; Bank switch to song bank
+	endif
 		pop	hl								; Restore hl
 		call	zGetFMInstrumentOffset		; hl = pointer to instrument data
 		call	zSendFMInstrument			; Send FM instrument
-		ld	a, zmake68kBank(SndBank)		; Get SFX bank
-		bankswitch2							; Bank switch to it
+		bankswitchToSFX
 		ld	a, (ix+zTrack.HaveSSGEGFlag)	; Get custom SSG-EG flag
 		or	a								; Does track have custom SSG-EG data?
 		jp	p, zStopCleanExit				; Exit if not
@@ -4222,8 +4326,12 @@ DecTable:
 ;loc_1126
 zPlaySEGAPCM:
 		di									; Disable interrupts
+	if SonicDriverVer==3
+		call	zFillSoundQueue
+	else
 		xor	a								; a = 0
 		ld	(PlaySegaPCMFlag), a			; Clear flag
+	endif
 		ld	a, 2Bh							; DAC enable/disable register
 		ld	(zYM2612_A0), a					; Select the register
 		nop									; Delay
@@ -4256,9 +4364,18 @@ zPlaySEGAPCM:
 		jr	nz, .loop						; Loop if not
 
 .done:
+	if SonicDriverVer==3
+		xor	a								; a = 0
+		ld	(PlaySegaPCMFlag), a			; Clear flag
+
+		ld	hl, zSFXNumber1+1
+		call	zClearSoundQueue
+	endif
 		jp	zPlayDigitalAudio				; Go back to normal DAC code
 ; ---------------------------------------------------------------------------
+	if SonicDriverVer<>3
 		db 0
+	endif
 
 	if $ > 1300h
 		fatal "Your Z80 code won't fit before its tables. It's \{$-1300h}h bytes past the start of music data \{1300h}h"
@@ -4397,7 +4514,12 @@ VolEnv_25:	db    0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   1,   1,   1, 
 			db    4,   4,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   6,   6,   6,   6
 			db    6,   6,   6,   6,   6,   6,   7,   7,   7,   7,   7,   7,   7,   7,   7,   7
 			db    8,   8,   8,   8,   8,   8,   8,   8,   8,   8,   9,   9,   9,   9,   9,   9
+	if SonicDriverVer==3
+			; This PSG envelope differs slightly between games.
+			db    9,   9,   9,   9, 83h
+	else
 			db    9,   9, 83h
+	endif
 VolEnv_26:	db    0,   2,   2,   2,   3,   3,   3,   4,   4,   4,   5,   5, 83h
 
 ; ---------------------------------------------------------------------------
@@ -4419,9 +4541,16 @@ z80_MusicPointers:
 		dw	zmake68kPtr(Snd_BPZ),zmake68kPtr(Snd_DPZ),zmake68kPtr(Snd_CGZ),zmake68kPtr(Snd_EMZ)
 		dw	zmake68kPtr(Snd_Title),zmake68kPtr(Snd_S3Credits),zmake68kPtr(Snd_GameOver),zmake68kPtr(Snd_Continue)
 		dw	zmake68kPtr(Snd_Results),zmake68kPtr(Snd_1UP),zmake68kPtr(Snd_Emerald),zmake68kPtr(Snd_Invic)
-		dw	zmake68kPtr(Snd_2PMenu),zmake68kPtr(Snd_Minib_SK),zmake68kPtr(Snd_Menu),zmake68kPtr(Snd_FinalBoss)
-
-		dw	zmake68kPtr(Snd_Drown),zmake68kPtr(Snd_PresSega),zmake68kPtr(Snd_SKCredits)
+		dw	zmake68kPtr(Snd_2PMenu)
+	if SonicDriverVer==3
+		dw	zmake68kPtr(Snd_Minib)
+	else
+		dw	zmake68kPtr(Snd_Minib_SK)
+	endif
+		dw	zmake68kPtr(Snd_Menu),zmake68kPtr(Snd_FinalBoss),zmake68kPtr(Snd_Drown),zmake68kPtr(Snd_PresSega)
+	if SonicDriverVer<>3
+		dw	zmake68kPtr(Snd_SKCredits)
+	endif
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; SFX Pointers

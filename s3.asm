@@ -22,9 +22,8 @@ FixMusicAndSFXDataBugs = 0
 SonicDriverVer = 3 ; Tell SMPS2ASM that we are targetting Sonic 3's sound driver
 		include "Sound/_smps2asm_inc.asm"
 
-; TODO: Remove these when they're no longer needed.
-z80_UniVoiceBank = $17D8
-
+Size_of_Snd_driver_guess = $1300
+Size_of_Snd_driver2_guess = $843
 Size_of_Snd_Bank1 = $E60
 ; This particular bank has its contents aligned to the end
 ; ---------------------------------------------------------------------------
@@ -1563,14 +1562,14 @@ SndDrvInit:
 		; Load SMPS sound driver
 		lea	(Z80_SoundDriver).l,a0
 		lea	(Z80_RAM).l,a1
-		move.w	#$1C00-2,d0
+		move.w	#zDataStart-2,d0
 
 loc_1584:
 		move.b	(a0)+,(a1)+
 		dbf	d0,loc_1584
 		; Load default variables
 		lea	(Z80_DefaultVariables).l,a0
-		lea	(Z80_RAM+$1C00).l,a1
+		lea	(Z80_RAM+zDataStart).l,a1
 		move.w	#Z80_DefaultVariables_end-Z80_DefaultVariables-1,d0
 
 loc_159A:
@@ -117457,8 +117456,7 @@ DAC_98_99_9A_Data:		DACBINCLUDE "Sound/DAC/98-9A.bin"
 
 		align $1000
 
-Z80_SoundDriver:
-		binclude "Sound/Sonic 3 Z80 Sound Driver.bin"
+		include "Sound/Z80 Sound Driver.asm"
 
 ; ---------------------------------------------------------------------------
 ; Dac Bank 2
@@ -117797,6 +117795,7 @@ DAC_C0_Data:			DACBINCLUDE "Sound/DAC/C0.bin"
 SndBank:			startBank
 
 SEGA_PCM:	binclude "Sound/Sega PCM.bin"
+SEGA_PCM_End
 		align 2
 Sound_33:	include "Sound/SFX/33.asm"
 Sound_34:	include "Sound/SFX/34.asm"
