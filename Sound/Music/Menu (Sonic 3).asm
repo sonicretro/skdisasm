@@ -633,19 +633,23 @@ Snd_Menu_Jump05:
 	smpsCall            Snd_Menu_Call01
 	smpsCall            Snd_Menu_Call01
 	smpsCall            Snd_Menu_Call01
-	smpsFMAlterVol      $FD, $D3
+	; The following smpsFMAlterVol calls are horribly-bugged: not only
+	; do they not actually do anything on the PSG channel, but they also
+	; cause note data to be skipped.
+	; The dev obviously intended to use smpsPSGAlterVol commands here.
+	smpsFMAlterVol      $FD, nMaxPSG1
 	dc.b	$06
-	smpsFMAlterVol      $03, $D3
+	smpsFMAlterVol      $03, nMaxPSG1
 	dc.b	$03, nMaxPSG1, nMaxPSG1, $06, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, $0C
-	smpsFMAlterVol      $FD, $D3
+	smpsFMAlterVol      $FD, nMaxPSG1
 	dc.b	$0C, nMaxPSG1, $06, nMaxPSG1, $08, nMaxPSG1, nMaxPSG1, $02
-	smpsFMAlterVol      $03, $80
+	smpsFMAlterVol      $03, nRst
 	dc.b	$06
 	smpsCall            Snd_Menu_Call01
 	smpsCall            Snd_Menu_Call01
-	smpsFMAlterVol      $FD, $D3
+	smpsFMAlterVol      $FD, nMaxPSG1
 	dc.b	$06
-	smpsFMAlterVol      $03, $D3
+	smpsFMAlterVol      $03, nMaxPSG1
 	dc.b	$03, nMaxPSG1
 
 Snd_Menu_Loop06:
@@ -663,42 +667,42 @@ Snd_Menu_Loop06:
 	dc.b	$36
 	smpsCall            Snd_Menu_Call01
 	smpsCall            Snd_Menu_Call01
-	smpsFMAlterVol      $FD, $D3
+	smpsFMAlterVol      $FD, nMaxPSG1
 	dc.b	$06
-	smpsFMAlterVol      $03, $D3
+	smpsFMAlterVol      $03, nMaxPSG1
 	dc.b	$03, nMaxPSG1
 
 Snd_Menu_Loop07:
 	dc.b	nMaxPSG1, $06
 	smpsLoop            $00, $0D, Snd_Menu_Loop07
 	dc.b	nMaxPSG1, $32, nMaxPSG1, $34, nMaxPSG1, $06, nMaxPSG1, $03, nMaxPSG1, nMaxPSG1, $06
-	smpsFMAlterVol      $FD, $D3
-	smpsFMAlterVol      $03, $D3
+	smpsFMAlterVol      $FD, nMaxPSG1
+	smpsFMAlterVol      $03, nMaxPSG1
 	dc.b	nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1
 
 Snd_Menu_Loop08:
 	dc.b	nMaxPSG1, $06, nMaxPSG1, $03, nMaxPSG1, nMaxPSG1, $06
-	smpsFMAlterVol      $FD, $D3
-	smpsFMAlterVol      $03, $D3
+	smpsFMAlterVol      $FD, nMaxPSG1
+	smpsFMAlterVol      $03, nMaxPSG1
 	dc.b	nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1
 	smpsLoop            $00, $06, Snd_Menu_Loop08
 	dc.b	nMaxPSG1, $06, nMaxPSG1, $03, nMaxPSG1, nMaxPSG1, $06
-	smpsFMAlterVol      $FD, $D3
-	smpsFMAlterVol      $03, $D3
+	smpsFMAlterVol      $FD, nMaxPSG1
+	smpsFMAlterVol      $03, nMaxPSG1
 	dc.b	nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1
 	dc.b	nMaxPSG1, $03, nMaxPSG1, nMaxPSG1, $06
-	smpsFMAlterVol      $FD, $D3
-	smpsFMAlterVol      $03, $D3
+	smpsFMAlterVol      $FD, nMaxPSG1
+	smpsFMAlterVol      $03, nMaxPSG1
 	dc.b	nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1, nMaxPSG1
 	dc.b	nMaxPSG1, $03, nMaxPSG1, nMaxPSG1, $06
-	smpsFMAlterVol      $FD, $D3
+	smpsFMAlterVol      $FD, nMaxPSG1
 	dc.b	nMaxPSG1
 	smpsJump            Snd_Menu_Jump05
 
 Snd_Menu_Call01:
-	smpsFMAlterVol      $FD, $D3
+	smpsFMAlterVol      $FD, nMaxPSG1
 	dc.b	$06
-	smpsFMAlterVol      $03, $D3
+	smpsFMAlterVol      $03, nMaxPSG1
 	dc.b	$03, nMaxPSG1
 
 Snd_Menu_Loop0A:
