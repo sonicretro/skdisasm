@@ -3683,130 +3683,471 @@ locret_2918:
 		rts
 ; ---------------------------------------------------------------------------
 AnPal_PalAIZ1_1:
-		dc.w $EE8,$EE2,$EA4,$E64,$EE2,$EA4,$E64,$EE8,$EA4,$E64,$EE8,$EE2,$E64,$EE8,$EE2,$EA4
+		dc.w  $EE8, $EE2, $EA4, $E64
+		dc.w  $EE2, $EA4, $E64, $EE8
+		dc.w  $EA4, $E64, $EE8, $EE2
+		dc.w  $E64, $EE8, $EE2, $EA4
 
 AnPal_PalAIZ1_3:
-		dc.w $EEC,$EEE,$EE8,$E40,$EEC,$EE8,$EE8,$EEE,$EEA,$E86,$EE8,$EE8,$EE8,$E40,$EE8,$E86
-		dc.w $EE6,$EEE,$EE8,$E40,$EEA,$EE8,$EE8,$EEE,$EE8,$E86,$EE8,$EE8,$EE8,$E40,$EE8,$E86
-		dc.w $EE6,$EEE,$EE8,$E40,$EE8,$EE8,$EE8,$EEE,$EEA,$E86,$EE8,$EE8,$EEC,$E40,$EE8,$E86
-		dc.w $EEC,$EEE,$EE8,$E40,$EEC,$EE8,$EE8,$EEE,$EEC,$E86,$EE8,$EE8,$EEC,$E40,$EE8,$E86
+		dc.w  $EEC, $EEE, $EE8, $E40
+		dc.w  $EEC, $EE8, $EE8, $EEE
+		dc.w  $EEA, $E86, $EE8, $EE8
+		dc.w  $EE8, $E40, $EE8, $E86
+		dc.w  $EE6, $EEE, $EE8, $E40
+		dc.w  $EEA, $EE8, $EE8, $EEE
+		dc.w  $EE8, $E86, $EE8, $EE8
+		dc.w  $EE8, $E40, $EE8, $E86
+		dc.w  $EE6, $EEE, $EE8, $E40
+		dc.w  $EE8, $EE8, $EE8, $EEE
+		dc.w  $EEA, $E86, $EE8, $EE8
+		dc.w  $EEC, $E40, $EE8, $E86
+		dc.w  $EEC, $EEE, $EE8, $E40
+		dc.w  $EEC, $EE8, $EE8, $EEE
+		dc.w  $EEC, $E86, $EE8, $EE8
+		dc.w  $EEC, $E40, $EE8, $E86
 
 AnPal_PalAIZ1_4:
-		dc.w $CEC,$CEE,$EEE,$CEE,$EEE,$EEE,$EEE,$EEE,$EEE,$EEE,$EEE,$EEE,$EEE,$EEE,$EEE,$EEE
-		dc.w $EEE,$EEE,$EEE,$EEE,$EEE,$EE8,$EEE,$EEE,$EE8,$EE8,$EEE,$EE8,$EE8,$EE8,$EE8,$EE8
-		dc.w $EE8,$EE8,$EE8,$EE8,$EE8,$EE8,$EE8,$EE8,$EE8,$AEC,$EE8,$AEC,$CEC,$AEC,$CEC,$CEC
+		dc.w  $CEC, $CEE, $EEE
+		dc.w  $CEE, $EEE, $EEE
+		dc.w  $EEE, $EEE, $EEE
+		dc.w  $EEE, $EEE, $EEE
+		dc.w  $EEE, $EEE, $EEE
+		dc.w  $EEE, $EEE, $EEE
+		dc.w  $EEE, $EEE, $EEE
+		dc.w  $EE8, $EEE, $EEE
+		dc.w  $EE8, $EE8, $EEE
+		dc.w  $EE8, $EE8, $EE8
+		dc.w  $EE8, $EE8, $EE8
+		dc.w  $EE8, $EE8, $EE8
+		dc.w  $EE8, $EE8, $EE8
+		dc.w  $EE8, $EE8, $AEC
+		dc.w  $EE8, $AEC, $CEC
+		dc.w  $AEC, $CEC, $CEC
 
 AnPal_PalAIZ1_2:
-		dc.w $EA4,$E60,$EE2,$EA4,$EE8,$EA4,$E60,$EE8,$EEE,$E60,$EE2,$EE2,$EE8,$EA4,$EA4,$EE2
-		dc.w $E60,$E60,$EE2,$E60,$EEE,$EE2,$E60,$EE8
+		dc.w  $EA4, $E60, $EE2
+		dc.w  $EA4, $EE8, $EA4
+		dc.w  $E60, $EE8, $EEE
+		dc.w  $E60, $EE2, $EE2
+		dc.w  $EE8, $EA4, $EA4
+		dc.w  $EE2, $E60, $E60
+		dc.w  $EE2, $E60, $EEE
+		dc.w  $EE2, $E60, $EE8
 
 AnPal_PalAIZ2_1:
-		dc.w $EE8,$EE2,$EC4,$EA4,$EE2,$EC4,$EA4,$EE8,$EC4,$EA4,$EE8,$EE2,$EA4,$EE8,$EE2,$EC4
+		dc.w  $EE8, $EE2, $EC4, $EA4
+		dc.w  $EE2, $EC4, $EA4, $EE8
+		dc.w  $EC4, $EA4, $EE8, $EE2
+		dc.w  $EA4, $EE8, $EE2, $EC4
 
 AnPal_PalAIZ2_2:
-		dc.w  $24, $44, $8E, $26, $46, $AE, $24, $48, $8E, $26, $4A, $AE, $24, $4C, $8E, $26
-		dc.w  $4A, $AE, $24, $48, $8E, $24, $46, $8E
+		dc.w   $24,  $44,  $8E
+		dc.w   $26,  $46,  $AE
+		dc.w   $24,  $48,  $8E
+		dc.w   $26,  $4A,  $AE
+		dc.w   $24,  $4C,  $8E
+		dc.w   $26,  $4A,  $AE
+		dc.w   $24,  $48,  $8E
+		dc.w   $24,  $46,  $8E
 
 AnPal_PalAIZ2_3:
-		dc.w  $24, $44,  $C, $26, $46,  $E, $24, $48,  $C, $26, $4A,  $E, $24, $4C,  $C, $26
-		dc.w  $4A,  $E, $24, $48,  $C, $24, $46,  $C
+		dc.w   $24,  $44,   $C
+		dc.w   $26,  $46,   $E
+		dc.w   $24,  $48,   $C
+		dc.w   $26,  $4A,   $E
+		dc.w   $24,  $4C,   $C
+		dc.w   $26,  $4A,   $E
+		dc.w   $24,  $48,   $C
+		dc.w   $24,  $46,   $C
 
 AnPal_PalAIZ2_4:
-		dc.w  $6E, $6E, $6E, $6E,$28E,$4AE,$6AE,$8CE,$8EE,$AEE,$AEE,$AEE,$AEE,$AEE,$8EE,$8EE
-		dc.w $8EE,$8EE,$8CE,$8CE,$8CE,$6AE,$6AE,$4AE,$4AE,$28E
+		dc.w   $6E
+		dc.w   $6E
+		dc.w   $6E
+		dc.w   $6E
+		dc.w  $28E
+		dc.w  $4AE
+		dc.w  $6AE
+		dc.w  $8CE
+		dc.w  $8EE
+		dc.w  $AEE
+		dc.w  $AEE
+		dc.w  $AEE
+		dc.w  $AEE
+		dc.w  $AEE
+		dc.w  $8EE
+		dc.w  $8EE
+		dc.w  $8EE
+		dc.w  $8EE
+		dc.w  $8CE
+		dc.w  $8CE
+		dc.w  $8CE
+		dc.w  $6AE
+		dc.w  $6AE
+		dc.w  $4AE
+		dc.w  $4AE
+		dc.w  $28E
 
 AnPal_PalAIZ2_5:
-		dc.w   $C,  $C,  $C,  $C, $2C,  $E, $2E, $4E, $6E, $8E, $8E, $8E, $8E, $8E, $6E, $4E
-		dc.w  $4E, $4E, $2E, $2E, $2E,  $E,  $E, $2C, $2C, $2C
+		dc.w    $C
+		dc.w    $C
+		dc.w    $C
+		dc.w    $C
+		dc.w   $2C
+		dc.w    $E
+		dc.w   $2E
+		dc.w   $4E
+		dc.w   $6E
+		dc.w   $8E
+		dc.w   $8E
+		dc.w   $8E
+		dc.w   $8E
+		dc.w   $8E
+		dc.w   $6E
+		dc.w   $4E
+		dc.w   $4E
+		dc.w   $4E
+		dc.w   $2E
+		dc.w   $2E
+		dc.w   $2E
+		dc.w    $E
+		dc.w    $E
+		dc.w   $2C
+		dc.w   $2C
+		dc.w   $2C
 
 AnPal_PalHCZ1:
-		dc.w $EC8,$EC0,$EA0,$E80,$EC0,$EA0,$E80,$EC8,$EA0,$E80,$EC8,$EC0,$E80,$EC8,$EC0,$EA0
+		dc.w  $EC8, $EC0, $EA0, $E80
+		dc.w  $EC0, $EA0, $E80, $EC8
+		dc.w  $EA0, $E80, $EC8, $EC0
+		dc.w  $E80, $EC8, $EC0, $EA0
 
 AnPal_PalCNZ_1:
-		dc.w    0, $66, $EE, $22, $44, $CC, $44, $22, $AA, $66,   0, $88, $88,   0, $66, $AA
-		dc.w  $22, $44, $CC, $44, $22, $EE, $66,   0, $EE, $88,   0, $CC, $AA, $22, $AA, $CC
-		dc.w  $44, $88, $EE, $66, $66, $EE, $88, $44, $CC, $AA, $22, $AA, $CC,   0, $88, $EE
+		dc.w     0,  $66,  $EE
+		dc.w   $22,  $44,  $CC
+		dc.w   $44,  $22,  $AA
+		dc.w   $66,    0,  $88
+		dc.w   $88,    0,  $66
+		dc.w   $AA,  $22,  $44
+		dc.w   $CC,  $44,  $22
+		dc.w   $EE,  $66,    0
+		dc.w   $EE,  $88,    0
+		dc.w   $CC,  $AA,  $22
+		dc.w   $AA,  $CC,  $44
+		dc.w   $88,  $EE,  $66
+		dc.w   $66,  $EE,  $88
+		dc.w   $44,  $CC,  $AA
+		dc.w   $22,  $AA,  $CC
+		dc.w     0,  $88,  $EE
 
 AnPal_PalCNZ_3:
-		dc.w $E20, $8A,$C0E,$C42, $6C,$E0E,$A64, $4C,$E0C,$884, $2E,$E0A,$6A6,  $E,$E08,$4C6
-		dc.w $20E,$E06,$2E8,$40E,$E04, $E8,$60E,$E02, $C8,$80E,$E00, $AA,$A0E,$E00, $8A,$C0E
-		dc.w $E20, $6C,$E0E,$C42, $4C,$E0C,$A64, $2E,$E0A,$884,  $E,$E08,$6A6,$20E,$E06,$4C6
-		dc.w $40E,$E04,$2E8,$60E,$E02, $E8,$80E,$E00, $C8,$A0E,$E00, $AA,$C0E,$E20, $8A,$E0E
-		dc.w $C42, $6C,$E0C,$A64, $4C,$E0A,$884, $2E,$E08,$6A6,  $E,$E06,$4C6,$20E,$E04,$2E8
-		dc.w $40E,$E02, $E8,$60E,$E00, $C8,$80E,$E00, $AA,$A0E
+		dc.w  $E20,  $8A, $C0E
+		dc.w  $C42,  $6C, $E0E
+		dc.w  $A64,  $4C, $E0C
+		dc.w  $884,  $2E, $E0A
+		dc.w  $6A6,   $E, $E08
+		dc.w  $4C6, $20E, $E06
+		dc.w  $2E8, $40E, $E04
+		dc.w   $E8, $60E, $E02
+		dc.w   $C8, $80E, $E00
+		dc.w   $AA, $A0E, $E00
+		dc.w   $8A, $C0E, $E20
+		dc.w   $6C, $E0E, $C42
+		dc.w   $4C, $E0C, $A64
+		dc.w   $2E, $E0A, $884
+		dc.w    $E, $E08, $6A6
+		dc.w  $20E, $E06, $4C6
+		dc.w  $40E, $E04, $2E8
+		dc.w  $60E, $E02,  $E8
+		dc.w  $80E, $E00,  $C8
+		dc.w  $A0E, $E00,  $AA
+		dc.w  $C0E, $E20,  $8A
+		dc.w  $E0E, $C42,  $6C
+		dc.w  $E0C, $A64,  $4C
+		dc.w  $E0A, $884,  $2E
+		dc.w  $E08, $6A6,   $E
+		dc.w  $E06, $4C6, $20E
+		dc.w  $E04, $2E8, $40E
+		dc.w  $E02,  $E8, $60E
+		dc.w  $E00,  $C8, $80E
+		dc.w  $E00,  $AA, $A0E
 
 AnPal_PalCNZ_5:
-		dc.w $2E0,$ECE,$4E2,$EAC,$6E4,$E8A,$8E6,$E68,$AE8,$E46,$CEA,$E24,$EEC,$E02,$EEE,$E00
-		dc.w $EEC,$E02,$CEA,$E24,$AE8,$E46,$8E6,$E68,$6E4,$E8A,$4E2,$EAC,$2E0,$ECE, $E0,$EEE
+		dc.w  $2E0, $ECE
+		dc.w  $4E2, $EAC
+		dc.w  $6E4, $E8A
+		dc.w  $8E6, $E68
+		dc.w  $AE8, $E46
+		dc.w  $CEA, $E24
+		dc.w  $EEC, $E02
+		dc.w  $EEE, $E00
+		dc.w  $EEC, $E02
+		dc.w  $CEA, $E24
+		dc.w  $AE8, $E46
+		dc.w  $8E6, $E68
+		dc.w  $6E4, $E8A
+		dc.w  $4E2, $EAC
+		dc.w  $2E0, $ECE
+		dc.w   $E0, $EEE
 
 AnPal_PalCNZ_2:
-		dc.w $800,$800,$886,$800,$800,$864,$800,$800,$842,$800,$800,$820,$820,$800,$800,$842
-		dc.w $800,$800,$864,$800,$800,$886,$800,$800,$886,$820,$800,$864,$842,$800,$842,$864
-		dc.w $800,$820,$886,$800,$800,$886,$820,$800,$864,$842,$800,$842,$864,$800,$820,$886
+		dc.w  $800, $800, $886
+		dc.w  $800, $800, $864
+		dc.w  $800, $800, $842
+		dc.w  $800, $800, $820
+		dc.w  $820, $800, $800
+		dc.w  $842, $800, $800
+		dc.w  $864, $800, $800
+		dc.w  $886, $800, $800
+		dc.w  $886, $820, $800
+		dc.w  $864, $842, $800
+		dc.w  $842, $864, $800
+		dc.w  $820, $886, $800
+		dc.w  $800, $886, $820
+		dc.w  $800, $864, $842
+		dc.w  $800, $842, $864
+		dc.w  $800, $820, $886
 
 AnPal_PalCNZ_4:
-		dc.w $E20,$E8A,$E0A,$E42,$E6A,$E0A,$E64,$E4A,$E0A,$E84,$E2A,$E0A,$EA6,$E0A,$E08,$EC6
-		dc.w $E0A,$E06,$EE8,$E0A,$E04,$EE8,$E0A,$E02,$EC8,$E0A,$E00,$EAA,$E0A,$E00,$E8A,$E0A
-		dc.w $E20,$E6A,$E0A,$C42,$E4A,$E0A,$E64,$E2A,$E0A,$E84,$E0A,$E08,$EA6,$E0A,$E06,$EC6
-		dc.w $E0A,$E04,$EE8,$E0A,$E02,$EE8,$E0A,$E00,$EC8,$E0A,$E00,$EAA,$E0A,$E20,$E8A,$E0A
-		dc.w $E42,$E6A,$E0A,$E64,$E4A,$E0A,$E84,$E2A,$E08,$EA6,$E0A,$E06,$EC6,$E0A,$E04,$EE8
-		dc.w $E0A,$E02,$EE8,$E0A,$E00,$EC8,$E0A,$E00,$EAA,$E0A,$840,$ECA,$862,$EAA,$884,$E88
-		dc.w $8A6,$E66,$AE8,$E44,$CEA,$E22,$EEC,$E00,$EEC,$E00,$EEC,$E00,$CEA,$E22,$AE8,$E44
-		dc.w $8A6,$E66,$884,$E88,$862,$EAA,$840,$ECA,$822,$ECA
+		dc.w  $E20, $E8A, $E0A
+		dc.w  $E42, $E6A, $E0A
+		dc.w  $E64, $E4A, $E0A
+		dc.w  $E84, $E2A, $E0A
+		dc.w  $EA6, $E0A, $E08
+		dc.w  $EC6, $E0A, $E06
+		dc.w  $EE8, $E0A, $E04
+		dc.w  $EE8, $E0A, $E02
+		dc.w  $EC8, $E0A, $E00
+		dc.w  $EAA, $E0A, $E00
+		dc.w  $E8A, $E0A, $E20
+		dc.w  $E6A, $E0A, $C42
+		dc.w  $E4A, $E0A, $E64
+		dc.w  $E2A, $E0A, $E84
+		dc.w  $E0A, $E08, $EA6
+		dc.w  $E0A, $E06, $EC6
+		dc.w  $E0A, $E04, $EE8
+		dc.w  $E0A, $E02, $EE8
+		dc.w  $E0A, $E00, $EC8
+		dc.w  $E0A, $E00, $EAA
+		dc.w  $E0A, $E20, $E8A
+		dc.w  $E0A, $E42, $E6A
+		dc.w  $E0A, $E64, $E4A
+		dc.w  $E0A, $E84, $E2A
+		dc.w  $E08, $EA6, $E0A
+		dc.w  $E06, $EC6, $E0A
+		dc.w  $E04, $EE8, $E0A
+		dc.w  $E02, $EE8, $E0A
+		dc.w  $E00, $EC8, $E0A
+		dc.w  $E00, $EAA, $E0A
+
+		dc.w  $840, $ECA
+		dc.w  $862, $EAA
+		dc.w  $884, $E88
+		dc.w  $8A6, $E66
+		dc.w  $AE8, $E44
+		dc.w  $CEA, $E22
+		dc.w  $EEC, $E00
+		dc.w  $EEC, $E00
+		dc.w  $EEC, $E00
+		dc.w  $CEA, $E22
+		dc.w  $AE8, $E44
+		dc.w  $8A6, $E66
+		dc.w  $884, $E88
+		dc.w  $862, $EAA
+		dc.w  $840, $ECA
+		dc.w  $822, $ECA
 
 AnPal_PalICZ_1:
-		dc.w $E62,$E20,$E44,$E20,$E44,$E00,$E42,$E00,$E62,$C00,$E82,$A00,$EA2,$C00,$EC0,$E00
-		dc.w $EE0,$E20,$EE4,$E00,$EE4,$C00,$EE4,$A00,$EE0,$800,$EC2,$A00,$EA2,$C00,$E82,$E20
+		dc.w  $E62, $E20
+		dc.w  $E44, $E20
+		dc.w  $E44, $E00
+		dc.w  $E42, $E00
+		dc.w  $E62, $C00
+		dc.w  $E82, $A00
+		dc.w  $EA2, $C00
+		dc.w  $EC0, $E00
+		dc.w  $EE0, $E20
+		dc.w  $EE4, $E00
+		dc.w  $EE4, $C00
+		dc.w  $EE4, $A00
+		dc.w  $EE0, $800
+		dc.w  $EC2, $A00
+		dc.w  $EA2, $C00
+		dc.w  $E82, $E20
 
 AnPal_PalICZ_2:
-		dc.w $E06,$E08,$E04,$E06,$C04,$E04,$C02,$C04,$A02,$C02,$A00,$A02,$800,$A00,$600,$800
-		dc.w $600,$800,$600,$800,$600,$800,$800,$A00,$A00,$A02,$A02,$C02,$C02,$C04,$C04,$E04
-		dc.w $E04,$E06,$E06,$E08
+		dc.w  $E06, $E08
+		dc.w  $E04, $E06
+		dc.w  $C04, $E04
+		dc.w  $C02, $C04
+		dc.w  $A02, $C02
+		dc.w  $A00, $A02
+		dc.w  $800, $A00
+		dc.w  $600, $800
+		dc.w  $600, $800
+		dc.w  $600, $800
+		dc.w  $600, $800
+		dc.w  $800, $A00
+		dc.w  $A00, $A02
+		dc.w  $A02, $C02
+		dc.w  $C02, $C04
+		dc.w  $C04, $E04
+		dc.w  $E04, $E06
+		dc.w  $E06, $E08
 
 AnPal_PalICZ_3:
-		dc.w $840,$EEA,$860,$EE0,$A80,$EC0,$EC0,$A80,$A80,$EC0,$860,$EE0
+		dc.w  $840, $EEA
+		dc.w  $860, $EE0
+		dc.w  $A80, $EC0
+		dc.w  $EC0, $A80
+		dc.w  $A80, $EC0
+		dc.w  $860, $EE0
 
 AnPal_PalICZ_4:
-		dc.w  $E8,$CEC, $C8,$AEA, $C8,$AEA, $A6,$6E8, $A6,$6E8, $84, $E8, $84, $E8, $82, $C8
-		dc.w  $64, $A6, $64, $A6, $82, $C8, $84, $E8, $A6,$6E8, $C8,$AEA, $E8,$CEC, $E8,$CEC
+		dc.w   $E8, $CEC
+		dc.w   $C8, $AEA
+		dc.w   $C8, $AEA
+		dc.w   $A6, $6E8
+		dc.w   $A6, $6E8
+		dc.w   $84,  $E8
+		dc.w   $84,  $E8
+		dc.w   $82,  $C8
+		dc.w   $64,  $A6
+		dc.w   $64,  $A6
+		dc.w   $82,  $C8
+		dc.w   $84,  $E8
+		dc.w   $A6, $6E8
+		dc.w   $C8, $AEA
+		dc.w   $E8, $CEC
+		dc.w   $E8, $CEC
 
 AnPal_PalLBZ1:
-		dc.w $8E0, $C0, $80, $C0, $80,$8E0, $80,$8E0, $C0
+		dc.w  $8E0,  $C0,  $80
+		dc.w   $C0,  $80, $8E0
+		dc.w   $80, $8E0,  $C0
 
 AnPal_PalLBZ2:
-		dc.w $EEA,$EA4,$C62,$EA4,$C62,$EEA,$C62,$EEA,$EA4
+		dc.w  $EEA, $EA4, $C62
+		dc.w  $EA4, $C62, $EEA
+		dc.w  $C62, $EEA, $EA4
 
 AnPal_PalLRZ1_1:
-		dc.w  $EE, $AE, $6E,  $E, $AE, $6E,  $E, $EE, $6E,  $E, $EE,$2CE, $2E,$8EE,$4EE, $6E
-		dc.w $AEE,$6EE, $8E, $4E,$4EE, $6E, $2E,$8EE, $6E,  $E, $EE,$2CE,  $E, $EE,$2CE, $6E
-		dc.w  $EE, $AE, $6E,  $E, $8E, $4E,  $C, $CE, $2E,  $A, $AC, $6E,   8, $8E, $4C,  $C
-		dc.w  $AC, $6E, $2E,  $A, $8E, $4E,  $C, $CE, $6E,  $E, $EE, $AE,  $E, $EE, $AE, $6E
+		dc.w   $EE,  $AE,  $6E,   $E
+		dc.w   $AE,  $6E,   $E,  $EE
+		dc.w   $6E,   $E,  $EE, $2CE
+		dc.w   $2E, $8EE, $4EE,  $6E
+		dc.w  $AEE, $6EE,  $8E,  $4E
+		dc.w  $4EE,  $6E,  $2E, $8EE
+		dc.w   $6E,   $E,  $EE, $2CE
+		dc.w    $E,  $EE, $2CE,  $6E
+		dc.w   $EE,  $AE,  $6E,   $E
+		dc.w   $8E,  $4E,   $C,  $CE
+		dc.w   $2E,   $A,  $AC,  $6E
+		dc.w     8,  $8E,  $4C,   $C
+		dc.w   $AC,  $6E,  $2E,   $A
+		dc.w   $8E,  $4E,   $C,  $CE
+		dc.w   $6E,   $E,  $EE,  $AE
+		dc.w    $E,  $EE,  $AE,  $6E
 
 AnPal_PalLRZ1_2:
-		dc.w $224,$224,$224,$424,$224,$426,$426,$224,$424,$224,$224,$224,$224,$224,$224,$422
-		dc.w $422,$422
+		dc.w  $224, $224
+		dc.w  $224, $424
+		dc.w  $224, $426
+		dc.w  $426, $224
+		dc.w  $424, $224
+		dc.w  $224, $224
+		dc.w  $224, $224
+
+		dc.w  $224, $422
+		dc.w  $422, $422
 
 AnPal_PalBPZ_1:
-		dc.w  $EE, $AE, $6C, $AE, $6E, $EE, $6E, $EE, $AE
+		dc.w   $EE,  $AE,  $6C
+		dc.w   $AE,  $6E,  $EE
+		dc.w   $6E,  $EE,  $AE
 
 AnPal_PalBPZ_2:
-		dc.w $EE0,$E0E, $EE,$EA0,$A0E, $EA,$E60,$60E, $E6,$E20,$20E, $E2,$E02, $2E,$2E0,$E06
-		dc.w  $6E,$6E0,$E0A, $AE,$AE0,$E0E, $EE,$EE0,$A0E, $EA,$EA0,$60E, $E6,$E60,$20E, $E2
-		dc.w $E20, $2E,$2E0,$E02, $6E,$6E0,$E06, $AE,$AE0,$E0A, $EE,$EE0,$E0E, $EA,$EA0,$A0E
-		dc.w  $E6,$E60,$60E, $E2,$E20,$20E,$2E0,$E02, $2E,$6E0,$E06, $6E,$AE0,$E0A, $AE
+		dc.w  $EE0, $E0E,  $EE
+		dc.w  $EA0, $A0E,  $EA
+		dc.w  $E60, $60E,  $E6
+		dc.w  $E20, $20E,  $E2
+		dc.w  $E02,  $2E, $2E0
+		dc.w  $E06,  $6E, $6E0
+		dc.w  $E0A,  $AE, $AE0
+		dc.w  $E0E,  $EE, $EE0
+		dc.w  $A0E,  $EA, $EA0
+		dc.w  $60E,  $E6, $E60
+		dc.w  $20E,  $E2, $E20
+		dc.w   $2E, $2E0, $E02
+		dc.w   $6E, $6E0, $E06
+		dc.w   $AE, $AE0, $E0A
+		dc.w   $EE, $EE0, $E0E
+		dc.w   $EA, $EA0, $A0E
+		dc.w   $E6, $E60, $60E
+		dc.w   $E2, $E20, $20E
+		dc.w  $2E0, $E02,  $2E
+		dc.w  $6E0, $E06,  $6E
+		dc.w  $AE0, $E0A,  $AE
 
 AnPal_PalCGZ:
-		dc.w   $E,   8,   4,$EEE,  $C,   6,   2,$CCE,  $A,   4,   0,$AAE,   8,   2,   0,$88E
-		dc.w    6,   0,   0,$66E,   4,   0,   0,$44E,   6,   0,   0,$66E,   8,   2,   0,$88E
-		dc.w   $A,   4,   2,$AAE,  $C,   6,   4,$CCE
+		dc.w    $E,    8,    4, $EEE
+		dc.w    $C,    6,    2, $CCE
+		dc.w    $A,    4,    0, $AAE
+		dc.w     8,    2,    0, $88E
+		dc.w     6,    0,    0, $66E
+		dc.w     4,    0,    0, $44E
+		dc.w     6,    0,    0, $66E
+		dc.w     8,    2,    0, $88E
+		dc.w    $A,    4,    2, $AAE
+		dc.w    $C,    6,    4, $CCE
 
 AnPal_PalEMZ_1:
-		dc.w    6,   8,  $A,  $C,  $E,  $E,  $E,  $E,  $C,  $A,   8,   6,   6,   6,   6,   8
-		dc.w   $A,  $C,  $E,  $E,  $E,  $C,  $A,   8,   6,   8,  $A,  $A,  $A,   8
+		dc.w     6
+		dc.w     8
+		dc.w    $A
+		dc.w    $C
+		dc.w    $E
+		dc.w    $E
+		dc.w    $E
+		dc.w    $E
+		dc.w    $C
+		dc.w    $A
+		dc.w     8
+		dc.w     6
+		dc.w     6
+		dc.w     6
+		dc.w     6
+		dc.w     8
+		dc.w    $A
+		dc.w    $C
+		dc.w    $E
+		dc.w    $E
+		dc.w    $E
+		dc.w    $C
+		dc.w    $A
+		dc.w     8
+		dc.w     6
+		dc.w     8
+		dc.w    $A
+		dc.w    $A
+		dc.w    $A
+		dc.w     8
 
 AnPal_PalEMZ_2:
-		dc.w    0,  $E,   2,  $C,   4,  $A,   6,   8,   8,   6,  $A,   4,  $C,   2,  $E,   0
-		dc.w   $C,   2,  $A,   4,   8,   6,   6,   8,   4,  $A,   2,  $C
+		dc.w     0,   $E
+		dc.w     2,   $C
+		dc.w     4,   $A
+		dc.w     6,    8
+		dc.w     8,    6
+		dc.w    $A,    4
+		dc.w    $C,    2
+		dc.w    $E,    0
+		dc.w    $C,    2
+		dc.w    $A,    4
+		dc.w     8,    6
+		dc.w     6,    8
+		dc.w     4,   $A
+		dc.w     2,   $C
 
 ; =============== S U B R O U T I N E =======================================
 
