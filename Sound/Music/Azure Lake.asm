@@ -200,13 +200,11 @@ Snd_ALZ_Loop06:
 	dc.b	nF4, $0C, nRst, $12, nF4, $06, nF4, nRst, nF4, nRst, $0C, nC4
 	dc.b	$1E, nRst, $06, nD4, nRst, $12, nF4, $0C, nE4, $06, nRst, $1E
 	dc.b	nRst, $60, nRst, nRst, nRst, nRst, nRst, nRst, nRst, nRst, $0C
-	if 1=1
-	; This is an error; it uses data from Balloon Park song as if it were a
-	; voice. Any voice in the bank is better than this.
-	smpsSetvoice        $2D
-	else
-	; This voice seems slightly better than the others.
+	if FixMusicAndSFXDataBugs
 	smpsSetvoice        $00
+	else
+	; This is an error; it uses data from Balloon Park song as if it were a voice.
+	smpsSetvoice        $2D
 	endif
 	dc.b	nF5, $06, nG5, nC6, nG5, nF5, nE5, nC5, $05, nRst, $2B, nRst
 	dc.b	$3C
