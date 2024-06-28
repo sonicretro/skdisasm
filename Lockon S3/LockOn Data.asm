@@ -1611,8 +1611,8 @@ DAC_AB_Setup3:			DAC_Setup $0D,DAC_AB_Data
 DAC_AC_Setup3:			DAC_Setup $06,DAC_AC_Data
 DAC_AD_Setup3:			DAC_Setup $10,DAC_AD_AE_Data
 DAC_AE_Setup3:			DAC_Setup $18,DAC_AD_AE_Data
-DAC_AF_Setup3:			DAC_Setup $09,DAC_AF_Data
-DAC_B0_Setup3:			DAC_Setup $12,DAC_AF_Data
+DAC_AF_Setup3:			DAC_Setup $09,DAC_AF_B0_Data
+DAC_B0_Setup3:			DAC_Setup $12,DAC_AF_B0_Data
 DAC_B1_Setup3:			DAC_Setup $18,DAC_B1_Data
 DAC_B2_Setup3:			DAC_Setup $16,DAC_B2_B3_Data
 DAC_B3_Setup3:			DAC_Setup $20,DAC_B2_B3_Data
@@ -1642,7 +1642,7 @@ DAC_A1_Setup3:			DAC_Null_Setup $0A
 DAC_AB_Data:			DACBINCLUDE "Sound/DAC/AB.bin"
 DAC_AC_Data:			DACBINCLUDE "Sound/DAC/AC.bin"
 DAC_AD_AE_Data:			DACBINCLUDE "Sound/DAC/AD-AE.bin"
-DAC_AF_Data:			DACBINCLUDE "Sound/DAC/AF.bin"
+DAC_AF_B0_Data:			DACBINCLUDE "Sound/DAC/AF-B0.bin"
 Bank3_Filler1:			cnop 	$28E0,soundBankStart
 DAC_B1_Data:			DACBINCLUDE "Sound/DAC/B1.bin"
 Bank3_Filler2:			cnop 	$3CAD,soundBankStart
