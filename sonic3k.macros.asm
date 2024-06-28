@@ -259,6 +259,11 @@ palscriptrun	macro header
 	dc.w -$C
     endm
 
+; Function to turn a sample rate into a djnz loop counter
+pcmLoopCounterBase function sampleRate,baseCycles, 1+(53693175/15/(sampleRate)-(baseCycles)+(13/2))/13
+pcmLoopCounter function sampleRate, pcmLoopCounterBase(sampleRate,102) ; 102 is the number of cycles zPlaySEGAPCM takes to deliver one sample.
+dpcmLoopCounter function sampleRate, pcmLoopCounterBase(sampleRate,297/2) ; 297 is the number of cycles zPlayDigitalAudio takes to deliver two samples.
+
 ; Function to make a little endian (z80) pointer
 k68z80Pointer function addr,((((addr&$7FFF)+$8000)<<8)&$FF00)+(((addr&$7FFF)+$8000)>>8)
 
@@ -297,14 +302,14 @@ __LABEL___Bank := soundBankStart
 
 ; Setup macro for DAC samples.
 DAC_Setup macro rate,dacptr
-	dc.b	rate
+	dc.b	dpcmLoopCounter(rate)
 	dc.w	dacptr_Len
 	dc.w	dacptr_Ptr
     endm
 
 ; Setup a null entry for a DAC sample.
 DAC_Null_Setup macro rate
-	dc.b	rate
+	dc.b	dpcmLoopCounter(rate)
 	dc.w 	$0000,$0000
     endm
 
@@ -313,6 +318,6 @@ DAC_Null_Setup macro rate
 ; while the pointer (usually) goes towards the DAC pointer
 ; entry of another DAC sample setup.
 DAC_Null_Chain macro rate,linkptr
-	dc.b	rate
+	dc.b	dpcmLoopCounter(rate)
 	dc.w 	$0000,k68z80Pointer(linkptr+3-soundBankStart)
     endm

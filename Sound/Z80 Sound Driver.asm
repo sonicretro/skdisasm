@@ -4236,7 +4236,7 @@ zPlayDigitalAudio:
 		ld	a, (hl)							; a = DAC index
 		dec	a								; a -= 1
 		set	7, (hl)							; Set bit 7 to indicate that DAC sample is being played
-		ld	hl, zmake68kPtr(DAC_Offsets)					; hl = pointer to ROM window
+		ld	hl, zmake68kPtr(DAC_Offsets)	; hl = pointer to ROM window
 		rst	PointerTableOffset				; hl = pointer to DAC data
 		ld	c, 80h							; c is an accumulator below; this initializes it to 80h
 		ld	a, (hl)							; a = DAC rate
@@ -4255,56 +4255,56 @@ zPlayDigitalAudio:
 
 .dac_playback_loop:
 .sample1_rate:
-		ld	b, 0Ah							; self-modified code; b is set to DAC rate
-		ei									; Enable interrupts
-		djnz	$							; Loop in this instruction, decrementing b each iteration, until b = 0
+		ld	b, 0Ah					; 7		; self-modified code; b is set to DAC rate
+		ei							; 4		; Enable interrupts
+		djnz	$					; 8		; Loop in this instruction, decrementing b each iteration, until b = 0
 
-		di									; Disable interrupts
-		ld	a, 2Ah							; DAC channel register
-		ld	(zYM2612_A0), a					; Send to YM2612
-		ld	a, (hl)							; a = next byte of DAC sample
+		di							; 4		; Disable interrupts
+		ld	a, 2Ah					; 7		; DAC channel register
+		ld	(zYM2612_A0), a			; 13	; Send to YM2612
+		ld	a, (hl)					; 7		; a = next byte of DAC sample
 		; Want only the high nibble now, so shift it into position
-		rlca
-		rlca
-		rlca
-		rlca
-		and	0Fh								; Get only low nibble (which was the high nibble originally)
-		ld	(.sample1_index+2), a			; Store into following instruction (self-modifying code)
-		ld	a, c							; a = c
+		rlca						; 4
+		rlca						; 4
+		rlca						; 4
+		rlca						; 4
+		and	0Fh						; 7		; Get only low nibble (which was the high nibble originally)
+		ld	(.sample1_index+2), a	; 13	; Store into following instruction (self-modifying code)
+		ld	a, c					; 4		; a = c
 
 .sample1_index:
-		add	a, (iy+0)						; Self-modified code: the index offset is not zero, but what was set above
-		ld	(zYM2612_D0), a					; Send byte to DAC
-		ld	c, a							; Set c to the new value of a
+		add	a, (iy+0)				; 19	; Self-modified code: the index offset is not zero, but what was set above
+		ld	(zYM2612_D0), a			; 13	; Send byte to DAC
+		ld	c, a					; 4		; Set c to the new value of a
 
 .sample2_rate:
-		ld	b, 0Ah							; self-modified code; b is set to DAC rate
-		ei									; Enable interrupts
-		djnz	$							; Loop in this instruction, decrementing b each iteration, until b = 0
+		ld	b, 0Ah					; 7		; self-modified code; b is set to DAC rate
+		ei							; 4		; Enable interrupts
+		djnz	$					; 8		; Loop in this instruction, decrementing b each iteration, until b = 0
 
-		di									; Disable interrupts
-		ld	a, 2Ah							; DAC channel register
-		ld	(zYM2612_A0), a					; Send to YM2612
-		ld	a, (hl)							; a = next byte of DAC sample
-		and	0Fh								; Want only the low nibble
-		ld	(.sample2_index+2), a			; Store into following instruction (self-modifying code)
-		ld	a, c							; a = c
+		di							; 4		; Disable interrupts
+		ld	a, 2Ah					; 7		; DAC channel register
+		ld	(zYM2612_A0), a			; 13	; Send to YM2612
+		ld	a, (hl)					; 7		; a = next byte of DAC sample
+		and	0Fh						; 7		; Want only the low nibble
+		ld	(.sample2_index+2), a	; 13	; Store into following instruction (self-modifying code)
+		ld	a, c					; 4		; a = c
 
 .sample2_index:
-		add	a, (iy+0)						; Self-modified code: the index offset is not zero, but what was set above
-		ld	(zYM2612_D0), a					; Send byte to DAC
-		ei									; Enable interrupts
-		ld	c, a							; Set c to the new value of a
-		ld	a, (zDACIndex)					; a = DAC index/flag
-		or	a								; Is playing flag set?
-		jp	p, .dac_idle_loop				; Branch if not
+		add	a, (iy+0)				; 19	; Self-modified code: the index offset is not zero, but what was set above
+		ld	(zYM2612_D0), a			; 13	; Send byte to DAC
+		ei							; 4		; Enable interrupts
+		ld	c, a					; 4		; Set c to the new value of a
+		ld	a, (zDACIndex)			; 13	; a = DAC index/flag
+		or	a						; 4		; Is playing flag set?
+		jp	p, .dac_idle_loop		; 10	; Branch if not
 
-		inc	hl								; Advance to next sample byte
-		dec	de								; Mark one byte as being done
-		ld	a, d							; a = d
-		or	e								; Is length zero?
-		jp	nz, .dac_playback_loop			; Loop if not
-
+		inc	hl						; 6		; Advance to next sample byte
+		dec	de						; 6		; Mark one byte as being done
+		ld	a, d					; 4		; a = d
+		or	e						; 4		; Is length zero?
+		jp	nz, .dac_playback_loop	; 10	; Loop if not
+									; total: 7+4+8+4+7+13+7+4+4+4+4+7+13+4+19+13+4+7+4+8+4+7+13+7+7+13+4+19+13+4+4+13+4+10+6+6+4+4+10
 		xor	a								; a = 0
 		ld	(zDACIndex), a					; Mark DAC as being idle
 		jp	zPlayDigitalAudio				; Loop
@@ -4347,22 +4347,23 @@ zPlaySEGAPCM:
 		nop									; Delay
 
 .loop:
-		ld	a, (hl)							; a = next byte of SEGA PCM
-		ld	(zYM2612_D0), a					; Send to DAC
-		ld	a, (zMusicNumber)				; Check next song number
-		cp	mus_StopSEGA					; Is it the command to stop playing SEGA PCM?
-		jr	z, .done						; Break the loop if yes
-		nop
-		nop
+		ld	a, (hl)					; 7		; a = next byte of SEGA PCM
+		ld	(zYM2612_D0), a			; 13	; Send to DAC
+		ld	a, (zMusicNumber)		; 13	; Check next song number
+		cp	mus_StopSEGA			; 7		; Is it the command to stop playing SEGA PCM?
+		jr	z, .done				; 7		; Break the loop if yes
+		nop							; 4
+		nop							; 4
 
-		ld	b, 0Ch							; Loop counter
-		djnz	$							; Loop in this instruction, decrementing b each iteration, until b = 0
+		ld	b, pcmLoopCounter(14500); 7		; Loop counter
+		djnz	$					; 8		; Loop in this instruction, decrementing b each iteration, until b = 0
 
-		inc	hl								; Advance to next byte of SEGA PCM
-		dec	de								; Mark one byte as being done
-		ld	a, d							; a = d
-		or	e								; Is length zero?
-		jr	nz, .loop						; Loop if not
+		inc	hl						; 6		; Advance to next byte of SEGA PCM
+		dec	de						; 6		; Mark one byte as being done
+		ld	a, d					; 4		; a = d
+		or	e						; 4		; Is length zero?
+		jr	nz, .loop				; 12	; Loop if not
+									; total: 102
 
 .done:
 	if SonicDriverVer==3
