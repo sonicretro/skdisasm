@@ -4414,7 +4414,7 @@ z80_SoundDriverPointers:
 		dw	z80_SFXPointers
 		dw	z80_ModEnvPointers
 		dw	z80_VolEnvPointers
-		dw	33h			; This is the song limit; it is never used in any driver
+		dw	mus__End		; This is the song limit; it is never used in any driver
 	endif
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
