@@ -192,8 +192,10 @@ Snd_S3Credits_FM4:
 
 Snd_S3Credits_Jump00:
     if ~FixMusicAndSFXDataBugs
-	; this causes this channel to desync with the rest of the song every loop
-	; compare Snd_S3Credits_Jump00 (FM4) to Snd_S3Credits_Jump01 (FM3 and FM5)
+	; This delay is needed before the song loops to be synced with FM3 and FM5.
+	; However, this makes it delay every loop, causing it to eventually desync
+	; with the rest of the song every loop!
+	; Compare Snd_S3Credits_Jump00 (FM4) to Snd_S3Credits_Jump01 (FM3 and FM5)
 	dc.b	nRst, $02
     endif
 	dc.b	nRst, $60, nRst
