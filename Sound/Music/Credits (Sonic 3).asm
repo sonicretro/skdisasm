@@ -186,12 +186,12 @@ Snd_S3Credits_FM4:
 	smpsCall            Snd_S3Credits_Call00
 	dc.b	nG3, nF3, nFs3, nAb3, nG3, nAb3, nBb3, nC4
 	smpsCall            Snd_S3Credits_Call01
-    if FixMusicAndSFXDataBugs
+    if FixMusicAndSFXDataBugs<>0
 	dc.b	nRst, $02
     endif
 
 Snd_S3Credits_Jump00:
-    if ~FixMusicAndSFXDataBugs
+    if FixMusicAndSFXDataBugs=0
 	; This delay is needed before the song loops to be synced with FM3 and FM5.
 	; However, this makes it delay every loop, causing it to eventually desync
 	; with the rest of the song every loop!
