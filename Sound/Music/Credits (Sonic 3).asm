@@ -186,9 +186,17 @@ Snd_S3Credits_FM4:
 	smpsCall            Snd_S3Credits_Call00
 	dc.b	nG3, nF3, nFs3, nAb3, nG3, nAb3, nBb3, nC4
 	smpsCall            Snd_S3Credits_Call01
+    if FixMusicAndSFXDataBugs
+	dc.b	nRst, $02
+    endif
 
 Snd_S3Credits_Jump00:
-	dc.b	nRst, $02, nRst, $60, nRst
+    if ~FixMusicAndSFXDataBugs
+	; this causes this channel to desync with the rest of the song every loop
+	; compare Snd_S3Credits_Jump00 (FM4) to Snd_S3Credits_Jump01 (FM3 and FM5)
+	dc.b	nRst, $02
+    endif
+	dc.b	nRst, $60, nRst
 	smpsAlterPitch      $F4
 	smpsCall            Snd_S3Credits_Call02
 	smpsAlterPitch      $0C
