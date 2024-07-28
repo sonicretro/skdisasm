@@ -197,10 +197,11 @@ shield_plc          = $3C
 ; Clock equates
 ; ---------------------------------------------------------------------------
 
-Master_Clock   = 53693175
-M68000_Clock   = Master_Clock/7
-Z80_Clock      = Master_Clock/15
-FM_Sample_Rate = M68000_Clock/(6*6*4)
+Master_Clock    = 53693175
+M68000_Clock    = Master_Clock/7
+Z80_Clock       = Master_Clock/15
+FM_Sample_Rate  = M68000_Clock/(6*6*4)
+PSG_Sample_Rate = Z80_Clock/16
 
 ; ---------------------------------------------------------------------------
 ; Address equates
