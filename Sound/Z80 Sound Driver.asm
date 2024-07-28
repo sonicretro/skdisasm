@@ -2776,9 +2776,7 @@ zFadeInToPrevious:
 		ret
 ; End of function zFadeInToPrevious
 ; ---------------------------------------------------------------------------
-zRoundFloatToInteger function float,INT(float+0.5)
-zMin function a,b,b!((a!b)&(-(a<b)))
-zMakePSGFrequency function frequency,zMin(3FFh,zRoundFloatToInteger(PSG_Sample_Rate/(frequency*2)))
+zMakePSGFrequency function frequency,min(3FFh,roundFloatToInteger(PSG_Sample_Rate/(frequency*2)))
 zMakePSGFrequencies macro
 		irp op,ALLARGS
 			dw zMakePSGFrequency(op)
@@ -2799,7 +2797,7 @@ zPSGFrequencies:
 		zMakePSGFrequencies 2071.49,   2193.34,   2330.42,   2485.78,   2601.40,   2796.51,   2943.69,   3107.23,   3290.01,   3495.64,   3608.40,   3857.25
 		zMakePSGFrequencies 4142.98,   4302.32,   4660.85,   4863.50,   5084.56,   5326.69,   5887.39,   6214.47,   6580.02,   6991.28, 223721.56, 223721.56
 ; ---------------------------------------------------------------------------
-zMakeFMFrequency function frequency,zRoundFloatToInteger(frequency*1024*1024*2/FM_Sample_Rate)
+zMakeFMFrequency function frequency,roundFloatToInteger(frequency*1024*1024*2/FM_Sample_Rate)
 zMakeFMFrequencies macro
 		irp op,ALLARGS
 			dw zMakeFMFrequency(op)
