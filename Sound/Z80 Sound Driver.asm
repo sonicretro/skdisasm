@@ -4650,111 +4650,635 @@ z80_SFXPointers:
 	endif
 
 z80_UniVoiceBank:
-		; Synth Bass 2
-		db  3Ch,   1,   0,   0,   0, 1Fh, 1Fh, 15h, 1Fh, 11h, 0Dh, 12h,   5
-		db         7,   4,   9,   2, 55h, 3Ah, 25h, 1Ah, 1Ah, 80h,   7, 80h	; 0
-		; Trumpet 1
-		db  3Dh,   1,   1,   1,   1, 94h, 19h, 19h, 19h, 0Fh, 0Dh, 0Dh, 0Dh
-		db         7,   4,   4,   4, 25h, 1Ah, 1Ah, 1Ah, 15h, 80h, 80h, 80h	; 25
-		; Slap Bass 2
-		db    3,   0,0D7h, 33h,   2, 5Fh, 9Fh, 5Fh, 1Fh, 13h, 0Fh, 0Ah, 0Ah
-		db       10h, 0Fh,   2,   9, 35h, 15h, 25h, 1Ah, 13h, 16h, 15h, 80h	; 50
-		; Synth Bass 1
-		db  34h, 70h, 72h, 31h, 31h, 1Fh, 1Fh, 1Fh, 1Fh, 10h,   6,   6,   6
-		db         1,   6,   6,   6, 35h, 1Ah, 15h, 1Ah, 10h, 83h, 18h, 83h	; 75
-		; Bell Synth 1
-		db  3Eh, 77h, 71h, 32h, 31h, 1Fh, 1Fh, 1Fh, 1Fh, 0Dh,   6,   0,   0
-		db         8,   6,   0,   0, 15h, 0Ah, 0Ah, 0Ah, 1Bh, 80h, 80h, 80h	; 100
-		; Bell Synth 2
-		db  34h, 33h, 41h, 7Eh, 74h, 5Bh, 9Fh, 5Fh, 1Fh,   4,   7,   7,   8
-		db         0,   0,   0,   0,0FFh,0FFh,0EFh,0FFh, 23h, 80h, 29h, 87h	; 125
-		; Synth Brass 1
-		db  3Ah,   1,   7, 31h, 71h, 8Eh, 8Eh, 8Dh, 53h, 0Eh, 0Eh, 0Eh,   3
-		db         0,   0,   0,   7, 1Fh,0FFh, 1Fh, 0Fh, 18h, 28h, 27h, 80h	; 150
-		; Synth like Bassoon
-		db  3Ch, 32h, 32h, 71h, 42h, 1Fh, 18h, 1Fh, 1Eh,   7, 1Fh,   7, 1Fh
-		db         0,   0,   0,   0, 1Fh, 0Fh, 1Fh, 0Fh, 1Eh, 80h, 0Ch, 80h	; 175
-		; Bell Horn type thing
-		db  3Ch, 71h, 72h, 3Fh, 34h, 8Dh, 52h, 9Fh, 1Fh,   9,   0,   0, 0Dh
-		db         0,   0,   0,   0, 23h,   8,   2,0F7h, 15h, 80h, 1Dh, 87h	; 200
-		; Synth Bass 3
-		db  3Dh,   1,   1,   0,   0, 8Eh, 52h, 14h, 4Ch,   8,   8, 0Eh,   3
-		db         0,   0,   0,   0, 1Fh, 1Fh, 1Fh, 1Fh, 1Bh, 80h, 80h, 9Bh	; 225
-		; Synth Trumpet
-		db  3Ah,   1,   1,   1,   2, 8Dh,   7,   7, 52h,   9,   0,   0,   3
-		db         1,   2,   2,   0, 52h,   2,   2, 28h, 18h, 22h, 18h, 80h	; 250
-		; Wood Block
-		db  3Ch, 36h, 31h, 76h, 71h, 94h, 9Fh, 96h, 9Fh, 12h,   0, 14h, 0Fh
-		db         4, 0Ah,   4, 0Dh, 2Fh, 0Fh, 4Fh, 2Fh, 33h, 80h, 1Ah, 80h	; 275
-		; Tubular Bell
-		db  34h, 33h, 41h, 7Eh, 74h, 5Bh, 9Fh, 5Fh, 1Fh,   4,   7,   7,   8
-		db         0,   0,   0,   0,0FFh,0FFh,0EFh,0FFh, 23h, 90h, 29h, 97h	; 300
-		; Strike Bass
-		db  38h, 63h, 31h, 31h, 31h, 10h, 13h, 1Ah, 1Bh, 0Eh,   0,   0,   0
-		db         0,   0,   0,   0, 3Fh, 0Fh, 0Fh, 0Fh, 1Ah, 19h, 1Ah, 80h	; 325
-		; Elec Piano
-		db  3Ah, 31h, 25h, 73h, 41h, 5Fh, 1Fh, 1Fh, 9Ch,   8,   5,   4,   5
-		db         3,   4,   2,   2, 2Fh, 2Fh, 1Fh, 2Fh, 29h, 27h, 1Fh, 80h	; 350
-		; Bright Piano
-		db    4, 71h, 41h, 31h, 31h, 12h, 12h, 12h, 12h,   0,   0,   0,   0
-		db         0,   0,   0,   0, 0Fh, 0Fh, 0Fh, 0Fh, 23h, 80h, 23h, 80h	; 375
-		; Church Bell
-		db  14h, 75h, 72h, 35h, 32h, 9Fh, 9Fh, 9Fh, 9Fh,   5,   5,   0, 0Ah
-		db         5,   5,   7,   5, 2Fh,0FFh, 0Fh, 2Fh, 1Eh, 80h, 14h, 80h	; 400
-		; Synth Brass 2
-		db  3Dh,   1,   0,   1,   2, 12h, 1Fh, 1Fh, 14h,   7,   2,   2, 0Ah
-		db         5,   5,   5,   5, 2Fh, 2Fh, 2Fh,0AFh, 1Ch, 80h, 82h, 80h	; 425
-		; Bell Piano
-		db  1Ch, 73h, 72h, 33h, 32h, 94h, 99h, 94h, 99h,   8, 0Ah,   8, 0Ah
-		db         0,   5,   0,   5, 3Fh, 4Fh, 3Fh, 4Fh, 1Eh, 80h, 19h, 80h	; 450
-		; Wet Wood Bass
-		db  31h, 33h,   1,   0,   0, 9Fh, 1Fh, 1Fh, 1Fh, 0Dh, 0Ah, 0Ah, 0Ah
-		db       0Ah,   7,   7,   7,0FFh,0AFh,0AFh,0AFh, 1Eh, 1Eh, 1Eh, 80h	; 475
-		; Silent Bass
-		db  3Ah, 70h, 76h, 30h, 71h, 1Fh, 95h, 1Fh, 1Fh, 0Eh, 0Fh,   5, 0Ch
-		db         7,   6,   6,   7, 2Fh, 4Fh, 1Fh, 5Fh, 21h, 12h, 28h, 80h	; 500
-		; Picked Bass
-		db  28h, 71h,   0, 30h,   1, 1Fh, 1Fh, 1Dh, 1Fh, 13h, 13h,   6,   5
-		db         3,   3,   2,   5, 4Fh, 4Fh, 2Fh, 3Fh, 0Eh, 14h, 1Eh, 80h	; 525
-		; Xylophone
-		db  3Eh, 38h,   1, 7Ah, 34h, 59h,0D9h, 5Fh, 9Ch, 0Fh,   4, 0Fh, 0Ah
-		db         2,   2,   5,   5,0AFh,0AFh, 66h, 66h, 28h, 80h,0A3h, 80h	; 550
-		; Sine Flute
-		db  39h, 32h, 31h, 72h, 71h, 1Fh, 1Fh, 1Fh, 1Fh,   0,   0,   0,   0
-		db         0,   0,   0,   0, 0Fh, 0Fh, 0Fh, 0Fh, 1Bh, 32h, 28h, 80h	; 575
-		; Pipe Organ
-		db    7, 34h, 74h, 32h, 71h, 1Fh, 1Fh, 1Fh, 1Fh, 0Ah, 0Ah,   5,   3
-		db         0,   0,   0,   0, 3Fh, 3Fh, 2Fh, 2Fh, 8Ah, 8Ah, 80h, 80h	; 600
-		; Synth Brass 2
-		db  3Ah, 31h, 37h, 31h, 31h, 8Dh, 8Dh, 8Eh, 53h, 0Eh, 0Eh, 0Eh,   3
-		db         0,   0,   0,   0, 1Fh,0FFh, 1Fh, 0Fh, 17h, 28h, 26h, 80h	; 625
-		; Harpsichord
-		db  3Bh, 3Ah, 31h, 71h, 74h,0DFh, 1Fh, 1Fh,0DFh,   0, 0Ah, 0Ah,   5
-		db         0,   5,   5,   3, 0Fh, 5Fh, 1Fh, 5Fh, 32h, 1Eh, 0Fh, 80h	; 650
-		; Metallic Bass
-		db    5,   4,   1,   2,   4, 8Dh, 1Fh, 15h, 52h,   6,   0,   0,   4
-		db         2,   8,   0,   0, 1Fh, 0Fh, 0Fh, 2Fh, 16h, 90h, 84h, 8Ch	; 675
-		; Alternate Metallic Bass
-		db  2Ch, 71h, 74h, 32h, 32h, 1Fh, 12h, 1Fh, 12h,   0, 0Ah,   0, 0Ah
-		db         0,   0,   0,   0, 0Fh, 1Fh, 0Fh, 1Fh, 16h, 80h, 17h, 80h	; 700
-		; Backdropped Metallic Bass
-		db  3Ah,   1,   7,   1,   1, 8Eh, 8Eh, 8Dh, 53h, 0Eh, 0Eh, 0Eh,   3
-		db         0,   0,   0,   7, 1Fh,0FFh, 1Fh, 0Fh, 18h, 28h, 27h, 8Fh	; 725
-		; Sine like Bell
-		db  36h, 7Ah, 32h, 51h, 11h, 1Fh, 1Fh, 59h, 1Ch, 0Ah, 0Dh,   6, 0Ah
-		db         7,   0,   2,   2,0AFh, 5Fh, 5Fh, 5Fh, 1Eh, 8Bh, 81h, 80h	; 750
-		; Synth like Metallic with Small Bell
-		db  3Ch, 71h, 72h, 3Fh, 34h, 8Dh, 52h, 9Fh, 1Fh,   9,   0,   0, 0Dh
-		db         0,   0,   0,   0, 23h,   8,   2,0F7h, 15h, 85h, 1Dh, 8Ah	; 775
-		; Nice Synth like lead
-		db  3Eh, 77h, 71h, 32h, 31h, 1Fh, 1Fh, 1Fh, 1Fh, 0Dh,   6,   0,   0
-		db         8,   6,   0,   0, 15h, 0Ah, 0Ah, 0Ah, 1Bh, 8Fh, 8Fh, 8Fh	; 800
-		; Rock Organ
-		db    7, 34h, 74h, 32h, 71h, 1Fh, 1Fh, 1Fh, 1Fh, 0Ah, 0Ah,   5,   3
-		db         0,   0,   0,   0, 3Fh, 3Fh, 2Fh, 2Fh, 8Ah, 8Ah, 8Ah, 8Ah	; 825
-		; Strike like Slap Bass
-		db  20h, 36h, 35h, 30h, 31h,0DFh,0DFh, 9Fh, 9Fh,   7,   6,   9,   6
-		db         7,   6,   6,   8, 20h, 10h, 10h,0F8h, 19h, 37h, 13h, 80h	; 850
+;	Voice 00h - Synth Bass 2
+;	3Ch
+;	01h, 00h, 00h, 00h, 	1Fh, 1Fh, 15h, 1Fh, 	11h, 0Dh, 12h, 05h
+;	07h, 04h, 09h, 02h, 	55h, 3Ah, 25h, 1Ah, 	1Ah, 80h, 07h, 80h
+	smpsVcAlgorithm     04h
+	smpsVcFeedback      07h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        00h, 00h, 00h, 00h
+	smpsVcCoarseFreq    00h, 00h, 00h, 01h
+	smpsVcRateScale     00h, 00h, 00h, 00h
+	smpsVcAttackRate    1Fh, 15h, 1Fh, 1Fh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    05h, 12h, 0Dh, 11h
+	smpsVcDecayRate2    02h, 09h, 04h, 07h
+	smpsVcDecayLevel    01h, 02h, 03h, 05h
+	smpsVcReleaseRate   0Ah, 05h, 0Ah, 05h
+	smpsVcTotalLevel    80h, 07h, 80h, 1Ah
+
+;	Voice 01h - Trumpet 1
+;	3Dh
+;	01h, 01h, 01h, 01h, 	94h, 19h, 19h, 19h, 	0Fh, 0Dh, 0Dh, 0Dh
+;	07h, 04h, 04h, 04h, 	25h, 1Ah, 1Ah, 1Ah, 	15h, 80h, 80h, 80h
+	smpsVcAlgorithm     05h
+	smpsVcFeedback      07h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        00h, 00h, 00h, 00h
+	smpsVcCoarseFreq    01h, 01h, 01h, 01h
+	smpsVcRateScale     00h, 00h, 00h, 02h
+	smpsVcAttackRate    19h, 19h, 19h, 14h
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    0Dh, 0Dh, 0Dh, 0Fh
+	smpsVcDecayRate2    04h, 04h, 04h, 07h
+	smpsVcDecayLevel    01h, 01h, 01h, 02h
+	smpsVcReleaseRate   0Ah, 0Ah, 0Ah, 05h
+	smpsVcTotalLevel    80h, 80h, 80h, 15h
+
+;	Voice 02h - Slap Bass 2
+;	03h
+;	00h, 0D7h, 33h, 02h, 	5Fh, 9Fh, 5Fh, 1Fh, 	13h, 0Fh, 0Ah, 0Ah
+;	10h, 0Fh, 02h, 09h, 	35h, 15h, 25h, 1Ah, 	13h, 16h, 15h, 80h
+	smpsVcAlgorithm     03h
+	smpsVcFeedback      00h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        00h, 03h, 0Dh, 00h
+	smpsVcCoarseFreq    02h, 03h, 07h, 00h
+	smpsVcRateScale     00h, 01h, 02h, 01h
+	smpsVcAttackRate    1Fh, 1Fh, 1Fh, 1Fh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    0Ah, 0Ah, 0Fh, 13h
+	smpsVcDecayRate2    09h, 02h, 0Fh, 10h
+	smpsVcDecayLevel    01h, 02h, 01h, 03h
+	smpsVcReleaseRate   0Ah, 05h, 05h, 05h
+	smpsVcTotalLevel    80h, 15h, 16h, 13h
+
+;	Voice 03h - Synth Bass 1
+;	34h
+;	70h, 72h, 31h, 31h, 	1Fh, 1Fh, 1Fh, 1Fh, 	10h, 06h, 06h, 06h
+;	01h, 06h, 06h, 06h, 	35h, 1Ah, 15h, 1Ah, 	10h, 83h, 18h, 83h
+	smpsVcAlgorithm     04h
+	smpsVcFeedback      06h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        03h, 03h, 07h, 07h
+	smpsVcCoarseFreq    01h, 01h, 02h, 00h
+	smpsVcRateScale     00h, 00h, 00h, 00h
+	smpsVcAttackRate    1Fh, 1Fh, 1Fh, 1Fh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    06h, 06h, 06h, 10h
+	smpsVcDecayRate2    06h, 06h, 06h, 01h
+	smpsVcDecayLevel    01h, 01h, 01h, 03h
+	smpsVcReleaseRate   0Ah, 05h, 0Ah, 05h
+	smpsVcTotalLevel    83h, 18h, 83h, 10h
+
+;	Voice 04h - Bell Synth 1
+;	3Eh
+;	77h, 71h, 32h, 31h, 	1Fh, 1Fh, 1Fh, 1Fh, 	0Dh, 06h, 00h, 00h
+;	08h, 06h, 00h, 00h, 	15h, 0Ah, 0Ah, 0Ah, 	1Bh, 80h, 80h, 80h
+	smpsVcAlgorithm     06h
+	smpsVcFeedback      07h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        03h, 03h, 07h, 07h
+	smpsVcCoarseFreq    01h, 02h, 01h, 07h
+	smpsVcRateScale     00h, 00h, 00h, 00h
+	smpsVcAttackRate    1Fh, 1Fh, 1Fh, 1Fh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    00h, 00h, 06h, 0Dh
+	smpsVcDecayRate2    00h, 00h, 06h, 08h
+	smpsVcDecayLevel    00h, 00h, 00h, 01h
+	smpsVcReleaseRate   0Ah, 0Ah, 0Ah, 05h
+	smpsVcTotalLevel    80h, 80h, 80h, 1Bh
+
+;	Voice 05h - Bell Synth 2
+;	34h
+;	33h, 41h, 7Eh, 74h, 	5Bh, 9Fh, 5Fh, 1Fh, 	04h, 07h, 07h, 08h
+;	00h, 00h, 00h, 00h, 	0FFh, 0FFh, 0EFh, 0FFh, 	23h, 80h, 29h, 87h
+	smpsVcAlgorithm     04h
+	smpsVcFeedback      06h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        07h, 07h, 04h, 03h
+	smpsVcCoarseFreq    04h, 0Eh, 01h, 03h
+	smpsVcRateScale     00h, 01h, 02h, 01h
+	smpsVcAttackRate    1Fh, 1Fh, 1Fh, 1Bh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    08h, 07h, 07h, 04h
+	smpsVcDecayRate2    00h, 00h, 00h, 00h
+	smpsVcDecayLevel    0Fh, 0Eh, 0Fh, 0Fh
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    87h, 29h, 80h, 23h
+
+;	Voice 06h - Synth Brass 1
+;	3Ah
+;	01h, 07h, 31h, 71h, 	8Eh, 8Eh, 8Dh, 53h, 	0Eh, 0Eh, 0Eh, 03h
+;	00h, 00h, 00h, 07h, 	1Fh, 0FFh, 1Fh, 0Fh, 	18h, 28h, 27h, 80h
+	smpsVcAlgorithm     02h
+	smpsVcFeedback      07h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        07h, 03h, 00h, 00h
+	smpsVcCoarseFreq    01h, 01h, 07h, 01h
+	smpsVcRateScale     01h, 02h, 02h, 02h
+	smpsVcAttackRate    13h, 0Dh, 0Eh, 0Eh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    03h, 0Eh, 0Eh, 0Eh
+	smpsVcDecayRate2    07h, 00h, 00h, 00h
+	smpsVcDecayLevel    00h, 01h, 0Fh, 01h
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    80h, 27h, 28h, 18h
+
+;	Voice 07h - Synth like Bassoon
+;	3Ch
+;	32h, 32h, 71h, 42h, 	1Fh, 18h, 1Fh, 1Eh, 	07h, 1Fh, 07h, 1Fh
+;	00h, 00h, 00h, 00h, 	1Fh, 0Fh, 1Fh, 0Fh, 	1Eh, 80h, 0Ch, 80h
+	smpsVcAlgorithm     04h
+	smpsVcFeedback      07h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        04h, 07h, 03h, 03h
+	smpsVcCoarseFreq    02h, 01h, 02h, 02h
+	smpsVcRateScale     00h, 00h, 00h, 00h
+	smpsVcAttackRate    1Eh, 1Fh, 18h, 1Fh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    1Fh, 07h, 1Fh, 07h
+	smpsVcDecayRate2    00h, 00h, 00h, 00h
+	smpsVcDecayLevel    00h, 01h, 00h, 01h
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    80h, 0Ch, 80h, 1Eh
+
+;	Voice 08h - Bell Horn type thing
+;	3Ch
+;	71h, 72h, 3Fh, 34h, 	8Dh, 52h, 9Fh, 1Fh, 	09h, 00h, 00h, 0Dh
+;	00h, 00h, 00h, 00h, 	23h, 08h, 02h, 0F7h, 	15h, 80h, 1Dh, 87h
+	smpsVcAlgorithm     04h
+	smpsVcFeedback      07h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        03h, 03h, 07h, 07h
+	smpsVcCoarseFreq    04h, 0Fh, 02h, 01h
+	smpsVcRateScale     00h, 02h, 01h, 02h
+	smpsVcAttackRate    1Fh, 1Fh, 12h, 0Dh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    0Dh, 00h, 00h, 09h
+	smpsVcDecayRate2    00h, 00h, 00h, 00h
+	smpsVcDecayLevel    0Fh, 00h, 00h, 02h
+	smpsVcReleaseRate   07h, 02h, 08h, 03h
+	smpsVcTotalLevel    87h, 1Dh, 80h, 15h
+
+;	Voice 09h - Synth Bass 3
+;	3Dh
+;	01h, 01h, 00h, 00h, 	8Eh, 52h, 14h, 4Ch, 	08h, 08h, 0Eh, 03h
+;	00h, 00h, 00h, 00h, 	1Fh, 1Fh, 1Fh, 1Fh, 	1Bh, 80h, 80h, 9Bh
+	smpsVcAlgorithm     05h
+	smpsVcFeedback      07h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        00h, 00h, 00h, 00h
+	smpsVcCoarseFreq    00h, 00h, 01h, 01h
+	smpsVcRateScale     01h, 00h, 01h, 02h
+	smpsVcAttackRate    0Ch, 14h, 12h, 0Eh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    03h, 0Eh, 08h, 08h
+	smpsVcDecayRate2    00h, 00h, 00h, 00h
+	smpsVcDecayLevel    01h, 01h, 01h, 01h
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    9Bh, 80h, 80h, 1Bh
+
+;	Voice 0Ah - Synth Trumpet
+;	3Ah
+;	01h, 01h, 01h, 02h, 	8Dh, 07h, 07h, 52h, 	09h, 00h, 00h, 03h
+;	01h, 02h, 02h, 00h, 	52h, 02h, 02h, 28h, 	18h, 22h, 18h, 80h
+	smpsVcAlgorithm     02h
+	smpsVcFeedback      07h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        00h, 00h, 00h, 00h
+	smpsVcCoarseFreq    02h, 01h, 01h, 01h
+	smpsVcRateScale     01h, 00h, 00h, 02h
+	smpsVcAttackRate    12h, 07h, 07h, 0Dh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    03h, 00h, 00h, 09h
+	smpsVcDecayRate2    00h, 02h, 02h, 01h
+	smpsVcDecayLevel    02h, 00h, 00h, 05h
+	smpsVcReleaseRate   08h, 02h, 02h, 02h
+	smpsVcTotalLevel    80h, 18h, 22h, 18h
+
+;	Voice 0Bh - Wood Block
+;	3Ch
+;	36h, 31h, 76h, 71h, 	94h, 9Fh, 96h, 9Fh, 	12h, 00h, 14h, 0Fh
+;	04h, 0Ah, 04h, 0Dh, 	2Fh, 0Fh, 4Fh, 2Fh, 	33h, 80h, 1Ah, 80h
+	smpsVcAlgorithm     04h
+	smpsVcFeedback      07h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        07h, 07h, 03h, 03h
+	smpsVcCoarseFreq    01h, 06h, 01h, 06h
+	smpsVcRateScale     02h, 02h, 02h, 02h
+	smpsVcAttackRate    1Fh, 16h, 1Fh, 14h
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    0Fh, 14h, 00h, 12h
+	smpsVcDecayRate2    0Dh, 04h, 0Ah, 04h
+	smpsVcDecayLevel    02h, 04h, 00h, 02h
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    80h, 1Ah, 80h, 33h
+
+;	Voice 0Ch - Tubular Bell
+;	34h
+;	33h, 41h, 7Eh, 74h, 	5Bh, 9Fh, 5Fh, 1Fh, 	04h, 07h, 07h, 08h
+;	00h, 00h, 00h, 00h, 	0FFh, 0FFh, 0EFh, 0FFh, 	23h, 90h, 29h, 97h
+	smpsVcAlgorithm     04h
+	smpsVcFeedback      06h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        07h, 07h, 04h, 03h
+	smpsVcCoarseFreq    04h, 0Eh, 01h, 03h
+	smpsVcRateScale     00h, 01h, 02h, 01h
+	smpsVcAttackRate    1Fh, 1Fh, 1Fh, 1Bh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    08h, 07h, 07h, 04h
+	smpsVcDecayRate2    00h, 00h, 00h, 00h
+	smpsVcDecayLevel    0Fh, 0Eh, 0Fh, 0Fh
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    97h, 29h, 90h, 23h
+
+;	Voice 0Dh - Strike Bass
+;	38h
+;	63h, 31h, 31h, 31h, 	10h, 13h, 1Ah, 1Bh, 	0Eh, 00h, 00h, 00h
+;	00h, 00h, 00h, 00h, 	3Fh, 0Fh, 0Fh, 0Fh, 	1Ah, 19h, 1Ah, 80h
+	smpsVcAlgorithm     00h
+	smpsVcFeedback      07h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        03h, 03h, 03h, 06h
+	smpsVcCoarseFreq    01h, 01h, 01h, 03h
+	smpsVcRateScale     00h, 00h, 00h, 00h
+	smpsVcAttackRate    1Bh, 1Ah, 13h, 10h
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    00h, 00h, 00h, 0Eh
+	smpsVcDecayRate2    00h, 00h, 00h, 00h
+	smpsVcDecayLevel    00h, 00h, 00h, 03h
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    80h, 1Ah, 19h, 1Ah
+
+;	Voice 0Eh - Elec Piano
+;	3Ah
+;	31h, 25h, 73h, 41h, 	5Fh, 1Fh, 1Fh, 9Ch, 	08h, 05h, 04h, 05h
+;	03h, 04h, 02h, 02h, 	2Fh, 2Fh, 1Fh, 2Fh, 	29h, 27h, 1Fh, 80h
+	smpsVcAlgorithm     02h
+	smpsVcFeedback      07h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        04h, 07h, 02h, 03h
+	smpsVcCoarseFreq    01h, 03h, 05h, 01h
+	smpsVcRateScale     02h, 00h, 00h, 01h
+	smpsVcAttackRate    1Ch, 1Fh, 1Fh, 1Fh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    05h, 04h, 05h, 08h
+	smpsVcDecayRate2    02h, 02h, 04h, 03h
+	smpsVcDecayLevel    02h, 01h, 02h, 02h
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    80h, 1Fh, 27h, 29h
+
+;	Voice 0Fh - Bright Piano
+;	04h
+;	71h, 41h, 31h, 31h, 	12h, 12h, 12h, 12h, 	00h, 00h, 00h, 00h
+;	00h, 00h, 00h, 00h, 	0Fh, 0Fh, 0Fh, 0Fh, 	23h, 80h, 23h, 80h
+	smpsVcAlgorithm     04h
+	smpsVcFeedback      00h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        03h, 03h, 04h, 07h
+	smpsVcCoarseFreq    01h, 01h, 01h, 01h
+	smpsVcRateScale     00h, 00h, 00h, 00h
+	smpsVcAttackRate    12h, 12h, 12h, 12h
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    00h, 00h, 00h, 00h
+	smpsVcDecayRate2    00h, 00h, 00h, 00h
+	smpsVcDecayLevel    00h, 00h, 00h, 00h
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    80h, 23h, 80h, 23h
+
+;	Voice 10h - Church Bell
+;	14h
+;	75h, 72h, 35h, 32h, 	9Fh, 9Fh, 9Fh, 9Fh, 	05h, 05h, 00h, 0Ah
+;	05h, 05h, 07h, 05h, 	2Fh, 0FFh, 0Fh, 2Fh, 	1Eh, 80h, 14h, 80h
+	smpsVcAlgorithm     04h
+	smpsVcFeedback      02h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        03h, 03h, 07h, 07h
+	smpsVcCoarseFreq    02h, 05h, 02h, 05h
+	smpsVcRateScale     02h, 02h, 02h, 02h
+	smpsVcAttackRate    1Fh, 1Fh, 1Fh, 1Fh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    0Ah, 00h, 05h, 05h
+	smpsVcDecayRate2    05h, 07h, 05h, 05h
+	smpsVcDecayLevel    02h, 00h, 0Fh, 02h
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    80h, 14h, 80h, 1Eh
+
+;	Voice 11h - Synth Brass 2
+;	3Dh
+;	01h, 00h, 01h, 02h, 	12h, 1Fh, 1Fh, 14h, 	07h, 02h, 02h, 0Ah
+;	05h, 05h, 05h, 05h, 	2Fh, 2Fh, 2Fh, 0AFh, 	1Ch, 80h, 82h, 80h
+	smpsVcAlgorithm     05h
+	smpsVcFeedback      07h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        00h, 00h, 00h, 00h
+	smpsVcCoarseFreq    02h, 01h, 00h, 01h
+	smpsVcRateScale     00h, 00h, 00h, 00h
+	smpsVcAttackRate    14h, 1Fh, 1Fh, 12h
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    0Ah, 02h, 02h, 07h
+	smpsVcDecayRate2    05h, 05h, 05h, 05h
+	smpsVcDecayLevel    0Ah, 02h, 02h, 02h
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    80h, 82h, 80h, 1Ch
+
+;	Voice 12h - Bell Piano
+;	1Ch
+;	73h, 72h, 33h, 32h, 	94h, 99h, 94h, 99h, 	08h, 0Ah, 08h, 0Ah
+;	00h, 05h, 00h, 05h, 	3Fh, 4Fh, 3Fh, 4Fh, 	1Eh, 80h, 19h, 80h
+	smpsVcAlgorithm     04h
+	smpsVcFeedback      03h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        03h, 03h, 07h, 07h
+	smpsVcCoarseFreq    02h, 03h, 02h, 03h
+	smpsVcRateScale     02h, 02h, 02h, 02h
+	smpsVcAttackRate    19h, 14h, 19h, 14h
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    0Ah, 08h, 0Ah, 08h
+	smpsVcDecayRate2    05h, 00h, 05h, 00h
+	smpsVcDecayLevel    04h, 03h, 04h, 03h
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    80h, 19h, 80h, 1Eh
+
+;	Voice 13h - Wet Wood Bass
+;	31h
+;	33h, 01h, 00h, 00h, 	9Fh, 1Fh, 1Fh, 1Fh, 	0Dh, 0Ah, 0Ah, 0Ah
+;	0Ah, 07h, 07h, 07h, 	0FFh, 0AFh, 0AFh, 0AFh, 	1Eh, 1Eh, 1Eh, 80h
+	smpsVcAlgorithm     01h
+	smpsVcFeedback      06h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        00h, 00h, 00h, 03h
+	smpsVcCoarseFreq    00h, 00h, 01h, 03h
+	smpsVcRateScale     00h, 00h, 00h, 02h
+	smpsVcAttackRate    1Fh, 1Fh, 1Fh, 1Fh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    0Ah, 0Ah, 0Ah, 0Dh
+	smpsVcDecayRate2    07h, 07h, 07h, 0Ah
+	smpsVcDecayLevel    0Ah, 0Ah, 0Ah, 0Fh
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    80h, 1Eh, 1Eh, 1Eh
+
+;	Voice 14h - Silent Bass
+;	3Ah
+;	70h, 76h, 30h, 71h, 	1Fh, 95h, 1Fh, 1Fh, 	0Eh, 0Fh, 05h, 0Ch
+;	07h, 06h, 06h, 07h, 	2Fh, 4Fh, 1Fh, 5Fh, 	21h, 12h, 28h, 80h
+	smpsVcAlgorithm     02h
+	smpsVcFeedback      07h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        07h, 03h, 07h, 07h
+	smpsVcCoarseFreq    01h, 00h, 06h, 00h
+	smpsVcRateScale     00h, 00h, 02h, 00h
+	smpsVcAttackRate    1Fh, 1Fh, 15h, 1Fh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    0Ch, 05h, 0Fh, 0Eh
+	smpsVcDecayRate2    07h, 06h, 06h, 07h
+	smpsVcDecayLevel    05h, 01h, 04h, 02h
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    80h, 28h, 12h, 21h
+
+;	Voice 15h - Picked Bass
+;	28h
+;	71h, 00h, 30h, 01h, 	1Fh, 1Fh, 1Dh, 1Fh, 	13h, 13h, 06h, 05h
+;	03h, 03h, 02h, 05h, 	4Fh, 4Fh, 2Fh, 3Fh, 	0Eh, 14h, 1Eh, 80h
+	smpsVcAlgorithm     00h
+	smpsVcFeedback      05h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        00h, 03h, 00h, 07h
+	smpsVcCoarseFreq    01h, 00h, 00h, 01h
+	smpsVcRateScale     00h, 00h, 00h, 00h
+	smpsVcAttackRate    1Fh, 1Dh, 1Fh, 1Fh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    05h, 06h, 13h, 13h
+	smpsVcDecayRate2    05h, 02h, 03h, 03h
+	smpsVcDecayLevel    03h, 02h, 04h, 04h
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    80h, 1Eh, 14h, 0Eh
+
+;	Voice 16h - Xylophone
+;	3Eh
+;	38h, 01h, 7Ah, 34h, 	59h, 0D9h, 5Fh, 9Ch, 	0Fh, 04h, 0Fh, 0Ah
+;	02h, 02h, 05h, 05h, 	0AFh, 0AFh, 66h, 66h, 	28h, 80h, 0A3h, 80h
+	smpsVcAlgorithm     06h
+	smpsVcFeedback      07h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        03h, 07h, 00h, 03h
+	smpsVcCoarseFreq    04h, 0Ah, 01h, 08h
+	smpsVcRateScale     02h, 01h, 03h, 01h
+	smpsVcAttackRate    1Ch, 1Fh, 19h, 19h
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    0Ah, 0Fh, 04h, 0Fh
+	smpsVcDecayRate2    05h, 05h, 02h, 02h
+	smpsVcDecayLevel    06h, 06h, 0Ah, 0Ah
+	smpsVcReleaseRate   06h, 06h, 0Fh, 0Fh
+	smpsVcTotalLevel    80h, 0A3h, 80h, 28h
+
+;	Voice 17h - Sine Flute
+;	39h
+;	32h, 31h, 72h, 71h, 	1Fh, 1Fh, 1Fh, 1Fh, 	00h, 00h, 00h, 00h
+;	00h, 00h, 00h, 00h, 	0Fh, 0Fh, 0Fh, 0Fh, 	1Bh, 32h, 28h, 80h
+	smpsVcAlgorithm     01h
+	smpsVcFeedback      07h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        07h, 07h, 03h, 03h
+	smpsVcCoarseFreq    01h, 02h, 01h, 02h
+	smpsVcRateScale     00h, 00h, 00h, 00h
+	smpsVcAttackRate    1Fh, 1Fh, 1Fh, 1Fh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    00h, 00h, 00h, 00h
+	smpsVcDecayRate2    00h, 00h, 00h, 00h
+	smpsVcDecayLevel    00h, 00h, 00h, 00h
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    80h, 28h, 32h, 1Bh
+
+;	Voice 18h - Pipe Organ
+;	07h
+;	34h, 74h, 32h, 71h, 	1Fh, 1Fh, 1Fh, 1Fh, 	0Ah, 0Ah, 05h, 03h
+;	00h, 00h, 00h, 00h, 	3Fh, 3Fh, 2Fh, 2Fh, 	8Ah, 8Ah, 80h, 80h
+	smpsVcAlgorithm     07h
+	smpsVcFeedback      00h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        07h, 03h, 07h, 03h
+	smpsVcCoarseFreq    01h, 02h, 04h, 04h
+	smpsVcRateScale     00h, 00h, 00h, 00h
+	smpsVcAttackRate    1Fh, 1Fh, 1Fh, 1Fh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    03h, 05h, 0Ah, 0Ah
+	smpsVcDecayRate2    00h, 00h, 00h, 00h
+	smpsVcDecayLevel    02h, 02h, 03h, 03h
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    80h, 80h, 8Ah, 8Ah
+
+;	Voice 19h - Synth Brass 2
+;	3Ah
+;	31h, 37h, 31h, 31h, 	8Dh, 8Dh, 8Eh, 53h, 	0Eh, 0Eh, 0Eh, 03h
+;	00h, 00h, 00h, 00h, 	1Fh, 0FFh, 1Fh, 0Fh, 	17h, 28h, 26h, 80h
+	smpsVcAlgorithm     02h
+	smpsVcFeedback      07h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        03h, 03h, 03h, 03h
+	smpsVcCoarseFreq    01h, 01h, 07h, 01h
+	smpsVcRateScale     01h, 02h, 02h, 02h
+	smpsVcAttackRate    13h, 0Eh, 0Dh, 0Dh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    03h, 0Eh, 0Eh, 0Eh
+	smpsVcDecayRate2    00h, 00h, 00h, 00h
+	smpsVcDecayLevel    00h, 01h, 0Fh, 01h
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    80h, 26h, 28h, 17h
+
+;	Voice 1Ah - Harpsichord
+;	3Bh
+;	3Ah, 31h, 71h, 74h, 	0DFh, 1Fh, 1Fh, 0DFh, 	00h, 0Ah, 0Ah, 05h
+;	00h, 05h, 05h, 03h, 	0Fh, 5Fh, 1Fh, 5Fh, 	32h, 1Eh, 0Fh, 80h
+	smpsVcAlgorithm     03h
+	smpsVcFeedback      07h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        07h, 07h, 03h, 03h
+	smpsVcCoarseFreq    04h, 01h, 01h, 0Ah
+	smpsVcRateScale     03h, 00h, 00h, 03h
+	smpsVcAttackRate    1Fh, 1Fh, 1Fh, 1Fh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    05h, 0Ah, 0Ah, 00h
+	smpsVcDecayRate2    03h, 05h, 05h, 00h
+	smpsVcDecayLevel    05h, 01h, 05h, 00h
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    80h, 0Fh, 1Eh, 32h
+
+;	Voice 1Bh - Metallic Bass
+;	05h
+;	04h, 01h, 02h, 04h, 	8Dh, 1Fh, 15h, 52h, 	06h, 00h, 00h, 04h
+;	02h, 08h, 00h, 00h, 	1Fh, 0Fh, 0Fh, 2Fh, 	16h, 90h, 84h, 8Ch
+	smpsVcAlgorithm     05h
+	smpsVcFeedback      00h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        00h, 00h, 00h, 00h
+	smpsVcCoarseFreq    04h, 02h, 01h, 04h
+	smpsVcRateScale     01h, 00h, 00h, 02h
+	smpsVcAttackRate    12h, 15h, 1Fh, 0Dh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    04h, 00h, 00h, 06h
+	smpsVcDecayRate2    00h, 00h, 08h, 02h
+	smpsVcDecayLevel    02h, 00h, 00h, 01h
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    8Ch, 84h, 90h, 16h
+
+;	Voice 1Ch - Alternate Metallic Bass
+;	2Ch
+;	71h, 74h, 32h, 32h, 	1Fh, 12h, 1Fh, 12h, 	00h, 0Ah, 00h, 0Ah
+;	00h, 00h, 00h, 00h, 	0Fh, 1Fh, 0Fh, 1Fh, 	16h, 80h, 17h, 80h
+	smpsVcAlgorithm     04h
+	smpsVcFeedback      05h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        03h, 03h, 07h, 07h
+	smpsVcCoarseFreq    02h, 02h, 04h, 01h
+	smpsVcRateScale     00h, 00h, 00h, 00h
+	smpsVcAttackRate    12h, 1Fh, 12h, 1Fh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    0Ah, 00h, 0Ah, 00h
+	smpsVcDecayRate2    00h, 00h, 00h, 00h
+	smpsVcDecayLevel    01h, 00h, 01h, 00h
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    80h, 17h, 80h, 16h
+
+;	Voice 1Dh - Backdropped Metallic Bass
+;	3Ah
+;	01h, 07h, 01h, 01h, 	8Eh, 8Eh, 8Dh, 53h, 	0Eh, 0Eh, 0Eh, 03h
+;	00h, 00h, 00h, 07h, 	1Fh, 0FFh, 1Fh, 0Fh, 	18h, 28h, 27h, 8Fh
+	smpsVcAlgorithm     02h
+	smpsVcFeedback      07h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        00h, 00h, 00h, 00h
+	smpsVcCoarseFreq    01h, 01h, 07h, 01h
+	smpsVcRateScale     01h, 02h, 02h, 02h
+	smpsVcAttackRate    13h, 0Dh, 0Eh, 0Eh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    03h, 0Eh, 0Eh, 0Eh
+	smpsVcDecayRate2    07h, 00h, 00h, 00h
+	smpsVcDecayLevel    00h, 01h, 0Fh, 01h
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    8Fh, 27h, 28h, 18h
+
+;	Voice 1Eh - Sine like Bell
+;	36h
+;	7Ah, 32h, 51h, 11h, 	1Fh, 1Fh, 59h, 1Ch, 	0Ah, 0Dh, 06h, 0Ah
+;	07h, 00h, 02h, 02h, 	0AFh, 5Fh, 5Fh, 5Fh, 	1Eh, 8Bh, 81h, 80h
+	smpsVcAlgorithm     06h
+	smpsVcFeedback      06h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        01h, 05h, 03h, 07h
+	smpsVcCoarseFreq    01h, 01h, 02h, 0Ah
+	smpsVcRateScale     00h, 01h, 00h, 00h
+	smpsVcAttackRate    1Ch, 19h, 1Fh, 1Fh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    0Ah, 06h, 0Dh, 0Ah
+	smpsVcDecayRate2    02h, 02h, 00h, 07h
+	smpsVcDecayLevel    05h, 05h, 05h, 0Ah
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    80h, 81h, 8Bh, 1Eh
+
+;	Voice 1Fh - Synth like Metallic with Small Bell
+;	3Ch
+;	71h, 72h, 3Fh, 34h, 	8Dh, 52h, 9Fh, 1Fh, 	09h, 00h, 00h, 0Dh
+;	00h, 00h, 00h, 00h, 	23h, 08h, 02h, 0F7h, 	15h, 85h, 1Dh, 8Ah
+	smpsVcAlgorithm     04h
+	smpsVcFeedback      07h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        03h, 03h, 07h, 07h
+	smpsVcCoarseFreq    04h, 0Fh, 02h, 01h
+	smpsVcRateScale     00h, 02h, 01h, 02h
+	smpsVcAttackRate    1Fh, 1Fh, 12h, 0Dh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    0Dh, 00h, 00h, 09h
+	smpsVcDecayRate2    00h, 00h, 00h, 00h
+	smpsVcDecayLevel    0Fh, 00h, 00h, 02h
+	smpsVcReleaseRate   07h, 02h, 08h, 03h
+	smpsVcTotalLevel    8Ah, 1Dh, 85h, 15h
+
+;	Voice 20h - Nice Synth like lead
+;	3Eh
+;	77h, 71h, 32h, 31h, 	1Fh, 1Fh, 1Fh, 1Fh, 	0Dh, 06h, 00h, 00h
+;	08h, 06h, 00h, 00h, 	15h, 0Ah, 0Ah, 0Ah, 	1Bh, 8Fh, 8Fh, 8Fh
+	smpsVcAlgorithm     06h
+	smpsVcFeedback      07h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        03h, 03h, 07h, 07h
+	smpsVcCoarseFreq    01h, 02h, 01h, 07h
+	smpsVcRateScale     00h, 00h, 00h, 00h
+	smpsVcAttackRate    1Fh, 1Fh, 1Fh, 1Fh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    00h, 00h, 06h, 0Dh
+	smpsVcDecayRate2    00h, 00h, 06h, 08h
+	smpsVcDecayLevel    00h, 00h, 00h, 01h
+	smpsVcReleaseRate   0Ah, 0Ah, 0Ah, 05h
+	smpsVcTotalLevel    8Fh, 8Fh, 8Fh, 1Bh
+
+;	Voice 21h - Rock Organ
+;	07h
+;	34h, 74h, 32h, 71h, 	1Fh, 1Fh, 1Fh, 1Fh, 	0Ah, 0Ah, 05h, 03h
+;	00h, 00h, 00h, 00h, 	3Fh, 3Fh, 2Fh, 2Fh, 	8Ah, 8Ah, 8Ah, 8Ah
+	smpsVcAlgorithm     07h
+	smpsVcFeedback      00h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        07h, 03h, 07h, 03h
+	smpsVcCoarseFreq    01h, 02h, 04h, 04h
+	smpsVcRateScale     00h, 00h, 00h, 00h
+	smpsVcAttackRate    1Fh, 1Fh, 1Fh, 1Fh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    03h, 05h, 0Ah, 0Ah
+	smpsVcDecayRate2    00h, 00h, 00h, 00h
+	smpsVcDecayLevel    02h, 02h, 03h, 03h
+	smpsVcReleaseRate   0Fh, 0Fh, 0Fh, 0Fh
+	smpsVcTotalLevel    8Ah, 8Ah, 8Ah, 8Ah
+
+;	Voice 22h - Strike like Slap Bass
+;	20h
+;	36h, 35h, 30h, 31h, 	0DFh, 0DFh, 9Fh, 9Fh, 	07h, 06h, 09h, 06h
+;	07h, 06h, 06h, 08h, 	20h, 10h, 10h, 0F8h, 	19h, 37h, 13h, 80h
+	smpsVcAlgorithm     00h
+	smpsVcFeedback      04h
+	smpsVcUnusedBits    00h
+	smpsVcDetune        03h, 03h, 03h, 03h
+	smpsVcCoarseFreq    01h, 00h, 05h, 06h
+	smpsVcRateScale     02h, 02h, 03h, 03h
+	smpsVcAttackRate    1Fh, 1Fh, 1Fh, 1Fh
+	smpsVcAmpMod        00h, 00h, 00h, 00h
+	smpsVcDecayRate1    06h, 09h, 06h, 07h
+	smpsVcDecayRate2    08h, 06h, 06h, 07h
+	smpsVcDecayLevel    0Fh, 01h, 01h, 02h
+	smpsVcReleaseRate   08h, 00h, 00h, 00h
+	smpsVcTotalLevel    80h, 13h, 37h, 19h
 
 	if $ > zDataStart
 		fatal "Your Z80 tables won't fit before its variables. It's \{$-zDataStart}h bytes past the start of the variables, at \{zDataStart}h"
