@@ -260,7 +260,7 @@ palscriptrun	macro header
     endm
 
 ; Function to turn a sample rate into a djnz loop counter
-pcmLoopCounterBase function sampleRate,baseCycles, 1+(53693175/15/(sampleRate)-(baseCycles)+(13/2))/13
+pcmLoopCounterBase function sampleRate,baseCycles, 1+(Z80_Clock/(sampleRate)-(baseCycles)+(13/2))/13
 pcmLoopCounter function sampleRate, pcmLoopCounterBase(sampleRate,102) ; 102 is the number of cycles zPlaySEGAPCM takes to deliver one sample.
 dpcmLoopCounter function sampleRate, pcmLoopCounterBase(sampleRate,297/2) ; 297 is the number of cycles zPlayDigitalAudio takes to deliver two samples.
 

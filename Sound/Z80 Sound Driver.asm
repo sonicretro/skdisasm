@@ -2783,11 +2783,21 @@ zPSGFrequencies:
 		dw 06Bh,065h,05Fh,05Ah,055h,050h,04Bh,047h,043h,040h,03Ch,039h
 		dw 036h,033h,030h,02Dh,02Bh,028h,026h,024h,022h,020h,01Fh,01Dh
 		dw 01Bh,01Ah,018h,017h,016h,015h,013h,012h,011h,010h,000h,000h
+; ---------------------------------------------------------------------------
+zRoundFloatToInteger function float,INT(float+0.5)
+zFrequencyToFNumber function frequency,zRoundFloatToInteger(frequency*1024*1024*2/FM_Sample_Rate)
+zFrequenciesToFNumbers macro
+		irp op,ALLARGS
+			dw zFrequencyToFNumber(op)
+		endm
+	endm
+
 ;loc_B4D
 zFMFrequencies:
 		; This table spans only a single octave, as the octave frequency
 		; is calculated at run-time unlike in Sonic 1 and 2's drivers.
-		dw 284h,2ABh,2D3h,2FEh,32Dh,35Ch,38Fh,3C5h,3FFh,43Ch,47Ch,4C0h
+		; The first frequency is C, the last frequency is B.
+		zFrequenciesToFNumbers 16.35, 17.34, 18.36, 19.45, 20.64, 21.84, 23.13, 24.51, 25.98, 27.53, 29.15, 30.88
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; MUSIC BANKS
