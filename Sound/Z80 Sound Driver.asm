@@ -613,28 +613,33 @@ zWriteFMII:
 ; ===========================================================================
 ; DAC BANKS
 ; ===========================================================================
+zmake68kBanks macro
+		irp op,ALLARGS
+			db zmake68kBank(op)
+		endm
+	endm
 ; Note: this table has a dummy first entry for the case when there is no DAC
 ; sample being played -- the code still results in a valid bank switch, and
 ; does not need to worry about special cases.
 DAC_Banks:
-		db		zmake68kBank(DacBank1)               ,zmake68kBank(DAC_81_Data)            ,zmake68kBank(DAC_82_83_84_85_Data)   ,zmake68kBank(DAC_82_83_84_85_Data)
-		db		zmake68kBank(DAC_82_83_84_85_Data)   ,zmake68kBank(DAC_82_83_84_85_Data)   ,zmake68kBank(DAC_86_Data)            ,zmake68kBank(DAC_87_Data)
-		db		zmake68kBank(DAC_88_Data)            ,zmake68kBank(DAC_89_Data)            ,zmake68kBank(DAC_8A_8B_Data)         ,zmake68kBank(DAC_8A_8B_Data)
-		db		zmake68kBank(DAC_8C_Data)            ,zmake68kBank(DAC_8D_8E_Data)         ,zmake68kBank(DAC_8D_8E_Data)         ,zmake68kBank(DAC_8F_Data)
-		db		zmake68kBank(DAC_90_91_92_93_Data)   ,zmake68kBank(DAC_90_91_92_93_Data)   ,zmake68kBank(DAC_90_91_92_93_Data)   ,zmake68kBank(DAC_90_91_92_93_Data)
-		db		zmake68kBank(DAC_94_95_96_97_Data)   ,zmake68kBank(DAC_94_95_96_97_Data)   ,zmake68kBank(DAC_94_95_96_97_Data)   ,zmake68kBank(DAC_94_95_96_97_Data)
-		db		zmake68kBank(DAC_98_99_9A_Data)      ,zmake68kBank(DAC_98_99_9A_Data)      ,zmake68kBank(DAC_98_99_9A_Data)      ,zmake68kBank(DAC_9B_Data)
-		db		zmake68kBank(DAC_9C_Data)            ,zmake68kBank(DAC_9D_Data)            ,zmake68kBank(DAC_9E_Data)            ,zmake68kBank(DAC_9F_Data)
-		db		zmake68kBank(DAC_A0_Data)            ,zmake68kBank(DAC_A1_Data)            ,zmake68kBank(DAC_A2_Data)            ,zmake68kBank(DAC_A3_Data)
-		db		zmake68kBank(DAC_A4_Data)            ,zmake68kBank(DAC_A5_Data)            ,zmake68kBank(DAC_A6_Data)            ,zmake68kBank(DAC_A7_Data)
-		db		zmake68kBank(DAC_A8_Data)            ,zmake68kBank(DAC_A9_Data)            ,zmake68kBank(DAC_AA_Data)            ,zmake68kBank(DAC_AB_Data)
-		db		zmake68kBank(DAC_AC_Data)            ,zmake68kBank(DAC_AD_AE_Data)         ,zmake68kBank(DAC_AD_AE_Data)         ,zmake68kBank(DAC_AF_B0_Data)
-		db		zmake68kBank(DAC_AF_B0_Data)         ,zmake68kBank(DAC_B1_Data)            ,zmake68kBank(DAC_B2_B3_Data)         ,zmake68kBank(DAC_B2_B3_Data)
-		db		zmake68kBank(DAC_B4_C1_C2_C3_C4_Data),zmake68kBank(DAC_B5_Data)            ,zmake68kBank(DAC_B6_Data)            ,zmake68kBank(DAC_B7_Data)
-		db		zmake68kBank(DAC_B8_B9_Data)         ,zmake68kBank(DAC_B8_B9_Data)         ,zmake68kBank(DAC_BA_Data)            ,zmake68kBank(DAC_BB_Data)
-		db		zmake68kBank(DAC_BC_Data)            ,zmake68kBank(DAC_BD_Data)            ,zmake68kBank(DAC_BE_Data)            ,zmake68kBank(DAC_BF_Data)
-		db		zmake68kBank(DAC_C0_Data)            ,zmake68kBank(DAC_B4_C1_C2_C3_C4_Data),zmake68kBank(DAC_B4_C1_C2_C3_C4_Data),zmake68kBank(DAC_B4_C1_C2_C3_C4_Data)
-		db		zmake68kBank(DAC_B4_C1_C2_C3_C4_Data)
+		zmake68kBanks DacBank1               , DAC_81_Data            , DAC_82_83_84_85_Data   , DAC_82_83_84_85_Data
+		zmake68kBanks DAC_82_83_84_85_Data   , DAC_82_83_84_85_Data   , DAC_86_Data            , DAC_87_Data
+		zmake68kBanks DAC_88_Data            , DAC_89_Data            , DAC_8A_8B_Data         , DAC_8A_8B_Data
+		zmake68kBanks DAC_8C_Data            , DAC_8D_8E_Data         , DAC_8D_8E_Data         , DAC_8F_Data
+		zmake68kBanks DAC_90_91_92_93_Data   , DAC_90_91_92_93_Data   , DAC_90_91_92_93_Data   , DAC_90_91_92_93_Data
+		zmake68kBanks DAC_94_95_96_97_Data   , DAC_94_95_96_97_Data   , DAC_94_95_96_97_Data   , DAC_94_95_96_97_Data
+		zmake68kBanks DAC_98_99_9A_Data      , DAC_98_99_9A_Data      , DAC_98_99_9A_Data      , DAC_9B_Data
+		zmake68kBanks DAC_9C_Data            , DAC_9D_Data            , DAC_9E_Data            , DAC_9F_Data
+		zmake68kBanks DAC_A0_Data            , DAC_A1_Data            , DAC_A2_Data            , DAC_A3_Data
+		zmake68kBanks DAC_A4_Data            , DAC_A5_Data            , DAC_A6_Data            , DAC_A7_Data
+		zmake68kBanks DAC_A8_Data            , DAC_A9_Data            , DAC_AA_Data            , DAC_AB_Data
+		zmake68kBanks DAC_AC_Data            , DAC_AD_AE_Data         , DAC_AD_AE_Data         , DAC_AF_B0_Data
+		zmake68kBanks DAC_AF_B0_Data         , DAC_B1_Data            , DAC_B2_B3_Data         , DAC_B2_B3_Data
+		zmake68kBanks DAC_B4_C1_C2_C3_C4_Data, DAC_B5_Data            , DAC_B6_Data            , DAC_B7_Data
+		zmake68kBanks DAC_B8_B9_Data         , DAC_B8_B9_Data         , DAC_BA_Data            , DAC_BB_Data
+		zmake68kBanks DAC_BC_Data            , DAC_BD_Data            , DAC_BE_Data            , DAC_BF_Data
+		zmake68kBanks DAC_C0_Data            , DAC_B4_C1_C2_C3_C4_Data, DAC_B4_C1_C2_C3_C4_Data, DAC_B4_C1_C2_C3_C4_Data
+		zmake68kBanks DAC_B4_C1_C2_C3_C4_Data
 
 ; =============== S U B	R O U T	I N E =======================================
 ;
@@ -2834,7 +2839,7 @@ z80_MusicBanks:
 	else
 		zmakeSongBanks Snd_Minib_SK
 	endif
-		zmakeSongBanks Snd_Menu, Snd_FinalBoss, Snd_Drown, Snd_PresSega
+		zmakeSongBanks Snd_Menu,Snd_FinalBoss,Snd_Drown,Snd_PresSega
 	if SonicDriverVer<>3
 		zmakeSongBanks Snd_SKCredits
 	endif
@@ -4545,29 +4550,35 @@ VolEnv_26:	db    0,   2,   2,   2,   3,   3,   3,   4,   4,   4,   5,   5, 83h
 ; Music Pointers
 ; ===========================================================================
 
+zmake68kPtrs macro
+		irp op,ALLARGS
+			dw zmake68kPtr(op)
+		endm
+	endm
+
 z80_MusicPointers:
-		dw	zmake68kPtr(Snd_AIZ1),zmake68kPtr(Snd_AIZ2),zmake68kPtr(Snd_HCZ1),zmake68kPtr(Snd_HCZ2)
-		dw	zmake68kPtr(Snd_MGZ1),zmake68kPtr(Snd_MGZ2),zmake68kPtr(Snd_CNZ1),zmake68kPtr(Snd_CNZ2)
-		dw	zmake68kPtr(Snd_FBZ1),zmake68kPtr(Snd_FBZ2),zmake68kPtr(Snd_ICZ1),zmake68kPtr(Snd_ICZ2)
-		dw	zmake68kPtr(Snd_LBZ1),zmake68kPtr(Snd_LBZ2),zmake68kPtr(Snd_MHZ1),zmake68kPtr(Snd_MHZ2)
+		zmake68kPtrs Snd_AIZ1, Snd_AIZ2, Snd_HCZ1, Snd_HCZ2
+		zmake68kPtrs Snd_MGZ1, Snd_MGZ2, Snd_CNZ1, Snd_CNZ2
+		zmake68kPtrs Snd_FBZ1, Snd_FBZ2, Snd_ICZ1, Snd_ICZ2
+		zmake68kPtrs Snd_LBZ1, Snd_LBZ2, Snd_MHZ1, Snd_MHZ2
 
-		dw	zmake68kPtr(Snd_SOZ1),zmake68kPtr(Snd_SOZ2),zmake68kPtr(Snd_LRZ1),zmake68kPtr(Snd_LRZ2)
-		dw	zmake68kPtr(Snd_SSZ),zmake68kPtr(Snd_DEZ1),zmake68kPtr(Snd_DEZ2),zmake68kPtr(Snd_Minib_SK)
-		dw	zmake68kPtr(Snd_Boss),zmake68kPtr(Snd_DDZ),zmake68kPtr(Snd_PachBonus),zmake68kPtr(Snd_SpecialS)
-		dw	zmake68kPtr(Snd_SlotBonus),zmake68kPtr(Snd_GumBonus),zmake68kPtr(Snd_Knux),zmake68kPtr(Snd_ALZ)
+		zmake68kPtrs Snd_SOZ1, Snd_SOZ2, Snd_LRZ1, Snd_LRZ2
+		zmake68kPtrs Snd_SSZ, Snd_DEZ1, Snd_DEZ2, Snd_Minib_SK
+		zmake68kPtrs Snd_Boss, Snd_DDZ, Snd_PachBonus, Snd_SpecialS
+		zmake68kPtrs Snd_SlotBonus, Snd_GumBonus, Snd_Knux, Snd_ALZ
 
-		dw	zmake68kPtr(Snd_BPZ),zmake68kPtr(Snd_DPZ),zmake68kPtr(Snd_CGZ),zmake68kPtr(Snd_EMZ)
-		dw	zmake68kPtr(Snd_Title),zmake68kPtr(Snd_S3Credits),zmake68kPtr(Snd_GameOver),zmake68kPtr(Snd_Continue)
-		dw	zmake68kPtr(Snd_Results),zmake68kPtr(Snd_1UP),zmake68kPtr(Snd_Emerald),zmake68kPtr(Snd_Invic)
-		dw	zmake68kPtr(Snd_2PMenu)
+		zmake68kPtrs Snd_BPZ, Snd_DPZ, Snd_CGZ, Snd_EMZ
+		zmake68kPtrs Snd_Title, Snd_S3Credits, Snd_GameOver, Snd_Continue
+		zmake68kPtrs Snd_Results, Snd_1UP, Snd_Emerald, Snd_Invic
+		zmake68kPtrs Snd_2PMenu
 	if SonicDriverVer==3
-		dw	zmake68kPtr(Snd_Minib)
+		zmake68kPtrs Snd_Minib
 	else
-		dw	zmake68kPtr(Snd_Minib_SK)
+		zmake68kPtrs Snd_Minib_SK
 	endif
-		dw	zmake68kPtr(Snd_Menu),zmake68kPtr(Snd_FinalBoss),zmake68kPtr(Snd_Drown),zmake68kPtr(Snd_PresSega)
+		zmake68kPtrs Snd_Menu, Snd_FinalBoss, Snd_Drown, Snd_PresSega
 	if SonicDriverVer<>3
-		dw	zmake68kPtr(Snd_SKCredits)
+		zmake68kPtrs Snd_SKCredits
 	endif
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
@@ -4575,60 +4586,60 @@ z80_MusicPointers:
 ; ===========================================================================
 
 z80_SFXPointers:
-		dw	zmake68kPtr(Sound_33),zmake68kPtr(Sound_34),zmake68kPtr(Sound_35),zmake68kPtr(Sound_36)
-		dw	zmake68kPtr(Sound_37),zmake68kPtr(Sound_38),zmake68kPtr(Sound_39),zmake68kPtr(Sound_3A)
-		dw	zmake68kPtr(Sound_3B),zmake68kPtr(Sound_3C),zmake68kPtr(Sound_3D),zmake68kPtr(Sound_3E)
-		dw	zmake68kPtr(Sound_3F)
+		zmake68kPtrs  Sound_33, Sound_34, Sound_35, Sound_36
+		zmake68kPtrs  Sound_37, Sound_38, Sound_39, Sound_3A
+		zmake68kPtrs  Sound_3B, Sound_3C, Sound_3D, Sound_3E
+		zmake68kPtrs  Sound_3F
 
-		dw	zmake68kPtr(Sound_40),zmake68kPtr(Sound_41),zmake68kPtr(Sound_42),zmake68kPtr(Sound_43)
-		dw	zmake68kPtr(Sound_44),zmake68kPtr(Sound_45),zmake68kPtr(Sound_46),zmake68kPtr(Sound_47)
-		dw	zmake68kPtr(Sound_48),zmake68kPtr(Sound_49),zmake68kPtr(Sound_4A),zmake68kPtr(Sound_4B)
-		dw	zmake68kPtr(Sound_4C),zmake68kPtr(Sound_4D),zmake68kPtr(Sound_4E),zmake68kPtr(Sound_4F)
+		zmake68kPtrs  Sound_40, Sound_41, Sound_42, Sound_43
+		zmake68kPtrs  Sound_44, Sound_45, Sound_46, Sound_47
+		zmake68kPtrs  Sound_48, Sound_49, Sound_4A, Sound_4B
+		zmake68kPtrs  Sound_4C, Sound_4D, Sound_4E, Sound_4F
 
-		dw	zmake68kPtr(Sound_50),zmake68kPtr(Sound_51),zmake68kPtr(Sound_52),zmake68kPtr(Sound_53)
-		dw	zmake68kPtr(Sound_54),zmake68kPtr(Sound_55),zmake68kPtr(Sound_56),zmake68kPtr(Sound_57)
-		dw	zmake68kPtr(Sound_58),zmake68kPtr(Sound_59),zmake68kPtr(Sound_5A),zmake68kPtr(Sound_5B)
-		dw	zmake68kPtr(Sound_5C),zmake68kPtr(Sound_5D),zmake68kPtr(Sound_5E),zmake68kPtr(Sound_5F)
+		zmake68kPtrs  Sound_50, Sound_51, Sound_52, Sound_53
+		zmake68kPtrs  Sound_54, Sound_55, Sound_56, Sound_57
+		zmake68kPtrs  Sound_58, Sound_59, Sound_5A, Sound_5B
+		zmake68kPtrs  Sound_5C, Sound_5D, Sound_5E, Sound_5F
 
-		dw	zmake68kPtr(Sound_60),zmake68kPtr(Sound_61),zmake68kPtr(Sound_62),zmake68kPtr(Sound_63)
-		dw	zmake68kPtr(Sound_64),zmake68kPtr(Sound_65),zmake68kPtr(Sound_66),zmake68kPtr(Sound_67)
-		dw	zmake68kPtr(Sound_68),zmake68kPtr(Sound_69),zmake68kPtr(Sound_6A),zmake68kPtr(Sound_6B)
-		dw	zmake68kPtr(Sound_6C),zmake68kPtr(Sound_6D),zmake68kPtr(Sound_6E),zmake68kPtr(Sound_6F)
+		zmake68kPtrs  Sound_60, Sound_61, Sound_62, Sound_63
+		zmake68kPtrs  Sound_64, Sound_65, Sound_66, Sound_67
+		zmake68kPtrs  Sound_68, Sound_69, Sound_6A, Sound_6B
+		zmake68kPtrs  Sound_6C, Sound_6D, Sound_6E, Sound_6F
 
-		dw	zmake68kPtr(Sound_70),zmake68kPtr(Sound_71),zmake68kPtr(Sound_72),zmake68kPtr(Sound_73)
-		dw	zmake68kPtr(Sound_74),zmake68kPtr(Sound_75),zmake68kPtr(Sound_76),zmake68kPtr(Sound_77)
-		dw	zmake68kPtr(Sound_78),zmake68kPtr(Sound_79),zmake68kPtr(Sound_7A),zmake68kPtr(Sound_7B)
-		dw	zmake68kPtr(Sound_7C),zmake68kPtr(Sound_7D),zmake68kPtr(Sound_7E),zmake68kPtr(Sound_7F)
+		zmake68kPtrs  Sound_70, Sound_71, Sound_72, Sound_73
+		zmake68kPtrs  Sound_74, Sound_75, Sound_76, Sound_77
+		zmake68kPtrs  Sound_78, Sound_79, Sound_7A, Sound_7B
+		zmake68kPtrs  Sound_7C, Sound_7D, Sound_7E, Sound_7F
 
-		dw	zmake68kPtr(Sound_80),zmake68kPtr(Sound_81),zmake68kPtr(Sound_82),zmake68kPtr(Sound_83)
-		dw	zmake68kPtr(Sound_84),zmake68kPtr(Sound_85),zmake68kPtr(Sound_86),zmake68kPtr(Sound_87)
-		dw	zmake68kPtr(Sound_88),zmake68kPtr(Sound_89),zmake68kPtr(Sound_8A),zmake68kPtr(Sound_8B)
-		dw	zmake68kPtr(Sound_8C),zmake68kPtr(Sound_8D),zmake68kPtr(Sound_8E),zmake68kPtr(Sound_8F)
+		zmake68kPtrs  Sound_80, Sound_81, Sound_82, Sound_83
+		zmake68kPtrs  Sound_84, Sound_85, Sound_86, Sound_87
+		zmake68kPtrs  Sound_88, Sound_89, Sound_8A, Sound_8B
+		zmake68kPtrs  Sound_8C, Sound_8D, Sound_8E, Sound_8F
 
-		dw	zmake68kPtr(Sound_90),zmake68kPtr(Sound_91),zmake68kPtr(Sound_92),zmake68kPtr(Sound_93)
-		dw	zmake68kPtr(Sound_94),zmake68kPtr(Sound_95),zmake68kPtr(Sound_96),zmake68kPtr(Sound_97)
-		dw	zmake68kPtr(Sound_98),zmake68kPtr(Sound_99),zmake68kPtr(Sound_9A),zmake68kPtr(Sound_9B)
-		dw	zmake68kPtr(Sound_9C),zmake68kPtr(Sound_9D),zmake68kPtr(Sound_9E),zmake68kPtr(Sound_9F)
+		zmake68kPtrs  Sound_90, Sound_91, Sound_92, Sound_93
+		zmake68kPtrs  Sound_94, Sound_95, Sound_96, Sound_97
+		zmake68kPtrs  Sound_98, Sound_99, Sound_9A, Sound_9B
+		zmake68kPtrs  Sound_9C, Sound_9D, Sound_9E, Sound_9F
 
-		dw	zmake68kPtr(Sound_A0),zmake68kPtr(Sound_A1),zmake68kPtr(Sound_A2),zmake68kPtr(Sound_A3)
-		dw	zmake68kPtr(Sound_A4),zmake68kPtr(Sound_A5),zmake68kPtr(Sound_A6),zmake68kPtr(Sound_A7)
-		dw	zmake68kPtr(Sound_A8),zmake68kPtr(Sound_A9),zmake68kPtr(Sound_AA),zmake68kPtr(Sound_AB)
-		dw	zmake68kPtr(Sound_AC),zmake68kPtr(Sound_AD),zmake68kPtr(Sound_AE),zmake68kPtr(Sound_AF)
+		zmake68kPtrs  Sound_A0, Sound_A1, Sound_A2, Sound_A3
+		zmake68kPtrs  Sound_A4, Sound_A5, Sound_A6, Sound_A7
+		zmake68kPtrs  Sound_A8, Sound_A9, Sound_AA, Sound_AB
+		zmake68kPtrs  Sound_AC, Sound_AD, Sound_AE, Sound_AF
 
-		dw	zmake68kPtr(Sound_B0),zmake68kPtr(Sound_B1),zmake68kPtr(Sound_B2),zmake68kPtr(Sound_B3)
-		dw	zmake68kPtr(Sound_B4),zmake68kPtr(Sound_B5),zmake68kPtr(Sound_B6),zmake68kPtr(Sound_B7)
-		dw	zmake68kPtr(Sound_B8),zmake68kPtr(Sound_B9),zmake68kPtr(Sound_BA),zmake68kPtr(Sound_BB)
-		dw	zmake68kPtr(Sound_BC),zmake68kPtr(Sound_BD),zmake68kPtr(Sound_BE),zmake68kPtr(Sound_BF)
+		zmake68kPtrs  Sound_B0, Sound_B1, Sound_B2, Sound_B3
+		zmake68kPtrs  Sound_B4, Sound_B5, Sound_B6, Sound_B7
+		zmake68kPtrs  Sound_B8, Sound_B9, Sound_BA, Sound_BB
+		zmake68kPtrs  Sound_BC, Sound_BD, Sound_BE, Sound_BF
 
-		dw	zmake68kPtr(Sound_C0),zmake68kPtr(Sound_C1),zmake68kPtr(Sound_C2),zmake68kPtr(Sound_C3)
-		dw	zmake68kPtr(Sound_C4),zmake68kPtr(Sound_C5),zmake68kPtr(Sound_C6),zmake68kPtr(Sound_C7)
-		dw	zmake68kPtr(Sound_C8),zmake68kPtr(Sound_C9),zmake68kPtr(Sound_CA),zmake68kPtr(Sound_CB)
-		dw	zmake68kPtr(Sound_CC),zmake68kPtr(Sound_CD),zmake68kPtr(Sound_CE),zmake68kPtr(Sound_CF)
+		zmake68kPtrs  Sound_C0, Sound_C1, Sound_C2, Sound_C3
+		zmake68kPtrs  Sound_C4, Sound_C5, Sound_C6, Sound_C7
+		zmake68kPtrs  Sound_C8, Sound_C9, Sound_CA, Sound_CB
+		zmake68kPtrs  Sound_CC, Sound_CD, Sound_CE, Sound_CF
 
-		dw	zmake68kPtr(Sound_D0),zmake68kPtr(Sound_D1),zmake68kPtr(Sound_D2),zmake68kPtr(Sound_D3)
-		dw	zmake68kPtr(Sound_D4),zmake68kPtr(Sound_D5),zmake68kPtr(Sound_D6),zmake68kPtr(Sound_D7)
-		dw	zmake68kPtr(Sound_D8),zmake68kPtr(Sound_D9),zmake68kPtr(Sound_DA),zmake68kPtr(Sound_DB)
-		dw	zmake68kPtr(Sound_DB),zmake68kPtr(Sound_DB),zmake68kPtr(Sound_DB),zmake68kPtr(Sound_DB)
+		zmake68kPtrs  Sound_D0, Sound_D1, Sound_D2, Sound_D3
+		zmake68kPtrs  Sound_D4, Sound_D5, Sound_D6, Sound_D7
+		zmake68kPtrs  Sound_D8, Sound_D9, Sound_DA, Sound_DB
+		zmake68kPtrs  Sound_DB, Sound_DB, Sound_DB, Sound_DB
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; FM Universal Voice Bank
