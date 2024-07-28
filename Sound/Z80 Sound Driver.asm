@@ -2839,7 +2839,7 @@ z80_MusicBanks:
 	else
 		zmakeSongBanks Snd_Minib_SK
 	endif
-		zmakeSongBanks Snd_Menu,Snd_FinalBoss,Snd_Drown,Snd_PresSega
+		zmakeSongBanks Snd_Menu, Snd_FinalBoss, Snd_Drown, Snd_PresSega
 	if SonicDriverVer<>3
 		zmakeSongBanks Snd_SKCredits
 	endif
