@@ -2808,30 +2808,35 @@ zmakeSongBank function addr,zmake68kBank(addr)&0Fh ; See bankswitchToMusicS3
 	else
 zmakeSongBank function addr,zmake68kBank(addr)
 	endif
+zmakeSongBanks macro
+		irp op,ALLARGS
+			db zmakeSongBank(op)
+		endm
+	endm
 
 z80_MusicBanks:
-		db  zmakeSongBank(Snd_AIZ1),zmakeSongBank(Snd_AIZ2),zmakeSongBank(Snd_HCZ1),zmakeSongBank(Snd_HCZ2)
-		db  zmakeSongBank(Snd_MGZ1),zmakeSongBank(Snd_MGZ2),zmakeSongBank(Snd_CNZ1),zmakeSongBank(Snd_CNZ2)
-		db  zmakeSongBank(Snd_FBZ1),zmakeSongBank(Snd_FBZ2),zmakeSongBank(Snd_ICZ1),zmakeSongBank(Snd_ICZ2)
-		db  zmakeSongBank(Snd_LBZ1),zmakeSongBank(Snd_LBZ2),zmakeSongBank(Snd_MHZ1),zmakeSongBank(Snd_MHZ2)
+		zmakeSongBanks Snd_AIZ1, Snd_AIZ2, Snd_HCZ1, Snd_HCZ2
+		zmakeSongBanks Snd_MGZ1, Snd_MGZ2, Snd_CNZ1, Snd_CNZ2
+		zmakeSongBanks Snd_FBZ1, Snd_FBZ2, Snd_ICZ1, Snd_ICZ2
+		zmakeSongBanks Snd_LBZ1, Snd_LBZ2, Snd_MHZ1, Snd_MHZ2
 
-		db  zmakeSongBank(Snd_SOZ1),zmakeSongBank(Snd_SOZ2),zmakeSongBank(Snd_LRZ1),zmakeSongBank(Snd_LRZ2)
-		db  zmakeSongBank(Snd_SSZ),zmakeSongBank(Snd_DEZ1),zmakeSongBank(Snd_DEZ2),zmakeSongBank(Snd_Minib_SK)
-		db  zmakeSongBank(Snd_Boss),zmakeSongBank(Snd_DDZ),zmakeSongBank(Snd_PachBonus),zmakeSongBank(Snd_SpecialS)
-		db  zmakeSongBank(Snd_SlotBonus),zmakeSongBank(Snd_GumBonus),zmakeSongBank(Snd_Knux),zmakeSongBank(Snd_ALZ)
+		zmakeSongBanks Snd_SOZ1, Snd_SOZ2, Snd_LRZ1, Snd_LRZ2
+		zmakeSongBanks Snd_SSZ, Snd_DEZ1, Snd_DEZ2, Snd_Minib_SK
+		zmakeSongBanks Snd_Boss, Snd_DDZ, Snd_PachBonus, Snd_SpecialS
+		zmakeSongBanks Snd_SlotBonus, Snd_GumBonus, Snd_Knux, Snd_ALZ
 
-		db  zmakeSongBank(Snd_BPZ),zmakeSongBank(Snd_DPZ),zmakeSongBank(Snd_CGZ),zmakeSongBank(Snd_EMZ)
-		db  zmakeSongBank(Snd_Title),zmakeSongBank(Snd_S3Credits),zmakeSongBank(Snd_GameOver),zmakeSongBank(Snd_Continue)
-		db  zmakeSongBank(Snd_Results),zmakeSongBank(Snd_1UP),zmakeSongBank(Snd_Emerald),zmakeSongBank(Snd_Invic)
-		db  zmakeSongBank(Snd_2PMenu)
+		zmakeSongBanks Snd_BPZ, Snd_DPZ, Snd_CGZ, Snd_EMZ
+		zmakeSongBanks Snd_Title, Snd_S3Credits, Snd_GameOver, Snd_Continue
+		zmakeSongBanks Snd_Results, Snd_1UP, Snd_Emerald, Snd_Invic
+		zmakeSongBanks Snd_2PMenu
 	if SonicDriverVer==3
-		db  zmakeSongBank(Snd_Minib)
+		zmakeSongBanks Snd_Minib
 	else
-		db  zmakeSongBank(Snd_Minib_SK)
+		zmakeSongBanks Snd_Minib_SK
 	endif
-		db  zmakeSongBank(Snd_Menu),zmakeSongBank(Snd_FinalBoss),zmakeSongBank(Snd_Drown),zmakeSongBank(Snd_PresSega)
+		zmakeSongBanks Snd_Menu, Snd_FinalBoss, Snd_Drown, Snd_PresSega
 	if SonicDriverVer<>3
-		db  zmakeSongBank(Snd_SKCredits)
+		zmakeSongBanks Snd_SKCredits
 	endif
 
 ; =============== S U B	R O U T	I N E =======================================
