@@ -2785,10 +2785,15 @@ zMakePSGFrequencies macro
 
 ;loc_AA5
 zPSGFrequencies:
+		; 7 octaves, each one begins with C and ends with B.
 		; This table differs from the one in Sonic 1 and 2's drivers by
 		; having an extra octave at the start and two extra notes at
-		; the end, allowing it to span notes c-0 to b-6.
-		; 7 octaves, each one begins with C and ends with B.
+		; the end, allowing it to span 7 octaves.
+		; The first octave contains duplicate frequencies due to the
+		; PSG's frequency counter being limited to 3FFh.
+		; The last octave's final two notes are set to the PSG's maximum
+		; frequency. These are typically used by the noise channel to
+		; create a sound that is similar to a hi-hat.
 		zMakePSGFrequencies  109.34,    109.34,    109.34,    109.34,    109.34,    109.34,    109.34,    109.34,    109.34,    110.20,    116.76,    123.73
 		zMakePSGFrequencies  130.98,    138.78,    146.99,    155.79,    165.22,    174.78,    185.19,    196.24,    207.91,    220.63,    233.52,    247.47
 		zMakePSGFrequencies  261.96,    277.56,    293.59,    311.58,    329.97,    349.56,    370.39,    392.49,    415.83,    440.39,    468.03,    494.95
