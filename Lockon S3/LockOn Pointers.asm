@@ -86,7 +86,8 @@ Map_AIZFallingLogSplash2:		ds.b $70
 Map_AIZFallingLogSplash:		ds.b $240
 Map_AIZSpikedLog:			ds.b $7FC
 Map_AIZForegroundPlant:			ds.b $42E
-Map_Button2:				ds.b $30
+;Map_Button2:
+Map_HCZButton:				ds.b $30
 Map_CNZButton:				ds.b $30
 Map_2PButton:				ds.b $2892
 Map_HCZWaterRush:			ds.b $160

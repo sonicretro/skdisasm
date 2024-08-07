@@ -13,7 +13,7 @@
 	dbglistobj Obj_MegaChopper,			Map_MegaChopper,		   0,   0, make_art_tile($54D,1,0)
 	dbglistobj Obj_TurboSpiker,			Map_TurboSpiker,		   0,   0, make_art_tile($500,1,0)
 	dbglistobj Obj_Jawz,				Map_Jawz,			   0,   0, make_art_tile($539,1,0)
-	dbglistobj Obj_Button,				Map_Button2,			 $20,   2, make_art_tile($426,1,0)
+	dbglistobj Obj_Button,				Map_HCZButton,			 $20,   2, make_art_tile($426,1,0)
 	dbglistobj Obj_HCZBreakableBar,			Map_HCZBreakableBar,		   0,   0, make_art_tile($3CA,2,0)
 	dbglistobj Obj_HCZBreakableBar,			Map_HCZBreakableBar,		 $80,   4, make_art_tile($3CA,2,0)
 	dbglistobj Obj_HCZCGZFan,			Map_HCZFan,			 $16,   0, make_art_tile($40B,1,0)

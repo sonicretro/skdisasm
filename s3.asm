@@ -51854,7 +51854,7 @@ Obj_Button:
 		move.w	#make_art_tile($456,0,0),art_tile(a0)
 		cmpi.b	#1,(Current_zone).w
 		bne.s	loc_2BB4C
-		move.l	#Map_Button2,mappings(a0)
+		move.l	#Map_HCZButton,mappings(a0)
 		move.w	#make_art_tile($426,1,0),art_tile(a0)
 
 loc_2BB4C:
@@ -52005,8 +52005,9 @@ loc_2BCEA:
 ; ---------------------------------------------------------------------------
 Map_Button:
 		include "General/Sprites/Buttons/Map - Button.asm"
-Map_Button2:
-		include "General/Sprites/Buttons/Map - Button 2.asm"
+;Map_Button2:
+Map_HCZButton:
+		include "Levels/HCZ/Misc Object Data/Map - Button.asm"
 Map_CNZButton:
 		include "Levels/CNZ/Misc Object Data/Map - Button.asm"
 Map_2PButton:
