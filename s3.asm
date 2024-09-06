@@ -27848,7 +27848,7 @@ loc_1744C:
 
 ; ---------------------------------------------------------------------------
 Ani_AirCountdown:
-		include "General/Sprites/Dash Dust/Anim - Air Countdown.asm"
+		include "General/Sprites/Bubbles/Anim - Air Countdown.asm"
 ; ---------------------------------------------------------------------------
 
 Obj_S2Shield:
@@ -117611,7 +117611,7 @@ ArtUnc_CNZCannon:
 		binclude "General/Sprites/CNZ Cannon/CNZ Cannon.bin"
 		even
 ArtUnc_AirCountdown:
-		binclude "General/Sprites/Dash Dust/Air Countdown.bin"
+		binclude "General/Sprites/Bubbles/Air Countdown.bin"
 		even
 ArtUnc_SONICMILES:
 		binclude "General/S2Menu/Uncompressed Art/SONICMILES.bin"
