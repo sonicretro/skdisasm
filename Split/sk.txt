@@ -619,17 +619,17 @@
 #split	0x00008D2C,0x00008D5C,General\Special Stage\Uncompressed Map\HUD.bin
 
 /* Enigma Compressed plane mappings */
-#split	0x000AEDB0,0x000AEED0,General\Special Stage\Enigma Map\BG.bin
-#split	0x000AEF54,0x000B07B8,General\Special Stage\Enigma Map\Layout.bin
-#split	0x000CAB54,0x000CAD00,General\S2Menu\Enigma Map\2P Options.bin
-#split	0x000CBA68,0x000CBB32,General\Title\Enigma Map\SK SEGA.bin
-#split	0x000CBB32,0x000CBCE0,General\Title\Enigma Map\SK SonicKnux Frame 1.bin
-#split	0x000CBCE0,0x000CBF3E,General\Title\Enigma Map\SK SonicKnux Frame 2.bin
-#split	0x000CBF3E,0x000CC1C4,General\Title\Enigma Map\SK SonicKnux Frame 3.bin
-#split	0x000CC1C4,0x000CC3AA,General\Title\Enigma Map\SK SonicKnux Frame 4.bin
-#split	0x000CC3AA,0x000CC6A0,General\Title\Enigma Map\SK Background.bin
-#split	0x00187CB0,0x00187D1C,General\Blue Sphere\Enigma Map\Title FG.bin
-#split	0x00189C4E,0x00189C7C,General\Blue Sphere\Enigma Map\Title BG.bin
+#split	0x000AEDB0,0x000AEED0,General\Special Stage\Enigma Map\BG.eni
+#split	0x000AEF54,0x000B07B8,General\Special Stage\Enigma Map\Layout.eni
+#split	0x000CAB54,0x000CAD00,General\S2Menu\Enigma Map\2P Options.eni
+#split	0x000CBA68,0x000CBB32,General\Title\Enigma Map\SK SEGA.eni
+#split	0x000CBB32,0x000CBCE0,General\Title\Enigma Map\SK SonicKnux Frame 1.eni
+#split	0x000CBCE0,0x000CBF3E,General\Title\Enigma Map\SK SonicKnux Frame 2.eni
+#split	0x000CBF3E,0x000CC1C4,General\Title\Enigma Map\SK SonicKnux Frame 3.eni
+#split	0x000CC1C4,0x000CC3AA,General\Title\Enigma Map\SK SonicKnux Frame 4.eni
+#split	0x000CC3AA,0x000CC6A0,General\Title\Enigma Map\SK Background.eni
+#split	0x00187CB0,0x00187D1C,General\Blue Sphere\Enigma Map\Title FG.eni
+#split	0x00189C4E,0x00189C7C,General\Blue Sphere\Enigma Map\Title BG.eni
 
 /* Slots Bonus */
 #split	0x001E4080,0x001E4084,Levels\Slots\SSLayout\Bonus Player Start.bin

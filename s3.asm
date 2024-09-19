@@ -8994,16 +8994,16 @@ Pal_S2LevelIcons:
 		binclude "General/S2Menu/Palettes/Level Select Icons.bin"
 		even
 MapEni_S2LevSel2P:
-		binclude "General/S2Menu/Enigma Map/Level Select 2P.bin"
+		binclude "General/S2Menu/Enigma Map/Level Select 2P.eni"
 		even
 MapEni_S2Options:
-		binclude "General/S2Menu/Enigma Map/Options Screen.bin"
+		binclude "General/S2Menu/Enigma Map/Options Screen.eni"
 		even
 MapEni_S2LevSel:
-		binclude "General/S2Menu/Enigma Map/Level Select.bin"
+		binclude "General/S2Menu/Enigma Map/Level Select.eni"
 		even
 MapEni_S2LevSelIcon:
-		binclude "General/S2Menu/Enigma Map/Level Select Icons.bin"
+		binclude "General/S2Menu/Enigma Map/Level Select Icons.eni"
 		even
 AniPLC_SONICMILES: zoneanimstart
 	; Sonic/Miles animated background
@@ -13043,7 +13043,7 @@ VRAMDatList_AE06:
 		dc.l MapUnc_CompetitionResultsTOTAL
 		dc.w VRAM_Plane_A_Name_Table+$CD0,   5-1,   2-1
 MapEni_CompetitionResultsLED:
-		binclude "General/Competition Menu/Enigma Map/Menu.bin"
+		binclude "General/Competition Menu/Enigma Map/Menu.eni"
 		even
 MapUnc_CompetitionResultsLetters:
 		binclude "General/Competition Menu/Uncompressed Map/Results Letters.bin"
@@ -117281,7 +117281,7 @@ ArtKosM_SStageChaosEmerald:
 		binclude "General/Special Stage/KosinskiM Art/Special Stage Chaos Emerald.bin"
 		even
 MapEni_SStageBG:
-		binclude "General/Special Stage/Enigma Map/BG.bin"
+		binclude "General/Special Stage/Enigma Map/BG.eni"
 		even
 ArtNem_SStageBG:
 		binclude "General/Special Stage/Nemesis Art/BG.bin"
@@ -117518,7 +117518,7 @@ ArtNem_1P2PWins:
 		binclude "General/S2Menu/Nemesis Art/1P 2P Wins.bin"
 		even
 MapEni_S22POptions:
-		binclude "General/S2Menu/Enigma Map/2P Options.bin"
+		binclude "General/S2Menu/Enigma Map/2P Options.eni"
 		even
 ArtNem_S2MenuBox:
 		binclude "General/S2Menu/Nemesis Art/Menu Box.bin"
@@ -118402,46 +118402,46 @@ ArtNem_2PDashdust:
 		binclude "General/2P Zone/Nemesis Art/Spindash Dust.bin"
 		even
 MapEni_S3TitleSonic1:
-		binclude "General/Title/Enigma Map/S3 Sonic 1.bin"
+		binclude "General/Title/Enigma Map/S3 Sonic 1.eni"
 		even
 MapEni_S3TitleSonic2:
-		binclude "General/Title/Enigma Map/S3 Sonic 2.bin"
+		binclude "General/Title/Enigma Map/S3 Sonic 2.eni"
 		even
 MapEni_S3TitleSonic3:
-		binclude "General/Title/Enigma Map/S3 Sonic 3.bin"
+		binclude "General/Title/Enigma Map/S3 Sonic 3.eni"
 		even
 MapEni_S3TitleSonic4:
-		binclude "General/Title/Enigma Map/S3 Sonic 4.bin"
+		binclude "General/Title/Enigma Map/S3 Sonic 4.eni"
 		even
 MapEni_S3TitleSonic5:
-		binclude "General/Title/Enigma Map/S3 Sonic 5.bin"
+		binclude "General/Title/Enigma Map/S3 Sonic 5.eni"
 		even
 MapEni_S3TitleSonic6:
-		binclude "General/Title/Enigma Map/S3 Sonic 6.bin"
+		binclude "General/Title/Enigma Map/S3 Sonic 6.eni"
 		even
 MapEni_S3TitleSonic7:
-		binclude "General/Title/Enigma Map/S3 Sonic 7.bin"
+		binclude "General/Title/Enigma Map/S3 Sonic 7.eni"
 		even
 MapEni_S3TitleSonic8:
-		binclude "General/Title/Enigma Map/S3 Sonic 8.bin"
+		binclude "General/Title/Enigma Map/S3 Sonic 8.eni"
 		even
 MapEni_S3TitleSonic9:
-		binclude "General/Title/Enigma Map/S3 Sonic 9.bin"
+		binclude "General/Title/Enigma Map/S3 Sonic 9.eni"
 		even
 MapEni_S3TitleSonicA:
-		binclude "General/Title/Enigma Map/S3 Sonic A.bin"
+		binclude "General/Title/Enigma Map/S3 Sonic A.eni"
 		even
 MapEni_S3TitleSonicB:
-		binclude "General/Title/Enigma Map/S3 Sonic B.bin"
+		binclude "General/Title/Enigma Map/S3 Sonic B.eni"
 		even
 MapEni_S3TitleSonicC:
-		binclude "General/Title/Enigma Map/S3 Sonic C.bin"
+		binclude "General/Title/Enigma Map/S3 Sonic C.eni"
 		even
 MapEni_S3TitleSonicD:
-		binclude "General/Title/Enigma Map/S3 Sonic D.bin"
+		binclude "General/Title/Enigma Map/S3 Sonic D.eni"
 		even
 MapEni_S3TitleBg:
-		binclude "General/Title/Enigma Map/S3 BG.bin"
+		binclude "General/Title/Enigma Map/S3 BG.eni"
 		even
 Map_S3TitleBanner:
 		include "General/Title/Map - S3 Banner.asm"
@@ -119341,13 +119341,13 @@ Pal_CompetitionMenuBG:
 		binclude "General/Competition Menu/Palettes/BG.bin"
 		even
 MapEni_S3MenuBG:
-		binclude "General/Save Menu/Enigma Map/Menu BG.bin"
+		binclude "General/Save Menu/Enigma Map/Menu BG.eni"
 		even
 ArtKos_S3MenuBG:
 		binclude "General/Save Menu/Kosinski Art/Menu BG.bin"
 		even
 MapEni_CompetitionLevBorder:
-		binclude "General/Competition Menu/Enigma Map/Level Border.bin"
+		binclude "General/Competition Menu/Enigma Map/Level Border.eni"
 		even
 MapUnc_CompetitionTimeBorder:
 		binclude "General/Competition Menu/Uncompressed Map/Time Border.bin"
@@ -119356,10 +119356,10 @@ MapUnc_CompetitionBESTTIME:
 		binclude "General/Competition Menu/Uncompressed Map/Time Text.bin"
 		even
 MapEni_CompetitionLevImage:
-		binclude "General/Competition Menu/Enigma Map/Level Images.bin"
+		binclude "General/Competition Menu/Enigma Map/Level Images.eni"
 		even
 MapEni_CompetitionLevName:
-		binclude "General/Competition Menu/Enigma Map/Level Names.bin"
+		binclude "General/Competition Menu/Enigma Map/Level Names.eni"
 		even
 ArtKos_CompetitionMode:
 		binclude "General/Competition Menu/Kosinski Art/Mode Select.bin"
@@ -119376,7 +119376,7 @@ ArtKos_CompetitionPlayer:
 		binclude "General/Competition Menu/Kosinski Art/Player Sprites.bin"
 		even
 MapEni_SaveScreen_Layout:
-		binclude "General/Save Menu/Enigma Map/Save Screen Layout.bin"
+		binclude "General/Save Menu/Enigma Map/Save Screen Layout.eni"
 		even
 MapUnc_SaveScreenNEW:
 		binclude "General/Save Menu/Uncompressed Map/NEW.bin"
