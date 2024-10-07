@@ -39,7 +39,7 @@
 #split	0x0002D39E,0x0002D41E,General\Special Stage\Palettes\Results S3.bin
 #split	0x0003C05A,0x0003C07A,Levels\AIZ\Palettes\Battleship.bin
 #split	0x0003C07A,0x0003C096,Levels\AIZ\Palettes\Boss Small.bin
-#split	0x0003F698,0x0003F718,General\Sprites\Continue\Palette S3.bin
+#split	0x0003F698,0x0003F718,General\Continue\Palettes\Palette S3.bin
 #split	0x0004160A,0x0004164A,General\Ending\Palettes\S3 Ending.bin
 #split	0x0004164A,0x0004168A,General\Ending\Palettes\S3 Logo.bin
 #split	0x0004168A,0x000416CA,General\Ending\Palettes\S3 Knuckles Eyecatch.bin

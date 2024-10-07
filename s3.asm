@@ -76727,12 +76727,12 @@ aCONTINUE:
 		dc.b "C O N T I N U E",0
 		even
 Pal_ContinueScreen:
-		binclude "General/Sprites/Continue/Palette S3.bin"
+		binclude "General/Continue/Palettes/Palette S3.bin"
 		even
 Map_ContinueSprites:
-		include "General/Sprites/Continue/Map - Player Sprites S3.asm"
+		include "General/Continue/Map - Player Sprites S3.asm"
 Map_ContinueIcons:
-		include "General/Sprites/Continue/Map - Player Icons.asm"
+		include "General/Continue/Map - Player Icons.asm"
 byte_3F834:	dc.b 0
 		dc.b 1
 byte_3F836:	dc.b 2
@@ -76745,13 +76745,13 @@ byte_3F840:
 		dc.b    8,   4,   5,   6, $FC
 		even
 ArtNem_ContinueSprites:
-		binclude "General/Sprites/Continue/Player Sprites.bin"
+		binclude "General/Continue/Nemesis Art/Player Sprites.bin"
 		even
 ArtNem_ContinueIcons:
-		binclude "General/Sprites/Continue/Player Icons.bin"
+		binclude "General/Continue/Nemesis Art/Player Icons.bin"
 		even
 ArtNem_ContinueDigits:
-		binclude "General/Sprites/Continue/Digits.bin"
+		binclude "General/Continue/Nemesis Art/Digits.bin"
 		even
 ; ---------------------------------------------------------------------------
 
