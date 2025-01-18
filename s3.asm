@@ -10882,9 +10882,9 @@ Touch_SSSprites_BlueSphere:
 		movea.l	4(a0),a1
 		cmpi.b	#2,(a1)
 		bne.s	loc_8C9E
-		bsr.w	sub_8CC4
+		bsr.w	Decrement_BlueSphere_Count
 		move.b	#9,(a1)
-		bsr.s	sub_8CF8
+		bsr.s	Sphere_To_Rings
 		beq.s	locret_8C9C
 		move.b	#4,(a1)
 		clr.l	(a0)
@@ -10914,17 +10914,17 @@ locret_8CC2:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_8CC4:
+Decrement_BlueSphere_Count:
 		move.w	d0,-(sp)
-		move.b	#-1,(Special_stage_sphere_HUD_flag).w
-		subq.w	#1,(Special_stage_spheres_left).w
-		bne.s	loc_8CD8
-		move.b	#1,(Special_stage_clear_routine).w
+		move.b	#-1,(Special_stage_sphere_HUD_flag).w	; Set flag to update HUD
+		subq.w	#1,(Special_stage_spheres_left).w	; Decrement Count
+		bne.s	loc_8CD8				; If Count is 0
+		move.b	#1,(Special_stage_clear_routine).w	; Set flag to clear special stage
 
 loc_8CD8:
 		move.w	(sp)+,d0
 		rts
-; End of function sub_8CC4
+; End of function Decrement_BlueSphere_Count
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -10949,236 +10949,321 @@ loc_8CEE:
 
 ; =============== S U B R O U T I N E =======================================
 
-
-sub_8CF8:
+; Arguments
+;	a1: Address of Position in Map
+; Mutates:
+;	d0-d6/a2-a5
+; Returns:
+;	d1/CCR: 1 is transformed. 0 otherwise
+;
+; First Calls Find_Red_Sphere_Loop to:
+;	Check if there are and loops of red spheres
+;	Turn 1 blue sphere per loop to a ring
+;	Add the position of those rings to the ring queue
+;
+; If the queue is empty, return 0
+;
+; The use a breath first seach algorithm to using the queue
+; to fill out each area of blue spheres, turning them into
+; rings and adding them to the queue, and updating the HUD.
+;
+; Lastly check all neighbors of the queue for red spheres
+; that can be turning into rings, and do so.
+;
+; Play the sfx_RingLoss sfx and return 1.
+Sphere_To_Rings:
 		lea	(Level_layout_header).w,a2
 		move.l	a1,d5
-		sub.l	a2,d5
-		bsr.s	sub_8D78
+		sub.l	a2,d5						; position index = position address - start address
+		bsr.s	Find_Red_Sphere_Loop				; returns ring queue end in a5
 		moveq	#0,d6
-		move.l	a5,d1
-		lea	(SStage_unkA500).w,a4
-		sub.l	a4,d1
-		beq.s	locret_8D76
+		move.l	a5,d1						; ring queue end (from Find_Red_Sphere_Loop)
+		lea	(SStage_blue_sphere_to_ring_queue).w,a4 	; ring queue start
+		sub.l	a4,d1						; remaining entries count = end - start
+		beq.s	locret_8D76					; if empty queue, return 0
 
-loc_8D0E:
-		move.w	(a4)+,d5
-		lea	(word_8EDA).l,a3
+; For each ring in the queue, find its blue sphere neighbors, then
+; turn those blue spheres into rings, and add those positions
+; to the queue
+Blue_To_Ring_Next_Ring_B:
+		move.w	(a4)+,d5					; read ring from queue
+		lea	(SStage_8_Directions).l,a3			; load directions table
 		move.w	#8-1,d0
 
-loc_8D1A:
-		move.w	(a3)+,d2
-		add.w	d5,d2
-		cmpi.b	#2,(a2,d2.w)
-		bne.s	loc_8D34
-		bsr.w	sub_8CC4
-		move.b	#4,(a2,d2.w)
-		move.w	d2,(a5)+
-		addq.w	#2,d1
+Blue_To_Ring_Next_Direction_B:						; Loop[neighbors of ring]
+		move.w	(a3)+,d2					; 	get next direction
+		add.w	d5,d2						; 	neighbor = ring + direction
+		cmpi.b	#2,(a2,d2.w)					; 	If the neighbor is Blue
+		bne.s	Blue_To_Ring_Continue_B
+		bsr.w	Decrement_BlueSphere_Count
+		move.b	#4,(a2,d2.w)					;		Change to ring
+		move.w	d2,(a5)+					; 		Add to queue
+		addq.w	#2,d1						; 		increment remaining entries count
 
-loc_8D34:
-		dbf	d0,loc_8D1A
-		subq.w	#2,d1
-		bne.s	loc_8D0E
-		move.l	a5,d1
-		lea	(SStage_unkA500).w,a4
-		sub.l	a4,d1
-		beq.s	locret_8D76
+Blue_To_Ring_Continue_B:
+		dbf	d0,Blue_To_Ring_Next_Direction_B		; Loop[neighbors of ring]:end
+		subq.w	#2,d1						; decrement remaining entries count
+		bne.s	Blue_To_Ring_Next_Ring_B			; If more rings in queue, get next ring
+		move.l	a5,d1						; reset queue end
+		lea	(SStage_blue_sphere_to_ring_queue).w,a4		; reset queue start
+		sub.l	a4,d1						; reset remaining entries count
+		beq.s	locret_8D76					; if empty queue (how?), return 0
 
-loc_8D46:
-		move.w	(a4)+,d5
-		lea	(word_8EDA).l,a3
+; For each ring in the queue, find its red sphere neighbors, then
+; turn those red spheres into rings
+Blue_To_Ring_Next_Ring_R:
+		move.w	(a4)+,d5					; read ring from queue
+		lea	(SStage_8_Directions).l,a3			; load directions table
 		move.w	#8-1,d0
 
-loc_8D52:
-		move.w	(a3)+,d2
-		add.w	d5,d2
-		cmpi.b	#1,(a2,d2.w)
-		bne.s	loc_8D64
-		move.b	#4,(a2,d2.w)
+Blue_To_Ring_Next_Direction_R:						; Loop[neighbors of ring]
+		move.w	(a3)+,d2					; 	get next direction
+		add.w	d5,d2						; 	neighbor = ring + direction
+		cmpi.b	#1,(a2,d2.w)					; 	If the current neighbor is Red
+		bne.s	Blue_To_Ring_Continue_R
+		move.b	#4,(a2,d2.w)					; 		Change to ring
 
-loc_8D64:
-		dbf	d0,loc_8D52
-		subq.w	#2,d1
-		bne.s	loc_8D46
-		moveq	#signextendB(sfx_RingLoss),d0
+Blue_To_Ring_Continue_R:
+		dbf	d0,Blue_To_Ring_Next_Direction_R		; Loop[neighbors or ring]:end
+		subq.w	#2,d1						; decrement remaining entries count
+		bne.s	Blue_To_Ring_Next_Ring_R
+		moveq	#signextendB(sfx_RingLoss),d0			; load and play Ring Loss SFX
 		jsr	(Play_SFX).l
-		moveq	#1,d1
+		moveq	#1,d1						; Return 1
 
 locret_8D76:
 		rts
-; End of function sub_8CF8
+; End of function Sphere_To_Rings
 
 
 ; =============== S U B R O U T I N E =======================================
 
-
-sub_8D78:
-		lea	(SStage_unkA500).w,a5
-		lea	(word_8EDA).l,a3
-		moveq	#0,d2
+; Arguments
+;	d5: Starting Position Index in Map
+;	a2: Address of the Special Stage Map
+; Mutates
+;	d0-d4/d6/a3-a5
+; Returns:
+;	a5: 1 past the end of ring queue
+;
+; First checks if the touched sphere has any blue sphere neighbours,
+; while also turning any touched neighbours into red spheres.
+; If there are none, return early
+;
+; Next check if the contiguous vertical and horizontal span
+; of spheres and rings starting from the touched sphere is
+; at least 3 spheres long each.
+; Otherwise, return early
+;
+; Then use a depth first search traversal algorithm to walk
+; a path of red spheres to find valid loops. For each loop
+; try to find an enclosed blue sphere. If one is found,
+; turn it into a ring, and add its index to the ring queue
+; and incrememnt the queue pointer.
+Find_Red_Sphere_Loop:
+		lea	(SStage_blue_sphere_to_ring_queue).w,a5		; Load special stage map pointer
+		lea	(SStage_8_Directions).l,a3			; Load directions pointer
+		moveq	#0,d2						; Blue sphere counter
 		move.w	#8-1,d0
 
-loc_8D88:
-		move.w	(a3)+,d1
-		add.w	d5,d1
-		cmpi.b	#9,(a2,d1.w)
+Red_Loop_Check_Neighbors:						; Loop[neighbors of touched]
+		move.w	(a3)+,d1					; 	get next direction
+		add.w	d5,d1						; 	neighbor = touched + direction
+		cmpi.b	#9,(a2,d1.w)					; 	If neighbour is 9 (TOUCHED)
 		bne.s	loc_8D9A
-		move.b	#1,(a2,d1.w)
+		move.b	#1,(a2,d1.w)					;		change to RedSphere
 
 loc_8D9A:
-		cmpi.b	#2,(a2,d1.w)
+		cmpi.b	#2,(a2,d1.w)					; 	If neighbour is Blue
 		bne.s	loc_8DA4
-		addq.w	#1,d2
+		addq.w	#1,d2						;		increment count
 
 loc_8DA4:
-		dbf	d0,loc_8D88
-		tst.w	d2
-		beq.w	locret_8E8A
-		moveq	#0,d2
-		move.w	d5,d1
+		dbf	d0,Red_Loop_Check_Neighbors			; Loop[neighbors of touched]:end
+		tst.w	d2						; If there are no blue sphere neighbors
+		beq.w	locret_8E8A					;	return
+		moveq	#0,d2						; Horizontal span length
+		move.w	d5,d1						; scanning index
 
-loc_8DB2:
-		addq.w	#1,d2
-		addi.w	#-1,d1
-		tst.b	(a2,d1.w)
-		bne.s	loc_8DB2
-		move.w	d5,d1
+Red_Loop_Count_Horizontal_Left:						; Loop[left until empty]
+		addq.w	#1,d2						;	increment horizontal span length
+		addi.w	#-1,d1						;	move index left
+		tst.b	(a2,d1.w)					;	If index is empty (map[index] == 0)
+		bne.s	Red_Loop_Count_Horizontal_Left			;		break
+									; Loop[left until empty]:end
+		move.w	d5,d1						; scanning index
 
-loc_8DC0:
-		addq.w	#1,d2
-		addi.w	#1,d1
-		tst.b	(a2,d1.w)
-		bne.s	loc_8DC0
-		cmpi.w	#4,d2
-		blo.w	locret_8E8A
-		moveq	#0,d2
-		move.w	d5,d1
+Red_Loop_Count_Horizontal_Right:					; Loop[right until empty]
+		addq.w	#1,d2						;	increment horizontal span length
+		addi.w	#1,d1						;	move index right
+		tst.b	(a2,d1.w)					;	If index is empty (map[index] == 0)
+		bne.s	Red_Loop_Count_Horizontal_Right			;		break
+									; Loop[right until empty]:end
+		cmpi.w	#4,d2						; If horizontal span is less than 3 (< 4 because touched is double counted)
+		blo.w	locret_8E8A					; 	then return
+		moveq	#0,d2						; Vertical span lengthh
+		move.w	d5,d1						; scanning index
 
-loc_8DD8:
-		addq.w	#1,d2
-		addi.w	#-$20,d1
-		tst.b	(a2,d1.w)
-		bne.s	loc_8DD8
-		move.w	d5,d1
+Red_Loop_Count_Vertically_Up:						; Loop[up until empty]
+		addq.w	#1,d2						;	increment vertical span length
+		addi.w	#-$20,d1					;	move index up
+		tst.b	(a2,d1.w)					;	If index is empty (map[index] == 0)
+		bne.s	Red_Loop_Count_Vertically_Up			;		break
+									; Loop[up until empty]:end
+		move.w	d5,d1						; scanning index
 
-loc_8DE6:
-		addq.w	#1,d2
-		addi.w	#$20,d1
-		tst.b	(a2,d1.w)
-		bne.s	loc_8DE6
-		cmpi.w	#4,d2
-		blo.w	locret_8E8A
-		lea	(SStage_unkA600).w,a4
-		lea	(word_8EEA).l,a3
-		moveq	#0,d6
-		moveq	#0,d3
-		moveq	#6,d4
+Red_Loop_Count_Vertically_Down:						; Loop[down until empty]
+		addq.w	#1,d2						;	increment vertical span length
+		addi.w	#$20,d1						;	move index up
+		tst.b	(a2,d1.w)					;	If index is empty (map[index] == 0)
+		bne.s	Red_Loop_Count_Vertically_Down			;		break
+									; Loop[down until empty]:end
+		cmpi.w	#4,d2						; If vertical span is less than 3 (< 4 because touched is double counted)
+		blo.w	locret_8E8A					; 	then return
+		lea	(SStage_red_sphere_dfs_walk_stack).w,a4
+		lea	(SStage_4_Directions).l,a3			; Load Directions Pointer
+		moveq	#0,d6						; Walk Stack Size
+		moveq	#0,d3						; Direction Index Lower Bound
+		moveq	#6,d4						; Direction Index
 		add.w	d3,d4
-		move.w	d5,d0
+		move.w	d5,d0						; Current Walk Position
 
-loc_8E0E:
-		move.w	(a3,d4.w),d1
-		add.w	d0,d1
-		move.b	(a2,d1.w),d2
-		cmpi.b	#$89,d2
-		beq.s	loc_8E8C
-		cmpi.b	#1,d2
-		bne.s	loc_8E68
-		cmpi.w	#2,d6
-		blo.s	loc_8E48
+Red_Loop_Find_Next:
+		move.w	(a3,d4.w),d1					; Next Direction = directions[direction index]
+		add.w	d0,d1						; Next Candidate = current position + next direction
+		move.b	(a2,d1.w),d2					; load map entry at candidate position
+		cmpi.b	#$89,d2						; If candidate sphere is $8A (Processed + Touched)
+		beq.s	Red_Loop_Processes_Loop				; 	Loop found. Process Loop
+		cmpi.b	#1,d2						; If candidate is not a Red Sphere
+		bne.s	Red_Loop_Decrement				; 	Decrement direction Index
+		cmpi.w	#2,d6						; If walk stack size < 2
+		blo.s	Red_Loop_Push_Stack				; 	Push current state to walk stack
 		move.w	d1,d2
-		sub.w	-6(a4),d2
-		cmpi.w	#-1,d2
-		beq.s	loc_8E68
-		cmpi.w	#1,d2
-		beq.s	loc_8E68
-		cmpi.w	#$20,d2
-		beq.s	loc_8E68
-		cmpi.w	#-$20,d2
-		beq.s	loc_8E68
+		sub.w	-6(a4),d2					; Difference between canidate position and position at walk_stack[-2]
+		cmpi.w	#-1,d2						; If the difference is one square away in any direction
+									; Then it's not part of the loop
+		beq.s	Red_Loop_Decrement				;	Canidate is not part of the loop. Decrement direction Indext
+		cmpi.w	#1,d2						; Else Push current state to walk stack
+		beq.s	Red_Loop_Decrement
+		cmpi.w	#$20,d2						; [S-1] -> [Current]
+		beq.s	Red_Loop_Decrement				;   ^          V
+		cmpi.w	#-$20,d2					; [S-2]	   [Candidate]
+		beq.s	Red_Loop_Decrement
 
-loc_8E48:
-		ori.b	#$80,(a2,d0.w)
-		move.b	d3,(a4)+
-		move.b	d4,(a4)+
-		move.w	d0,(a4)+
-		addq.w	#1,d6
+Red_Loop_Push_Stack:
+		ori.b	#$80,(a2,d0.w)					; Mark current position as being processed
+		move.b	d3,(a4)+					; Push direction index to walk stack
+		move.b	d4,(a4)+					; Push direction index lower bound to walk stack
+		move.w	d0,(a4)+					; Push current position to walk stack
+		addq.w	#1,d6						; Increment walk stack size
+
+		; For subsequent steps of a walk, you don't want the next position to consider making a complete
+		; 180 degree turn. The following code is used to limit the new position's range of movement directions.
+		; It's done by defining the lower bound index as one less than the current direction (looping to index 3 if -1),
+		; 	and by defining the upper bound index as two more than the new lower bound,
+		;
+		; As an example, given that the 4-way direction table is [L, U, R, D, L, U],
+		; let's say the direction from current to candidate is Right (index 2).
+		; Then the new lower bound index would be 1, and the new upper bound would be 3
+		; which is the range [U, R, D], which excludes going LEFT i.e. turning 180 degrees
+		;
+		; These offsets are multiplied by 2 as each direction is 2 bytes long
 		move.w	d4,d3
 		subq.w	#2,d3
-		andi.w	#6,d3
+		andi.w	#6,d3						; lower_bound = (index - 2) & 6
 		move.w	#4,d4
-		add.w	d3,d4
-		move.w	d1,d0
-		bra.s	loc_8E0E
+		add.w	d3,d4						; index = 4 + lower_bound
+		move.w	d1,d0						; current position = candidate position
+		bra.s	Red_Loop_Find_Next
 ; ---------------------------------------------------------------------------
 
-loc_8E68:
-		subq.w	#2,d4
-		cmp.w	d3,d4
-		bge.s	loc_8E0E
+Red_Loop_Decrement:
+		subq.w	#2,d4						; Decrement direction index
+		cmp.w	d3,d4						; If index >= lower bound,
+		bge.s	Red_Loop_Find_Next				; 	check next candidate
+									; Else this position is done, pop the stack to get previous
 
-loc_8E6E:
+Red_Loop_Pop_Stack:
 		moveq	#0,d3
 		moveq	#0,d4
-		move.w	-(a4),d0
-		move.b	-(a4),d4
-		move.b	-(a4),d3
-		subq.w	#1,d6
-		bcs.s	locret_8E8A
-		andi.b	#$7F,(a2,d0.w)
-		subq.w	#2,d4
-		cmp.w	d3,d4
-		bge.s	loc_8E0E
-		bra.s	loc_8E6E
+		move.w	-(a4),d0					; Pop current position from walk stack
+		move.b	-(a4),d4					; Pop direction index from walk stack
+		move.b	-(a4),d3					; Pop direction index lower bound from walk stack
+		subq.w	#1,d6						; Decrement walk stack size
+		bcs.s	locret_8E8A					; If walk stack was empty,
+									; 	No more loops to find. Return
+		andi.b	#$7F,(a2,d0.w)					; Unmark current position as being processed
+		subq.w	#2,d4						; Decrement direction index
+		cmp.w	d3,d4						; If index >= lower bound,
+		bge.s	Red_Loop_Find_Next				; 	check next candidate
+		bra.s	Red_Loop_Pop_Stack				; Else this position is done, pop the stack to get previous
 ; ---------------------------------------------------------------------------
 
 locret_8E8A:
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_8E8C:
+; Once a loop has been detected, this code finds which direction
+; is "inside" the loop, and checks if there is a blue sphere
+; which would then be turned into a ring, and whose position
+; is added to the ring queue.
+
+; To find the "inside" direction, rewalk the red sphere path
+; keeping track of the direction of each step.
+; Once you find a direction that is different from the final direction,
+; then apply that directional offset to the touched sphere,
+; then as a backup, apply that directional offset to the last sphere of the loop
+; In case the touched sphere is in the corner
+
+;	[R] [R] [R]	[T]<[R] [R]
+;	 V		 V
+;	[T]>[B] [R]	[R]>[B] [R]
+;	 V		 V
+;	[R] [B] [R]	[R] [B] [R]
+;	 V		 V
+;	[R]>[R] [R]	[R]>[R] [R]
+Red_Loop_Processes_Loop:
 		movem.l	d0/d3/d6/a4,-(sp)
-		sub.w	d5,d0
+		sub.w	d5,d0						; Direction (start -> last walk)
 		move.w	d0,d2
-		neg.w	d2
-		lea	(SStage_unkA600+6).w,a4
-		move.w	d5,d3
+		neg.w	d2						; Final Direction of loop (last walk -> start)
+		lea	(SStage_red_sphere_dfs_walk_stack+6).w,a4	; &WalkPath[1].position
+		move.w	d5,d3						; Walk position head (starts at touched)						; Walk position
 
-loc_8E9C:
-		move.w	(a4)+,d0
+Red_Loop_Walk_Forward:
+		move.w	(a4)+,d0					; Next step of walk (starts at second)
 		addq.w	#2,a4
-		sub.w	d3,d0
-		cmp.w	d2,d0
-		bne.s	loc_8EAA
-		add.w	d0,d3
-		bra.s	loc_8E9C
+		sub.w	d3,d0						; Direction from walk position to next step
+		cmp.w	d2,d0						; If next direction != final direction
+		bne.s	Red_Loop_Blue_Check				; 	break
+		add.w	d0,d3						; Otherwise move walk position forward
+		bra.s	Red_Loop_Walk_Forward
 ; ---------------------------------------------------------------------------
 
-loc_8EAA:
-		add.w	d5,d0
-		cmpi.b	#2,(a2,d0.w)
-		beq.s	loc_8EC8
-		cmpi.b	#4,(a2,d0.w)
-		beq.s	loc_8ED4
-		sub.w	d2,d0
-		cmpi.b	#2,(a2,d0.w)
-		beq.s	loc_8EC8
-		bra.s	loc_8ED4
+Red_Loop_Blue_Check:
+		add.w	d5,d0						; Sphere to check (touched position + new direction)
+		cmpi.b	#2,(a2,d0.w)					; If checked sphere is Blue
+		beq.s	Red_Loop_Blue_To_Ring				;	Turn into ring
+		cmpi.b	#4,(a2,d0.w)					; If checked sphere is a Ring
+		beq.s	Red_Loop_Return_To_DFS				; 	return to DFS walk
+		sub.w	d2,d0						; Move Sphere to check one step opposite of the final direction
+		cmpi.b	#2,(a2,d0.w)					; If checked sphere is Blue
+		beq.s	Red_Loop_Blue_To_Ring				;	Turn into ring
+		bra.s	Red_Loop_Return_To_DFS				; Else return to DFS walk
 ; ---------------------------------------------------------------------------
 
-loc_8EC8:
-		bsr.w	sub_8CC4
-		move.b	#4,(a2,d0.w)
-		move.w	d0,(a5)+
+Red_Loop_Blue_To_Ring:
+		bsr.w	Decrement_BlueSphere_Count
+		move.b	#4,(a2,d0.w)					; Turn blue sphere into a ring
+		move.w	d0,(a5)+					; and add ring position to ring queue
 
-loc_8ED4:
+Red_Loop_Return_To_DFS:
 		movem.l	(sp)+,d0/d3/d6/a4
-		bra.s	loc_8E68
-; End of function sub_8D78
+		bra.s	Red_Loop_Decrement
+; End of function Find_Red_Sphere_Loop
 
 ; ---------------------------------------------------------------------------
-word_8EDA:
+SStage_8_Directions:
 		dc.w   -$21
 		dc.w   -$20
 		dc.w   -$1F
@@ -11187,7 +11272,7 @@ word_8EDA:
 		dc.w    $1F
 		dc.w    $20
 		dc.w    $21
-word_8EEA:
+SStage_4_Directions:
 		dc.w     -1
 		dc.w   -$20
 		dc.w      1
