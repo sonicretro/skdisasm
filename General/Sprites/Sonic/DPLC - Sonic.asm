@@ -440,18 +440,34 @@ PLC_SuperSonic_:
 		dc.w word_148E72-PLC_SuperSonic_
 		dc.w word_148E7A-PLC_SuperSonic_
 		dc.w word_148E84-PLC_SuperSonic_
+	if FixBugs
+		dc.w word_148E8E-PLC_SuperSonic_
+	else
 		dc.w word_148E7A-PLC_SuperSonic_		; word_148E8E is the proper pointer here
+	endif
 		dc.w word_148E84-PLC_SuperSonic_
 		dc.w word_148E7A-PLC_SuperSonic_
+	if FixBugs
+		dc.w word_148E8E-PLC_SuperSonic_
+	else
 		dc.w word_148E84-PLC_SuperSonic_		; word_148E8E is the proper pointer here
+	endif
 		dc.w word_148E7A-PLC_SuperSonic_
 		dc.w word_148E84-PLC_SuperSonic_
+	if FixBugs
+		dc.w word_148E8E-PLC_SuperSonic_
+	else
 		dc.w word_148E7A-PLC_SuperSonic_		; word_148E8E is the proper pointer here
+	endif
 		dc.w word_148B6E-PLC_SuperSonic_
 		dc.w word_148B78-PLC_SuperSonic_
 		dc.w word_148E84-PLC_SuperSonic_
 		dc.w word_148E7A-PLC_SuperSonic_
+	if FixBugs
+		dc.w word_148E8E-PLC_SuperSonic_
+	else
 		dc.w word_148E84-PLC_SuperSonic_		; word_148E8E is the proper pointer here
+	endif
 		dc.w word_148B9E-PLC_SuperSonic_
 		dc.w word_148BA6-PLC_SuperSonic_
 		dc.w word_148BAE-PLC_SuperSonic_
