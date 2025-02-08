@@ -4234,7 +4234,7 @@ SuperSonic_PalCycle_Revert:	; runs the fade in transition backwards
 		move.w	#0,(Palette_frame).w
 	else
 		; Bug: this only clears the high byte of Palette_frame, causing subsequent
-		; fade-ins to pull color values from PalCycle_SuperTails
+		; fade-ins to pull color values from Pal_FromBlack
 		move.b	#0,(Palette_frame).w
 	endif
 		move.b	#0,(Super_palette_status).w	; 0 = off
