@@ -1157,12 +1157,24 @@ Snd_AIZ1_PSG2:
 	dc.b	nC4, nRst, nA3, nRst, nF3, nRst, nD3, nRst, nB4, nRst, nA4, nRst
 	dc.b	nF4, nRst, nD4, nRst, nB3, nRst, nA3, nRst, nF3, nRst, nD3, nRst
 	dc.b	$15
+	if FixBugs
+	smpsPSGAlterVol		$0A
+	dc.b	nG3
+	else
+	; Bug: The PSG volume does not change with this command.
 	smpsFMAlterVol      $0A, $AC
+	endif
 	dc.b	$0B, nRst, $01, nD4, $0B, nRst, $01, nG4, $0B, nRst, $01, nF4
 	dc.b	$05, nRst, $0D, nE4, $05, nRst, $0D, nC4, $05, nRst, $07, nA3
 	dc.b	$2F, nRst, $01, nD4, $05, nRst, $0D, nC4, $05, nRst, $0D, nB3
 	dc.b	$05, nRst, $01
+	if FixBugs
+	smpsPSGAlterVol		$F6
+	dc.b	nD5
+	else
+	; Bug: The PSG volume does not change with this command.
 	smpsFMAlterVol      $F6, $BF
+	endif
 	dc.b	$03, nRst, nB4, nRst, nG4, nRst, nE4, nRst, nD4, nRst, nB3, nRst
 	dc.b	nG3, nRst, nE3, nRst, nC5, nRst, nB4, nRst, nG4, nRst, nE4, nRst
 	dc.b	nC4, nRst, nB3, nRst, nG3, nRst, nE3, nRst, nC5, nRst, nA4, nRst
