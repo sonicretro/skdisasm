@@ -731,6 +731,8 @@ zTrackUpdLoop:
 		pop	bc				; Restore bc
 		djnz	zTrackUpdLoop			; Loop for all tracks
 
+		; This code is ran by both zUpdateSFXTracks and zUpdateMusic,
+		; causing it to execute multiple times per frame.
 		ld	a, (zTempoSpeedup)		; Get tempo speed-up value
 		or	a				; Is music sped up?
 		ret	z				; Return if not
@@ -1089,6 +1091,7 @@ zComputeNoteDuration:
 ;sub_33A
 	if fix_sndbugs=0
 zTrackRunTimer:
+		; This is absurdly inefficient, since 'dec' can be ran directly on memory.
 		ld	a, (ix+zTrack.DurationTimeout)	; Get track duration timeout
 		dec	a				; Decrement it...
 		ld	(ix+zTrack.DurationTimeout), a	; ... and save new value
@@ -3132,6 +3135,10 @@ cfSetVolume:
 ;loc_CA1
 cfChangeVolume2:
 		inc	de				; Advance pointer
+		; Other drivers feature these two lines, causing the first parameter
+		; to be used by PSG tracks. In this driver, it is instead completely unused.
+		;add	a,(ix+zTrack.Volume)
+		;ld	(ix+zTrack.Volume),a
 		ld	a, (de)				; Get change in volume then fall-through
 
 
