@@ -620,9 +620,16 @@ smpsCall macro loc
 ; ---------------------------------------------------------------------------
 ; Alter Volume
 smpsFMAlterVol macro val1,val2
-	if (SonicDriverVer>=3)&&("val2"<>"")
-		dc.b	$E5,val1,val2
+	if ("val2"<>"")
+		; S3K's nerfed 'PSG & FM volume' command with broken PSG support.
+		; The first value is completely unused, while the second is for FM tracks.
+		if (SonicDriverVer>=3)
+			dc.b	$E5,val1,val2
+		else
+			dc.b	$E6,val2
+		endif
 	else
+		; Normal, sane command.
 		dc.b	$E6,val1
 	endif
 	endm
