@@ -167,7 +167,7 @@ Snd_FinalBoss_Loop05:
 	dc.b	nG3, nA3, nB3, nC4, nE4, $0C, nRst, nD5, $03, nRst, nD5, nRst
 	smpsLoop            $00, $03, Snd_FinalBoss_Loop05
 	dc.b	nE3, $02, nF3, nG3, nA3, nB3, nC4, nE4, $0C, nE3, $02, nF3
-	if FixBugs
+	if FixMusicAndSFXDataBugs
 	; Taken from Snd_FinalBoss_Loop10.
 	dc.b	nG3, nA3, nB3, nC4, nE4, $0C, nRst, nRst, nRst, $24
 	else

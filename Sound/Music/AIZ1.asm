@@ -1157,7 +1157,7 @@ Snd_AIZ1_PSG2:
 	dc.b	nC4, nRst, nA3, nRst, nF3, nRst, nD3, nRst, nB4, nRst, nA4, nRst
 	dc.b	nF4, nRst, nD4, nRst, nB3, nRst, nA3, nRst, nF3, nRst, nD3, nRst
 	dc.b	$15
-	if FixBugs
+	if FixMusicAndSFXDataBugs
 	smpsPSGAlterVol		$0A
 	dc.b	nG3
 	else
@@ -1168,7 +1168,7 @@ Snd_AIZ1_PSG2:
 	dc.b	$05, nRst, $0D, nE4, $05, nRst, $0D, nC4, $05, nRst, $07, nA3
 	dc.b	$2F, nRst, $01, nD4, $05, nRst, $0D, nC4, $05, nRst, $0D, nB3
 	dc.b	$05, nRst, $01
-	if FixBugs
+	if FixMusicAndSFXDataBugs
 	smpsPSGAlterVol		$F6
 	dc.b	nD5
 	else
