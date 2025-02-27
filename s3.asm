@@ -31857,11 +31857,11 @@ Do_ResizeEvents:
 		move.w	(Current_zone_and_act).w,d0
 		ror.b	#1,d0
 		lsr.w	#6,d0
-		if ~~FixBugs
+	if ~~FixBugs
 		; Bug: this clamps the array index too hard, causing Competition and bonus
 		; stages to execute resize routines meant for the early game levels
 		andi.w	#$3E,d0
-		endif
+	endif
 		move.w	LevelResizeArray(pc,d0.w),d0
 		jsr	LevelResizeArray(pc,d0.w)
 		moveq	#2,d1
@@ -100071,10 +100071,10 @@ loc_51D52:
 loc_51D78:
 		tst.b	$30(a0)
 	if FixBugs
-		beq.s	loc_7507A
+		beq.s	loc_51D82
 	else
 		; Bug: this branch is inverted, freeing the player if they're _not_ being held
-		bne.s	loc_7507A
+		bne.s	loc_51D82
 	endif
 		jsr	Restore_PlayerControl(pc)
 
