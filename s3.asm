@@ -21,6 +21,9 @@
 FixMusicAndSFXDataBugs = 0
 SonicDriverVer = 3 ; Tell SMPS2ASM that we are targetting Sonic 3's sound driver
 		include "Sound/_smps2asm_inc.asm"
+		
+FixBugs = 0
+; If 1, fixes multiple bugs within the game
 
 Size_of_Snd_driver_guess = $1300
 Size_of_Snd_driver2_guess = $843
@@ -1541,10 +1544,15 @@ Clear_DisplayData_No2P:
 Clear_DisplayData_Cont:
 		clr.l	(V_scroll_value).w
 		clr.l	(_unkF61A).w
+	if FixBugs
+		clearRAM Sprite_table,$280
+		clearRAM H_scroll_buffer,$400
+	else
 		; Bug: this should be $280
 		clearRAM Sprite_table,$280+4
 		; Bug: this should be $400
 		clearRAM H_scroll_buffer,$400+4
+	endif
 
 		startZ80
 		rts
@@ -2351,16 +2359,29 @@ Process_Nem_Queue_Done:
 		rts
 ; ---------------------------------------------------------------------------
 
-; Bug: filling in all $10 slots is dangerous because this routine
-; doesn't copy the VRAM location for the last entry in the queue,
-; nor does it mark the last slot in the queue as clear
 Process_Nem_Queue_ShiftUp:
 		lea	(Nem_decomp_queue).w,a0
-		moveq	#$16-1,d0
+		moveq	#bytesToLcnt(Nem_decomp_queue_End-Nem_decomp_queue-6),d0
 
 .loop:
 		move.l	6(a0),(a0)+
 		dbf	d0,.loop
+		
+	if FixBugs
+		; The above code does not properly 'pop' the 16th PLC entry.
+		; Because of this, occupying the 16th slot will cause it to
+		; be repeatedly decompressed infinitely.
+		; Granted, this could be conisdered more of an optimisation
+		; than a bug: treating the 16th entry as a dummy that
+		; should never be occupied makes this code unnecessary.
+		; Still, the overhead of this code is minimal.
+		if (Nem_decomp_queue_End-Nem_decomp_queue-6)&2
+		move.w	6(a0),(a0)
+		endif
+
+		clr.l	(Nem_decomp_queue_End-6).w
+	endif
+		
 		rts
 ; End of function Process_Nem_Queue_Main
 
@@ -4208,9 +4229,14 @@ SuperSonic_PalCycle_Revert:	; runs the fade in transition backwards
 		move.w	(Palette_frame).w,d0
 		subq.w	#6,(Palette_frame).w	; previous frame
 		bcc.s	loc_3194		; branch, if it isn't the first frame
+	if FixBugs
+		; Set it to word to clear the entirety of Palette_frame.
+		move.w	#0,(Palette_frame).w
+	else
 		; Bug: this only clears the high byte of Palette_frame, causing subsequent
 		; fade-ins to pull color values from Pal_FromBlack
 		move.b	#0,(Palette_frame).w
+	endif
 		move.b	#0,(Super_palette_status).w	; 0 = off
 
 loc_3194:
@@ -4228,7 +4254,12 @@ SuperSonic_PalCycle_Normal:
 		move.w	(Palette_frame).w,d0
 		addq.w	#6,(Palette_frame).w	; next frame
 		cmpi.w	#$36,(Palette_frame).w	; is it the last frame?
+	if FixBugs
+		bls.s	loc_31BE		; if not, branch
+	else
+		; This condition causes the last frame to be skipped.
 		blo.s	loc_31BE		; if not, branch
+	endif
 		move.w	#$24,(Palette_frame).w	; reset frame counter (Super Sonic's normal palette cycle starts at $24. Everything before that is for the palette fade)
 
 loc_31BE:
@@ -20357,9 +20388,20 @@ loc_124BA:
 
 loc_124C2:
 		move.w	d0,ground_vel(a0)
+	if FixBugs
+		move.b	angle(a0),d1
+		addi.b	#$20,d1
+		andi.b	#$C0,d1
+	else
+		; These three instructions partially overwrite the inertia value in
+		; 'd0'! This causes the character to trigger their skidding
+		; animation at different speeds depending on whether they're going
+		; right or left. To fix this, make these instructions use 'd1'
+		; instead.
 		move.b	angle(a0),d0
 		addi.b	#$20,d0
 		andi.b	#$C0,d0
+	endif
 		bne.s	locret_1250A
 		cmpi.w	#$400,d0
 		blt.s	locret_1250A
@@ -20412,9 +20454,20 @@ loc_12540:
 
 loc_12548:
 		move.w	d0,ground_vel(a0)
+	if FixBugs
+		move.b	angle(a0),d1
+		addi.b	#$20,d1
+		andi.b	#$C0,d1
+	else
+		; These three instructions partially overwrite the inertia value in
+		; 'd0'! This causes the character to trigger their skidding
+		; animation at different speeds depending on whether they're going
+		; right or left. To fix this, make these instructions use 'd1'
+		; instead.
 		move.b	angle(a0),d0
 		addi.b	#$20,d0
 		andi.b	#$C0,d0
+	endif
 		bne.s	locret_12590
 		cmpi.w	#-$400,d0
 		bgt.s	locret_12590
@@ -25052,9 +25105,20 @@ loc_15820:
 
 loc_15828:
 		move.w	d0,ground_vel(a0)
+	if FixBugs
+		move.b	angle(a0),d1
+		addi.b	#$20,d1
+		andi.b	#$C0,d1
+	else
+		; These three instructions partially overwrite the inertia value in
+		; 'd0'! This causes the character to trigger their skidding
+		; animation at different speeds depending on whether they're going
+		; right or left. To fix this, make these instructions use 'd1'
+		; instead.
 		move.b	angle(a0),d0
 		addi.b	#$20,d0
 		andi.b	#$C0,d0
+	endif
 		bne.s	locret_15870
 		cmpi.w	#$400,d0
 		blt.s	locret_15870
@@ -25107,9 +25171,20 @@ loc_158A6:
 
 loc_158AE:
 		move.w	d0,ground_vel(a0)
+	if FixBugs
+		move.b	angle(a0),d1
+		addi.b	#$20,d1
+		andi.b	#$C0,d1
+	else
+		; These three instructions partially overwrite the inertia value in
+		; 'd0'! This causes the character to trigger their skidding
+		; animation at different speeds depending on whether they're going
+		; right or left. To fix this, make these instructions use 'd1'
+		; instead.
 		move.b	angle(a0),d0
 		addi.b	#$20,d0
 		andi.b	#$C0,d0
+	endif
 		bne.s	locret_158F6
 		cmpi.w	#-$400,d0
 		bgt.s	locret_158F6
@@ -29064,9 +29139,13 @@ loc_19028:
 		bclr	#7,(a2)
 
 loc_19034:
+	if FixBugs
+		move.w	$30(a0),d0
+	else
 		; Bug: probably meant to be $30(a0), as Test_Ring_Collisions_AttractRing
 		; stores the ring's address in the ring status table there
 		move.w	$30,d0
+	endif
 		beq.s	loc_19040
 		movea.w	d0,a2
 		move.w	#0,(a2)
@@ -31778,9 +31857,11 @@ Do_ResizeEvents:
 		move.w	(Current_zone_and_act).w,d0
 		ror.b	#1,d0
 		lsr.w	#6,d0
+		if ~~FixBugs
 		; Bug: this clamps the array index too hard, causing Competition and bonus
 		; stages to execute resize routines meant for the early game levels
 		andi.w	#$3E,d0
+		endif
 		move.w	LevelResizeArray(pc,d0.w),d0
 		jsr	LevelResizeArray(pc,d0.w)
 		moveq	#2,d1
@@ -32186,8 +32267,12 @@ loc_1AC4E:
 		cmpi.w	#$3E0,(Camera_Y_pos).w
 		blo.s	locret_1AC72
 		lea	(Normal_palette_line_4+$10).w,a1
+	if FixBugs
+		move.w	#$680,(a1)+
+	else
 		; Bug: this should be $680
 		move.w	#$B80,(a1)+
+	endif
 		move.w	#$240,(a1)+
 		move.w	#$220,(a1)+
 		addq.b	#2,(Dynamic_resize_routine).w
@@ -32252,8 +32337,12 @@ locret_1ACD6:
 ; ---------------------------------------------------------------------------
 
 MGZ1_Resize:
+	if FixBugs
+		rts
+	else
 		; Bug: MGZ1 uses a dynamic resize routine meant for MGZ2
 		; This causes the act 2 boss to spawn in out-of-bounds act 1
+	endif
 
 MGZ2_Resize:
 		moveq	#0,d0
@@ -35801,9 +35890,13 @@ sub_1D436:
 		bsr.s	sub_1D44C
 		lea	(Player_2).w,a1
 		lea	$34(a0),a2
+	if FixBugs
+		moveq	#p2_standing_bit,d6
+	else
 		; Bug: if player 1 was riding the object, then d6 may have become dirty from
 		; a call to Perform_Player_DPLC, causing player 2 to behave erratically
 		addq.b	#p2_standing_bit-p1_standing_bit,d6
+	endif
 ; End of function sub_1D436
 
 
@@ -36488,7 +36581,14 @@ loc_1DB88:
 		ori.w	#high_priority,art_tile(a1)
 		move.w	#$80,priority(a1)
 		move.b	#$18,width_pixels(a1)
+	if FixBugs
+		move.b	#$18,height_pixels(a1)
+	else
+		; Bug: This only covers the width, when it
+		; should be covering the height as the width
+		; has already been defined.
 		move.b	#$18,width_pixels(a1)
+	endif
 		move.w	(a4)+,x_vel(a1)
 		move.w	(a4)+,y_vel(a1)
 		move.b	d6,mapping_frame(a1)
@@ -45120,15 +45220,23 @@ loc_2634C:
 
 
 sub_2636C:
+	if FixBugs
+		lea	$30(a0),a2
+	else
 		; Bug: probably meant to be $30(a0)
 		lea	$30,a2
+	endif
 		lea	(Player_1).w,a1
 		moveq	#p1_standing_bit,d6
 		movem.l	d1-d3,-(sp)
 		bsr.s	sub_2638A
 		movem.l	(sp)+,d1-d3
+	if FixBugs
+		lea	$34(a0),a2
+	else
 		; Bug: probably meant to be $34(a0)
 		lea	$34,a2
+	endif
 		lea	(Player_2).w,a1
 		addq.b	#p2_standing_bit-p1_standing_bit,d6
 ; End of function sub_2636C
@@ -45468,10 +45576,20 @@ loc_26714:
 		move.l	a3,mappings(a1)
 		move.b	d5,render_flags(a1)
 		move.w	art_tile(a0),art_tile(a1)
-		move.b	priority(a0),priority(a1)	; this is not a bug because the design of this object is that priority is set to $200
+	if FixBugs
+		; Just to be on the safe side, we'll use word here.
+		move.w	priority(a0),priority(a1)
+	else
+		; this is not a bug because the design of this object is that priority is set to $200
 		; copying priority as a byte would lead to $8 being 0x02 and $9 being 00 by default would still end up as $200 anyway but if you
 		; change priority to something like $280 it would bug up so using a word here would be better
+		move.b	priority(a0),priority(a1)
+	endif
 		move.b	width_pixels(a0),width_pixels(a1)
+	if FixBugs
+		; The height was originally missing, which would result in it disappearing too quickly vertically.
+		move.b	height_pixels(a0),height_pixels(a1)
+	endif
 		move.w	(a4)+,x_vel(a1)
 		move.w	(a4)+,y_vel(a1)
 		move.b	(a5)+,mapping_frame(a1)
@@ -45513,10 +45631,20 @@ loc_26798:
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
 		move.w	art_tile(a0),art_tile(a1)
-		move.b	priority(a0),priority(a1)	; this is not a bug because the design of this object is that priority is set to $200
+	if FixBugs
+		; Just to be on the safe side, we'll use word here.
+		move.w	priority(a0),priority(a1)
+	else
+		; this is not a bug because the design of this object is that priority is set to $200
 		; copying priority as a byte would lead to $8 being 0x02 and $9 being 00 by default would still end up as $200 anyway but if you
 		; change priority to something like $280 it would bug up so using a word here would be better
-		move.b	width_pixels(a0),width_pixels(a1)	; copying height_pixels is missing
+		move.b	priority(a0),priority(a1)
+	endif
+		move.b	width_pixels(a0),width_pixels(a1)
+	if FixBugs
+		; The height was originally missing, which would result in it disappearing too quickly vertically.
+		move.b	height_pixels(a0),height_pixels(a1)
+	endif
 		move.w	(a4)+,x_vel(a1)
 		move.w	(a4)+,y_vel(a1)
 		dbf	d1,loc_2678E
@@ -55170,7 +55298,13 @@ loc_2F0EA:
 		move.w	#make_art_tile($45C,0,0),art_tile(a1)
 		move.b	#$84,render_flags(a1)
 		move.b	#4,width_pixels(a1)
+	if FixBugs
+		; This identifies the height without identifying the width twice.
+		move.b	#4,height_pixels(a1)
+	else
+		; Bug: This is missing the height, and only really repeats what the previous line did.
 		move.b	#4,width_pixels(a1)
+	endif
 		move.w	#$300,priority(a1)
 		move.w	x_pos(a0),x_pos(a1)
 		jsr	(Random_Number).l
@@ -55488,7 +55622,13 @@ Obj_HCZHandLauncher:
 		move.w	#make_art_tile($3E4,1,0),art_tile(a1)
 		move.b	render_flags(a0),render_flags(a1)
 		move.b	#$20,width_pixels(a1)
+	if FixBugs
+		; This identifies the height without overwiting the width value.
+		move.b	#$30,height_pixels(a1)
+	else
+		; Bug: This is missing the height, and it overwrites what the previous line did.
 		move.b	#$30,width_pixels(a1)
+	endif
 		move.w	#$280,priority(a1)
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
@@ -56508,9 +56648,13 @@ loc_303CC:
 loc_303DA:
 		lea	(Ani_CNZBalloon).l,a1
 		jsr	(Animate_Sprite).l
-		; Bug: probably meant to be 5(a0), and at some point the animation terminated
+	if FixBugs
+		tst.b	routine(a0)
+	else
+		; Bug: probably meant to be routine(a0), and at some point the animation terminated
 		; with code $FC (increment routine counter) rather than $FB (move offscreen)
 		tst.b	5
+	endif
 		beq.s	loc_303F2
 		move.w	#$7F00,x_pos(a0)
 
@@ -59526,9 +59670,14 @@ loc_32A98:
 		bsr.s	sub_32AFE
 		lea	(Player_2).w,a1
 		lea	$34(a0),a2
+	if FixBugs
+		; Set the entirety of d6 to be the standing bit, which fixes d6's dirtiness.
+		moveq	#p2_standing_bit,d6
+	else
 		; Bug: if player 1 was riding the object, then d6 may have become dirty from
 		; a call to Perform_Player_DPLC, causing player 2 to behave erratically
 		addq.b	#p2_standing_bit-p1_standing_bit,d6
+	endif
 		move.w	(Ctrl_2_logical).w,d5
 		bsr.s	sub_32AFE
 		move.b	(Level_frame_counter+1).w,d0
@@ -62080,9 +62229,20 @@ loc_34B28:
 
 loc_34B30:
 		move.w	d0,ground_vel(a0)
+	if FixBugs
+		move.b	angle(a0),d1
+		addi.b	#$20,d1
+		andi.b	#$C0,d1
+	else
+		; These three instructions partially overwrite the inertia value in
+		; 'd0'! This causes the character to trigger their skidding
+		; animation at different speeds depending on whether they're going
+		; right or left. To fix this, make these instructions use 'd1'
+		; instead.
 		move.b	angle(a0),d0
 		addi.b	#$20,d0
 		andi.b	#$C0,d0
+	endif
 		bne.s	locret_34B74
 		cmpi.w	#$400,d0
 		blt.s	locret_34B74
@@ -62134,9 +62294,20 @@ loc_34BAA:
 
 loc_34BB2:
 		move.w	d0,ground_vel(a0)
+	if FixBugs
+		move.b	angle(a0),d1
+		addi.b	#$20,d1
+		andi.b	#$C0,d1
+	else
+		; These three instructions partially overwrite the inertia value in
+		; 'd0'! This causes the character to trigger their skidding
+		; animation at different speeds depending on whether they're going
+		; right or left. To fix this, make these instructions use 'd1'
+		; instead.
 		move.b	angle(a0),d0
 		addi.b	#$20,d0
 		andi.b	#$C0,d0
+	endif
 		bne.s	locret_34BF6
 		cmpi.w	#-$400,d0
 		bgt.s	locret_34BF6
@@ -76438,10 +76609,15 @@ S3Credits:
 		andi.b	#$BF,d0
 		move.w	d0,(VDP_control_port).l
 		jsr	(Clear_DisplayData).l
+	if FixBugs
+		clearRAM	Sprite_table,$280
+		clearRAM	H_scroll_buffer,$400
+	else
 		; Bug: this should be $280
 		clearRAM	Sprite_table,$280+4
 		; Bug: this should be $400
 		clearRAM	H_scroll_buffer,$400+4
+	endif
 		clearRAM	Sprite_table_input,$400
 		clearRAM	Player_1,$2000
 		clearRAM	RAM_start+$2000,$2000
@@ -77775,8 +77951,12 @@ loc_4328A:
 		subi.w	#$28,x_pos(a0)
 		bchg	#0,render_flags(a0)
 		bchg	#0,status(a0)
+	if FixBugs
+		clearRAM	H_scroll_buffer,$1000
+	else
 		; Bug: this should be $1000
 		clearRAM	H_scroll_buffer,$1000+4
+	endif
 		lea	(H_scroll_buffer+$13C).w,a1
 		lea	Streak_Horizontal_offsets(pc),a2
 		moveq	#0,d0
@@ -81071,7 +81251,13 @@ loc_45B56:
 		move.w	#make_art_tile($529,0,0),art_tile(a0)
 		move.w	#$280,priority(a0)
 		move.b	#$40,width_pixels(a0)
+	if FixBugs
+		; This identifies the height without overwriting the width value.
+		move.b	#$20,height_pixels(a0)
+	else
+		; Bug: This is missing the height, and it overwrites what the previous line did.
 		move.b	#$20,width_pixels(a0)
+	endif
 		jsr	Swing_Setup1(pc)
 		lea	(ArtKosM_AIZIntroPlane).l,a1
 		move.w	#tiles_to_bytes($529),d2
@@ -81118,7 +81304,13 @@ loc_45C00:
 		move.w	#make_art_tile($529,0,0),art_tile(a0)
 		move.w	#$280,priority(a0)
 		move.b	#4,width_pixels(a0)
+	if FixBugs
+		; This identifies the height without overwriting the width value.
+		move.b	#$C,height_pixels(a0)
+	else
+		; Bug: This is missing the height, and it overwrites what the previous line did.
 		move.b	#$C,width_pixels(a0)
+	endif
 		move.l	#loc_45C26,(a0)
 
 loc_45C26:
@@ -81133,7 +81325,13 @@ loc_45C3E:
 		move.w	#make_art_tile($529,0,0),art_tile(a0)
 		move.w	#$280,priority(a0)
 		move.b	#4,width_pixels(a0)
+	if FixBugs
+		; This identifies the height without overwriting the width value.
+		move.b	#$C,height_pixels(a0)
+	else
+		; Bug: This is missing the height, and it overwrites what the previous line did.
 		move.b	#$C,width_pixels(a0)
+	endif
 		move.l	#loc_45C64,(a0)
 
 loc_45C64:
@@ -81249,7 +81447,12 @@ loc_45DAE:
 		move.w	(Palette_frame).w,d0
 		addq.w	#6,(Palette_frame).w
 		cmpi.w	#$36,(Palette_frame).w
+	if FixBugs
+		bls.s	loc_45DD6
+	else
+		; This condition causes the last frame to be skipped.
 		blo.s	loc_45DD6
+	endif
 		move.w	#$24,(Palette_frame).w
 
 loc_45DD6:
@@ -81452,8 +81655,12 @@ Obj_FBZRobotnikHeadMain:
 loc_45F9A:
 		clr.b	mapping_frame(a0)
 		movea.w	$44(a0),a1
+	if FixBugs
+		btst	#2,$38(a1)
+	else
 		; Bug: this should check bit 2 of $38(a1)
 		btst	#2,$38(a0)
+	endif
 		beq.s	loc_45FB0
 		move.b	#1,mapping_frame(a0)
 
@@ -93378,8 +93585,12 @@ loc_4DAB2:
 		moveq	#0,d0
 		btst	#0,$20(a0)
 		bne.s	loc_4DAC4
+	if FixBugs
+		addq.w	#2*3,d0
+	else
 		; Bug: this should be 2*3
 		addq.w	#2*2,d0
+	endif
 
 loc_4DAC4:
 		lea	word_4DAEA(pc),a1
@@ -99859,8 +100070,12 @@ loc_51D52:
 
 loc_51D78:
 		tst.b	$30(a0)
+	if FixBugs
+		beq.s	loc_7507A
+	else
 		; Bug: this branch is inverted, freeing the player if they're _not_ being held
-		bne.s	loc_51D82
+		bne.s	loc_7507A
+	endif
 		jsr	Restore_PlayerControl(pc)
 
 loc_51D82:
@@ -111897,8 +112112,12 @@ sub_58B62:
 loc_58B78:
 		btst	#p2_standing_bit,d0
 		beq.s	locret_58BD0
+	if FixBugs
+		lea	(Player_2).w,a2
+	else
 		; Bug: this should instead write Player_2 to a1
 		lea	(Player_1).w,a2
+	endif
 		cmpi.b	#2,$3B(a0)
 		bne.s	locret_58BD0
 
@@ -111999,12 +112218,23 @@ loc_58C8C:
 loc_58C98:
 		add.w	d0,d0
 		movea.w	word_58CC4-2(pc,d0.w),a1
+	if FixBugs
+		btst	#Status_Invincible,status_secondary(a1)
+		bne.s	loc_58CAA
+		tst.b	invulnerability_timer(a1)
+		bne.s	loc_58CAA
+	else
 		; Bug: no invincibility or invulnerability checks are performed,
 		; allowing Super Sonic to be hurt
+	endif
 		movea.l	a0,a2
 		movea.l	a1,a0
 		jsr	(HurtCharacter).l
 		movea.l	a2,a0
+		
+	if FixBugs
+loc_58CAA:
+	endif
 		lea	ChildObjDat_58CE2(pc),a2
 		jsr	CreateChild6_Simple(pc)
 		jsr	Go_Delete_Sprite(pc)

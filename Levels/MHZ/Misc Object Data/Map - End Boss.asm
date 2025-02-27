@@ -29,7 +29,12 @@ word_185F4E:	dc.w 4
 		dc.b  $C3,  $F,   0,   0,   0,   0
 		dc.b  $C3,   7,   0, $10,   0, $20
 		dc.b  $C4,   7,   0, $51,   0, $30
-word_185F68:	dc.w 2	; 3 pieces are defined
+word_185F68:
+	if FixBugs
+				dc.w 3	; This covers all entries.
+	else
+				dc.w 2	; Bug: This misses the last entry of the mappings.
+	endif
 		dc.b  $DB,   9,   0, $D5, $FF, $FC
 		dc.b  $F4,   7,   0, $43, $FF, $D8
 		dc.b  $F4,   6,   0, $4B, $FF, $E8

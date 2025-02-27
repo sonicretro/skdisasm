@@ -167,7 +167,13 @@ Snd_FinalBoss_Loop05:
 	dc.b	nG3, nA3, nB3, nC4, nE4, $0C, nRst, nD5, $03, nRst, nD5, nRst
 	smpsLoop            $00, $03, Snd_FinalBoss_Loop05
 	dc.b	nE3, $02, nF3, nG3, nA3, nB3, nC4, nE4, $0C, nE3, $02, nF3
+	if FixBugs
+	; Taken from Snd_FinalBoss_Loop10.
+	dc.b	nG3, nA3, nB3, nC4, nE4, $0C, nRst, nRst, nRst, $24
+	else
+	; Bug: The $0D here makes this loop incorrectly.
 	dc.b	nG3, nA3, nB3, nC4, nE4, $0C, nRst, $0D, nRst, $0C, nRst, $24
+	endif
 	smpsSetvoice        $03
 	dc.b	nE4, $12, nB4, nA4, $0C, nD5, $12, nC5, nB4, $0C, nC5, $12
 	dc.b	nD5, nE5, $0C, nD5, $12, nA4, $1E, nE4, $12, nB4, nA4, $0C

@@ -567,6 +567,7 @@ Scroll_forced_Y_pos		ds.w 1			; note: must be exactly 4 bytes after Scroll_force
 			ds.w 1				; unused
 
 Nem_decomp_queue		ds.b 6*$10		; 6 bytes per entry, first longword is source location and next word is VRAM destination
+Nem_decomp_queue_End
 Nem_decomp_source =		Nem_decomp_queue	; long ; the compressed data location for the first entry in the queue
 Nem_decomp_destination =	Nem_decomp_queue+4	; word ; destination in VRAM for the first entry in the queue
 Nem_decomp_vars =		*			; $20 bytes ; various variables used by the Nemesis decompression queue processor
