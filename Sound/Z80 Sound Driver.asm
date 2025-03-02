@@ -3983,7 +3983,7 @@ zSendSSGEGData:
 		; we preserve rate scaling, whereas that driver sets it to 0.
 		ld	l, (ix+zTrack.TLPtrLow)				; l = low byte of pointer to TL data
 		ld	h, (ix+zTrack.TLPtrHigh)			; hl = pointer to TL data
-		ld	bc, zFMInstrumentTLTable-zFMInstrumentRSARTable	; bc = -10h
+		ld	bc, zFMInstrumentRSARTable-zFMInstrumentTLTable	; bc = -10h
 		add	hl, bc						; hl = pointer to RS/AR data
 		push	hl						; Save hl (**)
 	endif
