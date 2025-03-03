@@ -9,6 +9,10 @@ Sound_CC_Header:
 
 ; FM3 Data
 Sound_CC_FM3:
+    if FixMusicAndSFXDataBugs
+	; These notes are mute without a voice!
+	smpsSetvoice        $00
+    endif
 	dc.b	nE0, $03, nC0, $07, nA0, $0A, nEb1, $07
 
 ; FM4 Data
