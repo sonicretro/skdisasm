@@ -100757,14 +100757,23 @@ EndSign_CheckPlayerHit:
 		jsr	Check_PlayerInRange(pc)
 		tst.l	d0
 		beq.s	locret_52612		; If neither player is in range, don't do anything
-		tst.w	d0
-		beq.s	loc_525C0
+		tst.w	d0				; Is Sonic?
+		beq.s	loc_525C0		; If it's not Sonic, branch
+
+	if FixBugs
+		move.l	d0,-(sp)			; Save players address
 		bsr.w	sub_525C6
+		move.l	(sp)+,d0			; Restore players address
+	else
+		; Bug: After returning from the subroutine, the address of the characters in d0
+		; will be corrupted and the check will not work correctly.
+		bsr.w	sub_525C6
+	endif
 
 loc_525C0:
-		swap	d0
-		tst.w	d0
-		beq.s	locret_52612
+		swap	d0				; Get Tails address
+		tst.w	d0				; Is Tails?
+		beq.s	locret_52612		; If it's not Tails, branch
 ; End of function EndSign_CheckPlayerHit
 
 
