@@ -46,20 +46,36 @@ Snd_Drown_Loop03:
 ; FM3 Data
 Snd_Drown_FM3:
 	smpsSetvoice        $02
+    if FixMusicAndSFXDataBugs
+	smpsFMAlterVol      $FE
+	smpsCall            Snd_Drown_Call02
 
 Snd_Drown_Loop02:
 	smpsFMAlterVol      $FE
-    if ~~FixMusicAndSFXDataBugs
-; Like Sonic 1 and 2, the drowning countdown is supposed to have channel 3 get louder as the song progesses.
-; However in 3/& Knuckles, it remains silent until the very end, this smpsNoAttack command seems to cause the issue.
-; This is likely a SMPS Type 2 driver diffrence commparied to Type 1b, as if you port this version of the drowning countdown to Sonic 1/2 it will work.   
+	smpsCall            Snd_Drown_Call03
+	smpsLoop            $00, $1D, Snd_Drown_Loop02
+	dc.b	nC6, $0C
+	smpsStop
+
+Snd_Drown_Call03:
 	dc.b	smpsNoAttack
-    endif	
-	dc.b	nC6, $02, smpsNoAttack, nCs6, smpsNoAttack, nC6, smpsNoAttack, nCs6, smpsNoAttack, nC6, smpsNoAttack
+
+Snd_Drown_Call02:
+	dc.b	nC6, $02, smpsNoAttack, nCs6
+	smpsLoop            $01, $04, Snd_Drown_Call03
+	smpsReturn
+    else
+	; SMPS Z80 and SMPS 68k both handle 'smpsNoAttack' slightly differently,
+	; with the former preventing notes from 'keying-on' whilst it is active.
+	; This causes most of this track's notes to be completely silent.
+Snd_Drown_Loop02:
+	smpsFMAlterVol      $FE
+	dc.b	smpsNoAttack, nC6, $02, smpsNoAttack, nCs6, smpsNoAttack, nC6, smpsNoAttack, nCs6, smpsNoAttack, nC6, smpsNoAttack
 	dc.b	nCs6, smpsNoAttack, nC6, smpsNoAttack, nCs6
 	smpsLoop            $00, $1E, Snd_Drown_Loop02
 	dc.b	nC6, $0C
 	smpsStop
+    endif
 
 ; FM4 Data
 Snd_Drown_FM4:
