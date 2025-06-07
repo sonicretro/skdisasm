@@ -49,7 +49,13 @@ Snd_Drown_FM3:
 
 Snd_Drown_Loop02:
 	smpsFMAlterVol      $FE
-	dc.b	smpsNoAttack, nC6, $02, smpsNoAttack, nCs6, smpsNoAttack, nC6, smpsNoAttack, nCs6, smpsNoAttack, nC6, smpsNoAttack
+    if ~~FixMusicAndSFXDataBugs
+; Like Sonic 1 and 2, the drowning countdown is supposed to have channel 3 get louder as the song progesses.
+; However in 3/& Knuckles, it remains silent until the very end, this smpsNoAttack command seems to cause the issue.
+; This is likely a SMPS Type 2 driver diffrence commparied to Type 1b, as if you port this version of the drowning countdown to Sonic 1/2 it will work.   
+	dc.b	smpsNoAttack
+    endif	
+	dc.b	nC6, $02, smpsNoAttack, nCs6, smpsNoAttack, nC6, smpsNoAttack, nCs6, smpsNoAttack, nC6, smpsNoAttack
 	dc.b	nCs6, smpsNoAttack, nC6, smpsNoAttack, nCs6
 	smpsLoop            $00, $1E, Snd_Drown_Loop02
 	dc.b	nC6, $0C

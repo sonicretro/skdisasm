@@ -44,6 +44,8 @@ Snd_Emerald_FM5:
 	smpsStop
 
 ; FM6 Data
+; There is FM channel 6 data in this song, however the Sonic & Knuckles sound driver doesn't support FM on channel 6, causing it to be silent
+; This is likely a left over from Sonic 1 and 2 where those game's sound drivers do support FM on channel 6
 Snd_Emerald_FM6:
 	smpsSetvoice        $01
 	dc.b	nG5, $0C, nG5, $06, nC6, $06, nRst, nC6, nRst, nE6, $2A
