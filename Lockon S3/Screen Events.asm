@@ -134,7 +134,7 @@ loc_23A764:
 		jsr	(ApplyDeformation2).l
 		movea.l a6,a4
 		lea	(HScroll_table+$100).w,a5
-		move.w	(_unkEE74).w,d0
+		move.w	(Camera_Y_pos_P2_BG_copy).w,d0
 		subq.w	#4,d0
 		move.w	(Camera_X_pos_P2_copy).w,d3
 		moveq	#$74-1,d1
@@ -150,7 +150,7 @@ DPZ_BackgroundEvent:
 		moveq	#$1A,d2
 		bsr.s	sub_23A7BA
 		move.w	(Camera_X_pos_P2_copy).w,d0
-		move.w	(_unkEE70).w,d1
+		move.w	(Camera_X_pos_P2_BG_copy).w,d1
 		moveq	#$1C,d2
 		bsr.s	sub_23A7BA
 		jmp	(Update_VScrollValueP2).l
@@ -177,7 +177,7 @@ ALZ_Deformation:
 		move.w	d0,(Camera_Y_pos_BG_copy).w
 		move.w	(Camera_Y_pos_P2_copy).w,d0
 		bsr.s	sub_23A808
-		move.w	d0,(_unkEE74).w
+		move.w	d0,(Camera_Y_pos_P2_BG_copy).w
 		addq.w	#3,(Events_bg+$00).w
 		addi.l	#$1000,(Events_bg+$02).w
 		lea	(AIZ2_ALZ_BGDeformDelta).l,a4
@@ -261,7 +261,7 @@ BPZ_Deformation:
 		move.w	d0,(Camera_Y_pos_BG_copy).w
 		move.w	(Camera_Y_pos_P2_copy).w,d0
 		bsr.s	sub_23A8B6
-		move.w	d0,(_unkEE74).w
+		move.w	d0,(Camera_Y_pos_P2_BG_copy).w
 		lea	(HScroll_table+$00E).w,a1
 		move.w	(Events_fg_1).w,d0
 		bsr.s	sub_23A8C2
@@ -300,14 +300,14 @@ DPZ_Deformation:
 		move.w	(Camera_Y_pos_P2_copy).w,d0
 		bsr.s	sub_23A912
 		addi.w	#$80,d0
-		move.w	d0,(_unkEE74).w
+		move.w	d0,(Camera_Y_pos_P2_BG_copy).w
 		move.w	(Events_fg_1).w,d0
 		bsr.s	sub_23A91C
 		move.w	d0,(Camera_X_pos_BG_copy).w
 		move.w	d1,(Events_bg+$10).w
 		move.w	(_unkEEBA).w,d0
 		bsr.s	sub_23A91C
-		move.w	d0,(_unkEE70).w
+		move.w	d0,(Camera_X_pos_P2_BG_copy).w
 		move.w	d1,(Events_bg+$12).w
 		rts
 ; ---------------------------------------------------------------------------
@@ -332,7 +332,7 @@ CGZ_Deformation:
 		move.w	d0,(Camera_Y_pos_BG_copy).w
 		move.w	(Events_bg+$06).w,d0
 		bsr.s	sub_23A94C
-		move.w	d0,(_unkEE74).w
+		move.w	d0,(Camera_Y_pos_P2_BG_copy).w
 		lea	(HScroll_table+$00A).w,a1
 		move.w	(Events_fg_1).w,d0
 		bsr.s	sub_23A95C
@@ -380,7 +380,7 @@ EMZ_Deformation:
 		move.w	d0,(Camera_Y_pos_BG_copy).w
 		move.w	(Camera_Y_pos_P2_copy).w,d0
 		bsr.s	sub_23A9A8
-		move.w	d0,(_unkEE74).w
+		move.w	d0,(Camera_Y_pos_P2_BG_copy).w
 		lea	(HScroll_table).w,a1
 		move.w	(Events_fg_1).w,d0
 		bsr.s	sub_23A9BE

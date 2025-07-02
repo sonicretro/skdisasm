@@ -374,9 +374,9 @@ Camera_X_pos_P2_copy		ds.w 1
 			ds.w 1				; unused
 Camera_Y_pos_P2_copy		ds.w 1
 			ds.w 1				; unused
-_unkEE70			ds.w 1			; it is unclear how this is used
+Camera_X_pos_P2_BG_copy		ds.w 1			; this is used in competition mode, and it acts as a copy of the x position for player 2's background
 			ds.w 1				; unused
-_unkEE74			ds.w 1			; it is unclear how this is used
+Camera_Y_pos_P2_BG_copy		ds.w 1			; this is used in competition mode, and it acts as a copy of the y position for player 2's background
 			ds.w 1				; unused
 Camera_X_pos			ds.l 1
 Camera_Y_pos			ds.l 1
@@ -401,12 +401,12 @@ Screen_Y_wrap_value		ds.w 1			; either $7FF or $FFF
 Camera_Y_pos_mask		ds.w 1			; either $7F0 or $FF0
 Layout_row_index_mask		ds.w 1			; either $3C or $7C
 
-_unkEEB0			ds.w 1			;
+_unkEEB0			ds.w 1			; only ever set to $100 or $80, used in competition mode
 Special_events_routine		ds.w 1			; routine counter for various special events. Used for example with LBZ2 Death Egg sequence
 Events_fg_0			ds.w 1			; various flags used by screen events
 Events_fg_1			ds.w 1			; various flags used by screen events
 Events_fg_2			ds.w 1			; various flags used by screen events
-_unkEEBA			ds.w 1			; only used in Sonic 3
+_unkEEBA			ds.w 1			; only used in Sonic 3, and only used in the competition mode
 Level_repeat_offset		ds.w 1			; the number of pixels the screen was moved this frame, used to offset level objects horizontally. Used only for level repeat sections, such as AIZ airship.
 Events_fg_3			ds.w 1			; various flags used by screen events
 Events_routine_fg		ds.w 1			; screen events routine counter
@@ -423,7 +423,7 @@ Events_bg			ds.b $18		; $18 bytes ; various flags used by background events
 SStage_results_object_addr =	Events_bg+$E		; word ; RAM address of the special stage results object
 FBZ_cloud_addr =		*			; $14 bytes ; addresses for cloud objects in FBZ2
 Vscroll_buffer =		*			; $50 bytes ; vertical scroll buffer used in various levels
-_unkEEEA			ds.w 1			; various unknown uses for EEEA
+_unkEEEA			ds.w 1			; used in save screen to store VRAM addresses (4 word VRAM addresses), also used in SSZ screen events
 			ds.w 1				; used in some instances (see above)
 _unkEEEE			ds.w 1			; used exclusively in SSZ background events code
 			ds.w 1				; used in some instances (see above)
@@ -853,7 +853,7 @@ Loser_time_left			ds.b 1			; left over from Sonic 2
 			ds.b $23			; unused
 Results_screen_2P		ds.w 1			; left over from Sonic 2
 Perfect_rings_left		ds.w 1			; left over from Sonic 2
-_unkFF06			ds.w 1			; unknown
+Perfect_rings_flag		ds.w 1			; unknown
 Player_mode			ds.w 1			; 0 = Sonic and Tails, 1 = Sonic alone, 2 = Tails alone, 3 = Knuckles alone
 Player_option			ds.w 1			; option selected on level select, data select screen or Sonic & Knuckles title screen
 			ds.w 1				; unused
