@@ -257,9 +257,10 @@ Level_layout_main		ds.b $FF8		; $40 word-sized line pointers followed by actual 
 Object_respawn_table_2 :=	Level_layout_header+$400; $200 bytes ; respawn table used by glowing spheres bonus stage, because... Reasons?
 Ring_status_table_2 :=		Level_layout_header+$600; $400 bytes ; ring status table used by glowing spheres bonus stage, because... Reasons?
 Block_table			ds.b $1800		; block (16x16) definitions, 8 bytes per definition, space for $300 blocks
-SStage_collision_response_list := Block_table+$1400	; $100 bytes ; sprite collision list during a special stage
-SStage_unkA500 :=		Block_table+$1500	; unknown special stage array
-SStage_unkA600 :=		Block_table+$1600	; unknown special stage array
+SStage_collision_response_list := 	Block_table+$1400	; $100 bytes ; sprite collision list during a special stage
+SStage_blue_sphere_to_ring_queue :=	Block_table+$1500	; $100 bytes ; queue used by special stages to temporarily store the positions of blue spheres that have turned into rings
+SStage_red_sphere_dfs_walk_stack :=	Block_table+$1600	; $100 bytes ; stack of (direction index bounds, direction index, position) used by special stages
+								; as part of the red sphere DFS walk to check for loops of red spheres
 HScroll_table			ds.b $200		; array of background scroll positions for the level. WARNING: some references are before this label
 _unkA880 :=			HScroll_table+$80	; used in SSZ screen/background events
 _unkA8E0 :=			HScroll_table+$E0	; used in SSZ screen/background events

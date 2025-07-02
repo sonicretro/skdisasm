@@ -1,13 +1,14 @@
 	phase Level_layout_header+$400
-SStage_extra_sprites :=		*		; Sonic & Knuckles uses a different address
-				ds.b $70		; some extra sprite info for special stages
-			ds.b $390			; unused
-SStage_collision_response_list := *		; Sonic & Knuckles uses a different address
-			ds.b $100			; some extra sprite info for special stages
-SStage_unkA500 :=		*		; Sonic & Knuckles uses a different address
-			ds.b $100			; unknown special stage array
-SStage_unkA600 :=		*		; Sonic & Knuckles uses a different address
-			ds.b $100			; unknown special stage array
+SStage_extra_sprites :=			*		; Sonic & Knuckles uses a different address
+					ds.b $70		; some extra sprite info for special stages
+					ds.b $390		; unused
+SStage_collision_response_list := 	*		; Sonic & Knuckles uses a different address
+					ds.b $100		; some extra sprite info for special stages
+SStage_blue_sphere_to_ring_queue :=	*		; Sonic & Knuckles uses a different address
+					ds.b $100		; queue used by special stages to temporarily store the positions of blue spheres that have turned into rings
+SStage_red_sphere_dfs_walk_stack :=	*		; Sonic & Knuckles uses a different address
+					ds.b $100		; stack of (direction index bounds, direction index, position) used by special stages
+								; as part of the red sphere DFS walk to check for loops of red spheres
 	dephase
 
 	phase Stat_table+$12
@@ -71,7 +72,7 @@ V_blank_cycles :=		*		; Sonic & Knuckles uses a different address
 				ds.w 1			; the number of cycles between V-blanks
 Graphics_flags :=		*		; Sonic & Knuckles uses a different address
 				ds.b 1			; bit 7 set = English system, bit 6 set = PAL system
-			ds.b 1				; unused
+				ds.b 1			; unused
 Debug_mode_flag :=		*		; Sonic & Knuckles uses a different address
 				ds.w 1
 Checksum_string :=		*		; Sonic & Knuckles uses a different address
