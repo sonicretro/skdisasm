@@ -4352,8 +4352,7 @@ zPlayDigitalAudio:
 ; JMan2050's DAC decode lookup table
 ; ===========================================================================
 DecTable:
-		db	   0,  1,   2,   4,   8,  10h,  20h,  40h
-		db	 80h, -1,  -2,  -4,  -8, -10h, -20h, -40h
+		binclude "Sound/DAC/deltas.bin"
 ; ---------------------------------------------------------------------------
 
 ; =============== S U B	R O U T	I N E =======================================
@@ -4380,7 +4379,7 @@ zPlaySEGAPCM:
 		ld	a, zmake68kBank(SEGA_PCM)	; a = sound bank index
 		bankswitch3				; Bank switch to sound bank
 		ld	hl, zmake68kPtr(SEGA_PCM)	; hl = pointer to SEGA PCM
-		ld	de, SEGA_PCM_End-SEGA_PCM	; de = length of SEGA PCM
+		ld	de, SEGA_PCM.size		; de = length of SEGA PCM
 		ld	a, 2Ah				; DAC channel register
 		ld	(zYM2612_A0), a			; Send to YM2612
 		nop					; Delay

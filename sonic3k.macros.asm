@@ -291,10 +291,10 @@ offsetBankTableEntry macro ptr
 	dc.ATTRIBUTE k68z80Pointer(ptr-soundBankStart)
     endm
 
-; Special BINCLUDE wrapper function
-DACBINCLUDE macro file,{INTLABEL}
+; Special INCLUDE wrapper function
+DACINCLUDE macro file,{INTLABEL}
 __LABEL__ label *
-	BINCLUDE file
+	INCLUDE file
 __LABEL___Len  := little_endian(*-__LABEL__)
 __LABEL___Ptr  := k68z80Pointer(__LABEL__-soundBankStart)
 __LABEL___Bank := soundBankStart
