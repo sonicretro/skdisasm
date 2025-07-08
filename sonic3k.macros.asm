@@ -301,7 +301,7 @@ __LABEL___Bank := soundBankStart
     endm
 
 ; Setup macro for DAC samples.
-DAC_Setup macro rate,dacptr
+DAC_Setup macro dacptr,rate
 	dc.b	dpcmLoopCounter(rate)
 	dc.w	dacptr_Len
 	dc.w	dacptr_Ptr
@@ -317,7 +317,7 @@ DAC_Null_Setup macro rate
 ; The sample's length is correctly stored for the sample,
 ; while the pointer (usually) goes towards the DAC pointer
 ; entry of another DAC sample setup.
-DAC_Null_Chain macro rate,linkptr
+DAC_Null_Chain macro linkptr,rate
 	dc.b	dpcmLoopCounter(rate)
 	dc.w 	$0000,k68z80Pointer(linkptr+3-soundBankStart)
     endm
