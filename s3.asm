@@ -118459,7 +118459,7 @@ DAC_C0_Data:			DACBINCLUDE "Sound/DAC/C0.bin"
 ; ===========================================================================
 SndBank:			startBank
 
-SEGA_PCM:	binclude "Sound/Sega PCM.bin"
+SEGA_PCM:	binclude "Sound/PCM/Sega.bin"
 SEGA_PCM_End
 		align 2
 Sound_33:	include "Sound/SFX/33 - Ring (Right).asm"
