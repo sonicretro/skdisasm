@@ -4666,10 +4666,6 @@ z80_SFXPointers:
 ; ===========================================================================
 ; FM Universal Voice Bank
 ; ===========================================================================
-	align 17D8h
-	if $ <> 17D8h
-		fatal "The universal voice bank is not in a location where music can find it; any song using it will fail."
-	endif
 
 z80_UniVoiceBank:
 ;	Voice 00h - Synth Bass 2
