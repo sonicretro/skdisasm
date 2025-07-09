@@ -4397,7 +4397,7 @@ zPlaySEGAPCM:
 		nop				; 4
 		nop				; 4
 
-		ld	b, pcmLoopCounter(14500); 7	; Loop counter
+		ld	b, pcmLoopCounter(SEGA_PCM.sample_rate); 7	; Loop counter
 		djnz	$			; 8	; Loop in this instruction, decrementing b each iteration, until b = 0
 
 		inc	hl			; 6	; Advance to next byte of SEGA PCM
