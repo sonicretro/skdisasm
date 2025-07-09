@@ -342,7 +342,6 @@ __LABEL__ label *
 	ds.b dataSize
 __LABEL___Len  := little_endian(*-__LABEL__)
 __LABEL___Ptr  := k68z80Pointer(__LABEL__-DacBank2)
-__LABEL___Bank := DacBank2
     endm
 
 DAC_9C_Data:				DACDECLARE $332,13500

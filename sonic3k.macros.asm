@@ -297,8 +297,17 @@ __LABEL__ label *
 	INCLUDE file
 __LABEL___Len  := little_endian(*-__LABEL__)
 __LABEL___Ptr  := k68z80Pointer(__LABEL__-soundBankStart)
-__LABEL___Bank := soundBankStart
+__LABEL__.previous_reference := 0
+__LABEL__.current_reference := 0
     endm
+
+; Function magic for boolean arithmetic, because 'if' statements suffer from those annoying 'must be evaluable on first pass' errors.
+zero_if_false function boolean,value,value&(0-boolean)
+zero_if_true function boolean,value,zero_if_false(~~boolean,value)
+ternary function boolean,trueValue,falseValue,zero_if_false(boolean,trueValue)|zero_if_true(boolean,falseValue)
+
+get_z80_bank function value,value-(value#$8000)
+is_in_this_z80_bank function value,get_z80_bank(value)==get_z80_bank(*)
 
 ; Setup macro for DAC samples.
 DAC_Setup macro dacptr,sampleRate
@@ -307,29 +316,14 @@ sample_rate := dacptr.sample_rate
 sample_rate := int(sample_rate*sampleRate)
     endif
 	dc.b	dpcmLoopCounter(sample_rate)
-	dc.w	dacptr_Len
-	dc.w	dacptr_Ptr
-    endm
-
-; Setup a null entry for a DAC sample.
-DAC_Null_Setup macro dacptr,sampleRate
-sample_rate := dacptr.sample_rate
-    if "sampleRate"<>""
-sample_rate := int(sample_rate*sampleRate)
-    endif
-	dc.b	dpcmLoopCounter(sample_rate)
-	dc.w 	$0000,$0000
-    endm
-
-; Setup a chain-linked invalid entry for a DAC sample.
-; The sample's length is correctly stored for the sample,
-; while the pointer (usually) goes towards the DAC pointer
-; entry of another DAC sample setup.
-DAC_Null_Chain macro dacptr,sampleRate,linkptr
-sample_rate := dacptr.sample_rate
-    if "sampleRate"<>""
-sample_rate := int(sample_rate*sampleRate)
-    endif
-	dc.b	dpcmLoopCounter(sample_rate)
-	dc.w 	$0000,k68z80Pointer(linkptr+3-soundBankStart)
+	; Your eyes are not deceiving you; DAC metadata does some truly bizarre things.
+	; Basically, in Sonic 3, if the DAC sample is not in the same bank as this metadata,
+	; then the metadata will have blank pointers. An exception to this is when this is
+	; not the first metadata in the bank to reference the DAC sample, in which case it
+	; will point to the previous metadata instead. It makes absolutely no sense, but it
+	; must be recreated in order to produce a bit-perfect ROM.
+	dc.w	zero_if_false((SonicDriverVer <> 3) || is_in_this_z80_bank(dacptr), dacptr_Len)
+dacptr.previous_reference := dacptr.current_reference
+dacptr.current_reference := *
+	dc.w	ternary((SonicDriverVer <> 3) || is_in_this_z80_bank(dacptr), dacptr_Ptr, ternary(is_in_this_z80_bank(dacptr.previous_reference), k68z80Pointer(dacptr.previous_reference), 0))
     endm
