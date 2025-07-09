@@ -264,10 +264,10 @@ pcmLoopCounterBase function sampleRate,baseCycles, 1+(Z80_Clock/(sampleRate)-(ba
 pcmLoopCounter function sampleRate, pcmLoopCounterBase(sampleRate,105) ; 105 is the number of cycles zPlaySEGAPCM takes to deliver one sample.
 dpcmLoopCounter function sampleRate, pcmLoopCounterBase(sampleRate,303/2) ; 303 is the number of cycles zPlayDigitalAudio takes to deliver two samples.
 
-; Function to make a little endian (z80) pointer
-k68z80Pointer function addr,((((addr&$7FFF)+$8000)<<8)&$FF00)+(((addr&$7FFF)+$8000)>>8)
-
 little_endian function x,(x)<<8&$FF00|(x)>>8&$FF
+
+; Function to make a little endian (z80) pointer
+k68z80Pointer function addr,little_endian((addr#$8000)+$8000)
 
 startBank macro {INTLABEL}
 	align	$8000
@@ -288,7 +288,7 @@ finishBank macro
 
 ; macro to declare an entry in an offset table rooted at a bank
 offsetBankTableEntry macro ptr
-	dc.ATTRIBUTE k68z80Pointer(ptr-soundBankStart)
+	dc.ATTRIBUTE k68z80Pointer(ptr)
     endm
 
 ; Function magic for boolean arithmetic, because 'if' statements suffer from those annoying 'must be evaluable on first pass' errors.
