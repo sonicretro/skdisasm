@@ -406,8 +406,8 @@ __LABEL__: startBank
 __LABEL__.DAC_81_Setup:			DAC_Setup DAC_81_Data
 __LABEL__.DAC_82_Setup:			DAC_Setup DAC_82_83_84_85_Data
 __LABEL__.DAC_83_Setup:			DAC_Setup DAC_82_83_84_85_Data,0.80
-__LABEL__.DAC_84_Setup:			DAC_Setup DAC_82_83_84_85_Data,0.65
-__LABEL__.DAC_85_Setup:			DAC_Setup DAC_82_83_84_85_Data,0.56
+__LABEL__.DAC_84_Setup:			DAC_Setup DAC_82_83_84_85_Data,0.67
+__LABEL__.DAC_85_Setup:			DAC_Setup DAC_82_83_84_85_Data,0.58
 __LABEL__.DAC_86_Setup:			DAC_Setup DAC_86_Data
 __LABEL__.DAC_87_Setup:			DAC_Setup DAC_87_Data
 __LABEL__.DAC_88_Setup:			DAC_Setup DAC_88_Data
@@ -425,10 +425,10 @@ __LABEL__.DAC_93_Setup:			DAC_Setup DAC_90_91_92_93_Data,0.56
 __LABEL__.DAC_94_Setup:			DAC_Setup DAC_94_95_96_97_Data
 __LABEL__.DAC_95_Setup:			DAC_Setup DAC_94_95_96_97_Data,0.79
 __LABEL__.DAC_96_Setup:			DAC_Setup DAC_94_95_96_97_Data,0.70
-__LABEL__.DAC_97_Setup:			DAC_Setup DAC_94_95_96_97_Data,0.57
+__LABEL__.DAC_97_Setup:			DAC_Setup DAC_94_95_96_97_Data,0.58
 __LABEL__.DAC_98_Setup:			DAC_Setup DAC_98_99_9A_Data
-__LABEL__.DAC_99_Setup:			DAC_Setup DAC_98_99_9A_Data,0.71
-__LABEL__.DAC_9A_Setup:			DAC_Setup DAC_98_99_9A_Data,0.65
+__LABEL__.DAC_99_Setup:			DAC_Setup DAC_98_99_9A_Data,0.73
+__LABEL__.DAC_9A_Setup:			DAC_Setup DAC_98_99_9A_Data,0.66
 __LABEL__.DAC_9B_Setup:			DAC_Setup DAC_9B_Data
 __LABEL__.DAC_A2_Setup:			DAC_Setup DAC_A2_Data
 __LABEL__.DAC_A3_Setup:			DAC_Setup DAC_A3_Data
@@ -444,7 +444,7 @@ __LABEL__.DAC_AC_Setup:			DAC_Setup DAC_AC_Data
 __LABEL__.DAC_AD_Setup:			DAC_Setup DAC_AD_AE_Data
 __LABEL__.DAC_AE_Setup:			DAC_Setup DAC_AD_AE_Data,0.76
 __LABEL__.DAC_AF_Setup:			DAC_Setup DAC_AF_B0_Data
-__LABEL__.DAC_B0_Setup:			DAC_Setup DAC_AF_B0_Data,0.70
+__LABEL__.DAC_B0_Setup:			DAC_Setup DAC_AF_B0_Data,0.68
 __LABEL__.DAC_B1_Setup:			DAC_Setup DAC_B1_Data
 __LABEL__.DAC_B2_Setup:			DAC_Setup DAC_B2_B3_Data
 __LABEL__.DAC_B3_Setup:			DAC_Setup DAC_B2_B3_Data,0.76
@@ -461,7 +461,7 @@ __LABEL__.DAC_BE_Setup:			DAC_Setup DAC_BE_Data
 __LABEL__.DAC_BF_Setup:			DAC_Setup DAC_BF_Data
 __LABEL__.DAC_C0_Setup:			DAC_Setup DAC_C0_Data
 __LABEL__.DAC_C1_Setup:			DAC_Setup DAC_B4_C1_C2_C3_C4_Data,0.88
-__LABEL__.DAC_C2_Setup:			DAC_Setup DAC_B4_C1_C2_C3_C4_Data,0.80
+__LABEL__.DAC_C2_Setup:			DAC_Setup DAC_B4_C1_C2_C3_C4_Data,0.82
 __LABEL__.DAC_C3_Setup:			DAC_Setup DAC_B4_C1_C2_C3_C4_Data,0.78
 __LABEL__.DAC_C4_Setup:			DAC_Setup DAC_B4_C1_C2_C3_C4_Data,1.04
 __LABEL__.DAC_9C_Setup:			DAC_Setup DAC_9C_Data
