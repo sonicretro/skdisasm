@@ -334,7 +334,6 @@ __LABEL__: startBank
 		offsetBankTableEntry.w	__LABEL__.DAC_8D_Setup
 		offsetBankTableEntry.w	__LABEL__.DAC_8E_Setup
 		offsetBankTableEntry.w	__LABEL__.DAC_8F_Setup
-
 		offsetBankTableEntry.w	__LABEL__.DAC_90_Setup
 		offsetBankTableEntry.w	__LABEL__.DAC_91_Setup
 		offsetBankTableEntry.w	__LABEL__.DAC_92_Setup
@@ -351,7 +350,6 @@ __LABEL__: startBank
 		offsetBankTableEntry.w	__LABEL__.DAC_9D_Setup
 		offsetBankTableEntry.w	__LABEL__.DAC_9E_Setup
 		offsetBankTableEntry.w	__LABEL__.DAC_9F_Setup
-
 		offsetBankTableEntry.w	__LABEL__.DAC_A0_Setup
 		offsetBankTableEntry.w	__LABEL__.DAC_A1_Setup
 		offsetBankTableEntry.w	__LABEL__.DAC_A2_Setup
@@ -368,7 +366,6 @@ __LABEL__: startBank
 		offsetBankTableEntry.w	__LABEL__.DAC_AD_Setup
 		offsetBankTableEntry.w	__LABEL__.DAC_AE_Setup
 		offsetBankTableEntry.w	__LABEL__.DAC_AF_Setup
-
 		offsetBankTableEntry.w	__LABEL__.DAC_B0_Setup
 		offsetBankTableEntry.w	__LABEL__.DAC_B1_Setup
 		offsetBankTableEntry.w	__LABEL__.DAC_B2_Setup
@@ -385,13 +382,14 @@ __LABEL__: startBank
 		offsetBankTableEntry.w	__LABEL__.DAC_BD_Setup
 		offsetBankTableEntry.w	__LABEL__.DAC_BE_Setup
 		offsetBankTableEntry.w	__LABEL__.DAC_BF_Setup
-
 		offsetBankTableEntry.w	__LABEL__.DAC_C0_Setup
 		offsetBankTableEntry.w	__LABEL__.DAC_C1_Setup
 		offsetBankTableEntry.w	__LABEL__.DAC_C2_Setup
 		offsetBankTableEntry.w	__LABEL__.DAC_C3_Setup
 		offsetBankTableEntry.w	__LABEL__.DAC_C4_Setup
 
+; The first value is the sample's label,and the optional second value multiplies the sample rate.
+; A multiplier of 0.80 means that the sample will play a fifth slower.
 __LABEL__.DAC_81_Setup:			DAC_Setup DAC_81_Data
 __LABEL__.DAC_82_Setup:			DAC_Setup DAC_82_83_84_85_Data
 __LABEL__.DAC_83_Setup:			DAC_Setup DAC_82_83_84_85_Data,0.80
