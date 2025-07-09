@@ -301,15 +301,23 @@ __LABEL___Bank := soundBankStart
     endm
 
 ; Setup macro for DAC samples.
-DAC_Setup macro dacptr,rate
-	dc.b	dpcmLoopCounter(rate)
+DAC_Setup macro dacptr,sampleRate
+sample_rate := dacptr.sample_rate
+    if "sampleRate"<>""
+sample_rate := int(sample_rate*sampleRate)
+    endif
+	dc.b	dpcmLoopCounter(sample_rate)
 	dc.w	dacptr_Len
 	dc.w	dacptr_Ptr
     endm
 
 ; Setup a null entry for a DAC sample.
-DAC_Null_Setup macro rate
-	dc.b	dpcmLoopCounter(rate)
+DAC_Null_Setup macro dacptr,sampleRate
+sample_rate := dacptr.sample_rate
+    if "sampleRate"<>""
+sample_rate := int(sample_rate*sampleRate)
+    endif
+	dc.b	dpcmLoopCounter(sample_rate)
 	dc.w 	$0000,$0000
     endm
 
@@ -317,7 +325,11 @@ DAC_Null_Setup macro rate
 ; The sample's length is correctly stored for the sample,
 ; while the pointer (usually) goes towards the DAC pointer
 ; entry of another DAC sample setup.
-DAC_Null_Chain macro linkptr,rate
-	dc.b	dpcmLoopCounter(rate)
+DAC_Null_Chain macro dacptr,sampleRate,linkptr
+sample_rate := dacptr.sample_rate
+    if "sampleRate"<>""
+sample_rate := int(sample_rate*sampleRate)
+    endif
+	dc.b	dpcmLoopCounter(sample_rate)
 	dc.w 	$0000,k68z80Pointer(linkptr+3-soundBankStart)
     endm
