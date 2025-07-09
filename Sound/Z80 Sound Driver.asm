@@ -4275,7 +4275,7 @@ zPlayDigitalAudio:
 		ld	a, (hl)				; a = DAC index
 		dec	a				; a -= 1
 		set	7, (hl)				; Set bit 7 to indicate that DAC sample is being played
-		ld	hl, zmake68kPtr(DAC_Offsets)	; hl = pointer to ROM window
+		ld	hl, zROMWindow			; hl = pointer to ROM window
 		rst	PointerTableOffset		; hl = pointer to DAC data
 		ld	c, 80h				; c is an accumulator below; this initializes it to 80h
 		ld	a, (hl)				; a = DAC rate

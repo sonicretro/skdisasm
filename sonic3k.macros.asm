@@ -311,11 +311,11 @@ is_in_this_z80_bank function value,get_z80_bank(value)==get_z80_bank(*)
 
 ; Setup macro for DAC samples.
 DAC_Setup macro dacptr,sampleRate
-sample_rate := dacptr.sample_rate
+.sample_rate := dacptr.sample_rate
     if "sampleRate"<>""
-sample_rate := int(sample_rate*sampleRate)
+.sample_rate := int(.sample_rate*sampleRate)
     endif
-	dc.b	dpcmLoopCounter(sample_rate)
+	dc.b	dpcmLoopCounter(.sample_rate)
 	; Your eyes are not deceiving you; DAC metadata does some truly bizarre things.
 	; Basically, in Sonic 3, if the DAC sample is not in the same bank as this metadata,
 	; then the metadata will have blank pointers. An exception to this is when this is
@@ -326,4 +326,148 @@ sample_rate := int(sample_rate*sampleRate)
 dacptr.previous_reference := dacptr.current_reference
 dacptr.current_reference := *
 	dc.w	ternary((SonicDriverVer <> 3) || is_in_this_z80_bank(dacptr), dacptr_Ptr, ternary(is_in_this_z80_bank(dacptr.previous_reference), k68z80Pointer(dacptr.previous_reference), 0))
+    endm
+
+startDACBank macro {INTLABEL}
+__LABEL__: startBank
+		offsetBankTableEntry.w	__LABEL__.DAC_81_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_82_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_83_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_84_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_85_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_86_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_87_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_88_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_89_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_8A_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_8B_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_8C_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_8D_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_8E_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_8F_Setup
+
+		offsetBankTableEntry.w	__LABEL__.DAC_90_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_91_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_92_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_93_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_94_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_95_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_96_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_97_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_98_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_99_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_9A_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_9B_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_9C_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_9D_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_9E_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_9F_Setup
+
+		offsetBankTableEntry.w	__LABEL__.DAC_A0_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_A1_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_A2_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_A3_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_A4_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_A5_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_A6_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_A7_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_A8_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_A9_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_AA_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_AB_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_AC_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_AD_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_AE_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_AF_Setup
+
+		offsetBankTableEntry.w	__LABEL__.DAC_B0_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_B1_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_B2_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_B3_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_B4_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_B5_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_B6_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_B7_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_B8_B9_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_B8_B9_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_BA_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_BB_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_BC_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_BD_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_BE_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_BF_Setup
+
+		offsetBankTableEntry.w	__LABEL__.DAC_C0_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_C1_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_C2_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_C3_Setup
+		offsetBankTableEntry.w	__LABEL__.DAC_C4_Setup
+
+__LABEL__.DAC_81_Setup:			DAC_Setup DAC_81_Data
+__LABEL__.DAC_82_Setup:			DAC_Setup DAC_82_83_84_85_Data
+__LABEL__.DAC_83_Setup:			DAC_Setup DAC_82_83_84_85_Data,0.80
+__LABEL__.DAC_84_Setup:			DAC_Setup DAC_82_83_84_85_Data,0.65
+__LABEL__.DAC_85_Setup:			DAC_Setup DAC_82_83_84_85_Data,0.56
+__LABEL__.DAC_86_Setup:			DAC_Setup DAC_86_Data
+__LABEL__.DAC_87_Setup:			DAC_Setup DAC_87_Data
+__LABEL__.DAC_88_Setup:			DAC_Setup DAC_88_Data
+__LABEL__.DAC_89_Setup:			DAC_Setup DAC_89_Data
+__LABEL__.DAC_8A_Setup:			DAC_Setup DAC_8A_8B_Data
+__LABEL__.DAC_8B_Setup:			DAC_Setup DAC_8A_8B_Data,0.82
+__LABEL__.DAC_8C_Setup:			DAC_Setup DAC_8C_Data
+__LABEL__.DAC_8D_Setup:			DAC_Setup DAC_8D_8E_Data
+__LABEL__.DAC_8E_Setup:			DAC_Setup DAC_8D_8E_Data,0.77
+__LABEL__.DAC_8F_Setup:			DAC_Setup DAC_8F_Data
+__LABEL__.DAC_90_Setup:			DAC_Setup DAC_90_91_92_93_Data
+__LABEL__.DAC_91_Setup:			DAC_Setup DAC_90_91_92_93_Data,0.78
+__LABEL__.DAC_92_Setup:			DAC_Setup DAC_90_91_92_93_Data,0.66
+__LABEL__.DAC_93_Setup:			DAC_Setup DAC_90_91_92_93_Data,0.56
+__LABEL__.DAC_94_Setup:			DAC_Setup DAC_94_95_96_97_Data
+__LABEL__.DAC_95_Setup:			DAC_Setup DAC_94_95_96_97_Data,0.79
+__LABEL__.DAC_96_Setup:			DAC_Setup DAC_94_95_96_97_Data,0.70
+__LABEL__.DAC_97_Setup:			DAC_Setup DAC_94_95_96_97_Data,0.57
+__LABEL__.DAC_98_Setup:			DAC_Setup DAC_98_99_9A_Data
+__LABEL__.DAC_99_Setup:			DAC_Setup DAC_98_99_9A_Data,0.71
+__LABEL__.DAC_9A_Setup:			DAC_Setup DAC_98_99_9A_Data,0.65
+__LABEL__.DAC_9B_Setup:			DAC_Setup DAC_9B_Data
+__LABEL__.DAC_A2_Setup:			DAC_Setup DAC_A2_Data
+__LABEL__.DAC_A3_Setup:			DAC_Setup DAC_A3_Data
+__LABEL__.DAC_A4_Setup:			DAC_Setup DAC_A4_Data
+__LABEL__.DAC_A5_Setup:			DAC_Setup DAC_A5_Data
+__LABEL__.DAC_A6_Setup:			DAC_Setup DAC_A6_Data
+__LABEL__.DAC_A7_Setup:			DAC_Setup DAC_A7_Data
+__LABEL__.DAC_A8_Setup:			DAC_Setup DAC_A8_Data
+__LABEL__.DAC_A9_Setup:			DAC_Setup DAC_A9_Data
+__LABEL__.DAC_AA_Setup:			DAC_Setup DAC_AA_Data
+__LABEL__.DAC_AB_Setup:			DAC_Setup DAC_AB_Data
+__LABEL__.DAC_AC_Setup:			DAC_Setup DAC_AC_Data
+__LABEL__.DAC_AD_Setup:			DAC_Setup DAC_AD_AE_Data
+__LABEL__.DAC_AE_Setup:			DAC_Setup DAC_AD_AE_Data,0.76
+__LABEL__.DAC_AF_Setup:			DAC_Setup DAC_AF_B0_Data
+__LABEL__.DAC_B0_Setup:			DAC_Setup DAC_AF_B0_Data,0.70
+__LABEL__.DAC_B1_Setup:			DAC_Setup DAC_B1_Data
+__LABEL__.DAC_B2_Setup:			DAC_Setup DAC_B2_B3_Data
+__LABEL__.DAC_B3_Setup:			DAC_Setup DAC_B2_B3_Data,0.76
+__LABEL__.DAC_B4_Setup:			DAC_Setup DAC_B4_C1_C2_C3_C4_Data
+__LABEL__.DAC_B5_Setup:			DAC_Setup DAC_B5_Data
+__LABEL__.DAC_B6_Setup:			DAC_Setup DAC_B6_Data
+__LABEL__.DAC_B7_Setup:			DAC_Setup DAC_B7_Data
+__LABEL__.DAC_B8_B9_Setup:		DAC_Setup DAC_B8_B9_Data
+__LABEL__.DAC_BA_Setup:			DAC_Setup DAC_BA_Data
+__LABEL__.DAC_BB_Setup:			DAC_Setup DAC_BB_Data
+__LABEL__.DAC_BC_Setup:			DAC_Setup DAC_BC_Data
+__LABEL__.DAC_BD_Setup:			DAC_Setup DAC_BD_Data
+__LABEL__.DAC_BE_Setup:			DAC_Setup DAC_BE_Data
+__LABEL__.DAC_BF_Setup:			DAC_Setup DAC_BF_Data
+__LABEL__.DAC_C0_Setup:			DAC_Setup DAC_C0_Data
+__LABEL__.DAC_C1_Setup:			DAC_Setup DAC_B4_C1_C2_C3_C4_Data,0.88
+__LABEL__.DAC_C2_Setup:			DAC_Setup DAC_B4_C1_C2_C3_C4_Data,0.80
+__LABEL__.DAC_C3_Setup:			DAC_Setup DAC_B4_C1_C2_C3_C4_Data,0.78
+__LABEL__.DAC_C4_Setup:			DAC_Setup DAC_B4_C1_C2_C3_C4_Data,1.04
+__LABEL__.DAC_9C_Setup:			DAC_Setup DAC_9C_Data
+__LABEL__.DAC_9D_Setup:			DAC_Setup DAC_9D_Data
+__LABEL__.DAC_9E_Setup:			DAC_Setup DAC_9E_Data
+__LABEL__.DAC_9F_Setup:			DAC_Setup DAC_9F_Data
+__LABEL__.DAC_A0_Setup:			DAC_Setup DAC_A0_Data
+__LABEL__.DAC_A1_Setup:			DAC_Setup DAC_A1_Data
     endm
