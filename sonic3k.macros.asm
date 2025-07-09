@@ -291,16 +291,6 @@ offsetBankTableEntry macro ptr
 	dc.ATTRIBUTE k68z80Pointer(ptr-soundBankStart)
     endm
 
-; Special INCLUDE wrapper function
-DACINCLUDE macro file,{INTLABEL}
-__LABEL__ label *
-	INCLUDE file
-__LABEL___Len  := little_endian(*-__LABEL__)
-__LABEL___Ptr  := k68z80Pointer(__LABEL__-soundBankStart)
-__LABEL__.previous_reference := 0
-__LABEL__.current_reference := 0
-    endm
-
 ; Function magic for boolean arithmetic, because 'if' statements suffer from those annoying 'must be evaluable on first pass' errors.
 zero_if_false function boolean,value,value&(0-boolean)
 zero_if_true function boolean,value,zero_if_false(~~boolean,value)
@@ -310,22 +300,21 @@ get_z80_bank function value,value-(value#$8000)
 is_in_this_z80_bank function value,get_z80_bank(value)==get_z80_bank(*)
 
 ; Setup macro for DAC samples.
-DAC_Setup macro dacptr,sampleRate
-.sample_rate := dacptr.sample_rate
-    if "sampleRate"<>""
-.sample_rate := int(.sample_rate*sampleRate)
-    endif
-	dc.b	dpcmLoopCounter(.sample_rate)
+DAC_Setup macro dacptr,sampleRateScale
+    if "sampleRateScale"==""
+	DAC_Setup dacptr,1.0
+    else
+	dc.b	dpcmLoopCounter(int(dacptr.sample_rate*sampleRateScale))
 	; Your eyes are not deceiving you; DAC metadata does some truly bizarre things.
 	; Basically, in Sonic 3, if the DAC sample is not in the same bank as this metadata,
 	; then the metadata will have blank pointers. An exception to this is when this is
 	; not the first metadata in the bank to reference the DAC sample, in which case it
 	; will point to the previous metadata instead. It makes absolutely no sense, but it
 	; must be recreated in order to produce a bit-perfect ROM.
-	dc.w	zero_if_false((SonicDriverVer <> 3) || is_in_this_z80_bank(dacptr), dacptr_Len)
-dacptr.previous_reference := dacptr.current_reference
-dacptr.current_reference := *
-	dc.w	ternary((SonicDriverVer <> 3) || is_in_this_z80_bank(dacptr), dacptr_Ptr, ternary(is_in_this_z80_bank(dacptr.previous_reference), k68z80Pointer(dacptr.previous_reference), 0))
+	dc.w	zero_if_false((SonicDriverVer <> 3) || is_in_this_z80_bank(dacptr), little_endian(dacptr.size))
+	dc.w	ternary((SonicDriverVer <> 3) || is_in_this_z80_bank(dacptr), k68z80Pointer(dacptr), zero_if_false(is_in_this_z80_bank(dacptr.last_reference), k68z80Pointer(dacptr.last_reference)))
+dacptr.last_reference := *-2
+    endif
     endm
 
 startDACBank macro {INTLABEL}

@@ -331,17 +331,13 @@ Snd_CGZ:				ds.b $1723
 Snd_EMZ:				ds.b $B40
 Snd_S3Credits:				ds.b $105D
 Snd_2PMenu:				ds.b $4DA
-Snd_Drown:				ds.b $8D39
+Snd_Drown:				ds.b $8542
 DacBank2:				ds.b $7F7
 
-; Adapted from DACBINCLUDE
-DACDECLARE macro dataSize,sampleRate,{INTLABEL}
-__LABEL__ label *
+DACDECLARE macro dataSize,sampleRate
 .sample_rate = sampleRate
 .size = dataSize
 	ds.b dataSize
-__LABEL___Len  := little_endian(*-__LABEL__)
-__LABEL___Ptr  := k68z80Pointer(__LABEL__-DacBank2)
     endm
 
 DAC_9C_Data:				DACDECLARE $332,13332
@@ -379,7 +375,7 @@ DAC_BD_Data:				DACDECLARE $5BE,12155
 DAC_BE_Data:				DACDECLARE $710,12155
 DAC_BF_Data:				DACDECLARE $1DC,7123
 DAC_C0_Data:				DACDECLARE $836,12716
-					ds.b $279BF
+					ds.b $281B6
 ArtUnc_Tails:				ds.b $16540
 ArtUnc_Tails_Tail:			ds.b $1160
 ArtUnc_Sonic2P:				ds.b $30C0
