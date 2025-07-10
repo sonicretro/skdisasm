@@ -116199,110 +116199,45 @@ sub_5B764:
 ; End of function sub_5B764
 
 ; ---------------------------------------------------------------------------
-DebugOffs:
-		include "Levels/Misc/Debug list pointers.asm"
+DebugOffs:		include "Levels/Misc/Debug list pointers.asm"
 
-Debug_AIZ1: dbglistheader
-		include "Levels/AIZ/Debug/Act 1 S3.asm"
-Debug_AIZ1_End
-
-Debug_AIZ2: dbglistheader
-		include "Levels/AIZ/Debug/Act 2 S3.asm"
-Debug_AIZ2_End
-
-Debug_HCZ: dbglistheader
-		include "Levels/HCZ/Debug/S3.asm"
-Debug_HCZ_End
-
-Debug_MGZ: dbglistheader
-		include "Levels/MGZ/Debug/S3.asm"
-Debug_MGZ_End
-
-Debug_CNZ: dbglistheader
-		include "Levels/CNZ/Debug/S3.asm"
-Debug_CNZ_End
-
+Debug_AIZ1:		dbglistinclude "Levels/AIZ/Debug/Act 1 S3.asm"
+Debug_AIZ2:		dbglistinclude "Levels/AIZ/Debug/Act 2 S3.asm"
+Debug_HCZ:		dbglistinclude "Levels/HCZ/Debug/S3.asm"
+Debug_MGZ:		dbglistinclude "Levels/MGZ/Debug/S3.asm"
+Debug_CNZ:		dbglistinclude "Levels/CNZ/Debug/S3.asm"
 Debug_FBZ1:
-Debug_FBZ2: dbglistheader
-		include "Levels/FBZ/Debug/S3.asm"
-Debug_FBZ2_End
-
-Debug_ICZ1: dbglistheader
-		include "Levels/ICZ/Debug/Act 1 S3.asm"
-Debug_ICZ1_End
-
-Debug_ICZ2: dbglistheader
-		include "Levels/ICZ/Debug/Act 2 S3.asm"
-Debug_ICZ2_End
-
-Debug_LBZ1: dbglistheader
-		include "Levels/LBZ/Debug/Act 1 S3.asm"
-Debug_LBZ1_End
-
-Debug_LBZ2: dbglistheader
-		include "Levels/LBZ/Debug/Act 2 S3.asm"
-Debug_LBZ2_End
-
-Debug_MHZ: dbglistheader
-		include "Levels/MHZ/Debug/S3.asm"
-Debug_MHZ_End
-
+Debug_FBZ2:		dbglistinclude "Levels/FBZ/Debug/S3.asm"
+Debug_ICZ1:		dbglistinclude "Levels/ICZ/Debug/Act 1 S3.asm"
+Debug_ICZ2:		dbglistinclude "Levels/ICZ/Debug/Act 2 S3.asm"
+Debug_LBZ1:		dbglistinclude "Levels/LBZ/Debug/Act 1 S3.asm"
+Debug_LBZ2:		dbglistinclude "Levels/LBZ/Debug/Act 2 S3.asm"
+Debug_MHZ:		dbglistinclude "Levels/MHZ/Debug/S3.asm"
 Debug_SOZ1:
-Debug_SOZ2: dbglistheader
-		include "Levels/SOZ/Debug/S3.asm"
-Debug_SOZ2_End
-
+Debug_SOZ2:		dbglistinclude "Levels/SOZ/Debug/S3.asm"
 Debug_LRZ1:
-Debug_LRZ2: dc.w 5
-		include "Levels/LRZ/Debug/S3.asm"
-Debug_LRZ_End
-
-Debug_SSZ: dbglistheader
-		include "Levels/SSZ/Debug/S3.asm"
-Debug_SSZ_End
-
+Debug_LRZ2:		dbglistinclude "Levels/LRZ/Debug/S3.asm"
+			; Presumably, these belong to the LRZ debug list, but the header only counts five entries, ignoring these three.
+			dbglistobj Obj_Spring, Map_Spring, $90,   3, make_art_tile($4B4,0,0)
+			dbglistobj Obj_Spring, Map_Spring, $A0,   6, make_art_tile($4A4,0,0)
+			dbglistobj Obj_Spikes, Map_Spikes,   0,   0, make_art_tile($49C,0,0)
+Debug_SSZ:		dbglistinclude "Levels/SSZ/Debug/S3.asm"
 Debug_DEZ1:
-Debug_DEZ2: dbglistheader
-		include "Levels/DEZ/Debug/S3.asm"
-Debug_DEZ2_End
-
+Debug_DEZ2:		dbglistinclude "Levels/DEZ/Debug/S3.asm"
 Debug_DDZ1:
-Debug_DDZ2: dbglistheader
-		include "Levels/DDZ/Debug/S3.asm"
-Debug_DDZ2_End
-
-Debug_Ending: dbglistheader
-		include "Levels/SSZ/Debug/Ending S3.asm"
-Debug_Ending_End
-
-Debug_ALZ: dbglistheader
-		include "Levels/ALZ/Debug/Main.asm"
-Debug_ALZ_End
-
-Debug_BPZ: dbglistheader
-		include "Levels/BPZ/Debug/Main.asm"
-Debug_BPZ_End
-
-Debug_DPZ: dbglistheader
-		include "Levels/DPZ/Debug/Main.asm"
-Debug_DPZ_End
-
-Debug_CGZ: dbglistheader
-		include "Levels/CGZ/Debug/Main.asm"
-Debug_CGZ_End
-
-Debug_EMZ: dbglistheader
-		include "Levels/EMZ/Debug/Main.asm"
-Debug_EMZ_End
-
+Debug_DDZ2:		dbglistinclude "Levels/DDZ/Debug/S3.asm"
+Debug_Ending:		dbglistinclude "Levels/SSZ/Debug/Ending S3.asm"
+Debug_ALZ:		dbglistinclude "Levels/ALZ/Debug/Main.asm"
+Debug_BPZ:		dbglistinclude "Levels/BPZ/Debug/Main.asm"
+Debug_DPZ:		dbglistinclude "Levels/DPZ/Debug/Main.asm"
+Debug_CGZ:		dbglistinclude "Levels/CGZ/Debug/Main.asm"
+Debug_EMZ:		dbglistinclude "Levels/EMZ/Debug/Main.asm"
 Debug_Pachinko_Special:
 Debug_HPZ:
-Debug_Gumball_Special: dbglistheader
-		include "Levels/Gumball/Debug/S3.asm"
-Debug_Gumball_Special_End
+Debug_Gumball_Special:	dbglistinclude "Levels/Gumball/Debug/S3.asm"
 
-Sprite_Listing:
-		include "Levels/Misc/Object pointers - S3 Set.asm"
+Sprite_Listing:	include "Levels/Misc/Object pointers - S3 Set.asm"
+
 		align $2000
 Character_Speeds:
 		dc.w  $600,  $10,  $20,    0
