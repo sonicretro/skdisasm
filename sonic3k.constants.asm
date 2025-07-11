@@ -741,7 +741,9 @@ Target_palette_line_3 =		Target_palette+$40	; $20 bytes
 Target_palette_line_4 =		Target_palette+$60	; $20 bytes
 Stack_contents			ds.b $100		; stack contents
 System_stack =			*			; this is the top of the stack, it grows downwards
-; Variables from this point on are not cleared when the console is reset.
+
+CrossResetRAM:	; RAM in this region will not be cleared after a soft reset.
+
 			ds.w 1				; unused
 Restart_level_flag		ds.w 1
 Level_frame_counter		ds.w 1			; the number of frames which have elapsed since the level started
@@ -955,6 +957,8 @@ P1_character :=			*		; S3 uses a different address
 P2_character :=			*		; S3 uses a different address
 				ds.b 1
 			ds.l 1				; unused
+
+CrossResetRAM_End :=		*		; S3 uses a different address
 
 V_int_jump :=			*		; S3 uses a different address
 				ds.b 6			; contains an instruction to jump to the V-int handler

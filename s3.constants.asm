@@ -77,6 +77,9 @@ Debug_mode_flag :=		*		; Sonic & Knuckles uses a different address
 				ds.w 1
 Checksum_string :=		*		; Sonic & Knuckles uses a different address
 				ds.l 1			; set to Ref_Checksum_String once the checksum routine has run
+
+CrossResetRAM_End :=		*		; Sonic & Knuckles uses a different address
+
 Ref_Checksum_String := 'init'
 	dephase
 	!org 0

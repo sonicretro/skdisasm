@@ -563,9 +563,9 @@ loc_6BC:
 		cmp.w	(a1),d1
 		nop
 		nop
-		lea	(System_stack).w,a6
+		lea	(CrossResetRAM).w,a6
 		moveq	#0,d7
-		move.w	#bytesToLcnt($200),d6
+		move.w	#bytesToLcnt(CrossResetRAM_End-CrossResetRAM),d6
 
 loc_6EA:
 		move.l	d7,(a6)+
@@ -577,9 +577,9 @@ loc_6EA:
 
 Test_Checksum_Done:
 		bsr.w	DetectPAL
-		lea	($FF0000).l,a6
+		lea	(RAM_start&$FFFFFF).l,a6
 		moveq	#0,d7
-		move.w	#bytesToLcnt($FE00),d6
+		move.w	#bytesToLcnt(CrossResetRAM-RAM_start),d6
 
 loc_716:
 		move.l	d7,(a6)+
