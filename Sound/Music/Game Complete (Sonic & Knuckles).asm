@@ -177,7 +177,7 @@ Snd_PresSega_PSG3:
 
 ; DAC Data
 Snd_PresSega_DAC:
-	smpsFade            $25
+	smpsNop             $25
 	dc.b	dCrashCymbal, $30, nRst, $0C, dSnareS3, dSnareS3, dSnareS3, $06, $06, dCrashCymbal, $18, dSnareS3
 	dc.b	$0C, dKickS3, dKickS3, $06, dKickS3, dKickS3, $0C, dSnareS3, $18, dKickS3, $18, dSnareS3
 	dc.b	$0C, dKickS3, dKickS3, $06, dKickS3, dKickS3, $0C, dSnareS3, $06, $06, nRst, nRst

@@ -212,7 +212,7 @@ Snd_S3_PresSega_Loop05:
 
 ; DAC Data
 Snd_S3_PresSega_DAC:
-	smpsFade            $25
+	smpsNop             $25
 	dc.b	dCrashCymbal, $30, nRst, $06, dSnareS3, dSnareS3, $06, nRst, dSnareS3, nRst, dSnareS3, dSnareS3
 	dc.b	dKickS3, $18, dSnareS3, dKickS3, dSnareS3, dKickS3, dSnareS3, dKickS3, dSnareS3, $06, nRst, nRst
 	dc.b	dSnareS3, $06, dKickS3, $18, dSnareS3, dKickS3, dSnareS3, dKickS3, dSnareS3, $06, nRst, nRst
