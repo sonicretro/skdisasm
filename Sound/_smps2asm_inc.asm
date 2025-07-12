@@ -417,7 +417,7 @@ smpsFade macro val
 		if SourceDriver<3
 			smpsStop
 		endif
-	elseif (SourceDriver>=3) && ("val"<>"") && (val<>$FF)
+	elseif (SourceDriver>=3) && ("val"<>"") && ("val"<>"$FF")
 		; This is actually a communication byte, not a fade.
 		smpsNop	val
 	else
