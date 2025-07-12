@@ -63,7 +63,7 @@ Snd_Emerald_Loop01:
 
 ; PSG1 Data
 Snd_Emerald_PSG1:
-	smpsFade            $01
+	smpsNop             $01
 	dc.b	nRst, $02, nRst, $2D
 
 Snd_Emerald_Loop00:

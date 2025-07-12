@@ -389,10 +389,9 @@ smpsDetune macro val
 	endm
 
 ; E2xx - Useless
+; In S3 alone and S&K, the value afterwards must be $FF, otherwise the fade command will be completely ignored
 smpsNop macro val
-	if SonicDriverVer<3
 		dc.b	$E2,val
-	endif
 	endm
 
 ; Return (used after smpsCall)
