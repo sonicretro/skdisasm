@@ -418,7 +418,8 @@ smpsFade macro val
 			smpsStop
 		endif
 	elseif (SourceDriver>=3) && ("val"<>"") && (val<>$FF)
-		; This is one of those weird S3+ "fades" that we don't need
+		; This is actually a communication byte, not a fade.
+		smpsNop	val
 	else
 		dc.b	$E4
 	endif
