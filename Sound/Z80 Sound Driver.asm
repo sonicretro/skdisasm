@@ -674,7 +674,10 @@ zUpdateMusic:
 
 ;loc_149
 .check_fade_in:
+	if ~~fix_sndbugs
+		; Redundant; 'a' already holds this value.
 		ld	a, (zFadeToPrevFlag)		; Get fade-to-previous flag
+	endif
 		cp	0FFh				; Is it 0FFh?
 		jr	z, .update_music		; Branch if yes
 		ld	hl, zMusicNumber		; Point hl to M68K input
