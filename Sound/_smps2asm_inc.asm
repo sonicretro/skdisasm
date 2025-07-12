@@ -417,7 +417,7 @@ smpsFade macro val
 		if SourceDriver<3
 			smpsStop
 		endif
-	elseif (SourceDriver>=3) && ("val"<>"") && ("val"<>"$FF")
+	elseif (SourceDriver>=3) && ("val"<>"") && (val<>$FF)
 		; This is one of those weird S3+ "fades" that we don't need
 	else
 		dc.b	$E4
