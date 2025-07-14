@@ -1072,17 +1072,17 @@ ArtTile_DashDust_P2                   = $07F0
 ; Sound commands list.
 
 	phase $E1
-mus__FirstCmd =			*		; ID of the first sound command
-mus_FadeOut			ds.b 1		; $E1 - fade out music
-mus_Stop			ds.b 1		; $E2 - stop music and sound effects
-mus_MutePSG			ds.b 1		; $E3 - mute all PSG channels
-mus_StopSFX			ds.b 1		; $E4 - stop all sound effects
-mus_FadeOut2			ds.b 1		; $E5 - fade out music (duplicate)
-mus__EndCmd =			*		; next ID after last sound command
+cmd__First =			*		; ID of the first sound command
+cmd_FadeOut			ds.b 1		; $E1 - fade out music
+cmd_Stop			ds.b 1		; $E2 - stop music and sound effects
+cmd_MutePSG			ds.b 1		; $E3 - mute all PSG channels
+cmd_StopSFX			ds.b 1		; $E4 - stop all sound effects
+cmd_FadeOut2			ds.b 1		; $E5 - fade out music (duplicate)
+cmd__End =			*		; next ID after last sound command
 
-mus_S2SEGA =			$FA		; $FA - SEGA sound ID in Sonic 2
-mus_StopSEGA =			$FE		; $FE - Stop SEGA sound
-mus_SEGA =			$FF		; $FF - Play SEGA sound
+cmd_S2SEGA =			$FA		; $FA - SEGA sound ID in Sonic 2
+cmd_StopSEGA =			$FE		; $FE - Stop SEGA sound
+cmd_SEGA =			$FF		; $FF - Play SEGA sound
 	dephase
 ; ---------------------------------------------------------------------------
 ; Music ID's list. These do not affect the sound driver, be careful.
