@@ -1,3 +1,16 @@
+; Zone IDs from Sonic 2.
+emerald_hill_zone =	$00
+mystic_cave_zone =		$0B
+casino_night_zone =	$0C
+
+; Zone and act IDs from Sonic 2
+emerald_hill_zone_act_1 =	(emerald_hill_zone<<8)|$00
+emerald_hill_zone_act_2 =	(emerald_hill_zone<<8)|$01
+casino_night_zone_act_1 =	(casino_night_zone<<8)|$00
+casino_night_zone_act_2 =	(casino_night_zone<<8)|$01
+mystic_cave_zone_act_1 =	(mystic_cave_zone<<8)|$00
+mystic_cave_zone_act_2 =	(mystic_cave_zone<<8)|$01
+
 	phase Level_layout_header+$400
 SStage_extra_sprites :=			*		; Sonic & Knuckles uses a different address
 					ds.b $70		; some extra sprite info for special stages

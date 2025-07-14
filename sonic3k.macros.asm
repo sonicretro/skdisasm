@@ -114,6 +114,9 @@ rom_ptr_z80 macro addr
 make_art_tile function addr,pal,pri,((pri&1)<<15)|((pal&3)<<13)|(addr&tile_mask)
 tiles_to_bytes function addr,((addr&$7FF)<<5)
 
+; function to calculate the location of a tile in plane mappings
+planeLoc function width,col,line,(((width * line) + col) * 2)
+
 ; function to calculate the location of a tile in plane mappings with a width of 40 cells
 planeLocH28 function col,line,(($50 * line) + (2 * col))
 

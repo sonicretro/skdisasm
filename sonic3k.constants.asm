@@ -858,7 +858,7 @@ Perfect_rings_left		ds.w 1			; left over from Sonic 2
 Perfect_rings_flag		ds.w 1			; unknown
 Player_mode			ds.w 1			; 0 = Sonic and Tails, 1 = Sonic alone, 2 = Tails alone, 3 = Knuckles alone
 Player_option			ds.w 1			; option selected on level select, data select screen or Sonic & Knuckles title screen
-			ds.w 1				; unused
+Two_player_items		ds.w 1			; left over from Sonic 2
 
 Kos_decomp_queue_count		ds.w 1			; the number of pieces of data on the queue. Sign bit set indicates a decompression is in progress
 Kos_decomp_stored_registers	ds.w 20			; allows decompression to be spread over multiple frames
