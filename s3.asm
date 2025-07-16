@@ -36,7 +36,7 @@ StartOfROM:
 		fatal "StartOfROM was $\{*} but it should be 0"
 	endif
 
-Vectors:	dc.l	$00000000,	EntryPoint,	ErrorTrap,	ErrorTrap	; 0
+Vectors:	dc.l	0,	EntryPoint,	ErrorTrap,	ErrorTrap		; 0
 		dc.l	ErrorTrap,	ErrorTrap,	ErrorTrap,	ErrorTrap	; 4
 		dc.l	ErrorTrap,	ErrorTrap,	ErrorTrap,	ErrorTrap	; 8
 		dc.l	ErrorTrap,	ErrorTrap,	ErrorTrap,	ErrorTrap	; 12
@@ -65,16 +65,16 @@ RAMStartLoc:	dc.l (RAM_start&$FFFFFF)
 RAMEndLoc:	dc.l (RAM_start&$FFFFFF)+$FFFF
 CartRAM_Info:	dc.b "RA"
 CartRAM_Type:	dc.w %1111100000100000
-CartRAMStartLoc:dc.l $00200001
-CartRAMEndLoc:	dc.l $002003FF
+CartRAMStartLoc:dc.l SRAM_start
+CartRAMEndLoc:	dc.l SRAM_end
 Modem_Info:	dc.b "  "
 		dc.b "          "
 Unknown_Header:	dc.w 1
 		dc.b "      "
 		dc.w $20, 0
 		dc.l $3FFFFF
-		dc.l $200001
-		dc.l $2003FF
+		dc.l SRAM_start
+		dc.l SRAM_end
 		dc.b "                "
 Country_Code:	dc.b "U               "
 ; ---------------------------------------------------------------------------
@@ -13716,8 +13716,8 @@ loc_B5F8:
 
 SRAM_Load:
 		move.b	#1,(SRAM_access_flag).l
-		lea	($200011).l,a0
-		lea	($2000BD).l,a1
+		lea	(SRAM_competition).l,a0
+		lea	(SRAM_competition_backup).l,a1
 		lea	(Competition_saved_data).w,a2
 		moveq	#$29,d0
 		move.w	#$4C44,d1		; RAM integrity value
@@ -13725,7 +13725,7 @@ SRAM_Load:
 		beq.s	loc_B674		; If the data read was successful, branch
 		lea	SaveData_GeneralDefault(pc),a0
 		lea	(Competition_saved_data).w,a1
-		moveq	#$29-1,d0
+		moveq	#bytesToWcnt($52),d0
 
 loc_B66A:
 		move.w	(a0)+,(a1)+		; Reset the general save data to the default
@@ -13733,8 +13733,8 @@ loc_B66A:
 		jsr	Write_SaveGeneral(pc)	; Write default data back to SRAM
 
 loc_B674:
-		lea	($200169).l,a0
-		lea	($2001F5).l,a1
+		lea	(SRAM_S3game).l,a0
+		lea	(SRAM_S3game_backup).l,a1
 		lea	(Saved_data).w,a2
 		moveq	#$19,d0
 		move.w	#$4244,d1		; RAM integrity value for save game data
@@ -13865,8 +13865,8 @@ loc_B792:
 Write_SaveGeneral:
 		move.l	a0,-(sp)
 		move.w	d7,-(sp)
-		lea	($200011).l,a0		; Save general SRAM
-		lea	($2000BD).l,a1		; Save general Backup SRAM
+		lea	(SRAM_competition).l,a0		; Save general SRAM
+		lea	(SRAM_competition_backup).l,a1		; Save general Backup SRAM
 		lea	(Competition_saved_data).w,a2	; Save general RAM
 		moveq	#$2A-1,d0
 		bsr.s	Write_SRAM
@@ -13882,8 +13882,8 @@ Write_SaveGeneral:
 Write_SaveGame:
 		move.l	a0,-(sp)
 		move.w	d7,-(sp)
-		lea	($200169).l,a0		; Save game SRAM
-		lea	($2001F5).l,a1		; Save game backup SRAM
+		lea	(SRAM_S3game).l,a0		; Save game SRAM
+		lea	(SRAM_S3game_backup).l,a1		; Save game backup SRAM
 		lea	(Saved_data).w,a2	; Save game RAM
 		moveq	#$1A-1,d0
 		bsr.s	Write_SRAM

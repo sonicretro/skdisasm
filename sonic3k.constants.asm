@@ -244,6 +244,24 @@ PSG_input =			$C00011
 
 ; RAM addresses
 
+	phase $200001
+SRAM_start	=		*
+	ds.b	$10	; unused?
+SRAM_competition	ds.b $2A*4	; $A8 bytes
+	ds.b	4	; unused?
+SRAM_competition_backup	ds.b	$2A*4	; $A8 bytes
+	ds.b	4	; unused?
+SRAM_S3game	ds.b	$1A*4	; $68 bytes
+	ds.b	$24	; unused?
+SRAM_S3game_backup	ds.b	$1A*4	; $68 bytes
+	ds.b	$24 ; unused?
+SRAM_SKgame	ds.b	$2A*4	; $A8 bytes
+	ds.b	4	; unused?
+SRAM_SKgame_backup	ds.b	$2A*4	; $A8 bytes
+	ds.b	$2A	; unused?
+SRAM_end	=		*
+	dephase
+
 Sprite_table_alternate =	ramaddr(   $FF7880 ) ; $280 bytes ; alternate sprite table for player 1 in competition mode
 Sprite_table_P2 =		ramaddr(   $FF7B00 ) ; $280 bytes ; sprite table for player 2 in competition mode
 Sprite_table_P2_alternate =	ramaddr(   $FF7D80 ) ; $280 bytes ; alternate sprite table for player 2 in competition mode
