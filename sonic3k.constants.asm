@@ -244,6 +244,24 @@ PSG_input =			$C00011
 
 ; RAM addresses
 
+	phase $200001
+SRAM_start	=		*
+	ds.b	$10	; unused?
+SRAM_competition	ds.b $2A*4	; $A8 bytes
+	ds.b	4	; unused?
+SRAM_competition_backup	ds.b	$2A*4	; $A8 bytes
+	ds.b	4	; unused?
+SRAM_S3game	ds.b	$1A*4	; $68 bytes
+	ds.b	$24	; unused?
+SRAM_S3game_backup	ds.b	$1A*4	; $68 bytes
+	ds.b	$24 ; unused?
+SRAM_SKgame	ds.b	$2A*4	; $A8 bytes
+	ds.b	4	; unused?
+SRAM_SKgame_backup	ds.b	$2A*4	; $A8 bytes
+	ds.b	$2A	; unused?
+SRAM_end	=		*
+	dephase
+
 Sprite_table_alternate =	ramaddr(   $FF7880 ) ; $280 bytes ; alternate sprite table for player 1 in competition mode
 Sprite_table_P2 =		ramaddr(   $FF7B00 ) ; $280 bytes ; sprite table for player 2 in competition mode
 Sprite_table_P2_alternate =	ramaddr(   $FF7D80 ) ; $280 bytes ; alternate sprite table for player 2 in competition mode
@@ -858,7 +876,7 @@ Perfect_rings_left		ds.w 1			; left over from Sonic 2
 Perfect_rings_flag		ds.w 1			; unknown
 Player_mode			ds.w 1			; 0 = Sonic and Tails, 1 = Sonic alone, 2 = Tails alone, 3 = Knuckles alone
 Player_option			ds.w 1			; option selected on level select, data select screen or Sonic & Knuckles title screen
-			ds.w 1				; unused
+Two_player_items		ds.w 1			; left over from Sonic 2
 
 Kos_decomp_queue_count		ds.w 1			; the number of pieces of data on the queue. Sign bit set indicates a decompression is in progress
 Kos_decomp_stored_registers	ds.w 20			; allows decompression to be spread over multiple frames
@@ -1072,17 +1090,17 @@ ArtTile_DashDust_P2                   = $07F0
 ; Sound commands list.
 
 	phase $E1
-mus__FirstCmd =			*		; ID of the first sound command
-mus_FadeOut			ds.b 1		; $E1 - fade out music
-mus_Stop			ds.b 1		; $E2 - stop music and sound effects
-mus_MutePSG			ds.b 1		; $E3 - mute all PSG channels
-mus_StopSFX			ds.b 1		; $E4 - stop all sound effects
-mus_FadeOut2			ds.b 1		; $E5 - fade out music (duplicate)
-mus__EndCmd =			*		; next ID after last sound command
+cmd__First =			*		; ID of the first sound command
+cmd_FadeOut			ds.b 1		; $E1 - fade out music
+cmd_Stop			ds.b 1		; $E2 - stop music and sound effects
+cmd_MutePSG			ds.b 1		; $E3 - mute all PSG channels
+cmd_StopSFX			ds.b 1		; $E4 - stop all sound effects
+cmd_FadeOut2			ds.b 1		; $E5 - fade out music (duplicate)
+cmd__End =			*		; next ID after last sound command
 
-mus_S2SEGA =			$FA		; $FA - SEGA sound ID in Sonic 2
-mus_StopSEGA =			$FE		; $FE - Stop SEGA sound
-mus_SEGA =			$FF		; $FF - Play SEGA sound
+cmd_S2SEGA =			$FA		; $FA - SEGA sound ID in Sonic 2
+cmd_StopSEGA =			$FE		; $FE - Stop SEGA sound
+cmd_SEGA =			$FF		; $FF - Play SEGA sound
 	dephase
 ; ---------------------------------------------------------------------------
 ; Music ID's list. These do not affect the sound driver, be careful.

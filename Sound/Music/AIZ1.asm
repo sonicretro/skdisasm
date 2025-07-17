@@ -1162,7 +1162,8 @@ Snd_AIZ1_PSG2:
 	dc.b	nG3
 	else
 	; Bug: The PSG volume does not change with this command.
-	smpsFMAlterVol      $0A, $AC
+	; This bug has been present since the Nov 3rd 1993 prototype.
+	smpsFMAlterVol      $0A, nG3
 	endif
 	dc.b	$0B, nRst, $01, nD4, $0B, nRst, $01, nG4, $0B, nRst, $01, nF4
 	dc.b	$05, nRst, $0D, nE4, $05, nRst, $0D, nC4, $05, nRst, $07, nA3
@@ -1173,7 +1174,8 @@ Snd_AIZ1_PSG2:
 	dc.b	nD5
 	else
 	; Bug: The PSG volume does not change with this command.
-	smpsFMAlterVol      $F6, $BF
+	; This bug has been present since the Nov 3rd 1993 prototype.
+	smpsFMAlterVol      $F6, nD5
 	endif
 	dc.b	$03, nRst, nB4, nRst, nG4, nRst, nE4, nRst, nD4, nRst, nB3, nRst
 	dc.b	nG3, nRst, nE3, nRst, nC5, nRst, nB4, nRst, nG4, nRst, nE4, nRst

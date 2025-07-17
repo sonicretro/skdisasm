@@ -1637,17 +1637,17 @@ zPlaySoundByIndex:
 		cp	mus_CreditsK			; Is this the credits music?
 		jp	z, zPlayMusicCredits		; Branch if yes
 	endif
-		cp	mus_SEGA			; Is this the SEGA sound?
+		cp	cmd_SEGA			; Is this the SEGA sound?
 		jp	z, zPlaySegaSound		; Branch if yes
 		cp	mus__End			; Is this a music?
 		jp	c, zPlayMusic			; Branch if yes
 		cp	sfx__End			; Is this a sound effect?
 		jp	c, zPlaySound_CheckRing		; Branch if yes
-		cp	mus__FirstCmd			; Is it before the first fade effect?
+		cp	cmd__First			; Is it before the first fade effect?
 		jp	c, zStopAllSound		; Branch if yes
-		cp	mus__EndCmd			; Is this after the last fade effect?
+		cp	cmd__End			; Is this after the last fade effect?
 		jp	nc, zStopAllSound		; Branch if yes
-		sub	mus__FirstCmd			; If none of the checks passed, do fade effects.
+		sub	cmd__First			; If none of the checks passed, do fade effects.
 		ld	hl, zFadeEffects		; hl = switch table pointer
 		rst	PointerTableOffset		; Get address of function that handles the fade effect
 	if fix_sndbugs=0
@@ -4366,7 +4366,7 @@ DecTable:
 ; disables interrupts) until either of the following conditions hold:
 ;
 ;	(1)	The SEGA PCM is fully played
-;	(2)	The next song to play is 0FEh (mus_StopSEGA)
+;	(2)	The next song to play is 0FEh (cmd_StopSEGA)
 ;loc_1126
 zPlaySEGAPCM:
 		di					; Disable interrupts
@@ -4395,7 +4395,7 @@ zPlaySEGAPCM:
 		ld	a, (hl)			; 7+3	; a = next byte of SEGA PCM
 		ld	(zYM2612_D0), a		; 13	; Send to DAC
 		ld	a, (zMusicNumber)	; 13	; Check next song number
-		cp	mus_StopSEGA		; 7	; Is it the command to stop playing SEGA PCM?
+		cp	cmd_StopSEGA		; 7	; Is it the command to stop playing SEGA PCM?
 		jr	z, .done		; 7	; Break the loop if yes
 		nop				; 4
 		nop				; 4

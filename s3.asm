@@ -36,7 +36,7 @@ StartOfROM:
 		fatal "StartOfROM was $\{*} but it should be 0"
 	endif
 
-Vectors:	dc.l	$00000000,	EntryPoint,	ErrorTrap,	ErrorTrap	; 0
+Vectors:	dc.l	0,	EntryPoint,	ErrorTrap,	ErrorTrap		; 0
 		dc.l	ErrorTrap,	ErrorTrap,	ErrorTrap,	ErrorTrap	; 4
 		dc.l	ErrorTrap,	ErrorTrap,	ErrorTrap,	ErrorTrap	; 8
 		dc.l	ErrorTrap,	ErrorTrap,	ErrorTrap,	ErrorTrap	; 12
@@ -65,16 +65,16 @@ RAMStartLoc:	dc.l (RAM_start&$FFFFFF)
 RAMEndLoc:	dc.l (RAM_start&$FFFFFF)+$FFFF
 CartRAM_Info:	dc.b "RA"
 CartRAM_Type:	dc.w %1111100000100000
-CartRAMStartLoc:dc.l $00200001
-CartRAMEndLoc:	dc.l $002003FF
+CartRAMStartLoc:dc.l SRAM_start
+CartRAMEndLoc:	dc.l SRAM_end
 Modem_Info:	dc.b "  "
 		dc.b "          "
 Unknown_Header:	dc.w 1
 		dc.b "      "
 		dc.w $20, 0
 		dc.l $3FFFFF
-		dc.l $200001
-		dc.l $2003FF
+		dc.l SRAM_start
+		dc.l SRAM_end
 		dc.b "                "
 Country_Code:	dc.b "U               "
 ; ---------------------------------------------------------------------------
@@ -1586,7 +1586,7 @@ loc_159A:
 		; Detect PAL region consoles
 		btst	#6,(Graphics_flags).w
 		beq.s	loc_15B0
-		move.b	#1,(Z80_RAM+$1C02).l
+		move.b	#1,(Z80_RAM+zPalFlag).l
 
 loc_15B0:
 		move.w	#0,(Z80_reset).l	; reset Z80
@@ -1631,7 +1631,7 @@ Z80_DefaultVariables_end:
 
 Play_Music:
 		stopZ80
-		move.b	d0,(Z80_RAM+$1C0A).l
+		move.b	d0,(Z80_RAM+zMusicNumber).l
 		startZ80
 		rts
 ; End of function Play_Music
@@ -1653,16 +1653,16 @@ Play_SFX_Local:
 
 Play_SFX:
 		stopZ80
-		cmp.b	(Z80_RAM+$1C0B).l,d0
+		cmp.b	(Z80_RAM+zSFXNumber0).l,d0
 		beq.s	loc_1642
-		tst.b	(Z80_RAM+$1C0B).l
+		tst.b	(Z80_RAM+zSFXNumber0).l
 		bne.s	loc_163C
-		move.b	d0,(Z80_RAM+$1C0B).l
+		move.b	d0,(Z80_RAM+zSFXNumber0).l
 		startZ80
 		rts
 
 loc_163C:
-		move.b	d0,(Z80_RAM+$1C0C).l
+		move.b	d0,(Z80_RAM+zSFXNumber1).l
 
 loc_1642:
 		startZ80
@@ -1677,7 +1677,7 @@ Play_SFX_Done:
 
 Change_Music_Tempo:
 		stopZ80
-		move.b	d0,(Z80_RAM+$1C08).l
+		move.b	d0,(Z80_RAM+zTempoSpeedup).l
 		startZ80
 		rts
 ; End of function Change_Music_Tempo
@@ -1700,7 +1700,7 @@ Pause_Game:
 loc_168E:
 		move.w	#1,(Game_paused).w
 		stopZ80
-		move.b	#1,(Z80_RAM+$1C10).l	; Pause the music
+		move.b	#1,(Z80_RAM+zPauseFlag).l	; Pause the music
 		startZ80
 
 Pause_Loop:
@@ -1742,7 +1742,7 @@ Pause_ChkStart:
 
 Pause_ResumeMusic:
 		stopZ80
-		move.b	#$80,(Z80_RAM+$1C10).l	; Unpause music
+		move.b	#$80,(Z80_RAM+zPauseFlag).l	; Unpause music
 		startZ80
 
 Pause_Unpause:
@@ -1755,7 +1755,7 @@ Pause_NoPause:
 Pause_FrameAdvance:
 		move.w	#1,(Game_paused).w
 		stopZ80
-		move.b	#$80,(Z80_RAM+$1C10).l	; Unpause music
+		move.b	#$80,(Z80_RAM+zPauseFlag).l	; Unpause music
 		startZ80
 		rts	; advance by a single frame
 ; End of function Pause_Game
@@ -2386,6 +2386,7 @@ Process_Nem_Queue_ShiftUp:
 ; End of function Process_Nem_Queue_Main
 
 ; ---------------------------------------------------------------------------
+		; unused
 		lea	(Offs_PLC).l,a1
 		add.w	d0,d0
 		move.w	(a1,d0.w),d0
@@ -3242,6 +3243,7 @@ AnPal_Load:
 		move.w	OffsAnPal(pc,d0.w),d0
 		jmp	OffsAnPal(pc,d0.w)
 ; ---------------------------------------------------------------------------
+		; unused
 		rts
 ; ---------------------------------------------------------------------------
 OffsAnPal:
@@ -4768,7 +4770,7 @@ Sega_Screen:
 ; ---------------------------------------------------------------------------
 
 Title_Screen:
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		bsr.w	Play_Music			; Fade music if any is playing
 		bsr.w	Clear_Nem_Queue
 		bsr.w	Pal_FadeToBlack		; Fade out
@@ -4834,7 +4836,7 @@ loc_36AE:
 		ori.b	#$40,d0
 		move.w	d0,(VDP_control_port).l			; Turn the display on
 		bsr.w	Pal_FadeFromBlack		; Fade in to logo
-		moveq	#signextendB(mus_SEGA),d0
+		moveq	#signextendB(cmd_SEGA),d0
 		bsr.w	Play_Music
 		move.w	#3*60,(Demo_timer).w		; Set to wait for 3 seconds
 
@@ -4849,7 +4851,7 @@ Wait_Sega:
 		bne.s	Wait_Sega
 
 loc_36F8:
-		moveq	#signextendB(mus_StopSEGA),d0
+		moveq	#signextendB(cmd_StopSEGA),d0
 		bsr.w	Play_Music				; Stop SEGA sound
 		lea	(Pal_Title).l,a1
 
@@ -4991,7 +4993,7 @@ loc_38D8:
 		move.b	d0,(Continue_count).w
 		move.l	#5000,(Next_extra_life_score).w
 		move.l	#5000,(Next_extra_life_score_P2).w
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		bsr.w	Play_SFX			; Fade out the title screen music
 		moveq	#0,d0
 		move.b	(Title_screen_option).w,d0		; Selection is stored here
@@ -5013,7 +5015,7 @@ loc_3970:
 ; ---------------------------------------------------------------------------
 
 loc_3978:
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		bsr.w	Play_SFX			; Fade out music
 		move.w	(Next_demo_number).w,d0		; Get index of current demo to run
 		andi.w	#7,d0
@@ -5126,6 +5128,7 @@ SonicFrameIndex:
 locret_3AB0:
 		rts
 ; ---------------------------------------------------------------------------
+		; unused
 		move.b	(Title_anim_buffer).w,d2
 		cmpi.b	#1,d2
 		beq.s	locret_3B0A
@@ -5666,7 +5669,7 @@ Level:
 		bset	#7,(Game_mode).w		; Set bit 7 of F600 is indicate that we're loading the level
 		tst.w	(Demo_mode_flag).w
 		bmi.s	loc_46C2
-		moveq	#signextendB(mus_FadeOut),d0		; If a demo
+		moveq	#signextendB(cmd_FadeOut),d0		; If a demo
 		bsr.w	Play_SFX
 
 loc_46C2:
@@ -6423,9 +6426,21 @@ Obj_ResetCollisionResponseList:
 UpdateWaterSurface:
 		rts
 ; ---------------------------------------------------------------------------
+		; unused leftover from Sonic 2
 		tst.b	(Water_flag).w
 		beq.s	locret_50DC
 		move.w	(Camera_X_pos).w,d1
+    if FixBugs
+		; This function can cause the water surface's to be cut off at the
+		; left when the game is paused. This is because this function pushes
+		; the water surface sprite to the right every frame. To fix this,
+		; just avoid pushing the sprite to the right when the game is about
+		; to be paused.
+		move.b	(Ctrl_1_Press).w,d0 ; is Start button pressed?
+		or.b	(Ctrl_2_Press).w,d0 ; (either player)
+		andi.b	#button_start_mask,d0
+		bne.s	loc_50D2
+    endif
 		btst	#0,(Level_frame_counter+1).w
 		beq.s	loc_50D2
 		addi.w	#$20,d1
@@ -6493,6 +6508,7 @@ loc_5146:
 ; End of function Handle_Onscreen_Water_Height
 
 ; ---------------------------------------------------------------------------
+		; unused
 		clr.b	(Water_full_screen_flag).w
 		move.w	(Mean_water_level).w,(Water_level).w
 		move.l	#HInt3,(H_int_addr).w
@@ -7584,6 +7600,7 @@ locret_5FEE:
 ; End of function LoadWaterPalette
 
 ; ---------------------------------------------------------------------------
+		; unused
 		subq.w	#1,$24(a0)
 		bpl.s	loc_6068
 		move.w	#7,$24(a0)
@@ -7793,6 +7810,7 @@ loc_6368:
 		move.b	#0,(Game_mode).w
 		rts
 ; ---------------------------------------------------------------------------
+		; unused leftover from Sonic 2
 		moveq	#0,d0
 		move.b	(Current_zone_2P).w,d0
 		add.w	d0,d0
@@ -7822,9 +7840,9 @@ loc_63BE:
 		rts
 ; ---------------------------------------------------------------------------
 LevelSelect2P_LevelOrder:
-		dc.w 0
-		dc.w $B00
-		dc.w $C00
+		dc.w emerald_hill_zone_act_1
+		dc.w mystic_cave_zone_act_1
+		dc.w casino_night_zone_act_1
 		dc.w $FFFF
 
 ; =============== S U B R O U T I N E =======================================
@@ -7954,22 +7972,18 @@ loc_64E2:
 
 ; ---------------------------------------------------------------------------
 S2LevSel2PIconData:
-		dc.l Text2P_EmeraldHill
-		dc.l Text2P_Zone
-		dc.l vdpComm(VRAM_Plane_A_Name_Table+$104,VRAM,WRITE)
-		dc.l $FF0330+(0<<24)
-		dc.l Text2P_MysticCave
-		dc.l Text2P_Zone
-		dc.l vdpComm(VRAM_Plane_A_Name_Table+$12C,VRAM,WRITE)
-		dc.l $FF03A8+(5<<24)
-		dc.l Text2P_CasinoNight
-		dc.l Text2P_Zone
-		dc.l vdpComm(VRAM_Plane_A_Name_Table+$784,VRAM,WRITE)
-		dc.l $FF03C0+(6<<24)
-		dc.l Text2P_Special
-		dc.l Text2P_Stage
-		dc.l vdpComm(VRAM_Plane_A_Name_Table+$7AC,VRAM,WRITE)
-		dc.l $FF0450+($C<<24)
+
+; macro to declare icon data for a 2P level select icon
+iconData macro txtlabel,txtlabel2,vramAddr,iconPal,iconAddr
+	dc.l txtlabel, txtlabel2	; text locations
+	dc.l vdpComm(vramAddr,VRAM,WRITE)	; VRAM location to place data
+	dc.l iconPal<<24|((iconAddr)&$FFFFFF)	; icon palette and plane data location
+    endm
+
+		iconData	Text2P_EmeraldHill,Text2P_Zone, VRAM_Plane_A_Name_Table+planeLoc(64,2,2),   0,RAM_start+$330
+		iconData	Text2P_MysticCave, Text2P_Zone, VRAM_Plane_A_Name_Table+planeLoc(64,22,2),  5,RAM_start+$3A8
+		iconData	Text2P_CasinoNight,Text2P_Zone, VRAM_Plane_A_Name_Table+planeLoc(64,2,15),  6,RAM_start+$3C0
+		iconData	Text2P_Special,    Text2P_Stage,VRAM_Plane_A_Name_Table+planeLoc(64,22,15),12,RAM_start+$450
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -8139,9 +8153,9 @@ locret_66FE:
 
 ; ---------------------------------------------------------------------------
 OptionScreen_Choices:
-		dc.w   $2FF, $FF0A
-		dc.w   $1FF, $FF0C
-		dc.w  $C9FF, $FF84
+		dc.l (3-1)<<24|(Player_option&$FFFFFF)
+		dc.l (2-1)<<24|(Two_player_items&$FFFFFF)
+		dc.l ($CA-1)<<24|(Sound_test_sound&$FFFFFF)
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -8459,6 +8473,7 @@ LevelSelect_SpecialStage:
 		move.b	#$34,(Game_mode).w
 		rts
 ; ---------------------------------------------------------------------------
+		; unused leftover from Sonic 2
 		move.b	#$10,(Game_mode).w
 		clr.w	(Current_zone_and_act).w
 		clr.w	(Apparent_zone_and_act).w
@@ -8532,7 +8547,7 @@ LevelSelect_StartZone:
 		move.b	d0,(Continue_count).w
 		move.l	#5000,(Next_extra_life_score).w
 		move.l	#5000,(Next_extra_life_score_P2).w
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_SFX).l
 		moveq	#0,d0
 		move.w	d0,(Competition_settings).w
@@ -8622,7 +8637,7 @@ loc_6BCA:
 loc_6BF4:
 		btst	#button_B,d1
 		beq.s	locret_6C02
-		moveq	#signextendB(mus_MutePSG),d0
+		moveq	#signextendB(cmd_MutePSG),d0
 		jsr	(Play_Music).l
 
 locret_6C02:
@@ -8640,6 +8655,7 @@ LevSelControls_SwitchSide:
 loc_6C1A:
 		bra.s	LevelSelect_PickCharacterNumber
 ; ---------------------------------------------------------------------------
+		; unused
 		rts
 ; ---------------------------------------------------------------------------
 LevelSelect_SwitchTable:
@@ -8822,9 +8838,22 @@ LevelSelect_DrawIcon:
 		lsl.w	#5,d0
 		lea	(a1,d0.w),a1
 		lea	(Normal_palette_line_3).w,a2
+    if FixBugs
+		; When the icon changes, the colours are briefly incorrect. This is
+		; because there's a delay between the icon being updated and the
+		; colours being updated, due to the colours being uploaded to the VDP
+		; during V-Int. To avoid this we can upload the colours ourselves right
+		; here.
+		; Prepare the VDP for data transfer.
+		move.l  #vdpComm(2*16*2,CRAM,WRITE),VDP_control_port-VDP_data_port(a6)
+    endif
 		moveq	#bytesToLcnt($20),d1
 
 loc_6DAA:
+    if FixBugs
+		; Upload colours to the VDP.
+		move.l	(a1),(a6)
+    endif
 		move.l	(a1)+,(a2)+
 		dbf	d1,loc_6DAA
 		rts
@@ -9050,7 +9079,7 @@ AniPLC_SONICMILES: zoneanimstart
 ; ---------------------------------------------------------------------------
 
 SpecialStage:
-		moveq	#signextendB(mus_Stop),d0
+		moveq	#signextendB(cmd_Stop),d0
 		bsr.w	Play_Music
 		bsr.w	Clear_Nem_Queue
 		bsr.w	Pal_FadeToWhite
@@ -10319,7 +10348,12 @@ loc_86C6:
 		subq.w	#1,(Special_stage_rings_left).w
 		bne.s	loc_86D4
 		moveq	#signextendB(sfx_Perfect),d0
+	if FixBugs
+		jsr	(Play_SFX).l
+	else
+		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jsr	(Play_Music).l
+	endif
 
 loc_86D4:
 		addi.w	#1,(Special_stage_ring_count).w
@@ -10329,8 +10363,13 @@ loc_86D4:
 		bset	#0,(Special_stage_extra_life_flags).w
 		bne.s	loc_86FE
 		addq.b	#1,(Continue_count).w
-		move.w	#$FF00|sfx_Continue,d0
+		move.w	#signextendB(sfx_Continue),d0
+	if FixBugs
+		jmp	(Play_SFX).l
+	else
+		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jmp	(Play_Music).l
+	endif
 ; ---------------------------------------------------------------------------
 
 loc_86FE:
@@ -10668,7 +10707,12 @@ sub_89E2:
 		cmpi.w	#2,(Special_stage_clear_timer).w
 		bne.s	loc_8A0C
 		moveq	#signextendB(sfx_AllSpheres),d0
+	if FixBugs
+		jsr	(Play_SFX).l
+	else
+		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jsr	(Play_Music).l
+	endif
 
 loc_8A0C:
 		cmpi.w	#$40,(Special_stage_clear_timer).w
@@ -11317,14 +11361,14 @@ SStage_4_Directions:
 Load_SSSprite_Mappings:
 		lea	(SStage_extra_sprites).w,a1
 		lea	(MapPtr_8F1A).l,a0
-		moveq	#$D-1,d1
+		moveq	#bytesToXcnt($68,8),d1
 
 loc_8F02:
 		move.l	(a0)+,(a1)+
 		move.l	(a0)+,(a1)+
 		dbf	d1,loc_8F02
 		lea	(SStage_collision_response_list).w,a1
-		move.w	#$40-1,d1
+		move.w	#bytesToLcnt($100),d1
 
 loc_8F12:
 		clr.l	(a1)+
@@ -11361,6 +11405,7 @@ MapPtr_8F1A:
 		dc.l Map_SStageSphere
 		dc.w make_art_tile($680,2,1), $0000
 ; ---------------------------------------------------------------------------
+		; unused
 		ext.l	d1
 		lsl.l	#8,d1
 		divs.w	d0,d1
@@ -12150,6 +12195,7 @@ sub_9E6C:
 		addi.w	#$600,d0
 		jmp	sub_B534(pc)
 ; ---------------------------------------------------------------------------
+		; unused
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -13670,8 +13716,8 @@ loc_B5F8:
 
 SRAM_Load:
 		move.b	#1,(SRAM_access_flag).l
-		lea	($200011).l,a0
-		lea	($2000BD).l,a1
+		lea	(SRAM_competition).l,a0
+		lea	(SRAM_competition_backup).l,a1
 		lea	(Competition_saved_data).w,a2
 		moveq	#$29,d0
 		move.w	#$4C44,d1		; RAM integrity value
@@ -13679,7 +13725,7 @@ SRAM_Load:
 		beq.s	loc_B674		; If the data read was successful, branch
 		lea	SaveData_GeneralDefault(pc),a0
 		lea	(Competition_saved_data).w,a1
-		moveq	#$29-1,d0
+		moveq	#bytesToWcnt($52),d0
 
 loc_B66A:
 		move.w	(a0)+,(a1)+		; Reset the general save data to the default
@@ -13687,8 +13733,8 @@ loc_B66A:
 		jsr	Write_SaveGeneral(pc)	; Write default data back to SRAM
 
 loc_B674:
-		lea	($200169).l,a0
-		lea	($2001F5).l,a1
+		lea	(SRAM_S3game).l,a0
+		lea	(SRAM_S3game_backup).l,a1
 		lea	(Saved_data).w,a2
 		moveq	#$19,d0
 		move.w	#$4244,d1		; RAM integrity value for save game data
@@ -13819,8 +13865,8 @@ loc_B792:
 Write_SaveGeneral:
 		move.l	a0,-(sp)
 		move.w	d7,-(sp)
-		lea	($200011).l,a0		; Save general SRAM
-		lea	($2000BD).l,a1		; Save general Backup SRAM
+		lea	(SRAM_competition).l,a0		; Save general SRAM
+		lea	(SRAM_competition_backup).l,a1		; Save general Backup SRAM
 		lea	(Competition_saved_data).w,a2	; Save general RAM
 		moveq	#$2A-1,d0
 		bsr.s	Write_SRAM
@@ -13836,8 +13882,8 @@ Write_SaveGeneral:
 Write_SaveGame:
 		move.l	a0,-(sp)
 		move.w	d7,-(sp)
-		lea	($200169).l,a0		; Save game SRAM
-		lea	($2001F5).l,a1		; Save game backup SRAM
+		lea	(SRAM_S3game).l,a0		; Save game SRAM
+		lea	(SRAM_S3game_backup).l,a1		; Save game backup SRAM
 		lea	(Saved_data).w,a2	; Save game RAM
 		moveq	#$1A-1,d0
 		bsr.s	Write_SRAM
@@ -15471,6 +15517,8 @@ loc_ED24:
 ; End of function DrawSixDigitNumber
 
 ; ---------------------------------------------------------------------------
+		; unused leftover from Sonic 2
+;ContScrCounter:
 		move.l	#vdpComm(tiles_to_bytes($6FC),VRAM,WRITE),(VDP_control_port).l
 		lea	(VDP_data_port).l,a6
 		lea	(dword_ED98).l,a2
@@ -15557,6 +15605,8 @@ loc_EDCE:
 ; End of function DrawTwoDigitNumber
 
 ; ---------------------------------------------------------------------------
+		; unused leftover from Sonic 2
+;Hud_TimeRingBonus:
 		lea	(dword_ED90).l,a2
 		moveq	#4-1,d6
 		moveq	#0,d4
@@ -18532,6 +18582,7 @@ locret_11144:
 ; End of function ObjCheckLeftWallDist
 
 ; ---------------------------------------------------------------------------
+		; unused
 		rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -18855,6 +18906,7 @@ Touch_EnemyNormal:
 Enemy_Points:
 		dc.w 10, 20, 50, 100
 ; ---------------------------------------------------------------------------
+		; unused
 		bset	#7,status(a1)
 
 ; ---------------------------------------------------------------------------
@@ -29007,6 +29059,7 @@ loc_18DB4:
 JmpTo_Play_SFX:
 		jmp	(Play_SFX).l
 ; ---------------------------------------------------------------------------
+		; unused
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -30678,6 +30731,7 @@ loc_19C58:
 ; End of function Delete_Sprite_If_Not_In_Range
 
 ; ---------------------------------------------------------------------------
+		; unused
 		tst.w	(Competition_mode).w
 		bne.s	loc_19C8A
 		move.w	x_pos(a0),d0
@@ -31079,6 +31133,7 @@ loc_19FCA:
 		move.w	d6,(Camera_Y_pos_coarse).w
 		rts
 ; ---------------------------------------------------------------------------
+		; unused
 		bset	#7,(a3)
 		beq.s	sub_19FDC
 		addq.w	#6,a0
@@ -33408,7 +33463,12 @@ loc_1B6F8:
 
 loc_1B714:
 		moveq	#signextendB(sfx_RingRight),d0
+	if FixBugs
+		jmp	(Play_SFX).l
+	else
+		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jmp	(Play_Music).l
+	endif
 ; ---------------------------------------------------------------------------
 
 loc_1B71C:
@@ -33447,7 +33507,12 @@ Monitor_Give_FireShield:
 		bset	#Status_Shield,status_secondary(a1)
 		bset	#Status_FireShield,status_secondary(a1)
 		moveq	#signextendB(sfx_FireShield),d0
+	if FixBugs
+		jsr	(Play_SFX).l
+	else
+		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jsr	(Play_Music).l
+	endif
 		tst.b	parent+1(a0)
 		bne.s	loc_1B7A2
 		move.l	#Obj_FireShield,(Shield).w
@@ -33467,7 +33532,12 @@ Monitor_Give_LightningShield:
 		bset	#Status_Shield,status_secondary(a1)
 		bset	#Status_LtngShield,status_secondary(a1)
 		moveq	#signextendB(sfx_LightningShield),d0
+	if FixBugs
+		jsr	(Play_SFX).l
+	else
+		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jsr	(Play_Music).l
+	endif
 		tst.b	parent+1(a0)
 		bne.s	loc_1B7E0
 		move.l	#Obj_LightningShield,(Shield).w
@@ -33487,7 +33557,12 @@ Monitor_Give_BubbleShield:
 		bset	#Status_Shield,status_secondary(a1)
 		bset	#Status_BublShield,status_secondary(a1)
 		moveq	#signextendB(sfx_BubbleShield),d0
+	if FixBugs
+		jsr	(Play_SFX).l
+	else
+		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jsr	(Play_Music).l
+	endif
 		tst.b	parent+1(a0)
 		bne.s	loc_1B81E
 		move.l	#Obj_BubbleShield,(Shield).w
@@ -33551,6 +33626,7 @@ Monitor_Give_SuperSonic:
 		moveq	#signextendB(mus_Invincibility),d0		; play invincibility theme
 		jmp	(Play_Music).l
 ; ---------------------------------------------------------------------------
+		; unused
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -33712,6 +33788,8 @@ loc_1BB12:
 ; End of function sub_1BADA
 
 ; ---------------------------------------------------------------------------
+		; unused leftover from Sonic 2
+;DoubleSlopedSolid:
 		lea	(Player_1).w,a1
 		moveq	#p1_standing_bit,d6
 		movem.l	d1-d4,-(sp)
@@ -34180,6 +34258,7 @@ MvSonicOnPtfm:
 		sub.w	d3,d0
 		bra.s	loc_1BF1C
 ; ---------------------------------------------------------------------------
+		; unused leftover from Sonic 1/2
 		move.w	y_pos(a0),d0
 		subi.w	#9,d0
 
@@ -36089,6 +36168,7 @@ loc_1D57C:
 ; End of function sub_1D44C
 
 ; ---------------------------------------------------------------------------
+		; unused
 		bra.w	loc_1D50A
 
 ; =============== S U B R O U T I N E =======================================
@@ -41108,7 +41188,7 @@ Init_ArtScaling:
 		movea.w	d1,a4
 		movea.w	d1,a5
 		lea	(H_scroll_buffer).w,a6
-		move.w	#($1000/$100)-1,d1
+		move.w	#bytesToXcnt($1000,$100),d1
 
 .loop:
 	rept 10
@@ -41184,6 +41264,7 @@ loc_22CA0:
 		add.w	d1,(_unkF740).w
 		rts
 ; ---------------------------------------------------------------------------
+		; unused
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -45879,6 +45960,7 @@ Animate_Tiles:
 ; End of function Animate_Tiles
 
 ; ---------------------------------------------------------------------------
+		; unused
 		rts
 ; ---------------------------------------------------------------------------
 Offs_AniFunc:	dc.w AnimateTiles_AIZ1-Offs_AniFunc
@@ -46580,6 +46662,7 @@ loc_27132:
 		addq.w	#2,a3
 		bra.w	loc_275F0
 ; ---------------------------------------------------------------------------
+		; unused
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -48797,6 +48880,7 @@ loc_28A9C:
 loc_28AA8:
 		jmp	(Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
+		; unused
 		move.l	#Map_TunnelExhaust,mappings(a0)
 		move.w	#make_art_tile($2EA,2,0),art_tile(a0)
 		move.b	#$10,width_pixels(a0)
@@ -53735,7 +53819,7 @@ locret_2D216:
 ; ---------------------------------------------------------------------------
 
 SpecialStage_Results:
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		move	#$2700,sr
 		move.w	(VDP_reg_1_command).w,d0
@@ -54924,9 +55008,9 @@ loc_2E958:
 		tst.b	render_flags(a0)
 		bmi.s	loc_2E990
 		clr.b	(Palette_cycle_counters+$00).w
-		move.w	#signextendB(mus_MutePSG),d0
+		move.w	#signextendB(cmd_MutePSG),d0
 		jsr	(Play_SFX).l
-		move.w	#signextendB(mus_StopSFX),d0
+		move.w	#signextendB(cmd_StopSFX),d0
 		jsr	(Play_SFX).l
 		move.w	#150,$30(a0)
 		move.l	#loc_2E996,(a0)
@@ -55231,11 +55315,11 @@ loc_2EDB4:
 loc_2EDBA:
 		tst.b	render_flags(a0)
 		bmi.s	loc_2EDFE
-		move.w	#signextendB(mus_StopSFX),d0
+		move.w	#signextendB(cmd_StopSFX),d0
 		jsr	(Play_SFX).l
-		move.w	#signextendB(mus_MutePSG),d0
+		move.w	#signextendB(cmd_MutePSG),d0
 		jsr	(Play_SFX).l		; this will actually never play... Why is any of this here?
-		move.w	#signextendB(mus_StopSFX),d0
+		move.w	#signextendB(cmd_StopSFX),d0
 		jsr	(Play_SFX).l
 		move.b	#0,(Palette_cycle_counters+$00).w
 		move.w	respawn_addr(a0),d0
@@ -56738,7 +56822,7 @@ loc_303DA:
 	else
 		; Bug: probably meant to be routine(a0), and at some point the animation terminated
 		; with code $FC (increment routine counter) rather than $FB (move offscreen)
-		tst.b	5
+		tst.b	routine
 	endif
 		beq.s	loc_303F2
 		move.w	#$7F00,x_pos(a0)
@@ -59961,6 +60045,7 @@ loc_32CDE:
 		move.b	mapping_frame(a1),d0
 		jmp	(Perform_Player_DPLC).l
 ; ---------------------------------------------------------------------------
+		; unused
 		rts
 ; ---------------------------------------------------------------------------
 RawAni_32D00:
@@ -60067,6 +60152,7 @@ loc_32E2E:
 ; End of function sub_32AFE
 
 ; ---------------------------------------------------------------------------
+		; unused
 		rts
 ; ---------------------------------------------------------------------------
 RawAni_32E50:
@@ -60129,6 +60215,7 @@ loc_32ED2:
 		bsr.s	sub_32EFE
 		jmp	(Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
+		; unused
 		lea	(Player_2).w,a1
 		lea	$36(a0),a2
 		addq.b	#p2_standing_bit-p1_standing_bit,d6
@@ -60371,6 +60458,7 @@ loc_33196:
 ; End of function sub_32EFE
 
 ; ---------------------------------------------------------------------------
+		; unused
 		rts
 ; ---------------------------------------------------------------------------
 byte_331B8:
@@ -61919,6 +62007,7 @@ loc_34712:
 locret_34720:
 		rts
 ; ---------------------------------------------------------------------------
+		; unused
 		clr.w	x_vel(a0)
 		clr.w	y_vel(a0)
 		rts
@@ -64860,6 +64949,7 @@ loc_374F2:
 Map_2PItemIcon:
 		include "General/2P Zone/Map - Item Icon.asm"
 ; ---------------------------------------------------------------------------
+		; unused
 		move.l	#Map_2PPosition,mappings(a0)
 		move.w	#make_art_tile($75E,0,1),art_tile(a0)
 		move.w	#0,priority(a0)
@@ -68265,6 +68355,7 @@ DrawBGAsYouMove:
 ; End of function DrawBGAsYouMove
 
 ; ---------------------------------------------------------------------------
+		; unused
 		movem.l	d5/a4-a5,-(sp)
 		lea	(Camera_Y_pos_copy).w,a6
 		jsr	Get_DeformDrawPosVert(pc)
@@ -68569,7 +68660,7 @@ PlainDeformation:
 		swap	d0
 		move.w	(Camera_X_pos_BG_copy).w,d0
 		neg.w	d0
-		moveq	#$38-1,d1
+		moveq	#bytesToXcnt($380,$10),d1
 
 loc_39E66:
 		move.l	d0,(a1)+
@@ -70630,7 +70721,7 @@ loc_3B544:
 		lea	(H_scroll_buffer+2).w,a1
 		move.w	(Camera_X_pos_BG_copy).w,d0	; Cancel out background deformation since we're still in the open field
 		neg.w	d0
-		moveq	#$38-1,d1
+		moveq	#bytesToXcnt($1C0,8),d1
 
 loc_3B554:
 		move.w	d0,(a1)
@@ -70856,7 +70947,7 @@ loc_3B744:
 		lea	(H_scroll_buffer).w,a1		; This is for what I assume to be the flying battleship sequence.
 		move.w	(_unkEE98).w,d0			; Nullifies the top 8 tiles worth of FG waviness for this effect
 		neg.w	d0						; And replaces it with position data from the second BG camera.
-		moveq	#$10-1,d1
+		moveq	#bytesToXcnt($80,8),d1
 
 loc_3B75E:
 		move.w	d0,(a1)
@@ -76674,7 +76765,7 @@ ArtNem_ContinueDigits:
 ; ---------------------------------------------------------------------------
 
 S3Credits:
-		moveq	#signextendB(mus_Stop),d0
+		moveq	#signextendB(cmd_Stop),d0
 		jsr	(Play_Music).l
 		jsr	(Clear_Nem_Queue).l
 		jsr	(Pal_FadeToBlack).l
@@ -76806,6 +76897,7 @@ loc_40538:
 		jsr	(Wait_VSync).l
 		jmp	(Pal_FadeFromBlack).l
 ; ---------------------------------------------------------------------------
+		; unused
 		move.w	#2,(_unkFA86).w
 		lea	S3CreditsText_Dummy(pc),a1
 		move.w	(a1),d0
@@ -78091,7 +78183,7 @@ loc_43322:
 loc_4332E:
 		addq.b	#2,routine(a0)
 		st	(_unkF660).w
-		move.b	#mus_S2SEGA,d0
+		move.b	#cmd_S2SEGA,d0
 		jsr	(Play_SFX).l
 
 locret_43340:
@@ -78295,7 +78387,7 @@ loc_43656:
 
 
 sub_43664:
-		moveq	#$29-1,d5
+		moveq	#bytesToWcnt($52),d5
 
 loc_43666:
 		move.w	d4,(a6)
@@ -79073,7 +79165,12 @@ loc_43DA2:
 		moveq	#Status_FireShield,d0
 		bsr.w	sub_43E20
 		moveq	#signextendB(sfx_FireShield),d0
+	if FixBugs
+		jmp	(Play_SFX).l
+	else
+		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jmp	(Play_Music).l
+	endif
 ; ---------------------------------------------------------------------------
 
 loc_43DCC:
@@ -79085,7 +79182,12 @@ loc_43DCC:
 		moveq	#Status_BublShield,d0
 		bsr.w	sub_43E20
 		moveq	#signextendB(sfx_BubbleShield),d0
+	if FixBugs
+		jmp	(Play_SFX).l
+	else
+		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jmp	(Play_Music).l
+	endif
 ; ---------------------------------------------------------------------------
 
 loc_43DF6:
@@ -79097,7 +79199,12 @@ loc_43DF6:
 		moveq	#Status_LtngShield,d0
 		bsr.w	sub_43E20
 		moveq	#signextendB(sfx_LightningShield),d0
+	if FixBugs
+		jmp	(Play_SFX).l
+	else
+		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jmp	(Play_Music).l
+	endif
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -80057,7 +80164,7 @@ loc_44C36:
 		lea	ObjSlot_CutsceneKnux(pc),a1
 		jsr	(SetUp_ObjAttributesSlotted).l
 		move.l	#byte_4578B,$30(a0)
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		move.w	#2*60,$2E(a0)
 		move.b	#mus_Knuckles,$26(a0)
@@ -82266,7 +82373,7 @@ loc_464AC:
 		move.w	#3*60,$2E(a0)
 		move.w	d5,(Camera_min_X_pos).w
 		move.w	d5,(Camera_max_X_pos).w
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 
 locret_464C8:
@@ -82330,6 +82437,7 @@ loc_4654C:
 		jsr	(Swing_UpAndDown).l
 		jmp	(MoveWaitTouch).l
 ; ---------------------------------------------------------------------------
+		; unused
 		subq.b	#1,$39(a0)
 		bpl.s	loc_46566
 		move.l	#loc_4657E,$34(a0)
@@ -82354,7 +82462,7 @@ loc_46596:
 		lea	Pal_AIZMiniboss(pc),a1
 		jsr	(PalLoad_Line1).l
 		move.b	#$F,collision_flags(a0)
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		move.w	#$400,x_vel(a0)
 		clr.w	y_vel(a0)
@@ -82619,6 +82727,7 @@ loc_46878:
 		move.w	d1,$2E(a0)
 		rts
 ; ---------------------------------------------------------------------------
+		; unused
 		jmp	(Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
@@ -83468,7 +83577,7 @@ loc_470BE:
 		move.l	#Obj_Wait,(a0)			; Set up object to wait $78 frames
 		move.w	#2*60,$2E(a0)
 		move.l	#Obj_AIZEndBossMusic,$34(a0)
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		move.b	#1,(Boss_flag).w		; Lock the screen
 		clr.b	(_unkFAA3).w
@@ -83682,7 +83791,7 @@ loc_47360:
 		move.l	#Obj_Wait,(a0)
 		bset	#4,$38(a0)
 		move.w	#$7F,$2E(a0)
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		lea	ChildObjDat_47BBC(pc),a2
 		jmp	(CreateChild1_Normal).l
@@ -84667,7 +84776,7 @@ loc_47D82:
 		move.l	#Obj_Wait,(a0)
 		move.w	#2*60,$2E(a0)
 		move.l	#loc_47DBA,$34(a0)
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		bset	#3,$38(a0)
 		lea	Pal_HCZMiniboss(pc),a1
@@ -85644,6 +85753,7 @@ locret_48866:
 ; End of function sub_48844
 
 ; ---------------------------------------------------------------------------
+		; unused
 		dc.w Player_1
 		dc.w 0
 		dc.w Player_2
@@ -86166,7 +86276,7 @@ Obj_HCZEndBoss:
 		jsr	(Check_CameraInRange).l
 		move.l	#loc_48D2E,(a0)
 		move.b	#1,(Boss_flag).w
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		move.w	#2*60,$2E(a0)
 		move.b	#mus_EndBoss,$26(a0)
@@ -86330,7 +86440,7 @@ loc_48EF6:
 		bset	#4,$38(a0)
 		move.w	#$7F,$2E(a0)
 		move.l	#loc_48F3C,$34(a0)
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		moveq	#$C,d0
 		jmp	(Set_IndexedVelocity).l
@@ -86535,6 +86645,7 @@ loc_49154:
 locret_4917E:
 		rts
 ; ---------------------------------------------------------------------------
+		; unused
 		bra.w	sub_49ACC
 ; ---------------------------------------------------------------------------
 
@@ -87776,7 +87887,7 @@ Obj_MGZ2DrillingRobotnik:
 		move.w	#2*60,$2E(a0)
 		move.l	#Obj_MGZ2DrillingRobotnikGo,$34(a0)
 		clr.b	subtype(a0)
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		lea	(ArtKosM_MGZEndBoss).l,a1
 		move.w	#tiles_to_bytes($33F),d2
@@ -88097,7 +88208,7 @@ loc_4A132:
 		move.b	#1,(Boss_flag).w
 		move.b	#$1C,y_radius(a0)
 		move.w	#$C,angle(a0)
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		move.w	#2*60,$2E(a0)
 		move.l	#loc_4A1C8,$34(a0)
@@ -88443,7 +88554,7 @@ loc_4A592:
 		move.l	#Obj_Wait,(a0)
 		bclr	#7,render_flags(a0)
 		bset	#4,$38(a0)
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		move.w	#$7F,$2E(a0)
 		move.l	#loc_4A5CA,$34(a0)
@@ -89031,6 +89142,7 @@ loc_4AC4A:
 		jsr	(MoveSprite_LightGravity).l
 		jmp	(Sprite_CheckDeleteXY).l
 ; ---------------------------------------------------------------------------
+		; unused
 		lea	word_4B3C2(pc),a1
 		jsr	(SetUp_ObjAttributes3).l
 		move.l	#loc_4AC72,(a0)
@@ -90058,7 +90170,7 @@ loc_4B5B4:
 		move.l	#Obj_Wait,(a0)
 		move.w	#2*60,$2E(a0)			; Wait for 2 seconds
 		move.l	#Obj_CNZMinibossGo,$34(a0)
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l				; Fade out music
 		move.b	#1,(Boss_flag).w		; Lock screen
 		moveq	#$5D,d0
@@ -90207,11 +90319,12 @@ Obj_CNZMinibossEnd:
 		bset	#4,$38(a0)
 		move.w	#$7F,$2E(a0)
 		move.l	#Obj_CNZMinibossEndGo,$34(a0)
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		lea	Child6_CNZMinibossMakeDebris(pc),a2
 		jmp	(CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
+		; unused
 		jmp	(Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
@@ -90956,7 +91069,7 @@ Obj_CNZEndBoss:
 		jsr	(Check_CameraInRange).l
 		move.l	#loc_4BFF4,(a0)
 		move.b	#1,(Boss_flag).w
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		move.w	#2*60,$2E(a0)
 		move.b	#mus_EndBoss,$26(a0)
@@ -91176,7 +91289,7 @@ loc_4C1EA:
 		bset	#4,$38(a0)
 		move.w	#$7F,$2E(a0)
 		move.l	#loc_4C21A,$34(a0)
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		lea	ChildObjDat_4C8D6(pc),a2
 		jmp	CreateChild1_Normal(pc)
@@ -91563,6 +91676,7 @@ loc_4C618:
 		or.b	d0,render_flags(a0)
 		rts
 ; ---------------------------------------------------------------------------
+		; unused
 		lea	ObjDat3_4C896(pc),a1
 		jsr	SetUp_ObjAttributes(pc)
 		bset	#4,shield_reaction(a0)
@@ -91979,7 +92093,7 @@ loc_4C9EE:
 		move.b	#6,routine(a0)
 		move.l	#loc_4CA10,$34(a0)
 		move.w	#2*60,$2E(a0)
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 
 locret_4CA0A:
@@ -93201,7 +93315,7 @@ loc_4D57A:
 		move.w	#$240,(Camera_target_max_Y_pos).w
 		move.w	#2*60,$2E(a0)
 		move.l	#loc_4D5EC,$34(a0)
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		move.b	#1,(Boss_flag).w
 		moveq	#$6A,d0
@@ -93795,7 +93909,7 @@ loc_4DBC0:
 		jsr	(PalLoad_Line1).l
 		move.w	#2*60,$2E(a0)
 		move.l	#loc_4DC30,$34(a0)
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		lea	(Child1_MakeFBZRoboShip).l,a2
 		jsr	CreateChild1_Normal(pc)
@@ -93914,7 +94028,7 @@ loc_4DD3C:
 		bset	#4,$38(a0)
 		move.w	#$7F,$2E(a0)
 		move.l	#loc_4DD66,$34(a0)
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		lea	ChildObjDat_4E2EA(pc),a2
 		jmp	CreateChild1_Normal(pc)
@@ -94570,7 +94684,7 @@ Obj_ICZMiniboss:
 		jsr	(Check_CameraInRange).l
 		move.l	#loc_4E3F4,(a0)
 		move.b	#1,(Boss_flag).w
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		move.w	#2*60,$2E(a0)
 		move.b	#mus_Miniboss,$26(a0)
@@ -94727,6 +94841,7 @@ loc_4E546:
 		move.l	#loc_4E564,$34(a0)
 		rts
 ; ---------------------------------------------------------------------------
+		; unused
 		jsr	Run_PalRotationScript(pc)
 		jmp	Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
@@ -95439,7 +95554,7 @@ Obj_ICZEndBoss:
 		jsr	(Check_CameraInRange).l
 		move.l	#loc_4ED30,(a0)
 		move.b	#1,(Boss_flag).w
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		move.w	#2*60,$2E(a0)
 		move.b	#mus_EndBoss,$26(a0)
@@ -95559,6 +95674,7 @@ loc_4EE3C:
 		move.l	#loc_4EE16,$34(a0)
 		rts
 ; ---------------------------------------------------------------------------
+		; unused
 		bclr	#2,$38(a0)
 		rts
 ; ---------------------------------------------------------------------------
@@ -95581,7 +95697,7 @@ loc_4EE74:
 		bset	#4,$38(a0)
 		move.w	#$7F,$2E(a0)
 		move.l	#loc_4EEA4,$34(a0)
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		lea	ChildObjDat_4F400(pc),a2
 		jmp	CreateChild1_Normal(pc)
@@ -97118,6 +97234,7 @@ loc_4FD76:
 		moveq	#4,d0
 		jmp	Child_Draw_Sprite_FlickerMove(pc)
 ; ---------------------------------------------------------------------------
+		; unused
 		movea.w	$44(a0),a1
 		btst	#6,status(a1)
 		bne.s	loc_4FD92
@@ -97817,7 +97934,7 @@ loc_50444:
 		jsr	SetUp_ObjAttributes(pc)
 		move.b	#8,collision_property(a0)
 		move.b	#1,(Boss_flag).w
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		move.w	#2*60,$2E(a0)
 		move.b	#mus_EndBoss,$26(a0)
@@ -99628,7 +99745,7 @@ sub_5174A:
 		addi.w	#$80,d0
 		cmp.w	y_pos(a0),d0
 		bcc.s	locret_51762
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		move.l	(sp),(a0)
 
@@ -99997,6 +100114,7 @@ locret_51BE0:
 ; End of function sub_51BC8
 
 ; ---------------------------------------------------------------------------
+		; unused
 		movea.w	$44(a0),a1
 		movea.w	parent3(a0),a2
 		move.w	x_pos(a1),d0
@@ -102999,6 +103117,7 @@ loc_5375A:
 		move.l	#Delete_Current_Sprite,(a0)
 		rts
 ; ---------------------------------------------------------------------------
+		; unused
 		move.w	x_pos(a0),d0
 		andi.w	#$FF80,d0
 		sub.w	(Camera_X_pos_coarse_back).w,d0
@@ -103057,6 +103176,7 @@ Sprite_CheckDeleteTouch2:
 		jsr	(Add_SpriteToCollisionResponseList).l
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
+		; unused
 		move.w	x_pos(a0),d0
 		andi.w	#$FF80,d0
 		sub.w	(Camera_X_pos_coarse_back).w,d0
@@ -103110,6 +103230,7 @@ Remove_From_TrackingSlot:
 ; End of function Remove_From_TrackingSlot
 
 ; ---------------------------------------------------------------------------
+		; unused
 		move.w	x_pos(a0),d0
 		andi.w	#$FF80,d0
 		sub.w	(Camera_X_pos_coarse_back).w,d0
@@ -103624,6 +103745,7 @@ MoveSlowFall_AnimateRaw:
 		jsr	MoveSprite_LightGravity(pc)
 		jmp	Animate_Raw(pc)
 ; ---------------------------------------------------------------------------
+		; unused
 		jsr	Swing_UpAndDown(pc)
 
 Move_AnimateRaw_Wait:
@@ -103663,6 +103785,7 @@ MoveChkDel:
 		jsr	(MoveSprite).l
 		jmp	Sprite_CheckDeleteXY(pc)
 ; ---------------------------------------------------------------------------
+		; unused
 		jsr	Animate_Raw(pc)
 
 MoveTouchChkDel:
@@ -103680,21 +103803,27 @@ Swing_MoveWaitNoFall:
 		jsr	(MoveSprite2).l
 		jmp	Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
+		; unused
 		jsr	Animate_Raw(pc)
 		jmp	Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
+		; unused
 		jsr	Animate_Raw(pc)
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
+		; unused
 		jsr	(MoveSprite2).l
 		jsr	Animate_Raw(pc)
 		jmp	Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
+		; unused
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
+		; unused
 		jsr	Animate_Raw(pc)
 		jmp	Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
+		; unused
 		jmp	Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
@@ -103869,19 +103998,27 @@ Displace_PlayerOffObject:
 		bclr	#p1_standing_bit,status(a0)
 		beq.s	loc_53ED0
 		lea	(Player_1).w,a1
-		; This should clear Status_OnObj instead of p1_standing_bit.
+	if FixBugs
+		bclr	#Status_OnObj,status(a1)
+	else
+		; Bug: This should clear Status_OnObj instead of p1_standing_bit.
 		; Thankfully, they both equal 3. Sonic (3) & Knuckles corrects this.
 		bclr	#p1_standing_bit,status(a1)
+	endif
 		bset	#Status_InAir,status(a1)
 
 loc_53ED0:
 		bclr	#p2_standing_bit,status(a0)
 		beq.s	locret_53EE8
 		lea	(Player_2).w,a1
+	if FixBugs
+		bclr	#Status_RollJump,status(a1)
+	else
 		; Bug: this should clear Status_OnObj instead of p2_standing_bit.
 		; As a result, player 2's Status_RollJump is cleared instead.
 		; Sonic (3) & Knuckles corrects this as well.
 		bclr	#p2_standing_bit,status(a1)
+	endif
 		bset	#Status_InAir,status(a1)
 
 locret_53EE8:
@@ -104101,7 +104238,7 @@ Map_Offscreen:
 
 Obj_Song_Fade_ToLevelMusic:
 		move.w	#2*60,$2E(a0)
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		move.l	#loc_54048,(a0)
 
@@ -104114,7 +104251,7 @@ loc_54048:
 
 Obj_Song_Fade_Transition:
 		move.w	#2*60,$2E(a0)
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		move.l	#loc_5406E,(a0)
 
@@ -104180,7 +104317,7 @@ Obj_EndSignControl:
 		bset	#4,$38(a0)
 		move.w	#$7F,$2E(a0)
 		move.l	#Obj_EndSignControlDoSign,$34(a0)
-		moveq	#signextendB(mus_FadeOut),d0
+		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		rts
 ; End of function Obj_EndSignControl
@@ -104227,6 +104364,7 @@ Obj_EndSignControlDoStart:
 		jsr	Change_Act2Sizes(pc)
 		jmp	(Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
+		; unused
 		jsr	Displace_PlayerOffObject(pc)
 		jmp	(Delete_Current_Sprite).l
 
@@ -104633,7 +104771,12 @@ loc_544A8:
 
 loc_544C4:
 		moveq	#signextendB(sfx_RingRight),d0
+	if FixBugs
+		jmp	(Play_SFX).l
+	else
+		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jmp	(Play_Music).l
+	endif
 ; ---------------------------------------------------------------------------
 
 loc_544CC:
@@ -105132,6 +105275,7 @@ locret_5498C:
 ; End of function sub_54946
 
 ; ---------------------------------------------------------------------------
+		; unused
 		moveq	#$2B,d1
 		moveq	#$18,d2
 		moveq	#$18,d3
@@ -106142,6 +106286,7 @@ loc_552C6:
 loc_552CE:
 		jmp	(Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
+		; unused
 		movea.w	parent3(a0),a1
 		move.b	render_flags(a1),d0
 		btst	#3,$38(a0)
@@ -106704,6 +106849,7 @@ sub_557A6:
 ; End of function sub_557A6
 
 ; ---------------------------------------------------------------------------
+		; unused
 		dc.w Player_1
 		dc.w Player_2
 ObjDat_Blastoid:
@@ -110153,6 +110299,7 @@ loc_5791A:
 		move.b	#$C,routine(a0)
 		rts
 ; ---------------------------------------------------------------------------
+		; unused
 		dc.w      0,     8,   $10,   $18,   $20,   $28,   $30,   $38
 		dc.w   -$38,  -$30,  -$28,  -$20,  -$18,  -$10,    -8,     0
 ; ---------------------------------------------------------------------------
@@ -110789,7 +110936,7 @@ loc_57EBA:
 loc_57EBE:
 		move.l	#loc_57E4E,(a0)
 		bclr	#1,$38(a0)
-		moveq	#signextendB(mus_StopSFX),d0
+		moveq	#signextendB(cmd_StopSFX),d0
 		jsr	(Play_SFX).l
 		jmp	Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
@@ -115079,6 +115226,7 @@ loc_5A6D0:
 PLC_LBZRobotnikAfter: plrlistheader
 		plreq $45C, ArtNem_Bubbles
 PLC_LBZRobotnikAfter_End
+		; unused
 		plreq $3C3, ArtNem_LBZMisc
 ; ---------------------------------------------------------------------------
 
