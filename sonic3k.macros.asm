@@ -118,7 +118,7 @@ tiles_to_bytes function addr,((addr&$7FF)<<5)
 planeLoc function width,col,line,(((width * line) + col) * 2)
 
 ; function to calculate the location of a tile in plane mappings with a width of 40 cells
-planeLocH28 function col,line,(($50 * line) + (2 * col))
+planeLocH28 function col,line,planeLoc(40,col,line)
 
 ; macro for generating water palette transition tables
 watertransheader macro {INTLABEL}
