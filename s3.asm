@@ -10348,12 +10348,7 @@ loc_86C6:
 		subq.w	#1,(Special_stage_rings_left).w
 		bne.s	loc_86D4
 		moveq	#signextendB(sfx_Perfect),d0
-	if FixBugs
-		jsr	(Play_SFX).l
-	else
-		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jsr	(Play_Music).l
-	endif
 
 loc_86D4:
 		addi.w	#1,(Special_stage_ring_count).w
@@ -10364,12 +10359,7 @@ loc_86D4:
 		bne.s	loc_86FE
 		addq.b	#1,(Continue_count).w
 		move.w	#signextendB(sfx_Continue),d0
-	if FixBugs
-		jmp	(Play_SFX).l
-	else
-		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jmp	(Play_Music).l
-	endif
 ; ---------------------------------------------------------------------------
 
 loc_86FE:
@@ -10707,12 +10697,7 @@ sub_89E2:
 		cmpi.w	#2,(Special_stage_clear_timer).w
 		bne.s	loc_8A0C
 		moveq	#signextendB(sfx_AllSpheres),d0
-	if FixBugs
-		jsr	(Play_SFX).l
-	else
-		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jsr	(Play_Music).l
-	endif
 
 loc_8A0C:
 		cmpi.w	#$40,(Special_stage_clear_timer).w
@@ -33463,12 +33448,7 @@ loc_1B6F8:
 
 loc_1B714:
 		moveq	#signextendB(sfx_RingRight),d0
-	if FixBugs
-		jmp	(Play_SFX).l
-	else
-		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jmp	(Play_Music).l
-	endif
 ; ---------------------------------------------------------------------------
 
 loc_1B71C:
@@ -33507,12 +33487,7 @@ Monitor_Give_FireShield:
 		bset	#Status_Shield,status_secondary(a1)
 		bset	#Status_FireShield,status_secondary(a1)
 		moveq	#signextendB(sfx_FireShield),d0
-	if FixBugs
-		jsr	(Play_SFX).l
-	else
-		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jsr	(Play_Music).l
-	endif
 		tst.b	parent+1(a0)
 		bne.s	loc_1B7A2
 		move.l	#Obj_FireShield,(Shield).w
@@ -33532,12 +33507,7 @@ Monitor_Give_LightningShield:
 		bset	#Status_Shield,status_secondary(a1)
 		bset	#Status_LtngShield,status_secondary(a1)
 		moveq	#signextendB(sfx_LightningShield),d0
-	if FixBugs
-		jsr	(Play_SFX).l
-	else
-		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jsr	(Play_Music).l
-	endif
 		tst.b	parent+1(a0)
 		bne.s	loc_1B7E0
 		move.l	#Obj_LightningShield,(Shield).w
@@ -33557,12 +33527,7 @@ Monitor_Give_BubbleShield:
 		bset	#Status_Shield,status_secondary(a1)
 		bset	#Status_BublShield,status_secondary(a1)
 		moveq	#signextendB(sfx_BubbleShield),d0
-	if FixBugs
-		jsr	(Play_SFX).l
-	else
-		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jsr	(Play_Music).l
-	endif
 		tst.b	parent+1(a0)
 		bne.s	loc_1B81E
 		move.l	#Obj_BubbleShield,(Shield).w
@@ -79165,12 +79130,7 @@ loc_43DA2:
 		moveq	#Status_FireShield,d0
 		bsr.w	sub_43E20
 		moveq	#signextendB(sfx_FireShield),d0
-	if FixBugs
-		jmp	(Play_SFX).l
-	else
-		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jmp	(Play_Music).l
-	endif
 ; ---------------------------------------------------------------------------
 
 loc_43DCC:
@@ -79182,12 +79142,7 @@ loc_43DCC:
 		moveq	#Status_BublShield,d0
 		bsr.w	sub_43E20
 		moveq	#signextendB(sfx_BubbleShield),d0
-	if FixBugs
-		jmp	(Play_SFX).l
-	else
-		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jmp	(Play_Music).l
-	endif
 ; ---------------------------------------------------------------------------
 
 loc_43DF6:
@@ -79199,12 +79154,7 @@ loc_43DF6:
 		moveq	#Status_LtngShield,d0
 		bsr.w	sub_43E20
 		moveq	#signextendB(sfx_LightningShield),d0
-	if FixBugs
-		jmp	(Play_SFX).l
-	else
-		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jmp	(Play_Music).l
-	endif
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -104771,12 +104721,7 @@ loc_544A8:
 
 loc_544C4:
 		moveq	#signextendB(sfx_RingRight),d0
-	if FixBugs
-		jmp	(Play_SFX).l
-	else
-		; Bug: This tries to play the SFX as if it were music. Luckily, the sound driver doesn't get affected by this.
 		jmp	(Play_Music).l
-	endif
 ; ---------------------------------------------------------------------------
 
 loc_544CC:
