@@ -244,23 +244,28 @@ PSG_input =			$C00011
 
 ; RAM addresses
 
+; SRAM addresses
+; Notes: SRAM in Sonic 3 Alone and Sonic 3 & Knuckles is 1KB in size.
+; Both games use odd 8-bit addresses for saving.
 	phase $200001
 SRAM_start	=		*
-	ds.b	$10	; unused?
+	ds.b	$10	; unused
 SRAM_competition	ds.b $2A*4	; $A8 bytes
-	ds.b	4	; unused?
+	ds.b	4	; unused
 SRAM_competition_backup	ds.b	$2A*4	; $A8 bytes
-	ds.b	4	; unused?
+	ds.b	4	; unused
 SRAM_S3game	ds.b	$1A*4	; $68 bytes
-	ds.b	$24	; unused?
+	ds.b	$24	; unused
 SRAM_S3game_backup	ds.b	$1A*4	; $68 bytes
-	ds.b	$24 ; unused?
+	ds.b	$24 ; unused
 SRAM_SKgame	ds.b	$2A*4	; $A8 bytes
-	ds.b	4	; unused?
+	ds.b	4	; unused
 SRAM_SKgame_backup	ds.b	$2A*4	; $A8 bytes
-	ds.b	$2A	; unused?
+	ds.b	$2A	; unused
 SRAM_end	=		*
 	dephase
+
+; M68K RAM addresses
 
 Sprite_table_alternate =	ramaddr(   $FF7880 ) ; $280 bytes ; alternate sprite table for player 1 in competition mode
 Sprite_table_P2 =		ramaddr(   $FF7B00 ) ; $280 bytes ; sprite table for player 2 in competition mode
