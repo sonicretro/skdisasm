@@ -64,7 +64,7 @@ ROMEndLoc:	dc.l EndOfROM-1
 RAMStartLoc:	dc.l (RAM_start&$FFFFFF)
 RAMEndLoc:	dc.l (RAM_start&$FFFFFF)+$FFFF
 CartRAM_Info:	dc.b "RA"
-CartRAM_Type:	dc.w %1111100000100000
+CartRAM_Type:	dc.w %1111100000100000	; Save odd number 8-bit addresses
 CartRAMStartLoc:dc.l SRAM_start
 CartRAMEndLoc:	dc.l SRAM_end
 Modem_Info:	dc.b "  "
