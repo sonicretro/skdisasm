@@ -1710,7 +1710,7 @@ Pause_Loop:
 		beq.s	Pause_NoSlowMo
 		btst	#button_A,(Ctrl_1_pressed).w
 		beq.s	Pause_ChkFrameAdvance	; branch if A isn't pressed
-		move.b	#$28,(Game_mode).w	; go to level select (oddly enough this is only for Sonic 3 Alone, Sonic 2, the Nov 3rd 1993 Prototype and Sonic & Knuckles do not have it set to go to the level select)
+		move.b	#$28,(Game_mode).w	; go to level select (oddly enough this is only for Sonic 3 Alone, Sonic 2, the Nov 3rd 1993 Prototype and Sonic & Knuckles do not have it set to go to the level select. This line was eventually changed to go back to the title screen once more by the 0610 build of Sonic & Knuckles.)
 		nop
 		bra.s	Pause_ResumeMusic
 ; ---------------------------------------------------------------------------
