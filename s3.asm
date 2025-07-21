@@ -740,9 +740,9 @@ VInt_0_Main:
 		addq.w	#1,(Lag_frame_count).w
 
 		; branch if a level or demo is running
-		cmpi.b	#$88,(Game_mode).w
+		cmpi.b	#8+$80,(Game_mode).w
 		beq.s	VInt_0_Level
-		cmpi.b	#$8C,(Game_mode).w
+		cmpi.b	#$C+$80,(Game_mode).w
 		beq.s	VInt_0_Level
 		cmpi.b	#8,(Game_mode).w
 		beq.s	VInt_0_Level
@@ -1388,7 +1388,7 @@ HInt2:
 		movem.l	a0-a1,-(sp)
 
 		lea	(VDP_data_port).l,a1
-		move.w	#$8ADF,VDP_control_port-VDP_data_port(a1)
+		move.w	#$8A00+224-1,VDP_control_port-VDP_data_port(a1)
 		lea	(Water_palette).w,a0
 		move.l	#vdpComm($0000,CRAM,WRITE),VDP_control_port-VDP_data_port(a1)
 	rept 32
@@ -1483,7 +1483,7 @@ $$setRegisters:
 		dbf	d7,$$setRegisters
 		move.w	(VDP_register_values+2).l,d0	; get command for register #1
 		move.w	d0,(VDP_reg_1_command).w	; and store it in RAM (for easy display blanking/enabling)
-		move.w	#$8ADF,(H_int_counter_command).w
+		move.w	#$8A00+224-1,(H_int_counter_command).w
 		moveq	#0,d0
 		move.l	#vdpComm($0000,VSRAM,WRITE),(VDP_control_port).l
 		move.w	d0,(a1)
@@ -1570,7 +1570,7 @@ SndDrvInit:
 		; Load SMPS sound driver
 		lea	(Z80_SoundDriver).l,a0
 		lea	(Z80_RAM).l,a1
-		move.w	#zDataStart-2,d0
+		move.w	#(Size_of_Snd_driver_guess+Size_of_Snd_driver2_guess+$BC)-1,d0	; Oddly, this loads $BC extra bytes of padding into the Z80 instead of loading the exact size of the Z80. Remove the +$BC to fix this.
 
 loc_1584:
 		move.b	(a0)+,(a1)+
@@ -1694,7 +1694,7 @@ Pause_Game:
 		bne.s	loc_168E
 		move.b	(Ctrl_1_pressed).w,d0
 		or.b	(Ctrl_2_pressed).w,d0
-		andi.b	#$80,d0	; is Start pressed?
+		andi.b	#button_start_mask,d0	; is Start pressed?
 		beq.w	Pause_NoPause	; if not, branch
 
 loc_168E:
@@ -1710,7 +1710,7 @@ Pause_Loop:
 		beq.s	Pause_NoSlowMo
 		btst	#button_A,(Ctrl_1_pressed).w
 		beq.s	Pause_ChkFrameAdvance	; branch if A isn't pressed
-		move.b	#$28,(Game_mode).w
+		move.b	#$28,(Game_mode).w	; go to level select (oddly enough this is only for Sonic 3 Alone, Sonic 2, the Nov 3rd 1993 Prototype and Sonic & Knuckles do not have it set to go to the level select)
 		nop
 		bra.s	Pause_ResumeMusic
 ; ---------------------------------------------------------------------------
@@ -1730,7 +1730,7 @@ Pause_NoSlowMo:
 		bpl.s	Pause_ChkStart
 		btst	#button_B,(Ctrl_1_pressed).w
 		beq.s	Pause_ChkStart
-		move.b	#$C0,(Game_mode).w	; If in time attack mode, go back to 2P menu if B is pressed
+		move.b	#$40+$80,(Game_mode).w	; If in time attack mode, go back to 2P menu if B is pressed
 		bra.s	Pause_ResumeMusic
 ; ---------------------------------------------------------------------------
 
@@ -2086,7 +2086,7 @@ Nem_BCT_NewPalIndex:
 Nem_BCT_Loop:
 		move.b	(a0)+,d0	; read next byte
 		cmpi.b	#$80,d0	; sign bit being set signifies a new palette index
-		bhs.s	Nem_BCT_ChkEnd	; a bmi could have been used instead of a compare and bcc
+		bhs.s	Nem_BCT_ChkEnd	; a bmi could have been used instead of a compare and bhs
 		move.b	d0,d1
 		andi.w	#$F,d7	; get palette index
 		andi.w	#$70,d1	; get repeat count for palette index
@@ -4765,7 +4765,7 @@ LoadPalette2_Immediate:
 ; ---------------------------------------------------------------------------
 
 Sega_Screen:
-		move.b	#4,(Game_mode).w
+		move.b	#4,(Game_mode).w	; set to title screen
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -4817,12 +4817,12 @@ Title_Screen:
 		jsr	(Add_To_DMA_Queue).l		; DMA Sega logo+Sonic art data 1 to $0 in VRAM
 		lea	(RAM_start+$8000).w,a1
 		lea	(MapEni_S3TitleSonic1).l,a0
-		move.w	#0,d0
+		move.w	#make_art_tile($000,0,0),d0
 		bsr.w	Eni_Decomp			; Decompress Enigma mappings
 		lea	(RAM_start+$8000).w,a1
 		move.l	#vdpComm(VRAM_Plane_A_Name_Table,VRAM,WRITE),d0
-		moveq	#$28-1,d1
-		moveq	#$1C-1,d2
+		moveq	#40-1,d1
+		moveq	#28-1,d2
 		jsr	(Plane_Map_To_VRAM).l		; Copy screen mappings to VRAM
 		lea	(Pal_TitleSonic1).l,a0
 		lea	(Target_palette).w,a1
@@ -4898,7 +4898,7 @@ Wait_Title:
 loc_379E:
 		move.w	#$C,(Title_anim_frame).w
 		lea	(Normal_palette).w,a1
-		moveq	#$40-1,d1
+		moveq	#bytesToWcnt($80),d1
 
 loc_37AA:
 		move.w	#$EEE,(a1)+
@@ -4921,8 +4921,8 @@ loc_37AA:
 		bsr.w	Eni_Decomp
 		lea	(Level_layout_header).w,a1
 		move.l	#vdpComm(VRAM_Plane_A_Name_Table,VRAM,WRITE),d0
-		moveq	#$28-1,d1
-		moveq	#$1C-1,d2
+		moveq	#40-1,d1
+		moveq	#28-1,d2
 		jsr	(Plane_Map_To_VRAM).l		; Load Sonic mapping frame 14 to $C000 VRAM
 		lea	(Level_layout_header).w,a1
 		lea	(MapEni_S3TitleBg).l,a0
@@ -4930,8 +4930,8 @@ loc_37AA:
 		bsr.w	Eni_Decomp
 		lea	(Level_layout_header).w,a1
 		move.l	#vdpComm(VRAM_Plane_B_Name_Table,VRAM,WRITE),d0
-		moveq	#$28-1,d1
-		moveq	#$1C-1,d2
+		moveq	#40-1,d1
+		moveq	#28-1,d2
 		jsr	(Plane_Map_To_VRAM).l		; Load S3K Title BG to $E000 VRAM
 		move.b	#4,(V_int_routine).w
 		bsr.w	Wait_VSync
@@ -4959,12 +4959,19 @@ loc_384E:
 		move.l	#Obj_TitleTailsPlane,(Dynamic_object_RAM+(object_size*3)).w		; Load all applicable title objects
 		moveq	#0,d0
 		bsr.w	Load_PLC_2
+	if 0
+		; Sonic 2 Beta 4 reveals that these were the original instructions.
+		; The original source code may have been able to produce debug builds with this enabled.
+		move.w	#$101,(Level_select_flag).w
+		move.w	#$101,(Debug_mode_flag).w
+	else
 		nop
 		nop
 		nop
 		nop
 		nop
 		nop
+	endif
 		move.b	#0,(Title_anim_delay).w
 
 loc_38D8:
@@ -5107,7 +5114,7 @@ Iterate_TitleSonicFrame:
 		move.w	(Title_anim_frame).w,d0
 		move.b	SonicFrameIndex(pc,d0.w),d0
 		ext.w	d0
-		bmi.s	loc_3A94
+		bmi.s	loc_3A94	; if negative, do not load anymore frames
 		bsr.w	TitleSonic_LoadFrame
 		addq.w	#1,(Title_anim_frame).w
 
@@ -5215,8 +5222,8 @@ loc_3B6E:
 		move	#$2700,sr
 		lea	(RAM_start+$8000).w,a1
 		move.l	#vdpComm(VRAM_Plane_A_Name_Table,VRAM,WRITE),d0	; to $C000 in VRAM, Nametable A
-		moveq	#$28-1,d1
-		moveq	#$1C-1,d2
+		moveq	#40-1,d1
+		moveq	#28-1,d2
 		jsr	(Plane_Map_To_VRAM).l
 		move	#$2300,sr
 		rts
@@ -5235,8 +5242,8 @@ loc_3BBA:
 		move	#$2700,sr
 		lea	(RAM_start+$8000).w,a1
 		move.l	#vdpComm(VRAM_Plane_B_Name_Table,VRAM,WRITE),d0	; to $E000 in VRAM Nametable B
-		moveq	#$28-1,d1
-		moveq	#$1C-1,d2
+		moveq	#40-1,d1
+		moveq	#28-1,d2
 		jsr	(Plane_Map_To_VRAM).l
 		move	#$2300,sr
 		rts
@@ -5413,7 +5420,7 @@ OldDebugCode:
 		move.w	(Debug_mode_cheat_counter).w,d0
 		adda.w	d0,a1
 		move.b	(Ctrl_1_pressed_title).w,d0
-		andi.b	#$7F,d0
+		andi.b	#button_up_mask|button_down_mask|button_left_mask|button_right_mask|button_A_mask|button_B_mask|button_C_mask,d0
 		beq.s	locret_406C
 		move.b	(Ctrl_1_held_title).w,d0
 		cmp.b	(a1),d0
@@ -5476,7 +5483,7 @@ Obj_TitleSelection_Main:
 		move.b	(Title_screen_option).w,d2
 		move.b	(Ctrl_1_pressed).w,d0
 		or.b	(Ctrl_2_pressed).w,d0
-		btst	#0,d0
+		btst	#button_up,d0
 		beq.s	loc_410A
 		subq.b	#1,d2
 		bcc.s	loc_410A
@@ -5486,7 +5493,7 @@ Obj_TitleSelection_Main:
 		move.b	#1,d2
 
 loc_410A:
-		btst	#1,d0
+		btst	#button_down,d0
 		beq.s	loc_4124
 		addq.b	#1,d2
 		tst.b	(Level_select_flag).w		; See above
@@ -5596,7 +5603,7 @@ S3_Level_Select_Code:
 		move.w	(Level_select_cheat_counter).w,d0
 		adda.w	d0,a1
 		move.b	(Ctrl_1_pressed_title).w,d0
-		andi.b	#$7F,d0
+		andi.b	#button_up_mask|button_down_mask|button_left_mask|button_right_mask|button_A_mask|button_B_mask|button_C_mask,d0
 		beq.s	locret_42C8
 		move.b	(Ctrl_1_held_title).w,d0
 		cmp.b	(a1),d0
@@ -6147,7 +6154,7 @@ loc_4D90:
 
 
 LevelLoad_ActiveCharacter:
-		cmpi.b	#$88,(Game_mode).w
+		cmpi.b	#8+$80,(Game_mode).w
 		beq.s	loc_4DAE
 		tst.w	(Competition_mode).w
 		bne.s	loc_4DAE
@@ -7321,7 +7328,7 @@ LoadSolids:
 OscillateNumInit:
 		lea	(Oscillating_table).w,a1
 		lea	(Osc_Data).l,a2
-		moveq	#(Oscillating_table_end-Oscillating_table)/2-1,d1
+		moveq	#bytesToWcnt(Oscillating_table_end-Oscillating_table),d1
 
 Osc_Loop:
 		move.w	(a2)+,(a1)+
@@ -7713,13 +7720,13 @@ LevelSelect_S2Options:
 		bsr.w	Eni_Decomp
 		lea	(RAM_start).l,a1
 		move.l	#vdpComm(VRAM_Plane_B_Name_Table,VRAM,WRITE),d0
-		moveq	#$28-1,d1
-		moveq	#$1C-1,d2
+		moveq	#40-1,d1
+		moveq	#28-1,d2
 		jsr	(Plane_Map_To_VRAM).l
-		cmpi.b	#$24,(Game_mode).w
-		beq.w	MenuScreen_Options
-		cmpi.b	#$28,(Game_mode).w
-		beq.w	MenuScreen_LevelSelect
+		cmpi.b	#$24,(Game_mode).w	; is the game mode id equal to $24?
+		beq.w	MenuScreen_Options	; if so, then branch to the options menu (leftover from Sonic 2)
+		cmpi.b	#$28,(Game_mode).w	; is the game mode id equal to $28?
+		beq.w	MenuScreen_LevelSelect	; if so, then branch to the level select menu
 		lea	(RAM_start).l,a1
 		lea	(MapEni_S2LevSel2P).l,a0
 		move.w	#make_art_tile($070,0,0),d0
@@ -7793,7 +7800,7 @@ LevelSelect2P_Main:
 		jsr	(AnimateTiles_DoAniPLC).l
 		move.b	(Ctrl_1_pressed).w,d0
 		or.b	(Ctrl_2_pressed).w,d0
-		andi.b	#$80,d0
+		andi.b	#button_start_mask,d0
 		bne.s	LevelSelect2P_PressStart
 		bra.w	LevelSelect2P_Main
 ; ---------------------------------------------------------------------------
@@ -7898,8 +7905,8 @@ loc_6448:
 		dbf	d1,loc_6448
 		lea	(RAM_start).l,a1
 		move.l	(a3)+,d0
-		moveq	#$11-1,d1
-		moveq	#$C-1,d2
+		moveq	#17-1,d1
+		moveq	#12-1,d2
 		bsr.w	Plane_Map_To_VRAM
 		lea	(Pal_S2LevelIcons).l,a1
 		moveq	#0,d0
@@ -7965,8 +7972,8 @@ loc_64E2:
 		dbf	d1,loc_64E2
 		lea	(RAM_start+$198).l,a1
 		move.l	(a3)+,d0
-		moveq	#$11-1,d1
-		moveq	#$C-1,d2
+		moveq	#17-1,d1
+		moveq	#12-1,d2
 		bra.w	Plane_Map_To_VRAM
 ; End of function ClearOld2PLevSelSelection
 
@@ -8001,6 +8008,7 @@ MenuScreenTextToRAM:
 
 ; ---------------------------------------------------------------------------
 
+; leftover from Sonic 2
 MenuScreen_Options:
 		lea	(RAM_start).l,a1
 		lea	(MapEni_S2Options).l,a0
@@ -8091,14 +8099,14 @@ OptionScreen_Controls:
 		move.b	(Options_menu_box).w,d2
 		move.b	(Ctrl_1_pressed).w,d0
 		or.b	(Ctrl_2_pressed).w,d0
-		btst	#0,d0
+		btst	#button_up,d0
 		beq.s	loc_6686
 		subq.b	#1,d2
 		bcc.s	loc_6686
 		move.b	#2,d2
 
 loc_6686:
-		btst	#1,d0
+		btst	#button_down,d0
 		beq.s	loc_6696
 		addq.b	#1,d2
 		cmpi.b	#3,d2
@@ -8111,14 +8119,14 @@ loc_6696:
 		move.b	OptionScreen_Choices(pc,d2.w),d3
 		movea.l	OptionScreen_Choices(pc,d2.w),a1
 		move.w	(a1),d2
-		btst	#2,d0
+		btst	#button_left,d0
 		beq.s	loc_66B2
 		subq.b	#1,d2
 		bcc.s	loc_66B2
 		move.b	d3,d2
 
 loc_66B2:
-		btst	#3,d0
+		btst	#button_right,d0
 		beq.s	loc_66C0
 		addq.b	#1,d2
 		cmp.b	d3,d2
@@ -8126,7 +8134,7 @@ loc_66B2:
 		moveq	#0,d2
 
 loc_66C0:
-		btst	#6,d0
+		btst	#button_A,d0
 		beq.s	loc_66D0
 		addi.b	#$10,d2
 		cmp.b	d3,d2
@@ -8193,7 +8201,7 @@ loc_6754:
 loc_676E:
 		lea	(RAM_start).l,a1
 		move.l	(a3)+,d0
-		moveq	#$16-1,d1
+		moveq	#22-1,d1
 		moveq	#8-1,d2
 		bra.w	Plane_Map_To_VRAM
 ; End of function OptionScreen_DrawSelected
@@ -8235,7 +8243,7 @@ loc_67C4:
 loc_67DE:
 		lea	(RAM_start+$160).l,a1
 		move.l	(a3)+,d0
-		moveq	#$16-1,d1
+		moveq	#22-1,d1
 		moveq	#8-1,d2
 		bra.w	Plane_Map_To_VRAM
 ; End of function OptionScreen_DrawUnselected
@@ -8387,8 +8395,8 @@ MenuScreen_LevelSelect:
 		; Send our built plane map to VRAM
 		lea	(RAM_start).l,a1
 		move.l	#vdpComm(VRAM_Plane_A_Name_Table,VRAM,WRITE),d0
-		moveq	#$28-1,d1
-		moveq	#$1C-1,d2
+		moveq	#40-1,d1
+		moveq	#28-1,d2
 		jsr	(Plane_Map_To_VRAM).l
 
 		moveq	#palette_line_0,d3
@@ -9113,8 +9121,8 @@ loc_7546:
 		bsr.w	Nem_Decomp
 		lea	(MapUnc_SStageLayout).l,a1
 		move.l	#vdpComm(VRAM_Plane_A_Name_Table,VRAM,WRITE),d0
-		moveq	#$28-1,d1
-		moveq	#$1C-1,d2
+		moveq	#40-1,d1
+		moveq	#28-1,d2
 		jsr	(Plane_Map_To_VRAM).l
 		move.l	#vdpComm(tiles_to_bytes($680),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_SStageSphere).l,a0
@@ -9159,8 +9167,8 @@ loc_7546:
 		bsr.w	Eni_Decomp
 		lea	(RAM_start).l,a1
 		move.l	#vdpComm(VRAM_Plane_B_Name_Table,VRAM,WRITE),d0
-		moveq	#$40-1,d1
-		moveq	#$20-1,d2
+		moveq	#64-1,d1
+		moveq	#32-1,d2
 		jsr	(Plane_Map_To_VRAM).l
 		lea	(SStageLayoutPtrs).l,a2
 		tst.b	(Debug_cheat_flag).w
@@ -9938,7 +9946,7 @@ sub_8272:
 		move.b	(Special_stage_jumping).w,2(a1)
 		addq.b	#4,(Pos_table_index+1).w
 		move.b	(Ctrl_2_held).w,d0
-		andi.b	#$7F,d0
+		andi.b	#button_up_mask|button_down_mask|button_left_mask|button_right_mask|button_A_mask|button_B_mask|button_C_mask,d0
 		beq.s	loc_829C
 		move.w	#600,(Tails_CPU_idle_timer).w
 
@@ -10170,7 +10178,7 @@ loc_84FC:
 		bne.w	loc_85D4
 		tst.b	(Special_stage_bumper_lock).w
 		bne.s	loc_8532
-		btst	#0,d1
+		btst	#button_up,d1
 		beq.s	loc_851E
 		move.b	#1,(Special_stage_advancing).w
 
@@ -10186,12 +10194,12 @@ loc_851E:
 loc_8532:
 		tst.b	(Special_stage_turn_lock).w
 		bne.s	loc_8550
-		btst	#2,d1
+		btst	#button_left,d1
 		beq.s	loc_8544
 		move.b	#4,(Special_stage_turning).w
 
 loc_8544:
-		btst	#3,d1
+		btst	#button_right,d1
 		beq.s	loc_8550
 		move.b	#-4,(Special_stage_turning).w
 
@@ -10873,7 +10881,7 @@ loc_8BFE:
 
 Find_SStageCollisionResponseSlot:
 		lea	(SStage_collision_response_list).w,a2
-		move.w	#$20-1,d0
+		move.w	#bytesToXcnt($100,8),d0
 
 loc_8C0E:
 		tst.b	(a2)
@@ -10891,7 +10899,7 @@ locret_8C18:
 
 Touch_SSSprites:
 		lea	(SStage_collision_response_list).w,a0
-		move.w	#$20-1,d7
+		move.w	#bytesToXcnt($100,8),d7
 
 loc_8C22:
 		moveq	#0,d0
@@ -11564,8 +11572,8 @@ loc_95AE:
 		jsr	(Eni_Decomp).l
 		lea	(RAM_start).l,a1
 		move.l	#vdpComm(VRAM_Plane_B_Name_Table,VRAM,WRITE),d0
-		moveq	#$28-1,d1
-		moveq	#$1C-1,d2
+		moveq	#40-1,d1
+		moveq	#28-1,d2
 		jsr	(Plane_Map_To_VRAM).l
 		lea	(ArtKos_S3MenuBG).l,a0				; Decompress source
 		lea	(RAM_start).l,a1				; Decompress destination/Transfer source
@@ -11680,7 +11688,7 @@ loc_9744:
 		beq.s	loc_9776
 		move.w	#-1,(Competition_settings).w
 		clr.b	(Not_ghost_flag).w
-		move.b	#$C0,(Game_mode).w
+		move.b	#$40+$80,(Game_mode).w
 
 loc_975E:
 		lea	($FF7800).l,a1
@@ -11831,8 +11839,8 @@ Competition_LevelSelect:
 		jsr	(Eni_Decomp).l
 		lea	(RAM_start).l,a1
 		move.l	#vdpComm(VRAM_Plane_B_Name_Table,VRAM,WRITE),d0
-		moveq	#$28-1,d1
-		moveq	#$1C-1,d2
+		moveq	#40-1,d1
+		moveq	#28-1,d2
 		jsr	(Plane_Map_To_VRAM).l
 		lea	(MapEni_CompetitionLevBorder).l,a0
 		lea	(RAM_start).l,a1
@@ -12300,15 +12308,15 @@ sub_9F48:
 VRAMDatList_CompetitionLevelSelect:
 		dc.w $19-1
 		dc.l RAM_start+$0000
-		dc.w VRAM_Plane_A_Name_Table+$0098, $1B-1, 9-1
+		dc.w VRAM_Plane_A_Name_Table+$0098,  27-1, 9-1
 		dc.l RAM_start+$0000
-		dc.w VRAM_Plane_A_Name_Table+$0518, $1B-1, 9-1
+		dc.w VRAM_Plane_A_Name_Table+$0518,  27-1, 9-1
 		dc.l RAM_start+$0000
-		dc.w VRAM_Plane_A_Name_Table+$0998, $1B-1, 9-1
+		dc.w VRAM_Plane_A_Name_Table+$0998,  27-1, 9-1
 		dc.l RAM_start+$0000
-		dc.w VRAM_Plane_A_Name_Table+$0E18, $1B-1, 9-1
+		dc.w VRAM_Plane_A_Name_Table+$0E18,  27-1, 9-1
 		dc.l RAM_start+$0000
-		dc.w VRAM_Plane_A_Name_Table+$1298, $1B-1, 9-1
+		dc.w VRAM_Plane_A_Name_Table+$1298,  27-1, 9-1
 		dc.l RAM_start+$1180
 		dc.w VRAM_Plane_A_Name_Table+$011A,   8-1, 6-1
 		dc.l RAM_start+$1120
@@ -12320,25 +12328,25 @@ VRAMDatList_CompetitionLevelSelect:
 		dc.l RAM_start+$10C0
 		dc.w VRAM_Plane_A_Name_Table+$131A,   8-1, 6-1
 		dc.l RAM_start+$2000
-		dc.w VRAM_Plane_A_Name_Table+$01AC,  $F-1, 5-1
+		dc.w VRAM_Plane_A_Name_Table+$01AC,  15-1, 5-1
 		dc.l RAM_start+$2258
-		dc.w VRAM_Plane_A_Name_Table+$062C,  $F-1, 5-1
+		dc.w VRAM_Plane_A_Name_Table+$062C,  15-1, 5-1
 		dc.l RAM_start+$2096
-		dc.w VRAM_Plane_A_Name_Table+$0AAC,  $F-1, 5-1
+		dc.w VRAM_Plane_A_Name_Table+$0AAC,  15-1, 5-1
 		dc.l RAM_start+$21C2
-		dc.w VRAM_Plane_A_Name_Table+$0F2C,  $F-1, 5-1
+		dc.w VRAM_Plane_A_Name_Table+$0F2C,  15-1, 5-1
 		dc.l RAM_start+$212C
-		dc.w VRAM_Plane_A_Name_Table+$13AC,  $F-1, 5-1
+		dc.w VRAM_Plane_A_Name_Table+$13AC,  15-1, 5-1
 		dc.l MapUnc_CompetitionTimeBorder
-		dc.w VRAM_Plane_A_Name_Table+$00CE,  $C-1, 9-1
+		dc.w VRAM_Plane_A_Name_Table+$00CE,  12-1, 9-1
 		dc.l MapUnc_CompetitionTimeBorder
-		dc.w VRAM_Plane_A_Name_Table+$054E,  $C-1, 9-1
+		dc.w VRAM_Plane_A_Name_Table+$054E,  12-1, 9-1
 		dc.l MapUnc_CompetitionTimeBorder
-		dc.w VRAM_Plane_A_Name_Table+$09CE,  $C-1, 9-1
+		dc.w VRAM_Plane_A_Name_Table+$09CE,  12-1, 9-1
 		dc.l MapUnc_CompetitionTimeBorder
-		dc.w VRAM_Plane_A_Name_Table+$0E4E,  $C-1, 9-1
+		dc.w VRAM_Plane_A_Name_Table+$0E4E,  12-1, 9-1
 		dc.l MapUnc_CompetitionTimeBorder
-		dc.w VRAM_Plane_A_Name_Table+$12CE,  $C-1, 9-1
+		dc.w VRAM_Plane_A_Name_Table+$12CE,  12-1, 9-1
 		dc.l MapUnc_CompetitionBESTTIME
 		dc.w VRAM_Plane_A_Name_Table+$01D0,   9-1, 2-1
 		dc.l MapUnc_CompetitionBESTTIME
@@ -12445,8 +12453,8 @@ Competition_PlayerSelect:
 		jsr	(Eni_Decomp).l
 		lea	(RAM_start).l,a1
 		move.l	#vdpComm(VRAM_Plane_B_Name_Table,VRAM,WRITE),d0
-		moveq	#$28-1,d1
-		moveq	#$1C-1,d2
+		moveq	#40-1,d1
+		moveq	#28-1,d2
 		jsr	(Plane_Map_To_VRAM).l
 		lea	(ArtKos_S3MenuBG).l,a0				; Decompress source
 		lea	(RAM_start).l,a1				; Decompress destination/Transfer source
@@ -13172,19 +13180,19 @@ ObjDat_ADA4:
 VRAMDatList_AE06:
 		dc.w 9-1
 		dc.l RAM_start+$0000
-		dc.w VRAM_Plane_B_Name_Table+$000, $28-1, $1C-1
+		dc.w VRAM_Plane_B_Name_Table+$000,  40-1,  28-1
 		dc.l RAM_start+$1000
-		dc.w VRAM_Plane_A_Name_Table+$204,  $F-1,   6-1
+		dc.w VRAM_Plane_A_Name_Table+$204,  15-1,   6-1
 		dc.l RAM_start+$1000
-		dc.w VRAM_Plane_A_Name_Table+$884,  $F-1,   6-1
+		dc.w VRAM_Plane_A_Name_Table+$884,  15-1,   6-1
 		dc.l MapUnc_CompetitionResultsLetters
-		dc.w VRAM_Plane_A_Name_Table+$142,   2-1,  $A-1
+		dc.w VRAM_Plane_A_Name_Table+$142,   2-1,  10-1
 		dc.l MapUnc_CompetitionResultsLetters
-		dc.w VRAM_Plane_A_Name_Table+$7C2,   2-1,  $A-1
+		dc.w VRAM_Plane_A_Name_Table+$7C2,   2-1,  10-1
 		dc.l MapUnc_CompetitionResultsDividers
-		dc.w VRAM_Plane_A_Name_Table+$152,   4-1,  $A-1
+		dc.w VRAM_Plane_A_Name_Table+$152,   4-1,  10-1
 		dc.l MapUnc_CompetitionResultsDividers
-		dc.w VRAM_Plane_A_Name_Table+$7D2,   4-1,  $A-1
+		dc.w VRAM_Plane_A_Name_Table+$7D2,   4-1,  10-1
 		dc.l MapUnc_CompetitionResultsTOTAL
 		dc.w VRAM_Plane_A_Name_Table+$650,   5-1,   2-1
 		dc.l MapUnc_CompetitionResultsTOTAL
@@ -13252,7 +13260,7 @@ TimeAttack_Records:
 		lea	CompTimeAttack_LevelNameMaps(pc),a1
 		movea.l	(a1,d0.w),a1
 		move.l	#vdpComm(VRAM_Plane_A_Name_Table+$826,VRAM,WRITE),d0
-		moveq	#$D-1,d1
+		moveq	#13-1,d1
 		moveq	#2-1,d2
 		jsr	(Plane_Map_To_VRAM).l
 		jsr	sub_B1C6(pc)
@@ -13372,7 +13380,7 @@ loc_B1A6:
 		move.b	(Ctrl_1_pressed).w,d0
 		andi.w	#button_start_mask|button_A_mask|button_C_mask,d0
 		beq.s	loc_B1B8
-		move.b	#$C0,(Game_mode).w
+		move.b	#$40+$80,(Game_mode).w
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -13468,11 +13476,11 @@ ObjDat_B28C:
 VRAMDatList_B2CA:
 		dc.w 9-1
 		dc.l RAM_start+$0000
-		dc.w VRAM_Plane_B_Name_Table+$000, $28-1, $1C-1
+		dc.w VRAM_Plane_B_Name_Table+$000,  40-1,  28-1
 		dc.l MapUnc_CompetitionLAPNum
-		dc.w VRAM_Plane_A_Name_Table+$144,   5-1,  $A-1
+		dc.w VRAM_Plane_A_Name_Table+$144,   5-1,  10-1
 		dc.l MapUnc_CompetitionResultsDividers
-		dc.w VRAM_Plane_A_Name_Table+$152,   4-1,  $A-1
+		dc.w VRAM_Plane_A_Name_Table+$152,   4-1,  10-1
 		dc.l MapUnc_CompetitionResultsTOTAL
 		dc.w VRAM_Plane_A_Name_Table+$650,   5-1,   2-1
 		dc.l MapUnc_CompetitionResultsDividers
@@ -13980,8 +13988,8 @@ SaveScreen:
 		jsr	(Eni_Decomp).l
 		lea	(RAM_start).l,a1
 		move.l	#vdpComm(VRAM_Plane_B_Name_Table,VRAM,WRITE),d0
-		moveq	#$28-1,d1
-		moveq	#$1C-1,d2
+		moveq	#40-1,d1
+		moveq	#28-1,d2
 		jsr	(Plane_Map_To_VRAM).l
 		lea	(MapEni_SaveScreen_Layout).l,a0
 		lea	(RAM_start).l,a1
@@ -14149,7 +14157,7 @@ loc_BB26:
 loc_BB32:
 		move.w	d7,d0
 		bsr.s	sub_BAF8
-		moveq	#$A-1,d1
+		moveq	#10-1,d1
 		moveq	#7-1,d2
 		jsr	(Plane_Map_To_VRAM_2).l
 		addi.w	#$1A,d7
@@ -14580,7 +14588,7 @@ loc_C306:
 		moveq	#0,d2
 		move.w	$36(a0),d1
 		move.b	(Ctrl_1_pressed).w,d0
-		btst	#1,d0
+		btst	#button_down,d0
 		beq.s	loc_C32A
 		moveq	#signextendB(sfx_Switch),d2
 		subq.w	#1,d1
@@ -14597,7 +14605,7 @@ loc_C320:
 ; ---------------------------------------------------------------------------
 
 loc_C32A:
-		btst	#0,d0
+		btst	#button_up,d0
 		beq.s	loc_C344
 		moveq	#signextendB(sfx_Switch),d2
 		addq.w	#1,d1
@@ -19373,7 +19381,7 @@ loc_1190E:
 		blo.s	loc_1195C
 		bsr.w	Player_SlopeResist
 		move.b	(Ctrl_1_held_logical).w,d0
-		andi.b	#$7F,d0
+		andi.b	#button_up_mask|button_down_mask|button_left_mask|button_right_mask|button_A_mask|button_B_mask|button_C_mask,d0
 		beq.s	loc_11976
 		move.b	#$A,anim(a0)
 		cmpi.b	#$AC,anim_frame(a0)
@@ -53355,7 +53363,7 @@ loc_2CE5A:
 		moveq	#0,d1
 		move.b	(Timer_second).w,d1
 		add.w	d1,d0
-		cmpi.w	#600-1,d0
+		cmpi.w	#9+59*10,d0
 		bne.s	loc_2CE80
 		move.w	#10000,(Time_bonus_countdown).w	; If clock is at 9:59, give an automatic 100000 point time bonus
 		bra.s	loc_2CE98
