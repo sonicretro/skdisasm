@@ -5,6 +5,7 @@
 ; ---------------------------------------------------------------------------
 
 ; universally followed object conventions:
+id =			  0 ; longword
 render_flags =		  4 ; bitfield ; refer to SCHG for details
 height_pixels =		  6 ; byte
 width_pixels =		  7 ; byte
@@ -77,6 +78,7 @@ top_solid_bit =		$46 ; byte ; the bit to check for top solidity (either $C or $E
 lrb_solid_bit =		$47 ; byte ; the bit to check for left/right/bottom solidity (either $D or $F)
 ; ---------------------------------------------------------------------------
 ; conventions followed by some/most bosses:
+boss_saved_mus =	$26	; byte ; used primarily by loc_85CA4 which is used by cutscene knuckles, and most of the boss objects
 boss_hitcount2 =	$29
 ; ---------------------------------------------------------------------------
 ; when childsprites are activated (i.e. bit #6 of render_flags set)
@@ -1073,6 +1075,9 @@ ArtTile_ArtKos_Competition_CharSel    = $05C9
 ; Save screen.
 ArtTile_ArtKos_Save_Misc              = $029F
 ArtTile_ArtKos_Save_Extra             = $0454
+
+; Objects.
+ArtTile_ArtNem_AIZMisc2				  = $02E9
 
 ; ---------------------------------------------------------------------------
 ; Universal locations.
