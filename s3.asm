@@ -11903,9 +11903,9 @@ loc_9B96:
 		move.l	(a1)+,(a0)
 		move.l	#Map_CompetitionSelect,mappings(a0)
 		move.w	(a1),x_pos(a0)
-		move.w	(a1)+,$12(a0)
+		move.w	(a1)+,objoff_12(a0)
 		move.w	(a1),y_pos(a0)
-		move.w	(a1)+,$16(a0)
+		move.w	(a1)+,objoff_16(a0)
 		move.w	(a1)+,d1
 		addi.w	#make_art_tile(ArtTile_ArtKos_Competition_LevSel,0,1),d1
 		move.w	d1,art_tile(a0)
@@ -12493,9 +12493,9 @@ loc_A29C:
 		move.l	(a1)+,(a0)
 		move.l	#Map_CompetitionSelect,mappings(a0)
 		move.w	(a1),x_pos(a0)
-		move.w	(a1)+,$12(a0)
+		move.w	(a1)+,objoff_12(a0)
 		move.w	(a1),y_pos(a0)
-		move.w	(a1)+,$16(a0)
+		move.w	(a1)+,objoff_16(a0)
 		move.w	(a1)+,d1
 		addi.w	#make_art_tile(ArtTile_ArtKos_Competition_LevSel,0,1),d1
 		move.w	d1,art_tile(a0)
@@ -12884,9 +12884,9 @@ loc_AAF4:
 		move.l	(a1)+,(a0)
 		move.l	#Map_CompetitionSelect,mappings(a0)
 		move.w	(a1),x_pos(a0)
-		move.w	(a1)+,$12(a0)
+		move.w	(a1)+,objoff_12(a0)
 		move.w	(a1),y_pos(a0)
-		move.w	(a1)+,$16(a0)
+		move.w	(a1)+,objoff_16(a0)
 		move.w	(a1)+,d1
 		addi.w	#make_art_tile(ArtTile_ArtKos_Competition_LevSel,0,1),d1
 		move.w	d1,art_tile(a0)
@@ -13330,9 +13330,9 @@ loc_B0FC:
 		move.l	(a1)+,(a0)
 		move.l	#Map_CompetitionSelect,mappings(a0)
 		move.w	(a1),x_pos(a0)
-		move.w	(a1)+,$12(a0)
+		move.w	(a1)+,objoff_12(a0)
 		move.w	(a1),y_pos(a0)
-		move.w	(a1)+,$16(a0)
+		move.w	(a1)+,objoff_16(a0)
 		move.w	(a1)+,d1
 		addi.w	#make_art_tile($29F,0,1),d1
 		move.w	d1,art_tile(a0)
@@ -36225,7 +36225,7 @@ Obj_AIZLRZEMZRock:
 		cmpi.w	#1,(Current_zone_and_act).w
 		bne.s	loc_1D6B6
 		move.l	#Map_AIZRock2,mappings(a0)
-		move.w	#make_art_tile($2E9,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0),art_tile(a0)
 
 loc_1D6B6:
 		cmpi.w	#$1200,(Current_zone_and_act).w
@@ -38075,7 +38075,7 @@ loc_2018C:
 		move.w	#$800,x_vel(a0)
 		move.w	#$200,y_vel(a0)
 		move.l	#Map_AnimatedStillSprites,mappings(a0)
-		move.w	#make_art_tile($2E9,3,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,3,0),art_tile(a0)
 		move.b	#8,width_pixels(a0)
 		move.b	#$C,height_pixels(a0)
 		move.b	#0,mapping_frame(a0)
@@ -42721,7 +42721,7 @@ Platform_Rising:
 		andi.b	#standing_mask,d0
 		beq.s	locret_240F6
 		move.b	#1,$3C(a0)
-		move.b	#$C,$1E(a0)
+		move.b	#$C,y_radius(a0)
 
 locret_240F6:
 		rts
@@ -43265,7 +43265,7 @@ Obj_LBZUnusedElevator:
 		move.b	#$30,width_pixels(a0)
 		move.b	#8,height_pixels(a0)
 		move.w	y_pos(a0),$32(a0)
-		move.w	#$8000,$16(a0)
+		move.w	#$8000,objoff_16(a0)
 		moveq	#0,d0
 		move.b	subtype(a0),d0
 		lsr.w	#4,d0
@@ -43315,7 +43315,7 @@ loc_247C6:
 		lea	(Level_trigger_array).w,a3
 		tst.b	(a3,d0.w)
 		beq.s	locret_247E2
-		move.w	#$8000,$16(a0)
+		move.w	#$8000,objoff_16(a0)
 		addq.w	#2,$36(a0)
 
 locret_247E2:
@@ -43347,7 +43347,7 @@ loc_24810:
 		lea	(Level_trigger_array).w,a3
 		tst.b	(a3,d0.w)
 		bne.s	locret_2482C
-		move.w	#$8000,$16(a0)
+		move.w	#$8000,objoff_16(a0)
 		addq.w	#2,$36(a0)
 
 locret_2482C:
@@ -44945,7 +44945,7 @@ LBZCupElev_Fling2:
 		bhi.s	loc_25E62
 		move.w	#$2AE0,$30(a0)
 		move.w	#$200,x_vel(a0)
-		move.w	#0,$1A(a0)
+		move.w	#0,y_vel(a0)
 		bra.s	loc_25E8E
 ; ---------------------------------------------------------------------------
 
@@ -49499,7 +49499,7 @@ loc_29350:
 		lsl.w	d2,d1
 		move.w	d1,$34(a0)
 		move.l	#Map_AIZDisappearingFloor,mappings(a0)
-		move.w	#make_art_tile($2E9,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0),art_tile(a0)	; immediately gets overwritten?
 		move.w	#make_art_tile($001,2,0),art_tile(a0)
 		move.b	#$20,width_pixels(a0)
 		move.b	#$18,height_pixels(a0)
@@ -50037,7 +50037,7 @@ Map_LBZCorkFloor:
 
 Obj_AIZFlippingBridge:
 		move.l	#Map_AIZFlippingBridge,mappings(a0)
-		move.w	#make_art_tile($2E9,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0),art_tile(a0)
 		move.b	#$80,width_pixels(a0)
 		move.b	#4,height_pixels(a0)
 		move.b	#4,render_flags(a0)
@@ -50068,7 +50068,7 @@ loc_29FEA:
 		bne.w	loc_2A084
 		move.l	#loc_2A0AC,(a1)
 		move.l	#Map_AIZFlippingBridge,mappings(a1)
-		move.w	#make_art_tile($2E9,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0),art_tile(a1)
 		move.b	#4,render_flags(a1)
 		move.b	#$80,width_pixels(a1)
 		move.b	#$40,height_pixels(a1)
@@ -50367,16 +50367,16 @@ Obj_AIZCollapsingLogBridge:
 		move.b	d0,$35(a0)
 		move.b	#8,$37(a0)
 		move.l	#Map_AIZCollapsingLogBridge,mappings(a0)
-		move.w	#make_art_tile($2E9,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0),art_tile(a0)
 		move.b	#$5A,width_pixels(a0)
 		move.b	#8,height_pixels(a0)
-		move.b	#4,render_flags(a0)
+		move.b	#4,render_flags(a0)	; oddly, this is not an ori like the child sprites, however it doesn't matter in normal gameplay as this object only faces one direction
 		move.w	#$200,priority(a0)
 		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2A466
 		move.l	#loc_2A57C,(a1)
 		move.l	#Map_AIZCollapsingLogBridge,mappings(a1)
-		move.w	#make_art_tile($2E9,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0),art_tile(a1)
 		ori.b	#4,render_flags(a1)
 		move.b	#$5A,width_pixels(a1)
 		move.b	#8,height_pixels(a1)
@@ -50414,16 +50414,16 @@ loc_2A470:
 		move.b	d0,$35(a0)
 		move.b	#8,$37(a0)
 		move.l	#Map_AIZDrawBridgeFire,mappings(a0)
-		move.w	#make_art_tile($2E9,2,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,1),art_tile(a0)
 		move.b	#$60,width_pixels(a0)
 		move.b	#8,height_pixels(a0)
-		move.b	#4,render_flags(a0)
+		move.b	#4,render_flags(a0)	; oddly, this is not an ori like the child sprites, however it doesn't matter in normal gameplay as this object only faces one direction
 		move.w	#$200,priority(a0)
 		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	loc_2A52E
 		move.l	#loc_2A57C,(a1)
 		move.l	#Map_AIZDrawBridgeFire,mappings(a1)
-		move.w	#make_art_tile($2E9,2,1),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,1),art_tile(a1)
 		ori.b	#4,render_flags(a1)
 		move.b	#$60,width_pixels(a1)
 		move.b	#8,height_pixels(a1)
@@ -50658,7 +50658,7 @@ Map_AIZDrawBridgeFire:
 
 Obj_AIZDrawBridge:
 		move.l	#Map_AIZDrawBridge,mappings(a0)
-		move.w	#make_art_tile($2E9,2,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,1),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$280,priority(a0)
 		move.b	#8,width_pixels(a0)
@@ -51095,7 +51095,7 @@ loc_2AC9C:
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
 		move.l	#Map_AIZFallingLog2,mappings(a1)
-		move.w	#make_art_tile($2E9,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0),art_tile(a1)
 		tst.b	(Current_act).w
 		bne.s	loc_2ACEA
 		move.l	#Map_AIZFallingLog,mappings(a1)
@@ -51113,7 +51113,7 @@ loc_2ACEA:
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
 		move.l	#Map_AIZFallingLogSplash2,mappings(a1)
-		move.w	#make_art_tile($2E9,3,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,3,0),art_tile(a1)
 		tst.b	(Current_act).w
 		bne.s	loc_2AD42
 		move.l	#Map_AIZFallingLogSplash,mappings(a1)
@@ -51215,7 +51215,7 @@ Map_AIZFallingLogSplash:
 
 Obj_AIZSpikedLog:
 		move.l	#Map_AIZSpikedLog,mappings(a0)
-		move.w	#make_art_tile($2E9,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0),art_tile(a0)
 		move.b	#$18,width_pixels(a0)
 		move.b	#8,height_pixels(a0)
 		move.b	#4,render_flags(a0)
@@ -51397,13 +51397,13 @@ loc_2B314:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 word_2B31A:
-		dc.w make_art_tile($2E9,2,0)	; 0 AIZ2 Bridge Post
+		dc.w make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0)	; 0 AIZ2 Bridge Post
 		dc.w   $300
 		dc.b   $C,  $C
-		dc.w make_art_tile($2E9,2,0)	; 1 AIZ2 Large Rope Twist Tie
+		dc.w make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0)	; 1 AIZ2 Large Rope Twist Tie
 		dc.w   $300
 		dc.b  $10,   8
-		dc.w make_art_tile($2E9,2,0)	; 2 AIZ2 Rope Twist tie
+		dc.w make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0)	; 2 AIZ2 Rope Twist tie
 		dc.w   $300
 		dc.b    8,   4
 		dc.w make_art_tile($001,2,0)	; 3 AIZ2 Tie Top Sprite
@@ -51412,7 +51412,7 @@ word_2B31A:
 		dc.w make_art_tile($001,3,0)	; 4 AIZ2 Waterfall sprite
 		dc.w   $300
 		dc.b    8, $20
-		dc.w make_art_tile($2E9,2,1)	; 5 AIZ2 Bridge Post (Different Palette)
+		dc.w make_art_tile(ArtTile_ArtNem_AIZMisc2,2,1)	; 5 AIZ2 Bridge Post (Different Palette)
 		dc.w   $300
 		dc.b   $C,  $C
 		dc.w make_art_tile($001,2,1)	; 6 128x128 HCZ Waterfall
@@ -51496,10 +51496,10 @@ loc_2B6A4:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 word_2B6B6:
-		dc.w make_art_tile($2E9,3,0)
+		dc.w make_art_tile(ArtTile_ArtNem_AIZMisc2,3,0)
 		dc.w   $300
 		dc.b    8,  $C
-		dc.w make_art_tile($2E9,3,0)
+		dc.w make_art_tile(ArtTile_ArtNem_AIZMisc2,3,0)
 		dc.w   $300
 		dc.b    8,  $C
 Ani_AnimatedStillSprites:
@@ -97998,7 +97998,7 @@ loc_50574:
 ; ---------------------------------------------------------------------------
 
 loc_5057E:
-		addi.w	#$20,$1A(a0)
+		addi.w	#$20,y_vel(a0)
 		jsr	(MoveSprite2).l
 		jsr	Obj_Wait(pc)
 		jmp	(Draw_Sprite).l
@@ -101122,7 +101122,7 @@ AfterBoss_LBZ:
 ; ---------------------------------------------------------------------------
 PLC_AfterMiniboss_AIZ: plrlistheader
 		plreq ArtTile_Monitors, ArtNem_Monitors
-		plreq $2E9, ArtNem_AIZMisc2
+		plreq ArtTile_ArtNem_AIZMisc2, ArtNem_AIZMisc2
 		plreq $41B, ArtNem_AIZSwingVine
 		plreq $438, ArtNem_AIZBackgroundTree
 		plreq $45C, ArtNem_Bubbles
@@ -115801,7 +115801,7 @@ PLC_0B: plrlistheader
 PLC_0B_End
 
 PLC_0C_0D: plrlistheader
-		plreq $2E9, ArtNem_AIZMisc2
+		plreq ArtTile_ArtNem_AIZMisc2, ArtNem_AIZMisc2
 		plreq $41B, ArtNem_AIZSwingVine
 		plreq $438, ArtNem_AIZBackgroundTree
 		plreq $45C, ArtNem_Bubbles
