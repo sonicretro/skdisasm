@@ -5,7 +5,7 @@
 ; ---------------------------------------------------------------------------
 
 ; universally followed object conventions:
-id =			  0 ; longword
+code =			  0 ; longword
 render_flags =		  4 ; bitfield ; refer to SCHG for details
 height_pixels =		  6 ; byte
 width_pixels =		  7 ; byte
