@@ -37702,7 +37702,7 @@ BreakObjectToPieces_Loop:
 		addq.w	#6,a3	; add to mappings
 
 BreakObjectToPieces_InitObject:
-		move.l	d4,(a1)	; get object pointer (in Sonic 1 and 2, this copies the object ID)
+		move.l	d4,code(a1)	; get object pointer (in Sonic 1 and 2, this copies the object ID)
 		move.l	a3,mappings(a1)	; get mappings pointer
 		move.b	d5,render_flags(a1)	; get render flags
 		move.w	x_pos(a0),x_pos(a1)
