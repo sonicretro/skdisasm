@@ -1,6 +1,7 @@
-		dc.w word_2C74E-Map_LRZButton
-		dc.w word_2C75C-Map_LRZButton
-		dc.w word_2C76A-Map_LRZButton
+Map_LRZButton_:
+		dc.w word_2C74E-Map_LRZButton_
+		dc.w word_2C75C-Map_LRZButton_
+		dc.w word_2C76A-Map_LRZButton_
 word_2C74E:	dc.w 2			; DATA XREF: ROM:0002C748o
 		dc.b  $F6,   5,	  0,   0, $FF, $F0
 		dc.b  $F6,   5,	  8,   0,   0,	 0

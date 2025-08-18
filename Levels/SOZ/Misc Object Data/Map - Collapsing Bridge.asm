@@ -1,6 +1,7 @@
-		dc.w word_21280-Map_SOZCollapsingBridge
-		dc.w word_212A0-Map_SOZCollapsingBridge
-		dc.w word_212DE-Map_SOZCollapsingBridge
+Map_SOZCollapsingBridge_:
+		dc.w word_21280-Map_SOZCollapsingBridge_
+		dc.w word_212A0-Map_SOZCollapsingBridge_
+		dc.w word_212DE-Map_SOZCollapsingBridge_
 word_21280:	dc.w 5			; DATA XREF: ROM:0002127Ao
 		dc.b  $F0,  $D,	$10,   8, $FF, $E0
 		dc.b  $F0,  $D,	$10, $10,   0,	 0

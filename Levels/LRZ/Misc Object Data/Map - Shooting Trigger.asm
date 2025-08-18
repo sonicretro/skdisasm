@@ -1,5 +1,6 @@
-		dc.w word_42F0A-Map_LRZShootingTrigger
-		dc.w word_42F12-Map_LRZShootingTrigger
+Map_LRZShootingTrigger_:
+		dc.w word_42F0A-Map_LRZShootingTrigger_
+		dc.w word_42F12-Map_LRZShootingTrigger_
 word_42F0A:	dc.w 1			; DATA XREF: ROM:00042F06o
 		dc.b  $F4,  $A,	  0, $10, $FF, $F4
 word_42F12:	dc.w 1			; DATA XREF: ROM:00042F06o

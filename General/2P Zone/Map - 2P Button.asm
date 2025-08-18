@@ -1,6 +1,7 @@
-Map_22BD7A:	dc.w Frame_22BD80-Map_22BD7A
-		dc.w Frame_22BD88-Map_22BD7A
-		dc.w Frame_22BD90-Map_22BD7A
+Map_2PButton_:
+		dc.w Frame_22BD80-Map_2PButton_
+		dc.w Frame_22BD88-Map_2PButton_
+		dc.w Frame_22BD90-Map_2PButton_
 Frame_22BD80:	dc.w 1
 		dc.b $F8,  8,  0, $D,$FF,$F4
 Frame_22BD88:	dc.w 1

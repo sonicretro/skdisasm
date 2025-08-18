@@ -1,8 +1,8 @@
 Map_CNZCylinder_:
-		dc.w Frame_2317B8-Map_CNZCylinder
-		dc.w Frame_2317EA-Map_CNZCylinder
-		dc.w Frame_23181C-Map_CNZCylinder
-		dc.w Frame_23184E-Map_CNZCylinder
+		dc.w Frame_2317B8-Map_CNZCylinder_
+		dc.w Frame_2317EA-Map_CNZCylinder_
+		dc.w Frame_23181C-Map_CNZCylinder_
+		dc.w Frame_23184E-Map_CNZCylinder_
 Frame_2317B8:	dc.w 8
 		dc.b  $E0,  $D,   0,   0, $FF, $E0
 		dc.b  $E0,  $D,   0,   8,   0,   0

@@ -1,8 +1,9 @@
-		dc.w word_49A76-Map_DEZGravityPuzzle
-		dc.w word_49A9C-Map_DEZGravityPuzzle
-		dc.w word_49AA4-Map_DEZGravityPuzzle
-		dc.w word_49AAC-Map_DEZGravityPuzzle
-		dc.w word_49AAC-Map_DEZGravityPuzzle
+Map_DEZGravityPuzzle_:
+		dc.w word_49A76-Map_DEZGravityPuzzle_
+		dc.w word_49A9C-Map_DEZGravityPuzzle_
+		dc.w word_49AA4-Map_DEZGravityPuzzle_
+		dc.w word_49AAC-Map_DEZGravityPuzzle_
+		dc.w word_49AAC-Map_DEZGravityPuzzle_
 word_49A76:	dc.w 6			; DATA XREF: ROM:00049A6Co
 		dc.b  $D0,  $F,	  0,   0, $FF, $E0
 		dc.b  $D0,  $F,	  8,   0,   0,	 0

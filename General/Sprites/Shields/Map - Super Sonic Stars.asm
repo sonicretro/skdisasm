@@ -6,10 +6,11 @@ Map_SuperSonic_Stars_:
 		dc.w word_192FC-Map_SuperSonic_Stars_
 		dc.w word_192F4-Map_SuperSonic_Stars_
 Map_SuperSonic_Stars2:
-		dc.w word_19330-Map_SuperSonic_Stars2
-		dc.w word_19338-Map_SuperSonic_Stars2
-		dc.w word_19330-Map_SuperSonic_Stars2
-		dc.w word_19340-Map_SuperSonic_Stars2
+Map_SuperSonic_Stars2_:
+		dc.w word_19330-Map_SuperSonic_Stars2_
+		dc.w word_19338-Map_SuperSonic_Stars2_
+		dc.w word_19330-Map_SuperSonic_Stars2_
+		dc.w word_19340-Map_SuperSonic_Stars2_
 word_192F2:	dc.w 0
 word_192F4:	dc.w 1
 		dc.b  $F8,   5,   0,   0, $FF, $F8

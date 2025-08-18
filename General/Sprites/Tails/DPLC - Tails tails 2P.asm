@@ -1,19 +1,20 @@
-PLC_2A024C:	dc.w Frame_2A026C-PLC_2A024C ; ...
-		dc.w Frame_2A026E-PLC_2A024C
-		dc.w Frame_2A0272-PLC_2A024C
-		dc.w Frame_2A0276-PLC_2A024C
-		dc.w Frame_2A027A-PLC_2A024C
-		dc.w Frame_2A027E-PLC_2A024C
-		dc.w Frame_2A0282-PLC_2A024C
-		dc.w Frame_2A0286-PLC_2A024C
-		dc.w Frame_2A028A-PLC_2A024C
-		dc.w Frame_2A028E-PLC_2A024C
-		dc.w Frame_2A0292-PLC_2A024C
-		dc.w Frame_2A0296-PLC_2A024C
-		dc.w Frame_2A029A-PLC_2A024C
-		dc.w Frame_2A029E-PLC_2A024C
-		dc.w Frame_2A02A2-PLC_2A024C
-		dc.w Frame_2A02A6-PLC_2A024C
+DPLC_Tails2P_Tail_:
+		dc.w Frame_2A026C-DPLC_Tails2P_Tail_ ; ...
+		dc.w Frame_2A026E-DPLC_Tails2P_Tail_
+		dc.w Frame_2A0272-DPLC_Tails2P_Tail_
+		dc.w Frame_2A0276-DPLC_Tails2P_Tail_
+		dc.w Frame_2A027A-DPLC_Tails2P_Tail_
+		dc.w Frame_2A027E-DPLC_Tails2P_Tail_
+		dc.w Frame_2A0282-DPLC_Tails2P_Tail_
+		dc.w Frame_2A0286-DPLC_Tails2P_Tail_
+		dc.w Frame_2A028A-DPLC_Tails2P_Tail_
+		dc.w Frame_2A028E-DPLC_Tails2P_Tail_
+		dc.w Frame_2A0292-DPLC_Tails2P_Tail_
+		dc.w Frame_2A0296-DPLC_Tails2P_Tail_
+		dc.w Frame_2A029A-DPLC_Tails2P_Tail_
+		dc.w Frame_2A029E-DPLC_Tails2P_Tail_
+		dc.w Frame_2A02A2-DPLC_Tails2P_Tail_
+		dc.w Frame_2A02A6-DPLC_Tails2P_Tail_
 Frame_2A026C:	dc.w 0
 Frame_2A026E:	dc.w 1
 		dc.w $3000
