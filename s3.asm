@@ -14202,6 +14202,7 @@ loc_BB9E:
 		dbf	d3,loc_BB58
 		rts
 ; ---------------------------------------------------------------------------
+;byte_BBAE
 DataSelectS3_ZoneNums:
 		dc.b 1
 		dc.b 2
@@ -15084,14 +15085,17 @@ locret_C7BC:
     charset 'A','Z',$1E ; Add character set for letters
     charset '#',$FF    ; Add character that marks the end of text
     charset ' ',0    ; Add character for displaying nothing...?
-
+;byte_C7BE
 NoSave_Delete_Text:
 		dc.b  "NO SAVE", $FF 
 		dc.b  "DELETE", $FF
+;byte_C7CD
 BlankSave_Text:
 		dc.b  "     ", $FF
+;byte_C7D3
 D_S_Zone_Text:
 		dc.b  "ZONE ", $FF
+;byte_C7D9
 Clear_Text:
 		dc.b  "CLEAR", $FF
 		even
