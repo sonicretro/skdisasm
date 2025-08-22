@@ -14000,7 +14000,7 @@ SaveScreen:
 		move.l	#vdpComm(tiles_to_bytes($562),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_S22POptions).l,a0
 		jsr	(Nem_Decomp).l
-		lea	byte_C7BE(pc),a1
+		lea	NoSave_Delete_Text(pc),a1
 		move.w	#VRAM_Plane_A_Name_Table+$D06,d0
 		jsr	sub_C794(pc)
 		move.w	#VRAM_Plane_A_Name_Table+$DB8,d0
@@ -14174,18 +14174,18 @@ loc_BB58:
 		jsr	sub_BAF8(pc)
 		move.l	d0,VDP_control_port-VDP_data_port(a6)
 		move.w	#make_art_tile($2B1,0,1),(a6)
-		lea	byte_C7CD(pc),a1
+		lea	BlankSave_Text(pc),a1
 		tst.b	(a0)
 		bmi.s	loc_BB98
-		lea	byte_C7D9(pc),a1
+		lea	Clear_Text(pc),a1
 		cmpi.w	#6,objoff_36(a3)
 		bhi.s	loc_BB98
-		lea	byte_C7D3(pc),a1
+		lea	D_S_Zone_Text(pc),a1
 		move.w	d7,d0
 		subq.w	#2,d0
 		jsr	sub_C794(pc)
 		move.w	objoff_36(a3),d0
-		move.b	byte_BBAE(pc,d0.w),d0
+		move.b	DataSelectS3_ZoneNums(pc,d0.w),d0
 		addi.w	#make_art_tile($562,1,1),d0
 		move.w	d0,(a6)
 		bra.s	loc_BB9E
@@ -14202,7 +14202,8 @@ loc_BB9E:
 		dbf	d3,loc_BB58
 		rts
 ; ---------------------------------------------------------------------------
-byte_BBAE:
+;byte_BBAE
+DataSelectS3_ZoneNums:
 		dc.b 1
 		dc.b 2
 		dc.b 3
@@ -15075,15 +15076,31 @@ locret_C7BC:
 ; End of function sub_C794
 
 ; ---------------------------------------------------------------------------
-byte_C7BE:
-		dc.b  $2B, $2C,   0, $30, $1E, $33, $22, $FF, $21, $22, $29, $22, $31, $22, $FF
-byte_C7CD:
-		dc.b    0,   0,   0,   0,   0, $FF
-byte_C7D3:
-		dc.b  $37, $2C, $2B, $22,   0, $FF
-byte_C7D9:
-		dc.b  $20, $29, $22, $1E, $2F, $FF
+
+    charset '0','9',$10    ; Add character set for numbers
+    charset '*',$1A    ; Add character for star
+    charset '@',$1B ; Add character for copyright symbol
+    charset ':',$1C ; Add character for colon
+    charset '.',$1D ; Add character for period
+    charset 'A','Z',$1E ; Add character set for letters
+    charset '#',$FF    ; Add character that marks the end of text
+    charset ' ',0    ; Add character for displaying nothing...?
+;byte_C7BE
+NoSave_Delete_Text:
+		dc.b  "NO SAVE", $FF 
+		dc.b  "DELETE", $FF
+;byte_C7CD
+BlankSave_Text:
+		dc.b  "     ", $FF
+;byte_C7D3
+D_S_Zone_Text:
+		dc.b  "ZONE ", $FF
+;byte_C7D9
+Clear_Text:
+		dc.b  "CLEAR", $FF
 		even
+		charset
+
 ArtKos_SaveScreenS3Zone:
 		binclude "General/Save Menu/Kosinski Art/Zone Art.bin"
 		even
