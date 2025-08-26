@@ -4942,13 +4942,13 @@ loc_37AA:
 loc_384E:
 		move.l	(a0)+,(a1)+
 		dbf	d0,loc_384E
-		move.l	#vdpComm(tiles_to_bytes($500),VRAM,WRITE),(VDP_control_port).l	; to VRAM $A000
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Title_Banner),VRAM,WRITE),(VDP_control_port).l	; to VRAM $A000
 		lea	(ArtNem_Title_S3Banner).l,a0
 		bsr.w	Nem_Decomp
-		move.l	#vdpComm(tiles_to_bytes($680),VRAM,WRITE),(VDP_control_port).l	; to VRAM $D000
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Title_Menu),VRAM,WRITE),(VDP_control_port).l	; to VRAM $D000
 		lea	(ArtNem_TitleScreenText).l,a0
 		bsr.w	Nem_Decomp
-		move.l	#vdpComm(tiles_to_bytes($400),VRAM,WRITE),(VDP_control_port).l	; to VRAM $8000
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Title_Misc),VRAM,WRITE),(VDP_control_port).l	; to VRAM $8000
 		lea	(ArtNem_Title_SonicSprites).l,a0
 		bsr.w	Nem_Decomp
 		move.l	#Obj_TitleBanner,(Player_1).w
@@ -5199,7 +5199,7 @@ loc_3B46:
 		move.w	#0,d2
 		tst.b	(Title_anim_buffer).w		; FFFFBC toggles on and off so that each animation frame could alternate locations for a sort of makeshift double-buffering
 		beq.s	loc_3B5A
-		move.w	#tiles_to_bytes($300),d2
+		move.w	#tiles_to_bytes(ArtTile_Title_Buffer),d2
 
 loc_3B5A:
 		andi.l	#$FFFFFF,d1
@@ -5232,7 +5232,7 @@ loc_3B6E:
 loc_3BA6:
 		lea	(RAM_start+$8000).w,a1			; Buffer 2
 		movea.l	(a2)+,a0				; Enigma Mappings
-		move.w	#make_art_tile($300,0,0),d0
+		move.w	#make_art_tile(ArtTile_Title_Buffer,0,0),d0
 		cmpi.w	#7,d7
 		bhs.s	loc_3BBA
 		move.w	#make_art_tile($000,0,0),d0
@@ -5336,7 +5336,7 @@ Pal_TitleSonicD:
 
 Obj_TitleBanner:
 		move.l	#Map_S3TitleBanner,mappings(a0)
-		move.w	#make_art_tile($500,3,1),art_tile(a0)	; Origin at $A000
+		move.w	#make_art_tile(ArtTile_Title_Banner,3,1),art_tile(a0)	; Origin at $A000
 		move.w	#$80,priority(a0)
 		move.b	#$80,width_pixels(a0)
 		move.b	#$40,height_pixels(a0)
@@ -5401,7 +5401,7 @@ Pal_TitleWaterRot:
 
 Obj_TitleTM:
 		move.l	#Map_S3TitleBanner,mappings(a0)
-		move.w	#make_art_tile($500,3,1),art_tile(a0)	; Start at $A000
+		move.w	#make_art_tile(ArtTile_Title_Banner,3,1),art_tile(a0)	; Start at $A000
 		move.w	#$188,x_pos(a0)
 		move.w	#$108,y_pos(a0)
 		move.w	#$80,priority(a0)
@@ -5456,7 +5456,7 @@ OldDebugCodeDat:
 
 Obj_TitleCopyright:
 		move.l	#Map_TitleScreenText,mappings(a0)
-		move.w	#make_art_tile($680,3,1),art_tile(a0)	; Start at $D000 VRAM
+		move.w	#make_art_tile(ArtTile_Title_Menu,3,1),art_tile(a0)	; Start at $D000 VRAM
 		move.w	#$158,x_pos(a0)
 		move.w	#$14C,y_pos(a0)
 		move.w	#$80,priority(a0)
@@ -5473,7 +5473,7 @@ Obj_TitleSelection:
 		move.w	#$F0,x_pos(a0)
 		move.w	#$140,y_pos(a0)
 		move.l	#Map_TitleScreenText,mappings(a0)
-		move.w	#make_art_tile($680,2,1),art_tile(a0)	; Start at $D000 VRAM
+		move.w	#make_art_tile(ArtTile_Title_Menu,2,1),art_tile(a0)	; Start at $D000 VRAM
 		andi.b	#1,(Title_screen_option).w
 		move.b	(Title_screen_option).w,mapping_frame(a0)
 		move.l	#Obj_TitleSelection_Main,(a0)
@@ -5519,7 +5519,7 @@ loc_413A:
 
 Obj_TitleSonicFinger:
 		move.l	#Map_TitleSonicAnim,mappings(a0)
-		move.w	#make_art_tile($400,1,1),art_tile(a0)	; Start at $8000 VRAM
+		move.w	#make_art_tile(ArtTile_Title_Misc,1,1),art_tile(a0)	; Start at $8000 VRAM
 		move.w	#$148,x_pos(a0)
 		move.w	#$DC,y_pos(a0)
 		move.w	#$180,priority(a0)
@@ -5538,7 +5538,7 @@ Ani_TitleSonicFinger:
 
 Obj_TitleSonicWink:
 		move.l	#Map_TitleSonicAnim,mappings(a0)
-		move.w	#make_art_tile($400,1,1),art_tile(a0)	; Start at $8000 VRAM
+		move.w	#make_art_tile(ArtTile_Title_Misc,1,1),art_tile(a0)	; Start at $8000 VRAM
 		move.w	#$F8,x_pos(a0)
 		move.w	#$C8,y_pos(a0)
 		move.w	#$180,priority(a0)
@@ -5557,7 +5557,7 @@ Ani_TitleSonicWink:
 
 Obj_TitleTailsPlane:
 		move.l	#Map_TitleTailsPlane,mappings(a0)
-		move.w	#make_art_tile($400,3,0),art_tile(a0)	; Start at $8000 VRAM
+		move.w	#make_art_tile(ArtTile_Title_Misc,3,0),art_tile(a0)	; Start at $8000 VRAM
 		move.w	#0,x_pos(a0)
 		move.w	#$C0,y_pos(a0)
 		move.w	#$380,priority(a0)
@@ -7708,10 +7708,10 @@ LevelSelect_S2Options:
 		move.l	#vdpComm(tiles_to_bytes($010),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_S22POptions).l,a0
 		bsr.w	Nem_Decomp
-		move.l	#vdpComm(tiles_to_bytes($070),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_S2MenuBox),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_S2MenuBox).l,a0
 		bsr.w	Nem_Decomp
-		move.l	#vdpComm(tiles_to_bytes($090),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_S2LevelSelectPics),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_S2LevelSelectPics).l,a0
 		bsr.w	Nem_Decomp
 		lea	(RAM_start).l,a1
@@ -7729,21 +7729,21 @@ LevelSelect_S2Options:
 		beq.w	MenuScreen_LevelSelect	; if so, then branch to the level select menu
 		lea	(RAM_start).l,a1
 		lea	(MapEni_S2LevSel2P).l,a0
-		move.w	#make_art_tile($070,0,0),d0
+		move.w	#make_art_tile(ArtTile_S2MenuBox,0,0),d0
 		bsr.w	Eni_Decomp
 		lea	(RAM_start+$198).l,a1
 		lea	(MapEni_S2LevSel2P).l,a0
-		move.w	#make_art_tile($070,1,0),d0
+		move.w	#make_art_tile(ArtTile_S2MenuBox,1,0),d0
 		bsr.w	Eni_Decomp
 		lea	(RAM_start+$330).l,a1
 		lea	(MapEni_S2LevSelIcon).l,a0
-		move.w	#make_art_tile($090,0,0),d0
+		move.w	#make_art_tile(ArtTile_S2LevelSelectPics,0,0),d0
 		bsr.w	Eni_Decomp
 		lea	(RAM_start+$498).l,a2
 		moveq	#$10-1,d1
 
 loc_626C:
-		move.w	#make_art_tile($07B,1,0),(a2)+
+		move.w	#make_art_tile(ArtTile_S2MenuBox+$B,1,0),(a2)+
 		dbf	d1,loc_626C
 		bsr.w	Update2PLevSelSelection
 		addq.b	#1,(Current_zone_2P).w
@@ -8012,11 +8012,11 @@ MenuScreenTextToRAM:
 MenuScreen_Options:
 		lea	(RAM_start).l,a1
 		lea	(MapEni_S2Options).l,a0
-		move.w	#make_art_tile($070,0,0),d0
+		move.w	#make_art_tile(ArtTile_S2MenuBox,0,0),d0
 		bsr.w	Eni_Decomp
 		lea	(RAM_start+$160).l,a1
 		lea	(MapEni_S2Options).l,a0
-		move.w	#make_art_tile($070,1,0),d0
+		move.w	#make_art_tile(ArtTile_S2MenuBox,1,0),d0
 		bsr.w	Eni_Decomp
 		clr.b	(Options_menu_box).w
 		bsr.w	OptionScreen_DrawSelected
@@ -8404,7 +8404,7 @@ MenuScreen_LevelSelect:
 
 		lea	(RAM_start+($28*$1C*2)).l,a1	; 2240; after the plane map
 		lea	(MapEni_S2LevSelIcon).l,a0
-		move.w	#make_art_tile($090,0,0),d0
+		move.w	#make_art_tile(ArtTile_S2LevelSelectPics,0,0),d0
 		bsr.w	Eni_Decomp
 		bsr.w	LevelSelect_DrawIcon
 
@@ -9124,31 +9124,31 @@ loc_7546:
 		moveq	#40-1,d1
 		moveq	#28-1,d2
 		jsr	(Plane_Map_To_VRAM).l
-		move.l	#vdpComm(tiles_to_bytes($680),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_SStage_Sphere),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_SStageSphere).l,a0
 		bsr.w	Nem_Decomp
-		move.l	#vdpComm(tiles_to_bytes($5A7),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_SStage_Ring),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_SStageRing).l,a0
 		bsr.w	Nem_Decomp
-		move.l	#vdpComm(tiles_to_bytes($59B),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_SStage_BG),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_SStageBG).l,a0
 		bsr.w	Nem_Decomp
-		move.l	#vdpComm(tiles_to_bytes($55F),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_SStage_GetBlueSpheres),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_GetBlueSpheres).l,a0
 		bsr.w	Nem_Decomp
-		move.l	#vdpComm(tiles_to_bytes($6F8),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_SStage_GetBlueSpheres+$199),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_GBSArrow).l,a0
 		bsr.w	Nem_Decomp
-		move.l	#vdpComm(tiles_to_bytes($781),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_SStage_Digits),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_SStageDigits).l,a0
 		bsr.w	Nem_Decomp
 		lea	(ArtNem_SStageDigits).l,a0
 		lea	(H_scroll_buffer+$20).w,a4
 		bsr.w	Nem_Decomp_To_RAM
-		move.l	#vdpComm(tiles_to_bytes($589),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_SStage_Icons),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_SStageIcons).l,a0
 		bsr.w	Nem_Decomp
-		move.l	#vdpComm(tiles_to_bytes($7A0),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_SStage_Shadow),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_SStageShadow).l,a0
 		bsr.w	Nem_Decomp
 		lea	(MapUnc_SSNum000).l,a1
@@ -9163,7 +9163,7 @@ loc_7546:
 		jsr	(Plane_Map_To_VRAM).l
 		lea	(RAM_start).l,a1
 		lea	(MapEni_SStageBG).l,a0
-		move.w	#make_art_tile($59B,2,0),d0
+		move.w	#make_art_tile(ArtTile_SStage_BG,2,0),d0
 		bsr.w	Eni_Decomp
 		lea	(RAM_start).l,a1
 		move.l	#vdpComm(VRAM_Plane_B_Name_Table,VRAM,WRITE),d0
@@ -9566,7 +9566,7 @@ Obj_SStage_7D70:
 		move.b	#$80,height_pixels(a0)
 		move.w	#0,priority(a0)
 		move.l	#Map_SSIcons,mappings(a0)
-		move.w	#make_art_tile($589,2,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_SStage_Icons,2,1),art_tile(a0)
 		move.w	#$120,x_pos(a0)
 		move.w	#$94,y_pos(a0)
 		move.l	#loc_7DA2,(a0)
@@ -9590,7 +9590,7 @@ loc_7DD4:
 		move.b	#$80,height_pixels(a0)
 		move.w	#0,priority(a0)
 		move.l	#Map_GetBlueSpheres,mappings(a0)
-		move.w	#make_art_tile($55F,1,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_SStage_GetBlueSpheres,1,1),art_tile(a0)
 		move.w	#$120,x_pos(a0)
 		move.w	#$E8,y_pos(a0)
 		move.w	#3*60,$32(a0)
@@ -9686,11 +9686,11 @@ Obj_SStage_7F1C:
 		move.b	#$10,height_pixels(a0)
 		move.w	#$200,priority(a0)
 		move.l	#Map_SStageSonic,mappings(a0)
-		move.w	#make_art_tile($7D4,0,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_SStage_Player1,0,1),art_tile(a0)
 		cmpi.w	#2,(Player_option).w
 		bne.s	loc_7F6C
 		move.l	#Map_SStageTails,mappings(a0)
-		move.w	#make_art_tile($7EB,1,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_SStage_Player2,1,1),art_tile(a0)
 		jsr	(AllocateObjectAfterCurrent_SpecialStage).l
 		bne.w	loc_7F6C
 		move.l	#Obj_SStage_82EE,(a1)
@@ -9801,12 +9801,12 @@ loc_80A2:
 		jsr	(Draw_Sprite).l
 		lea	(PLC_SStageSonic).l,a2
 		move.l	#ArtUnc_SStageSonic,d6
-		move.w	#tiles_to_bytes($7D4),d4
+		move.w	#tiles_to_bytes(ArtTile_SStage_Player1),d4
 		cmpi.w	#2,(Player_option).w
 		bne.s	loc_80D8
 		lea	(PLC_SStageTails).l,a2
 		move.l	#ArtUnc_SStageTails,d6
-		move.w	#tiles_to_bytes($7EB),d4
+		move.w	#tiles_to_bytes(ArtTile_SStage_Player2),d4
 
 loc_80D8:
 		moveq	#0,d0
@@ -9854,7 +9854,7 @@ Obj_SStage_8148:
 		move.b	#$10,height_pixels(a0)
 		move.w	#$180,priority(a0)
 		move.l	#Map_SStageTails,mappings(a0)
-		move.w	#make_art_tile($7EB,1,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_SStage_Player2,1,1),art_tile(a0)
 		move.w	#$A0,$30(a0)
 		move.w	#$70,$32(a0)
 		move.w	#0,$34(a0)
@@ -9932,7 +9932,7 @@ loc_823A:
 		jsr	(Draw_Sprite).l
 		lea	(PLC_SStageTails).l,a2
 		move.l	#ArtUnc_SStageTails,d6
-		move.w	#tiles_to_bytes($7EB),d4
+		move.w	#tiles_to_bytes(ArtTile_SStage_Player2),d4
 		bra.w	loc_80D8
 
 ; =============== S U B R O U T I N E =======================================
@@ -9999,7 +9999,7 @@ Obj_SStage_82EE:
 		move.b	#$10,height_pixels(a0)
 		move.w	#$100,priority(a0)
 		move.l	#Map_SStageTailstails,mappings(a0)
-		move.w	#make_art_tile($7B0,1,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_SStage_Player2_Tail,1,1),art_tile(a0)
 		move.w	#$A0,$30(a0)
 		move.w	#$70,$32(a0)
 		move.b	#-1,$3A(a0)
@@ -10031,7 +10031,7 @@ loc_8366:
 		jsr	(Draw_Sprite).l
 		lea	(PLC_SStageTailstails).l,a2
 		move.l	#ArtUnc_SStageTailstails,d6
-		move.w	#tiles_to_bytes($7B0),d4
+		move.w	#tiles_to_bytes(ArtTile_SStage_Player2_Tail),d4
 		bra.w	loc_80D8
 ; ---------------------------------------------------------------------------
 
@@ -10046,7 +10046,7 @@ loc_8392:
 		move.b	#$10,height_pixels(a0)
 		move.w	#$380,priority(a0)
 		move.l	#Map_SStageShadow,mappings(a0)
-		move.w	#make_art_tile($7A0,3,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_SStage_Shadow,3,1),art_tile(a0)
 		move.w	#$A0,$30(a0)
 		move.w	#$70,$32(a0)
 		move.b	#-1,$3A(a0)
@@ -10759,7 +10759,7 @@ loc_8A32:
 		move.l	(a1)+,(a2)+
 		move.l	(a1)+,(a2)+
 		lea	(ArtKosM_SStageChaosEmerald).l,a1
-		move.w	#tiles_to_bytes($5A7),d2
+		move.w	#tiles_to_bytes(ArtTile_SStage_Emerald),d2
 		jmp	(Queue_Kos_Module).l
 ; ---------------------------------------------------------------------------
 
@@ -11372,31 +11372,31 @@ loc_8F12:
 ; ---------------------------------------------------------------------------
 MapPtr_8F1A:
 		dc.l Map_SStageSphere
-		dc.w make_art_tile($680,0,1), $0000
+		dc.w make_art_tile(ArtTile_SStage_Sphere,0,1), $0000
 		dc.l Map_SStageSphere
-		dc.w make_art_tile($680,0,1), $0000
+		dc.w make_art_tile(ArtTile_SStage_Sphere,0,1), $0000
 		dc.l Map_SStageSphere
-		dc.w make_art_tile($680,2,1), $0000
+		dc.w make_art_tile(ArtTile_SStage_Sphere,2,1), $0000
 		dc.l Map_SStageSphere
-		dc.w make_art_tile($680,1,1), $0000
+		dc.w make_art_tile(ArtTile_SStage_Sphere,1,1), $0000
 		dc.l Map_SStageRing
-		dc.w make_art_tile($5A7,2,1), $0000
+		dc.w make_art_tile(ArtTile_SStage_Ring,2,1), $0000
 		dc.l Map_SStageRing
-		dc.w make_art_tile($5A7,2,1), $8030
+		dc.w make_art_tile(ArtTile_SStage_Ring,2,1), $8030
 		dc.l Map_SStageRing
-		dc.w make_art_tile($5A7,2,1), $8031
+		dc.w make_art_tile(ArtTile_SStage_Ring,2,1), $8031
 		dc.l Map_SStageRing
-		dc.w make_art_tile($5A7,2,1), $8032
+		dc.w make_art_tile(ArtTile_SStage_Ring,2,1), $8032
 		dc.l Map_SStageRing
-		dc.w make_art_tile($5A7,2,1), $8033
+		dc.w make_art_tile(ArtTile_SStage_Ring,2,1), $8033
 		dc.l Map_SStageSphere
-		dc.w make_art_tile($680,2,1), $0000
+		dc.w make_art_tile(ArtTile_SStage_Sphere,2,1), $0000
 		dc.l Map_SStageChaosEmerald
-		dc.w make_art_tile($5A7,3,1), $0000
+		dc.w make_art_tile(ArtTile_SStage_Ring,3,1), $0000
 		dc.l Map_SStageSphere
-		dc.w make_art_tile($680,2,1), $0000
+		dc.w make_art_tile(ArtTile_SStage_Sphere,2,1), $0000
 		dc.l Map_SStageSphere
-		dc.w make_art_tile($680,2,1), $0000
+		dc.w make_art_tile(ArtTile_SStage_Sphere,2,1), $0000
 ; ---------------------------------------------------------------------------
 		; unused
 		ext.l	d1
@@ -11568,7 +11568,7 @@ Competition_Menu:
 loc_95AE:
 		lea	(MapEni_S3MenuBG).l,a0
 		lea	(RAM_start).l,a1
-		move.w	#make_art_tile($001,3,0),d0
+		move.w	#make_art_tile(ArtTile_S3MenuBG,3,0),d0
 		jsr	(Eni_Decomp).l
 		lea	(RAM_start).l,a1
 		move.l	#vdpComm(VRAM_Plane_B_Name_Table,VRAM,WRITE),d0
@@ -11577,17 +11577,17 @@ loc_95AE:
 		jsr	(Plane_Map_To_VRAM).l
 		lea	(ArtKos_S3MenuBG).l,a0				; Decompress source
 		lea	(RAM_start).l,a1				; Decompress destination/Transfer source
-		movea.w	#tiles_to_bytes(ArtTile_ArtKos_S3MenuBG),a2	; Transfer destination
+		movea.w	#tiles_to_bytes(ArtTile_S3MenuBG),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		move.l	#locret_952E,(_unkEF44_1).w
 		move.b	#$1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		lea	(ArtKos_CompetitionLevel).l,a0				; Decompress source
 		lea	(RAM_start).l,a1					; Decompress destination/Transfer source, used by the next KosArt_To_VDP also
-		movea.w	#tiles_to_bytes(ArtTile_ArtKos_Competition_LevSel),a2	; Transfer destination
+		movea.w	#tiles_to_bytes(ArtTile_Competition_LevSel),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		lea	(ArtKos_CompetitionMode).l,a0				; Decompress source
-		movea.w	#tiles_to_bytes(ArtTile_ArtKos_Competition_ModeSel),a2	; Transfer destination
+		movea.w	#tiles_to_bytes(ArtTile_Competition_ModeSel),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		move.b	#$1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
@@ -11610,7 +11610,7 @@ loc_9648:
 
 loc_9658:
 		move.l	(a1)+,(a0)
-		move.w	#make_art_tile(ArtTile_ArtKos_Competition_ModeSel,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Competition_ModeSel,0,0),art_tile(a0)
 		move.l	#Map_CompetitionObject,mappings(a0)
 		move.w	(a1)+,x_pos(a0)
 		move.w	(a1)+,y_pos(a0)
@@ -11835,7 +11835,7 @@ Competition_LevelSelect:
 		clr.w	(Events_bg+$14).w
 		lea	(MapEni_S3MenuBG).l,a0
 		lea	(RAM_start).l,a1
-		move.w	#make_art_tile($001,0,0),d0
+		move.w	#make_art_tile(ArtTile_S3MenuBG,0,0),d0
 		jsr	(Eni_Decomp).l
 		lea	(RAM_start).l,a1
 		move.l	#vdpComm(VRAM_Plane_B_Name_Table,VRAM,WRITE),d0
@@ -11844,15 +11844,15 @@ Competition_LevelSelect:
 		jsr	(Plane_Map_To_VRAM).l
 		lea	(MapEni_CompetitionLevBorder).l,a0
 		lea	(RAM_start).l,a1
-		move.w	#make_art_tile(ArtTile_ArtKos_Competition_LevSel,0,1),d0
+		move.w	#make_art_tile(ArtTile_Competition_LevSel,0,1),d0
 		jsr	(Eni_Decomp).l
 		lea	(MapEni_CompetitionLevImage).l,a0
 		lea	(RAM_start+$1000).l,a1
-		move.w	#make_art_tile(ArtTile_ArtKos_Competition_LevSel,3,1),d0
+		move.w	#make_art_tile(ArtTile_Competition_LevSel,3,1),d0
 		jsr	(Eni_Decomp).l
 		lea	(MapEni_CompetitionLevName).l,a0
 		lea	(RAM_start+$2000).l,a1
-		move.w	#make_art_tile(ArtTile_ArtKos_Competition_LevSel,1,1),d0
+		move.w	#make_art_tile(ArtTile_Competition_LevSel,1,1),d0
 		jsr	(Eni_Decomp).l
 		lea	VRAMDatList_CompetitionLevelSelect(pc),a0
 		jsr	Copy_Listed_Data_To_VRAM(pc)
@@ -11863,17 +11863,17 @@ Competition_LevelSelect:
 		jsr	sub_9E9C(pc)
 		lea	(ArtKos_S3MenuBG).l,a0				; Decompress source
 		lea	(RAM_start).l,a1				; Decompress destination/Transfer source
-		movea.w	#tiles_to_bytes(ArtTile_ArtKos_S3MenuBG),a2	; Transfer destination
+		movea.w	#tiles_to_bytes(ArtTile_S3MenuBG),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		move.l	#locret_952E,(_unkEF44_1).w
 		move.b	#$1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		lea	(ArtKos_CompetitionLevel).l,a0				; Decompress source
 		lea	(RAM_start).l,a1					; Decompress destination/Transfer source, used by the next KosArt_To_VDP also
-		movea.w	#tiles_to_bytes(ArtTile_ArtKos_Competition_LevSel),a2	; Transfer destination
+		movea.w	#tiles_to_bytes(ArtTile_Competition_LevSel),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		lea	(ArtKos_CompetitionPlayer).l,a0				; Decompress source
-		movea.w	#tiles_to_bytes(ArtTile_ArtKos_Competition_CharSel),a2	; Transfer destination
+		movea.w	#tiles_to_bytes(ArtTile_Competition_CharSel),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		move.b	#$1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
@@ -11907,7 +11907,7 @@ loc_9B96:
 		move.w	(a1),y_pos(a0)
 		move.w	(a1)+,objoff_16(a0)
 		move.w	(a1)+,d1
-		addi.w	#make_art_tile(ArtTile_ArtKos_Competition_LevSel,0,1),d1
+		addi.w	#make_art_tile(ArtTile_Competition_LevSel,0,1),d1
 		move.w	d1,art_tile(a0)
 		move.b	(a1)+,mapping_frame(a0)
 		move.b	(a1)+,$2E(a0)
@@ -11936,7 +11936,7 @@ loc_9BF4:
 		lea	(Dynamic_object_RAM+(object_size*9)).w,a0
 		move.l	#loc_9DC2,(a0)
 		move.l	#Map_CompetitionSelect,mappings(a0)
-		addi.w	#make_art_tile(ArtTile_ArtKos_Competition_LevSel,2,1),art_tile(a0)
+		addi.w	#make_art_tile(ArtTile_Competition_LevSel,2,1),art_tile(a0)
 		move.w	#$B0,x_pos(a0)
 		moveq	#signextendB(mus_CompetitionMenu),d0
 		jsr	(Play_Music).l
@@ -12449,7 +12449,7 @@ Competition_PlayerSelect:
 		clr.w	(Events_bg+$12).w
 		lea	(MapEni_S3MenuBG).l,a0
 		lea	(RAM_start).l,a1
-		move.w	#make_art_tile(ArtTile_ArtKos_S3MenuBG,0,0),d0
+		move.w	#make_art_tile(ArtTile_S3MenuBG,0,0),d0
 		jsr	(Eni_Decomp).l
 		lea	(RAM_start).l,a1
 		move.l	#vdpComm(VRAM_Plane_B_Name_Table,VRAM,WRITE),d0
@@ -12458,17 +12458,17 @@ Competition_PlayerSelect:
 		jsr	(Plane_Map_To_VRAM).l
 		lea	(ArtKos_S3MenuBG).l,a0				; Decompress source
 		lea	(RAM_start).l,a1				; Decompress destination/Transfer source
-		movea.w	#tiles_to_bytes(ArtTile_ArtKos_S3MenuBG),a2	; Transfer destination
+		movea.w	#tiles_to_bytes(ArtTile_S3MenuBG),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		move.l	#locret_952E,(_unkEF44_1).w
 		move.b	#$1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		lea	(ArtKos_CompetitionLevel).l,a0				; Decompress source
 		lea	(RAM_start).l,a1					; Decompress destination/Transfer source, used by the next KosArt_To_VDP also
-		movea.w	#tiles_to_bytes(ArtTile_ArtKos_Competition_LevSel),a2	; Transfer destination
+		movea.w	#tiles_to_bytes(ArtTile_Competition_LevSel),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		lea	(ArtKos_CompetitionPlayer).l,a0				; Decompress source
-		movea.w	#tiles_to_bytes(ArtTile_ArtKos_Competition_CharSel),a2	; Transfer destination
+		movea.w	#tiles_to_bytes(ArtTile_Competition_CharSel),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		move.b	#$1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
@@ -12497,7 +12497,7 @@ loc_A29C:
 		move.w	(a1),y_pos(a0)
 		move.w	(a1)+,objoff_16(a0)
 		move.w	(a1)+,d1
-		addi.w	#make_art_tile(ArtTile_ArtKos_Competition_LevSel,0,1),d1
+		addi.w	#make_art_tile(ArtTile_Competition_LevSel,0,1),d1
 		move.w	d1,art_tile(a0)
 		move.b	(a1)+,mapping_frame(a0)
 		move.b	(a1)+,$2E(a0)
@@ -12713,7 +12713,7 @@ Obj_CompetitionPlayerSprite2P:
 
 Obj_CompetitionPlayerSprite:
 		move.l	#Map_CompetitionPlayerSprite,mappings(a0)
-		move.w	#make_art_tile(ArtTile_ArtKos_Competition_CharSel,1,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Competition_CharSel,1,0),art_tile(a0)
 		moveq	#0,d0
 		moveq	#-$55,d1
 		moveq	#0,d2
@@ -12829,31 +12829,31 @@ Competition_Results:
 		move.w	#$1E,(Events_bg+$16).w
 		lea	(MapEni_S3MenuBG).l,a0
 		lea	(RAM_start).l,a1
-		move.w	#make_art_tile(ArtTile_ArtKos_S3MenuBG,0,0),d0
+		move.w	#make_art_tile(ArtTile_S3MenuBG,0,0),d0
 		jsr	(Eni_Decomp).l
 		lea	MapEni_CompetitionResultsLED(pc),a0
 		lea	(RAM_start+$1000).l,a1
-		move.w	#make_art_tile(ArtTile_ArtKos_Competition_Results,1,1),d0
+		move.w	#make_art_tile(ArtTile_Competition_Results,1,1),d0
 		jsr	(Eni_Decomp).l
 		lea	VRAMDatList_AE06(pc),a0
 		jsr	Copy_Listed_Data_To_VRAM(pc)
 		jsr	sub_AC44(pc)
 		lea	(ArtKos_S3MenuBG).l,a0				; Decompress source
 		lea	(RAM_start).l,a1				; Decompress destination/Transfer source
-		movea.w	#tiles_to_bytes(ArtTile_ArtKos_S3MenuBG),a2	; Transfer destination
+		movea.w	#tiles_to_bytes(ArtTile_S3MenuBG),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		move.l	#locret_952E,(_unkEF44_1).w
 		move.b	#$1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		lea	(ArtKos_CompetitionLevel).l,a0				; Decompress source
 		lea	(RAM_start).l,a1					; Decompress destination/Transfer source, used by the next two KosArt_To_VDP also
-		movea.w	#tiles_to_bytes(ArtTile_ArtKos_Competition_LevSel),a2	; Transfer destination
+		movea.w	#tiles_to_bytes(ArtTile_Competition_LevSel),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		lea	(ArtKos_CompetitionResults).l,a0			; Decompress source
-		movea.w	#tiles_to_bytes(ArtTile_ArtKos_Competition_Results),a2	; Transfer destination
+		movea.w	#tiles_to_bytes(ArtTile_Competition_Results),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		lea	(ArtKos_CompetitionPlayer).l,a0				; Decompress source
-		movea.w	#tiles_to_bytes(ArtTile_ArtKos_Competition_CharSel),a2	; Transfer destination
+		movea.w	#tiles_to_bytes(ArtTile_Competition_CharSel),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		move.b	#$1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
@@ -12888,7 +12888,7 @@ loc_AAF4:
 		move.w	(a1),y_pos(a0)
 		move.w	(a1)+,objoff_16(a0)
 		move.w	(a1)+,d1
-		addi.w	#make_art_tile(ArtTile_ArtKos_Competition_LevSel,0,1),d1
+		addi.w	#make_art_tile(ArtTile_Competition_LevSel,0,1),d1
 		move.w	d1,art_tile(a0)
 		move.b	(a1)+,mapping_frame(a0)
 		move.b	(a1)+,$2E(a0)
@@ -12969,7 +12969,7 @@ loc_ABD6:
 
 Obj_Competition_ABE6:
 		move.l	#Map_CompetitionPlayerSprite,mappings(a0)
-		move.w	#make_art_tile(ArtTile_ArtKos_Competition_CharSel,1,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Competition_CharSel,1,1),art_tile(a0)
 		move.b	(P1_character).w,d0
 		tst.b	$2E(a0)
 		beq.s	loc_AC02
@@ -12981,7 +12981,7 @@ loc_AC02:
 ; ---------------------------------------------------------------------------
 
 Obj_Competition_AC0A:
-		move.w	#make_art_tile(ArtTile_ArtKos_Competition_Results,1,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Competition_Results,1,1),art_tile(a0)
 		move.b	(_unkEEA2).w,d0
 		move.b	(_unkEEA2+1).w,d1
 		tst.b	$2E(a0)
@@ -13249,7 +13249,7 @@ TimeAttack_Records:
 		move.w	#$FF78,(H_scroll_buffer).w
 		lea	(MapEni_S3MenuBG).l,a0
 		lea	(RAM_start).l,a1
-		move.w	#make_art_tile(ArtTile_ArtKos_S3MenuBG,0,0),d0
+		move.w	#make_art_tile(ArtTile_S3MenuBG,0,0),d0
 		jsr	(Eni_Decomp).l
 		lea	VRAMDatList_B2CA(pc),a0
 		jsr	Copy_Listed_Data_To_VRAM(pc)
@@ -13264,28 +13264,28 @@ TimeAttack_Records:
 		moveq	#2-1,d2
 		jsr	(Plane_Map_To_VRAM).l
 		jsr	sub_B1C6(pc)
-		move.l	#vdpComm(tiles_to_bytes($58D),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Competition_Text),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_ContinueDigits).l,a0
 		jsr	(Nem_Decomp).l
-		move.l	#vdpComm(tiles_to_bytes($5A1),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Competition_Text+$14),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_S38x16Font).l,a0
 		jsr	(Nem_Decomp).l
 		lea	(ArtKos_S3MenuBG).l,a0				; Decompress source
 		lea	(RAM_start).l,a1				; Decompress destination/Transfer source
-		movea.w	#tiles_to_bytes(ArtTile_ArtKos_S3MenuBG),a2	; Transfer destination
+		movea.w	#tiles_to_bytes(ArtTile_S3MenuBG),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		move.l	#locret_952E,(_unkEF44_1).w
 		move.b	#$1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		lea	(ArtKos_CompetitionLevel).l,a0				; Decompress source
 		lea	(RAM_start).l,a1					; Decompress destination/Transfer source, used by the next two KosArt_To_VDP also
-		movea.w	#tiles_to_bytes(ArtTile_ArtKos_Competition_LevSel),a2	; Transfer destination
+		movea.w	#tiles_to_bytes(ArtTile_Competition_LevSel),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		lea	(ArtKos_CompetitionResults).l,a0			; Decompress source
-		movea.w	#tiles_to_bytes(ArtTile_ArtKos_Competition_Results),a2	; Transfer destination
+		movea.w	#tiles_to_bytes(ArtTile_Competition_Results),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		lea	(ArtKos_CompetitionPlayer).l,a0				; Decompress source
-		movea.w	#tiles_to_bytes(ArtTile_ArtKos_Competition_CharSel),a2	; Transfer destination
+		movea.w	#tiles_to_bytes(ArtTile_Competition_CharSel),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		move.b	#$1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
@@ -13295,7 +13295,7 @@ TimeAttack_Records:
 		lea	(ArtKos_SSResultsTKIcons).l,a0
 		jsr	(Kos_Decomp).l
 		move	#$2700,sr
-		move.l	#vdpComm(tiles_to_bytes($572),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Competition_STKIcons),VRAM,WRITE),(VDP_control_port).l
 		lea	(RAM_start+$EE0).l,a0
 		lea	(VDP_data_port).l,a6
 		move.w	#bytesToLcnt(tiles_to_bytes($1B)),d0
@@ -13334,7 +13334,7 @@ loc_B0FC:
 		move.w	(a1),y_pos(a0)
 		move.w	(a1)+,objoff_16(a0)
 		move.w	(a1)+,d1
-		addi.w	#make_art_tile($29F,0,1),d1
+		addi.w	#make_art_tile(ArtTile_Competition_LevSel,0,1),d1
 		move.w	d1,art_tile(a0)
 		move.b	(a1)+,mapping_frame(a0)
 		move.b	(a1)+,$2E(a0)
@@ -13420,7 +13420,7 @@ sub_B1C6:
 
 Obj_Competition_B20C:
 		move.l	#Map_Results,mappings(a0)
-		move.w	#make_art_tile($4FB,1,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Competition_STKIcons-$77,1,1),art_tile(a0)
 		moveq	#0,d0
 		move.b	(Current_zone).w,d0
 		subi.w	#$E,d0
@@ -13984,7 +13984,7 @@ SaveScreen:
 		clr.w	(Events_bg+$12).w
 		lea	(MapEni_S3MenuBG).l,a0
 		lea	(RAM_start).l,a1
-		move.w	#make_art_tile(ArtTile_ArtKos_S3MenuBG,0,0),d0
+		move.w	#make_art_tile(ArtTile_S3MenuBG,0,0),d0
 		jsr	(Eni_Decomp).l
 		lea	(RAM_start).l,a1
 		move.l	#vdpComm(VRAM_Plane_B_Name_Table,VRAM,WRITE),d0
@@ -13993,11 +13993,11 @@ SaveScreen:
 		jsr	(Plane_Map_To_VRAM).l
 		lea	(MapEni_SaveScreen_Layout).l,a0
 		lea	(RAM_start).l,a1
-		move.w	#make_art_tile(ArtTile_ArtKos_Save_Misc,0,1),d0
+		move.w	#make_art_tile(ArtTile_Save_Misc,0,1),d0
 		jsr	(Eni_Decomp).l
 		lea	word_BD16(pc),a0
 		jsr	sub_BAE0(pc)
-		move.l	#vdpComm(tiles_to_bytes($562),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Save_Text),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_S22POptions).l,a0
 		jsr	(Nem_Decomp).l
 		lea	NoSave_Delete_Text(pc),a1
@@ -14007,14 +14007,14 @@ SaveScreen:
 		jsr	sub_C794(pc)
 		lea	(ArtKos_S3MenuBG).l,a0				; Decompress source
 		lea	(RAM_start).l,a1				; Decompress destination/Transfer source
-		movea.w	#tiles_to_bytes(ArtTile_ArtKos_S3MenuBG),a2	; Transfer destination
+		movea.w	#tiles_to_bytes(ArtTile_S3MenuBG),a2	; Transfer destination
 		jsr	(KosArt_To_VDP).l
 		move.l	#locret_B85A,(_unkEF44_1).w
 		move.b	#$1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		lea	(ArtKos_SaveScreenMisc).l,a0			; Decompress source
 		lea	(RAM_start).l,a1				; Decompress destination/Transfer source
-		movea.w	#tiles_to_bytes(ArtTile_ArtKos_Save_Misc),a2	; Transfer destination
+		movea.w	#tiles_to_bytes(ArtTile_Save_Misc),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		move.b	#$1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
@@ -14037,7 +14037,7 @@ loc_B9E0:
 
 loc_B9F0:
 		move.l	(a1)+,(a0)
-		move.w	#make_art_tile(ArtTile_ArtKos_Save_Misc,0,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Save_Misc,0,1),art_tile(a0)
 		move.l	#Map_SaveScreen,mappings(a0)
 		move.w	(a1),x_pos(a0)
 		move.w	(a1)+,objoff_12(a0)	; copy of object's x_pos
@@ -14173,7 +14173,7 @@ loc_BB58:
 		subq.w	#2,d0
 		jsr	sub_BAF8(pc)
 		move.l	d0,VDP_control_port-VDP_data_port(a6)
-		move.w	#make_art_tile($2B1,0,1),(a6)
+		move.w	#make_art_tile(ArtTile_Save_Misc+$12,0,1),(a6)
 		lea	BlankSave_Text(pc),a1
 		tst.b	(a0)
 		bmi.s	loc_BB98
@@ -14186,7 +14186,7 @@ loc_BB58:
 		jsr	sub_C794(pc)
 		move.w	objoff_36(a3),d0
 		move.b	DataSelectS3_ZoneNums(pc,d0.w),d0
-		addi.w	#make_art_tile($562,1,1),d0
+		addi.w	#make_art_tile(ArtTile_Save_Text,1,1),d0
 		move.w	d0,(a6)
 		bra.s	loc_BB9E
 ; ---------------------------------------------------------------------------
@@ -14789,7 +14789,7 @@ locret_C506:
 
 Obj_SaveScreen_Emeralds:
 		move.b	#$40,render_flags(a0)
-		move.w	#make_art_tile(ArtTile_ArtKos_Save_Misc,0,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Save_Misc,0,1),art_tile(a0)
 		move.l	#Map_SaveScreen,mappings(a0)
 		move.b	#$40,width_pixels(a0)
 		move.w	#7,mainspr_childsprites(a0)
@@ -15017,7 +15017,7 @@ Load_Icon_Art:
 		move.w	d1,-(sp)
 		mulu.w	#$8C0,d1
 		addi.l	#RAM_start,d1
-		move.w	#tiles_to_bytes($5BA),d2
+		move.w	#tiles_to_bytes(ArtTile_Save_Misc+$31B),d2
 		move.w	#$460,d3
 		jsr	(Add_To_DMA_Queue).l
 		move.w	(sp)+,d0
@@ -15053,7 +15053,7 @@ sub_C794:
 		lea	(VDP_data_port).l,a6
 		jsr	sub_BAF8(pc)
 		move.l	d0,VDP_control_port-VDP_data_port(a6)
-		move.w	#make_art_tile($552,1,1),d5
+		move.w	#make_art_tile(ArtTile_Save_Text-$10,1,1),d5
 		moveq	#0,d6
 
 loc_C7A8:
@@ -15153,7 +15153,7 @@ loc_E900:
 loc_E90E:
 		addi.w	#$8F,d0
 		move.w	#$108,d1
-		move.w	#make_art_tile($6CA,0,1),d5
+		move.w	#make_art_tile(ArtTile_Ring+$E,0,1),d5
 		lea	Map_HUD(pc),a1
 		adda.w	(a1,d4.w),a1
 		move.w	(a1)+,d4
@@ -15218,7 +15218,7 @@ UpdateHUD:
 		tst.b	(Update_HUD_score).w
 		beq.s	loc_EAB2
 		clr.b	(Update_HUD_score).w
-		move.l	#vdpComm(tiles_to_bytes($6E4),VRAM,WRITE),d0
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Ring+$28),VRAM,WRITE),d0
 		move.l	(Score).w,d1
 		bsr.w	DrawSixDigitNumber
 
@@ -15230,7 +15230,7 @@ loc_EAB2:
 
 loc_EABE:
 		clr.b	(Update_HUD_ring_count).w
-		move.l	#vdpComm(tiles_to_bytes($6FA),VRAM,WRITE),d0
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Ring+$3E),VRAM,WRITE),d0
 		moveq	#0,d1
 		move.w	(Ring_count).w,d1
 		bsr.w	DrawThreeDigitNumber
@@ -15263,11 +15263,11 @@ loc_EAE0:
 		move.b	#9,(a1)
 
 loc_EB1A:
-		move.l	#vdpComm(tiles_to_bytes($6F2),VRAM,WRITE),d0
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Ring+$36),VRAM,WRITE),d0
 		moveq	#0,d1
 		move.b	(Timer_minute).w,d1
 		bsr.w	DrawSingleDigitNumber
-		move.l	#vdpComm(tiles_to_bytes($6F6),VRAM,WRITE),d0
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Ring+$3A),VRAM,WRITE),d0
 		moveq	#0,d1
 		move.b	(Timer_second).w,d1
 		bsr.w	DrawTwoDigitNumber
@@ -15304,17 +15304,17 @@ loc_EB68:
 
 loc_EB78:
 		clr.b	(Update_HUD_ring_count).w
-		move.l	#vdpComm(tiles_to_bytes($6FA),VRAM,WRITE),d0
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Ring+$3E),VRAM,WRITE),d0
 		moveq	#0,d1
 		move.w	(Ring_count).w,d1
 		bsr.w	DrawThreeDigitNumber
 
 loc_EB8C:
-		move.l	#vdpComm(tiles_to_bytes($6F2),VRAM,WRITE),d0
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Ring+$36),VRAM,WRITE),d0
 		moveq	#0,d1
 		move.w	(Lag_frame_count).w,d1
 		bsr.w	DrawSingleDigitNumber
-		move.l	#vdpComm(tiles_to_bytes($6F6),VRAM,WRITE),d0
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Ring+$3A),VRAM,WRITE),d0
 		moveq	#0,d1
 		move.b	(Sprites_drawn).w,d1
 		bsr.w	DrawTwoDigitNumber
@@ -15357,7 +15357,7 @@ loc_EBF2:
 
 
 HUD_DrawZeroRings:
-		move.l	#vdpComm(tiles_to_bytes($6FA),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Ring+$3E),VRAM,WRITE),(VDP_control_port).l
 		lea	HUD_Zero_Rings(pc),a2
 		move.w	#3-1,d2
 		bra.s	loc_EC32
@@ -15372,7 +15372,7 @@ HUD_DrawInitial:
 		bsr.w	HUD_Lives
 		tst.w	(Competition_mode).w
 		bne.s	locret_EC5E
-		move.l	#vdpComm(tiles_to_bytes($6E2),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Ring+$26),VRAM,WRITE),(VDP_control_port).l
 		lea	HUD_Initial_Parts(pc),a2
 		move.w	#$F-1,d2
 
@@ -15434,7 +15434,7 @@ HUD_Zero_Rings:
 
 
 HUD_Debug:
-		move.l	#vdpComm(tiles_to_bytes($6E2),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Ring+$26),VRAM,WRITE),(VDP_control_port).l
 		move.w	(Camera_X_pos).w,d1
 		swap	d1
 		move.w	(Player_1+x_pos).w,d1
@@ -15529,7 +15529,7 @@ loc_ED24:
 ; ---------------------------------------------------------------------------
 		; unused leftover from Sonic 2
 ;ContScrCounter:
-		move.l	#vdpComm(tiles_to_bytes($6FC),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Ring+$40),VRAM,WRITE),(VDP_control_port).l
 		lea	(VDP_data_port).l,a6
 		lea	(dword_ED98).l,a2
 		moveq	#2-1,d6
@@ -15665,7 +15665,7 @@ loc_EE5A:
 
 
 HUD_Lives:
-		move.l	#vdpComm(tiles_to_bytes($7DD),VRAM,WRITE),d0
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_PlayerLifeIcon+9),VRAM,WRITE),d0
 		moveq	#0,d1
 		move.b	(Life_count).w,d1
 		lea	(dword_ED98).l,a2
@@ -27105,7 +27105,7 @@ Tails2P_Tail_Load_PLC:
 		move.w	#tiles_to_bytes(ArtTile_Player_2_Tail),d4
 		cmpa.w	#Tails_tails,a0
 		beq.s	loc_16B58
-		move.w	#tiles_to_bytes($690),d4
+		move.w	#tiles_to_bytes(ArtTile_Player_1+$10),d4
 		bra.s	loc_16B58
 ; End of function Tails2P_Tail_Load_PLC
 
@@ -27248,7 +27248,7 @@ Obj_Tails2P_Tail:
 		move.w	#make_art_tile(ArtTile_Player_2_Tail,0,0),art_tile(a0)
 		cmpa.w	#Tails_tails,a0
 		beq.s	loc_16CCC
-		move.w	#make_art_tile($690,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Player_1+$10,0,0),art_tile(a0)
 
 loc_16CCC:
 		move.w	#$100,priority(a0)
@@ -27454,7 +27454,7 @@ AirCountdown_Init:
 		move.l	#Map_Bubbler2,mappings(a0)
 
 loc_16F36:
-		move.w	#make_art_tile($45C,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Bubbles,0,0),art_tile(a0)
 		move.b	#$84,render_flags(a0)
 		move.b	#$10,width_pixels(a0)
 		move.w	#$80,priority(a0)
@@ -28532,7 +28532,7 @@ loc_17F92:
 		move.w	x_pos(a2),x_pos(a1)
 		move.w	y_pos(a2),y_pos(a1)
 		move.l	#Map_SuperSonic_Stars2,mappings(a1)
-		move.w	#make_art_tile($79C,0,1),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_Shield,0,1),art_tile(a1)
 		move.b	#$84,render_flags(a1)
 		move.w	#$380,priority(a1)
 		move.b	#8,width_pixels(a1)
@@ -29014,7 +29014,7 @@ Obj_RingInit:
 		move.b	#8,width_pixels(a0)
 		tst.w	(Competition_mode).w
 		beq.s	Obj_RingAnimate
-		move.w	#make_art_tile($3D2,3,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_2PArt_3+$C,3,0),art_tile(a0)
 
 Obj_RingAnimate:
 		move.b	(Rings_frame).w,mapping_frame(a0)
@@ -32341,7 +32341,7 @@ AIZ2_Resize4:
 		move.w	#tiles_to_bytes($1FC),d2
 		jsr	(Queue_Kos_Module).l
 		lea	(ArtKosM_AIZ2Bombership2_8x8).l,a1
-		move.w	#tiles_to_bytes($500),d2
+		move.w	#tiles_to_bytes(ArtTile_AIZ2Bombership),d2
 		jsr	(Queue_Kos_Module).l				; Load all battleship art
 		moveq	#$30,d0
 		jsr	(LoadPalette_Immediate).l			; Load palette
@@ -32883,7 +32883,7 @@ loc_1B02A:
 		tst.w	(Competition_mode).w
 		beq.w	loc_1B208
 		move.l	#loc_1B232,(a0)
-		move.w	#make_art_tile($3D2,3,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_2PArt_3+$C,3,0),art_tile(a0)
 		bra.w	loc_1B232
 ; ---------------------------------------------------------------------------
 word_1B048:
@@ -32912,7 +32912,7 @@ loc_1B084:
 		tst.w	(Competition_mode).w
 		beq.s	loc_1B09E
 		move.l	#loc_1B0C8,(a0)
-		move.w	#make_art_tile($3D2,3,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_2PArt_3+$C,3,0),art_tile(a0)
 		bra.s	loc_1B0C8
 ; ---------------------------------------------------------------------------
 
@@ -34640,7 +34640,7 @@ loc_1C24C:
 		move.l	#Map_Explosion,mappings(a0)
 		move.w	art_tile(a0),d0
 		andi.w	#high_priority,d0
-		ori.w	#ArtTile_Explosion,d0
+		ori.w	#make_art_tile(ArtTile_Explosion,0,0),d0
 		move.w	d0,art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$80,priority(a0)
@@ -34745,7 +34745,7 @@ Obj_AIZ1ZiplinePeg:
 		move.w	#$380,priority(a0)
 		move.b	#$20,width_pixels(a0)
 		move.b	#4,render_flags(a0)
-		move.w	#make_art_tile($324,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_AIZSlideRope,2,0),art_tile(a0)
 		move.l	#loc_1C424,(a0)
 
 loc_1C424:
@@ -35135,7 +35135,7 @@ byte_1C8E2:
 
 Obj_HCZBreakableBar:
 		move.l	#Map_HCZBreakableBar,mappings(a0)
-		move.w	#make_art_tile($3CA,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HCZMisc,2,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$200,priority(a0)
 		moveq	#0,d0
@@ -35573,7 +35573,7 @@ Map_HCZBreakableBar:
 
 Obj_HCZWaveSplash:
 		move.l	#Map_HCZWaveSplash,mappings(a0)
-		move.w	#make_art_tile($42E,0,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HCZWaveSplash,0,1),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.b	#$80,width_pixels(a0)
 		move.b	#8,height_pixels(a0)
@@ -35652,7 +35652,7 @@ Obj_HCZBlock:
 		move.b	(a1)+,width_pixels(a0)
 		move.b	(a1)+,height_pixels(a0)
 		move.l	#Map_HCZBlock,mappings(a0)
-		move.w	#make_art_tile($3D4,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HCZMisc+$A,2,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$280,priority(a0)
 		move.l	#loc_1D02A,(a0)
@@ -36234,7 +36234,7 @@ Obj_AIZLRZEMZRock:
 		move.b	d1,height_pixels(a0)
 		move.b	d1,y_radius(a0)
 		move.l	#Map_AIZRock,mappings(a0)
-		move.w	#make_art_tile($333,1,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_AIZMisc1,1,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$200,priority(a0)
 		move.w	x_pos(a0),$2E(a0)
@@ -36242,13 +36242,13 @@ Obj_AIZLRZEMZRock:
 		cmpi.w	#1,(Current_zone_and_act).w
 		bne.s	loc_1D6B6
 		move.l	#Map_AIZRock2,mappings(a0)
-		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_AIZMisc2,2,0),art_tile(a0)
 
 loc_1D6B6:
 		cmpi.w	#$1200,(Current_zone_and_act).w
 		bne.s	loc_1D6D2
 		move.l	#Map_EMZRock,mappings(a0)
-		move.w	#make_art_tile($300,3,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_EMZMisc,3,1),art_tile(a0)
 		move.b	#0,mapping_frame(a0)
 
 loc_1D6D2:
@@ -37518,7 +37518,7 @@ loc_1F6E0:
 		move.l	#word_1FC52,$38(a0)
 		cmpi.b	#2,mapping_frame(a0)
 		bne.s	loc_1F776
-		move.w	#make_art_tile($350,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HCZ2KnuxWall,2,0),art_tile(a0)
 		move.b	#$18,width_pixels(a0)
 		move.b	#$20,height_pixels(a0)
 		move.l	#word_1FC32,$34(a0)
@@ -37553,7 +37553,7 @@ loc_1F7C8:
 		cmpi.b	#3,(Current_zone).w
 		bne.s	loc_1F80A
 		move.l	#Map_CNZBreakableWall,mappings(a0)
-		move.w	#make_art_tile($420,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_CNZMisc+$CF,2,0),art_tile(a0)
 		move.b	#$10,width_pixels(a0)
 		move.b	#$20,height_pixels(a0)
 		move.l	#word_1FD12,$34(a0)
@@ -37568,7 +37568,7 @@ loc_1F80A:
 		cmpi.b	#6,(Current_zone).w
 		bne.s	loc_1F844
 		move.l	#Map_LBZBreakableWall,mappings(a0)
-		move.w	#make_art_tile($2EA,1,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZ2Misc,1,0),art_tile(a0)
 		move.b	#$10,width_pixels(a0)
 		move.b	#$20,height_pixels(a0)
 		move.l	#word_1FC32,$34(a0)
@@ -38061,7 +38061,7 @@ sub_20140:
 		move.b	#8,height_pixels(a1)
 		move.w	#$200,priority(a1)
 		move.l	#Map_AIZRideVine,mappings(a1)
-		move.w	#make_art_tile($41B,0,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_AIZSwingVine,0,0),art_tile(a1)
 		rts
 ; End of function sub_20140
 
@@ -38092,7 +38092,7 @@ loc_2018C:
 		move.w	#$800,x_vel(a0)
 		move.w	#$200,y_vel(a0)
 		move.l	#Map_AnimatedStillSprites,mappings(a0)
-		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,3,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_AIZMisc2,3,0),art_tile(a0)
 		move.b	#8,width_pixels(a0)
 		move.b	#$C,height_pixels(a0)
 		move.b	#0,mapping_frame(a0)
@@ -38659,7 +38659,7 @@ sub_20804:
 		move.b	#8,height_pixels(a1)
 		move.w	#$200,priority(a1)
 		move.l	#Map_AIZRideVine,mappings(a1)
-		move.w	#make_art_tile($41B,0,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_AIZSwingVine,0,0),art_tile(a1)
 		rts
 ; End of function sub_20804
 
@@ -39083,7 +39083,7 @@ Obj_SurfboardWaves:
 		move.w	#$100,priority(a0)
 		move.b	#0,width_pixels(a0)
 		move.b	#4,render_flags(a0)
-		move.w	#make_art_tile($3D1,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_AIZIntroSprites,0,0),art_tile(a0)
 		move.l	#Obj_SurfboardWaves_Main,(a0)
 		move.w	#1,anim(a0)	; and prev_anim
 		move.b	#0,mapping_frame(a0)
@@ -39284,7 +39284,7 @@ Obj_Surfboard:
 		move.w	#$80,priority(a0)
 		move.b	#$20,width_pixels(a0)
 		move.b	#4,render_flags(a0)
-		move.w	#make_art_tile($585,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Surfboard,0,0),art_tile(a0)
 		move.l	#Obj_Surfboard_Main,(a0)
 		move.w	#1,anim(a0)
 		move.w	#$800,x_vel(a0)
@@ -39327,7 +39327,7 @@ Map_Surfboard:
 
 Obj_Spring:
 		move.l	#Map_Spring,mappings(a0)
-		move.w	#make_art_tile($4A4,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_SpikesSprings+$10,0,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.b	#$10,width_pixels(a0)
 		move.b	#$10,height_pixels(a0)
@@ -39354,7 +39354,7 @@ Spring_Index:
 
 sub_21426:
 		move.l	#Map_Spring,mappings(a0)
-		move.w	#make_art_tile($4A4,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_SpikesSprings+$10,0,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.b	#$10,width_pixels(a0)
 		move.b	#$10,height_pixels(a0)
@@ -39385,13 +39385,13 @@ off_21472:
 Spring_Horizontal:
 		move.b	#2,anim(a0)
 		move.b	#3,mapping_frame(a0)
-		move.w	#make_art_tile($4B4,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_SpikesSprings+$20,0,0),art_tile(a0)
 		move.b	#8,width_pixels(a0)
 		move.l	#Obj_Spring_Horizontal,(a0)
 		tst.w	(Competition_mode).w
 		beq.w	Spring_Common
 		move.l	#Map_2PSpring,mappings(a0)
-		move.w	#make_art_tile($3AD,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_2PArt_1,0,0),art_tile(a0)
 		move.l	#Obj_2PSpring_Horizontal,(a0)
 		bra.w	Spring_Common
 ; ---------------------------------------------------------------------------
@@ -39404,17 +39404,17 @@ Spring_Down:
 		beq.w	Spring_Common
 		move.l	#Obj_2PSpring_Down,(a0)
 		move.l	#Map_2PSpring,mappings(a0)
-		move.w	#make_art_tile($391,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_2PArt_2,0,0),art_tile(a0)
 		bra.w	Spring_Common
 ; ---------------------------------------------------------------------------
 
 Spring_UpDiag:
 		move.b	#4,anim(a0)
 		move.b	#7,mapping_frame(a0)
-		move.w	#make_art_tile($43A,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_DiagonalSpring,0,0),art_tile(a0)
 		cmpi.b	#2,(Current_zone).w
 		bne.s	loc_21512
-		move.w	#make_art_tile($478,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_MGZMHZDiagonalSpring,0,0),art_tile(a0)
 
 loc_21512:
 		move.l	#Obj_Spring_UpDiag,(a0)
@@ -39424,10 +39424,10 @@ loc_21512:
 Spring_DownDiag:
 		move.b	#4,anim(a0)
 		move.b	#$A,mapping_frame(a0)
-		move.w	#make_art_tile($43A,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_DiagonalSpring,0,0),art_tile(a0)
 		cmpi.b	#2,(Current_zone).w
 		bne.s	loc_2153A
-		move.w	#make_art_tile($478,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_MGZMHZDiagonalSpring,0,0),art_tile(a0)
 
 loc_2153A:
 		bset	#1,status(a0)
@@ -39441,7 +39441,7 @@ Spring_Up:
 		beq.s	Spring_Common
 		move.l	#Obj_2PSpring_Up,(a0)
 		move.l	#Map_2PSpring,mappings(a0)
-		move.w	#make_art_tile($391,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_2PArt_2,0,0),art_tile(a0)
 		cmpi.b	#$12,(Current_zone).w
 		bne.s	Spring_Common
 		ori.w	#high_priority,art_tile(a0)
@@ -40356,7 +40356,7 @@ Obj_2PRetractingSpring:
 		bne.w	loc_2229C
 		move.l	#loc_2255E,(a1)
 		move.l	#Map_2PRetractingSpring,mappings(a1)
-		move.w	#make_art_tile($391,0,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_2PArt_2,0,0),art_tile(a1)
 		cmpi.b	#$12,(Current_zone).w
 		bne.s	loc_221F4
 		move.l	#Map_2PRetractingSpring_2,mappings(a1)
@@ -40737,13 +40737,13 @@ Obj_Spikes:
 		move.b	(a1)+,height_pixels(a0)
 		move.l	#loc_226FC,(a0)
 		move.l	#Map_Spikes,mappings(a0)
-		move.w	#make_art_tile($49C,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_SpikesSprings+$8,0,0),art_tile(a0)
 		lsr.w	#1,d0
 		move.b	d0,mapping_frame(a0)
 		cmpi.b	#4,d0
 		blo.s	loc_22666
 		move.l	#loc_2274E,(a0)
-		move.w	#make_art_tile($494,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_SpikesSprings,0,0),art_tile(a0)
 
 loc_22666:
 		btst	#1,status(a0)
@@ -40776,7 +40776,7 @@ loc_226A0:
 		move.b	(a1)+,height_pixels(a0)
 		move.l	#loc_227FA,(a0)
 		move.l	#Map_2PSpikes,mappings(a0)
-		move.w	#make_art_tile($391,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_2PArt_2,0,0),art_tile(a0)
 		lsr.w	#1,d0
 		move.b	d0,mapping_frame(a0)
 		cmpi.b	#4,d0
@@ -41859,7 +41859,7 @@ sub_23500:
 		move.b	#$10,height_pixels(a1)
 		move.w	#$200,priority(a1)
 		move.l	#Map_SphereTest,mappings(a1)
-		move.w	#make_art_tile($24E0,1,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_SphereTest,1,0),art_tile(a1)
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	x_pos(a0),$30(a1)
 		move.w	y_pos(a0),y_pos(a1)
@@ -41982,7 +41982,7 @@ sub_2366C:
 		move.b	#$10,height_pixels(a1)
 		move.w	#$200,priority(a1)
 		move.l	#Map_SphereTest,mappings(a1)
-		move.w	#make_art_tile($4E0,1,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_SphereTest,1,0),art_tile(a1)
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	x_pos(a0),$30(a1)
 		move.w	y_pos(a0),y_pos(a1)
@@ -42337,7 +42337,7 @@ byte_23D2A:
 
 Obj_LBZMovingPlatform:
 		move.l	#Map_LBZMovingPlatform,mappings(a0)
-		move.w	#make_art_tile($3C3,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZMisc,2,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$180,priority(a0)
 		moveq	#0,d0
@@ -42892,7 +42892,7 @@ Obj_LBZUnusedBarPlatform:
 		move.w	y_pos(a0),y_pos(a1)
 		move.b	status(a0),status(a1)
 		move.l	#Map_LBZUnusedBarPlatform,mappings(a1)
-		move.w	#make_art_tile($2EA,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_LBZ2Misc,2,0),art_tile(a1)
 		move.b	#4,render_flags(a1)
 		move.w	#$180,priority(a1)
 		move.b	#$20,width_pixels(a1)
@@ -43031,19 +43031,19 @@ Obj_FloatingPlatform:
 		cmpi.w	#0,(Current_zone_and_act).w
 		bne.s	loc_24412
 		move.l	#Map_AIZFloatingPlatform,mappings(a0)
-		move.w	#make_art_tile($3F7,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_AIZFloatingPlatform,2,0),art_tile(a0)
 
 loc_24412:
 		cmpi.w	#1,(Current_zone_and_act).w
 		bne.s	loc_24428
 		move.l	#Map_AIZFloatingPlatform,mappings(a0)
-		move.w	#make_art_tile($440,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_AIZ2FloatingPlatform,2,0),art_tile(a0)
 
 loc_24428:
 		cmpi.b	#1,(Current_zone).w
 		bne.s	loc_2443E
 		move.l	#Map_HCZFloatingPlatform,mappings(a0)
-		move.w	#make_art_tile($41D,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HCZMisc+$53,2,0),art_tile(a0)
 
 loc_2443E:
 		cmpi.b	#2,(Current_zone).w
@@ -43140,7 +43140,7 @@ Map_AIZFloatingPlatform:
 
 Obj_HCZSnakeBlocks:
 		move.l	#Map_HCZFloatingPlatform,mappings(a0)
-		move.w	#make_art_tile($028,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HCZ2BlockPlat,0,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$180,priority(a0)
 		move.b	#$10,width_pixels(a0)
@@ -43276,7 +43276,7 @@ byte_2471C:
 
 Obj_LBZUnusedElevator:
 		move.l	#Map_LBZUnusedElevator,mappings(a0)
-		move.w	#make_art_tile($3C3,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZMisc,2,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$200,priority(a0)
 		move.b	#$30,width_pixels(a0)
@@ -43457,7 +43457,7 @@ Map_LBZUnusedElevator:
 
 Obj_LBZExplodingTrigger:
 		move.l	#Map_LBZExplodingTrigger,mappings(a0)
-		move.w	#make_art_tile($433,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZMisc+$70,2,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.b	#$10,width_pixels(a0)
 		move.b	#$10,height_pixels(a0)
@@ -43512,7 +43512,7 @@ Map_LBZExplodingTrigger:
 
 Obj_MGZDashTrigger:
 		move.l	#Map_MGZDashTrigger,mappings(a0)
-		move.w	#make_art_tile($35F,1,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_MGZMisc1,1,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.b	#$10,width_pixels(a0)
 		move.b	#$10,height_pixels(a0)
@@ -43708,7 +43708,7 @@ loc_24C40:
 		andi.w	#$38,d0
 		lea	byte_24BE4(pc,d0.w),a1
 		move.l	#Map_LBZTriggerBridge,mappings(a0)
-		move.w	#make_art_tile($3C3,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZMisc,2,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$200,priority(a0)
 		move.w	x_pos(a0),$30(a0)
@@ -43855,7 +43855,7 @@ word_250CE:
 
 Obj_LBZPlayerLauncher:
 		move.l	#Map_LBZPlayerLauncher,mappings(a0)
-		move.w	#make_art_tile($3C3,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZMisc,2,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.b	#$20,width_pixels(a0)
 		move.w	#$80,priority(a0)
@@ -43980,7 +43980,7 @@ loc_25236:
 
 loc_2523E:
 		move.l	#Map_LBZPlayerLauncher,mappings(a0)
-		move.w	#make_art_tile($3C3,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZMisc,2,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.b	#8,width_pixels(a0)
 		move.w	#$80,priority(a0)
@@ -44088,7 +44088,7 @@ Map_LBZPlayerLauncher:
 
 sub_2536C:
 		move.l	#Map_LBZFlameThrower,mappings(a1)
-		move.w	#make_art_tile($3AC,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_LBZMisc-$17,2,0),art_tile(a1)
 		move.b	#$10,width_pixels(a1)
 		move.b	#$10,height_pixels(a1)
 		ori.b	#4,render_flags(a1)
@@ -44182,7 +44182,7 @@ Obj_LBZRideGrapple:
 		lsl.w	#2,d0
 		move.l	LBZRideGrapple_Range(pc,d0.w),$34(a0)
 		move.l	#Map_LBZRideGrapple,mappings(a0)
-		move.w	#make_art_tile($433,1,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZMisc+$70,1,0),art_tile(a0)
 		jsr	(AllocateObjectAfterCurrent).l
 		bne.s	loc_2562A
 		move.l	#loc_25752,(a1)
@@ -44586,7 +44586,7 @@ Map_LBZRideGrapple:
 
 Obj_LBZCupElevator:
 		move.l	#Map_LBZCupElevator,mappings(a0)
-		move.w	#make_art_tile($40D,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZMisc+$4A,2,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$80,priority(a0)
 		move.b	#$20,width_pixels(a0)
@@ -44597,7 +44597,7 @@ Obj_LBZCupElevator:
 		bne.w	loc_25AFE
 		move.l	#Obj_LBZCupElevatorAttach,(a1)
 		move.l	#Map_LBZCupElevator,mappings(a1)
-		move.w	#make_art_tile($40D,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_LBZMisc+$4A,2,0),art_tile(a1)
 		move.b	#4,render_flags(a1)
 		move.w	#$80,priority(a1)
 		move.b	#$20,width_pixels(a1)
@@ -44618,7 +44618,7 @@ loc_25AA6:
 		bne.w	loc_25AFE
 		move.l	#Obj_LBZCupElevatorBase,(a1)
 		move.l	#Map_LBZCupElevator,mappings(a1)
-		move.w	#make_art_tile($40D,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_LBZMisc+$4A,2,0),art_tile(a1)
 		move.b	#4,render_flags(a1)
 		move.w	#$100,priority(a1)
 		move.b	#$20,width_pixels(a1)
@@ -45229,7 +45229,7 @@ loc_26120:
 
 Obj_LBZCupElevatorPole:
 		move.l	#Map_LBZCupElevator,mappings(a0)
-		move.w	#make_art_tile($40D,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZMisc+$4A,2,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$180,priority(a0)
 		move.b	#8,width_pixels(a0)
@@ -45254,7 +45254,7 @@ Map_LBZCupElevator:
 
 Obj_LBZUnusedTiltingBridge:
 		move.l	#Map_LBZUnusedTiltingBridge,mappings(a0)
-		move.w	#make_art_tile($3C3,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZMisc,2,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.b	#$40,width_pixels(a0)
 		move.b	#$40,height_pixels(a0)
@@ -45265,7 +45265,7 @@ Obj_LBZUnusedTiltingBridge:
 		bne.w	loc_2628C
 		move.l	#loc_262DC,(a1)
 		move.l	#Map_LBZUnusedTiltingBridge,mappings(a1)
-		move.w	#make_art_tile($3C3,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_LBZMisc,2,0),art_tile(a1)
 		ori.b	#4,render_flags(a1)
 		move.b	#$40,width_pixels(a1)
 		move.b	#$40,height_pixels(a1)
@@ -45556,7 +45556,7 @@ Map_LBZUnusedTiltingBridge:
 Obj_LBZPipePlug:
 		move.b	#$10,y_radius(a0)
 		move.l	#Map_LBZPipePlug,mappings(a0)
-		move.w	#make_art_tile($2E6,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZ2Misc-$4,2,0),art_tile(a0)
 		move.b	#$10,width_pixels(a0)
 		move.b	#$20,height_pixels(a0)
 		move.l	#word_267D4,$3C(a0)
@@ -45851,7 +45851,7 @@ Map_LBZPipePlug:
 
 Obj_LBZUnusedSolidHurt:
 		move.l	#Map_LBZUnusedSolidHurt,mappings(a0)
-		move.w	#make_art_tile($2EA,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZ2Misc,2,0),art_tile(a0)
 		move.b	#$10,width_pixels(a0)
 		move.b	#$10,height_pixels(a0)
 		move.b	#4,render_flags(a0)
@@ -47220,10 +47220,10 @@ AnimateTiles_DoAniPLC_Part2:
 ; otherwise the subroutine would spend so much time waiting for the art to be
 ; decompressed that the VBLANK window would close before all the animating was done.
 
-;	zoneanimdecl -1, ArtUnc_Flowers1, ArtTile_ArtUnc_Flowers1, 6, 2
+;	zoneanimdecl -1, ArtUnc_Flowers1, ArtTile_Flowers1, 6, 2
 ;	-1			Global frame duration. If -1, then each frame will use its own duration, instead
 ;	ArtUnc_Flowers1		Source address
-;	ArtTile_ArtUnc_Flowers1	Destination VRAM address
+;	ArtTile_Flowers1	Destination VRAM address
 ;	6			Number of frames
 ;	2			Number of tiles to load into VRAM for each frame
 
@@ -47635,7 +47635,7 @@ locret_27958:
 
 Obj_LBZSpinLauncher:
 		move.l	#Map_LBZSpinLauncher,mappings(a0)
-		move.w	#make_art_tile($2EA,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZ2Misc,2,0),art_tile(a0)
 		move.b	#$20,width_pixels(a0)
 		move.b	#$20,height_pixels(a0)
 		ori.b	#4,render_flags(a0)
@@ -47866,7 +47866,7 @@ Obj_LBZLoweringGrapple:
 		move.b	#$80,height_pixels(a0)
 		move.w	y_pos(a0),$3C(a0)
 		move.l	#Map_LBZLoweringGrapple,mappings(a0)
-		move.w	#make_art_tile($2EA,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZ2Misc,2,0),art_tile(a0)
 		move.b	subtype(a0),d0
 		andi.w	#$7F,d0
 		lsl.w	#3,d0
@@ -48028,7 +48028,7 @@ Map_LBZLoweringGrapple:
 
 Obj_MGZLBZSmashingPillar:
 		move.l	#Map_LBZSmashingSpikes,mappings(a0)
-		move.w	#make_art_tile($455,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZTubeTrans,2,0),art_tile(a0)
 		move.b	#$10,width_pixels(a0)
 		move.b	#$10,height_pixels(a0)
 		move.w	#$80,priority(a0)
@@ -48129,7 +48129,7 @@ Map_MGZSmashingPillar:
 
 Obj_LBZGateLaser:
 		move.l	#Map_LBZGateLaser,mappings(a0)
-		move.w	#make_art_tile($2EA,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZ2Misc,2,0),art_tile(a0)
 		move.b	#$1C,width_pixels(a0)
 		move.b	#4,height_pixels(a0)
 		ori.b	#4,render_flags(a0)
@@ -48176,7 +48176,7 @@ sub_2831E:
 		move.w	y_pos(a0),y_pos(a1)
 		move.w	$2E(a0),$2E(a1)
 		move.l	#Map_LBZGateLaser,mappings(a1)
-		move.w	#make_art_tile($2EA,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_LBZ2Misc,2,0),art_tile(a1)
 		move.b	#$1C,width_pixels(a1)
 		move.b	#4,height_pixels(a1)
 		move.b	render_flags(a0),render_flags(a1)
@@ -48639,7 +48639,7 @@ loc_28802:
 
 Obj_TunnelExhaustControl:
 		move.l	#Map_TunnelExhaust,mappings(a0)
-		move.w	#make_art_tile($2EA,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZ2Misc,2,0),art_tile(a0)
 		move.b	#$10,width_pixels(a0)
 		move.b	#$10,height_pixels(a0)
 		ori.b	#4,render_flags(a0)
@@ -48685,7 +48685,7 @@ Obj_TunnelExhaustControlMain:
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
 		move.l	#Map_TunnelExhaust,mappings(a1)
-		move.w	#make_art_tile($2EA,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_LBZ2Misc,2,0),art_tile(a1)
 		move.b	#$10,width_pixels(a1)
 		move.b	#$10,height_pixels(a1)
 		move.w	#$380,priority(a1)
@@ -48814,7 +48814,7 @@ Obj_TunnelExContinuous:
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
 		move.l	#Map_TunnelExhaust,mappings(a1)
-		move.w	#make_art_tile($2EA,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_LBZ2Misc,2,0),art_tile(a1)
 		move.b	#$10,width_pixels(a1)
 		move.b	#$10,height_pixels(a1)
 		move.w	#$380,priority(a1)
@@ -48872,7 +48872,7 @@ loc_28AA8:
 ; ---------------------------------------------------------------------------
 		; unused
 		move.l	#Map_TunnelExhaust,mappings(a0)
-		move.w	#make_art_tile($2EA,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZ2Misc,2,0),art_tile(a0)
 		move.b	#$10,width_pixels(a0)
 		move.b	#$10,height_pixels(a0)
 		ori.b	#4,render_flags(a0)
@@ -48892,7 +48892,7 @@ loc_28AE0:
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
 		move.l	#Map_TunnelExhaust,mappings(a1)
-		move.w	#make_art_tile($2EA,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_LBZ2Misc,2,0),art_tile(a1)
 		move.b	#$10,width_pixels(a1)
 		move.b	#$10,height_pixels(a1)
 		move.w	#$380,priority(a1)
@@ -48974,7 +48974,7 @@ Map_TunnelExhaust:
 
 Obj_LBZTubeElevator:
 		move.l	#Map_LBZTubeElevator,mappings(a0)
-		move.w	#make_art_tile($455,1,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZTubeTrans,1,0),art_tile(a0)
 		move.b	#$18,width_pixels(a0)
 		move.b	#$30,height_pixels(a0)
 		ori.b	#4,render_flags(a0)
@@ -48996,7 +48996,7 @@ loc_28C5E:
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
 		move.l	#Map_LBZTubeElevator,mappings(a1)
-		move.w	#make_art_tile($455,1,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_LBZTubeTrans,1,0),art_tile(a1)
 		move.b	#$18,width_pixels(a1)
 		move.b	#$18,height_pixels(a1)
 		ori.b	#4,render_flags(a1)
@@ -49516,7 +49516,7 @@ loc_29350:
 		lsl.w	d2,d1
 		move.w	d1,$34(a0)
 		move.l	#Map_AIZDisappearingFloor,mappings(a0)
-		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0),art_tile(a0)	; immediately gets overwritten?
+		move.w	#make_art_tile(ArtTile_AIZMisc2,2,0),art_tile(a0)	; immediately gets overwritten?
 		move.w	#make_art_tile($001,2,0),art_tile(a0)
 		move.b	#$20,width_pixels(a0)
 		move.b	#$18,height_pixels(a0)
@@ -49563,7 +49563,7 @@ loc_293E4:
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
 		move.l	#Map_AIZDisappearingFloor2,mappings(a1)
-		move.w	#make_art_tile($62E9,3,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_AIZMisc2,3,0),art_tile(a1)
 		move.b	#$28,width_pixels(a1)
 		move.b	#$20,height_pixels(a1)
 		move.b	#4,render_flags(a1)
@@ -49619,7 +49619,7 @@ loc_29684:
 		cmpi.b	#3,(Current_zone).w
 		bne.s	loc_296AE
 		move.l	#Map_CNZCorkFloor,mappings(a0)
-		move.w	#make_art_tile($430,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_CNZPlatform,2,0),art_tile(a0)
 		move.b	#$20,width_pixels(a0)
 		move.b	#$20,height_pixels(a0)
 		move.l	#word_29B20,$3C(a0)
@@ -49643,7 +49643,7 @@ loc_296AE:
 
 loc_296EE:
 		move.l	#word_29AC4,$3C(a0)
-		move.w	#make_art_tile($3B6,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_ICZMisc1,2,0),art_tile(a0)
 		move.b	#$10,height_pixels(a0)
 
 loc_29702:
@@ -50054,7 +50054,7 @@ Map_LBZCorkFloor:
 
 Obj_AIZFlippingBridge:
 		move.l	#Map_AIZFlippingBridge,mappings(a0)
-		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_AIZMisc2,2,0),art_tile(a0)
 		move.b	#$80,width_pixels(a0)
 		move.b	#4,height_pixels(a0)
 		move.b	#4,render_flags(a0)
@@ -50085,7 +50085,7 @@ loc_29FEA:
 		bne.w	loc_2A084
 		move.l	#loc_2A0AC,(a1)
 		move.l	#Map_AIZFlippingBridge,mappings(a1)
-		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_AIZMisc2,2,0),art_tile(a1)
 		move.b	#4,render_flags(a1)
 		move.b	#$80,width_pixels(a1)
 		move.b	#$40,height_pixels(a1)
@@ -50384,7 +50384,7 @@ Obj_AIZCollapsingLogBridge:
 		move.b	d0,$35(a0)
 		move.b	#8,$37(a0)
 		move.l	#Map_AIZCollapsingLogBridge,mappings(a0)
-		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_AIZMisc2,2,0),art_tile(a0)
 		move.b	#$5A,width_pixels(a0)
 		move.b	#8,height_pixels(a0)
 		move.b	#4,render_flags(a0)	; oddly, this is not an ori like the child sprites, however it doesn't matter in normal gameplay as this object only faces one direction
@@ -50393,7 +50393,7 @@ Obj_AIZCollapsingLogBridge:
 		bne.w	loc_2A466
 		move.l	#loc_2A57C,(a1)
 		move.l	#Map_AIZCollapsingLogBridge,mappings(a1)
-		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_AIZMisc2,2,0),art_tile(a1)
 		ori.b	#4,render_flags(a1)
 		move.b	#$5A,width_pixels(a1)
 		move.b	#8,height_pixels(a1)
@@ -50431,7 +50431,7 @@ loc_2A470:
 		move.b	d0,$35(a0)
 		move.b	#8,$37(a0)
 		move.l	#Map_AIZDrawBridgeFire,mappings(a0)
-		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_AIZMisc2,2,1),art_tile(a0)
 		move.b	#$60,width_pixels(a0)
 		move.b	#8,height_pixels(a0)
 		move.b	#4,render_flags(a0)	; oddly, this is not an ori like the child sprites, however it doesn't matter in normal gameplay as this object only faces one direction
@@ -50440,7 +50440,7 @@ loc_2A470:
 		bne.w	loc_2A52E
 		move.l	#loc_2A57C,(a1)
 		move.l	#Map_AIZDrawBridgeFire,mappings(a1)
-		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,1),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_AIZMisc2,2,1),art_tile(a1)
 		ori.b	#4,render_flags(a1)
 		move.b	#$60,width_pixels(a1)
 		move.b	#8,height_pixels(a1)
@@ -50675,7 +50675,7 @@ Map_AIZDrawBridgeFire:
 
 Obj_AIZDrawBridge:
 		move.l	#Map_AIZDrawBridge,mappings(a0)
-		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_AIZMisc2,2,1),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$280,priority(a0)
 		move.b	#8,width_pixels(a0)
@@ -51112,11 +51112,11 @@ loc_2AC9C:
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
 		move.l	#Map_AIZFallingLog2,mappings(a1)
-		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_AIZMisc2,2,0),art_tile(a1)
 		tst.b	(Current_act).w
 		bne.s	loc_2ACEA
 		move.l	#Map_AIZFallingLog,mappings(a1)
-		move.w	#make_art_tile($3CF,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_AIZFallingLog,2,0),art_tile(a1)
 
 loc_2ACEA:
 		move.b	#$18,width_pixels(a1)
@@ -51130,11 +51130,11 @@ loc_2ACEA:
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
 		move.l	#Map_AIZFallingLogSplash2,mappings(a1)
-		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,3,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_AIZMisc2,3,0),art_tile(a1)
 		tst.b	(Current_act).w
 		bne.s	loc_2AD42
 		move.l	#Map_AIZFallingLogSplash,mappings(a1)
-		move.w	#make_art_tile($3CF,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_AIZFallingLog,2,0),art_tile(a1)
 
 loc_2AD42:
 		move.b	#$20,width_pixels(a1)
@@ -51232,7 +51232,7 @@ Map_AIZFallingLogSplash:
 
 Obj_AIZSpikedLog:
 		move.l	#Map_AIZSpikedLog,mappings(a0)
-		move.w	#make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_AIZMisc2,2,0),art_tile(a0)
 		move.b	#$18,width_pixels(a0)
 		move.b	#8,height_pixels(a0)
 		move.b	#4,render_flags(a0)
@@ -51414,76 +51414,76 @@ loc_2B314:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 word_2B31A:
-		dc.w make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0)	; 0 AIZ2 Bridge Post
+		dc.w make_art_tile(ArtTile_AIZMisc2,2,0)			; 0 AIZ2 Bridge Post
 		dc.w   $300
 		dc.b   $C,  $C
-		dc.w make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0)	; 1 AIZ2 Large Rope Twist Tie
+		dc.w make_art_tile(ArtTile_AIZMisc2,2,0)			; 1 AIZ2 Large Rope Twist Tie
 		dc.w   $300
 		dc.b  $10,   8
-		dc.w make_art_tile(ArtTile_ArtNem_AIZMisc2,2,0)	; 2 AIZ2 Rope Twist tie
+		dc.w make_art_tile(ArtTile_AIZMisc2,2,0)			; 2 AIZ2 Rope Twist tie
 		dc.w   $300
 		dc.b    8,   4
-		dc.w make_art_tile($001,2,0)	; 3 AIZ2 Tie Top Sprite
+		dc.w make_art_tile($001,2,0)						; 3 AIZ2 Tie Top Sprite
 		dc.w   $300
 		dc.b    8,   8
-		dc.w make_art_tile($001,3,0)	; 4 AIZ2 Waterfall sprite
+		dc.w make_art_tile($001,3,0)						; 4 AIZ2 Waterfall sprite
 		dc.w   $300
 		dc.b    8, $20
-		dc.w make_art_tile(ArtTile_ArtNem_AIZMisc2,2,1)	; 5 AIZ2 Bridge Post (Different Palette)
+		dc.w make_art_tile(ArtTile_AIZMisc2,2,1)			; 5 AIZ2 Bridge Post (Different Palette)
 		dc.w   $300
 		dc.b   $C,  $C
-		dc.w make_art_tile($001,2,1)	; 6 128x128 HCZ Waterfall
+		dc.w make_art_tile($001,2,1)						; 6 128x128 HCZ Waterfall
 		dc.w      0
 		dc.b  $40, $40
-		dc.w make_art_tile($001,2,1)	; 7 128x64 HCZ Waterfall
+		dc.w make_art_tile($001,2,1)						; 7 128x64 HCZ Waterfall
 		dc.w      0
 		dc.b  $40, $20
-		dc.w make_art_tile($001,2,0)	; 8 128x32 HCZ Waterfall
+		dc.w make_art_tile($001,2,0)						; 8 128x32 HCZ Waterfall
 		dc.w   $300
 		dc.b  $40, $10
-		dc.w make_art_tile($001,2,1)	; 9 Stagger Down HCZ Waterfall
+		dc.w make_art_tile($001,2,1)						; 9 Stagger Down HCZ Waterfall
 		dc.w      0
 		dc.b  $40, $40
-		dc.w make_art_tile($001,2,1)	; A Stagger Up HCZ Waterfall
+		dc.w make_art_tile($001,2,1)						; A Stagger Up HCZ Waterfall
 		dc.w      0
 		dc.b  $40, $60
-		dc.w make_art_tile($451,2,0)	; B MGZ Signpost Left
+		dc.w make_art_tile(ArtTile_MGZSigns,2,0)			; B MGZ Signpost Left
 		dc.w   $300
 		dc.b  $10, $18
-		dc.w make_art_tile($451,2,0)	; C MGZ Signpost Right
+		dc.w make_art_tile(ArtTile_MGZSigns,2,0)			; C MGZ Signpost Right
 		dc.w   $300
 		dc.b  $10, $18
-		dc.w make_art_tile($451,2,0)	; D MGZ Signpost Up
+		dc.w make_art_tile(ArtTile_MGZSigns,2,0)			; D MGZ Signpost Up
 		dc.w   $300
 		dc.b  $10, $18
-		dc.w make_art_tile($451,2,0)	; E MGZ Signpost Down
+		dc.w make_art_tile(ArtTile_MGZSigns,2,0)			; E MGZ Signpost Down
 		dc.w   $300
 		dc.b  $10, $18
-		dc.w make_art_tile($368,2,1)	; F HCZ2 Tube Bend 1
+		dc.w make_art_tile(ArtTile_HCZ2Slide+$C,2,1)		; F HCZ2 Tube Bend 1
 		dc.w      0
 		dc.b    8, $30
-		dc.w make_art_tile($379,2,1)	; 10 HCZ2 Tube Bend 2
+		dc.w make_art_tile(ArtTile_HCZ2Slide+$1D,2,1)		; 10 HCZ2 Tube Bend 2
 		dc.w      0
 		dc.b  $30, $18
-		dc.w make_art_tile($399,2,1)	; 11 HCZ2 Tube Bend 3
+		dc.w make_art_tile(ArtTile_HCZ2Slide+$3D,2,1)		; 11 HCZ2 Tube Bend 3
 		dc.w      0
 		dc.b   $C, $10
-		dc.w make_art_tile($3A4,2,1)	; 12 HCZ2 Tube Crossover
+		dc.w make_art_tile(ArtTile_HCZ2Slide+$48,2,1)		; 12 HCZ2 Tube Crossover
 		dc.w      0
 		dc.b  $20, $34
-		dc.w make_art_tile($038,2,0)	; 13 HCZ2 Bridge Post
+		dc.w make_art_tile(ArtTile_HCZ2BlockPlat+$10,2,0)	; 13 HCZ2 Bridge Post
 		dc.w   $300
 		dc.b    4, $10
-		dc.w make_art_tile($40D,2,0)	; 14 LBZ Cup Elevator Pole Top
+		dc.w make_art_tile(ArtTile_LBZMisc+$4A,2,0)			; 14 LBZ Cup Elevator Pole Top
 		dc.w   $300
 		dc.b    8,   8
-		dc.w make_art_tile($433,1,0)	; 15 LBZ Steel Girder Low Priority
+		dc.w make_art_tile(ArtTile_LBZMisc+$70,1,0)			; 15 LBZ Steel Girder Low Priority
 		dc.w   $300
 		dc.b  $10, $40
-		dc.w make_art_tile($433,1,0)	; 16 LBZ Large Steel Girder
+		dc.w make_art_tile(ArtTile_LBZMisc+$70,1,0)			; 16 LBZ Large Steel Girder
 		dc.w   $300
 		dc.b  $10, $80
-		dc.w make_art_tile($433,1,0)	; 17 LBZ Steel Girder High Priority
+		dc.w make_art_tile(ArtTile_LBZMisc+$70,1,0)			; 17 LBZ Steel Girder High Priority
 		dc.w    $80
 		dc.b  $10, $40
 Map_StillSprites:
@@ -51513,10 +51513,10 @@ loc_2B6A4:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 word_2B6B6:
-		dc.w make_art_tile(ArtTile_ArtNem_AIZMisc2,3,0)
+		dc.w make_art_tile(ArtTile_AIZMisc2,3,0)
 		dc.w   $300
 		dc.b    8,  $C
-		dc.w make_art_tile(ArtTile_ArtNem_AIZMisc2,3,0)
+		dc.w make_art_tile(ArtTile_AIZMisc2,3,0)
 		dc.w   $300
 		dc.b    8,  $C
 Ani_AnimatedStillSprites:
@@ -51549,10 +51549,10 @@ Obj_AIZForegroundPlant:
 		rts
 ; ---------------------------------------------------------------------------
 word_2B780:
-		dc.w make_art_tile($333,2,1)
+		dc.w make_art_tile(ArtTile_AIZMisc1,2,1)
 		dc.w      0
 		dc.b  $20, $30
-		dc.w make_art_tile($333,2,1)
+		dc.w make_art_tile(ArtTile_AIZMisc1,2,1)
 		dc.w      0
 		dc.b  $20, $3C
 off_2B78C:
@@ -51704,7 +51704,7 @@ loc_2B98E:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 word_2B994:
-		dc.w make_art_tile($438,2,0)
+		dc.w make_art_tile(ArtTile_AIZBackgroundTree,2,0)
 		dc.w   $300
 		dc.b    8, $40
 Map_AIZ2FGTree:
@@ -51851,17 +51851,17 @@ Obj_Button:
 		tst.w	(Competition_mode).w
 		bne.w	loc_2BC68
 		move.l	#Map_Button,mappings(a0)
-		move.w	#make_art_tile($456,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_GrayButton,0,0),art_tile(a0)
 		cmpi.b	#1,(Current_zone).w
 		bne.s	loc_2BB4C
 		move.l	#Map_HCZButton,mappings(a0)
-		move.w	#make_art_tile($426,1,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HCZButton,1,0),art_tile(a0)
 
 loc_2BB4C:
 		cmpi.b	#3,(Current_zone).w
 		bne.s	loc_2BB62
 		move.l	#Map_CNZButton,mappings(a0)
-		move.w	#make_art_tile($41A,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_CNZMisc+$C9,2,0),art_tile(a0)
 
 loc_2BB62:
 		move.b	#4,render_flags(a0)
@@ -51962,7 +51962,7 @@ loc_2BC62:
 
 loc_2BC68:
 		move.l	#Map_2PButton,mappings(a0)
-		move.w	#make_art_tile($3AD,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_2PArt_1,0,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.b	#$C,width_pixels(a0)
 		move.w	#$200,priority(a0)
@@ -52152,10 +52152,10 @@ loc_2BEC2:
 loc_2BF2E:
 		addq.b	#2,routine(a0)
 		jsr	(Random_Number).l
-		move.w	#make_art_tile($580,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Animals1,0,0),art_tile(a0)
 		andi.w	#1,d0
 		beq.s	loc_2BF4A
-		move.w	#make_art_tile($592,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Animals2,0,0),art_tile(a0)
 
 loc_2BF4A:
 		moveq	#0,d1
@@ -53371,7 +53371,7 @@ loc_2CE4C:
 		move.w	#tiles_to_bytes($580),d2
 		tst.b	(Apparent_act).w
 		beq.s	loc_2CE5A
-		move.w	#tiles_to_bytes(ArtTile_Explosion),d2
+		move.w	#tiles_to_bytes($5A0),d2
 
 loc_2CE5A:
 		jsr	(Queue_Kos_Module).l		; Load character name graphics
@@ -54406,58 +54406,58 @@ Offs_LoadEnemyArt:
 		dc.w PLCKosM_LBZ-Offs_LoadEnemyArt
 
 PLCKosM_AIZ: plrlistheader
-		plreq $548, ArtKosM_AIZ_MonkeyDude
-		plreq $52A, ArtKosM_AIZ_Bloominator
-		plreq $55F, ArtKosM_AIZ_CaterkillerJr
+		plreq ArtTile_MonkeyDude, ArtKosM_AIZ_MonkeyDude
+		plreq ArtTile_Bloominator, ArtKosM_AIZ_Bloominator
+		plreq ArtTile_CaterkillerJr, ArtKosM_AIZ_CaterkillerJr
 PLCKosM_AIZ_End
 
 PLCKosM_HCZ1: plrlistheader
-		plreq $539, ArtKosM_Blastoid
-		plreq $500, ArtKosM_TurboSpiker
-		plreq $54D, ArtKosM_MegaChopper
-		plreq $559, ArtKosM_Pointdexter
+		plreq ArtTile_Blastoid, ArtKosM_Blastoid
+		plreq ArtTile_TurboSpiker, ArtKosM_TurboSpiker
+		plreq ArtTile_MegaChopper, ArtKosM_MegaChopper
+		plreq ArtTile_Pointdexter, ArtKosM_Pointdexter
 PLCKosM_HCZ1_End
 
 PLCKosM_HCZ2: plrlistheader
-		plreq $539, ArtKosM_Jawz
-		plreq $500, ArtKosM_TurboSpiker
-		plreq $54D, ArtKosM_MegaChopper
-		plreq $559, ArtKosM_Pointdexter
+		plreq ArtTile_Jawz, ArtKosM_Jawz
+		plreq ArtTile_TurboSpiker, ArtKosM_TurboSpiker
+		plreq ArtTile_MegaChopper, ArtKosM_MegaChopper
+		plreq ArtTile_Pointdexter, ArtKosM_Pointdexter
 PLCKosM_HCZ2_End
 
 PLCKosM_MGZ1: plrlistheader
-		plreq $530, ArtKosM_Spiker
-		plreq $54F, ArtKosM_MGZMiniboss
-		plreq $570, ArtKosM_MGZEndBossDebris
+		plreq ArtTile_Spiker, ArtKosM_Spiker
+		plreq ArtTile_MGZMiniboss, ArtKosM_MGZMiniboss
+		plreq ArtTile_MGZMiniBossDebris, ArtKosM_MGZEndBossDebris
 PLCKosM_MGZ1_End
 
 PLCKosM_MGZ2: plrlistheader
-		plreq $530, ArtKosM_Spiker
-		plreq $54F, ArtKosM_Mantis
+		plreq ArtTile_Spiker, ArtKosM_Spiker
+		plreq ArtTile_Mantis, ArtKosM_Mantis
 PLCKosM_MGZ2_End
 
 PLCKosM_CNZ: plrlistheader
-		plreq $524, ArtKosM_Sparkle
-		plreq $552, ArtKosM_Batbot
-		plreq $570, ArtKosM_ClamerShot
-		plreq $574, ArtKosM_CNZBalloon
+		plreq ArtTile_Sparkle, ArtKosM_Sparkle
+		plreq ArtTile_Batbot, ArtKosM_Batbot
+		plreq ArtTile_Clamer+$70, ArtKosM_ClamerShot
+		plreq ArtTile_CNZBalloon, ArtKosM_CNZBalloon
 PLCKosM_CNZ_End
 
 PLCKosM_FBZ: plrlistheader
-		plreq $500, ArtKosM_Blaster
-		plreq $528, ArtKosM_Technosqueek
+		plreq ArtTile_Blaster-6, ArtKosM_Blaster
+		plreq ArtTile_Technosqueek-6, ArtKosM_Technosqueek
 PLCKosM_FBZ_End
 
 PLCKosM_ICZ: plrlistheader
-		plreq $558, ArtKosM_ICZSnowdust
-		plreq $548, ArtKosM_StarPointer
+		plreq ArtTile_ICZSnowdust, ArtKosM_ICZSnowdust
+		plreq ArtTile_StarPointer, ArtKosM_StarPointer
 PLCKosM_ICZ_End
 
 PLCKosM_LBZ: plrlistheader
-		plreq $524, ArtKosM_SnaleBlaster
-		plreq $56E, ArtKosM_Orbinaut
-		plreq $547, ArtKosM_Ribot
-		plreq $558, ArtKosM_Corkey
+		plreq ArtTile_SnaleBlaster, ArtKosM_SnaleBlaster
+		plreq ArtTile_Orbinaut, ArtKosM_Orbinaut
+		plreq ArtTile_Ribot, ArtKosM_Ribot
+		plreq ArtTile_Corkey, ArtKosM_Corkey
 PLCKosM_LBZ_End
 
 ; ---------------------------------------------------------------------------
@@ -54480,7 +54480,7 @@ Bubbler_Index:
 loc_2E068:
 		addq.b	#2,routine(a0)
 		move.l	#Map_Bubbler,mappings(a0)
-		move.w	#make_art_tile($45C,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Bubbles,0,0),art_tile(a0)
 		move.b	#$84,render_flags(a0)
 		move.b	#$10,width_pixels(a0)
 		move.w	#$80,priority(a0)
@@ -54762,7 +54762,7 @@ Map_Bubbler:
 Obj_HCZWaterRush:
 		move.l	#Map_HCZWaterRush,mappings(a0)
 		ori.b	#4,render_flags(a0)
-		move.w	#make_art_tile($37A,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HCZWaterRush,2,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$80,priority(a0)
 		move.b	#$40,width_pixels(a0)
@@ -54775,7 +54775,7 @@ Obj_HCZWaterRush:
 		move.w	y_pos(a0),y_pos(a1)
 		subi.w	#$30,x_pos(a1)
 		move.l	#Map_HCZWaterRushBlock,mappings(a1)
-		move.w	#make_art_tile($3D4,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_HCZMisc+$A,2,0),art_tile(a1)
 		move.b	#$10,width_pixels(a1)
 		move.b	#$20,height_pixels(a1)
 		move.b	#4,render_flags(a1)
@@ -54872,7 +54872,7 @@ loc_2E794:
 
 loc_2E7A4:
 		lea	(ArtKosM_HCZGeyserHorz).l,a1
-		move.w	#tiles_to_bytes($500),d2
+		move.w	#tiles_to_bytes(ArtTile_HCZGeyser),d2
 		jsr	(Queue_Kos_Module).l
 		move.l	#loc_2E7BA,(a0)
 
@@ -54886,7 +54886,7 @@ loc_2E7C2:
 		ori.b	#4,render_flags(a0)
 		move.w	#$300,priority(a0)
 		move.l	#Map_HCZWaterWall,mappings(a0)
-		move.w	#make_art_tile($500,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HCZGeyser,2,0),art_tile(a0)
 		move.b	#$80,width_pixels(a0)
 		move.b	#$20,height_pixels(a0)
 		bset	#6,render_flags(a0)
@@ -54916,7 +54916,7 @@ loc_2E83E:
 		bne.s	loc_2E896
 		move.l	#loc_2E9AA,(a1)
 		move.l	#Map_HCZWaterWallDebris,mappings(a1)
-		move.w	#make_art_tile($558,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_HCZGeyser+$58,2,0),art_tile(a1)
 		move.b	#$84,render_flags(a1)
 		move.b	(a3)+,d0
 		ext.w	d0
@@ -54978,11 +54978,11 @@ loc_2E8DA:
 		subi.w	#$50,d0
 		add.w	d0,x_pos(a1)
 		addi.w	#$18,y_pos(a1)
-		move.w	#make_art_tile($530,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_HCZGeyser+$30,2,0),art_tile(a1)
 		lsr.w	#4,d1
 		andi.w	#3,d1
 		bne.s	loc_2E936
-		move.w	#make_art_tile($45C,0,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_Bubbles,0,0),art_tile(a1)
 
 loc_2E936:
 		move.b	d1,anim(a1)
@@ -55044,7 +55044,7 @@ loc_2E9C0:
 		bne.w	loc_2EA32
 		move.l	#loc_2EACE,(a1)
 		move.l	#Map_HCZWaterWall,mappings(a1)
-		move.w	#make_art_tile($530,1,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_HCZGeyser+$30,1,0),art_tile(a1)
 		move.b	#$84,render_flags(a1)
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	(Water_level).w,y_pos(a1)
@@ -55135,7 +55135,7 @@ loc_2EB48:
 
 loc_2EB4E:
 		lea	(ArtKosM_HCZGeyserVert).l,a1
-		move.w	#tiles_to_bytes($500),d2
+		move.w	#tiles_to_bytes(ArtTile_HCZGeyser),d2
 		jsr	(Queue_Kos_Module).l
 		move.b	#1,mapping_frame(a0)
 		move.b	#$81,(Player_1+object_control).w
@@ -55154,7 +55154,7 @@ loc_2EB8A:
 		ori.b	#4,render_flags(a0)
 		move.w	#$300,priority(a0)
 		move.l	#Map_HCZWaterWall,mappings(a0)
-		move.w	#make_art_tile($500,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HCZGeyser,2,0),art_tile(a0)
 		move.b	#$20,width_pixels(a0)
 		move.b	#$60,height_pixels(a0)
 		move.w	#$60,$30(a0)
@@ -55190,7 +55190,7 @@ loc_2EC20:
 		bne.s	locret_2EC78
 		move.l	#loc_2E9AA,(a1)
 		move.l	#Map_HCZWaterWallDebris,mappings(a1)
-		move.w	#make_art_tile($558,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_HCZGeyser+$58,2,0),art_tile(a1)
 		move.b	#$84,render_flags(a1)
 		move.b	(a3)+,d0
 		ext.w	d0
@@ -55290,11 +55290,11 @@ sub_2ED6A:
 		move.w	#$380,priority(a1)
 		move.b	#$18,width_pixels(a1)
 		move.b	#$18,height_pixels(a1)
-		move.w	#make_art_tile($530,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_HCZGeyser+$30,2,0),art_tile(a1)
 		lsr.w	#4,d2
 		andi.w	#3,d2
 		bne.s	loc_2EDB4
-		move.w	#make_art_tile($45C,0,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_Bubbles,0,0),art_tile(a1)
 
 loc_2EDB4:
 		move.b	d2,anim(a1)
@@ -55349,7 +55349,7 @@ Obj_HCZCGZFan:
 		move.w	y_pos(a0),y_pos(a1)
 		addi.w	#$1C,y_pos(a0)
 		move.l	#Map_HCZWaterRushBlock,mappings(a0)
-		move.w	#make_art_tile($3D4,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HCZMisc+$A,2,0),art_tile(a0)
 		move.b	#$10,width_pixels(a0)
 		move.b	#$10,height_pixels(a0)
 		move.b	#4,render_flags(a0)
@@ -55365,7 +55365,7 @@ Obj_HCZCGZFan:
 
 loc_2EFE0:
 		move.l	#Map_HCZFan,mappings(a1)
-		move.w	#make_art_tile($40B,1,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_HCZMisc+$41,1,0),art_tile(a1)
 		ori.b	#4,render_flags(a1)
 		move.w	#$200,priority(a1)
 		move.b	#$10,width_pixels(a1)
@@ -55455,7 +55455,7 @@ loc_2F0EA:
 		bne.s	loc_2F152
 		move.l	#loc_2F212,(a1)
 		move.l	#Map_Bubbler,mappings(a1)
-		move.w	#make_art_tile($45C,0,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_Bubbles,0,0),art_tile(a1)
 		move.b	#$84,render_flags(a1)
 		move.b	#4,width_pixels(a1)
 	if FixBugs
@@ -55627,7 +55627,7 @@ loc_2F2F8:
 
 loc_2F304:
 		lea	(ArtKosM_HCZLargeFan).l,a1
-		move.w	#tiles_to_bytes($500),d2
+		move.w	#tiles_to_bytes(ArtTile_HCZLargeFan),d2
 		jsr	(Queue_Kos_Module).l
 		move.l	#loc_2F31A,(a0)
 
@@ -55641,7 +55641,7 @@ loc_2F322:
 		ori.b	#4,render_flags(a0)
 		move.w	#$200,priority(a0)
 		move.l	#Map_HCZLargeFan,mappings(a0)
-		move.w	#make_art_tile($500,1,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HCZLargeFan,1,0),art_tile(a0)
 		move.b	#$18,width_pixels(a0)
 		move.b	#$20,height_pixels(a0)
 		move.w	#8,$30(a0)
@@ -55684,7 +55684,7 @@ Map_HCZLargeFan:
 
 loc_2F51C:
 		move.l	#Map_CGZFan,mappings(a0)
-		move.w	#make_art_tile($300,3,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_CGZMisc,3,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$200,priority(a0)
 		move.b	#$10,width_pixels(a0)
@@ -55768,7 +55768,7 @@ Obj_HCZHandLauncher:
 		ori.b	#4,render_flags(a0)
 		move.w	#$200,priority(a0)
 		move.l	#Map_HCZHandLauncher,mappings(a0)
-		move.w	#make_art_tile($3E4,1,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HCZMisc+$1A,1,0),art_tile(a0)
 		move.b	#$20,width_pixels(a0)
 		move.b	#$40,height_pixels(a0)
 		move.w	y_pos(a0),$32(a0)
@@ -55779,7 +55779,7 @@ Obj_HCZHandLauncher:
 		bne.s	loc_2F6D2
 		move.l	#loc_2F96C,(a1)
 		move.l	#Map_HCZHandLauncher,mappings(a1)
-		move.w	#make_art_tile($3E4,1,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_HCZMisc+$1A,1,0),art_tile(a1)
 		move.b	render_flags(a0),render_flags(a1)
 		move.b	#$20,width_pixels(a1)
 	if FixBugs
@@ -56066,9 +56066,9 @@ Map_HCZHandLauncher:
 ; ---------------------------------------------------------------------------
 byte_2FAA8:
 		dc.b  $10, $20
-		dc.w make_art_tile($3D4,2,0)
+		dc.w make_art_tile(ArtTile_HCZMisc+$A,2,0)
 		dc.b    8, $20
-		dc.w make_art_tile($416,2,0)
+		dc.w make_art_tile(ArtTile_CNZMisc+$C5,2,0)
 ; ---------------------------------------------------------------------------
 
 Obj_Door:
@@ -56193,7 +56193,7 @@ Map_HCZCNZDoor:
 ; ---------------------------------------------------------------------------
 byte_2FC28:
 		dc.b  $20,   8
-		dc.w make_art_tile($416,2,0)
+		dc.w make_art_tile(ArtTile_CNZMisc+$C5,2,0)
 ; ---------------------------------------------------------------------------
 
 loc_2FC2C:
@@ -56661,7 +56661,7 @@ Obj_HCZConveryorSpike:
 		move.w	(a1)+,$3C(a0)
 		move.w	(a1)+,$3E(a0)
 		move.l	#Map_HCZConveyorSpike,mappings(a0)
-		move.w	#make_art_tile($43E,1,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HCZSpikeBall,1,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$280,priority(a0)
 		move.b	#$C,width_pixels(a0)
@@ -56776,7 +56776,7 @@ Map_HCZConveyorSpike:
 
 Obj_CNZBalloon:
 		move.l	#Map_CNZBalloon,mappings(a0)
-		move.w	#make_art_tile($351,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_CNZMisc,0,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$280,priority(a0)
 		move.b	#$10,width_pixels(a0)
@@ -56899,7 +56899,7 @@ Map_CNZBalloon:
 
 Obj_CNZCannon:
 		move.l	#Map_CNZCannon,mappings(a0)
-		move.w	#make_art_tile($374,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_CNZMisc+$23,2,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$280,priority(a0)
 		move.b	#$30,width_pixels(a0)
@@ -57126,7 +57126,7 @@ sub_309D8:
 		move.w	(a2)+,d5
 		subq.w	#1,d5
 		bmi.s	locret_30A30
-		move.w	#tiles_to_bytes($448),d4
+		move.w	#tiles_to_bytes(ArtTile_CNZCannon),d4
 
 loc_30A04:
 		moveq	#0,d1
@@ -57157,7 +57157,7 @@ DPLC_CNZCannon:
 
 Obj_CNZRisingPlatform:
 		move.l	#Map_CNZRisingPlatform,mappings(a0)
-		move.w	#make_art_tile($3BE,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_CNZMisc+$6D,2,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$280,priority(a0)
 		move.b	#$30,width_pixels(a0)
@@ -57242,7 +57242,7 @@ Map_CNZRisingPlatform:
 
 Obj_CNZTrapDoor:
 		move.l	#Map_CNZTrapDoor,mappings(a0)
-		move.w	#make_art_tile($3F0,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_CNZMisc+$9F,2,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$80,priority(a0)
 		move.b	#$20,width_pixels(a0)
@@ -57293,7 +57293,7 @@ Map_CNZTrapDoor:
 
 Obj_CNZLightBulb:
 		move.l	#Map_CNZLightBulb,mappings(a0)
-		move.w	#make_art_tile($404,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_CNZMisc+$B3,2,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$280,priority(a0)
 		move.b	#$10,width_pixels(a0)
@@ -57323,7 +57323,7 @@ Map_CNZLightBulb:
 
 Obj_CNZHoverFan:
 		move.l	#Map_CNZHoverFan,mappings(a0)
-		move.w	#make_art_tile($3E8,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_CNZMisc+$97,2,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$280,priority(a0)
 		move.b	#$10,width_pixels(a0)
@@ -57662,7 +57662,7 @@ Obj_CNZCylinder:
 		andi.w	#$1E,d0
 		move.w	d0,$3A(a0)
 		move.l	#Map_CNZCylinder,mappings(a0)
-		move.w	#make_art_tile($38E,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_CNZMisc+$3D,2,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$280,priority(a0)
 		move.b	#$20,width_pixels(a0)
@@ -58141,7 +58141,7 @@ Map_CNZCylinder:
 
 Obj_HCZSpinningColumn:
 		move.l	#Map_HCZSpinningColumn,mappings(a0)
-		move.w	#make_art_tile($040,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HCZ2BlockPlat+$18,2,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$280,priority(a0)
 		move.b	#$10,width_pixels(a0)
@@ -58859,7 +58859,7 @@ loc_32062:
 
 Obj_Bumper:
 		move.l	#Map_Bumper,mappings(a0)
-		move.w	#make_art_tile($364,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_CNZMisc+$13,2,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.b	#$10,width_pixels(a0)
 		move.b	#$10,height_pixels(a0)
@@ -58870,7 +58870,7 @@ Obj_Bumper:
 		tst.w	(Competition_mode).w
 		beq.s	loc_320D8
 		move.l	#Map_2PBumper,mappings(a0)
-		move.w	#make_art_tile($300,1,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_BPZMisc,1,0),art_tile(a0)
 		move.l	#loc_3221C,(a0)
 		bra.w	loc_3221C
 ; ---------------------------------------------------------------------------
@@ -60460,7 +60460,7 @@ byte_331B8:
 
 Obj_MGZSwingingPlatform:
 		move.l	#Map_MGZSwingingPlatform,mappings(a0)
-		move.w	#make_art_tile($35F,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_MGZMisc1,2,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.b	#$18,width_pixels(a0)
 		move.b	#$C,height_pixels(a0)
@@ -60472,7 +60472,7 @@ Obj_MGZSwingingPlatform:
 		bne.w	loc_33268
 		move.l	#loc_332BA,(a1)
 		move.l	#Map_MGZSwingingPlatform,mappings(a1)
-		move.w	#make_art_tile($35F,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_MGZMisc1,2,0),art_tile(a1)
 		move.b	#4,render_flags(a1)
 		move.b	#$50,width_pixels(a1)
 		move.b	#$50,height_pixels(a1)
@@ -60567,7 +60567,7 @@ Map_MGZSwingingPlatform:
 
 Obj_MGZSwingingSpikeBall:
 		move.l	#Map_MGZSwingingSpikeBall,mappings(a0)
-		move.w	#make_art_tile($35F,1,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_MGZMisc1,1,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.b	#$20,width_pixels(a0)
 		move.b	#$20,height_pixels(a0)
@@ -60580,7 +60580,7 @@ Obj_MGZSwingingSpikeBall:
 		bne.w	loc_333F0
 		move.l	#loc_334B4,(a1)
 		move.l	#Map_MGZSwingingSpikeBall,mappings(a1)
-		move.w	#make_art_tile($35F,1,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_MGZMisc1,1,0),art_tile(a1)
 		move.b	render_flags(a0),render_flags(a1)
 		move.b	#$50,width_pixels(a1)
 		move.b	#$50,height_pixels(a1)
@@ -60759,7 +60759,7 @@ Map_MGZSwingingSpikeBall:
 
 Obj_MGZHeadTrigger:
 		move.l	#Map_MGZHeadTrigger,mappings(a0)
-		move.w	#make_art_tile($3FF,1,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_MGZMisc2,1,1),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$280,priority(a0)
 		move.b	#$10,width_pixels(a0)
@@ -61115,7 +61115,7 @@ Map_MGZMovingSpikePlatform:
 
 Obj_MGZPulley:
 		move.l	#Map_MGZPulley,mappings(a0)
-		move.w	#make_art_tile($35F,1,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_MGZMisc1,1,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.b	#$20,width_pixels(a0)
 		move.b	#$20,height_pixels(a0)
@@ -61476,7 +61476,7 @@ Map_MGZPulley:
 
 Obj_MGZTopPlatform:
 		move.l	#Map_MGZTopPlatform,mappings(a0)
-		move.w	#make_art_tile($35F,1,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_MGZMisc1,1,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$280,priority(a0)
 		move.b	#$18,width_pixels(a0)
@@ -62771,7 +62771,7 @@ Map_MGZTopPlatform:
 
 Obj_MGZTopLauncher:
 		move.l	#Map_MGZTopPlatform,mappings(a0)
-		move.w	#make_art_tile($3FF,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_MGZMisc2,2,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$200,priority(a0)
 		move.b	#$C,width_pixels(a0)
@@ -62843,7 +62843,7 @@ loc_35006:
 
 Obj_CGZBladePlatform:
 		move.l	#Map_CGZBladePlatform,mappings(a0)
-		move.w	#make_art_tile($300,3,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_CGZMisc,3,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$280,priority(a0)
 		move.b	#$20,width_pixels(a0)
@@ -62935,7 +62935,7 @@ Map_CGZBladePlatform:
 
 Obj_BPZElephantBlock:
 		move.l	#Map_BPZElephantBlock,mappings(a0)
-		move.w	#make_art_tile($300,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_BPZMisc,0,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$280,priority(a0)
 		move.b	#$30,width_pixels(a0)
@@ -63055,7 +63055,7 @@ Map_BPZElephantBlock:
 
 Obj_BPZBalloon:
 		move.l	#Map_BPZBalloon,mappings(a0)
-		move.w	#make_art_tile($300,3,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_BPZMisc,3,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$200,priority(a0)
 		move.b	#$10,width_pixels(a0)
@@ -63140,7 +63140,7 @@ Map_BPZBalloon:
 
 Obj_DPZDisolvingSandBar:
 		move.l	#Map_DPZDissolvingSandBar,mappings(a0)
-		move.w	#make_art_tile($280,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_DPZMisc,2,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$200,priority(a0)
 		move.b	#$20,width_pixels(a0)
@@ -63220,7 +63220,7 @@ Map_DPZDissolvingSandBar:
 
 Obj_DPZButton:
 		move.l	#Map_DPZButton,mappings(a0)
-		move.w	#make_art_tile($280,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_DPZMisc,2,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$280,priority(a0)
 		move.b	#$C,width_pixels(a0)
@@ -63275,7 +63275,7 @@ Map_DPZButton:
 
 Obj_2PItem:
 		move.l	#Map_2PItem,mappings(a0)
-		move.w	#make_art_tile($3C6,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_2PArt_3,0,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$280,priority(a0)
 		move.b	#8,width_pixels(a0)
@@ -63946,7 +63946,7 @@ Map_2PItem:
 
 Obj_2PGoalMarker:
 		move.l	#Map_2PGoalMarker,mappings(a0)
-		move.w	#make_art_tile($6BC,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_2PStartPost,0,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$280,priority(a0)
 		move.b	#8,width_pixels(a0)
@@ -64289,7 +64289,7 @@ Map_2PGoalMarker:
 
 loc_365CC:
 		move.l	#Map_2PLapNumbers,mappings(a0)
-		move.w	#make_art_tile($700,0,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_2PLapNum,0,1),art_tile(a0)
 		move.w	#0,priority(a0)
 		move.b	#8,width_pixels(a0)
 		move.b	#$C,height_pixels(a0)
@@ -64345,7 +64345,7 @@ Map_2PLapNumbers:
 
 loc_366CC:
 		move.l	#Map_2PNeonDisplay,mappings(a0)
-		move.w	#make_art_tile($756,0,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_2PLapNum+$56,0,1),art_tile(a0)
 		move.w	#0,priority(a0)
 		move.b	#$80,width_pixels(a0)
 		move.b	#$28,height_pixels(a0)
@@ -64679,7 +64679,7 @@ locret_36A48:
 
 loc_36A4A:
 		move.l	#Map_2PNeonDisplay,mappings(a0)
-		move.w	#make_art_tile($756,0,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_2PLapNum+$56,0,1),art_tile(a0)
 		move.w	#0,priority(a0)
 		move.b	#$80,width_pixels(a0)
 		move.b	#$28,height_pixels(a0)
@@ -64707,7 +64707,7 @@ Map_2PNeonDisplay:
 
 loc_37220:
 		move.l	#$FF7000,mappings(a0)
-		move.w	#make_art_tile($600,0,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_2PTime,0,1),art_tile(a0)
 		move.w	#0,priority(a0)
 		move.b	#$40,width_pixels(a0)
 		move.b	#$10,height_pixels(a0)
@@ -64743,7 +64743,7 @@ loc_37292:
 
 loc_3729E:
 		move.l	#$FF7080,mappings(a0)
-		move.w	#make_art_tile($600,0,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_2PTime,0,1),art_tile(a0)
 		move.w	#0,priority(a0)
 		move.b	#$40,width_pixels(a0)
 		move.b	#$10,height_pixels(a0)
@@ -64877,7 +64877,7 @@ word_37422:	dc.w 8
 
 loc_37454:
 		move.l	#Map_2PItemIcon,mappings(a0)
-		move.w	#make_art_tile($750,0,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_2PLapNum+$50,0,1),art_tile(a0)
 		move.w	#0,priority(a0)
 		move.b	#$10,width_pixels(a0)
 		move.b	#$10,height_pixels(a0)
@@ -64942,7 +64942,7 @@ Map_2PItemIcon:
 ; ---------------------------------------------------------------------------
 		; unused
 		move.l	#Map_2PPosition,mappings(a0)
-		move.w	#make_art_tile($75E,0,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_2PPosIcon,0,1),art_tile(a0)
 		move.w	#0,priority(a0)
 		move.b	#4,width_pixels(a0)
 		move.b	#4,height_pixels(a0)
@@ -65020,7 +65020,7 @@ Map_2PPosition:
 
 Obj_EMZDripper:
 		move.l	#Map_EMZDripper,mappings(a0)
-		move.w	#make_art_tile($300,3,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_EMZMisc,3,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$280,priority(a0)
 		move.b	#8,width_pixels(a0)
@@ -65029,7 +65029,7 @@ Obj_EMZDripper:
 		move.b	#4,y_radius(a0)
 		btst	#0,status(a0)
 		beq.s	loc_376DC
-		move.w	#make_art_tile($300,2,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_EMZMisc,2,1),art_tile(a0)
 		move.b	#3,mapping_frame(a0)
 		move.l	#Draw_Sprite,(a0)
 		jmp	(Draw_Sprite).l
@@ -65052,7 +65052,7 @@ loc_376FC:
 		subq.w	#2,d0
 		bcc.s	loc_376FC
 		move.l	#loc_37720,(a1)
-		move.w	#make_art_tile($300,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_EMZMisc,2,0),art_tile(a1)
 		move.b	#1,mapping_frame(a1)
 		moveq	#0,d0
 
@@ -65144,7 +65144,7 @@ locret_3780C:
 
 Obj_WaterDrop:
 		move.l	#Map_HCZWaterDrop,mappings(a0)
-		move.w	#make_art_tile($35C,1,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HCZ2Slide,1,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#0,priority(a0)
 		move.b	#8,width_pixels(a0)
@@ -65250,10 +65250,10 @@ Obj_HCZWaterSplash:
 		tst.b	subtype(a0)
 		beq.s	loc_37A0A
 		move.l	#Map_HCZWaterSplash2,mappings(a0)
-		move.w	#make_art_tile($36E,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HCZ2WaterSplash2,0,0),art_tile(a0)
 		tst.b	(Current_act).w
 		beq.s	loc_379B4
-		move.w	#make_art_tile($344,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HCZ1WaterSplash2,0,0),art_tile(a0)
 
 loc_379B4:
 		ori.b	#4,render_flags(a0)
@@ -65277,7 +65277,7 @@ loc_379B4:
 
 loc_37A0A:
 		move.l	#Map_HCZWaterSplash,mappings(a0)
-		move.w	#make_art_tile($3B2,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HCZWaterSplash,2,0),art_tile(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$300,priority(a0)
 		move.b	#$28,width_pixels(a0)
@@ -65305,7 +65305,7 @@ loc_37A52:
 		add.w	d0,d0
 		add.w	d0,d1
 		addi.l	#ArtUnc_HCZWaterSplash,d1
-		move.w	#tiles_to_bytes($3B2),d2
+		move.w	#tiles_to_bytes(ArtTile_HCZWaterSplash),d2
 		move.w	#$180,d3
 		jsr	(Add_To_DMA_Queue).l
 
@@ -65346,10 +65346,10 @@ loc_37AD0:
 		add.w	d0,d0
 		add.w	d0,d1
 		addi.l	#ArtUnc_HCZWaterSplash2,d1
-		move.w	#tiles_to_bytes($36E),d2
+		move.w	#tiles_to_bytes(ArtTile_HCZ2WaterSplash2),d2
 		tst.b	(Current_act).w
 		beq.s	loc_37AFC
-		move.w	#tiles_to_bytes($344),d2
+		move.w	#tiles_to_bytes(ArtTile_HCZ1WaterSplash2),d2
 
 loc_37AFC:
 		move.w	#$C0,d3
@@ -65503,13 +65503,13 @@ Map_HCZWaterSplash2:
 Obj_TensionBridge:
 		move.l	#loc_37DDE,(a0)
 		move.l	#Map_TensionBridge,mappings(a0)
-		move.w	#make_art_tile($038,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HCZ2BlockPlat+$10,2,0),art_tile(a0)
 		move.w	#$200,priority(a0)
 		cmpi.b	#5,(Current_zone).w
 		bne.s	loc_37CDC
 		move.l	#loc_37E80,(a0)
 		move.l	#Map_ICZTensionBridge,mappings(a0)
-		move.w	#make_art_tile($3B6,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_ICZMisc1,2,0),art_tile(a0)
 		tst.b	subtype(a0)
 		bpl.s	loc_37CDC
 		move.l	#loc_37F44,(a0)
@@ -66934,7 +66934,7 @@ loc_38C74:
 
 
 sub_38C7A:
-		move.w	#tiles_to_bytes($6A4),d4
+		move.w	#tiles_to_bytes(ArtTile_S3Snowboard),d4
 		move.l	#ArtUnc_Snowboard,d6
 		lea	(DPLC_Snowboard).l,a2
 		bra.s	loc_38C9C
@@ -67001,7 +67001,7 @@ Obj_LevelIntroICZ1:
 		move.b	#3,object_control(a1)
 		move.b	#30,anim_frame_timer(a0)
 		move.l	#Map_Snowboard,mappings(a0)
-		move.w	#make_art_tile($6A4,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_S3Snowboard,0,0),art_tile(a0)
 		move.w	#$80,priority(a0)
 		move.b	#$20,width_pixels(a0)
 		move.b	#$20,height_pixels(a0)
@@ -67153,7 +67153,7 @@ sub_38F22:
 		jsr	(AllocateObjectAfterCurrent).l
 		bne.w	locret_38FA2
 		move.l	#loc_38FA4,(a1)
-		move.w	#make_art_tile($6B8,0,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_SnowboardDust,0,0),art_tile(a1)
 		move.l	#Map_SnowboardDust,mappings(a1)
 		move.w	#$100,priority(a1)
 		move.b	#4,width_pixels(a1)
@@ -71085,7 +71085,7 @@ Obj_BattleshipPropeller:
 		move.b	#$20,height_pixels(a0)
 		move.b	#8,width_pixels(a0)
 		move.w	#$80,priority(a0)
-		move.w	#make_art_tile($500,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_AIZ2Bombership,0,0),art_tile(a0)
 		move.l	#Map_AIZShipPropeller,mappings(a0)
 		move.w	#$A71,$30(a0)
 
@@ -71107,7 +71107,7 @@ Obj_AIZShipBomb:
 		move.b	#4,render_flags(a0)
 		move.b	#$18,width_pixels(a0)
 		move.w	#$80,priority(a0)
-		move.w	#make_art_tile($500,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_AIZ2Bombership,0,0),art_tile(a0)
 		move.l	#Map_AIZ2BombExplode,mappings(a0)
 		move.b	#$10,y_radius(a0)
 		move.w	#$A60,$30(a0)
@@ -71218,7 +71218,7 @@ loc_3BA40:
 		move.l	#Obj_AIZBombExplosionAnim,(a0)
 		move.b	#4,render_flags(a0)
 		move.b	#$20,width_pixels(a0)
-		move.w	#make_art_tile($500,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_AIZ2Bombership,0,0),art_tile(a0)
 		move.l	#Map_AIZ2BombExplode,mappings(a0)
 		move.b	#$8B,collision_flags(a0)
 		bra.s	loc_3BA70
@@ -71282,7 +71282,7 @@ locret_3BAEC:
 
 Obj_AIZ2BGTree:
 		move.l	#Obj_AIZ2BGTreeMove,(a0)
-		move.w	#make_art_tile($438,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_AIZBackgroundTree,0,0),art_tile(a0)
 		move.l	#Map_AIZ2BGTree,mappings(a0)
 		move.w	#$E9,y_pos(a0)
 		move.w	#$1C0,$2E(a0)
@@ -71315,7 +71315,7 @@ locret_3BB46:
 Obj_AIZ2BossSmall:
 		move.l	#Obj_AIZ2BossSmallMain,(a0)
 		move.w	#$300,priority(a0)
-		move.w	#make_art_tile($500,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_AIZ2Bombership,0,0),art_tile(a0)
 		move.l	#Map_AIZ2BossSmall,mappings(a0)
 		move.w	#$30,x_pos(a0)
 		move.w	#$D8,y_pos(a0)
@@ -76195,16 +76195,16 @@ ContinueScreen:
 		move.w	#$8004,(a6)
 		move.w	#$8700,(a6)
 		jsr	(Clear_DisplayData).l
-		move.l	#vdpComm(tiles_to_bytes($001),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Continue_Digits),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_ContinueDigits).l,a0
 		jsr	(Nem_Decomp).l
-		move.l	#vdpComm(tiles_to_bytes($029),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_S3Fonts_BigText),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_S3CreditsText).l,a0
 		jsr	(Nem_Decomp).l
-		move.l	#vdpComm(tiles_to_bytes($08C),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Continue_Misc),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_ContinueSprites).l,a0
 		jsr	(Nem_Decomp).l
-		move.l	#vdpComm(tiles_to_bytes($0D9),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Continue_Icons),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_ContinueIcons).l,a0
 		jsr	(Nem_Decomp).l
 		clr.b	(Level_started_flag).w
@@ -76312,7 +76312,7 @@ locret_3F226:
 
 Obj_Continue_SonicWTails:
 		move.l	#Map_ContinueSprites,mappings(a0)
-		move.w	#make_art_tile($08C,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Continue_Misc,0,0),art_tile(a0)
 		move.w	#$280,priority(a0)
 		move.b	#$C,width_pixels(a0)
 		move.b	#$14,height_pixels(a0)
@@ -76430,7 +76430,7 @@ locret_3F35C:
 
 Obj_Continue_TailsWSonic:
 		move.l	#Map_ContinueSprites,mappings(a0)
-		move.w	#make_art_tile($08C,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Continue_Misc,0,0),art_tile(a0)
 		move.w	#$200,priority(a0)
 		move.b	#$10,width_pixels(a0)
 		move.b	#$14,height_pixels(a0)
@@ -76537,7 +76537,7 @@ off_3F49E:
 loc_3F4A6:
 		lea	(ObjSlot_CutsceneKnux).l,a1
 		jsr	(SetUp_ObjAttributesSlotted).l
-		move.w	#make_art_tile($4DA,3,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_CutsceneKnux,3,0),art_tile(a0)
 		bclr	#2,render_flags(a0)
 		move.w	#$40,x_pos(a0)
 		move.w	#$120,y_pos(a0)
@@ -76571,7 +76571,7 @@ locret_3F4FE:
 
 loc_3F500:
 		move.l	#Map_ContinueSprites,mappings(a0)
-		move.w	#make_art_tile($08C,2,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Continue_Misc,2,0),art_tile(a0)
 		move.w	#$280,priority(a0)
 		move.b	#7,mapping_frame(a0)
 		move.b	#8,width_pixels(a0)
@@ -76586,7 +76586,7 @@ loc_3F538:
 
 loc_3F53E:
 		move.l	#Map_ContinueIcons,mappings(a0)
-		move.w	#make_art_tile($0D9,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Continue_Icons,0,0),art_tile(a0)
 		move.w	#$280,priority(a0)
 		move.b	#8,width_pixels(a0)
 		move.b	#8,height_pixels(a0)
@@ -76609,7 +76609,7 @@ loc_3F57E:
 
 Obj_3F58E:
 		move.l	#Map_ContinueIcons,mappings(a0)
-		move.w	#make_art_tile($0D9,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Continue_Icons,0,0),art_tile(a0)
 		move.w	#$280,priority(a0)
 		move.b	#8,width_pixels(a0)
 		move.b	#8,height_pixels(a0)
@@ -76803,17 +76803,17 @@ S3Credits:
 		clr.l	(V_scroll_value).w
 		clr.l	(_unkF61A).w
 		jsr	(Init_SpriteTable).l
-		move.l	#vdpComm(tiles_to_bytes($001),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_S3Fonts_SmallText),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_S38x16Font).l,a0
 		jsr	(Nem_Decomp).l
-		move.l	#vdpComm(tiles_to_bytes($029),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_S3Fonts_BigText),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_S3CreditsText).l,a0
 		jsr	(Nem_Decomp).l
-		move.l	#vdpComm(tiles_to_bytes($08E),VRAM,WRITE),(VDP_control_port).l
+		move.l	#vdpComm(tiles_to_bytes(ArtTile_Ending_Sprites),VRAM,WRITE),(VDP_control_port).l
 		lea	(ArtNem_EndingGraphics).l,a0
 		jsr	(Nem_Decomp).l
 		lea	(ArtKosM_AIZIntroEmeralds).l,a1
-		move.w	#tiles_to_bytes($211),d2
+		move.w	#tiles_to_bytes(ArtTile_Ending_Emeralds),d2
 		jsr	(Queue_Kos_Module).l
 		lea	S3CreditsText_Main(pc),a1
 		move.w	(a1),d0
@@ -76995,7 +76995,7 @@ loc_4069E:
 		move.l	#loc_406E2,(a0)
 		move.w	a0,(_unkFAA4).w
 		move.l	#Map_EndingGraphics,mappings(a0)
-		move.w	#make_art_tile($08E,2,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Ending_Sprites,2,1),art_tile(a0)
 		move.w	#$280,priority(a0)
 		move.b	#$40,width_pixels(a0)
 		move.b	#$40,height_pixels(a0)
@@ -77079,7 +77079,7 @@ loc_40780:
 loc_4078C:
 		move.l	#loc_407CC,(a0)
 		move.l	#Map_EndingGraphics,mappings(a0)
-		move.w	#make_art_tile($08E,3,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Ending_Sprites,3,1),art_tile(a0)
 		move.w	#$100,priority(a0)
 		move.b	#$18,width_pixels(a0)
 		move.b	#$18,height_pixels(a0)
@@ -77114,7 +77114,7 @@ locret_407FA:
 loc_407FC:
 		move.l	#loc_40844,(a0)
 		move.l	#Map_EndingGraphics,mappings(a0)
-		move.w	#make_art_tile($08E,3,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Ending_Sprites,3,1),art_tile(a0)
 		move.w	#$100,priority(a0)
 		move.b	#$C,width_pixels(a0)
 		move.b	#$18,height_pixels(a0)
@@ -77134,7 +77134,7 @@ loc_40844:
 loc_40854:
 		move.l	#loc_40886,(a0)
 		move.l	#Map_EndingGraphics,mappings(a0)
-		move.w	#make_art_tile($08E,3,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Ending_Sprites,3,1),art_tile(a0)
 		move.w	#$180,priority(a0)
 		move.b	#$C,width_pixels(a0)
 		move.b	#$C,height_pixels(a0)
@@ -77150,7 +77150,7 @@ loc_40886:
 loc_40896:
 		move.l	#loc_408D6,(a0)
 		move.l	#Map_EndingGraphics,mappings(a0)
-		move.w	#make_art_tile($08E,2,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Ending_Sprites,2,1),art_tile(a0)
 		move.w	#$100,priority(a0)
 		move.b	#$10,width_pixels(a0)
 		move.b	#$14,height_pixels(a0)
@@ -77196,7 +77196,7 @@ loc_40920:
 loc_40930:
 		move.l	#loc_40962,(a0)
 		move.l	#Map_AIZIntroEmeralds,mappings(a0)
-		move.w	#make_art_tile($211,3,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Ending_Emeralds,3,1),art_tile(a0)
 		move.w	#$80,priority(a0)
 		move.b	#4,width_pixels(a0)
 		move.b	#4,height_pixels(a0)
@@ -77233,7 +77233,7 @@ loc_4099C:
 loc_409A2:
 		move.l	#loc_409E0,(a0)
 		move.l	#Map_EndingGraphics,mappings(a0)
-		move.w	#make_art_tile($08E,2,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Ending_Sprites,2,1),art_tile(a0)
 		move.w	#$180,priority(a0)
 		move.b	#$14,width_pixels(a0)
 		move.b	#$1C,height_pixels(a0)
@@ -77821,32 +77821,32 @@ word_413BE:	dc.w 2-1
 		dc.b "F",0
 		even
 S3Credits_PlaneMapSmall:
-		dc.w    1,   2	; a
-		dc.w    3,   4	; b
-		dc.w    5,   6	; c
-		dc.w    7,   8	; d
-		dc.w    9,  $A	; e
-		dc.w    9,  $B	; f
-		dc.w   $C,   6	; g
-		dc.w   $D,   2	; h
-		dc.w   $E,  $F	; i
-		dc.w  $10,   6	; j
-		dc.w  $11, $12	; k
-		dc.w  $13, $14	; l
-		dc.w  $15, $16	; m
-		dc.w  $17, $18	; n
-		dc.w  $19,   6	; o
-		dc.w  $1A,  $B	; p
-		dc.w  $1B, $1C	; q
-		dc.w    3,   2	; r
-		dc.w  $1D,   6	; s
-		dc.w  $1E,  $F	; t
-		dc.w  $1F,   6	; u
-		dc.w  $1F, $20	; v
-		dc.w  $21, $22	; w
-		dc.w  $23, $18	; x
-		dc.w  $24,  $F	; y
-		dc.w  $25, $26	; z
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText,0,0),     make_art_tile(ArtTile_S3Fonts_SmallText+1,0,0)	; a
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+2,0,0),   make_art_tile(ArtTile_S3Fonts_SmallText+3,0,0)	; b
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+4,0,0),   make_art_tile(ArtTile_S3Fonts_SmallText+5,0,0)	; c
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+6,0,0),   make_art_tile(ArtTile_S3Fonts_SmallText+7,0,0)	; d
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+8,0,0),   make_art_tile(ArtTile_S3Fonts_SmallText+9,0,0)	; e
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+8,0,0),   make_art_tile(ArtTile_S3Fonts_SmallText+$A,0,0)	; f
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+$B,0,0),  make_art_tile(ArtTile_S3Fonts_SmallText+5,0,0)	; g
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+$C,0,0),  make_art_tile(ArtTile_S3Fonts_SmallText+1,0,0)	; h
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+$D,0,0),  make_art_tile(ArtTile_S3Fonts_SmallText+$E,0,0)	; i
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+$F,0,0),  make_art_tile(ArtTile_S3Fonts_SmallText+5,0,0)	; j
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+$10,0,0), make_art_tile(ArtTile_S3Fonts_SmallText+$11,0,0)	; k
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+$12,0,0), make_art_tile(ArtTile_S3Fonts_SmallText+$13,0,0)	; l
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+$14,0,0), make_art_tile(ArtTile_S3Fonts_SmallText+$15,0,0)	; m
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+$16,0,0), make_art_tile(ArtTile_S3Fonts_SmallText+$17,0,0)	; n
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+$18,0,0), make_art_tile(ArtTile_S3Fonts_SmallText+5,0,0)	; o
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+$19,0,0), make_art_tile(ArtTile_S3Fonts_SmallText+$A,0,0)	; p
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+$1A,0,0), make_art_tile(ArtTile_S3Fonts_SmallText+$1B,0,0)	; q
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+2,0,0),   make_art_tile(ArtTile_S3Fonts_SmallText+1,0,0)	; r
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+$1C,0,0), make_art_tile(ArtTile_S3Fonts_SmallText+5,0,0)	; s
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+$1D,0,0), make_art_tile(ArtTile_S3Fonts_SmallText+$E,0,0)	; t
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+$1E,0,0), make_art_tile(ArtTile_S3Fonts_SmallText+5,0,0)	; u
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+$1E,0,0), make_art_tile(ArtTile_S3Fonts_SmallText+$1F,0,0)	; v
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+$20,0,0), make_art_tile(ArtTile_S3Fonts_SmallText+$21,0,0)	; w
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+$22,0,0), make_art_tile(ArtTile_S3Fonts_SmallText+$17,0,0)	; x
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+$23,0,0), make_art_tile(ArtTile_S3Fonts_SmallText+$E,0,0)	; y
+		dc.w make_art_tile(ArtTile_S3Fonts_SmallText+$24,0,0), make_art_tile(ArtTile_S3Fonts_SmallText+$25,0,0)	; z
 S3Credits_PlaneMapLarge:
 		dc.w word_4146C-S3Credits_PlaneMapLarge	; A
 		dc.w word_4147A-S3Credits_PlaneMapLarge	; B
@@ -77879,65 +77879,94 @@ S3Credits_PlaneMapLarge:
 		dc.w word_415F4-S3Credits_PlaneMapLarge	; )
 		dc.w word_41602-S3Credits_PlaneMapLarge	; space
 word_4146C:	dc.w 2-1
-		dc.w  $2029, $202A, $202B, $202C, $202D, $202C
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText,1,0),           make_art_tile(ArtTile_S3Fonts_BigText+1,1,0),         make_art_tile(ArtTile_S3Fonts_BigText+2,1,0)
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+3,1,0),         make_art_tile(ArtTile_S3Fonts_BigText+4,1,0),         make_art_tile(ArtTile_S3Fonts_BigText+3,1,0)
 word_4147A:	dc.w 2-1
-		dc.w  $202E, $202F, $2030, $2031, $2032, $2033
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+5,1,0),         make_art_tile(ArtTile_S3Fonts_BigText+6,1,0),         make_art_tile(ArtTile_S3Fonts_BigText+7,1,0)
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+8,1,0),         make_art_tile(ArtTile_S3Fonts_BigText+9,1,0),         make_art_tile(ArtTile_S3Fonts_BigText+$A,1,0)
 word_41488:	dc.w 2-1
-		dc.w  $2034, $2035, $2036, $2037, $2038, $2039
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$B,1,0),        make_art_tile(ArtTile_S3Fonts_BigText+$C,1,0),        make_art_tile(ArtTile_S3Fonts_BigText+$D,1,0)
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$E,1,0),        make_art_tile(ArtTile_S3Fonts_BigText+$F,1,0),        make_art_tile(ArtTile_S3Fonts_BigText+$10,1,0)
 word_41496:	dc.w 2-1
-		dc.w  $203A, $2834, $203B, $2836, $203C, $2838
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$11,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$B,1,0)|$800,   make_art_tile(ArtTile_S3Fonts_BigText+$12,1,0)
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$D,1,0)|$800,   make_art_tile(ArtTile_S3Fonts_BigText+$13,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$F,1,0)|$800
 word_414A4:	dc.w 2-1
-		dc.w  $203D, $203E, $202D, $2037, $203F, $2040
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$14,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$15,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+4,1,0)
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$E,1,0),        make_art_tile(ArtTile_S3Fonts_BigText+$16,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$17,1,0)
 word_414B2:	dc.w 2-1
-		dc.w  $203D, $203E, $202D, $2037, $202D, $2037
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$14,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$15,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+4,1,0)
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$E,1,0),        make_art_tile(ArtTile_S3Fonts_BigText+4,1,0),         make_art_tile(ArtTile_S3Fonts_BigText+$E,1,0)
 word_414C0:	dc.w 2-1
-		dc.w  $2041, $2042, $2043, $202D, $2044, $2045
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$18,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$19,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$1A,1,0)
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+4,1,0),         make_art_tile(ArtTile_S3Fonts_BigText+$1B,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$1C,1,0)
 word_414CE:	dc.w 2-1
-		dc.w  $2046, $2047, $202D, $202C, $202D, $202C
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$1D,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$1E,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+4,1,0)
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+3,1,0),         make_art_tile(ArtTile_S3Fonts_BigText+4,1,0),         make_art_tile(ArtTile_S3Fonts_BigText+3,1,0)
 word_414DC:	dc.w 1-1
-		dc.w  $2048, $203B, $203B
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$1F,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$12,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$12,1,0)
 word_414E4:	dc.w 1-1
-		dc.w  $2049, $282C, $204A
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$20,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+3,1,0)|$800,    make_art_tile(ArtTile_S3Fonts_BigText+$21,1,0)
 word_414EC:	dc.w 2-1
-		dc.w  $204B, $204C, $204D, $204E, $204F, $2050
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$22,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$23,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$24,1,0)
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$25,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$26,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$27,1,0)
 word_414FA:	dc.w 1-1
-		dc.w  $2048, $203B, $2051
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$1F,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$12,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$28,1,0)
 word_41502:	dc.w 3-1
-		dc.w  $2052, $2053, $2054, $2055, $2056, $2057, $3855, $2058, $2059
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$29,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$2A,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$2B,1,0)
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$2C,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$2D,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$2E,1,0)
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$2C,1,0)|$1800, make_art_tile(ArtTile_S3Fonts_BigText+$2F,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$30,1,0)
 word_41516:	dc.w 2-1
-		dc.w  $205A, $2047, $203B, $202C, $203B, $202C
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$31,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$1E,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$12,1,0)
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+3,1,0),         make_art_tile(ArtTile_S3Fonts_BigText+$12,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+3,1,0)
 word_41524:	dc.w 3-1
-		dc.w  $205B, $205C, $285B, $2043, $2037, $2843, $205D, $205E, $285D
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$32,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$33,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$32,1,0)|$800
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$1A,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$E,1,0),        make_art_tile(ArtTile_S3Fonts_BigText+$1A,1,0)|$800
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$34,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$35,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$34,1,0)|$800
 word_41538:	dc.w 2-1
-		dc.w  $205F, $2060, $3030, $3031, $2061, $2037
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$36,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$37,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+7,1,0)|$1000
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+8,1,0)|$1000,   make_art_tile(ArtTile_S3Fonts_BigText+$38,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$E,1,0)
 word_41546:	dc.w 3-1
-		dc.w  $205B, $205C, $285B, $2043, $2037, $2843, $205D, $2062, $2063
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$32,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$33,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$32,1,0)|$800
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$1A,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$E,1,0),        make_art_tile(ArtTile_S3Fonts_BigText+$1A,1,0)|$800
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$34,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$39,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$3A,1,0)
 word_4155A:	dc.w 2-1
-		dc.w  $205F, $2060, $3030, $3031, $2064, $2065
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$36,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$37,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+7,1,0)|$1000
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+8,1,0)|$1000,   make_art_tile(ArtTile_S3Fonts_BigText+$3B,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$3C,1,0)
 word_41568:	dc.w 2-1
-		dc.w  $2066, $2067, $2068, $2069, $206A, $206B
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$3D,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$3E,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$3F,1,0)
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$40,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$41,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$42,1,0)
 word_41576:	dc.w 2-1
-		dc.w  $206C, $2067, $282D, $2037, $282D, $2037
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$43,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$3E,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+4,1,0)|$800
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$E,1,0),        make_art_tile(ArtTile_S3Fonts_BigText+4,1,0)|$800,    make_art_tile(ArtTile_S3Fonts_BigText+$E,1,0)
 word_41584:	dc.w 2-1
-		dc.w  $206D, $206E, $206F, $2070, $2071, $2072
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$44,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$45,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$46,1,0)
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$47,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$48,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$49,1,0)
 word_41592:	dc.w 2-1
-		dc.w  $2073, $2074, $3055, $2075, $2076, $2077
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$4A,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$4B,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$2C,1,0)|$1000
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$4C,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$4D,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$4E,1,0)
 word_415A0:	dc.w 3-1
-		dc.w  $2073, $2078, $2079, $3055, $3056, $3057, $2076, $207A, $207B
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$4A,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$4F,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$50,1,0)
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$2C,1,0)|$1000, make_art_tile(ArtTile_S3Fonts_BigText+$2D,1,0)|$1000, make_art_tile(ArtTile_S3Fonts_BigText+$2E,1,0)|$1000
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$4D,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$51,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$52,1,0)
 word_415B4:	dc.w 2-1
-		dc.w  $207C, $207D, $207E, $287E, $207F, $2080
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$53,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$54,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$55,1,0)
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$55,1,0)|$800,  make_art_tile(ArtTile_S3Fonts_BigText+$56,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$57,1,0)
 word_415C2:	dc.w 2-1
-		dc.w  $2081, $2082, $282C, $2037, $282C, $2037
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$58,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$59,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+3,1,0)|$800
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$E,1,0),        make_art_tile(ArtTile_S3Fonts_BigText+3,1,0)|$800,    make_art_tile(ArtTile_S3Fonts_BigText+$E,1,0)
 word_415D0:	dc.w 2-1
-		dc.w  $2083, $2084, $2085, $2037, $2086, $2087
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$5A,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$5B,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$5C,1,0)
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$E,1,0),        make_art_tile(ArtTile_S3Fonts_BigText+$5D,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$5E,1,0)
 word_415DE:	dc.w 1-1
-		dc.w  $202F, $2037, $2088
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+6,1,0),         make_art_tile(ArtTile_S3Fonts_BigText+$E,1,0),        make_art_tile(ArtTile_S3Fonts_BigText+$5F,1,0)
 word_415E6:	dc.w 2-1
-		dc.w  $2089, $208A, $208B, $2037, $208C, $208D
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$60,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$61,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$62,1,0)
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$E,1,0),        make_art_tile(ArtTile_S3Fonts_BigText+$63,1,0),       make_art_tile(ArtTile_S3Fonts_BigText+$64,1,0)
 word_415F4:	dc.w 2-1
-		dc.w  $288A, $2889, $2037, $288B, $288D, $288C
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$61,1,0)|$800,  make_art_tile(ArtTile_S3Fonts_BigText+$60,1,0)|$800,  make_art_tile(ArtTile_S3Fonts_BigText+$E,1,0)
+		dc.w make_art_tile(ArtTile_S3Fonts_BigText+$62,1,0)|$800,  make_art_tile(ArtTile_S3Fonts_BigText+$64,1,0)|$800,  make_art_tile(ArtTile_S3Fonts_BigText+$63,1,0)|$800
 word_41602:	dc.w 1-1
-		dc.w      0,     0,     0
+		dc.w     0,     0,     0
 Pal_Ending:
 		binclude "General/Ending/Palettes/S3 Ending.bin"
 		even
@@ -78304,7 +78333,7 @@ byte_4346A:
 		binclude "General/S2Menu/Palettes/Sega Screen 3.bin"
 ObjDat3_434E0:
 		dc.l Map_SonicOnSegaScr
-		dc.w make_art_tile($088,2,1)
+		dc.w make_art_tile(ArtTile_S2Sega+8,2,1)
 		dc.w    $80
 		dc.b  $10
 		dc.b    0
@@ -78388,23 +78417,23 @@ loc_43666:
 
 ; ---------------------------------------------------------------------------
 ObjB1_Streak_fade_to_right:
-		dc.w make_art_tile($080,1,1)
-		dc.w make_art_tile($081,1,1)
-		dc.w make_art_tile($082,1,1)
-		dc.w make_art_tile($083,1,1)
-		dc.w make_art_tile($084,1,1)
-		dc.w make_art_tile($085,1,1)
-		dc.w make_art_tile($086,1,1)
-		dc.w make_art_tile($087,1,1)|(1<<$A)
+		dc.w make_art_tile(ArtTile_S2Sega+0,1,1)
+		dc.w make_art_tile(ArtTile_S2Sega+1,1,1)
+		dc.w make_art_tile(ArtTile_S2Sega+2,1,1)
+		dc.w make_art_tile(ArtTile_S2Sega+3,1,1)
+		dc.w make_art_tile(ArtTile_S2Sega+4,1,1)
+		dc.w make_art_tile(ArtTile_S2Sega+5,1,1)
+		dc.w make_art_tile(ArtTile_S2Sega+6,1,1)
+		dc.w make_art_tile(ArtTile_S2Sega+7,1,1)|(1<<$A)
 ObjB1_Streak_fade_to_left:
-		dc.w make_art_tile($087,1,1)|(1<<$A)
-		dc.w make_art_tile($086,1,1)
-		dc.w make_art_tile($085,1,1)
-		dc.w make_art_tile($084,1,1)
-		dc.w make_art_tile($083,1,1)
-		dc.w make_art_tile($082,1,1)
-		dc.w make_art_tile($081,1,1)
-		dc.w make_art_tile($080,1,1)
+		dc.w make_art_tile(ArtTile_S2Sega+7,1,1)|(1<<$A)
+		dc.w make_art_tile(ArtTile_S2Sega+6,1,1)
+		dc.w make_art_tile(ArtTile_S2Sega+5,1,1)
+		dc.w make_art_tile(ArtTile_S2Sega+4,1,1)
+		dc.w make_art_tile(ArtTile_S2Sega+3,1,1)
+		dc.w make_art_tile(ArtTile_S2Sega+2,1,1)
+		dc.w make_art_tile(ArtTile_S2Sega+1,1,1)
+		dc.w make_art_tile(ArtTile_S2Sega+0,1,1)
 Streak_Horizontal_offsets:
 		dc.b  $12
 		dc.b    4
@@ -79359,42 +79388,42 @@ RawAni_43F54:
 		dc.b    0,   1,   0, $16
 ObjDat3_43F58:
 		dc.l Map_GumballBonus
-		dc.w make_art_tile($15B,0,0)
+		dc.w make_art_tile(ArtTile_BonusStage,0,0)
 		dc.w   $200
 		dc.b  $10, $20,   0,   0
 ObjDat3_43F64:
 		dc.l Map_GumballBonus
-		dc.w make_art_tile($15B,1,1)
+		dc.w make_art_tile(ArtTile_BonusStage,1,1)
 		dc.w   $100
 		dc.b  $40, $10, $13,   0
 ObjDat3_43F70:
 		dc.l Map_GumballBonus
-		dc.w make_art_tile($15B,1,1)
+		dc.w make_art_tile(ArtTile_BonusStage,1,1)
 		dc.w   $100
 		dc.b    4, $10, $12,   0
 ObjDat_GumballMachine:
 		dc.l Map_GumballBonus
-		dc.w make_art_tile($15B,1,1)
+		dc.w make_art_tile(ArtTile_BonusStage,1,1)
 		dc.w   $100
 		dc.b  $18, $18,   5,   0
 ObjDat3_43F88:
 		dc.l Map_GumballBonus
-		dc.w make_art_tile($15B,1,1)
+		dc.w make_art_tile(ArtTile_BonusStage,1,1)
 		dc.w   $100
 		dc.b  $14, $14,   2,   0
 ObjDat3_43F94:
 		dc.l Map_Spring
-		dc.w make_art_tile($4A4,0,0)
+		dc.w make_art_tile(ArtTile_SpikesSprings+$10,0,0)
 		dc.w   $100
 		dc.b  $10, $10,   0,   0
 ObjDat3_43FA0:
 		dc.l Map_GumballBonus
-		dc.w make_art_tile($15B,1,1)
+		dc.w make_art_tile(ArtTile_BonusStage,1,1)
 		dc.w   $100
 		dc.b    8,   8, $15,   0
 ObjDat3_43FAC:
 		dc.l Map_GumballBonus
-		dc.w make_art_tile($15B,0,1)
+		dc.w make_art_tile(ArtTile_BonusStage,0,1)
 		dc.w   $100
 		dc.b    8,   8,   8,   0
 ObjDat3_43FB8:
@@ -80872,7 +80901,7 @@ Obj_CutsceneButton:
 		jmp	(Load_PLC_Raw).l
 ; ---------------------------------------------------------------------------
 PLC_CutsceneButton: plrlistheader
-		plreq $456, ArtNem_GrayButton
+		plreq ArtTile_GrayButton, ArtNem_GrayButton
 PLC_CutsceneButton_End
 ; ---------------------------------------------------------------------------
 
@@ -81069,12 +81098,12 @@ ObjSlot_CutsceneKnux:
 		dc.b  $1C, $18, $16,   0
 ObjDat_CutsceneButton:
 		dc.l Map_Button
-		dc.w make_art_tile($456,0,1)
+		dc.w make_art_tile(ArtTile_GrayButton,0,1)
 		dc.w   $100
 		dc.b  $10,   8,   0,   0
 ObjDat3_456FA:
 		dc.l Map_LBZKnuxBomb
-		dc.w make_art_tile($4D6,1,1)
+		dc.w make_art_tile(ArtTile_LBZKnuxBomb,1,1)
 		dc.w    $80
 		dc.b    8,   8,   0,   0
 ObjDat3_45706:
@@ -81416,7 +81445,7 @@ loc_45B40:
 loc_45B56:
 		move.l	#loc_45BAA,(a0)
 		move.l	#Map_AIZIntroPlane,mappings(a0)
-		move.w	#make_art_tile($529,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_AIZIntroPlane,0,0),art_tile(a0)
 		move.w	#$280,priority(a0)
 		move.b	#$40,width_pixels(a0)
 	if FixBugs
@@ -81428,10 +81457,10 @@ loc_45B56:
 	endif
 		jsr	Swing_Setup1(pc)
 		lea	(ArtKosM_AIZIntroPlane).l,a1
-		move.w	#tiles_to_bytes($529),d2
+		move.w	#tiles_to_bytes(ArtTile_AIZIntroPlane),d2
 		jsr	(Queue_Kos_Module).l
 		lea	(ArtKosM_AIZIntroEmeralds).l,a1
-		move.w	#tiles_to_bytes($5B1),d2
+		move.w	#tiles_to_bytes(ArtTile_AIZIntroEmeralds),d2
 		jsr	(Queue_Kos_Module).l
 		lea	ChildObjDat_45E3E(pc),a2
 		jmp	(CreateChild1_Normal).l
@@ -81469,7 +81498,7 @@ loc_45BFA:
 
 loc_45C00:
 		move.l	#Map_AIZIntroPlane,mappings(a0)
-		move.w	#make_art_tile($529,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_AIZIntroPlane,0,0),art_tile(a0)
 		move.w	#$280,priority(a0)
 		move.b	#4,width_pixels(a0)
 	if FixBugs
@@ -81490,7 +81519,7 @@ loc_45C26:
 
 loc_45C3E:
 		move.l	#Map_AIZIntroPlane,mappings(a0)
-		move.w	#make_art_tile($529,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_AIZIntroPlane,0,0),art_tile(a0)
 		move.w	#$280,priority(a0)
 		move.b	#4,width_pixels(a0)
 	if FixBugs
@@ -81512,7 +81541,7 @@ loc_45C64:
 loc_45C7C:
 		move.l	#loc_45CB6,(a0)
 		move.l	#Map_AIZIntroWaves,mappings(a0)
-		move.w	#make_art_tile($3D1,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_AIZIntroSprites,0,0),art_tile(a0)
 		move.w	#$100,priority(a0)
 		move.b	#$10,width_pixels(a0)
 		bset	#0,render_flags(a0)
@@ -81675,7 +81704,7 @@ locret_45E28:
 ; ---------------------------------------------------------------------------
 ObjDat3_45E2A:
 		dc.l Map_AIZIntroEmeralds
-		dc.w make_art_tile($5B1,3,0)
+		dc.w make_art_tile(ArtTile_AIZIntroEmeralds,3,0)
 		dc.w   $280
 		dc.b    4,   4,   1,   0
 ChildObjDat_45E36:
@@ -82239,17 +82268,17 @@ loc_463B6:
 ; ---------------------------------------------------------------------------
 ObjDat_RobotnikHead:
 		dc.l Map_RobotnikShip
-		dc.w make_art_tile($52E,0,0)
+		dc.w make_art_tile(ArtTile_RobotnikShip,0,0)
 		dc.w   $280
 		dc.b  $10,   8,   0,   0
 ObjDat_FBZRobotnikHead:
 		dc.l Map_FBZRobotnikHead
-		dc.w make_art_tile($410,0,0)
+		dc.w make_art_tile(ArtTile_FBZRobotnikHead-$20,0,0)
 		dc.w   $280
 		dc.b  $10,   8,   0,   0
 ObjDat_RobotnikShip:
 		dc.l Map_RobotnikShip
-		dc.w make_art_tile($52E,0,0)
+		dc.w make_art_tile(ArtTile_RobotnikShip,0,0)
 		dc.w   $280
 		dc.b  $1C, $20,   8,   0
 ObjDat3_RoboShipFlame:
@@ -82721,7 +82750,7 @@ loc_468A6:
 
 loc_468B2:
 		move.l	#Map_BossExplosion,mappings(a0)
-		move.w	#make_art_tile($4D2,0,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_BossExplosion2,0,1),art_tile(a0)
 		move.l	#byte_4707A,$30(a0)
 		move.l	#Go_Delete_Sprite,$34(a0)
 		cmpi.b	#6,subtype(a0)
@@ -83360,42 +83389,42 @@ word_46F04:
 		dc.w   $888,  $AAA,  $EEE,  $AAA
 ObjDat_AIZMiniboss:
 		dc.l Map_AIZMiniboss
-		dc.w make_art_tile($41A,1,1)
+		dc.w make_art_tile(ArtTile_AIZMiniboss,1,1)
 		dc.w   $200
 		dc.b  $20, $20,   0,  $F
 word_46F20:
-		dc.w make_art_tile($41A,0,1)
+		dc.w make_art_tile(ArtTile_AIZMiniboss,0,1)
 		dc.w   $180
 		dc.b  $28, $10,   2, $9C
 word_46F28:
-		dc.w make_art_tile($41A,1,1)
+		dc.w make_art_tile(ArtTile_AIZMiniboss,1,1)
 		dc.w   $200
 		dc.b    4,   8,   6,   0
 word_46F30:
-		dc.w make_art_tile($41A,1,1)
+		dc.w make_art_tile(ArtTile_AIZMiniboss,1,1)
 		dc.w   $280
 		dc.b    8,   8,   3,   0
 word_46F38:
-		dc.w make_art_tile($41A,0,0)
+		dc.w make_art_tile(ArtTile_AIZMiniboss,0,0)
 		dc.w   $200
 		dc.b    8,   8,   7,   0
 word_46F40:
-		dc.w make_art_tile($41A,0,0)
+		dc.w make_art_tile(ArtTile_AIZMiniboss,0,0)
 		dc.w   $280
 		dc.b    8, $10,  $C, $98
 ObjDat3_46F48:
 		dc.l Map_BossExplosion
-		dc.w make_art_tile($4D2,0,0)
+		dc.w make_art_tile(ArtTile_BossExplosion2,0,0)
 		dc.w    $80
 		dc.b   $C,  $C,   0, $97
 ObjDat_AIZMiniboss_Flame:
 		dc.l Map_AIZMinibossFlame
-		dc.w make_art_tile($482,0,1)
+		dc.w make_art_tile(ArtTile_AIZBossFire,0,1)
 		dc.w   $100
 		dc.b  $10, $10,   0, $8B
 ObjDat3_46F60:
 		dc.l Map_AIZMinibossSmall
-		dc.w make_art_tile($474,1,0)
+		dc.w make_art_tile(ArtTile_AIZMinibossSmall,1,0)
 		dc.w   $380
 		dc.b  $10, $10,   0,   0
 word_46F6C:
@@ -83560,7 +83589,7 @@ loc_470BE:
 		moveq	#$6B,d0
 		jsr	(Load_PLC).l					; Load Robotnik's ship and explosions
 		lea	(ArtKosM_AIZEndBoss).l,a1
-		move.w	#tiles_to_bytes($180),d2
+		move.w	#tiles_to_bytes(ArtTile_AIZEndBoss),d2
 		jsr	(Queue_Kos_Module).l		; Load the AIZ boss ship
 		lea	Pal_AIZEndBoss(pc),a1
 		jmp	(PalLoad_Line1).l				; Load the AIZ boss palette
@@ -84479,7 +84508,7 @@ loc_47B08:
 ; ---------------------------------------------------------------------------
 ObjDat_AIZEndBoss:
 		dc.l Map_AIZEndBoss
-		dc.w make_art_tile($180,1,1)	; VRAM
+		dc.w make_art_tile(ArtTile_AIZEndBoss,1,1)	; VRAM
 		dc.w   $280			; Priority
 		dc.b  $28, $20,   0, $10	; Width, Height, Frame, Collision
 word_47B36:
@@ -84498,12 +84527,12 @@ word_47B4E:
 		dc.w   $100
 		dc.b    8,   8, $18,   0
 word_47B54:
-		dc.w make_art_tile($180,0,1)
+		dc.w make_art_tile(ArtTile_AIZEndBoss,0,1)
 		dc.w   $100
 		dc.b  $30, $30, $24,   0
 ObjDat_AIZEndBoss2:
 		dc.l Map_AIZEndBoss
-		dc.w make_art_tile($180,0,1)
+		dc.w make_art_tile(ArtTile_AIZEndBoss,0,1)
 		dc.w   $100
 		dc.b  $18, $10, $21,   0
 word_47B68:
@@ -86081,35 +86110,35 @@ word_48B18:
 		dc.w   $AAA,  $AAA,  $888,  $AAA,  $EEE,  $888,  $AAA
 ObjDat_HCZMiniboss_Loop:
 		dc.l Map_HCZMiniboss
-		dc.w make_art_tile($304,1,1)
+		dc.w make_art_tile(ArtTile_HCZMiniboss,1,1)
 		dc.w   $280
 		dc.b  $20, $20,   0,  $F
 ObjDat_HCZMiniboss_Rockets:
 		dc.l Map_HCZMiniboss
-		dc.w make_art_tile($304,1,1)
+		dc.w make_art_tile(ArtTile_HCZMiniboss,1,1)
 		dc.w   $200
 		dc.b  $10, $10,   1, $8B
 word_48B4C:
-		dc.w make_art_tile($304,0,1)
+		dc.w make_art_tile(ArtTile_HCZMiniboss,0,1)
 		dc.w   $280
 		dc.b  $10, $10, $15,   0
 ObjDat2_HCZMiniboss_Engine:
-		dc.w make_art_tile($304,0,1)
+		dc.w make_art_tile(ArtTile_HCZMiniboss,0,1)
 		dc.w   $280
 		dc.b  $10, $10, $15, $92
 ObjDat3_48B5C:
 		dc.l Map_HCZMiniboss
-		dc.w make_art_tile($304,1,1)
+		dc.w make_art_tile(ArtTile_HCZMiniboss,1,1)
 		dc.w   $280
 		dc.b  $10, $28, $16,   0
 ObjDat3_48B68:
 		dc.l Map_Bubbler
-		dc.w make_art_tile($45C,1,1)
+		dc.w make_art_tile(ArtTile_Bubbles,1,1)
 		dc.w   $280
 		dc.b  $10, $10,   0,   0
 ObjSlot_48B74:
 		dc.w 3-1
-		dc.w make_art_tile($3FC,0,1)
+		dc.w make_art_tile(ArtTile_HCZMinibossSplash,0,1)
 		dc.w    $10,     0
 		dc.l Map_HCZMinibossSplash
 		dc.w    $80
@@ -86998,7 +87027,7 @@ loc_495C0:
 
 loc_495C6:
 		lea	(ArtKosM_HCZGeyserVert).l,a1
-		move.w	#tiles_to_bytes($36B),d2
+		move.w	#tiles_to_bytes(ArtTile_HCZCutsceneGeyser),d2
 		jsr	(Queue_Kos_Module).l
 		move.l	#loc_495DC,(a0)
 
@@ -87594,7 +87623,7 @@ loc_49B08:
 		bne.s	locret_49B60
 		move.l	#loc_2E9AA,(a1)
 		move.l	#Map_HCZWaterWallDebris,mappings(a1)
-		move.w	#make_art_tile($3C3,2,0),art_tile(a1)
+		move.w	#make_art_tile(ArtTile_HCZCutsceneGeyser+$58,2,0),art_tile(a1)
 		move.b	#$84,render_flags(a1)
 		move.b	(a3)+,d0
 		ext.w	d0
@@ -87617,7 +87646,7 @@ locret_49B60:
 ; ---------------------------------------------------------------------------
 ObjDat_HCZEndBoss:
 		dc.l Map_HCZEndBoss
-		dc.w make_art_tile($320,1,1)
+		dc.w make_art_tile(ArtTile_HCZEndBoss,1,1)
 		dc.w   $100
 		dc.b  $2C, $1C,   0,   6
 word_49B6E:
@@ -87630,7 +87659,7 @@ word_49B7A:
 		dc.w   $200
 		dc.b  $1C,   4,   6,   0
 word_49B80:
-		dc.w make_art_tile($320,0,1)
+		dc.w make_art_tile(ArtTile_HCZEndBoss,0,1)
 		dc.w    $80
 		dc.b  $14,  $C, $17,   0
 word_49B88:
@@ -87640,12 +87669,12 @@ word_49B8E:
 		dc.w      0
 		dc.b  $10,   4, $1A,   0
 word_49B94:
-		dc.w make_art_tile($320,0,1)
+		dc.w make_art_tile(ArtTile_HCZEndBoss,0,1)
 		dc.w    $80
 		dc.b   $C,   8, $18,   0
 ObjDat3_49B9C:
 		dc.l Map_HCZEndBoss
-		dc.w make_art_tile($320,0,1)
+		dc.w make_art_tile(ArtTile_HCZEndBoss,0,1)
 		dc.w   $100
 		dc.b   $C, $10,   8,   0
 ObjDat3_49BA8:
@@ -87655,12 +87684,12 @@ ObjDat3_49BA8:
 		dc.b   $C,  $C,   0, $8B
 ObjDat3_49BB4:
 		dc.l Map_Bubbler
-		dc.w make_art_tile($45C,0,1)
+		dc.w make_art_tile(ArtTile_Bubbles,0,1)
 		dc.w   $280
 		dc.b  $10, $10,   0,   0
 ObjDat3_49BC0:
 		dc.l Map_HCZWaterWall
-		dc.w make_art_tile($36B,2,0)
+		dc.w make_art_tile(ArtTile_HCZCutsceneGeyser,2,0)
 		dc.w   $280
 		dc.b  $20, $60,   1,   0
 ChildObjDat_49BCC:
@@ -87866,10 +87895,10 @@ Obj_MGZ2DrillingRobotnik:
 		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		lea	(ArtKosM_MGZEndBoss).l,a1
-		move.w	#tiles_to_bytes($33F),d2
+		move.w	#tiles_to_bytes(ArtTile_MGZEndBoss),d2
 		jsr	(Queue_Kos_Module).l
 		lea	(ArtKosM_MGZEndBossDebris).l,a1
-		move.w	#tiles_to_bytes($45E),d2
+		move.w	#tiles_to_bytes(ArtTile_MGZEndBossDebris),d2
 		jsr	(Queue_Kos_Module).l
 		moveq	#$6D,d0
 		jsr	(Load_PLC).l
@@ -88120,10 +88149,10 @@ loc_4A04A:
 		moveq	#$14,d0
 		jsr	(Load_PLC).l
 		lea	(ArtKosM_Spiker).l,a1
-		move.w	#tiles_to_bytes($530),d2
+		move.w	#tiles_to_bytes(ArtTile_Spiker),d2
 		jsr	(Queue_Kos_Module).l
 		lea	(ArtKosM_Mantis).l,a1
-		move.w	#tiles_to_bytes($54F),d2
+		move.w	#tiles_to_bytes(ArtTile_Mantis),d2
 		jsr	(Queue_Kos_Module).l
 		lea	(PLC_MonitorsSpikesSprings).l,a1
 		jsr	(Load_PLC_Raw).l
@@ -88189,10 +88218,10 @@ loc_4A132:
 		move.w	#2*60,$2E(a0)
 		move.l	#loc_4A1C8,$34(a0)
 		lea	(ArtKosM_MGZEndBoss).l,a1
-		move.w	#tiles_to_bytes($33F),d2
+		move.w	#tiles_to_bytes(ArtTile_MGZEndBoss),d2
 		jsr	(Queue_Kos_Module).l
 		lea	(ArtKosM_MGZEndBossDebris).l,a1
-		move.w	#tiles_to_bytes($45E),d2
+		move.w	#tiles_to_bytes(ArtTile_MGZEndBossDebris),d2
 		jsr	(Queue_Kos_Module).l
 		moveq	#$6D,d0
 		jsr	(Load_PLC).l
@@ -89177,7 +89206,7 @@ loc_4ACFC:
 		lea	ObjDat3_4B3C8(pc),a1
 		jsr	(SetUp_ObjAttributes).l
 		move.l	#loc_4AD68,(a0)
-		move.w	#tiles_to_bytes($469),$3A(a0)
+		move.w	#tiles_to_bytes(ArtTile_MGZEndBossScaled),$3A(a0)
 		move.w	(Camera_X_pos).w,d0
 		addi.w	#$140,d0
 		move.w	d0,x_pos(a0)
@@ -89852,7 +89881,7 @@ byte_4B380:
 		even
 ObjDat_MGZDrillBoss:
 		dc.l Map_MGZEndBoss
-		dc.w make_art_tile($33F,1,0)
+		dc.w make_art_tile(ArtTile_MGZEndBoss,1,0)
 		dc.w   $300
 		dc.b  $24, $20,   0,  $F
 word_4B390:
@@ -89871,12 +89900,12 @@ word_4B3A8:
 		dc.w   $180
 		dc.b   $C,  $C,   6,   0
 word_4B3AE:
-		dc.w make_art_tile($33F,0,0)
+		dc.w make_art_tile(ArtTile_MGZEndBoss,0,0)
 		dc.w   $180
 		dc.b   $C,  $C, $19, $9A
 ObjDat3_4B3B6:
 		dc.l Map_MGZEndBossDebris
-		dc.w make_art_tile($45E,2,1)
+		dc.w make_art_tile(ArtTile_MGZEndBossDebris,2,1)
 		dc.w   $100
 		dc.b  $10, $10,   0,   0
 word_4B3C2:
@@ -89884,7 +89913,7 @@ word_4B3C2:
 		dc.b  $10,   4,   0,   0
 ObjDat3_4B3C8:
 		dc.l Map_ScaledArt
-		dc.w make_art_tile($469,1,0)
+		dc.w make_art_tile(ArtTile_MGZEndBossScaled,1,0)
 		dc.w   $300
 		dc.b  $20, $20,   0,   0
 ChildObjDat_4B3D4:
@@ -90963,7 +90992,7 @@ CNZMiniboss_CoilOpenRange:
 		dc.w    -$C,   $18,   $10,   $38
 ObjDat_CNZMiniboss:
 		dc.l Map_CNZMiniboss
-		dc.w make_art_tile($52E,1,1)
+		dc.w make_art_tile(ArtTile_CNZMiniboss,1,1)
 		dc.w   $280
 		dc.b  $18, $30,   0,  $C
 ObjDat3_CNZMinibossTop:
@@ -90977,7 +91006,7 @@ ObjDat3_CNZMbossBounceEffect:
 		dc.b    8,   8,  $C,   0
 ObjDat_CNZMinibossDebris:
 		dc.l Map_CNZMiniboss
-		dc.w make_art_tile($52E,1,1)
+		dc.w make_art_tile(ArtTile_CNZMiniboss,1,1)
 		dc.w   $100
 		dc.b  $10, $10,   0,   0
 Child1_CNZMinibossMakeTop:
@@ -91303,7 +91332,7 @@ loc_4C28C:
 		blo.s	locret_4C2C8
 		move.l	#loc_4C2CA,(a0)
 		lea	(ArtKosM_BadnikExplosion).l,a1
-		move.w	#tiles_to_bytes($5A0),d2
+		move.w	#tiles_to_bytes(ArtTile_Explosion),d2
 		jsr	(Queue_Kos_Module).l
 		jsr	(AllocateObject).l
 		bne.s	locret_4C2C8
@@ -91910,16 +91939,16 @@ loc_4C83E:
 ; ---------------------------------------------------------------------------
 ObjDat_CNZEndBoss:
 		dc.l Map_CNZEndBoss
-		dc.w make_art_tile($430,1,0)
+		dc.w make_art_tile(ArtTile_CNZEndBoss,1,0)
 		dc.w   $280
 		dc.b  $40, $14,   0,   6
 		dc.l Map_RobotnikShip
-		dc.w make_art_tile($52E,0,1)
+		dc.w make_art_tile(ArtTile_RobotnikShip,0,1)
 		dc.w   $280
 		dc.b  $20, $20,   5,   0
 ObjDat3_4C872:
 		dc.l Map_CNZEndBoss
-		dc.w make_art_tile($430,1,0)
+		dc.w make_art_tile(ArtTile_CNZEndBoss,1,0)
 		dc.w   $280
 		dc.b  $10, $10,   4, $8B
 word_4C87E:
@@ -91930,12 +91959,12 @@ word_4C884:
 		dc.b  $14, $14,   0,   0
 ObjDat3_4C88A:
 		dc.l Map_CNZEndBoss
-		dc.w make_art_tile($430,1,0)
+		dc.w make_art_tile(ArtTile_CNZEndBoss,1,0)
 		dc.w   $200
 		dc.b    8, $10,   1, $9E
 ObjDat3_4C896:
 		dc.l Map_CNZEndBoss
-		dc.w make_art_tile($430,1,0)
+		dc.w make_art_tile(ArtTile_CNZEndBoss,1,0)
 		dc.w    $80
 		dc.b  $10, $40,   6, $AB
 ChildObjDat_4C8A2:
@@ -92148,7 +92177,7 @@ loc_4CAA8:
 loc_4CAB6:
 		move.l	#loc_4CAD6,(a0)
 		move.l	#Map_EggCapsule,mappings(a0)
-		move.w	#make_art_tile($44E,0,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_EggCapsule-$46,0,1),art_tile(a0)
 		move.b	#5,mapping_frame(a0)
 		addq.w	#8,y_pos(a0)
 		rts
@@ -93180,7 +93209,7 @@ loc_4D456:
 ; ---------------------------------------------------------------------------
 ObjDat_FBZMiniboss:
 		dc.l Map_FBZMiniboss
-		dc.w make_art_tile($52E,1,1)
+		dc.w make_art_tile(ArtTile_FBZMiniboss,1,1)
 		dc.w   $200
 		dc.b  $20, $20,   0,   0
 word_4D474:
@@ -93206,12 +93235,12 @@ word_4D498:
 		dc.b  $10,   8,   4,   0
 ObjDat3_4D49E:	; unused
 		dc.l Map_EggCapsule
-		dc.w make_art_tile($494,0,1)
+		dc.w make_art_tile(ArtTile_EggCapsule,0,1)
 		dc.w   $100
 		dc.b    8,   8,   0,   0
 ObjDat3_4D4AA:
 		dc.l Map_EggCapsule
-		dc.w make_art_tile($44E,0,1)
+		dc.w make_art_tile(ArtTile_EggCapsule-$46,0,1)
 		dc.w   $200
 		dc.b  $20, $20,   1,   0
 ChildObjDat_4D4B6:
@@ -93556,7 +93585,7 @@ loc_4D868:
 		subq.w	#4,y_pos(a0)
 		move.w	#$200,x_vel(a0)
 		move.l	#Map_FBZRobotnikRun,mappings(a0)
-		move.w	#make_art_tile($4A9,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_FBZRobotnikRun,0,0),art_tile(a0)
 		clr.b	mapping_frame(a0)
 		clr.b	anim_frame_timer(a0)
 		clr.b	anim_frame(a0)
@@ -93789,7 +93818,7 @@ word_4DAF0:
 		dc.w   $EEE,  $EEE,  $EEE
 ObjDat_FBZ2Subboss:
 		dc.l Map_FBZ2Subboss
-		dc.w make_art_tile($52E,1,0)
+		dc.w make_art_tile(ArtTile_FBZ2Subboss,1,0)
 		dc.w   $280
 		dc.b  $20, $20,   0, $1C
 word_4DB08:
@@ -93802,12 +93831,12 @@ word_4DB14:
 		dc.w    $80
 		dc.b    8, $60,   4,   0
 word_4DB1A:
-		dc.w make_art_tile($52E,1,1)
+		dc.w make_art_tile(ArtTile_FBZ2Subboss,1,1)
 		dc.w    $80
 		dc.b  $18,   4,   5,   0
 ObjDat3_4DB22:
 		dc.l Map_FBZRobotnikStand
-		dc.w make_art_tile($466,0,1)
+		dc.w make_art_tile(ArtTile_FBZRobotnikStand,0,1)
 		dc.w   $280
 		dc.b  $20, $20,   0,   0
 ChildObjDat_4DB2E:
@@ -94542,7 +94571,7 @@ word_4E268:
 		dc.w   $888,  $AAA,  $EEE,  $AAA
 ObjDat_FBZEndBoss:
 		dc.l Map_FBZEndBoss
-		dc.w make_art_tile($3E0,1,1)
+		dc.w make_art_tile(ArtTile_FBZEndBoss-$20,1,1)
 		dc.w   $280
 		dc.b  $28, $18,   0, $16
 word_4E284:
@@ -94559,17 +94588,17 @@ word_4E296:
 		dc.b  $14, $10,   8,   0
 ObjDat3_4E29C:
 		dc.l Map_FBZEndBoss
-		dc.w make_art_tile($3E0,0,1)
+		dc.w make_art_tile(ArtTile_FBZEndBoss-$20,0,1)
 		dc.w    $80
 		dc.b    4,   8,   4, $8B
 ObjDat3_4E2A8:
 		dc.l Map_BossExplosion
-		dc.w make_art_tile($500,0,1)
+		dc.w make_art_tile(ArtTile_BossExplosion,0,1)
 		dc.w    $80
 		dc.b  $10, $10,   0, $8B
 ObjDat3_4E2B4:
 		dc.l Map_FBZEndBossFlame
-		dc.w make_art_tile($454,0,1)
+		dc.w make_art_tile(ArtTile_FBZEndBossFlame+$4,0,1)
 		dc.w    $80
 		dc.b  $10, $10,   0, $8B
 ChildObjDat_4E2C0:
@@ -95449,7 +95478,7 @@ word_4EB40:
 		dc.w   $EEE,  $EEE
 ObjDat3_4EB48:
 		dc.l Map_ICZMiniboss
-		dc.w make_art_tile($4A9,1,1)
+		dc.w make_art_tile(ArtTile_ICZMiniboss,1,1)
 		dc.w   $280
 		dc.b  $18, $18,   0,   6
 word_4EB54:
@@ -95457,7 +95486,7 @@ word_4EB54:
 		dc.b  $10,  $C,   1,   0
 ObjDat3_4EB5A:
 		dc.l Map_ICZMiniboss
-		dc.w make_art_tile($4A9,2,0)
+		dc.w make_art_tile(ArtTile_ICZMiniboss,2,0)
 		dc.w   $280
 		dc.b   $C,  $C,   6,   0
 word_4EB66:
@@ -96212,7 +96241,7 @@ word_4F392:
 		dc.w   $EEE,  $AAA
 ObjDat3_4F39A:
 		dc.l Map_ICZEndBoss
-		dc.w make_art_tile($2A6,1,1)
+		dc.w make_art_tile(ArtTile_ICZEndBoss,1,1)
 		dc.w   $280
 		dc.b  $24, $24,   0,  $F
 word_4F3A6:
@@ -96226,7 +96255,7 @@ word_4F3B2:
 		dc.b  $18, $2C,   2,   0
 ObjDat3_4F3B8:
 		dc.l Map_ICZEndBoss
-		dc.w make_art_tile($2A6,1,1)
+		dc.w make_art_tile(ArtTile_ICZEndBoss,1,1)
 		dc.w    $80
 		dc.b  $10, $10,   5,   0
 word_4F3C4:
@@ -96805,7 +96834,7 @@ word_4F930:
 		dc.w   -$80, -$100
 ObjDat_LBZMiniboss:
 		dc.l Map_LBZMiniboss
-		dc.w make_art_tile($4D6,1,1)
+		dc.w make_art_tile(ArtTile_LBZMiniboss,1,1)
 		dc.w   $280
 		dc.b  $20, $20,   0,   6
 word_4F954:
@@ -97739,29 +97768,29 @@ byte_5029E:
 		even
 ObjDat_LBZFinalBoss1:
 		dc.l Map_RobotnikShip
-		dc.w make_art_tile($52E,0,1)
+		dc.w make_art_tile(ArtTile_RobotnikShip,0,1)
 		dc.w   $280
 		dc.b  $20, $20,  $C,  $F
 word_502B0:
-		dc.w make_art_tile($3AA,1,1)
+		dc.w make_art_tile(ArtTile_LBZFinalBoss1,1,1)
 		dc.w   $200
 		dc.b  $10,   4, $15,   0
 word_502B8:
-		dc.w make_art_tile($3AA,1,1)
+		dc.w make_art_tile(ArtTile_LBZFinalBoss1,1,1)
 		dc.w   $300
 		dc.b   $C, $10, $16,   0
 ObjDat3_502C0:
 		dc.l Map_LBZFinalBoss1
-		dc.w make_art_tile($3AA,1,1)
+		dc.w make_art_tile(ArtTile_LBZFinalBoss1,1,1)
 		dc.w   $200
 		dc.b  $20, $14,   0, $AD
 ObjDat3_502CC:
 		dc.l Map_LBZFinalBoss1
-		dc.w make_art_tile($3AA,1,1)
+		dc.w make_art_tile(ArtTile_LBZFinalBoss1,1,1)
 		dc.w   $200
 		dc.b  $28, $18,   1, $AD
 word_502D8:
-		dc.w make_art_tile($3AA,0,1)
+		dc.w make_art_tile(ArtTile_LBZFinalBoss1,0,1)
 		dc.w   $280
 		dc.b   $C, $18,   9, $89
 word_502E0:
@@ -97771,7 +97800,7 @@ word_502E6:
 		dc.w   $180
 		dc.b   $C,  $C,   3,   0
 word_502EC:
-		dc.w make_art_tile($3AA,0,1)
+		dc.w make_art_tile(ArtTile_LBZFinalBoss1,0,1)
 		dc.w   $100
 		dc.b  $18,   8,  $F,   0
 word_502F4:
@@ -97779,17 +97808,17 @@ word_502F4:
 		dc.b    8,   8, $1C,   0
 ObjDat3_502FA:
 		dc.l Map_LBZFinalBoss1
-		dc.w make_art_tile($3AA,1,1)
+		dc.w make_art_tile(ArtTile_LBZFinalBoss1,1,1)
 		dc.w   $300
 		dc.b   $C,  $C,  $C, $97
 ObjDat3_50306:
 		dc.l Map_LBZFinalBoss1
-		dc.w make_art_tile($3AA,1,1)
+		dc.w make_art_tile(ArtTile_LBZFinalBoss1,1,1)
 		dc.w   $200
 		dc.b  $28,   8,   2,   0
 ObjDat3_50312:
 		dc.l Map_LBZFinalBoss1
-		dc.w make_art_tile($3AA,1,1)
+		dc.w make_art_tile(ArtTile_LBZFinalBoss1,1,1)
 		dc.w   $280
 		dc.b  $10,  $C, $10,   0
 ChildObjDat_5031E:
@@ -97923,7 +97952,7 @@ loc_50444:
 		moveq	#$77,d0
 		jsr	(Load_PLC).l
 		lea	(ArtKosM_LBZEndBoss).l,a1
-		move.w	#tiles_to_bytes($425),d2
+		move.w	#tiles_to_bytes(ArtTile_LBZEndBoss),d2
 		jsr	(Queue_Kos_Module).l
 		lea	Pal_LBZEndBoss(pc),a1
 		jmp	PalLoad_Line1(pc)
@@ -98563,7 +98592,7 @@ loc_50AD2:
 		bclr	#7,render_flags(a0)
 		move.w	#$7F,$2E(a0)
 		bset	#4,$38(a0)
-		move.w	#make_art_tile($425,1,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZEndBoss,1,1),art_tile(a0)
 		move.w	#-$200,y_vel(a0)
 		move.l	#loc_50594,$34(a0)
 		lea	(Child6_CreateBossExplosion).l,a2
@@ -98589,7 +98618,7 @@ loc_50B26:
 loc_50B38:
 		move.l	#MoveChkDel,(a0)
 		bset	#7,status(a0)
-		move.w	#make_art_tile($425,1,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_LBZEndBoss,1,1),art_tile(a0)
 		moveq	#0,d0
 		move.b	subtype(a0),d0
 		move.w	word_50B70(pc,d0.w),x_vel(a0)
@@ -98603,45 +98632,45 @@ word_50B70:
 		dc.w   $300,  $200, -$200, -$300
 ObjDat_LBZEndBoss:
 		dc.l Map_LBZEndBoss
-		dc.w make_art_tile($425,1,0)
+		dc.w make_art_tile(ArtTile_LBZEndBoss,1,0)
 		dc.w   $280
 		dc.b  $20, $10,   0, $18
 ObjDat3_50B84:
 		dc.l Map_FBZRobotnikRun
-		dc.w make_art_tile($4A9,0,0)
+		dc.w make_art_tile(ArtTile_FBZRobotnikRun,0,0)
 		dc.w   $280
 		dc.b  $20, $20,   0,   0
 ObjDat3_50B90:
 		dc.l Map_RobotnikShip
-		dc.w make_art_tile($52E,0,1)
+		dc.w make_art_tile(ArtTile_RobotnikShip,0,1)
 		dc.w   $300
 		dc.b  $10,   8,   4,   0
 ObjDat3_50B9C:
 		dc.l Map_LBZEndBoss
-		dc.w make_art_tile($425,1,0)
+		dc.w make_art_tile(ArtTile_LBZEndBoss,1,0)
 		dc.w   $300
 		dc.b    8, $20,  $C,   0
 word_50BA8:
 		dc.w   $280
 		dc.b    8, $18,   2,   0
 word_50BAE:
-		dc.w make_art_tile($425,1,1)
+		dc.w make_art_tile(ArtTile_LBZEndBoss,1,1)
 		dc.w   $200
 		dc.b    8,   8,  $D,   0
 word_50BB6:
 		dc.w   $280
 		dc.b  $10, $10,   5, $9A
 word_50BBC:
-		dc.w make_art_tile($425,0,0)
+		dc.w make_art_tile(ArtTile_LBZEndBoss,0,0)
 		dc.w   $200
 		dc.b    8,   8,   7,   0
 word_50BC4:
-		dc.w make_art_tile($425,1,1)
+		dc.w make_art_tile(ArtTile_LBZEndBoss,1,1)
 		dc.w   $200
 		dc.b    8,   8,  $A,   0
 ObjDat3_50BCC:
 		dc.l Map_LBZEndBoss
-		dc.w make_art_tile($425,2,0)
+		dc.w make_art_tile(ArtTile_LBZEndBoss,2,0)
 		dc.w   $280
 		dc.b    8,   8,  $E,   0
 ChildObjDat_50BD8:
@@ -98763,7 +98792,7 @@ loc_50CEE:
 		lea	Pal_LBZFinalBoss2(pc),a1
 		jsr	PalLoad_Line1(pc)
 		lea	(ArtKosM_LBZFinalBoss2).l,a1
-		move.w	#tiles_to_bytes($3D9),d2
+		move.w	#tiles_to_bytes(ArtTile_LBZFinalBoss2),d2
 		jsr	(Queue_Kos_Module).l
 		lea	(Child1_MakeRoboHead4).l,a2
 		jmp	CreateChild1_Normal(pc)
@@ -99166,7 +99195,7 @@ loc_510F8:
 		st	(Ctrl_1_locked).w
 		move.b	#$80,(Player_1+object_control).w
 		lea	(ArtKosM_LBZ2DeathEggSmall).l,a1
-		move.w	#tiles_to_bytes($4AE),d2
+		move.w	#tiles_to_bytes(ArtTile_LBZ2DeathEggSmall),d2
 		jsr	(Queue_Kos_Module).l
 
 loc_51142:
@@ -99751,7 +99780,7 @@ loc_5177E:
 		jsr	sub_5439C(pc)
 		lsl.w	#2,d0
 		movea.l	off_517AE(pc,d0.w),a1
-		move.w	#tiles_to_bytes($3D9),d2
+		move.w	#tiles_to_bytes(ArtTile_Ending_S3EndPose),d2
 		jmp	(Queue_Kos_Module).l
 ; ---------------------------------------------------------------------------
 off_517AE:
@@ -100049,7 +100078,7 @@ Obj_LBZ2UnusedRobotnik:
 		jsr	SetUp_ObjAttributes(pc)
 		move.l	#loc_51BB6,(a0)
 		bset	#0,render_flags(a0)
-		move.w	#tiles_to_bytes($3D9),$3A(a0)
+		move.w	#tiles_to_bytes(ArtTile_LBZFinalBoss2),$3A(a0)
 		move.b	#$30,$25(a0)
 		move.w	(Camera_X_pos).w,d0
 		addi.w	#$60,d0
@@ -100449,17 +100478,17 @@ loc_51F12:
 ; ---------------------------------------------------------------------------
 ObjDat_LBZFinalBoss2:
 		dc.l Map_RobotnikShip
-		dc.w make_art_tile($52E,0,0)
+		dc.w make_art_tile(ArtTile_RobotnikShip,0,0)
 		dc.w   $280
 		dc.b  $1C, $20,   5,   0
 ObjDat3_51F24:
 		dc.l Map_LBZFinalBoss2
-		dc.w make_art_tile($3D9,1,0)
+		dc.w make_art_tile(ArtTile_LBZFinalBoss2,1,0)
 		dc.w   $200
 		dc.b  $28, $28,   0,   0
 ObjDat3_51F30:
 		dc.l Map_LBZFinalBoss2
-		dc.w make_art_tile($3D9,1,0)
+		dc.w make_art_tile(ArtTile_LBZFinalBoss2,1,0)
 		dc.w   $180
 		dc.b  $20, $10,   2,   0
 word_51F3C:
@@ -100470,47 +100499,47 @@ word_51F42:
 		dc.b    8,   8,   3,   0
 ObjDat3_51F48:
 		dc.l Map_LBZFinalBoss2
-		dc.w make_art_tile($3D9,1,0)
+		dc.w make_art_tile(ArtTile_LBZFinalBoss2,1,0)
 		dc.w   $300
 		dc.b  $14,  $C,   1,   0
 ObjDat3_51F54:
 		dc.l Map_LBZFinalBoss2
-		dc.w make_art_tile($3D9,0,0)
+		dc.w make_art_tile(ArtTile_LBZFinalBoss2,0,0)
 		dc.w   $300
 		dc.b   $C,  $C,  $C,   0
 ObjDat3_51F60:
 		dc.l Map_LBZFinalBoss2
-		dc.w make_art_tile($3D9,1,1)
+		dc.w make_art_tile(ArtTile_LBZFinalBoss2,1,1)
 		dc.w   $100
 		dc.b  $10, $14,  $D,   0
 ObjDat3_51F6C:
 		dc.l Map_LBZDeathEggSmall
-		dc.w make_art_tile($4AE,2,0)
+		dc.w make_art_tile(ArtTile_LBZ2DeathEggSmall,2,0)
 		dc.w   $300
 		dc.b   $C,  $C,   7,   0
 ObjDat3_51F78:
 		dc.l Map_LBZDeathEggSmall
-		dc.w make_art_tile($4AE,1,0)
+		dc.w make_art_tile(ArtTile_LBZ2DeathEggSmall,1,0)
 		dc.w   $380
 		dc.b  $18, $18,   0,   0
 ObjDat3_51F84:
 		dc.l Map_LBZDeathEggSmall
-		dc.w make_art_tile($4AE,1,0)
+		dc.w make_art_tile(ArtTile_LBZ2DeathEggSmall,1,0)
 		dc.w   $300
 		dc.b    4,   4,   3,   0
 ObjDat3_51F90:
 		dc.l Map_LBZDeathEggSmall
-		dc.w make_art_tile($4AE,1,0)
+		dc.w make_art_tile(ArtTile_LBZ2DeathEggSmall,1,0)
 		dc.w   $300
 		dc.b    4,   4,   4,   0
 ObjDat_LBZ2UnusedRobotnik:
 		dc.l Map_ScaledArt
-		dc.w make_art_tile($3D9,0,0)
+		dc.w make_art_tile(ArtTile_LBZFinalBoss2,0,0)
 		dc.w   $300
 		dc.b  $20, $20,   0,   0
 ObjDat3_51FA8:
 		dc.l Map_SonicTailsEndPoses
-		dc.w make_art_tile($3D9,0,1)
+		dc.w make_art_tile(ArtTile_Ending_S3EndPose,0,1)
 		dc.w   $300
 		dc.b  $40, $40,   0,   0
 ChildObjDat_51FB4:
@@ -100877,7 +100906,7 @@ loc_52500:
 		jmp	Go_Delete_Sprite(pc)
 ; ---------------------------------------------------------------------------
 PLC_SpikesSprings: plrlistheader
-		plreq $494, ArtNem_SpikesSprings
+		plreq ArtTile_SpikesSprings, ArtNem_SpikesSprings
 PLC_SpikesSprings_End
 ; ---------------------------------------------------------------------------
 
@@ -101031,14 +101060,14 @@ locret_52658:
 ; ---------------------------------------------------------------------------
 ObjSlot_EndSigns:
 		dc.w 1-1
-		dc.w make_art_tile($4AC,0,0)
+		dc.w make_art_tile(ArtTile_EndSigns,0,0)
 		dc.w     $C,     0
 		dc.l Map_EndSigns
 		dc.w   $100
 		dc.b  $18, $10,   0,   0
 ObjDat_SignpostStub:
 		dc.l Map_SignpostStub
-		dc.w make_art_tile($69E,0,0)
+		dc.w make_art_tile(ArtTile_SignpostStub,0,0)
 		dc.w   $100
 		dc.b    4,   8,   0,   0
 ObjDat_SignpostSparkle:
@@ -101140,12 +101169,12 @@ AfterBoss_LBZ:
 ; ---------------------------------------------------------------------------
 PLC_AfterMiniboss_AIZ: plrlistheader
 		plreq ArtTile_Monitors, ArtNem_Monitors
-		plreq ArtTile_ArtNem_AIZMisc2, ArtNem_AIZMisc2
-		plreq $41B, ArtNem_AIZSwingVine
-		plreq $438, ArtNem_AIZBackgroundTree
-		plreq $45C, ArtNem_Bubbles
-		plreq $456, ArtNem_GrayButton
-		plreq $440, ArtNem_AIZCorkFloor2
+		plreq ArtTile_AIZMisc2, ArtNem_AIZMisc2
+		plreq ArtTile_AIZSwingVine, ArtNem_AIZSwingVine
+		plreq ArtTile_AIZBackgroundTree, ArtNem_AIZBackgroundTree
+		plreq ArtTile_Bubbles, ArtNem_Bubbles
+		plreq ArtTile_GrayButton, ArtNem_GrayButton
+		plreq ArtTile_AIZ2FloatingPlatform, ArtNem_AIZCorkFloor2
 PLC_AfterMiniboss_AIZ_End
 
 Pal_AfterMiniboss_AIZ:
@@ -101156,7 +101185,7 @@ Pal_AfterMiniboss_ICZ:
 		even
 PLC_MonitorsSpikesSprings: plrlistheader
 		plreq ArtTile_Monitors, ArtNem_Monitors
-		plreq $494, ArtNem_SpikesSprings
+		plreq ArtTile_SpikesSprings, ArtNem_SpikesSprings
 PLC_MonitorsSpikesSprings_End
 
 PLC_Monitors: plrlistheader
@@ -101165,12 +101194,12 @@ PLC_Monitors_End
 
 PLC_AnimalsAndExplosion: plrlistheader	; unused
 		plreq ArtTile_Explosion, ArtNem_Explosion
-		plreq $580, ArtNem_Squirrel
-		plreq $592, ArtNem_BlueFlicky
+		plreq ArtTile_Animals1, ArtNem_Squirrel
+		plreq ArtTile_Animals2, ArtNem_BlueFlicky
 PLC_AnimalsAndExplosion_End
 
 PLC_BossExplosion: plrlistheader
-		plreq $500, ArtNem_BossExplosion
+		plreq ArtTile_BossExplosion, ArtNem_BossExplosion
 PLC_BossExplosion_End
 
 PLC_Explosion: plrlistheader
@@ -101178,7 +101207,7 @@ PLC_Explosion: plrlistheader
 PLC_Explosion_End
 
 PLC_EggCapsule: plrlistheader
-		plreq $494, ArtNem_EggCapsule
+		plreq ArtTile_EggCapsule, ArtNem_EggCapsule
 PLC_EggCapsule_End
 ; ---------------------------------------------------------------------------
 
@@ -101339,7 +101368,7 @@ Obj_BossExplosion:
 		jsr	SetUp_ObjAttributes(pc)
 		tst.b	(Current_zone).w
 		bne.s	loc_52954
-		move.w	#make_art_tile($4D2,0,1),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_BossExplosion2,0,1),art_tile(a0)
 
 loc_52954:
 		move.l	#Obj_BossExplosionAnim,(a0)
@@ -101352,7 +101381,7 @@ Obj_BossExplosionAnim:
 ; ---------------------------------------------------------------------------
 ObjDat_BossExplosion:
 		dc.l Map_BossExplosion
-		dc.w make_art_tile($500,0,1)
+		dc.w make_art_tile(ArtTile_BossExplosion,0,1)
 		dc.w      0
 		dc.b   $C,  $C,   0,   0
 AniRaw_BossExplosion:
@@ -104300,7 +104329,7 @@ Obj_EndSignControl:
 
 ; ---------------------------------------------------------------------------
 PLC_EndSignStuff: plrlistheader
-		plreq $69E, ArtNem_SignpostStub
+		plreq ArtTile_SignpostStub, ArtNem_SignpostStub
 		plreq ArtTile_Monitors, ArtNem_Monitors
 PLC_EndSignStuff_End
 ; ---------------------------------------------------------------------------
@@ -104682,38 +104711,38 @@ PLCLoad_Animals_Index:
 		dc.w PLC_Animals_ICZ-PLCLoad_Animals_Index
 		dc.w PLC_Animals_LBZ-PLCLoad_Animals_Index
 PLC_Animals_AIZ: plrlistheader
-		plreq $580, ArtNem_BlueFlicky
-		plreq $592, ArtNem_Chicken
+		plreq ArtTile_Animals1, ArtNem_BlueFlicky
+		plreq ArtTile_Animals2, ArtNem_Chicken
 PLC_Animals_AIZ_End
 
 PLC_Animals_HCZ: plrlistheader
-		plreq $580, ArtNem_Rabbit
-		plreq $592, ArtNem_Seal
+		plreq ArtTile_Animals1, ArtNem_Rabbit
+		plreq ArtTile_Animals2, ArtNem_Seal
 PLC_Animals_HCZ_End
 
 PLC_Animals_MGZ: plrlistheader
-		plreq $580, ArtNem_BlueFlicky
-		plreq $592, ArtNem_Chicken
+		plreq ArtTile_Animals1, ArtNem_BlueFlicky
+		plreq ArtTile_Animals2, ArtNem_Chicken
 PLC_Animals_MGZ_End
 
 PLC_Animals_CNZ: plrlistheader
-		plreq $580, ArtNem_Rabbit
-		plreq $592, ArtNem_BlueFlicky
+		plreq ArtTile_Animals1, ArtNem_Rabbit
+		plreq ArtTile_Animals2, ArtNem_BlueFlicky
 PLC_Animals_CNZ_End
 
 PLC_Animals_FBZ: plrlistheader
-		plreq $580, ArtNem_Squirrel
-		plreq $592, ArtNem_BlueFlicky
+		plreq ArtTile_Animals1, ArtNem_Squirrel
+		plreq ArtTile_Animals2, ArtNem_BlueFlicky
 PLC_Animals_FBZ_End
 
 PLC_Animals_ICZ: plrlistheader
-		plreq $580, ArtNem_Penguin
-		plreq $592, ArtNem_Seal
+		plreq ArtTile_Animals1, ArtNem_Penguin
+		plreq ArtTile_Animals2, ArtNem_Seal
 PLC_Animals_ICZ_End
 
 PLC_Animals_LBZ: plrlistheader
-		plreq $580, ArtNem_Squirrel
-		plreq $592, ArtNem_Chicken
+		plreq ArtTile_Animals1, ArtNem_Squirrel
+		plreq ArtTile_Animals2, ArtNem_Chicken
 PLC_Animals_LBZ_End
 ; ---------------------------------------------------------------------------
 
@@ -104999,7 +105028,7 @@ loc_5472C:
 		jsr	SetUp_ObjAttributes(pc)
 		cmpi.w	#$400,(Current_zone_and_act).w
 		bne.s	loc_54742
-		move.w	#make_art_tile($44E,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_EggCapsule-$46,0,0),art_tile(a0)
 
 loc_54742:
 		move.l	#Obj_FlickerMove,(a0)
@@ -105340,10 +105369,10 @@ loc_54A4E:
 word_54A58:
 		dc.w  -$380, -$300, -$280, -$200
 word_54A60:
-		dc.w make_art_tile($580,0,1)
-		dc.w make_art_tile($592,0,1)
-		dc.w make_art_tile($42E,0,1)
-		dc.w make_art_tile($440,0,1)
+		dc.w make_art_tile(ArtTile_Animals1,0,1)
+		dc.w make_art_tile(ArtTile_Animals2,0,1)
+		dc.w make_art_tile(ArtTile_FBZAnimals1,0,1)
+		dc.w make_art_tile(ArtTile_FBZAnimals2,0,1)
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -105361,7 +105390,7 @@ locret_54A7A:
 ; ---------------------------------------------------------------------------
 ObjDat_EggCapsule:
 		dc.l Map_EggCapsule
-		dc.w make_art_tile($494,0,1)
+		dc.w make_art_tile(ArtTile_EggCapsule,0,1)
 		dc.w   $200
 		dc.b  $20, $20,   0,   0
 word_54A88:
@@ -105369,7 +105398,7 @@ word_54A88:
 		dc.b  $10,   8,   5,   0
 ObjDat3_54A8E:
 		dc.l Map_EggCapsule
-		dc.w make_art_tile($494,0,1)
+		dc.w make_art_tile(ArtTile_EggCapsule,0,1)
 		dc.w   $180
 		dc.b   $C,  $C,   0,   0
 word_54A9A:
@@ -105521,12 +105550,12 @@ loc_54BF8:
 ; ---------------------------------------------------------------------------
 ObjDat_Bloominator:
 		dc.l Map_Bloominator
-		dc.w make_art_tile($52A,1,0)
+		dc.w make_art_tile(ArtTile_Bloominator,1,0)
 		dc.w   $200
 		dc.b   $C, $18,   0, $23
 ObjDat3_54C1A:
 		dc.l Map_Bloominator
-		dc.w make_art_tile($52A,1,0)
+		dc.w make_art_tile(ArtTile_Bloominator,1,0)
 		dc.w   $280
 		dc.b    8,   8,   4, $98
 ChildObjDat_54C26:
@@ -105845,14 +105874,14 @@ loc_54EF4:
 ; ---------------------------------------------------------------------------
 ObjSlot_Rhinobot:
 		dc.w 2-1
-		dc.w make_art_tile($500,1,0)
+		dc.w make_art_tile(ArtTile_Rhinobot,1,0)
 		dc.w    $15,     0
 		dc.l Map_Rhinobot
 		dc.w   $280
 		dc.b  $14, $10,   0,  $B
 ObjSlot_54F0C:
 		dc.w 2-1
-		dc.w make_art_tile($44A,0,0)
+		dc.w make_art_tile(ArtTile_Rhinobot-$B6,0,0)
 		dc.w      6,     2
 		dc.l Map_Rhinobot
 		dc.w   $200
@@ -106411,7 +106440,7 @@ loc_553DC:
 		movea.w	$3E(a0),a1
 		cmpi.b	#$7C,$3C(a1)
 		blo.w	locret_55124
-		move.w	#make_art_tile($548,1,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_MonkeyDude,1,0),art_tile(a0)
 
 loc_55406:
 		bset	#0,$38(a0)
@@ -106449,19 +106478,19 @@ loc_55448:
 ; ---------------------------------------------------------------------------
 ObjDat_MonkeyDude:
 		dc.l Map_MonkeyDude
-		dc.w make_art_tile($548,1,0)
+		dc.w make_art_tile(ArtTile_MonkeyDude,1,0)
 		dc.w   $280
 		dc.b  $20, $20,   0,  $B
 word_55462:
 		dc.w   $300
 		dc.b    4,   4,   3,   0
 word_55468:
-		dc.w make_art_tile($548,1,1)
+		dc.w make_art_tile(ArtTile_MonkeyDude,1,1)
 		dc.w   $280
 		dc.b  $20, $20,   6,  $B
 ObjDat3_55470:
 		dc.l Map_MonkeyDude
-		dc.w make_art_tile($548,0,0)
+		dc.w make_art_tile(ArtTile_MonkeyDude,0,0)
 		dc.w   $280
 		dc.b  $20, $20,   6, $98
 ChildObjDat_5547C:
@@ -106664,22 +106693,22 @@ loc_55650:
 ; ---------------------------------------------------------------------------
 ObjDat_CaterKillerJr:
 		dc.l Map_CaterKillerJr
-		dc.w make_art_tile($55F,1,1)
+		dc.w make_art_tile(ArtTile_CaterkillerJr,1,1)
 		dc.w   $280
 		dc.b    8,   8,   0, $17
 ObjDat3_5566A:
 		dc.l Map_CaterKillerJr
-		dc.w make_art_tile($55F,1,1)
+		dc.w make_art_tile(ArtTile_CaterkillerJr,1,1)
 		dc.w   $280
 		dc.b    8,  $C,   1, $97
 ObjDat3_55676:
 		dc.l Map_CaterKillerJr
-		dc.w make_art_tile($55F,1,1)
+		dc.w make_art_tile(ArtTile_CaterkillerJr,1,1)
 		dc.w   $280
 		dc.b    8,   8,   2, $97
 ObjDat3_55682:
 		dc.l Map_MonkeyDude
-		dc.w make_art_tile($548,1,1)
+		dc.w make_art_tile(ArtTile_MonkeyDude,1,1)
 		dc.w   $280
 		dc.b    4,   4,   3, $98
 word_5568E:
@@ -106743,7 +106772,7 @@ word_55710:
 		dc.w Player_1
 ObjDat_Jawz:
 		dc.l Map_Jawz
-		dc.w make_art_tile($539,1,1)
+		dc.w make_art_tile(ArtTile_Jawz,1,1)
 		dc.w   $280
 		dc.b  $1C,  $C,   0, $D7
 byte_55722:
@@ -106825,12 +106854,12 @@ sub_557A6:
 		dc.w Player_2
 ObjDat_Blastoid:
 		dc.l Map_Blastoid
-		dc.w make_art_tile($539,1,1)
+		dc.w make_art_tile(ArtTile_Blastoid,1,1)
 		dc.w   $280
 		dc.b  $14,  $C,   0, $D7
 ObjDat3_557D2:
 		dc.l Map_Blastoid
-		dc.w make_art_tile($539,1,1)
+		dc.w make_art_tile(ArtTile_Blastoid,1,1)
 		dc.w   $280
 		dc.b    4,   4,   2, $98
 ChildObjDat_557DE:
@@ -107022,7 +107051,7 @@ locret_55984:
 ; ---------------------------------------------------------------------------
 ObjDat_Buggernaut:
 		dc.l Map_Buggernaut
-		dc.w make_art_tile($44C,1,1)
+		dc.w make_art_tile(ArtTile_Buggernaut,1,1)
 		dc.w   $280
 		dc.b  $10,  $C,   0, $17
 ObjDat3_Buggernaught_Baby:
@@ -107343,7 +107372,7 @@ loc_55C94:
 ; ---------------------------------------------------------------------------
 ObjDat_TurboSpiker:
 		dc.l Map_TurboSpiker
-		dc.w make_art_tile($500,1,0)
+		dc.w make_art_tile(ArtTile_TurboSpiker,1,0)
 		dc.w   $280
 		dc.b  $20, $20,   0, $1A
 word_55CA6:
@@ -107356,7 +107385,7 @@ word_55CB2:
 		dc.w   $280
 		dc.b    4,   4,   5,   0
 word_55CB8:
-		dc.w make_art_tile($500,0,1)
+		dc.w make_art_tile(ArtTile_TurboSpiker,0,1)
 		dc.w   $200
 		dc.b    8,   8,   8,   0
 ObjDat3_55CC0:
@@ -107697,7 +107726,7 @@ loc_56044:
 ; ---------------------------------------------------------------------------
 ObjDat_MegaChopper:
 		dc.l Map_MegaChopper
-		dc.w make_art_tile($54D,1,0)
+		dc.w make_art_tile(ArtTile_MegaChopper,1,0)
 		dc.w   $280
 		dc.b  $20, $20,   0, $D7
 AniRaw_MegaChopper:
@@ -107762,7 +107791,7 @@ loc_560FA:
 ; ---------------------------------------------------------------------------
 ObjDat_Poindexter:
 		dc.l Map_Poindexter
-		dc.w make_art_tile($559,1,1)
+		dc.w make_art_tile(ArtTile_Pointdexter,1,1)
 		dc.w   $280
 		dc.b  $14, $14,   0,   0
 AniRaw_Poindexter:
@@ -107858,7 +107887,7 @@ loc_56200:
 ; ---------------------------------------------------------------------------
 ObjSlot_BubblesBadnik:
 		dc.w 2-1
-		dc.w make_art_tile($500,1,1)
+		dc.w make_art_tile(ArtTile_BubblesBadnik,1,1)
 		dc.w    $18,     0
 		dc.l Map_BubblesBadnik
 		dc.w   $280
@@ -108468,17 +108497,17 @@ word_568A8:
 		dc.w   $EEE,  $EEE,  $EEE
 ObjDat_Tunnelbot:
 		dc.l Map_MGZMiniboss
-		dc.w make_art_tile($54F,1,0)
+		dc.w make_art_tile(ArtTile_MGZMiniboss,1,0)
 		dc.w   $280
 		dc.b  $28,  $C,   0, $10
 ObjDat3_568C0:
 		dc.l Map_MGZEndBossDebris
-		dc.w make_art_tile($570,2,0)
+		dc.w make_art_tile(ArtTile_MGZMiniBossDebris,2,0)
 		dc.w   $200
 		dc.b  $20, $20,   0,   0
 ObjDat3_568CC:
 		dc.l Map_MGZMinibossSpires
-		dc.w make_art_tile($500,2,0)
+		dc.w make_art_tile(ArtTile_MGZSpire,2,0)
 		dc.w   $200
 		dc.b    4, $10,   0, $84
 word_568D8:
@@ -108528,8 +108557,8 @@ byte_56937:
 Map_MGZMinibossSpires:
 		include "Levels/MGZ/Misc Object Data/Map - Miniboss Spires.asm"
 PLC_MGZMiniboss: plrlistheader
-		plreq $500, ArtNem_BossExplosion
-		plreq $500, ArtNem_MGZSpire
+		plreq ArtTile_BossExplosion, ArtNem_BossExplosion
+		plreq ArtTile_MGZSpire, ArtNem_MGZSpire
 PLC_MGZMiniboss_End
 ; ---------------------------------------------------------------------------
 
@@ -108809,7 +108838,7 @@ loc_56B96:
 ; ---------------------------------------------------------------------------
 ObjDat_Spiker:
 		dc.l Map_Spiker
-		dc.w make_art_tile($530,1,0)
+		dc.w make_art_tile(ArtTile_Spiker,1,0)
 		dc.w   $280
 		dc.b  $20, $10,   0,  $A
 word_56BC4:
@@ -108820,7 +108849,7 @@ word_56BCA:
 		dc.b  $20,   4,   7, $CA
 ObjDat3_56BD0:
 		dc.l Map_Spiker
-		dc.w make_art_tile($530,0,0)
+		dc.w make_art_tile(ArtTile_Spiker,0,0)
 		dc.w   $280
 		dc.b    4,   4,   5, $98
 ChildObjDat_56BDC:
@@ -108993,7 +109022,7 @@ locret_56D46:
 ; ---------------------------------------------------------------------------
 ObjDat_Mantis:
 		dc.l Map_Mantis
-		dc.w make_art_tile($54F,1,0)
+		dc.w make_art_tile(ArtTile_Mantis,1,0)
 		dc.w   $280
 		dc.b  $14, $1C,   0, $1A
 word_56D54:
@@ -109162,7 +109191,7 @@ loc_56EA6:
 ; ---------------------------------------------------------------------------
 ObjSlot_Clamer:
 		dc.w 2-1
-		dc.w make_art_tile($500,1,1)
+		dc.w make_art_tile(ArtTile_Clamer,1,1)
 		dc.w    $12,     0
 		dc.l Map_Clamer
 		dc.w   $280
@@ -109172,7 +109201,7 @@ word_56EEA:
 		dc.b    8,   4,  $B, $D7
 ObjDat3_56EF0:
 		dc.l Map_Clamer
-		dc.w make_art_tile($570,1,1)
+		dc.w make_art_tile(ArtTile_Clamer+$70,1,1)
 		dc.w   $200
 		dc.b    8,   8,   9, $98
 ChildObjDat_56EFC:
@@ -109397,7 +109426,7 @@ loc_570E8:
 ; ---------------------------------------------------------------------------
 ObjDat_Sparkle:
 		dc.l Map_Sparkle
-		dc.w make_art_tile($524,1,1)
+		dc.w make_art_tile(ArtTile_Sparkle,1,1)
 		dc.w   $280
 		dc.b   $C,  $C,   0,  $B
 word_570FA:
@@ -109537,7 +109566,7 @@ locret_57206:
 ; ---------------------------------------------------------------------------
 ObjDat_Batbot:
 		dc.l Map_Batbot
-		dc.w make_art_tile($552,1,1)
+		dc.w make_art_tile(ArtTile_Batbot,1,1)
 		dc.w   $280
 		dc.b  $20,   8,   2,  $D
 word_57214:
@@ -109761,7 +109790,7 @@ locret_57436:
 ; ---------------------------------------------------------------------------
 ObjDat_Blaster:
 		dc.l Map_Blaster
-		dc.w make_art_tile($500,1,1)
+		dc.w make_art_tile(ArtTile_Blaster-6,1,1)
 		dc.w   $280
 		dc.b  $18, $10,   0,  $A
 word_57444:
@@ -109769,12 +109798,12 @@ word_57444:
 		dc.b    8,   8,   4,   0
 ObjDat3_5744A:
 		dc.l Map_Blaster
-		dc.w make_art_tile($500,1,1)
+		dc.w make_art_tile(ArtTile_Blaster-6,1,1)
 		dc.w   $280
 		dc.b    4,   4,   5, $18
 ObjDat3_57456:
 		dc.l Map_Blaster
-		dc.w make_art_tile($500,1,1)
+		dc.w make_art_tile(ArtTile_Blaster-6,1,1)
 		dc.w   $200
 		dc.b    4,   4,   7,   0
 ChildObjDat_57462:
@@ -110029,12 +110058,12 @@ byte_576EC:
 		even
 ObjDat_576F2:
 		dc.l Map_TechnoSqueek
-		dc.w make_art_tile($528,1,1)
+		dc.w make_art_tile(ArtTile_Technosqueek-6,1,1)
 		dc.w   $280
 		dc.b   $C,   8,   0,  $B
 ObjDat3_576FE:
 		dc.l Map_TechnoSqueek
-		dc.w make_art_tile($528,1,1)
+		dc.w make_art_tile(ArtTile_Technosqueek-6,1,1)
 		dc.w   $280
 		dc.b    8,  $C,   5,  $B
 word_5770A:
@@ -110592,12 +110621,12 @@ locret_57BEA:
 ; ---------------------------------------------------------------------------
 ObjDat_ICZPathFollowPlatform:
 		dc.l Map_ICZPlatforms
-		dc.w make_art_tile($3B6,2,0)
+		dc.w make_art_tile(ArtTile_ICZMisc1,2,0)
 		dc.w   $280
 		dc.b  $20, $14,   0,   0
 ObjDat_ICZIceBlock:
 		dc.l Map_ICZPlatforms
-		dc.w make_art_tile($377,2,0)
+		dc.w make_art_tile(ArtTile_ICZMisc2,2,0)
 		dc.w   $280
 		dc.b  $10, $10, $1E,   0
 ObjDat3_57C04:
@@ -110612,12 +110641,12 @@ ObjDat_ICZBreakableWall:
 		dc.b  $20, $40,   6,   0
 ObjDat3_57C1C:
 		dc.l Map_ICZPlatforms
-		dc.w make_art_tile($3B6,2,1)
+		dc.w make_art_tile(ArtTile_ICZMisc1,2,1)
 		dc.w    $80
 		dc.b    8,   8, $23,   0
 ObjDat3_57C28:
 		dc.l Map_ICZPlatforms
-		dc.w make_art_tile($347,2,1)
+		dc.w make_art_tile(ArtTile_ICZIntroSprites,2,1)
 		dc.w    $80
 		dc.b   $C,  $C, $1C,   0
 ChildObjDat_57C34:
@@ -111309,21 +111338,21 @@ word_58264:
 		dc.w   -$1C,   $38,  -$18,   $30
 ObjDat_ICZFreezer:
 		dc.l Map_ICZPlatforms
-		dc.w make_art_tile($3B6,1,0)
+		dc.w make_art_tile(ArtTile_ICZMisc1,1,0)
 		dc.w   $280
 		dc.b  $10,  $C,   6, $9A
 word_58278:
-		dc.w make_art_tile($3B6,2,0)
+		dc.w make_art_tile(ArtTile_ICZMisc1,2,0)
 		dc.w    $80
 		dc.b   $C,  $C, $16,   0
 ObjDat3_58280:
 		dc.l Map_ICZPlatforms
-		dc.w make_art_tile($3B6,2,0)
+		dc.w make_art_tile(ArtTile_ICZMisc1,2,0)
 		dc.w    $80
 		dc.b  $14, $10,   2,   0
 ObjDat3_5828C:
 		dc.l Map_ICZPlatforms
-		dc.w make_art_tile($3B6,2,0)
+		dc.w make_art_tile(ArtTile_ICZMisc1,2,0)
 		dc.w    $80
 		dc.b    4,   4,  $C,   0
 ChildObjDat_58298:
@@ -112058,16 +112087,16 @@ sub_588CC:
 ; ---------------------------------------------------------------------------
 ObjDat_ICZSwingingPlatform:
 		dc.l Map_ICZPlatforms
-		dc.w make_art_tile($3B6,1,0)
+		dc.w make_art_tile(ArtTile_ICZMisc1,1,0)
 		dc.w    $80
 		dc.b  $20, $10,   7,   0
 word_588FC:
-		dc.w make_art_tile($3B6,2,0)
+		dc.w make_art_tile(ArtTile_ICZMisc1,2,0)
 		dc.w   $280
 		dc.b  $80, $80,   8,   0
 ObjDat3_58904:
 		dc.l Map_ICZPlatforms
-		dc.w make_art_tile($3B6,2,0)
+		dc.w make_art_tile(ArtTile_ICZMisc1,2,0)
 		dc.w   $280
 		dc.b    8,   8,   8,   0
 word_58910:
@@ -112195,7 +112224,7 @@ ObjDat_ICZStalagtite:
 		dc.b  $10, $20,   7,   0
 ObjDat3_58A3E:
 		dc.l Map_ICZPlatforms
-		dc.w make_art_tile($3B6,2,1)
+		dc.w make_art_tile(ArtTile_ICZMisc1,2,1)
 		dc.w   $280
 		dc.b    4,   4,  $F,   0
 ChildObjDat_58A4A:
@@ -112372,11 +112401,11 @@ loc_58BF8:
 ; ---------------------------------------------------------------------------
 ObjDat_ICZIceCube:
 		dc.l Map_ICZPlatforms
-		dc.w make_art_tile($3B6,2,0)
+		dc.w make_art_tile(ArtTile_ICZMisc1,2,0)
 		dc.w    $80
 		dc.b  $18, $10,   3, $2E
 word_58C18:
-		dc.w make_art_tile($3B6,2,1)
+		dc.w make_art_tile(ArtTile_ICZMisc1,2,1)
 		dc.w   $280
 		dc.b  $20, $20, $12,   0
 ChildObjDat_58C20:
@@ -112460,12 +112489,12 @@ word_58CC4:
 		dc.w Player_1
 ObjDat3_58CCA:
 		dc.l Map_ICZPlatforms
-		dc.w make_art_tile($3B6,2,0)
+		dc.w make_art_tile(ArtTile_ICZMisc1,2,0)
 		dc.w   $280
 		dc.b  $10, $18,   5, $82
 ObjDat3_58CD6:
 		dc.l Map_ICZPlatforms
-		dc.w make_art_tile($3B6,2,0)
+		dc.w make_art_tile(ArtTile_ICZMisc1,2,0)
 		dc.w   $280
 		dc.b  $10, $10,   4, $D7
 ChildObjDat_58CE2:
@@ -112760,26 +112789,26 @@ off_58F8C:
 		dc.l ObjDat3_58FD0
 ObjDat3_58FAC:
 		dc.l Map_ICZPlatforms
-		dc.w make_art_tile($377,2,0)
+		dc.w make_art_tile(ArtTile_ICZMisc2,2,0)
 		dc.w    $80
 		dc.b  $18,   8, $20,   0
 ObjDat3_58FB8:
 		dc.l Map_ICZPlatforms
-		dc.w make_art_tile($377,2,1)
+		dc.w make_art_tile(ArtTile_ICZMisc2,2,1)
 		dc.w    $80
 		dc.b    8, $10, $21,   0
 ObjDat3_58FC4:
 		dc.l Map_ICZPlatforms
-		dc.w make_art_tile($377,2,1)
+		dc.w make_art_tile(ArtTile_ICZMisc2,2,1)
 		dc.w    $80
 		dc.b  $10, $10, $22,   0
 ObjDat3_58FD0:
 		dc.l Map_ICZPlatforms
-		dc.w make_art_tile($3B6,2,0)
+		dc.w make_art_tile(ArtTile_ICZMisc1,2,0)
 		dc.w    $80
 		dc.b    4,   4,  $B,   0
 word_58FDC:
-		dc.w make_art_tile($3B6,2,0)
+		dc.w make_art_tile(ArtTile_ICZMisc1,2,0)
 		dc.w    $80
 		dc.b    8,   8,   9,   0
 ChildObjDat_58FE4:
@@ -113087,11 +113116,11 @@ loc_59248:
 ; ---------------------------------------------------------------------------
 ObjDat_ICZTensionPlatform:
 		dc.l Map_ICZPlatforms
-		dc.w make_art_tile($377,2,0)
+		dc.w make_art_tile(ArtTile_ICZMisc2,2,0)
 		dc.w   $280
 		dc.b  $18,  $C, $1F,   0
 word_59260:
-		dc.w make_art_tile($3B6,2,0)
+		dc.w make_art_tile(ArtTile_ICZMisc1,2,0)
 		dc.w   $280
 		dc.b  $40, $40,   8,   0
 ChildObjDat_59268:
@@ -113397,14 +113426,14 @@ sub_5955A:
 ; ---------------------------------------------------------------------------
 ObjSlot_Penguinator:
 		dc.w 4-1
-		dc.w make_art_tile($500,1,0)
+		dc.w make_art_tile(ArtTile_Penguinator,1,0)
 		dc.w    $12,     0
 		dc.l Map_Penguinator
 		dc.w   $280
 		dc.b  $14, $10,   0, $1A
 ObjDat_ICZSnowdust:
 		dc.l Map_ICZSnowdust
-		dc.w make_art_tile($558,1,0)
+		dc.w make_art_tile(ArtTile_ICZSnowdust,1,0)
 		dc.w      0
 		dc.b    4, $18,   0,   0
 ChildObjDat_59592:
@@ -113566,7 +113595,7 @@ locret_59724:
 ; ---------------------------------------------------------------------------
 ObjDat_StarPointer:
 		dc.l Map_StarPointer
-		dc.w make_art_tile($548,1,0)
+		dc.w make_art_tile(ArtTile_StarPointer,1,0)
 		dc.w   $280
 		dc.b    8,   8,   0,  $B
 word_59732:
@@ -113867,7 +113896,7 @@ loc_599E8:
 ; ---------------------------------------------------------------------------
 ObjDat_SnaleBlaster:
 		dc.l Map_SnaleBlaster
-		dc.w make_art_tile($524,1,0)
+		dc.w make_art_tile(ArtTile_SnaleBlaster,1,0)
 		dc.w   $200
 		dc.b  $10, $10,   0,  $B
 word_59A14:
@@ -113878,7 +113907,7 @@ word_59A1A:
 		dc.b    4,   4,   7,   0
 ObjDat3_59A10:
 		dc.l Map_SnaleBlaster
-		dc.w make_art_tile($524,0,1)
+		dc.w make_art_tile(ArtTile_SnaleBlaster,0,1)
 		dc.w   $200
 		dc.b    4,   4,   9, $98
 ChildObjDat_59A1C:
@@ -114249,7 +114278,7 @@ loc_59D42:
 ; ---------------------------------------------------------------------------
 ObjDat_Ribot:
 		dc.l Map_Ribot
-		dc.w make_art_tile($547,1,0)
+		dc.w make_art_tile(ArtTile_Ribot,1,0)
 		dc.w   $280
 		dc.b  $10,  $C,   0,  $B
 word_59D56:
@@ -114385,7 +114414,7 @@ locret_59E6C:
 ; ---------------------------------------------------------------------------
 ObjDat_Orbinaut:
 		dc.l Map_Orbinaut
-		dc.w make_art_tile($56E,1,0)
+		dc.w make_art_tile(ArtTile_Orbinaut,1,0)
 		dc.w   $280
 		dc.b    8,   8,   0,  $B
 word_59E7A:
@@ -114589,14 +114618,14 @@ loc_5A05C:
 ; ---------------------------------------------------------------------------
 ObjDat_Corkey:
 		dc.l Map_Corkey
-		dc.w make_art_tile($558,1,0)
+		dc.w make_art_tile(ArtTile_Corkey,1,0)
 		dc.w   $280
 		dc.b  $10,  $C,   0,  $B
 word_5A074:
 		dc.w   $280
 		dc.b    8,   4,   1,   0
 word_5A07A:
-		dc.w make_art_tile($558,0,0)
+		dc.w make_art_tile(ArtTile_Corkey,0,0)
 		dc.w   $280
 		dc.b    4, $50,   0, $A0
 ChildObjDat_5A082:
@@ -114797,7 +114826,7 @@ loc_5A272:
 ; ---------------------------------------------------------------------------
 ObjSlot_Flybot767:
 		dc.w 3-1
-		dc.w make_art_tile($500,1,1)
+		dc.w make_art_tile(ArtTile_Flybot767,1,1)
 		dc.w     $C,     0
 		dc.l Map_Flybot767
 		dc.w   $280
@@ -114852,7 +114881,7 @@ loc_5A2F8:
 		moveq	#$60,d0
 		jsr	(Load_PLC).l
 		lea	(ArtKosM_LBZMinibossBox).l,a1
-		move.w	#tiles_to_bytes($456),d2
+		move.w	#tiles_to_bytes(ArtTile_LBZMinibossBox),d2
 		jsr	(Queue_Kos_Module).l
 		lea	(Child1_MakeRoboHead3).l,a2
 		jsr	CreateChild1_Normal(pc)
@@ -114925,7 +114954,7 @@ loc_5A3D6:
 loc_5A3DE:
 		move.b	#$A,routine(a0)
 		lea	(ArtKosM_LBZMinibossBox).l,a1
-		move.w	#tiles_to_bytes($456),d2
+		move.w	#tiles_to_bytes(ArtTile_LBZMinibossBox),d2
 		jsr	(Queue_Kos_Module).l
 		move.w	#$3EA0,(Camera_stored_max_X_pos).w
 		lea	(Child6_IncLevX).l,a2
@@ -114965,7 +114994,7 @@ loc_5A444:
 		move.w	#$200,x_vel(a0)
 		move.w	#$200,y_vel(a0)
 		lea	(ArtKosM_LBZMiniboss).l,a1
-		move.w	#tiles_to_bytes($4D6),d2
+		move.w	#tiles_to_bytes(ArtTile_LBZMiniboss),d2
 		jsr	(Queue_Kos_Module).l
 		lea	(Child1_MakeRoboShipFlame).l,a2
 		jmp	(CreateChild1_Normal).l
@@ -115031,10 +115060,10 @@ Obj_LBZMinibossBox:
 		move.w	#$3EA0,(Camera_max_X_pos).w
 		move.w	#$3C00,(Camera_min_X_pos).w
 		lea	(ArtKosM_LBZMiniboss).l,a1
-		move.w	#tiles_to_bytes($4D6),d2
+		move.w	#tiles_to_bytes(ArtTile_LBZMiniboss),d2
 		jsr	(Queue_Kos_Module).l
 		lea	(ArtKosM_LBZMinibossBox).l,a1
-		move.w	#tiles_to_bytes($456),d2
+		move.w	#tiles_to_bytes(ArtTile_LBZMinibossBox),d2
 		jsr	(Queue_Kos_Module).l
 		lea	PLC_BossExplosion(pc),a1
 		jsr	(Load_PLC_Raw).l
@@ -115195,10 +115224,10 @@ loc_5A6D0:
 		jmp	(Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 PLC_LBZRobotnikAfter: plrlistheader
-		plreq $45C, ArtNem_Bubbles
+		plreq ArtTile_Bubbles, ArtNem_Bubbles
 PLC_LBZRobotnikAfter_End
 		; unused
-		plreq $3C3, ArtNem_LBZMisc
+		plreq ArtTile_LBZMisc, ArtNem_LBZMisc
 ; ---------------------------------------------------------------------------
 
 loc_5A6E4:
@@ -115295,12 +115324,12 @@ locret_5A7E6:
 ; ---------------------------------------------------------------------------
 ObjDat_LBZ1Robotnik:
 		dc.l Map_RobotnikShip
-		dc.w make_art_tile($52E,0,0)
+		dc.w make_art_tile(ArtTile_RobotnikShip,0,0)
 		dc.w   $100
 		dc.b  $20, $20,  $A,  $F
 ObjDat3_5A7F4:
 		dc.l Map_LBZMinibossBox
-		dc.w make_art_tile($456,2,0)
+		dc.w make_art_tile(ArtTile_LBZMinibossBox,2,0)
 		dc.w   $100
 		dc.b  $14, $14,   0,   0
 ChildObjDat_5A800:
@@ -115556,7 +115585,7 @@ word_5AAEA:
 		dc.w Player_prev_frame, Player_prev_frame_P2
 ObjDat_LBZ2RobotnikShip:
 		dc.l Map_RobotnikShip
-		dc.w make_art_tile($52E,0,1)
+		dc.w make_art_tile(ArtTile_RobotnikShip,0,1)
 		dc.w    $80
 		dc.b  $20, $20,  $A, $CA
 		dc.w 1-1
@@ -115753,14 +115782,14 @@ Offs_PLC:
 		dc.w PLC_78_79_7A_7B-Offs_PLC				; Boss ship and explosion (unused)
 
 PLC_00: plrlistheader
-		plreq $7D4, ArtNem_SonicLifeIcon
+		plreq ArtTile_PlayerLifeIcon, ArtNem_SonicLifeIcon
 		plreq ArtTile_Ring, ArtNem_RingHUDText
 		plreq ArtTile_StarPost, ArtNem_EnemyPtsStarPost
 		plreq ArtTile_Monitors, ArtNem_Monitors
 PLC_00_End
 
 PLC_01: plrlistheader
-		plreq $7D4, ArtNem_SonicLifeIcon
+		plreq ArtTile_PlayerLifeIcon, ArtNem_SonicLifeIcon
 		plreq ArtTile_Monitors, ArtNem_Monitors
 		plreq ArtTile_Ring, ArtNem_RingHUDText
 		plreq ArtTile_StarPost, ArtNem_EnemyPtsStarPost
@@ -115768,8 +115797,8 @@ PLC_01_End
 
 PLC_02: plrlistheader
 		plreq ArtTile_Explosion, ArtNem_Explosion
-		plreq $580, ArtNem_Squirrel
-		plreq $592, ArtNem_BlueFlicky
+		plreq ArtTile_Animals1, ArtNem_Squirrel
+		plreq ArtTile_Animals2, ArtNem_BlueFlicky
 PLC_02_End
 
 PLC_03: plrlistheader
@@ -115777,21 +115806,21 @@ PLC_03: plrlistheader
 PLC_03_End
 
 PLC_04: plrlistheader
-		plreq $500, ArtNem_S2Signpost
+		plreq ArtTile_S2Signpost, ArtNem_S2Signpost
 PLC_04_End
 
 PLC_05: plrlistheader
-		plreq $494, ArtNem_SpikesSprings
+		plreq ArtTile_SpikesSprings, ArtNem_SpikesSprings
 PLC_05_End
 
 PLC_06: plrlistheader
-		plreq $391, ArtNem_2PArt_2
-		plreq $3AD, ArtNem_2PArt_1
-		plreq $3C6, ArtNem_2PArt_3
+		plreq ArtTile_2PArt_2, ArtNem_2PArt_2
+		plreq ArtTile_2PArt_1, ArtNem_2PArt_1
+		plreq ArtTile_2PArt_3, ArtNem_2PArt_3
 PLC_06_End
 
 PLC_07: plrlistheader
-		plreq $7D4, ArtNem_TailsLifeIcon
+		plreq ArtTile_PlayerLifeIcon, ArtNem_TailsLifeIcon
 		plreq ArtTile_Monitors, ArtNem_Monitors
 		plreq ArtTile_Ring, ArtNem_RingHUDText
 		plreq ArtTile_StarPost, ArtNem_EnemyPtsStarPost
@@ -115802,284 +115831,284 @@ PLC_08: plrlistheader
 PLC_08_End
 
 PLC_09: plrlistheader
-		plreq $4E0, ArtNem_SphereTest
+		plreq ArtTile_SphereTest, ArtNem_SphereTest
 PLC_09_End
 
 PLC_0A: plrlistheader
-		plreq $3D1, ArtNem_AIZIntroSprites
+		plreq ArtTile_AIZIntroSprites, ArtNem_AIZIntroSprites
 PLC_0A_End
 
 PLC_0B: plrlistheader
-		plreq $41B, ArtNem_AIZSwingVine
-		plreq $324, ArtNem_AIZSlideRope
-		plreq $333, ArtNem_AIZMisc1
-		plreq $3CF, ArtNem_AIZFallingLog
-		plreq $45C, ArtNem_Bubbles
-		plreq $3F7, ArtNem_AIZCorkFloor
+		plreq ArtTile_AIZSwingVine, ArtNem_AIZSwingVine
+		plreq ArtTile_AIZSlideRope, ArtNem_AIZSlideRope
+		plreq ArtTile_AIZMisc1, ArtNem_AIZMisc1
+		plreq ArtTile_AIZFallingLog, ArtNem_AIZFallingLog
+		plreq ArtTile_Bubbles, ArtNem_Bubbles
+		plreq ArtTile_AIZFloatingPlatform, ArtNem_AIZCorkFloor
 PLC_0B_End
 
 PLC_0C_0D: plrlistheader
-		plreq ArtTile_ArtNem_AIZMisc2, ArtNem_AIZMisc2
-		plreq $41B, ArtNem_AIZSwingVine
-		plreq $438, ArtNem_AIZBackgroundTree
-		plreq $45C, ArtNem_Bubbles
-		plreq $456, ArtNem_GrayButton
-		plreq $440, ArtNem_AIZCorkFloor2
+		plreq ArtTile_AIZMisc2, ArtNem_AIZMisc2
+		plreq ArtTile_AIZSwingVine, ArtNem_AIZSwingVine
+		plreq ArtTile_AIZBackgroundTree, ArtNem_AIZBackgroundTree
+		plreq ArtTile_Bubbles, ArtNem_Bubbles
+		plreq ArtTile_GrayButton, ArtNem_GrayButton
+		plreq ArtTile_AIZ2FloatingPlatform, ArtNem_AIZCorkFloor2
 PLC_0C_0D_End
 
 PLC_0E: plrlistheader
-		plreq $45C, ArtNem_Bubbles
-		plreq $3CA, ArtNem_HCZMisc
-		plreq $426, ArtNem_HCZButton
-		plreq $37A, ArtNem_HCZWaterRush
-		plreq $42E, ArtNem_HCZWaveSplash
-		plreq $43E, ArtNem_HCZSpikeBall
+		plreq ArtTile_Bubbles, ArtNem_Bubbles
+		plreq ArtTile_HCZMisc, ArtNem_HCZMisc
+		plreq ArtTile_HCZButton, ArtNem_HCZButton
+		plreq ArtTile_HCZWaterRush, ArtNem_HCZWaterRush
+		plreq ArtTile_HCZWaveSplash, ArtNem_HCZWaveSplash
+		plreq ArtTile_HCZSpikeBall, ArtNem_HCZSpikeBall
 PLC_0E_End
 
 PLC_0F: plrlistheader
-		plreq $44C, ArtNem_HCZDragonfly
+		plreq ArtTile_Buggernaut, ArtNem_HCZDragonfly
 PLC_0F_End
 
 PLC_10: plrlistheader
-		plreq $45C, ArtNem_Bubbles
-		plreq $3CA, ArtNem_HCZMisc
-		plreq $426, ArtNem_HCZButton
-		plreq $42E, ArtNem_HCZWaveSplash
-		plreq $43E, ArtNem_HCZSpikeBall
-		plreq $35C, ArtNem_HCZ2Slide
+		plreq ArtTile_Bubbles, ArtNem_Bubbles
+		plreq ArtTile_HCZMisc, ArtNem_HCZMisc
+		plreq ArtTile_HCZButton, ArtNem_HCZButton
+		plreq ArtTile_HCZWaveSplash, ArtNem_HCZWaveSplash
+		plreq ArtTile_HCZSpikeBall, ArtNem_HCZSpikeBall
+		plreq ArtTile_HCZ2Slide, ArtNem_HCZ2Slide
 PLC_10_End
 
 PLC_11: plrlistheader
-		plreq $350, ArtNem_HCZ2KnuxWall
-		plreq  $28, ArtNem_HCZ2BlockPlat
-		plreq $44C, ArtNem_HCZDragonfly
+		plreq ArtTile_HCZ2KnuxWall, ArtNem_HCZ2KnuxWall
+		plreq ArtTile_HCZ2BlockPlat, ArtNem_HCZ2BlockPlat
+		plreq ArtTile_Buggernaut, ArtNem_HCZDragonfly
 PLC_11_End
 
 PLC_12_13: plrlistheader
-		plreq $35F, ArtNem_MGZMisc1
-		plreq $3FF, ArtNem_MGZMisc2
-		plreq $451, ArtNem_MGZSigns
-		plreq $478, ArtNem_DiagonalSpring
+		plreq ArtTile_MGZMisc1, ArtNem_MGZMisc1
+		plreq ArtTile_MGZMisc2, ArtNem_MGZMisc2
+		plreq ArtTile_MGZSigns, ArtNem_MGZSigns
+		plreq ArtTile_MGZMHZDiagonalSpring, ArtNem_DiagonalSpring
 PLC_12_13_End
 
 PLC_14_15: plrlistheader
-		plreq $35F, ArtNem_MGZMisc1
-		plreq $3FF, ArtNem_MGZMisc2
-		plreq $451, ArtNem_MGZSigns
-		plreq $478, ArtNem_DiagonalSpring
+		plreq ArtTile_MGZMisc1, ArtNem_MGZMisc1
+		plreq ArtTile_MGZMisc2, ArtNem_MGZMisc2
+		plreq ArtTile_MGZSigns, ArtNem_MGZSigns
+		plreq ArtTile_MGZMHZDiagonalSpring, ArtNem_DiagonalSpring
 PLC_14_15_End
 
 PLC_16_17_18_19: plrlistheader
-		plreq $351, ArtNem_CNZMisc
-		plreq $45C, ArtNem_Bubbles
-		plreq $430, ArtNem_CNZPlatform
+		plreq ArtTile_CNZMisc, ArtNem_CNZMisc
+		plreq ArtTile_Bubbles, ArtNem_Bubbles
+		plreq ArtTile_CNZPlatform, ArtNem_CNZPlatform
 PLC_16_17_18_19_End
 
 PLC_1A_1B_1C_1D: plrlistheader
-		plreq $43A, ArtNem_DiagonalSpring
+		plreq ArtTile_DiagonalSpring, ArtNem_DiagonalSpring
 PLC_1A_1B_1C_1D_End
 
 PLC_1E_1F: plrlistheader
-		plreq $6B8, ArtNem_SnowboardDust
-		plreq $43A, ArtNem_DiagonalSpring
-		plreq $456, ArtNem_GrayButton
-		plreq $3B6, ArtNem_ICZMisc1
-		plreq $347, ArtNem_ICZIntroSprites
+		plreq ArtTile_SnowboardDust, ArtNem_SnowboardDust
+		plreq ArtTile_DiagonalSpring, ArtNem_DiagonalSpring
+		plreq ArtTile_GrayButton, ArtNem_GrayButton
+		plreq ArtTile_ICZMisc1, ArtNem_ICZMisc1
+		plreq ArtTile_ICZIntroSprites, ArtNem_ICZIntroSprites
 PLC_1E_1F_End
 
 PLC_20_21: plrlistheader
-		plreq $43A, ArtNem_DiagonalSpring
-		plreq $456, ArtNem_GrayButton
-		plreq $3B6, ArtNem_ICZMisc1
-		plreq $377, ArtNem_ICZMisc2
-		plreq $45C, ArtNem_Bubbles
+		plreq ArtTile_DiagonalSpring, ArtNem_DiagonalSpring
+		plreq ArtTile_GrayButton, ArtNem_GrayButton
+		plreq ArtTile_ICZMisc1, ArtNem_ICZMisc1
+		plreq ArtTile_ICZMisc2, ArtNem_ICZMisc2
+		plreq ArtTile_Bubbles, ArtNem_Bubbles
 PLC_20_21_End
 
 PLC_22_23: plrlistheader
-		plreq $3C3, ArtNem_LBZMisc
-		plreq $455, ArtNem_LBZTubeTrans
+		plreq ArtTile_LBZMisc, ArtNem_LBZMisc
+		plreq ArtTile_LBZTubeTrans, ArtNem_LBZTubeTrans
 PLC_22_23_End
 
 PLC_24: plrlistheader
-		plreq $3C3, ArtNem_LBZMisc
-		plreq $45C, ArtNem_Bubbles
+		plreq ArtTile_LBZMisc, ArtNem_LBZMisc
+		plreq ArtTile_Bubbles, ArtNem_Bubbles
 PLC_24_End
 
 PLC_25: plrlistheader
-		plreq $2EA, ArtNem_LBZ2Misc
+		plreq ArtTile_LBZ2Misc, ArtNem_LBZ2Misc
 PLC_25_End
 
 PLC_26_Through_2D: plrlistheader
-		plreq $43A, ArtNem_DiagonalSpring
-		plreq $494, ArtNem_SpikesSprings
+		plreq ArtTile_DiagonalSpring, ArtNem_DiagonalSpring
+		plreq ArtTile_SpikesSprings, ArtNem_SpikesSprings
 PLC_26_Through_2D_End
 
 PLC_2E_Through_41: plrlistheader
-		plreq $43A, ArtNem_DiagonalSpring
-		plreq $494, ArtNem_SpikesSprings
+		plreq ArtTile_DiagonalSpring, ArtNem_DiagonalSpring
+		plreq ArtTile_SpikesSprings, ArtNem_SpikesSprings
 PLC_2E_Through_41_End
 
 PLC_42: plrlistheader
 		plreq ArtTile_DashDust, ArtNem_2PDashdust
-		plreq $6BC, ArtNem_2PStartPost
-		plreq $700, ArtNem_2PLapNum
-		plreq $600, ArtNem_2PTime
-		plreq $75E, ArtNem_2PPosIcon
-		plreq $391, ArtNem_2PArt_2
-		plreq $3AD, ArtNem_2PArt_1
-		plreq $3C6, ArtNem_2PArt_3
+		plreq ArtTile_2PStartPost, ArtNem_2PStartPost
+		plreq ArtTile_2PLapNum, ArtNem_2PLapNum
+		plreq ArtTile_2PTime, ArtNem_2PTime
+		plreq ArtTile_2PPosIcon, ArtNem_2PPosIcon
+		plreq ArtTile_2PArt_2, ArtNem_2PArt_2
+		plreq ArtTile_2PArt_1, ArtNem_2PArt_1
+		plreq ArtTile_2PArt_3, ArtNem_2PArt_3
 PLC_42_End
 
 PLC_43: plrlistheader
-		plreq $300, ArtNem_BPZMisc
+		plreq ArtTile_BPZMisc, ArtNem_BPZMisc
 		plreq ArtTile_DashDust, ArtNem_2PDashdust
-		plreq $6BC, ArtNem_2PStartPost
-		plreq $700, ArtNem_2PLapNum
-		plreq $600, ArtNem_2PTime
-		plreq $75E, ArtNem_2PPosIcon
-		plreq $391, ArtNem_2PArt_2
-		plreq $3AD, ArtNem_2PArt_1
-		plreq $3C6, ArtNem_2PArt_3
+		plreq ArtTile_2PStartPost, ArtNem_2PStartPost
+		plreq ArtTile_2PLapNum, ArtNem_2PLapNum
+		plreq ArtTile_2PTime, ArtNem_2PTime
+		plreq ArtTile_2PPosIcon, ArtNem_2PPosIcon
+		plreq ArtTile_2PArt_2, ArtNem_2PArt_2
+		plreq ArtTile_2PArt_1, ArtNem_2PArt_1
+		plreq ArtTile_2PArt_3, ArtNem_2PArt_3
 PLC_43_End
 
 PLC_44: plrlistheader
-		plreq $280, ArtNem_DPZMisc
+		plreq ArtTile_DPZMisc, ArtNem_DPZMisc
 		plreq ArtTile_DashDust, ArtNem_2PDashdust
-		plreq $6BC, ArtNem_2PStartPost
-		plreq $700, ArtNem_2PLapNum
-		plreq $600, ArtNem_2PTime
-		plreq $75E, ArtNem_2PPosIcon
-		plreq $391, ArtNem_2PArt_2
-		plreq $3AD, ArtNem_2PArt_1
-		plreq $3C6, ArtNem_2PArt_3
+		plreq ArtTile_2PStartPost, ArtNem_2PStartPost
+		plreq ArtTile_2PLapNum, ArtNem_2PLapNum
+		plreq ArtTile_2PTime, ArtNem_2PTime
+		plreq ArtTile_2PPosIcon, ArtNem_2PPosIcon
+		plreq ArtTile_2PArt_2, ArtNem_2PArt_2
+		plreq ArtTile_2PArt_1, ArtNem_2PArt_1
+		plreq ArtTile_2PArt_3, ArtNem_2PArt_3
 PLC_44_End
 
 PLC_45: plrlistheader
-		plreq $300, ArtNem_CGZMisc
+		plreq ArtTile_CGZMisc, ArtNem_CGZMisc
 		plreq ArtTile_DashDust, ArtNem_2PDashdust
-		plreq $6BC, ArtNem_2PStartPost
-		plreq $700, ArtNem_2PLapNum
-		plreq $600, ArtNem_2PTime
-		plreq $75E, ArtNem_2PPosIcon
-		plreq $391, ArtNem_2PArt_2
-		plreq $3AD, ArtNem_2PArt_1
-		plreq $3C6, ArtNem_2PArt_3
+		plreq ArtTile_2PStartPost, ArtNem_2PStartPost
+		plreq ArtTile_2PLapNum, ArtNem_2PLapNum
+		plreq ArtTile_2PTime, ArtNem_2PTime
+		plreq ArtTile_2PPosIcon, ArtNem_2PPosIcon
+		plreq ArtTile_2PArt_2, ArtNem_2PArt_2
+		plreq ArtTile_2PArt_1, ArtNem_2PArt_1
+		plreq ArtTile_2PArt_3, ArtNem_2PArt_3
 PLC_45_End
 
 PLC_46: plrlistheader
-		plreq $300, ArtNem_EMZMisc
+		plreq ArtTile_EMZMisc, ArtNem_EMZMisc
 		plreq ArtTile_DashDust, ArtNem_2PDashdust
-		plreq $6BC, ArtNem_2PStartPost
-		plreq $700, ArtNem_2PLapNum
-		plreq $600, ArtNem_2PTime
-		plreq $75E, ArtNem_2PPosIcon
-		plreq $391, ArtNem_2PArt_2
-		plreq $3AD, ArtNem_2PArt_1
-		plreq $3C6, ArtNem_2PArt_3
+		plreq ArtTile_2PStartPost, ArtNem_2PStartPost
+		plreq ArtTile_2PLapNum, ArtNem_2PLapNum
+		plreq ArtTile_2PTime, ArtNem_2PTime
+		plreq ArtTile_2PPosIcon, ArtNem_2PPosIcon
+		plreq ArtTile_2PArt_2, ArtNem_2PArt_2
+		plreq ArtTile_2PArt_1, ArtNem_2PArt_1
+		plreq ArtTile_2PArt_3, ArtNem_2PArt_3
 PLC_46_End
 
 PLC_47: plrlistheader
-		plreq $15B, ArtNem_BonusStage
-		plreq $494, ArtNem_SpikesSprings
+		plreq ArtTile_BonusStage, ArtNem_BonusStage
+		plreq ArtTile_SpikesSprings, ArtNem_SpikesSprings
 PLC_47_End
 
 PLC_48_Through_5A: plrlistheader
-		plreq $41A, ArtNem_AIZMiniboss
-		plreq $474, ArtNem_AIZMinibossSmall
-		plreq $482, ArtNem_AIZBossFire
-		plreq $4D2, ArtNem_BossExplosion
+		plreq ArtTile_AIZMiniboss, ArtNem_AIZMiniboss
+		plreq ArtTile_AIZMinibossSmall, ArtNem_AIZMinibossSmall
+		plreq ArtTile_AIZBossFire, ArtNem_AIZBossFire
+		plreq ArtTile_BossExplosion2, ArtNem_BossExplosion
 PLC_48_Through_5A_End
 
 PLC_5B: plrlistheader
-		plreq $304, ArtNem_HCZMiniboss
-		plreq $500, ArtNem_BossExplosion
+		plreq ArtTile_HCZMiniboss, ArtNem_HCZMiniboss
+		plreq ArtTile_BossExplosion, ArtNem_BossExplosion
 PLC_5B_End
 
 PLC_5C_5D: plrlistheader
-		plreq $52E, ArtNem_CNZMiniboss
-		plreq $500, ArtNem_BossExplosion
+		plreq ArtTile_CNZMiniboss, ArtNem_CNZMiniboss
+		plreq ArtTile_BossExplosion, ArtNem_BossExplosion
 PLC_5C_5D_End
 
 PLC_5E: plrlistheader
-		plreq $52E, ArtNem_FBZMiniboss
-		plreq $44E, ArtNem_EggCapsule
-		plreq $500, ArtNem_BossExplosion
-		plreq $42E, ArtNem_Squirrel
-		plreq $440, ArtNem_BlueFlicky
+		plreq ArtTile_FBZMiniboss, ArtNem_FBZMiniboss
+		plreq ArtTile_EggCapsule-$46, ArtNem_EggCapsule
+		plreq ArtTile_BossExplosion, ArtNem_BossExplosion
+		plreq ArtTile_FBZAnimals1, ArtNem_Squirrel
+		plreq ArtTile_FBZAnimals2, ArtNem_BlueFlicky
 PLC_5E_End
 
 PLC_5F: plrlistheader
-		plreq $4A9, ArtNem_ICZMiniboss
-		plreq $500, ArtNem_BossExplosion
+		plreq ArtTile_ICZMiniboss, ArtNem_ICZMiniboss
+		plreq ArtTile_BossExplosion, ArtNem_BossExplosion
 PLC_5F_End
 
 PLC_60: plrlistheader
-		plreq $52E, ArtNem_RobotnikShip
-		plreq $4D6, ArtNem_LBZKnuxBomb
+		plreq ArtTile_RobotnikShip, ArtNem_RobotnikShip
+		plreq ArtTile_LBZKnuxBomb, ArtNem_LBZKnuxBomb
 PLC_60_End
 
 PLC_61_Through_6A: plrlistheader
-		plreq $52E, ArtNem_FBZ2Subboss
-		plreq $466, ArtNem_FBZRobotnikStand
-		plreq $4A9, ArtNem_FBZRobotnikRun
-		plreq $500, ArtNem_BossExplosion
+		plreq ArtTile_FBZ2Subboss, ArtNem_FBZ2Subboss
+		plreq ArtTile_FBZRobotnikStand, ArtNem_FBZRobotnikStand
+		plreq ArtTile_FBZRobotnikRun, ArtNem_FBZRobotnikRun
+		plreq ArtTile_BossExplosion, ArtNem_BossExplosion
 PLC_61_Through_6A_End
 
 PLC_6B: plrlistheader
-		plreq $52E, ArtNem_RobotnikShip
-		plreq $4D2, ArtNem_BossExplosion
+		plreq ArtTile_RobotnikShip, ArtNem_RobotnikShip
+		plreq ArtTile_BossExplosion2, ArtNem_BossExplosion
 PLC_6B_End
 
 PLC_6C: plrlistheader
-		plreq $320, ArtNem_HCZEndBoss
-		plreq $52E, ArtNem_RobotnikShip
-		plreq $500, ArtNem_BossExplosion
-		plreq $494, ArtNem_EggCapsule
+		plreq ArtTile_HCZEndBoss, ArtNem_HCZEndBoss
+		plreq ArtTile_RobotnikShip, ArtNem_RobotnikShip
+		plreq ArtTile_BossExplosion, ArtNem_BossExplosion
+		plreq ArtTile_EggCapsule, ArtNem_EggCapsule
 PLC_6C_End
 
 PLC_6D: plrlistheader
-		plreq $52E, ArtNem_RobotnikShip
-		plreq $500, ArtNem_BossExplosion
-		plreq $494, ArtNem_EggCapsule
+		plreq ArtTile_RobotnikShip, ArtNem_RobotnikShip
+		plreq ArtTile_BossExplosion, ArtNem_BossExplosion
+		plreq ArtTile_EggCapsule, ArtNem_EggCapsule
 PLC_6D_End
 
 PLC_6E: plrlistheader
-		plreq $430, ArtNem_CNZEndBoss
-		plreq $52E, ArtNem_RobotnikShip
-		plreq $500, ArtNem_BossExplosion
-		plreq $494, ArtNem_EggCapsule
+		plreq ArtTile_CNZEndBoss, ArtNem_CNZEndBoss
+		plreq ArtTile_RobotnikShip, ArtNem_RobotnikShip
+		plreq ArtTile_BossExplosion, ArtNem_BossExplosion
+		plreq ArtTile_EggCapsule, ArtNem_EggCapsule
 PLC_6E_End
 
 PLC_6F: plrlistheader
-		plreq $3E0, ArtNem_FBZEndBoss
-		plreq $410, ArtNem_FBZRobotnikHead
-		plreq $454, ArtNem_FBZEndBossFlame
-		plreq $52E, ArtNem_RobotnikShip
-		plreq $500, ArtNem_BossExplosion
-		plreq $494, ArtNem_EggCapsule
+		plreq ArtTile_FBZEndBoss-$20, ArtNem_FBZEndBoss
+		plreq ArtTile_FBZRobotnikHead-$20, ArtNem_FBZRobotnikHead
+		plreq ArtTile_FBZEndBossFlame+$4, ArtNem_FBZEndBossFlame
+		plreq ArtTile_RobotnikShip, ArtNem_RobotnikShip
+		plreq ArtTile_BossExplosion, ArtNem_BossExplosion
+		plreq ArtTile_EggCapsule, ArtNem_EggCapsule
 PLC_6F_End
 
 PLC_70: plrlistheader
-		plreq $2A6, ArtNem_ICZEndBoss
-		plreq $52E, ArtNem_RobotnikShip
-		plreq $500, ArtNem_BossExplosion
-		plreq $494, ArtNem_EggCapsule
+		plreq ArtTile_ICZEndBoss, ArtNem_ICZEndBoss
+		plreq ArtTile_RobotnikShip, ArtNem_RobotnikShip
+		plreq ArtTile_BossExplosion, ArtNem_BossExplosion
+		plreq ArtTile_EggCapsule, ArtNem_EggCapsule
 PLC_70_End
 
 PLC_71: plrlistheader
-		plreq $3AA, ArtNem_LBZFinalBoss1
-		plreq $500, ArtNem_BossExplosion
+		plreq ArtTile_LBZFinalBoss1, ArtNem_LBZFinalBoss1
+		plreq ArtTile_BossExplosion, ArtNem_BossExplosion
 PLC_71_End
 
 PLC_72_73_74_75_76_77: plrlistheader
-		plreq $52E, ArtNem_RobotnikShip
-		plreq $4A9, ArtNem_FBZRobotnikRun
-		plreq $500, ArtNem_BossExplosion
+		plreq ArtTile_RobotnikShip, ArtNem_RobotnikShip
+		plreq ArtTile_FBZRobotnikRun, ArtNem_FBZRobotnikRun
+		plreq ArtTile_BossExplosion, ArtNem_BossExplosion
 PLC_72_73_74_75_76_77_End
 
 PLC_78_79_7A_7B: plrlistheader
-		plreq $52E, ArtNem_RobotnikShip
-		plreq $500, ArtNem_BossExplosion
+		plreq ArtTile_RobotnikShip, ArtNem_RobotnikShip
+		plreq ArtTile_BossExplosion, ArtNem_BossExplosion
 PLC_78_79_7A_7B_End
 
 ; =============== S U B R O U T I N E =======================================
@@ -116337,9 +116366,9 @@ Debug_SOZ2:		dbglistinclude "Levels/SOZ/Debug/S3.asm"
 Debug_LRZ1:
 Debug_LRZ2:		dbglistinclude "Levels/LRZ/Debug/S3.asm"
 			; Presumably, these belong to the LRZ debug list, but the header only counts five entries, ignoring these three.
-			dbglistobj Obj_Spring, Map_Spring, $90,   3, make_art_tile($4B4,0,0)
-			dbglistobj Obj_Spring, Map_Spring, $A0,   6, make_art_tile($4A4,0,0)
-			dbglistobj Obj_Spikes, Map_Spikes,   0,   0, make_art_tile($49C,0,0)
+			dbglistobj Obj_Spring, Map_Spring, $90,   3, make_art_tile(ArtTile_SpikesSprings+$20,0,0)
+			dbglistobj Obj_Spring, Map_Spring, $A0,   6, make_art_tile(ArtTile_SpikesSprings+$10,0,0)
+			dbglistobj Obj_Spikes, Map_Spikes,   0,   0, make_art_tile(ArtTile_SpikesSprings+$8,0,0)
 Debug_SSZ:		dbglistinclude "Levels/SSZ/Debug/S3.asm"
 Debug_DEZ1:
 Debug_DEZ2:		dbglistinclude "Levels/DEZ/Debug/S3.asm"

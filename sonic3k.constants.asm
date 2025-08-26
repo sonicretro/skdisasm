@@ -1064,35 +1064,345 @@ VRAM_Plane_A_Name_Table               = $C000	; Extends until $CFFF
 VRAM_Plane_B_Name_Table               = $E000	; Extends until $EFFF
 
 ; Menu background.
-ArtTile_ArtKos_S3MenuBG               = $0001
+ArtTile_S3MenuBG                      = $0001
 
 ; Competition mode.
-ArtTile_ArtKos_Competition_LevSel     = $029F
-ArtTile_ArtKos_Competition_ModeSel    = $034A
-ArtTile_ArtKos_Competition_Results    = $034A
-ArtTile_ArtKos_Competition_CharSel    = $05C9
+ArtTile_Competition_LevSel            = $029F
+ArtTile_Competition_ModeSel           = $034A
+ArtTile_Competition_Results           = $034A
+ArtTile_Competition_STKIcons          = $0572
+ArtTile_Competition_Text              = $058D
+ArtTile_Competition_CharSel           = $05C9
 
 ; Save screen.
-ArtTile_ArtKos_Save_Misc              = $029F
-ArtTile_ArtKos_Save_Extra             = $0454
+ArtTile_Save_Misc                     = $029F
+ArtTile_Save_Extra                    = $0454
+ArtTile_Save_Text                     = $0562
 
-; Objects.
-ArtTile_ArtNem_AIZMisc2				  = $02E9
+; Sonic 2 Menus.
+ArtTile_S2MenuBox                     = $0070
+ArtTile_S2Sega                        = $0080
+ArtTile_S2LevelSelectPics             = $0090
+ArtTile_S2Signpost                    = $0500
+
+; Blue Sphere.
+ArtTile_BlueSphere_Difficulty         = $0180
+ArtTile_BlueSphere_BG                 = $0197
+ArtTile_BlueSphere_Emeralds           = $01DC
+ArtTile_BlueSphere_Misc               = $054E
+ArtTile_BlueSphere_TitleText          = $05BF
+ArtTile_BlueSphere_Tails              = $07A0
+
+; Special Stage.
+ArtTile_SStage_GetBlueSpheres         = $055F
+ArtTile_SStage_Icons                  = $0589
+ArtTile_SStage_BG                     = $059B
+ArtTile_SStage_Ring                   = $05A7
+ArtTile_SStage_Emerald                = $05A7
+ArtTile_SStage_Sphere                 = $0680
+ArtTile_SStage_Digits                 = $0781
+ArtTile_SStage_Shadow                 = $07A0
+ArtTile_SStage_Player2_Tail           = $07B0
+ArtTile_SStage_Player1                = $07D4
+ArtTile_SStage_Player2                = $07EB
+
+; Title screen.
+ArtTile_Title_Buffer                  = $0300
+ArtTile_Title_Misc                    = $0400
+ArtTile_Title_ANDKnuckles             = $04C0
+ArtTile_Title_Banner                  = $0500
+ArtTile_Title_Menu                    = $0680
+ArtTile_SKTitle_SonicKnuxStand        = $00E2
+ArtTile_SKTitle_Menu                  = $0462
+ArtTile_SKTitle_Sega                  = $049C
+ArtTile_SKTitle_Banner                = $04EE
+ArtTile_SKTitle_SonicFall             = $04EF
+ArtTile_SKTitle_DeathEgg              = $0680
+ArtTile_SKTitle_Mountain              = $07A0
+
+; Sonic 3 fonts (continue, credits).
+ArtTile_S3Fonts_SmallText             = $0001
+ArtTile_S3Fonts_BigText               = $0029
+
+; Continue screen.
+ArtTile_Continue_Digits               = $0001
+ArtTile_Continue_Misc                 = $008C
+ArtTile_Continue_Icons                = $00D9
+ArtTile_Continue_Text                 = $0347
+
+; Ending.
+ArtTile_Ending_S3EndPose              = $03D9
+ArtTile_Ending_S3Sprites              = $045D
+ArtTile_Ending_Sprites                = $008E
+ArtTile_Ending_Plane                  = $01E3
+ArtTile_Ending_Emeralds               = $0211
+ArtTile_Ending_PlaneExtra             = $026E
+ArtTile_Ending_KnuxEndPose            = $02C1
+ArtTile_Ending_IslandLiftGfx          = $02FF
+ArtTile_Ending_Animals                = $02FF
+ArtTile_Ending_EyecatchEggman         = $0300
+ArtTile_Ending_EyecatchEggRobo        = $0300
+ArtTile_Ending_SSZKnuckles            = $0310
+ArtTile_Ending_CreditsText            = $0347
+ArtTile_Ending_SonicTailsEndPose      = $0347
+ArtTile_Ending_Cloud                  = $03B6
+ArtTile_Ending_ANDKnuckles            = $03EF
+ArtTile_Ending_Logo                   = $0415
+ArtTile_Ending_MasterEmerald          = $052E
+ArtTile_Ending_Knuckles               = $05E0
+
+; Game objects.
+ArtTile_AIZEndBoss                    = $0180
+ArtTile_AIZMisc2                      = $02E9
+ArtTile_AIZSlideRope                  = $0324
+ArtTile_AIZMisc1                      = $0333
+ArtTile_AIZFallingLog                 = $03CF
+ArtTile_AIZIntroSprites               = $03D1
+ArtTile_AIZFloatingPlatform           = $03F7
+ArtTile_AIZMiniboss                   = $041A
+ArtTile_AIZSwingVine                  = $041B
+ArtTile_AIZBackgroundTree             = $0438
+ArtTile_AIZ2FloatingPlatform          = $0440
+ArtTile_AIZMinibossSmall              = $0474
+ArtTile_AIZBossFire                   = $0482
+ArtTile_SphereTest                    = $04E0
+ArtTile_AIZ2Bombership                = $0500
+ArtTile_Rhinobot                      = $0500
+ArtTile_AIZIntroPlane                 = $0529
+ArtTile_Bloominator                   = $052A
+ArtTile_MonkeyDude                    = $0548
+ArtTile_CaterkillerJr                 = $055F
+ArtTile_Surfboard                     = $0585
+ArtTile_AIZIntroEmeralds              = $05B1
+
+ArtTile_HCZ2BlockPlat                 = $0028
+ArtTile_HCZMiniboss                   = $0304
+ArtTile_HCZEndBoss                    = $0320
+ArtTile_HCZ1WaterSplash2              = $0344
+ArtTile_HCZ2KnuxWall                  = $0350
+ArtTile_HCZ2Slide                     = $035C
+ArtTile_HCZCutsceneGeyser             = $036B
+ArtTile_HCZ2WaterSplash2              = $036E
+ArtTile_HCZWaterRush                  = $037A
+ArtTile_HCZWaterSplash                = $03B2
+ArtTile_HCZMisc                       = $03CA
+ArtTile_HCZMinibossSplash             = $03FC
+ArtTile_HCZButton                     = $0426
+ArtTile_HCZWaveSplash                 = $042E
+ArtTile_HCZSpikeBall                  = $043E
+ArtTile_Buggernaut                    = $044C
+ArtTile_TurboSpiker                   = $0500
+ArtTile_HCZGeyser                     = $0500
+ArtTile_HCZLargeFan                   = $0500
+ArtTile_Blastoid                      = $0539
+ArtTile_Jawz                          = $0539
+ArtTile_MegaChopper                   = $054D
+ArtTile_Pointdexter                   = $0559
+
+ArtTile_MGZEndBoss                    = $033F
+ArtTile_MGZMisc1                      = $035F
+ArtTile_MGZMisc2                      = $03FF
+ArtTile_MGZSigns                      = $0451
+ArtTile_MGZEndBossDebris              = $045E
+ArtTile_MGZEndBossScaled              = $0469
+ArtTile_MGZMHZDiagonalSpring          = $0478
+ArtTile_MGZSpire                      = $0500
+ArtTile_BubblesBadnik                 = $0500
+ArtTile_Spiker                        = $0530
+ArtTile_MGZMiniboss                   = $054F
+ArtTile_Mantis                        = $054F
+ArtTile_MGZMiniBossDebris             = $0570
+
+ArtTile_CNZMisc                       = $0351
+ArtTile_CNZEndBoss                    = $0430
+ArtTile_CNZPlatform                   = $0430
+ArtTile_CNZCannon                     = $0448
+ArtTile_CNZTeleport                   = $0500
+ArtTile_Clamer                        = $0500
+ArtTile_Sparkle                       = $0524
+ArtTile_CNZMiniboss                   = $052E
+ArtTile_Batbot                        = $0552
+ArtTile_CNZBalloon                    = $0574
+
+ArtTile_S3Snowboard                   = $06A4
+ArtTile_ICZEndBoss                    = $02A6
+ArtTile_Snowboard                     = $0320
+ArtTile_ICZIntroSprites               = $0347
+ArtTile_ICZMisc2                      = $0377
+ArtTile_ICZMisc1                      = $03B6
+ArtTile_ICZMiniboss                   = $04A9
+ArtTile_Penguinator                   = $0500
+ArtTile_StarPointer                   = $0548
+ArtTile_ICZSnowdust                   = $0558
+ArtTile_ICZTeleport                   = $0570
+ArtTile_SnowboardDust                 = $06B8
+
+ArtTile_LBZ2Misc                      = $02EA
+ArtTile_LBZFinalBoss1                 = $03AA
+ArtTile_LBZMisc                       = $03C3
+ArtTile_LBZFinalBoss2                 = $03D9
+ArtTile_LBZEndBoss                    = $0425
+ArtTile_LBZTubeTrans                  = $0455
+ArtTile_LBZMinibossBox                = $0456
+ArtTile_LBZ2DeathEggSmall             = $04AE
+ArtTile_LBZKnuxBomb                   = $04D6
+ArtTile_LBZMiniboss                   = $04D6
+ArtTile_Flybot767                     = $0500
+ArtTile_SnaleBlaster                  = $0524
+ArtTile_Ribot                         = $0547
+ArtTile_Corkey                        = $0558
+ArtTile_Orbinaut                      = $056E
+
+ArtTile_MHZ1CutsceneButton            = $0341
+ArtTile_MHZMisc                       = $0347
+ArtTile_MHZMiniboss                   = $03AD
+ArtTile_MHZEndBossSpikes              = $03AF
+ArtTile_MHZEndBoss                    = $03EC
+ArtTile_MHZMinibossLog                = $049F
+ArtTile_Cluckoid                      = $0500
+ArtTile_MHZShipPropeller              = $0500
+ArtTile_MHZKnuxPeer                   = $0500
+ArtTile_Butterdroid                   = $0514
+ArtTile_MHZKnuxSwitch                 = $0528
+ArtTile_KnuxIntroBomb                 = $052E
+ArtTile_Dragonfly                     = $0538
+ArtTile_Madmole                       = $0545
+ArtTile_Mushmeanie                    = $056D
+ArtTile_MHZEndBossPillar              = $0580
+
+ArtTile_FBZSpikes                     = $0200
+ArtTile_FBZMisc2                      = $02D2
+ArtTile_FBZOutdoors                   = $02E5
+ArtTile_FBZEggCapsule                 = $035D
+ArtTile_FBZMisc                       = $0379
+ArtTile_FBZCloud                      = $03A3
+ArtTile_FBZBossPillar                 = $03D5
+ArtTile_FBZExitDoor                   = $03E5
+ArtTile_FBZExitHall                   = $03F4
+ArtTile_FBZEndBoss                    = $0400
+ArtTile_FBZAnimals1                   = $042E
+ArtTile_FBZRobotnikHead               = $0430
+ArtTile_FBZAnimals2                   = $0440
+ArtTile_FBZEndBossFlame               = $0450
+ArtTile_FBZRobotnikStand              = $0466
+ArtTile_FBZRobotnikRun                = $04A9
+ArtTile_FBZButton                     = $0500
+ArtTile_Blaster                       = $0506
+ArtTile_FBZ2Subboss                   = $052E
+ArtTile_FBZMiniboss                   = $052E
+ArtTile_Technosqueek                  = $052E
+
+ArtTile_SOZEndBoss                    = $03A4
+ArtTile_SOZ2Extra                     = $03AF
+ArtTile_SOZMiniboss                   = $03B5
+ArtTile_SOZTile                       = $03C0
+ArtTile_SOZMisc                       = $03C9
+ArtTile_SOZSand                       = $04F3
+ArtTile_Rockn                         = $0500
+ArtTile_SOZGhosts                     = $0500
+ArtTile_Skorp                         = $0536
+ArtTile_SOZGhostCapsule               = $0536
+ArtTile_Sandworm                      = $0557
+
+ArtTile_LRZ2DeathEggBG                = $039F
+ArtTile_LRZMisc                       = $03A1
+ArtTile_LRZ3DeathEggFlash             = $03AB
+ArtTile_LRZ2Drum                      = $03AD
+ArtTile_LRZEndBoss                    = $03CC
+ArtTile_LRZMiniboss                   = $03FB
+ArtTile_LRZ2Misc                      = $040D
+ArtTile_LRZ3Autoscroll                = $0424
+ArtTile_LRZBigSpike                   = $0442
+ArtTile_LRZ3PlatformDebris            = $0487
+ArtTile_Fireworm                      = $0500
+ArtTile_LRZKnuxBoulder                = $0500
+ArtTile_FirewormSegments              = $0512
+ArtTile_LRZRockCrusher                = $052E
+ArtTile_Iwamodoki                     = $0530
+ArtTile_Toxomister                    = $0562
+
+ArtTile_HPZEmeraldMisc                = $03B5
+ArtTile_HPZGrayEmerald                = $0477
+ArtTile_HPZEntryTeleporter            = $0488
+ArtTile_HPZSmallEmeralds              = $04AC
+ArtTile_HPZKnuxDizzy                  = $0500
+ArtTile_HPZKnuxBossDust               = $0500
+ArtTile_HPZTeleporter                 = $052E
+
+ArtTile_SSZMasterEmerald              = $01EE
+ArtTile_SSZMisc                       = $02D4
+ArtTile_SSZSpiralRamp                 = $0348
+ArtTile_MechaSonic                    = $03F4
+ArtTile_MechaSonicExtra               = $041C
+ArtTile_SSZMTZOrbs                    = $041F
+ArtTile_SSZGHZMisc                    = $0468
+ArtTile_SSZCutsceneButton             = $048E
+ArtTile_HPZSSZBossCrane               = $04A7
+ArtTile_SSZDeathEggCloud              = $04C9
+ArtTile_EggRoboBadnik                 = $0500
+ArtTile_SSZDeathEggSmall              = $0500
+ArtTile_EggRoboFlyScaled              = $0500
+
+ArtTile_DEZFinalBossDebris            = $0100
+ArtTile_DEZMisc2                      = $02FC
+ArtTile_DEZ2Extra                     = $0332
+ArtTile_DEZMisc                       = $034D
+ArtTile_DEZEndBoss                    = $038A
+ArtTile_DEZFinalBossMisc              = $038F
+ArtTile_DEZMiniboss                   = $0400
+ArtTile_DEZBossCrane                  = $049D
+ArtTile_Spikebonker                   = $0500
+ArtTile_Chainspike                    = $0542
+ArtTile_DEZRobotnikRun                = $058C
+
+ArtTile_DDZMisc                       = $02DB
+ArtTile_BossMasterEmerald             = $04D0
+
+ArtTile_2PArt_2                       = $0391
+ArtTile_2PArt_1                       = $03AD
+ArtTile_2PArt_3                       = $03C6
+ArtTile_2PTime                        = $0600
+ArtTile_2PStartPost                   = $06BC
+ArtTile_2PLapNum                      = $0700
+ArtTile_2PPosIcon                     = $075E
+
+ArtTile_DPZMisc                       = $0280
+ArtTile_BPZMisc                       = $0300
+ArtTile_CGZMisc                       = $0300
+ArtTile_EMZMisc                       = $0300
+
+ArtTile_BonusStage                    = $015B
+ArtTile_PachinkoMain                  = $02CD
+ArtTile_SlotsBlocks                   = $033B
+ArtTile_PachinkoGumballs              = $0388
 
 ; ---------------------------------------------------------------------------
 ; Universal locations.
 
 ; Universal (used on all standard levels).
+ArtTile_DiagonalSpring                = $043A
+ArtTile_GrayButton                    = $0456
+ArtTile_Bubbles                       = $045C
+ArtTile_EggCapsule                    = $0494
+ArtTile_SpikesSprings                 = $0494
+ArtTile_EndSigns                      = $04AC
 ArtTile_Monitors                      = $04C4
+ArtTile_BossExplosion2                = $04D2
 ArtTile_CutsceneKnux                  = $04DA
+ArtTile_BossExplosion                 = $0500
+ArtTile_RobotnikShip                  = $052E
+ArtTile_Animals1                      = $0580
+ArtTile_Animals2                      = $0592
 ArtTile_Explosion                     = $05A0
 ArtTile_StarPost                      = $05E4
 ArtTile_Player_1                      = $0680
+ArtTile_SignpostStub                  = $069E
 ArtTile_Player_2                      = $06A0
 ArtTile_Player_2_Tail                 = $06B0
 ArtTile_Ring                          = $06BC
 ArtTile_Shield                        = $079C
 ArtTile_Shield_Sparks                 = $07BB
+ArtTile_PlayerLifeIcon                = $07D4
 ArtTile_DashDust                      = $07E0
 ArtTile_DashDust_P2                   = $07F0
 
