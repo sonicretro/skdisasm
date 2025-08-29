@@ -529,7 +529,7 @@ zInitAudioDriver:
 	if (SonicDriverVer==3)&&(fix_sndbugs=0)
 		; Nonsensical junk values.
 		ld	a, 80h
-		ld	a, 6
+		ld	a, zmake68kBank(0B0000h)&0Fh	; Leftover set song bank to first music bank from the Nov 3rd 1993 Prototype
 	else
 		ld	a, zmake68kBank(Snd_Bank2_Start)	; Set song bank to second music bank (default value)
 	endif
