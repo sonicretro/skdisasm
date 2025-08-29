@@ -354,6 +354,12 @@ zmake68kPtr function addr,zROMWindow+(addr&7FFFh)
 
 ; function to turn a 68k address into a bank byte
 zmake68kBank function addr,(((addr&3F8000h)/zROMWindow))
+
+	if SonicDriverVer==3
+zmakeSongBank function addr,zmake68kBank(addr)&0Fh ; See bankswitchToMusicS3
+	else
+zmakeSongBank function addr,zmake68kBank(addr)
+	endif
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; Entry Point
@@ -529,9 +535,9 @@ zInitAudioDriver:
 	if (SonicDriverVer==3)&&(fix_sndbugs=0)
 		; Nonsensical junk values.
 		ld	a, 80h
-		ld	a, zmake68kBank(0B0000h)&0Fh	; Leftover set song bank to first music bank from the Nov 3rd 1993 Prototype
+		ld	a, zmakeSongBank(0B0000h)	; Leftover set song bank to first music bank from the Nov 3rd 1993 Prototype
 	else
-		ld	a, zmake68kBank(Snd_Bank2_Start)	; Set song bank to second music bank (default value)
+		ld	a, zmakeSongBank(Snd_Bank2_Start)	; Set song bank to second music bank (default value)
 	endif
 		ld	(zSongBank), a		; Store it
 		xor	a			; a = 0
@@ -2826,11 +2832,6 @@ zFMFrequencies:
 ; MUSIC BANKS
 ; ===========================================================================
 
-	if SonicDriverVer==3
-zmakeSongBank function addr,zmake68kBank(addr)&0Fh ; See bankswitchToMusicS3
-	else
-zmakeSongBank function addr,zmake68kBank(addr)
-	endif
 zmakeSongBanks macro
 		irp op,ALLARGS
 			db zmakeSongBank(op)
