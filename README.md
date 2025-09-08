@@ -40,8 +40,8 @@ is the recommended choice.
 
 The base directory contains two sets of build scripts - the Windows Batch files (*.bat), and the Lua scripts (*.lua).
 The Batch files are the simplest to use but will only work on Windows. The Lua scripts are cross platform (Windows, Mac, Linux,
-FreeBSD) but require Lua to be installed. The Batch files are ran by double-clicking them, while the Lua scripts are ran on the
-command line with 'lua nameOfScript'.
+FreeBSD) but require Lua (5.3+) to be installed. The Batch files are ran by double-clicking them, while the Lua scripts are ran
+on the command line with 'lua nameOfScript'.
 
 buildS3         - Builds a byte-perfect copy of the Sonic 3 ROM.
 buildSK         - Builds a byte-perfect copy of the Sonic & Knuckles ROM.
