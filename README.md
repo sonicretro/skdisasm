@@ -48,6 +48,9 @@ buildSK         - Builds a byte-perfect copy of the Sonic & Knuckles ROM.
 buildS3Complete - Builds a combined Sonic 3 & Knuckles ROM (using the 'Sonic3_Complete' flag detailed above).
 chkbitperfect   - Builds both an S3 ROM and an S&K ROM, then verifies that they are byte-identical to the original ROMs.
 
+The Lua scripts require Lua version 5.3. Earlier versions will cause errors about integer divisions ('//') and bit-shifts
+('<<', '>>') not being recognised.
+
 
 ## Editing with SonLVL
 
