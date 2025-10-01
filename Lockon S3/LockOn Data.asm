@@ -1039,8 +1039,6 @@ ArtNem_AIZBossFire:
 ArtKosM_AIZIntroPlane:
 		binclude "Levels/AIZ/KosinskiM Art/Intro Plane.bin"
 		even
-		binclude "Levels/AIZ/Kosinski Art/Intro Plane Shadows.bin"
-		even
 ArtUnc_CutsceneKnux:
 		binclude "General/Sprites/Knuckles/Cutscene/Cutscene Main.bin"
 		even
