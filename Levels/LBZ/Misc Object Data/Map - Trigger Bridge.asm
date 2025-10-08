@@ -1,27 +1,28 @@
-Map_224DE6:	dc.w Frame_224E16-Map_224DE6 ; ...
-		dc.w Frame_224E48-Map_224DE6
-		dc.w Frame_224E74-Map_224DE6
-		dc.w Frame_224E9A-Map_224DE6
-		dc.w Frame_224EBA-Map_224DE6
-		dc.w Frame_224ED4-Map_224DE6
-		dc.w Frame_224EE8-Map_224DE6
-		dc.w Frame_224EF6-Map_224DE6
-		dc.w Frame_224EFE-Map_224DE6
-		dc.w Frame_224F30-Map_224DE6
-		dc.w Frame_224F5C-Map_224DE6
-		dc.w Frame_224F82-Map_224DE6
-		dc.w Frame_224FA2-Map_224DE6
-		dc.w Frame_224FBC-Map_224DE6
-		dc.w Frame_224FD0-Map_224DE6
-		dc.w Frame_224FDE-Map_224DE6
-		dc.w Frame_224FE6-Map_224DE6
-		dc.w Frame_225018-Map_224DE6
-		dc.w Frame_225044-Map_224DE6
-		dc.w Frame_22506A-Map_224DE6
-		dc.w Frame_22508A-Map_224DE6
-		dc.w Frame_2250A4-Map_224DE6
-		dc.w Frame_2250B8-Map_224DE6
-		dc.w Frame_2250C6-Map_224DE6
+Map_LBZTriggerBridge_:
+		dc.w Frame_224E16-Map_LBZTriggerBridge_ ; ...
+		dc.w Frame_224E48-Map_LBZTriggerBridge_
+		dc.w Frame_224E74-Map_LBZTriggerBridge_
+		dc.w Frame_224E9A-Map_LBZTriggerBridge_
+		dc.w Frame_224EBA-Map_LBZTriggerBridge_
+		dc.w Frame_224ED4-Map_LBZTriggerBridge_
+		dc.w Frame_224EE8-Map_LBZTriggerBridge_
+		dc.w Frame_224EF6-Map_LBZTriggerBridge_
+		dc.w Frame_224EFE-Map_LBZTriggerBridge_
+		dc.w Frame_224F30-Map_LBZTriggerBridge_
+		dc.w Frame_224F5C-Map_LBZTriggerBridge_
+		dc.w Frame_224F82-Map_LBZTriggerBridge_
+		dc.w Frame_224FA2-Map_LBZTriggerBridge_
+		dc.w Frame_224FBC-Map_LBZTriggerBridge_
+		dc.w Frame_224FD0-Map_LBZTriggerBridge_
+		dc.w Frame_224FDE-Map_LBZTriggerBridge_
+		dc.w Frame_224FE6-Map_LBZTriggerBridge_
+		dc.w Frame_225018-Map_LBZTriggerBridge_
+		dc.w Frame_225044-Map_LBZTriggerBridge_
+		dc.w Frame_22506A-Map_LBZTriggerBridge_
+		dc.w Frame_22508A-Map_LBZTriggerBridge_
+		dc.w Frame_2250A4-Map_LBZTriggerBridge_
+		dc.w Frame_2250B8-Map_LBZTriggerBridge_
+		dc.w Frame_2250C6-Map_LBZTriggerBridge_
 Frame_224E16:	dc.w 8
 		dc.b $C0,  5,  0,$10,$FF,$F8
 		dc.b $D0,  5,  0,$10,$FF,$F8

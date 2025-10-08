@@ -1,11 +1,11 @@
 Map_LBZTubeElevator_:
-		dc.w Frame_2291B2-Map_LBZTubeElevator
-		dc.w Frame_2291F0-Map_LBZTubeElevator
-		dc.w Frame_22922E-Map_LBZTubeElevator
-		dc.w Frame_22925A-Map_LBZTubeElevator
-		dc.w Frame_229298-Map_LBZTubeElevator
-		dc.w Frame_2292C4-Map_LBZTubeElevator
-		dc.w Frame_229302-Map_LBZTubeElevator
+		dc.w Frame_2291B2-Map_LBZTubeElevator_
+		dc.w Frame_2291F0-Map_LBZTubeElevator_
+		dc.w Frame_22922E-Map_LBZTubeElevator_
+		dc.w Frame_22925A-Map_LBZTubeElevator_
+		dc.w Frame_229298-Map_LBZTubeElevator_
+		dc.w Frame_2292C4-Map_LBZTubeElevator_
+		dc.w Frame_229302-Map_LBZTubeElevator_
 Frame_2291B2:	dc.w $A
 		dc.b  $D0,  $A,   0,   0, $FF, $E8
 		dc.b  $D0,  $A,   8,   0,   0,   0

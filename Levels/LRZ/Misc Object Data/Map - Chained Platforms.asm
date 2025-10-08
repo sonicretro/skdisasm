@@ -1,4 +1,5 @@
-		dc.w word_4A982-Map_LRZChainedPlatforms
+Map_LRZChainedPlatforms_:
+		dc.w word_4A982-Map_LRZChainedPlatforms_
 word_4A982:	dc.w 6			; DATA XREF: ROM:0004A980o
 		dc.b  $E8,   9,	  0, $57, $FF, $E8
 		dc.b  $E8,   9,	  8, $57,   0,	 0

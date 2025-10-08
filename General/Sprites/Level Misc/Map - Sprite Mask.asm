@@ -1,21 +1,21 @@
-Map_18595E:
-		dc.w word_185980-Map_18595E
-		dc.w word_185982-Map_18595E
-		dc.w word_185990-Map_18595E
-		dc.w word_18599E-Map_18595E
-		dc.w word_1859AC-Map_18595E
-		dc.w word_1859BA-Map_18595E
-		dc.w word_1859D4-Map_18595E
-		dc.w word_1859EE-Map_18595E
-		dc.w word_185A08-Map_18595E
-		dc.w word_185A22-Map_18595E
-		dc.w word_185A48-Map_18595E
-		dc.w word_185A6E-Map_18595E
-		dc.w word_185A94-Map_18595E
-		dc.w word_185ABA-Map_18595E
-		dc.w word_185AEC-Map_18595E
-		dc.w word_185B1E-Map_18595E
-		dc.w word_185B50-Map_18595E
+Map_SpriteMask_:
+		dc.w word_185980-Map_SpriteMask_
+		dc.w word_185982-Map_SpriteMask_
+		dc.w word_185990-Map_SpriteMask_
+		dc.w word_18599E-Map_SpriteMask_
+		dc.w word_1859AC-Map_SpriteMask_
+		dc.w word_1859BA-Map_SpriteMask_
+		dc.w word_1859D4-Map_SpriteMask_
+		dc.w word_1859EE-Map_SpriteMask_
+		dc.w word_185A08-Map_SpriteMask_
+		dc.w word_185A22-Map_SpriteMask_
+		dc.w word_185A48-Map_SpriteMask_
+		dc.w word_185A6E-Map_SpriteMask_
+		dc.w word_185A94-Map_SpriteMask_
+		dc.w word_185ABA-Map_SpriteMask_
+		dc.w word_185AEC-Map_SpriteMask_
+		dc.w word_185B1E-Map_SpriteMask_
+		dc.w word_185B50-Map_SpriteMask_
 word_185980:	dc.w 0
 word_185982:	dc.w 2
 		dc.b  $FC,   0,   7, $C0,   0,   8
