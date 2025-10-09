@@ -295,7 +295,7 @@
 #split	0x0016EFB2,0x0016F332,General\Sprites\Fireworm\Fireworm.bin
 #split	0x00172406,0x00174A86,General\Sprites\Knuckles\Cutscene\HPZ Emerald Grab.bin
 #split	0x00175A9E,0x0017B17E,General\Sprites\Mecha Sonic\Mecha Sonic.bin
-#split	0x0017C802,0x0017DBC2,General\Sprites\SSZ Death Egg Cloud\SSZ Death Egg Cloud.bin
+#split	0x0017C802,0x0017DBC2,Levels\SSZ\Uncompressed Art\Death Egg Cloud.bin
 #split	0x0017E274,0x0017EDB4,General\Sprites\Knuckles\Cutscene\SSZ Tired.bin
 #split	0x0018A204,0x0018A604,General\Sprites\Shields\Invincibility.bin
 #split	0x0018A604,0x0018BD44,General\Sprites\Dash Dust\Dash Dust.bin
