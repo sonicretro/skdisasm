@@ -57150,9 +57150,9 @@ locret_30A30:
 
 ; ---------------------------------------------------------------------------
 Map_CNZCannon:
-		include "General/Sprites/CNZ Cannon/Map - CNZ Cannon.asm"
+		include "Levels/CNZ/Misc Object Data/Map - Cannon.asm"
 DPLC_CNZCannon:
-		include "General/Sprites/CNZ Cannon/DPLC - CNZ Cannon.asm"
+		include "Levels/CNZ/Misc Object Data/DPLC - Cannon.asm"
 ; ---------------------------------------------------------------------------
 
 Obj_CNZRisingPlatform:
@@ -117608,7 +117608,7 @@ Pal_Slot_Special:
 		binclude "Levels/Slots/Palettes/S3.bin"
 		even
 ArtUnc_CNZCannon:
-		binclude "General/Sprites/CNZ Cannon/CNZ Cannon.bin"
+		binclude "Levels/CNZ/Uncompressed Art/Cannon.bin"
 		even
 ArtUnc_AirCountdown:
 		binclude "General/Sprites/Bubbles/Air Countdown.bin"
