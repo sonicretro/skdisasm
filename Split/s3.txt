@@ -39,7 +39,7 @@
 #split	0x0002D39E,0x0002D41E,General\Special Stage\Palettes\Results S3.bin
 #split	0x0003C05A,0x0003C07A,Levels\AIZ\Palettes\Battleship.bin
 #split	0x0003C07A,0x0003C096,Levels\AIZ\Palettes\Boss Small.bin
-#split	0x0003F698,0x0003F718,General\Sprites\Continue\Palette S3.bin
+#split	0x0003F698,0x0003F718,General\Continue\Palettes\Palette S3.bin
 #split	0x0004160A,0x0004164A,General\Ending\Palettes\S3 Ending.bin
 #split	0x0004164A,0x0004168A,General\Ending\Palettes\S3 Logo.bin
 #split	0x0004168A,0x000416CA,General\Ending\Palettes\S3 Knuckles Eyecatch.bin
@@ -57,7 +57,7 @@
 #split	0x0019D282,0x0019D2A2,General\Competition Menu\Palettes\BG.bin
 
 /* Uncompressed Art */
-#split	0x0008CE74,0x0008D834,General\Sprites\CNZ Cannon\CNZ Cannon.bin
+#split	0x0008CE74,0x0008D834,Levels\CNZ\Uncompressed Art\Cannon.bin
 #split	0x0008F95A,0x000908BA,General\Sprites\Tails\Art\SStage Tails.bin
 #split	0x000909E8,0x000910E8,General\Sprites\Tails\Art\SStage Tails tails.bin
 #split	0x000A05C2,0x000A2922,General\Sprites\Sonic\Art\Sonic Surfboarding.bin

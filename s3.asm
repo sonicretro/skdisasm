@@ -27848,7 +27848,7 @@ loc_1744C:
 
 ; ---------------------------------------------------------------------------
 Ani_AirCountdown:
-		include "General/Sprites/Dash Dust/Anim - Air Countdown.asm"
+		include "General/Sprites/Bubbles/Anim - Air Countdown.asm"
 ; ---------------------------------------------------------------------------
 
 Obj_S2Shield:
@@ -51854,7 +51854,7 @@ Obj_Button:
 		move.w	#make_art_tile($456,0,0),art_tile(a0)
 		cmpi.b	#1,(Current_zone).w
 		bne.s	loc_2BB4C
-		move.l	#Map_Button2,mappings(a0)
+		move.l	#Map_HCZButton,mappings(a0)
 		move.w	#make_art_tile($426,1,0),art_tile(a0)
 
 loc_2BB4C:
@@ -52005,8 +52005,9 @@ loc_2BCEA:
 ; ---------------------------------------------------------------------------
 Map_Button:
 		include "General/Sprites/Buttons/Map - Button.asm"
-Map_Button2:
-		include "General/Sprites/Buttons/Map - Button 2.asm"
+;Map_Button2:
+Map_HCZButton:
+		include "Levels/HCZ/Misc Object Data/Map - Button.asm"
 Map_CNZButton:
 		include "Levels/CNZ/Misc Object Data/Map - Button.asm"
 Map_2PButton:
@@ -57149,9 +57150,9 @@ locret_30A30:
 
 ; ---------------------------------------------------------------------------
 Map_CNZCannon:
-		include "General/Sprites/CNZ Cannon/Map - CNZ Cannon.asm"
+		include "Levels/CNZ/Misc Object Data/Map - Cannon.asm"
 DPLC_CNZCannon:
-		include "General/Sprites/CNZ Cannon/DPLC - CNZ Cannon.asm"
+		include "Levels/CNZ/Misc Object Data/DPLC - Cannon.asm"
 ; ---------------------------------------------------------------------------
 
 Obj_CNZRisingPlatform:
@@ -76726,12 +76727,12 @@ aCONTINUE:
 		dc.b "C O N T I N U E",0
 		even
 Pal_ContinueScreen:
-		binclude "General/Sprites/Continue/Palette S3.bin"
+		binclude "General/Continue/Palettes/Palette S3.bin"
 		even
 Map_ContinueSprites:
-		include "General/Sprites/Continue/Map - Player Sprites S3.asm"
+		include "General/Continue/Map - Player Sprites S3.asm"
 Map_ContinueIcons:
-		include "General/Sprites/Continue/Map - Player Icons.asm"
+		include "General/Continue/Map - Player Icons.asm"
 byte_3F834:	dc.b 0
 		dc.b 1
 byte_3F836:	dc.b 2
@@ -76744,13 +76745,13 @@ byte_3F840:
 		dc.b    8,   4,   5,   6, $FC
 		even
 ArtNem_ContinueSprites:
-		binclude "General/Sprites/Continue/Player Sprites.bin"
+		binclude "General/Continue/Nemesis Art/Player Sprites.bin"
 		even
 ArtNem_ContinueIcons:
-		binclude "General/Sprites/Continue/Player Icons.bin"
+		binclude "General/Continue/Nemesis Art/Player Icons.bin"
 		even
 ArtNem_ContinueDigits:
-		binclude "General/Sprites/Continue/Digits.bin"
+		binclude "General/Continue/Nemesis Art/Digits.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -117607,10 +117608,10 @@ Pal_Slot_Special:
 		binclude "Levels/Slots/Palettes/S3.bin"
 		even
 ArtUnc_CNZCannon:
-		binclude "General/Sprites/CNZ Cannon/CNZ Cannon.bin"
+		binclude "Levels/CNZ/Uncompressed Art/Cannon.bin"
 		even
 ArtUnc_AirCountdown:
-		binclude "General/Sprites/Dash Dust/Air Countdown.bin"
+		binclude "General/Sprites/Bubbles/Air Countdown.bin"
 		even
 ArtUnc_SONICMILES:
 		binclude "General/S2Menu/Uncompressed Art/SONICMILES.bin"

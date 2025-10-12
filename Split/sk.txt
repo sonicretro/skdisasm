@@ -91,7 +91,7 @@
 #split	0x000577DA,0x000577FA,Levels\SSZ\Palettes\Death Egg.bin
 #split	0x000592BE,0x000592EE,General\Ending\Palettes\Water Cycle.bin
 #split	0x0005B16E,0x0005B18E,General\Ending\Palettes\Sky.bin
-#split	0x0005CBCA,0x0005CC4A,General\Sprites\Continue\Palette.bin
+#split	0x0005CBCA,0x0005CC4A,General\Continue\Palettes\Palette.bin
 #split	0x0005FBE2,0x0005FC1E,General\Ending\Palettes\Super Knuckles End Pose.bin
 #split	0x00060A9A,0x00060ABA,General\Ending\Palettes\Small Plane.bin
 #split	0x00060ABA,0x00060ADA,General\Ending\Palettes\SK Logo.bin
@@ -235,7 +235,7 @@
 #split	0x0000E18A,0x0000E48A,General\Sprites\HUD Icon\HUD Digits.bin
 #split	0x0000E48A,0x0000E5CA,General\Sprites\HUD Icon\Lives Digits.bin
 #split	0x0000E5CA,0x0000E8AA,General\Sprites\HUD Icon\Debug Digits.bin
-#split	0x000A9DFC,0x000AA57C,General\Sprites\Dash Dust\Air Countdown.bin
+#split	0x000A9DFC,0x000AA57C,General\Sprites\Bubbles\Air Countdown.bin
 #split	0x000AA57C,0x000AAA7C,General\S2Menu\Uncompressed Art\SONICMILES.bin
 #split	0x000AAA7C,0x000ABDFC,General\Sprites\Sonic\Art\SStage Sonic.bin
 #split	0x000ABF22,0x000AD302,General\Sprites\Knuckles\Art\SStage Knuckles.bin
@@ -295,7 +295,7 @@
 #split	0x0016EFB2,0x0016F332,General\Sprites\Fireworm\Fireworm.bin
 #split	0x00172406,0x00174A86,General\Sprites\Knuckles\Cutscene\HPZ Emerald Grab.bin
 #split	0x00175A9E,0x0017B17E,General\Sprites\Mecha Sonic\Mecha Sonic.bin
-#split	0x0017C802,0x0017DBC2,General\Sprites\SSZ Death Egg Cloud\SSZ Death Egg Cloud.bin
+#split	0x0017C802,0x0017DBC2,Levels\SSZ\Uncompressed Art\Death Egg Cloud.bin
 #split	0x0017E274,0x0017EDB4,General\Sprites\Knuckles\Cutscene\SSZ Tired.bin
 #split	0x0018A204,0x0018A604,General\Sprites\Shields\Invincibility.bin
 #split	0x0018A604,0x0018BD44,General\Sprites\Dash Dust\Dash Dust.bin
@@ -309,9 +309,9 @@
 /* Nemesis-Compressed Art */
 #split	0x00004D2A,0x00004F8C,General\Title\Nemesis Art\S3 Screen Text.bin
 #split	0x00039A00,0x00039A40,General\Sprites\Snowboard\Snowboard Dust.bin
-#split	0x0005CD66,0x0005D3C6,General\Sprites\Continue\Player Sprites.bin
-#split	0x0005D3C6,0x0005D788,General\Sprites\Continue\Player Icons.bin
-#split	0x0005D788,0x0005D868,General\Sprites\Continue\Digits.bin
+#split	0x0005CD66,0x0005D3C6,General\Continue\Nemesis Art\Player Sprites.bin
+#split	0x0005D3C6,0x0005D788,General\Continue\Nemesis Art\Player Icons.bin
+#split	0x0005D788,0x0005D868,General\Continue\Nemesis Art\Digits.bin
 #split	0x000AD430,0x000AD472,General\Special Stage\Nemesis Art\Shadow.bin
 #split	0x000AD472,0x000AD5F4,General\Special Stage\Nemesis Art\Get Blue Spheres.bin
 #split	0x000AD5F4,0x000AD650,General\Special Stage\Nemesis Art\Get Blue Spheres Arrow.bin

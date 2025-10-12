@@ -178,8 +178,9 @@ Map_AIZSpikedLog:
 		include "Levels/AIZ/Misc Object Data/Map - Spiked Log.asm"
 Map_AIZForegroundPlant:
 		include "Levels/AIZ/Misc Object Data/Map - Foreground Plant.asm"
-Map_Button2:
-		include "General/Sprites/Buttons/Map - Button 2.asm"
+;Map_Button2:
+Map_HCZButton:
+		include "Levels/HCZ/Misc Object Data/Map - Button.asm"
 Map_CNZButton:
 		include "Levels/CNZ/Misc Object Data/Map - Button.asm"
 Map_2PButton:
@@ -205,7 +206,7 @@ Map_HCZConveyorSpike:
 Map_CNZBalloon:
 		include "Levels/CNZ/Misc Object Data/Map - Balloon.asm"
 Map_CNZCannon:
-		include "General/Sprites/CNZ Cannon/Map - CNZ Cannon.asm"
+		include "Levels/CNZ/Misc Object Data/Map - Cannon.asm"
 Map_CNZRisingPlatform:
 		include "Levels/CNZ/Misc Object Data/Map - Rising Platform.asm"
 Map_CNZTrapDoor:
@@ -392,7 +393,7 @@ Layout_Gumball_Special:
 		binclude "Levels/Gumball/Layout/1.bin"
 		even
 ArtUnc_CNZCannon:
-		binclude "General/Sprites/CNZ Cannon/CNZ Cannon.bin"
+		binclude "Levels/CNZ/Uncompressed Art/Cannon.bin"
 		even
 ArtUnc_SStageTails:
 		binclude "General/Sprites/Tails/Art/SStage Tails.bin"
