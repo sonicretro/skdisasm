@@ -21,7 +21,7 @@
 FixMusicAndSFXDataBugs = 0
 SonicDriverVer = 3 ; Tell SMPS2ASM that we are targeting Sonic 3's sound driver
 		include "Sound/_smps2asm_inc.asm"
-		
+
 FixBugs = 0
 ; If 1, fixes multiple bugs within the game
 
@@ -2366,7 +2366,7 @@ Process_Nem_Queue_ShiftUp:
 .loop:
 		move.l	6(a0),(a0)+
 		dbf	d0,.loop
-		
+
 	if FixBugs
 		; The above code does not properly 'pop' the 16th PLC entry.
 		; Because of this, occupying the 16th slot will cause it to
@@ -2381,7 +2381,7 @@ Process_Nem_Queue_ShiftUp:
 
 		clr.l	(Nem_decomp_queue_End-6).w
 	endif
-		
+
 		rts
 ; End of function Process_Nem_Queue_Main
 
@@ -6437,7 +6437,7 @@ UpdateWaterSurface:
 		tst.b	(Water_flag).w
 		beq.s	locret_50DC
 		move.w	(Camera_X_pos).w,d1
-    if FixBugs
+	if FixBugs
 		; This function can cause the water surface's to be cut off at the
 		; left when the game is paused. This is because this function pushes
 		; the water surface sprite to the right every frame. To fix this,
@@ -6447,7 +6447,7 @@ UpdateWaterSurface:
 		or.b	(Ctrl_2_Press).w,d0 ; (either player)
 		andi.b	#button_start_mask,d0
 		bne.s	loc_50D2
-    endif
+	endif
 		btst	#0,(Level_frame_counter+1).w
 		beq.s	loc_50D2
 		addi.w	#$20,d1
@@ -7985,7 +7985,7 @@ iconData macro txtlabel,txtlabel2,vramAddr,iconPal,iconAddr
 	dc.l txtlabel, txtlabel2	; text locations
 	dc.l vdpComm(vramAddr,VRAM,WRITE)	; VRAM location to place data
 	dc.l iconPal<<24|((iconAddr)&$FFFFFF)	; icon palette and plane data location
-    endm
+	endm
 
 		iconData	Text2P_EmeraldHill,Text2P_Zone, VRAM_Plane_A_Name_Table+planeLoc(64,2,2),   0,RAM_start+$330
 		iconData	Text2P_MysticCave, Text2P_Zone, VRAM_Plane_A_Name_Table+planeLoc(64,22,2),  5,RAM_start+$3A8
@@ -8846,7 +8846,7 @@ LevelSelect_DrawIcon:
 		lsl.w	#5,d0
 		lea	(a1,d0.w),a1
 		lea	(Normal_palette_line_3).w,a2
-    if FixBugs
+	if FixBugs
 		; When the icon changes, the colors are briefly incorrect. This is
 		; because there's a delay between the icon being updated and the
 		; colors being updated, due to the colors being uploaded to the VDP
@@ -8854,14 +8854,14 @@ LevelSelect_DrawIcon:
 		; here.
 		; Prepare the VDP for data transfer.
 		move.l  #vdpComm(2*16*2,CRAM,WRITE),VDP_control_port-VDP_data_port(a6)
-    endif
+	endif
 		moveq	#bytesToLcnt($20),d1
 
 loc_6DAA:
-    if FixBugs
+	if FixBugs
 		; Upload colors to the VDP.
 		move.l	(a1),(a6)
-    endif
+	endif
 		move.l	(a1)+,(a2)+
 		dbf	d1,loc_6DAA
 		rts
@@ -15081,7 +15081,7 @@ locret_C7BC:
 		codepage	LEVELSELECT
 ;byte_C7BE
 NoSave_Delete_Text:
-		dc.b  "NO SAVE", $FF 
+		dc.b  "NO SAVE", $FF
 		dc.b  "DELETE", $FF
 ;byte_C7CD
 BlankSave_Text:
@@ -57473,7 +57473,7 @@ loc_310BC:
 		jmp	(Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
-  
+
 sub_310D2:
 		move.w	x_pos(a1),d0
 		sub.w	x_pos(a0),d0
@@ -112464,7 +112464,7 @@ loc_58C98:
 		movea.l	a1,a0
 		jsr	(HurtCharacter).l
 		movea.l	a2,a0
-		
+
 	if FixBugs
 loc_58CAA:
 	endif
@@ -117379,7 +117379,7 @@ Solid_CNZ:
 Solid_FBZ1:
 Solid_FBZ2:
 Solid_ICZ1:
-		
+
 	binclude "Levels/ICZ/Collision/1.bin"
 		even
 Solid_ICZ2:
