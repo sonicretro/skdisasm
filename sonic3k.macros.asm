@@ -111,8 +111,8 @@ rom_ptr_z80 macro addr
     endm
 
 ; macros to convert from tile index to art tiles, block mapping or VRAM address.
-make_art_tile function addr,pal,pri,((pri&1)<<15)|((pal&3)<<13)|(addr&tile_mask)
-tiles_to_bytes function addr,((addr&$7FF)<<5)
+make_art_tile function addr,pal,pri,((pri<<15)&high_priority)|((pal<<13)&palette_line_3)|(addr&tile_mask)
+tiles_to_bytes function addr,((addr&tile_mask)<<5)
 
 ; function to calculate the location of a tile in plane mappings
 planeLoc function width,col,line,(((width * line) + col) * 2)
