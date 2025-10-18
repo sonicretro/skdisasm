@@ -135,17 +135,19 @@ levselstr macro str
 	restore
     endm
 
-; codepage for level select
+; codepage for level select (and save screen)
 	save
 	codepage LEVELSELECT
-	charset '0','9', 16
-	charset 'A','Z', 30
-	charset 'a','z', 30
-	charset '*', 26
-	charset $A9, 27	; '?'
-	charset ':', 28
-	charset '.', 29
-	charset ' ',  0
+	charset '0','9', 16    ; Add character set for numbers
+	charset 'A','Z', 30    ; Add character set for uppercase letters
+	charset 'a','z', 30    ; Add character set for lowercase letters
+	charset '*', 26        ; Add character for asterisk
+	charset '@', 27        ; Add character for copyright symbol
+	charset $A9, 27        ; Add character for copyright symbol
+	charset ':', 28        ; Add character for colon
+	charset '.', 29        ; Add character for period
+	charset '#',$FF        ; Add character that marks the end of text
+	charset ' ',  0        ; Add character for space
 	restore
 
 ; macros for defining animated PLC script lists

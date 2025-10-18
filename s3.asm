@@ -15077,14 +15077,8 @@ locret_C7BC:
 
 ; ---------------------------------------------------------------------------
 
-    charset '0','9',$10    ; Add character set for numbers
-    charset '*',$1A    ; Add character for star
-    charset '@',$1B ; Add character for copyright symbol
-    charset ':',$1C ; Add character for colon
-    charset '.',$1D ; Add character for period
-    charset 'A','Z',$1E ; Add character set for letters
-    charset '#',$FF    ; Add character that marks the end of text
-    charset ' ',0    ; Add character for displaying nothing...?
+		save
+		codepage	LEVELSELECT
 ;byte_C7BE
 NoSave_Delete_Text:
 		dc.b  "NO SAVE", $FF 
@@ -15099,7 +15093,7 @@ D_S_Zone_Text:
 Clear_Text:
 		dc.b  "CLEAR", $FF
 		even
-		charset
+		restore
 
 ArtKos_SaveScreenS3Zone:
 		binclude "General/Save Menu/Kosinski Art/Zone Art.bin"
