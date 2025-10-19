@@ -2570,7 +2570,7 @@ Eni_Decomp_FetchInlineValue:
 		subq.w	#1,d6
 		btst	d6,d5	; is the priority bit set in the inline render flags?
 		beq.s	loc_1C0E	; if not, branch
-		ori.w	#$8000,d3	; otherwise set priority bit in art tile
+		ori.w	#high_priority,d3	; otherwise set priority bit in art tile
 
 loc_1C0E:
 		add.b	d1,d1	; is the high palette line bit set?
@@ -2578,7 +2578,7 @@ loc_1C0E:
 		subq.w	#1,d6
 		btst	d6,d5
 		beq.s	loc_1C1C
-		addi.w	#$4000,d3
+		addi.w	#palette_line_2,d3
 
 loc_1C1C:
 		add.b	d1,d1	; is the low palette line bit set?
@@ -2586,7 +2586,7 @@ loc_1C1C:
 		subq.w	#1,d6
 		btst	d6,d5
 		beq.s	loc_1C2A
-		addi.w	#$2000,d3
+		addi.w	#palette_line_1,d3
 
 loc_1C2A:
 		add.b	d1,d1	; is the vertical flip flag set?
@@ -7882,7 +7882,7 @@ Update2PLevSelSelection:
 		lsl.w	#4,d0
 		lea	(S2LevSel2PIconData).l,a3
 		lea	(a3,d0.w),a3
-		move.w	#$6000,d0
+		move.w	#palette_line_3,d0
 		lea	(RAM_start+$48).l,a2
 		movea.l	(a3)+,a1
 		bsr.w	MenuScreenTextToRAM
@@ -7949,7 +7949,7 @@ ClearOld2PLevSelSelection:
 		lsl.w	#4,d0
 		lea	(S2LevSel2PIconData).l,a3
 		lea	(a3,d0.w),a3
-		moveq	#0,d0
+		moveq	#palette_line_0,d0
 		lea	(RAM_start+$1E0).l,a2
 		movea.l	(a3)+,a1
 		bsr.w	MenuScreenTextToRAM
@@ -8145,7 +8145,7 @@ loc_66D0:
 		move.w	d2,(a1)
 		cmpi.b	#2,(Options_menu_box).w
 		bne.s	locret_66FE
-		andi.w	#$30,d0
+		andi.w	#button_B_mask|button_C_mask,d0
 		beq.s	locret_66FE
 		move.w	(Sound_test_sound).w,d0
 		bsr.w	Play_Music
@@ -8175,7 +8175,7 @@ OptionScreen_DrawSelected:
 		lsl.w	#3,d1
 		lea	(S2OptScrBoxData).l,a3
 		lea	(a3,d1.w),a3
-		move.w	#$6000,d0
+		move.w	#palette_line_3,d0
 		lea	(RAM_start+$030).l,a2
 		movea.l	(a3)+,a1
 		bsr.w	MenuScreenTextToRAM
@@ -8217,7 +8217,7 @@ OptionScreen_DrawUnselected:
 		lsl.w	#3,d1
 		lea	(S2OptScrBoxData).l,a3
 		lea	(a3,d1.w),a3
-		moveq	#0,d0
+		moveq	#palette_line_0,d0
 		lea	(RAM_start+$190).l,a2
 		movea.l	(a3)+,a1
 		bsr.w	MenuScreenTextToRAM
@@ -11737,10 +11737,10 @@ Obj_Competition_97AC:
 		move.b	$2E(a0),d0
 		bmi.s	loc_97CA
 		andi.w	#$9FFF,art_tile(a0)
-		move.w	#$2000,d1
+		move.w	#palette_line_1,d1
 		cmp.b	(Competition_menu_selection).w,d0
 		bne.s	loc_97C6
-		move.w	#$4000,d1
+		move.w	#palette_line_2,d1
 
 loc_97C6:
 		or.w	d1,art_tile(a0)
@@ -12589,7 +12589,7 @@ loc_A3CE:
 		bne.w	loc_A4BC
 		tst.b	$2F(a0)
 		beq.s	loc_A3EE
-		btst	#4,(a1)
+		btst	#button_B,(a1)
 		beq.w	loc_A4BC
 		sf	$2F(a0)
 		st	(a2)
@@ -12600,7 +12600,7 @@ loc_A3EE:
 		tst.b	$30(a0)
 		bne.s	loc_A466
 		move.b	(a1),d0
-		andi.w	#$C,d0
+		andi.w	#button_left_mask|button_right_mask,d0
 		beq.w	loc_A498
 		move.l	d0,-(sp)
 		moveq	#signextendB(sfx_GravityTunnel),d0
@@ -12608,7 +12608,7 @@ loc_A3EE:
 		move.l	(sp)+,d0
 		clr.b	$34(a0)
 		move.b	$2E(a0),$35(a0)
-		btst	#2,d0
+		btst	#button_left,d0
 		bne.s	loc_A442
 		move.b	#1,$30(a0)
 		move.b	(a3),d0
@@ -12674,7 +12674,7 @@ loc_A48E:
 ; ---------------------------------------------------------------------------
 
 loc_A498:
-		btst	#4,(a1)
+		btst	#button_B,(a1)
 		beq.s	loc_A4A6
 		move.b	#$38,(Events_bg+$12).w
 		bra.s	loc_A4BC
@@ -12682,7 +12682,7 @@ loc_A498:
 
 loc_A4A6:
 		move.b	(a1),d0
-		andi.w	#$E0,d0
+		andi.w	#button_A_mask|button_C_mask|button_start_mask,d0
 		beq.s	loc_A4BC
 		st	$2F(a0)
 		sf	(a2)
@@ -14052,7 +14052,7 @@ loc_B9F0:
 		jsr	(Render_Sprites).l
 		lea	(Normal_palette_line_4).w,a0
 		lea	(Target_palette_line_4).w,a1
-		moveq	#8-1,d0
+		moveq	#bytesToLcnt($20),d0
 
 loc_BA3E:
 		move.l	(a0),(a1)+
@@ -22120,7 +22120,7 @@ locret_133E6:
 ; ---------------------------------------------------------------------------
 
 loc_133E8:
-		tst.w	(Camera_RAM).w
+		tst.w	(H_scroll_amount).w
 		bne.s	loc_133FA
 		tst.w	(V_scroll_amount).w
 		bne.s	loc_133FA
@@ -25409,7 +25409,7 @@ loc_15958:
 
 loc_1598C:
 		move.w	#$400,ground_vel(a0)
-		btst	#0,status(a0)
+		btst	#Status_Facing,status(a0)
 		beq.s	loc_1599E
 		neg.w	ground_vel(a0)
 
@@ -35990,7 +35990,7 @@ Obj_AIZHollowTree:
 loc_1D3D0:
 		bsr.w	sub_1D436
 		move.b	status(a0),d0
-		andi.b	#$18,d0
+		andi.b	#standing_mask,d0
 		bne.s	loc_1D430
 		tst.w	$38(a0)
 		beq.s	loc_1D430
@@ -36232,7 +36232,7 @@ Obj_AIZLRZEMZRock:
 		ori.b	#4,render_flags(a0)
 		move.w	#$200,priority(a0)
 		move.w	x_pos(a0),$2E(a0)
-		move.w	#$40,$42(a0)
+		move.w	#$40,child_dx(a0)
 		cmpi.w	#1,(Current_zone_and_act).w
 		bne.s	loc_1D6B6
 		move.l	#Map_AIZRock2,mappings(a0)
@@ -36263,7 +36263,7 @@ loc_1D6EA:
 		sub.w	d0,x_pos(a0)
 		neg.w	d0
 		addi.w	#$40,d0
-		move.w	d0,$42(a0)
+		move.w	d0,child_dx(a0)
 		jsr	(ObjCheckFloorDist).l
 		add.w	d1,y_pos(a0)
 
@@ -37678,7 +37678,7 @@ loc_1F956:
 
 loc_1F96E:
 		jsr	(MoveSprite2).l
-		addi.w	#$70,y_vel(a0)
+		addi.w	#$70,y_vel(a0)	; make obj fall
 		tst.b	render_flags(a0)
 		bpl.s	loc_1F986
 		jmp	(Draw_Sprite).l
@@ -42325,7 +42325,7 @@ locret_23D28:
 byte_23D2A:
 		dc.b  $20,   8,   0
 		even
-		dc.b  $20,   8,  1
+		dc.b  $20,   8,   1
 		even
 ; ---------------------------------------------------------------------------
 
@@ -43598,12 +43598,12 @@ loc_24AD0:
 loc_24AEA:
 		tst.b	mapping_frame(a0)
 		beq.s	loc_24AF8
-		move.b	#0,$22(a0)
+		move.b	#0,mapping_frame(a0)
 		bra.s	loc_24AFE
 ; ---------------------------------------------------------------------------
 
 loc_24AF8:
-		move.b	#4,$22(a0)
+		move.b	#4,mapping_frame(a0)
 
 loc_24AFE:
 		jmp	(Sprite_OnScreen_Test).l
@@ -48410,7 +48410,7 @@ Obj_AutoTunnelInit:
 		clr.b	jumping(a1)		; Ensure they're no longer jumping
 		move.w	#$800,ground_vel(a1)
 		move.w	#0,x_vel(a1)
-		move.w	#0,y_vel(a1)
+		move.w	#0,y_vel(a1)		; Null actual velocity but make player very fast
 		bclr	#p1_pushing_bit,status(a0)
 		bclr	#Status_Push,status(a1)
 		bset	#Status_InAir,status(a1)	; Player is not pushing anything and not in the air
@@ -48580,7 +48580,7 @@ loc_2879A:
 loc_287A8:
 		cmp.w	d0,d1
 		blo.s	loc_287DA
-		moveq	#0,d1
+		moveq	#0,d1			; If X distance is less than Y distance
 		move.w	d5,d1
 		sub.w	y_pos(a1),d1
 		swap	d1
@@ -49160,7 +49160,7 @@ loc_28E32:
 		addi.w	#$C00,d0
 
 loc_28E44:
-		move.w	d0,$26(a0)
+		move.w	d0,angle(a0)
 		cmpi.w	#$180,$3C(a0)	; Accelerate speed of spinning
 		bhs.s	loc_28E8E		; When maxed out, branch
 		addq.w	#2,$3C(a0)
@@ -50984,7 +50984,7 @@ locret_2AB74:
 
 sub_2AB76:
 		lea	(byte_2AC10).l,a4
-		lea	$18(a3),a2
+		lea	sub2_x_pos(a3),a2
 		move.w	mainspr_childsprites(a3),d6
 		subq.w	#1,d6
 		bclr	#6,render_flags(a3)
@@ -56935,7 +56935,7 @@ sub_307EC:
 		bne.s	loc_30804
 		move.w	#$10,d1
 		move.w	#$29,d3
-		move.w	$10(a0),d4
+		move.w	x_pos(a0),d4
 		jmp	(SolidObjectTop).l
 ; ---------------------------------------------------------------------------
 
@@ -57042,7 +57042,7 @@ loc_3090C:
 		cmp.w	y_pos(a1),d0
 		bhs.s	locret_3093A
 		move.w	d0,y_pos(a1)
-		move.b	#$1C,$20(a1)
+		move.b	#$1C,anim(a1)
 		move.b	#2,(a2)
 
 locret_3093A:
@@ -59112,7 +59112,7 @@ loc_3233C:
 loc_323AE:
 		add.w	x_pos(a0),d1
 		move.w	d1,x_pos(a1)
-		move.w	y_pos(a0),$14(a1)
+		move.w	y_pos(a0),y_pos(a1)
 		move.w	#sfx_Roll,d0
 		jsr	(Play_SFX).l
 
@@ -62020,7 +62020,7 @@ loc_3475C:
 		bne.s	loc_3477A
 		bclr	#0,object_control(a2)
 		move.b	#0,status_tertiary(a2)
-		bset	#1,status(a2)
+		bset	#Status_InAir,status(a2)
 
 loc_3477A:
 		tst.b	$42(a0)
@@ -72274,7 +72274,7 @@ loc_3CA76:
 
 MGZ2SE_MoveBG:
 		move.l	(Events_bg+$08).w,d0
-		cmpi.l	#loc_50000,d0
+		cmpi.l	#$50000,d0
 		bhs.s	loc_3CA9C
 		addi.l	#$800,d0
 		move.l	d0,(Events_bg+$08).w
@@ -75238,7 +75238,7 @@ loc_3E79A:
 LBZ1_BGDrawArray:
 		dc.w    $D0, $7FFF
 LBZ1_BGDeformArray:
-		dc.w    $D0, $18,     8,     8, $7FFF
+		dc.w    $D0,   $18,     8,     8, $7FFF
 ; ---------------------------------------------------------------------------
 
 LBZ2_ScreenInit:
@@ -78829,7 +78829,7 @@ loc_439F4:
 		jsr	(Animate_Sprite).l
 		btst	#5,$38(a0)
 		beq.s	loc_43A20
-		cmpi.b	#1,$21(a0)
+		cmpi.b	#1,prev_anim(a0)
 		bne.s	loc_43A20
 
 loc_43A10:
@@ -93093,7 +93093,7 @@ sub_4D36C:
 		movea.w	$32(a0),a1
 		movea.w	$30(a0),a2
 		moveq	#0,d2
-		move.b	$2C(a0),d2
+		move.b	subtype(a0),d2
 		lsr.w	#1,d2
 		moveq	#0,d0
 		move.w	x_pos(a1),d0
@@ -97477,8 +97477,6 @@ loc_4FFF0:
 		sne	d2
 		beq.s	loc_50008
 		subq.b	#1,d0
-
-loc_50000:
 		bpl.s	loc_50012
 		moveq	#$B,d0
 		bra.w	loc_50012
