@@ -78,6 +78,7 @@ Unknown_Header:	dc.w 1
 		dc.b "                "
 Country_Code:	dc.b "U               "
 ; ---------------------------------------------------------------------------
+; Crash/Freeze the 68000. Like Sonic 2 the Z80 will still keep running, so music playback will continue.
 
 ErrorTrap:
 		nop
