@@ -112628,11 +112628,11 @@ loc_58DF8:
 		subq.w	#1,$2E(a0)
 		bpl.s	locret_58E3E
 		move.w	#8,$2E(a0)
-		move.b	(_unkFAAD).w,d0
+		move.b	(Hyudoro_count).w,d0
 		addq.b	#1,d0
 		cmpi.b	#$3C,d0
 		bhi.s	locret_58E3E
-		move.b	d0,(_unkFAAD).w
+		move.b	d0,(Hyudoro_count).w
 		jsr	(AllocateObject).l
 		bne.s	locret_58E3E
 		move.l	#loc_58E46,(a1)
@@ -112708,10 +112708,10 @@ loc_58ED2:
 ; ---------------------------------------------------------------------------
 
 loc_58EEE:
-		move.b	(_unkFAAD).w,d0
+		move.b	(Hyudoro_count).w,d0
 		subq.b	#1,d0
 		bmi.s	loc_58EFA
-		move.b	d0,(_unkFAAD).w
+		move.b	d0,(Hyudoro_count).w
 
 loc_58EFA:
 		jmp	(Delete_Current_Sprite).l
