@@ -168,9 +168,9 @@
 		dc.l Obj_DEZEndBoss			; 167
 		dc.l Obj_MHZ1CutsceneKnuckles		; 168
 		dc.l Obj_MHZ1CutsceneButton		; 169
-		dc.l Obj_SOZGhosts			; 170
-		dc.l Obj_SOZGhostCapsuleLoadArt		; 171
-		dc.l Obj_SOZGhostCapsule		; 172
+		dc.l Hyudoro			; 170
+		dc.l set_SOZ_capsule_Hyudoro_cg		; 171
+		dc.l SOZ_capsule		; 172
 		dc.l Obj_LRZ3Platform			; 173
 		dc.l Obj_LRZ2CutsceneKnuckles		; 174
 		dc.l Obj_SSZCutsceneButton		; 175
