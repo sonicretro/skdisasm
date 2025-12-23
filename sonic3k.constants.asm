@@ -671,7 +671,7 @@ Secondary_collision_addr	ds.l 1
 MHZ_pollen_counter		ds.b 1			; number of currently active pollen or leaves in MHZ
 _unkF7C1			ds.b 1
 _unkF7C2			ds.b 1
-_unkF7C3			ds.b 1
+SOZ_darkness_level			ds.b 1
 _unkF7C4			ds.w 1
 Reverse_gravity_flag		ds.b 1
 _unkF7C7			ds.b 1
@@ -718,7 +718,7 @@ _unkFAA9			ds.b 1
 End_of_level_flag		ds.b 1			; set if end of level is current active, for example after beating a boss
 _unkFAAB			ds.b 1
 _unkFAAC			ds.b 1
-_unkFAAD			ds.b 1
+Hyudoro_count			ds.b 1
 _unkFAAE			ds.w 1
 _unkFAB0			ds.w 1
 _unkFAB2			ds.w 1
