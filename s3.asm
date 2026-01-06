@@ -29285,8 +29285,9 @@ loc_19034:
 	if FixBugs
 		move.w	$30(a0),d0
 	else
-		; Bug: probably meant to be $30(a0), as Test_Ring_Collisions_AttractRing
-		; stores the ring's address in the ring status table there
+		; Bug: Probably meant to be $30(a0), as Test_Ring_Collisions_AttractRing
+		; stores the ring's address in the ring status table there.
+		; This is corrected in Sonic & Knuckles Collection.
 		move.w	$30,d0
 	endif
 		beq.s	loc_19040
