@@ -249,21 +249,28 @@ PSG_input =			$C00011
 ; SRAM addresses
 ; Notes: SRAM in Sonic 3 Alone and Sonic 3 & Knuckles is 1KB in size.
 ; Both games use odd 8-bit addresses for saving.
+; This means that even addresses cannot be used unless SRAM is set to use them.
+; Therefore, this is phased in word to skip the even bytes.
+
+SRAM_competition_size =	$15*4	; $54 bytes
+SRAM_S3game_size = $D*4	; $34 bytes
+SRAM_SKgame_size = $15*4	; $54 bytes
+
 	phase $200001
 SRAM_start	=		*
-	ds.b	$10	; unused
-SRAM_competition	ds.b $2A*4	; $A8 bytes
-	ds.b	4	; unused
-SRAM_competition_backup	ds.b	$2A*4	; $A8 bytes
-	ds.b	4	; unused
-SRAM_S3game	ds.b	$1A*4	; $68 bytes
-	ds.b	$24	; unused
-SRAM_S3game_backup	ds.b	$1A*4	; $68 bytes
-	ds.b	$24 ; unused
-SRAM_SKgame	ds.b	$2A*4	; $A8 bytes
-	ds.b	4	; unused
-SRAM_SKgame_backup	ds.b	$2A*4	; $A8 bytes
-	ds.b	$2A	; unused
+	ds.w 8	; unused
+SRAM_competition	ds.w SRAM_competition_size	; $54 bytes
+	ds.w 2	; unused
+SRAM_competition_backup	ds.w SRAM_competition_size	; $54 bytes
+	ds.w 2	; unused
+SRAM_S3game	ds.w SRAM_S3game_size	; $34 bytes
+	ds.w $12	; unused
+SRAM_S3game_backup	ds.w SRAM_S3game_size	; $34 bytes
+	ds.w $12	; unused
+SRAM_SKgame	ds.w SRAM_SKgame_size	; $54 bytes
+	ds.w 2	; unused
+SRAM_SKgame_backup	ds.w SRAM_SKgame_size	; $54 bytes
+	ds.w $15	; unused
 SRAM_end	=		*
 	dephase
 

@@ -13713,7 +13713,7 @@ SRAM_Load:
 		lea	(SRAM_competition).l,a0
 		lea	(SRAM_competition_backup).l,a1
 		lea	(Competition_saved_data).w,a2
-		moveq	#$29,d0
+		moveq	#bytesToWcnt(SRAM_competition_size),d0
 		move.w	#$4C44,d1		; RAM integrity value
 		jsr	Get_From_SRAM(pc)
 		beq.s	loc_B674		; If the data read was successful, branch
@@ -13730,7 +13730,7 @@ loc_B674:
 		lea	(SRAM_S3game).l,a0
 		lea	(SRAM_S3game_backup).l,a1
 		lea	(Saved_data).w,a2
-		moveq	#$19,d0
+		moveq	#bytesToWcnt(SRAM_S3game_size),d0
 		move.w	#$4244,d1		; RAM integrity value for save game data
 		jsr	Get_From_SRAM(pc)
 		beq.s	loc_B6A4		; If the data read was not successful, branch
@@ -13862,7 +13862,7 @@ Write_SaveGeneral:
 		lea	(SRAM_competition).l,a0		; Save general SRAM
 		lea	(SRAM_competition_backup).l,a1		; Save general Backup SRAM
 		lea	(Competition_saved_data).w,a2	; Save general RAM
-		moveq	#$2A-1,d0
+		moveq	#bytesToWcnt(SRAM_competition_size),d0
 		bsr.s	Write_SRAM
 		move.w	(sp)+,d7
 		movea.l	(sp)+,a0
@@ -13879,7 +13879,7 @@ Write_SaveGame:
 		lea	(SRAM_S3game).l,a0		; Save game SRAM
 		lea	(SRAM_S3game_backup).l,a1		; Save game backup SRAM
 		lea	(Saved_data).w,a2	; Save game RAM
-		moveq	#$1A-1,d0
+		moveq	#bytesToWcnt(SRAM_S3game_size),d0
 		bsr.s	Write_SRAM
 		move.w	(sp)+,d7
 		movea.l	(sp)+,a0
