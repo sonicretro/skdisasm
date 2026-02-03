@@ -550,6 +550,12 @@ Snd_CGZ_Jump05:
 	dc.b	nF4, $04, nRst, $02, nF5, $04, nRst, $02, nE4, $04, nRst, $08
 	dc.b	nE5, $04, nRst, $02, nE4, $04, nRst, $08, nE5, $04, nRst, $02
 	dc.b	nE5, $04, nRst, $02, nE4, $04, nRst, $32
+	if FixMusicAndSFXDataBugs
+	; Oddly, the tone we start with never gets set back to 4 when looping,
+	; resulting in the PSG using the latter tone for the first section of every loop
+	; instead of using the initial tone that was set at the beginning.
+	smpsPSGvoice        sTone_04
+	endif
 	smpsJump            Snd_CGZ_Jump05
 
 ; Unreachable
@@ -620,6 +626,12 @@ Snd_CGZ_Jump04:
 	dc.b	$02, nC3, $04, nRst, $02, nD3, $04, nRst, $02, nE3, $04, nRst
 	dc.b	$02, nG3, $04, nRst, $02, nD3, $04, nRst, $02, nE3, $04, nRst
 	dc.b	$02, nG3, $04, nRst, $02, nC4, $04, nRst, $32
+	if FixMusicAndSFXDataBugs
+	; Oddly, the tone we start with never gets set back to 4 when looping,
+	; resulting in the PSG using the latter tone for the first section of every loop
+	; instead of using the initial tone that was set at the beginning.
+	smpsPSGvoice        sTone_04
+	endif
 	smpsJump            Snd_CGZ_Jump04
 
 ; Unreachable
