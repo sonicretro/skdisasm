@@ -27,8 +27,8 @@ namespace S3KObjectDefinitions.Common
 		protected void BuildSpritesProperties2P(bool priority)
 		{
 			BuildSpritesProperties(
-				"../General/2P Zone/Nemesis Art/Misc Art 2.bin", "word_23982", "word_23920", 0,
-				"../General/2P Zone/Nemesis Art/Misc Art 1.bin", "word_2394A", "word_239AC", 0,
+				"../General/2P Zone/Nemesis Art/Misc Art 2.nem", "word_23982", "word_23920", 0,
+				"../General/2P Zone/Nemesis Art/Misc Art 1.nem", "word_2394A", "word_239AC", 0,
 				"../General/Sprites/Level Misc/Map - 2P Spring.asm", priority);
 		}
 	}
@@ -39,7 +39,7 @@ namespace S3KObjectDefinitions.Common
 		{
 			base.Init(data);
 			var art = LevelData.ReadFile(
-				"../General/Sprites/Level Misc/Diagonal Spring.bin", CompressionType.Nemesis);
+				"../General/Sprites/Level Misc/Diagonal Spring.nem", CompressionType.Nemesis);
 			sprites[6] = BuildFlippedSprites(ObjectHelper.MapASMToBmp(art,
 				"../General/Sprites/Level Misc/Map - Spring.asm", "word_23834", 0));
 			sprites[7] = BuildFlippedSprites(ObjectHelper.MapASMToBmp(art,
@@ -138,8 +138,8 @@ namespace S3KObjectDefinitions.Common
 		public override void Init(ObjectData data)
 		{
 			BuildSpritesProperties(
-				"../General/Sprites/Level Misc/SpikesSprings.bin", "word_23788", "word_237AC", -512,
-				"../General/Sprites/Level Misc/SpikesSprings.bin", "word_237D0", "word_237F4", -1024,
+				"../General/Sprites/Level Misc/SpikesSprings.nem", "word_23788", "word_237AC", -512,
+				"../General/Sprites/Level Misc/SpikesSprings.nem", "word_237D0", "word_237F4", -1024,
 				"../General/Sprites/Level Misc/Map - Spring.asm", false);
 		}
 

@@ -2,12 +2,12 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Cannon" Image="base" Depth="5">
   <Images>
     <ImageFromMappings id="chamber">
-      <ArtFile filename="../Levels/CNZ/Nemesis Art/Misc Art.bin" offset="-1120" />
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/Misc Art.nem" offset="-1120" />
       <ArtFile filename="../Levels/CNZ/Uncompressed Art/Cannon.bin" compression="Uncompressed" offset="6784" />
       <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - Cannon.asm" frame="4" startpal="2" />
     </ImageFromMappings>
     <ImageFromMappings id="base">
-      <ArtFile filename="../Levels/CNZ/Nemesis Art/Misc Art.bin" offset="-1120" />
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/Misc Art.nem" offset="-1120" />
       <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - Cannon.asm" frame="9" startpal="2" />
     </ImageFromMappings>
   </Images>

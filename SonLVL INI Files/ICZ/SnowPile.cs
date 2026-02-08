@@ -64,7 +64,7 @@ namespace S3KObjectDefinitions.ICZ
 		public override void Init(ObjectData data)
 		{
 			var version = LevelData.Game.MappingsVersion;
-			var art = LevelData.ReadFile("../Levels/ICZ/Nemesis Art/Misc Art 2.bin", CompressionType.Nemesis);
+			var art = LevelData.ReadFile("../Levels/ICZ/Nemesis Art/Misc Art 2.nem", CompressionType.Nemesis);
 			var map = LevelData.ASMToBin("../Levels/ICZ/Misc Object Data/Map - Platforms.asm", version);
 
 			subtypeNames = new Dictionary<byte, string>

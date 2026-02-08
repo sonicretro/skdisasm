@@ -2,23 +2,23 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Boss" Image="main" Depth="5">
   <Images>
     <ImageFromMappings id="main">
-      <ArtFile filename="../Levels/CNZ/Nemesis Art/End Boss.bin" />
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/End Boss.nem" />
       <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - End Boss.asm" frame="0" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="arm">
-      <ArtFile filename="../Levels/CNZ/Nemesis Art/End Boss.bin" />
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/End Boss.nem" />
       <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - End Boss.asm" frame="1" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="ball">
-      <ArtFile filename="../Levels/CNZ/Nemesis Art/End Boss.bin" />
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/End Boss.nem" />
       <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - End Boss.asm" frame="4" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="head" priority="true">
-      <ArtFile filename="../General/Sprites/Robotnik/Ship.bin" />
+      <ArtFile filename="../General/Sprites/Robotnik/Ship.nem" />
       <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Robotnik Ship.asm" frame="0" />
     </ImageFromMappings>
     <ImageFromMappings id="ship" priority="true">
-      <ArtFile filename="../General/Sprites/Robotnik/Ship.bin" />
+      <ArtFile filename="../General/Sprites/Robotnik/Ship.nem" />
       <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Robotnik Ship.asm" frame="9" />
     </ImageFromMappings>
   </Images>

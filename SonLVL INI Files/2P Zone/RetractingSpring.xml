@@ -2,19 +2,19 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Retracting Spring" Depth="4" DefaultSubtype="B0">
   <Images>
     <ImageFromMappings id="horzred">
-      <ArtFile filename="../General/2P Zone/Nemesis Art/Misc Art 1.bin" />
+      <ArtFile filename="../General/2P Zone/Nemesis Art/Misc Art 1.nem" />
       <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - 2P Spring.asm" label="word_2394A" />
     </ImageFromMappings>
     <ImageFromMappings id="horzblock">
-      <ArtFile filename="../General/2P Zone/Nemesis Art/Misc Art 1.bin" offset="896" />
+      <ArtFile filename="../General/2P Zone/Nemesis Art/Misc Art 1.nem" offset="896" />
       <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - 2P Retracting Spring.asm" label="word_23F5C" />
     </ImageFromMappings>
     <ImageFromMappings id="vertyel">
-      <ArtFile filename="../General/2P Zone/Nemesis Art/Misc Art 2.bin" />
+      <ArtFile filename="../General/2P Zone/Nemesis Art/Misc Art 2.nem" />
       <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - 2P Spring.asm" label="word_23920" />
     </ImageFromMappings>
     <ImageFromMappings id="vertblock">
-      <ArtFile filename="../General/2P Zone/Nemesis Art/Misc Art 2.bin" />
+      <ArtFile filename="../General/2P Zone/Nemesis Art/Misc Art 2.nem" />
       <MapFile type="ASM" filename="../General/Sprites/Level Misc/Map - 2P Retracting Spring.asm" label="word_23F64" />
     </ImageFromMappings>
   </Images>

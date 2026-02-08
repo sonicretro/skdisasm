@@ -2,19 +2,19 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Mushroom Cap" Image="darklow">
   <Images>
     <ImageFromMappings id="darkhigh" priority="true">
-      <ArtFile filename="../Levels/MHZ/Nemesis Art/Misc Art.bin" offset="-1088" />
+      <ArtFile filename="../Levels/MHZ/Nemesis Art/Misc Art.nem" offset="-1088" />
       <MapFile type="ASM" filename="../Levels/MHZ/Misc Object Data/Map - Mushroom Cap.asm" frame="0" startpal="2" />
     </ImageFromMappings>
     <ImageFromMappings id="darklow">
-      <ArtFile filename="../Levels/MHZ/Nemesis Art/Misc Art.bin" offset="-1088" />
+      <ArtFile filename="../Levels/MHZ/Nemesis Art/Misc Art.nem" offset="-1088" />
       <MapFile type="ASM" filename="../Levels/MHZ/Misc Object Data/Map - Mushroom Cap.asm" frame="0" startpal="2" />
     </ImageFromMappings>
     <ImageFromMappings id="lighthigh" priority="true">
-      <ArtFile filename="../Levels/MHZ/Nemesis Art/Misc Art.bin" offset="-2624" />
+      <ArtFile filename="../Levels/MHZ/Nemesis Art/Misc Art.nem" offset="-2624" />
       <MapFile type="ASM" filename="../Levels/MHZ/Misc Object Data/Map - Mushroom Cap.asm" frame="0" startpal="2" />
     </ImageFromMappings>
     <ImageFromMappings id="lightlow">
-      <ArtFile filename="../Levels/MHZ/Nemesis Art/Misc Art.bin" offset="-2624" />
+      <ArtFile filename="../Levels/MHZ/Nemesis Art/Misc Art.nem" offset="-2624" />
       <MapFile type="ASM" filename="../Levels/MHZ/Misc Object Data/Map - Mushroom Cap.asm" frame="0" startpal="2" />
     </ImageFromMappings>
   </Images>

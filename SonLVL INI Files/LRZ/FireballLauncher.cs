@@ -65,7 +65,7 @@ namespace S3KObjectDefinitions.LRZ
 			var map = LevelData.ASMToBin(
 				"../Levels/LRZ/Misc Object Data/Map - Fireball Launcher.asm", version);
 			var art = LevelData.ReadFile(
-				"../Levels/LRZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis);
+				"../Levels/LRZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis);
 
 			var flame = ObjectHelper.MapToBmp(art, map, 0, 0);
 			image = ObjectHelper.MapToBmp(art, map, 2, 3);

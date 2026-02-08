@@ -2,39 +2,39 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Miniboss" Image="main" Depth="4">
   <Images>
     <ImageFromMappings id="main" priority="true">
-      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Miniboss.asm" frame="0" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="left" priority="true">
-      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Miniboss.asm" frame="1" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="right" priority="true">
-      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Miniboss.asm" frame="2" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="down" priority="true">
-      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Miniboss.asm" frame="3" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="arm" priority="true">
-      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Miniboss.asm" frame="5" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="small" priority="true">
-      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Miniboss.asm" frame="6" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="big" priority="true">
-      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Miniboss.asm" frame="7" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="eyes" priority="true">
-      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Miniboss.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Miniboss.asm" frame="8" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="button">
-      <ArtFile filename="../Levels/FBZ/Nemesis Art/Egg Capsule.bin" offset="27552" />
+      <ArtFile filename="../Levels/FBZ/Nemesis Art/Egg Capsule.nem" offset="27552" />
       <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Egg Capsule.asm" frame="5" />
     </ImageFromMappings>
   </Images>

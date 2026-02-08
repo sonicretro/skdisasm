@@ -54,7 +54,7 @@ namespace S3KObjectDefinitions.HCZ
 		public override void Init(ObjectData data)
 		{
 			base.Init(data);
-			var art = LevelData.ReadFile("../Levels/HCZ/Nemesis Art/Act 2 Knuckles Wall.bin", CompressionType.Nemesis);
+			var art = LevelData.ReadFile("../Levels/HCZ/Nemesis Art/Act 2 Knuckles Wall.nem", CompressionType.Nemesis);
 			var sprite = ObjectHelper.MapASMToBmp(art, "../Levels/HCZ/Misc Object Data/Map - Breakable Wall.asm", 2, 2);
 			sprites[1] = BuildFlippedSprites(sprite);
 			properties[0].Enumeration.Add("Knuckles Wall", 1);
@@ -93,7 +93,7 @@ namespace S3KObjectDefinitions.CNZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/CNZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis)), -6624);
+				"../Levels/CNZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis)), -6624);
 
 			BuildSpritesProperties(indexer.ToArray(),
 				"../Levels/CNZ/Misc Object Data/Map - (&SOZ) Breakable Wall.asm", 2,
@@ -115,7 +115,7 @@ namespace S3KObjectDefinitions.LBZ
 	{
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesProperties("../Levels/LBZ/Nemesis Art/Act 2 Misc Art.bin",
+			BuildSpritesProperties("../Levels/LBZ/Nemesis Art/Act 2 Misc Art.nem",
 				"../Levels/LBZ/Misc Object Data/Map - Breakable Wall.asm", 1,
 				new string[] { "Knuckles only" },
 				new Func<int, bool>[] { subtype => (subtype & 0x80) == 0 },
@@ -136,7 +136,7 @@ namespace S3KObjectDefinitions.MHZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/MHZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis)), -128);
+				"../Levels/MHZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis)), -128);
 
 			BuildSpritesProperties(indexer.ToArray(),
 				"../Levels/MHZ/Misc Object Data/Map - Breakable Wall.asm", 2,
@@ -159,7 +159,7 @@ namespace S3KObjectDefinitions.SOZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/SOZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis)), -6240);
+				"../Levels/SOZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis)), -6240);
 
 			BuildSpritesProperties(indexer.ToArray(),
 				"../Levels/CNZ/Misc Object Data/Map - (&SOZ) Breakable Wall.asm", 2,
@@ -181,7 +181,7 @@ namespace S3KObjectDefinitions.LRZ
 	{
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesProperties("../Levels/LRZ/Nemesis Art/Act 2 Misc Art.bin",
+			BuildSpritesProperties("../Levels/LRZ/Nemesis Art/Act 2 Misc Art.nem",
 				"../Levels/LRZ/Misc Object Data/Map - Breakable Wall.asm", 2,
 				new string[] { "Normal" },
 				new Func<int, bool>[] { subtype => (subtype & 0x80) == 0 },

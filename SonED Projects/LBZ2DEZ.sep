@@ -8,21 +8,21 @@ Object Palette: objdef\s3obj1.pcx
 
 8x8 Compression:      5
 Num 8x8 Pages:        2
-8x8 Tiles Page 0:     ..\Levels\LBZ\Tiles\Act 2 Death Egg.bin
-8x8 Tiles Page 0:     ..\Levels\LBZ\Tiles\Act 2 Death Egg 2.bin
+8x8 Tiles Page 0:     ..\Levels\LBZ\Tiles\Act 2 Death Egg.kosm
+8x8 Tiles Page 0:     ..\Levels\LBZ\Tiles\Act 2 Death Egg 2.kosm
 
 16x16 Compression:    1
 Num 16x16 Pages:      2
 Page0 8x8 Page:       0
-16x16 Tiles Page 0:   ..\Levels\LBZ\Blocks\Act 2 Death Egg.bin
+16x16 Tiles Page 0:   ..\Levels\LBZ\Blocks\Act 2 Death Egg.kos
 Page1 8x8 Page:       0
-16x16 Tiles Page 1:   ..\Levels\LBZ\Blocks\Act 2 Secondary.bin
+16x16 Tiles Page 1:   ..\Levels\LBZ\Blocks\Act 2 Secondary.kos
 
 Metatile Size:        128
 128x128 Compression:  1
 Num 128x128 Pages:    1
 Page0 16x16 Page:     0
-128x128 Tiles Page 0: ..\Levels\LBZ\Chunks\Act 2 Death Egg.bin
+128x128 Tiles Page 0: ..\Levels\LBZ\Chunks\Act 2 Death Egg.kos
 
 Layout Format:        2
 Layout Compression:   0

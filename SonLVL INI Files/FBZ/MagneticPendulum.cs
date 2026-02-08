@@ -84,7 +84,7 @@ namespace S3KObjectDefinitions.FBZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/FBZ/Nemesis Art/Misc Art 2.bin", CompressionType.Nemesis)), -2592);
+				"../Levels/FBZ/Nemesis Art/Misc Art 2.nem", CompressionType.Nemesis)), -2592);
 			var art = indexer.ToArray();
 
 			var version = LevelData.Game.MappingsVersion;

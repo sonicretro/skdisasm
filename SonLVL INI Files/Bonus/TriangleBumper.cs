@@ -67,7 +67,7 @@ namespace S3KObjectDefinitions.Pachinko
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/Pachinko/Nemesis Art/Main.bin", CompressionType.Nemesis)), -960);
+				"../Levels/Pachinko/Nemesis Art/Main.nem", CompressionType.Nemesis)), -960);
 			var frame = ObjectHelper.MapASMToBmp(indexer.ToArray(),
 				"../Levels/Pachinko/Misc Object Data/Map - Triangle Bumper.asm", 2, 3);
 

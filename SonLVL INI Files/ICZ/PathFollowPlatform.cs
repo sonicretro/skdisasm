@@ -105,7 +105,7 @@ namespace S3KObjectDefinitions.ICZ
 			sprites = new Sprite[3][];
 
 			sprites[0] = BuildFlippedSprites(ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../Levels/ICZ/Nemesis Art/Misc Art 1.bin", CompressionType.Nemesis),
+				"../Levels/ICZ/Nemesis Art/Misc Art 1.nem", CompressionType.Nemesis),
 				"../Levels/ICZ/Misc Object Data/Map - Platforms.asm", 0, 2));
 
 			var indexer = new MultiFileIndexer<byte>();

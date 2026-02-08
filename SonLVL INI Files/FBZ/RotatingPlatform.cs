@@ -76,7 +76,7 @@ namespace S3KObjectDefinitions.FBZ
 
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/FBZ/Nemesis Art/Misc Art 1.bin", CompressionType.Nemesis)), -7744);
+				"../Levels/FBZ/Nemesis Art/Misc Art 1.nem", CompressionType.Nemesis)), -7744);
 			block = ObjectHelper.MapToBmp(indexer.ToArray(), map, 0, 1);
 			var block1 = new Sprite(block, 44, 0);
 			var block2 = new Sprite(block1, 24, 0);
@@ -86,7 +86,7 @@ namespace S3KObjectDefinitions.FBZ
 			var block6 = new Sprite(block5, -24, 0);
 
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/FBZ/Nemesis Art/Misc Art 1.bin", CompressionType.Nemesis)), -6464);
+				"../Levels/FBZ/Nemesis Art/Misc Art 1.nem", CompressionType.Nemesis)), -6464);
 			var spike = ObjectHelper.MapToBmp(indexer.ToArray(), map, 1, 1);
 			var spike1 = new Sprite(spike, 44, 0);
 			var spike2 = new Sprite(spike1, 24, 0);

@@ -6,7 +6,7 @@
       <MapFile type="ASM" filename="../General/Sprites/Cluckoid/Map - Cluckoid.asm" startpal="1" />
     </ImageFromMappings>
     <ImageFromMappings id="arrow">
-      <ArtFile filename="../General/Sprites/Cluckoid/Cluckoid Arrow.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Cluckoid/Cluckoid Arrow.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Cluckoid/Map - Cluckoid Arrow.asm" startpal="1" />
     </ImageFromMappings>
   </Images>

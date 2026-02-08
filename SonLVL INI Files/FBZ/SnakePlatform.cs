@@ -86,7 +86,7 @@ namespace S3KObjectDefinitions.FBZ
 
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/FBZ/Nemesis Art/Misc Art 1.bin", CompressionType.Nemesis)), -7744);
+				"../Levels/FBZ/Nemesis Art/Misc Art 1.nem", CompressionType.Nemesis)), -7744);
 
 			sprite = ObjectHelper.MapToBmp(indexer.ToArray(), map, 0, 1);
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);

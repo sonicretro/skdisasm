@@ -73,7 +73,7 @@ namespace S3KObjectDefinitions.ICZ
 		{
 			var version = LevelData.Game.MappingsVersion;
 			var art = LevelData.ReadFile(
-				"../Levels/ICZ/Nemesis Art/Misc Art 1.bin", CompressionType.Nemesis);
+				"../Levels/ICZ/Nemesis Art/Misc Art 1.nem", CompressionType.Nemesis);
 			var map = LevelData.ASMToBin(
 				"../Levels/ICZ/Misc Object Data/Map - Platforms.asm", version);
 

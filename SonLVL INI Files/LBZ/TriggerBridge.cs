@@ -79,7 +79,7 @@ namespace S3KObjectDefinitions.LBZ
 		public override void Init(ObjectData data)
 		{
 			var art = LevelData.ReadFile(
-				"../Levels/LBZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis);
+				"../Levels/LBZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis);
 			var map = LevelData.ASMToBin(
 				"../Levels/LBZ/Misc Object Data/Map - Trigger Bridge.asm", LevelData.Game.MappingsVersion);
 

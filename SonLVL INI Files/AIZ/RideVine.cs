@@ -81,7 +81,7 @@ namespace S3KObjectDefinitions.AIZ
 		public override void Init(ObjectData data)
 		{
 			var version = LevelData.Game.MappingsVersion;
-			var art = LevelData.ReadFile("../Levels/AIZ/Nemesis Art/Swing Vine.bin", CompressionType.Nemesis);
+			var art = LevelData.ReadFile("../Levels/AIZ/Nemesis Art/Swing Vine.nem", CompressionType.Nemesis);
 			var map = LevelData.ASMToBin("../Levels/AIZ/Misc Object Data/Map - (&MHZ) Ride Vine.asm", version);
 			var sprites = new[]
 			{

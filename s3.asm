@@ -5639,7 +5639,7 @@ LSelect3CodeDat:
 Map_TitleScreenText:
 		include "General/Title/Map - S3 Screen Text.asm"
 ArtNem_TitleScreenText:
-		binclude "General/Title/Nemesis Art/S3 Screen Text.bin"
+		binclude "General/Title/Nemesis Art/S3 Screen Text.nem"
 		even
 Map_TitleSonicAnim:
 		include "General/Title/Map - S3 Sonic Anim.asm"
@@ -15097,7 +15097,7 @@ Clear_Text:
 		restore
 
 ArtKos_SaveScreenS3Zone:
-		binclude "General/Save Menu/Kosinski Art/Zone Art.bin"
+		binclude "General/Save Menu/Kosinski Art/Zone Art.kos"
 		even
 
 ; =============== S U B R O U T I N E =======================================
@@ -67198,7 +67198,7 @@ Ani_SnowboardDust:
 Map_SnowboardDust:
 		include "General/Sprites/Snowboard/Map - Snowboard Dust.asm"
 ArtNem_SnowboardDust:
-		binclude "General/Sprites/Snowboard/Snowboard Dust.bin"
+		binclude "General/Sprites/Snowboard/Snowboard Dust.nem"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -76741,13 +76741,13 @@ byte_3F840:
 		dc.b    8,   4,   5,   6, $FC
 		even
 ArtNem_ContinueSprites:
-		binclude "General/Continue/Nemesis Art/Player Sprites.bin"
+		binclude "General/Continue/Nemesis Art/Player Sprites.nem"
 		even
 ArtNem_ContinueIcons:
-		binclude "General/Continue/Nemesis Art/Player Icons.bin"
+		binclude "General/Continue/Nemesis Art/Player Icons.nem"
 		even
 ArtNem_ContinueDigits:
-		binclude "General/Continue/Nemesis Art/Digits.bin"
+		binclude "General/Continue/Nemesis Art/Digits.nem"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -77997,7 +77997,7 @@ AniRaw_41959:
 		dc.b  $10, $1F,  $F,   7,  $E,   0, $F4
 		even
 ArtNem_EndingGraphics:
-		binclude "General/Ending/Nemesis Art/S3 Ending Graphics.bin"
+		binclude "General/Ending/Nemesis Art/S3 Ending Graphics.nem"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -117655,43 +117655,43 @@ ArtUnc_SStageTailstails:
 Map_SStageTailstails:
 		include "General/Sprites/Tails/Map - SStage Tails tails.asm"
 ArtNem_SphereTest:
-		binclude "General/Special Stage/Nemesis Art/Eosian Spheres.bin"
+		binclude "General/Special Stage/Nemesis Art/Eosian Spheres.nem"
 		even
 ArtNem_SStageShadow:
-		binclude "General/Special Stage/Nemesis Art/Shadow.bin"
+		binclude "General/Special Stage/Nemesis Art/Shadow.nem"
 		even
 ArtNem_GetBlueSpheres:
-		binclude "General/Special Stage/Nemesis Art/Get Blue Spheres.bin"
+		binclude "General/Special Stage/Nemesis Art/Get Blue Spheres.nem"
 		even
 ArtNem_GBSArrow:
-		binclude "General/Special Stage/Nemesis Art/Get Blue Spheres Arrow.bin"
+		binclude "General/Special Stage/Nemesis Art/Get Blue Spheres Arrow.nem"
 		even
 ArtNem_SStageDigits:
-		binclude "General/Special Stage/Nemesis Art/Digits.bin"
+		binclude "General/Special Stage/Nemesis Art/Digits.nem"
 		even
 ArtNem_SStageIcons:
-		binclude "General/Special Stage/Nemesis Art/Icons.bin"
+		binclude "General/Special Stage/Nemesis Art/Icons.nem"
 		even
 ArtNem_SStageSphere:
-		binclude "General/Special Stage/Nemesis Art/Sphere.bin"
+		binclude "General/Special Stage/Nemesis Art/Sphere.nem"
 		even
 ArtNem_SStageRing:
-		binclude "General/Special Stage/Nemesis Art/Ring.bin"
+		binclude "General/Special Stage/Nemesis Art/Ring.nem"
 		even
 ArtKosM_SStageChaosEmerald:
-		binclude "General/Special Stage/KosinskiM Art/Special Stage Chaos Emerald.bin"
+		binclude "General/Special Stage/KosinskiM Art/Special Stage Chaos Emerald.kosm"
 		even
 MapEni_SStageBG:
 		binclude "General/Special Stage/Enigma Map/BG.eni"
 		even
 ArtNem_SStageBG:
-		binclude "General/Special Stage/Nemesis Art/BG.bin"
+		binclude "General/Special Stage/Nemesis Art/BG.nem"
 		even
 MapUnc_SStageLayout:
 		binclude "General/Special Stage/Uncompressed Map/Layout S3.bin"
 		even
 ArtNem_SStageLayout:
-		binclude "General/Special Stage/Nemesis Art/Layout.bin"
+		binclude "General/Special Stage/Nemesis Art/Layout.nem"
 		even
 SStage_PerspectiveMapPtrs:
 		dc.l SStage_PerspectiveMaps
@@ -117913,22 +117913,22 @@ ArtUnc_SplashDrown:
 		binclude "General/Sprites/Dash Dust/Splash Drown.bin"
 		even
 ArtNem_S22POptions:
-		binclude "General/S2Menu/Nemesis Art/2P Options.bin"
+		binclude "General/S2Menu/Nemesis Art/2P Options.nem"
 		even
 ArtNem_1P2PWins:
-		binclude "General/S2Menu/Nemesis Art/1P 2P Wins.bin"
+		binclude "General/S2Menu/Nemesis Art/1P 2P Wins.nem"
 		even
 MapEni_S22POptions:
 		binclude "General/S2Menu/Enigma Map/2P Options.eni"
 		even
 ArtNem_S2MenuBox:
-		binclude "General/S2Menu/Nemesis Art/Menu Box.bin"
+		binclude "General/S2Menu/Nemesis Art/Menu Box.nem"
 		even
 ArtNem_S2LevelSelectPics:
-		binclude "General/S2Menu/Nemesis Art/Level Select Icons.bin"
+		binclude "General/S2Menu/Nemesis Art/Level Select Icons.nem"
 		even
 ArtNem_Title_SonicSprites:
-		binclude "General/Title/Nemesis Art/S3 Sonic Sprites.bin"
+		binclude "General/Title/Nemesis Art/S3 Sonic Sprites.nem"
 		even
 DemoDat_AIZ:
 		binclude "Levels/AIZ/Demodata/1.bin"
@@ -118343,13 +118343,13 @@ Map_Snowboard:
 DPLC_Snowboard:
 		include "General/Sprites/Snowboard/DPLC - Snowboard.asm"
 ArtNem_AIZIntroSprites:
-		binclude "Levels/AIZ/Nemesis Art/Intro Waves.bin"
+		binclude "Levels/AIZ/Nemesis Art/Intro Waves.nem"
 		even
 ArtNem_SurfboardSplash:
-		binclude "General/Sprites/Surfboard/Surfboard Splash.bin"
+		binclude "General/Sprites/Surfboard/Surfboard Splash.nem"
 		even
 ArtNem_Surfboard:
-		binclude "General/Sprites/Surfboard/Surfboard.bin"
+		binclude "General/Sprites/Surfboard/Surfboard.nem"
 		even
 ArtUnc_Invincibility:
 		binclude "General/Sprites/Shields/Invincibility.bin"
@@ -118377,7 +118377,7 @@ ArtUnc_BubbleShield:
 		binclude "General/Sprites/Shields/Bubble Shield.bin"
 		even
 ArtNem_2PDashdust:
-		binclude "General/2P Zone/Nemesis Art/Spindash Dust.bin"
+		binclude "General/2P Zone/Nemesis Art/Spindash Dust.nem"
 		even
 MapEni_S3TitleSonic1:
 		binclude "General/Title/Enigma Map/S3 Sonic 1.eni"
@@ -118424,121 +118424,121 @@ MapEni_S3TitleBg:
 Map_S3TitleBanner:
 		include "General/Title/Map - S3 Banner.asm"
 ArtNem_Title_S3Banner:
-		binclude "General/Title/Nemesis Art/S3 Banner.bin"
+		binclude "General/Title/Nemesis Art/S3 Banner.nem"
 		even
 ArtKos_S3TitleSonic1:
-		binclude "General/Title/Kosinski Art/S3 Sonic 1.bin"
+		binclude "General/Title/Kosinski Art/S3 Sonic 1.kos"
 		even
 ArtKos_S3TitleSonic8:
-		binclude "General/Title/Kosinski Art/S3 Sonic 8.bin"
+		binclude "General/Title/Kosinski Art/S3 Sonic 8.kos"
 		even
 ArtKos_S3TitleSonic9:
-		binclude "General/Title/Kosinski Art/S3 Sonic 9.bin"
+		binclude "General/Title/Kosinski Art/S3 Sonic 9.kos"
 		even
 ArtKos_S3TitleSonicA:
-		binclude "General/Title/Kosinski Art/S3 Sonic A.bin"
+		binclude "General/Title/Kosinski Art/S3 Sonic A.kos"
 		even
 ArtKos_S3TitleSonicB:
-		binclude "General/Title/Kosinski Art/S3 Sonic B.bin"
+		binclude "General/Title/Kosinski Art/S3 Sonic B.kos"
 		even
 ArtKos_S3TitleSonicC:
-		binclude "General/Title/Kosinski Art/S3 Sonic C.bin"
+		binclude "General/Title/Kosinski Art/S3 Sonic C.kos"
 		even
 ArtKos_S3TitleSonicD:
-		binclude "General/Title/Kosinski Art/S3 Sonic D.bin"
+		binclude "General/Title/Kosinski Art/S3 Sonic D.kos"
 		align $100
 ArtNem_GrayButton:
-		binclude "General/Sprites/Buttons/Gray Button.bin"
+		binclude "General/Sprites/Buttons/Gray Button.nem"
 		even
 ArtNem_VerticalSpring:
-		binclude "General/Sprites/Level Misc/Vertical Spring.bin"
+		binclude "General/Sprites/Level Misc/Vertical Spring.nem"
 		even
 ArtNem_HorizontalSpring:
-		binclude "General/Sprites/Level Misc/Horizontal Spring.bin"
+		binclude "General/Sprites/Level Misc/Horizontal Spring.nem"
 		even
 ArtNem_DiagonalSpring:
-		binclude "General/Sprites/Level Misc/Diagonal Spring.bin"
+		binclude "General/Sprites/Level Misc/Diagonal Spring.nem"
 		even
 ArtNem_HUDText:
-		binclude "General/Sprites/HUD Icon/HUD Text.bin"
+		binclude "General/Sprites/HUD Icon/HUD Text.nem"
 		even
 ArtNem_SonicLifeIcon:
-		binclude "General/Sprites/HUD Icon/Sonic Life Icon.bin"
+		binclude "General/Sprites/HUD Icon/Sonic Life Icon.nem"
 		even
 ArtNem_TailsLifeIcon:
-		binclude "General/Sprites/HUD Icon/Tails Life Icon.bin"
+		binclude "General/Sprites/HUD Icon/Tails Life Icon.nem"
 		even
 ArtNem_KnucklesLifeIcon:
-		binclude "General/Sprites/HUD Icon/Knuckles Life Icon.bin"
+		binclude "General/Sprites/HUD Icon/Knuckles Life Icon.nem"
 		even
 ArtNem_Ring:
-		binclude "General/Sprites/Ring/Ring.bin"
+		binclude "General/Sprites/Ring/Ring.nem"
 		even
 ArtNem_Monitors:
-		binclude "General/Sprites/Monitors/Monitors.bin"
+		binclude "General/Sprites/Monitors/Monitors.nem"
 		even
 ArtNem_VerticalSpikes:
-		binclude "General/Sprites/Level Misc/Vertical Spikes.bin"
+		binclude "General/Sprites/Level Misc/Vertical Spikes.nem"
 		even
 ArtNem_HorizontalSpikes:
-		binclude "General/Sprites/Level Misc/Horizontal Spikes.bin"
+		binclude "General/Sprites/Level Misc/Horizontal Spikes.nem"
 		even
 ArtNem_EnemyPoints:
-		binclude "General/Sprites/Enemy Misc/Enemy Points.bin"
+		binclude "General/Sprites/Enemy Misc/Enemy Points.nem"
 		even
 ArtNem_StarPost:
-		binclude "General/Sprites/Starpost/Starpost.bin"
+		binclude "General/Sprites/Starpost/Starpost.nem"
 		even
 ArtNem_S2Signpost:
-		binclude "General/S2Menu/Nemesis Art/Signpost.bin"
+		binclude "General/S2Menu/Nemesis Art/Signpost.nem"
 		even
 ArtNem_Bubbles:
-		binclude "General/Sprites/Bubbles/Bubbles.bin"
+		binclude "General/Sprites/Bubbles/Bubbles.nem"
 		even
 ArtNem_GameOver:
-		binclude "General/Sprites/Game Over/GameOver.bin"
+		binclude "General/Sprites/Game Over/GameOver.nem"
 		even
 ArtNem_Explosion:
-		binclude "General/Sprites/Enemy Misc/Explosion.bin"
+		binclude "General/Sprites/Enemy Misc/Explosion.nem"
 		even
 ArtNem_ContinueTails:
-		binclude "General/S2Menu/Nemesis Art/Tails Continue Sprites.bin"
+		binclude "General/S2Menu/Nemesis Art/Tails Continue Sprites.nem"
 		even
 ArtNem_MiniSonic:
-		binclude "General/S2Menu/Nemesis Art/Sonic Continue Icon.bin"
+		binclude "General/S2Menu/Nemesis Art/Sonic Continue Icon.nem"
 		even
 ArtNem_MiniTails:
-		binclude "General/S2Menu/Nemesis Art/Tails Continue Icon.bin"
+		binclude "General/S2Menu/Nemesis Art/Tails Continue Icon.nem"
 		even
 ArtNem_SpikesSprings:
-		binclude "General/Sprites/Level Misc/SpikesSprings.bin"
+		binclude "General/Sprites/Level Misc/SpikesSprings.nem"
 		even
 ArtNem_RingHUDText:
-		binclude "General/Sprites/Ring/RingHUDText.bin"
+		binclude "General/Sprites/Ring/RingHUDText.nem"
 		even
 ArtNem_EnemyPtsStarPost:
-		binclude "General/Sprites/Enemy Misc/EnemyPtsStarpost.bin"
+		binclude "General/Sprites/Enemy Misc/EnemyPtsStarpost.nem"
 		even
 ArtNem_Seal:
-		binclude "General/Sprites/Animals/Seal.bin"
+		binclude "General/Sprites/Animals/Seal.nem"
 		even
 ArtNem_Pig:
-		binclude "General/Sprites/Animals/Pig.bin"
+		binclude "General/Sprites/Animals/Pig.nem"
 		even
 ArtNem_BlueFlicky:
-		binclude "General/Sprites/Animals/Blue Flicky.bin"
+		binclude "General/Sprites/Animals/Blue Flicky.nem"
 		even
 ArtNem_Chicken:
-		binclude "General/Sprites/Animals/Chicken.bin"
+		binclude "General/Sprites/Animals/Chicken.nem"
 		even
 ArtNem_Penguin:
-		binclude "General/Sprites/Animals/Penguin.bin"
+		binclude "General/Sprites/Animals/Penguin.nem"
 		even
 ArtNem_Squirrel:
-		binclude "General/Sprites/Animals/Squirrel.bin"
+		binclude "General/Sprites/Animals/Squirrel.nem"
 		even
 ArtNem_Rabbit:
-		binclude "General/Sprites/Animals/Rabbit.bin"
+		binclude "General/Sprites/Animals/Rabbit.nem"
 		even
 Map_RobotnikShip:
 		include "General/Sprites/Robotnik/Map - Robotnik Ship.asm"
@@ -118883,214 +118883,214 @@ Pal_MGZFadeCNZ:
 Map_LBZFinalBoss2:
 		include "Levels/LBZ/Misc Object Data/Map - Final Boss 2.asm"
 ArtNem_AIZMiniboss:
-		binclude "Levels/AIZ/Nemesis Art/Miniboss.bin"
+		binclude "Levels/AIZ/Nemesis Art/Miniboss.nem"
 		even
 ArtKosM_AIZEndBoss:
-		binclude "Levels/AIZ/KosinskiM Art/End Boss.bin"
+		binclude "Levels/AIZ/KosinskiM Art/End Boss.kosm"
 		even
 ArtNem_AIZMinibossSmall:
-		binclude "Levels/AIZ/Nemesis Art/Miniboss Small.bin"
+		binclude "Levels/AIZ/Nemesis Art/Miniboss Small.nem"
 		even
 ArtUnc_AIZRhinobot:
 		binclude "General/Sprites/Rhinobot/Rhinobot.bin"
 		even
 ArtKosM_AIZ_Bloominator:
-		binclude "General/Sprites/Bloominator/Bloominator.bin"
+		binclude "General/Sprites/Bloominator/Bloominator.kosm"
 		even
 ArtKosM_AIZ_MonkeyDude:
-		binclude "General/Sprites/Monkey Dude/Monkey Dude.bin"
+		binclude "General/Sprites/Monkey Dude/Monkey Dude.kosm"
 		even
 ArtKosM_AIZ_CaterkillerJr:
-		binclude "General/Sprites/Caterkiller Jr/Caterkiller Jr.bin"
+		binclude "General/Sprites/Caterkiller Jr/Caterkiller Jr.kosm"
 		even
 ArtNem_HCZMiniboss:
-		binclude "Levels/HCZ/Nemesis Art/Miniboss.bin"
+		binclude "Levels/HCZ/Nemesis Art/Miniboss.nem"
 		even
 ArtNem_HCZEndBoss:
-		binclude "Levels/HCZ/Nemesis Art/End Boss.bin"
+		binclude "Levels/HCZ/Nemesis Art/End Boss.nem"
 		even
 ArtNem_HCZDragonfly:
-		binclude "General/Sprites/Buggernaut/Buggernaut.bin"
+		binclude "General/Sprites/Buggernaut/Buggernaut.nem"
 		even
 ArtKosM_Jawz:
-		binclude "General/Sprites/Jawz/Jawz.bin"
+		binclude "General/Sprites/Jawz/Jawz.kosm"
 		even
 ArtKosM_MegaChopper:
-		binclude "General/Sprites/Mega Chopper/Mega Chopper.bin"
+		binclude "General/Sprites/Mega Chopper/Mega Chopper.kosm"
 		even
 ArtKosM_Blastoid:
-		binclude "General/Sprites/Blastoid/Blastoid.bin"
+		binclude "General/Sprites/Blastoid/Blastoid.kosm"
 		even
 ArtKosM_TurboSpiker:
-		binclude "General/Sprites/Turbo Spiker/Turbo Spiker.bin"
+		binclude "General/Sprites/Turbo Spiker/Turbo Spiker.kosm"
 		even
 ArtKosM_Pointdexter:
-		binclude "General/Sprites/Pointdexter/Pointdexter.bin"
+		binclude "General/Sprites/Pointdexter/Pointdexter.kosm"
 		even
 ArtKosM_MGZMiniboss:
-		binclude "Levels/MGZ/KosinskiM Art/Miniboss.bin"
+		binclude "Levels/MGZ/KosinskiM Art/Miniboss.kosm"
 		even
 ArtNem_MGZSpire:
-		binclude "Levels/MGZ/Nemesis Art/Spire.bin"
+		binclude "Levels/MGZ/Nemesis Art/Spire.nem"
 		even
 ArtKosM_MGZEndBoss:
-		binclude "Levels/MGZ/KosinskiM Art/End Boss.bin"
+		binclude "Levels/MGZ/KosinskiM Art/End Boss.kosm"
 		even
 ArtScaled_MGZEndBoss:
 		binclude "Levels/MGZ/Misc/MGZ End Boss Scaled.bin"
 		even
 ArtKosM_MGZEndBossDebris:
-		binclude "Levels/MGZ/KosinskiM Art/End Boss Debris.bin"
+		binclude "Levels/MGZ/KosinskiM Art/End Boss Debris.kosm"
 		even
 ArtUnc_BubblesBadnik:
 		binclude "General/Sprites/Bubbles Badnik/Bubbles Badnik.bin"
 		even
 ArtKosM_Spiker:
-		binclude "General/Sprites/Spiker/Spiker.bin"
+		binclude "General/Sprites/Spiker/Spiker.kosm"
 		even
 ArtKosM_Mantis:
-		binclude "General/Sprites/Mantis/Mantis.bin"
+		binclude "General/Sprites/Mantis/Mantis.kosm"
 		even
 ArtNem_CNZMiniboss:
-		binclude "Levels/CNZ/Nemesis Art/Miniboss.bin"
+		binclude "Levels/CNZ/Nemesis Art/Miniboss.nem"
 		even
 ArtNem_CNZEndBoss:
-		binclude "Levels/CNZ/Nemesis Art/End Boss.bin"
+		binclude "Levels/CNZ/Nemesis Art/End Boss.nem"
 		even
 ArtUnc_Clamer:
 		binclude "General/Sprites/Clamer/Clamer.bin"
 		even
 ArtKosM_ClamerShot:
-		binclude "General/Sprites/Clamer/Clamer Shot.bin"
+		binclude "General/Sprites/Clamer/Clamer Shot.kosm"
 		even
 ArtKosM_Sparkle:
-		binclude "General/Sprites/Sparkle/Sparkle.bin"
+		binclude "General/Sprites/Sparkle/Sparkle.kosm"
 		even
 ArtKosM_Batbot:
-		binclude "General/Sprites/Batbot/Batbot.bin"
+		binclude "General/Sprites/Batbot/Batbot.kosm"
 		even
 ArtKosM_CNZBalloon:
-		binclude "Levels/CNZ/KosinskiM Art/Balloon.bin"
+		binclude "Levels/CNZ/KosinskiM Art/Balloon.kosm"
 		even
 ArtNem_FBZMiniboss:
-		binclude "Levels/FBZ/Nemesis Art/S3 Miniboss.bin"
+		binclude "Levels/FBZ/Nemesis Art/S3 Miniboss.nem"
 		even
 ArtNem_FBZ2Subboss:
-		binclude "Levels/FBZ/Nemesis Art/Act 2 Subboss.bin"
+		binclude "Levels/FBZ/Nemesis Art/Act 2 Subboss.nem"
 		even
 ArtNem_FBZEndBoss:
-		binclude "Levels/FBZ/Nemesis Art/End Boss.bin"
+		binclude "Levels/FBZ/Nemesis Art/End Boss.nem"
 		even
 ArtKosM_Blaster:
-		binclude "General/Sprites/Blaster/Blaster.bin"
+		binclude "General/Sprites/Blaster/Blaster.kosm"
 		even
 ArtKosM_Technosqueek:
-		binclude "General/Sprites/Technosqueek/Technosqueek.bin"
+		binclude "General/Sprites/Technosqueek/Technosqueek.kosm"
 		even
 ArtNem_ICZMisc1:
-		binclude "Levels/ICZ/Nemesis Art/Misc Art 1.bin"
+		binclude "Levels/ICZ/Nemesis Art/Misc Art 1.nem"
 		even
 ArtNem_ICZIntroSprites:
-		binclude "Levels/ICZ/Nemesis Art/Intro Sprites.bin"
+		binclude "Levels/ICZ/Nemesis Art/Intro Sprites.nem"
 		even
 ArtNem_ICZMisc2:
-		binclude "Levels/ICZ/Nemesis Art/Misc Art 2.bin"
+		binclude "Levels/ICZ/Nemesis Art/Misc Art 2.nem"
 		even
 ArtNem_ICZEndBoss:
-		binclude "Levels/ICZ/Nemesis Art/End Boss.bin"
+		binclude "Levels/ICZ/Nemesis Art/End Boss.nem"
 		even
 ArtNem_ICZMiniboss:
-		binclude "Levels/ICZ/Nemesis Art/Miniboss.bin"
+		binclude "Levels/ICZ/Nemesis Art/Miniboss.nem"
 		even
 ArtUnc_Penguinator:
 		binclude "General/Sprites/Penguinator/Penguinator.bin"
 		even
 ArtKosM_ICZSnowdust:
-		binclude "Levels/ICZ/KosinskiM Art/Snowdust.bin"
+		binclude "Levels/ICZ/KosinskiM Art/Snowdust.kosm"
 		even
 ArtKosM_StarPointer:
-		binclude "General/Sprites/Star Pointer/Star Pointer.bin"
+		binclude "General/Sprites/Star Pointer/Star Pointer.kosm"
 		even
 ArtKosM_LBZMiniboss:
-		binclude "Levels/LBZ/KosinskiM Art/Miniboss.bin"
+		binclude "Levels/LBZ/KosinskiM Art/Miniboss.kosm"
 		even
 ArtKosM_LBZMinibossBox:
-		binclude "Levels/LBZ/KosinskiM Art/Miniboss Box.bin"
+		binclude "Levels/LBZ/KosinskiM Art/Miniboss Box.kosm"
 		even
 ArtNem_LBZFinalBoss1:
-		binclude "Levels/LBZ/Nemesis Art/Final Boss 1.bin"
+		binclude "Levels/LBZ/Nemesis Art/Final Boss 1.nem"
 		even
 ArtKosM_LBZEndBoss:
-		binclude "Levels/LBZ/KosinskiM Art/End Boss.bin"
+		binclude "Levels/LBZ/KosinskiM Art/End Boss.kosm"
 		even
 ArtKosM_LBZFinalBoss2:
-		binclude "Levels/LBZ/KosinskiM Art/Final Boss 2.bin"
+		binclude "Levels/LBZ/KosinskiM Art/Final Boss 2.kosm"
 		even
 ArtKosM_SnaleBlaster:
-		binclude "General/Sprites/Snale Blaster/Snale Blaster.bin"
+		binclude "General/Sprites/Snale Blaster/Snale Blaster.kosm"
 		even
 ArtKosM_Ribot:
-		binclude "General/Sprites/Ribot/Ribot.bin"
+		binclude "General/Sprites/Ribot/Ribot.kosm"
 		even
 ArtKosM_Orbinaut:
-		binclude "General/Sprites/Orbinaut/Orbinaut.bin"
+		binclude "General/Sprites/Orbinaut/Orbinaut.kosm"
 		even
 ArtKosM_Corkey:
-		binclude "General/Sprites/Corkey/Corkey.bin"
+		binclude "General/Sprites/Corkey/Corkey.kosm"
 		even
 ArtUnc_Flybot767:
 		binclude "General/Sprites/Flybot767/Flybot767.bin"
 		even
 ArtNem_LBZKnuxBomb:
-		binclude "General/Sprites/Knuckles/Cutscene/Knuckles Bomb.bin"
+		binclude "General/Sprites/Knuckles/Cutscene/Knuckles Bomb.nem"
 		even
 ArtKosM_LBZ2DeathEggSmall:
-		binclude "Levels/LBZ/KosinskiM Art/Act 2 Death Egg Small.bin"
+		binclude "Levels/LBZ/KosinskiM Art/Act 2 Death Egg Small.kosm"
 		even
 ArtScaled_LBZ2UnusedRobotnik:
 		binclude "General/Sprites/Robotnik/Robotnik Fly Scaled.bin"
 		even
 ArtKosM_LBZ2DeathEgg2_8x8:
-		binclude "Levels/LBZ/Tiles/Act 2 Death Egg 2.bin"
+		binclude "Levels/LBZ/Tiles/Act 2 Death Egg 2.kosm"
 		even
 ArtNem_BossExplosion:
-		binclude "General/Sprites/Boss Explosion/Boss Explosion.bin"
+		binclude "General/Sprites/Boss Explosion/Boss Explosion.nem"
 		even
 ArtNem_AIZBossFire:
-		binclude "Levels/AIZ/Nemesis Art/Miniboss Fire.bin"
+		binclude "Levels/AIZ/Nemesis Art/Miniboss Fire.nem"
 		even
 ArtNem_FBZEndBossFlame:
-		binclude "Levels/FBZ/Nemesis Art/End Boss Flame.bin"
+		binclude "Levels/FBZ/Nemesis Art/End Boss Flame.nem"
 		even
 ArtNem_RobotnikShip:
-		binclude "General/Sprites/Robotnik/Ship.bin"
+		binclude "General/Sprites/Robotnik/Ship.nem"
 		even
 ArtNem_FBZRobotnikHead:
-		binclude "General/Sprites/Robotnik/FBZ Robotnik Head.bin"
+		binclude "General/Sprites/Robotnik/FBZ Robotnik Head.nem"
 		even
 ArtNem_FBZRobotnikStand:
-		binclude "General/Sprites/Robotnik/FBZ Robotnik Stand.bin"
+		binclude "General/Sprites/Robotnik/FBZ Robotnik Stand.nem"
 		even
 ArtNem_FBZRobotnikRun:
-		binclude "General/Sprites/Robotnik/FBZ Robotnik Run.bin"
+		binclude "General/Sprites/Robotnik/FBZ Robotnik Run.nem"
 		even
 ArtUnc_EndSigns:
 		binclude "General/Sprites/Signpost/End Signs.bin"
 		even
 ArtNem_SignpostStub:
-		binclude "General/Sprites/Signpost/Stub.bin"
+		binclude "General/Sprites/Signpost/Stub.nem"
 		even
 ArtNem_EggCapsule:
-		binclude "General/Sprites/Egg Capsule/Egg Capsule.bin"
+		binclude "General/Sprites/Egg Capsule/Egg Capsule.nem"
 		even
 ArtKosM_AIZIntroPlane:
-		binclude "Levels/AIZ/KosinskiM Art/Intro Plane.bin"
+		binclude "Levels/AIZ/KosinskiM Art/Intro Plane.kosm"
 		even
 ArtUnc_CutsceneKnux:
 		binclude "General/Sprites/Knuckles/Cutscene/Cutscene Main.bin"
 		even
 ArtKosM_AIZIntroEmeralds:
-		binclude "Levels/AIZ/KosinskiM Art/Intro Emeralds.bin"
+		binclude "Levels/AIZ/KosinskiM Art/Intro Emeralds.kosm"
 		even
 ArtUnc_SSEntryRing:
 		binclude "General/Sprites/SS Entry/Entry Ring.bin"
@@ -119099,79 +119099,79 @@ ArtUnc_SSEntryFlash:
 		binclude "General/Sprites/SS Entry/Entry Flash.bin"
 		even
 ArtKosM_BadnikExplosion:
-		binclude "General/Sprites/SS Entry/Badnik Explosion.bin"
+		binclude "General/Sprites/SS Entry/Badnik Explosion.kosm"
 		even
 ArtNem_BonusStage:
-		binclude "Levels/Gumball/Nemesis Art/Gumball Bonus.bin"
+		binclude "Levels/Gumball/Nemesis Art/Gumball Bonus.nem"
 		even
 ArtKosM_SonicEndPose:
-		binclude "General/Ending/KosinskiM Art/Sonic 3 Sonic Ending Pose.bin"
+		binclude "General/Ending/KosinskiM Art/Sonic 3 Sonic Ending Pose.kosm"
 		even
 ArtKosM_TailsEndPose:
-		binclude "General/Ending/KosinskiM Art/Tails Ending Pose.bin"
+		binclude "General/Ending/KosinskiM Art/Tails Ending Pose.kosm"
 		even
 ArtKosM_SuperSonicEndPose:
-		binclude "General/Ending/KosinskiM Art/Sonic 3 Super Sonic Ending Pose.bin"
+		binclude "General/Ending/KosinskiM Art/Sonic 3 Super Sonic Ending Pose.kosm"
 		even
 ArtNem_S3CreditsText:
-		binclude "General/Ending/Nemesis Art/S3 Large Text.bin"
+		binclude "General/Ending/Nemesis Art/S3 Large Text.nem"
 		even
 ArtNem_S38x16Font:
-		binclude "General/Ending/Nemesis Art/S3 8x16 Font.bin"
+		binclude "General/Ending/Nemesis Art/S3 8x16 Font.nem"
 		even
 ArtNem_AIZCorkFloor:
-		binclude "Levels/AIZ/Nemesis Art/Cork Floor 1.bin"
+		binclude "Levels/AIZ/Nemesis Art/Cork Floor 1.nem"
 		even
 ArtNem_AIZCorkFloor2:
-		binclude "Levels/AIZ/Nemesis Art/Cork Floor 2.bin"
+		binclude "Levels/AIZ/Nemesis Art/Cork Floor 2.nem"
 		even
 ArtNem_AIZSwingVine:
-		binclude "Levels/AIZ/Nemesis Art/Swing Vine.bin"
+		binclude "Levels/AIZ/Nemesis Art/Swing Vine.nem"
 		even
 ArtNem_AIZSlideRope:
-		binclude "Levels/AIZ/Nemesis Art/Zip Vine.bin"
+		binclude "Levels/AIZ/Nemesis Art/Zip Vine.nem"
 		even
 ArtNem_AIZBackgroundTree:
-		binclude "Levels/AIZ/Nemesis Art/BG Tree.bin"
+		binclude "Levels/AIZ/Nemesis Art/BG Tree.nem"
 		even
 ArtNem_AIZMisc1:
-		binclude "Levels/AIZ/Nemesis Art/Misc Art 1.bin"
+		binclude "Levels/AIZ/Nemesis Art/Misc Art 1.nem"
 		even
 ArtNem_AIZFallingLog:
-		binclude "Levels/AIZ/Nemesis Art/Falling Log.bin"
+		binclude "Levels/AIZ/Nemesis Art/Falling Log.nem"
 		even
 ArtNem_AIZMisc2:
-		binclude "Levels/AIZ/Nemesis Art/Misc Art 2.bin"
+		binclude "Levels/AIZ/Nemesis Art/Misc Art 2.nem"
 		even
 ArtNem_HCZSpikeBall:
-		binclude "Levels/HCZ/Nemesis Art/Spike Ball.bin"
+		binclude "Levels/HCZ/Nemesis Art/Spike Ball.nem"
 		even
 ArtNem_HCZWaveSplash:
-		binclude "Levels/HCZ/Nemesis Art/Wave Splash.bin"
+		binclude "Levels/HCZ/Nemesis Art/Wave Splash.nem"
 		even
 ArtNem_HCZButton:
-		binclude "Levels/HCZ/Nemesis Art/Button.bin"
+		binclude "Levels/HCZ/Nemesis Art/Button.nem"
 		even
 ArtNem_HCZMisc:
-		binclude "Levels/HCZ/Nemesis Art/Misc Art.bin"
+		binclude "Levels/HCZ/Nemesis Art/Misc Art.nem"
 		even
 ArtNem_HCZWaterRush:
-		binclude "Levels/HCZ/Nemesis Art/Water Rush.bin"
+		binclude "Levels/HCZ/Nemesis Art/Water Rush.nem"
 		even
 ArtKosM_HCZLargeFan:
-		binclude "Levels/HCZ/KosinskiM Art/Large Fan.bin"
+		binclude "Levels/HCZ/KosinskiM Art/Large Fan.kosm"
 		even
 ArtKosM_HCZGeyserHorz:
-		binclude "Levels/HCZ/KosinskiM Art/Geyser Horizontal.bin"
+		binclude "Levels/HCZ/KosinskiM Art/Geyser Horizontal.kosm"
 		even
 ArtKosM_HCZGeyserVert:
-		binclude "Levels/HCZ/KosinskiM Art/Geyser Vertical.bin"
+		binclude "Levels/HCZ/KosinskiM Art/Geyser Vertical.kosm"
 		even
 ArtNem_HCZ2Slide:
-		binclude "Levels/HCZ/Nemesis Art/Act 2 Slide.bin"
+		binclude "Levels/HCZ/Nemesis Art/Act 2 Slide.nem"
 		even
 ArtNem_HCZ2BlockPlat:
-		binclude "Levels/HCZ/Nemesis Art/Act 2 Block Platform.bin"
+		binclude "Levels/HCZ/Nemesis Art/Act 2 Block Platform.nem"
 		even
 ArtUnc_HCZWaterSplash2:
 		binclude "Levels/HCZ/Animated Tiles/Water Splash 2.bin"
@@ -119180,137 +119180,137 @@ ArtUnc_HCZWaterSplash:
 		binclude "Levels/HCZ/Animated Tiles/Water Splash.bin"
 		even
 ArtNem_HCZ2KnuxWall:
-		binclude "Levels/HCZ/Nemesis Art/Act 2 Knuckles Wall.bin"
+		binclude "Levels/HCZ/Nemesis Art/Act 2 Knuckles Wall.nem"
 		even
 ArtNem_MGZMisc1:
-		binclude "Levels/MGZ/Nemesis Art/Misc Art 1.bin"
+		binclude "Levels/MGZ/Nemesis Art/Misc Art 1.nem"
 		even
 ArtNem_MGZMisc2:
-		binclude "Levels/MGZ/Nemesis Art/Misc Art 2.bin"
+		binclude "Levels/MGZ/Nemesis Art/Misc Art 2.nem"
 		even
 ArtNem_MGZSigns:
-		binclude "Levels/MGZ/Nemesis Art/Direction Signs.bin"
+		binclude "Levels/MGZ/Nemesis Art/Direction Signs.nem"
 		even
 ArtNem_CNZMisc:
-		binclude "Levels/CNZ/Nemesis Art/Misc Art.bin"
+		binclude "Levels/CNZ/Nemesis Art/Misc Art.nem"
 		even
 ArtNem_CNZPlatform:
-		binclude "Levels/CNZ/Nemesis Art/Platform.bin"
+		binclude "Levels/CNZ/Nemesis Art/Platform.nem"
 		even
 ArtNem_LBZMisc:
-		binclude "Levels/LBZ/Nemesis Art/Misc Art.bin"
+		binclude "Levels/LBZ/Nemesis Art/Misc Art.nem"
 		even
 ArtNem_LBZTubeTrans:
-		binclude "Levels/LBZ/Nemesis Art/Tube Transport.bin"
+		binclude "Levels/LBZ/Nemesis Art/Tube Transport.nem"
 		even
 ArtNem_LBZ2Misc:
-		binclude "Levels/LBZ/Nemesis Art/Act 2 Misc Art.bin"
+		binclude "Levels/LBZ/Nemesis Art/Act 2 Misc Art.nem"
 		even
 ArtNem_2PArt_1:
-		binclude "General/2P Zone/Nemesis Art/Misc Art 1.bin"
+		binclude "General/2P Zone/Nemesis Art/Misc Art 1.nem"
 		even
 ArtNem_2PArt_2:
-		binclude "General/2P Zone/Nemesis Art/Misc Art 2.bin"
+		binclude "General/2P Zone/Nemesis Art/Misc Art 2.nem"
 		even
 ArtNem_2PArt_3:
-		binclude "General/2P Zone/Nemesis Art/Misc Art 3.bin"
+		binclude "General/2P Zone/Nemesis Art/Misc Art 3.nem"
 		even
 ArtNem_2PStartPost:
-		binclude "General/2P Zone/Nemesis Art/Start Post.bin"
+		binclude "General/2P Zone/Nemesis Art/Start Post.nem"
 		even
 ArtNem_2PTime:
-		binclude "General/2P Zone/Nemesis Art/Time Display.bin"
+		binclude "General/2P Zone/Nemesis Art/Time Display.nem"
 		even
 ArtNem_2PLapNum:
-		binclude "General/2P Zone/Nemesis Art/Lap Numbers.bin"
+		binclude "General/2P Zone/Nemesis Art/Lap Numbers.nem"
 		even
 ArtNem_2PPosIcon:
-		binclude "General/2P Zone/Nemesis Art/Position Icons.bin"
+		binclude "General/2P Zone/Nemesis Art/Position Icons.nem"
 		even
 ArtNem_BPZMisc:
-		binclude "Levels/BPZ/Nemesis Art/Misc Art.bin"
+		binclude "Levels/BPZ/Nemesis Art/Misc Art.nem"
 		even
 ArtNem_DPZMisc:
-		binclude "Levels/DPZ/Nemesis Art/Misc Art.bin"
+		binclude "Levels/DPZ/Nemesis Art/Misc Art.nem"
 		even
 ArtNem_CGZMisc:
-		binclude "Levels/CGZ/Nemesis Art/Platform.bin"
+		binclude "Levels/CGZ/Nemesis Art/Platform.nem"
 		even
 ArtNem_EMZMisc:
-		binclude "Levels/EMZ/Nemesis Art/Misc Art.bin"
+		binclude "Levels/EMZ/Nemesis Art/Misc Art.nem"
 		even
 ArtKosM_AIZ2Bombership2_8x8:
-		binclude "Levels/AIZ/Tiles/Act 2 Bombership 2.bin"
+		binclude "Levels/AIZ/Tiles/Act 2 Bombership 2.kosm"
 		even
 ArtKosM_ResultsSONIC:
-		binclude "General/Sprites/Results/Results SONIC S3.bin"
+		binclude "General/Sprites/Results/Results SONIC S3.kosm"
 		even
 ArtKosM_ResultsMILES:
-		binclude "General/Sprites/Results/Results MILES.bin"
+		binclude "General/Sprites/Results/Results MILES.kosm"
 		even
 ArtKosM_ResultsTAILS:
-		binclude "General/Sprites/Results/Results TAILS.bin"
+		binclude "General/Sprites/Results/Results TAILS.kosm"
 		even
 ArtKosM_ResultsKNUCKLES:
-		binclude "General/Sprites/Results/Results KNUCKLES.bin"
+		binclude "General/Sprites/Results/Results KNUCKLES.kosm"
 		even
 ArtKosM_ResultsGeneral:
-		binclude "General/Sprites/Results/Results General.bin"
+		binclude "General/Sprites/Results/Results General.kosm"
 		even
 ArtKosM_TitleCardNum1:
-		binclude "General/Sprites/Title Card/Title Card Number 1.bin"
+		binclude "General/Sprites/Title Card/Title Card Number 1.kosm"
 		even
 ArtKosM_TitleCardNum2:
-		binclude "General/Sprites/Title Card/Title Card Number 2.bin"
+		binclude "General/Sprites/Title Card/Title Card Number 2.kosm"
 		even
 ArtKosM_SSResults:
 		dc.w $1220
 ArtKos_SSResultsGeneral:
-		binclude "General/Special Stage/Kosinski Art/S3 SSResults General.bin"
+		binclude "General/Special Stage/Kosinski Art/S3 SSResults General.kos"
 ArtKos_SSResultsTKIcons:
-		binclude "General/Special Stage/Kosinski Art/S3 SSResults Tails Knuckles Icons.bin"
+		binclude "General/Special Stage/Kosinski Art/S3 SSResults Tails Knuckles Icons.kos"
 		even
 ArtKosM_TitleCardRedAct:
-		binclude "General/Sprites/Title Card/Title Card Red ACT.bin"
+		binclude "General/Sprites/Title Card/Title Card Red ACT.kosm"
 		even
 ArtKosM_AIZTitleCard:
-		binclude "Levels/AIZ/KosinskiM Art/Title Card.bin"
+		binclude "Levels/AIZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_HCZTitleCard:
-		binclude "Levels/HCZ/KosinskiM Art/Title Card.bin"
+		binclude "Levels/HCZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_MGZTitleCard:
-		binclude "Levels/MGZ/KosinskiM Art/Title Card.bin"
+		binclude "Levels/MGZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_CNZTitleCard:
-		binclude "Levels/CNZ/KosinskiM Art/Title Card.bin"
+		binclude "Levels/CNZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_FBZTitleCard:
-		binclude "Levels/FBZ/KosinskiM Art/Title Card.bin"
+		binclude "Levels/FBZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_ICZTitleCard:
-		binclude "Levels/ICZ/KosinskiM Art/Title Card.bin"
+		binclude "Levels/ICZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_LBZTitleCard:
-		binclude "Levels/LBZ/KosinskiM Art/Title Card.bin"
+		binclude "Levels/LBZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_ALZTitleCard:
-		binclude "Levels/ALZ/KosinskiM Art/Title Card.bin"
+		binclude "Levels/ALZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_BPZTitleCard:
-		binclude "Levels/BPZ/KosinskiM Art/Title Card.bin"
+		binclude "Levels/BPZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_CGZTitleCard:
-		binclude "Levels/CGZ/KosinskiM Art/Title Card.bin"
+		binclude "Levels/CGZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_DPZTitleCard:
-		binclude "Levels/DPZ/KosinskiM Art/Title Card.bin"
+		binclude "Levels/DPZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_EMZTitleCard:
-		binclude "Levels/EMZ/KosinskiM Art/Title Card.bin"
+		binclude "Levels/EMZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_BonusTitleCard:
-		binclude "General/Sprites/Title Card/Bonus Title Card.bin"
+		binclude "General/Sprites/Title Card/Bonus Title Card.kosm"
 		even
 Pal_SaveMenuBG:
 		binclude "General/Save Menu/Palettes/BG.bin"
@@ -119322,7 +119322,7 @@ MapEni_S3MenuBG:
 		binclude "General/Save Menu/Enigma Map/Menu BG.eni"
 		even
 ArtKos_S3MenuBG:
-		binclude "General/Save Menu/Kosinski Art/Menu BG.bin"
+		binclude "General/Save Menu/Kosinski Art/Menu BG.kos"
 		even
 MapEni_CompetitionLevBorder:
 		binclude "General/Competition Menu/Enigma Map/Level Border.eni"
@@ -119340,18 +119340,18 @@ MapEni_CompetitionLevName:
 		binclude "General/Competition Menu/Enigma Map/Level Names.eni"
 		even
 ArtKos_CompetitionMode:
-		binclude "General/Competition Menu/Kosinski Art/Mode Select.bin"
+		binclude "General/Competition Menu/Kosinski Art/Mode Select.kos"
 		even
 ArtKos_CompetitionLevel:
-		binclude "General/Competition Menu/Kosinski Art/Level Select.bin"
+		binclude "General/Competition Menu/Kosinski Art/Level Select.kos"
 		even
 ArtKos_CompetitionResults:
-		binclude "General/Competition Menu/Kosinski Art/Results.bin"
+		binclude "General/Competition Menu/Kosinski Art/Results.kos"
 		even
 Map_CompetitionPlayerSprite:
 		include "General/Competition Menu/Map - Competition Player Sprites.asm"
 ArtKos_CompetitionPlayer:
-		binclude "General/Competition Menu/Kosinski Art/Player Sprites.bin"
+		binclude "General/Competition Menu/Kosinski Art/Player Sprites.kos"
 		even
 MapEni_SaveScreen_Layout:
 		binclude "General/Save Menu/Enigma Map/Save Screen Layout.eni"
@@ -119377,118 +119377,118 @@ MapUnc_SaveScreenStatic4:
 		binclude "General/Save Menu/Uncompressed Map/Static 4.bin"
 		even
 ArtKos_SaveScreenMisc:
-		binclude "General/Save Menu/Kosinski Art/Misc.bin"
+		binclude "General/Save Menu/Kosinski Art/Misc.kos"
 		even
 AIZ1_16x16_Primary_Kos:
-		binclude "Levels/AIZ/Blocks/Act 1 Primary.bin"
+		binclude "Levels/AIZ/Blocks/Act 1 Primary.kos"
 		even
 AIZ1_16x16_Secondary_Kos:
-		binclude "Levels/AIZ/Blocks/Act 1 Secondary.bin"
+		binclude "Levels/AIZ/Blocks/Act 1 Secondary.kos"
 		even
 AIZ1_16x16_MainLevel_Kos:
-		binclude "Levels/AIZ/Blocks/Act 1 Main Level.bin"
+		binclude "Levels/AIZ/Blocks/Act 1 Main Level.kos"
 		even
 AIZ1_8x8_Primary_KosM:
-		binclude "Levels/AIZ/Tiles/Act 1 Primary.bin"
+		binclude "Levels/AIZ/Tiles/Act 1 Primary.kosm"
 		even
 AIZ1_8x8_Secondary_KosM:
-		binclude "Levels/AIZ/Tiles/Act 1 Secondary.bin"
+		binclude "Levels/AIZ/Tiles/Act 1 Secondary.kosm"
 		even
 AIZ1_8x8_MainLevel_KosM:
-		binclude "Levels/AIZ/Tiles/Act 1 Main Level.bin"
+		binclude "Levels/AIZ/Tiles/Act 1 Main Level.kosm"
 		even
 AIZ1_128x128_Kos:
-		binclude "Levels/AIZ/Chunks/Act 1.bin"
+		binclude "Levels/AIZ/Chunks/Act 1.kos"
 		even
 AIZ1_8x8_Flames_KosM:
-		binclude "Levels/AIZ/Tiles/Act 1 Fire Overlay.bin"
+		binclude "Levels/AIZ/Tiles/Act 1 Fire Overlay.kosm"
 		even
 AIZ2_16x16_Primary_Kos:
-		binclude "Levels/AIZ/Blocks/Act 2 Primary.bin"
+		binclude "Levels/AIZ/Blocks/Act 2 Primary.kos"
 		even
 AIZ2_16x16_Secondary_Kos:
-		binclude "Levels/AIZ/Blocks/Act 2 Secondary.bin"
+		binclude "Levels/AIZ/Blocks/Act 2 Secondary.kos"
 		even
 AIZ2_16x16_BomberShip_Kos:
-		binclude "Levels/AIZ/Blocks/Act 2 BomberShip.bin"
+		binclude "Levels/AIZ/Blocks/Act 2 BomberShip.kos"
 		even
 AIZ2_8x8_Primary_KosM:
-		binclude "Levels/AIZ/Tiles/Act 2 Primary.bin"
+		binclude "Levels/AIZ/Tiles/Act 2 Primary.kosm"
 		even
 AIZ2_8x8_Secondary_KosM:
-		binclude "Levels/AIZ/Tiles/Act 2 Secondary.bin"
+		binclude "Levels/AIZ/Tiles/Act 2 Secondary.kosm"
 		even
 AIZ2_8x8_BomberShip_KosM:
-		binclude "Levels/AIZ/Tiles/Act 2 Bombership.bin"
+		binclude "Levels/AIZ/Tiles/Act 2 Bombership.kosm"
 		even
 AIZ2_128x128_Kos:
-		binclude "Levels/AIZ/Chunks/Act 2.bin"
+		binclude "Levels/AIZ/Chunks/Act 2.kos"
 		even
 HCZ_16x16_Primary_Kos:
-		binclude "Levels/HCZ/Blocks/Primary.bin"
+		binclude "Levels/HCZ/Blocks/Primary.kos"
 		even
 HCZ_8x8_Primary_KosM:
-		binclude "Levels/HCZ/Tiles/Primary.bin"
+		binclude "Levels/HCZ/Tiles/Primary.kosm"
 		even
 HCZ_128x128_Primary_Kos:
-		binclude "Levels/HCZ/Chunks/Primary.bin"
+		binclude "Levels/HCZ/Chunks/Primary.kos"
 		even
 HCZ1_16x16_Secondary_Kos:
-		binclude "Levels/HCZ/Blocks/Act 1 Secondary.bin"
+		binclude "Levels/HCZ/Blocks/Act 1 Secondary.kos"
 		even
 HCZ1_8x8_Secondary_KosM:
-		binclude "Levels/HCZ/Tiles/Act 1 Secondary.bin"
+		binclude "Levels/HCZ/Tiles/Act 1 Secondary.kosm"
 		even
 HCZ1_128x128_Secondary_Kos:
-		binclude "Levels/HCZ/Chunks/Act 1 Secondary.bin"
+		binclude "Levels/HCZ/Chunks/Act 1 Secondary.kos"
 		even
 HCZ2_16x16_Secondary_Kos:
-		binclude "Levels/HCZ/Blocks/Act 2 Secondary.bin"
+		binclude "Levels/HCZ/Blocks/Act 2 Secondary.kos"
 		even
 HCZ2_8x8_Secondary_KosM:
-		binclude "Levels/HCZ/Tiles/Act 2 Secondary.bin"
+		binclude "Levels/HCZ/Tiles/Act 2 Secondary.kosm"
 		even
 HCZ2_128x128_Secondary_Kos:
-		binclude "Levels/HCZ/Chunks/Act 2 Secondary.bin"
+		binclude "Levels/HCZ/Chunks/Act 2 Secondary.kos"
 		even
 MGZ_16x16_Primary_Kos:
-		binclude "Levels/MGZ/Blocks/Primary.bin"
+		binclude "Levels/MGZ/Blocks/Primary.kos"
 		even
 MGZ_8x8_Primary_KosM:
-		binclude "Levels/MGZ/Tiles/Primary.bin"
+		binclude "Levels/MGZ/Tiles/Primary.kosm"
 		even
 MGZ_128x128_Primary_Kos:
-		binclude "Levels/MGZ/Chunks/Primary.bin"
+		binclude "Levels/MGZ/Chunks/Primary.kos"
 		even
 MGZ1_16x16_Secondary_Kos:
-		binclude "Levels/MGZ/Blocks/Act 1 Secondary.bin"
+		binclude "Levels/MGZ/Blocks/Act 1 Secondary.kos"
 		even
 MGZ1_8x8_Secondary_KosM:
-		binclude "Levels/MGZ/Tiles/Act 1 Secondary.bin"
+		binclude "Levels/MGZ/Tiles/Act 1 Secondary.kosm"
 		even
 MGZ1_128x128_Secondary_Kos:
-		binclude "Levels/MGZ/Chunks/Act 1 Secondary.bin"
+		binclude "Levels/MGZ/Chunks/Act 1 Secondary.kos"
 		even
 MGZ2_16x16_Secondary_Kos:
-		binclude "Levels/MGZ/Blocks/Act 2 Secondary.bin"
+		binclude "Levels/MGZ/Blocks/Act 2 Secondary.kos"
 		even
 MGZ2_8x8_Secondary_KosM:
-		binclude "Levels/MGZ/Tiles/Act 2 Secondary.bin"
+		binclude "Levels/MGZ/Tiles/Act 2 Secondary.kosm"
 		even
 MGZ2_128x128_Secondary_Kos:
-		binclude "Levels/MGZ/Chunks/Act 2 Secondary.bin"
+		binclude "Levels/MGZ/Chunks/Act 2 Secondary.kos"
 		even
 MGZ2_QuakeChunks:
 		binclude "Levels/MGZ/Misc/Act 2 Quake Chunks.bin"
 		even
 CNZ_16x16_Kos:
-		binclude "Levels/CNZ/Blocks/Primary.bin"
+		binclude "Levels/CNZ/Blocks/Primary.kos"
 		even
 CNZ_8x8_KosM:
-		binclude "Levels/CNZ/Tiles/Primary.bin"
+		binclude "Levels/CNZ/Tiles/Primary.kosm"
 		even
 CNZ_128x128_Kos:
-		binclude "Levels/CNZ/Chunks/Primary.bin"
+		binclude "Levels/CNZ/Chunks/Primary.kos"
 		even
 FBZ1_16x16_Kos:
 FBZ1_8x8_KosM:
@@ -119497,67 +119497,67 @@ FBZ2_16x16_Kos:
 FBZ2_8x8_KosM:
 FBZ2_128x128_Kos:
 ICZ_16x16_Primary_Kos:
-		binclude "Levels/ICZ/Blocks/Primary.bin"
+		binclude "Levels/ICZ/Blocks/Primary.kos"
 		even
 ICZ_8x8_Primary_KosM:
-		binclude "Levels/ICZ/Tiles/Primary.bin"
+		binclude "Levels/ICZ/Tiles/Primary.kosm"
 		even
 ICZ_128x128_Primary_Kos:
-		binclude "Levels/ICZ/Chunks/Primary.bin"
+		binclude "Levels/ICZ/Chunks/Primary.kos"
 		even
 ICZ1_16x16_Secondary_Kos:
-		binclude "Levels/ICZ/Blocks/Act 1 Secondary.bin"
+		binclude "Levels/ICZ/Blocks/Act 1 Secondary.kos"
 		even
 ICZ1_8x8_Secondary_KosM:
-		binclude "Levels/ICZ/Tiles/Act 1 Secondary.bin"
+		binclude "Levels/ICZ/Tiles/Act 1 Secondary.kosm"
 		even
 ICZ1_128x128_Secondary_Kos:
-		binclude "Levels/ICZ/Chunks/Act 1 Secondary.bin"
+		binclude "Levels/ICZ/Chunks/Act 1 Secondary.kos"
 		even
 ICZ2_16x16_Secondary_Kos:
-		binclude "Levels/ICZ/Blocks/Act 2 Secondary.bin"
+		binclude "Levels/ICZ/Blocks/Act 2 Secondary.kos"
 		even
 ICZ2_8x8_Secondary_KosM:
-		binclude "Levels/ICZ/Tiles/Act 2 Secondary.bin"
+		binclude "Levels/ICZ/Tiles/Act 2 Secondary.kosm"
 		even
 ICZ2_128x128_Secondary_Kos:
-		binclude "Levels/ICZ/Chunks/Act 2 Secondary.bin"
+		binclude "Levels/ICZ/Chunks/Act 2 Secondary.kos"
 		even
 LBZ_16x16_Primary_Kos:
-		binclude "Levels/LBZ/Blocks/Primary.bin"
+		binclude "Levels/LBZ/Blocks/Primary.kos"
 		even
 LBZ1_16x16_Secondary_Kos:
-		binclude "Levels/LBZ/Blocks/Act 1 Secondary.bin"
+		binclude "Levels/LBZ/Blocks/Act 1 Secondary.kos"
 		even
 LBZ_8x8_Primary_KosM:
-		binclude "Levels/LBZ/Tiles/Primary.bin"
+		binclude "Levels/LBZ/Tiles/Primary.kosm"
 		even
 LBZ1_8x8_Secondary_KosM:
-		binclude "Levels/LBZ/Tiles/Act 1 Secondary.bin"
+		binclude "Levels/LBZ/Tiles/Act 1 Secondary.kosm"
 		even
 LBZ1_Unknown_Kos:
-		binclude "Levels/LBZ/Chunks/Unknown Unused.bin"
+		binclude "Levels/LBZ/Chunks/Unknown Unused.kos"
 		even
 LBZ1_128x128_Kos:
-		binclude "Levels/LBZ/Chunks/Act 1.bin"
+		binclude "Levels/LBZ/Chunks/Act 1.kos"
 		even
 LBZ2_16x16_Secondary_Kos:
-		binclude "Levels/LBZ/Blocks/Act 2 Secondary.bin"
+		binclude "Levels/LBZ/Blocks/Act 2 Secondary.kos"
 		even
 LBZ2_16x16_DeathEgg_Kos:
-		binclude "Levels/LBZ/Blocks/Act 2 Death Egg.bin"
+		binclude "Levels/LBZ/Blocks/Act 2 Death Egg.kos"
 		even
 LBZ2_8x8_Secondary_KosM:
-		binclude "Levels/LBZ/Tiles/Act 2 Secondary.bin"
+		binclude "Levels/LBZ/Tiles/Act 2 Secondary.kosm"
 		even
 LBZ2_8x8_DeathEgg_KosM:
-		binclude "Levels/LBZ/Tiles/Act 2 Death Egg.bin"
+		binclude "Levels/LBZ/Tiles/Act 2 Death Egg.kosm"
 		even
 LBZ2_128x128_Kos:
-		binclude "Levels/LBZ/Chunks/Act 2.bin"
+		binclude "Levels/LBZ/Chunks/Act 2.kos"
 		even
 LBZ2_128x128_DeathEgg_Kos:
-		binclude "Levels/LBZ/Chunks/Act 2 Death Egg.bin"
+		binclude "Levels/LBZ/Chunks/Act 2 Death Egg.kos"
 		even
 MHZ_16x16_Kos:
 ArtKosM_MHZ:
@@ -119566,58 +119566,58 @@ LRZ_16x16_Kos:
 ArtKosM_LRZ:
 LRZ_128x128_Kos:
 ALZ_16x16_Kos:
-		binclude "Levels/ALZ/Blocks/Primary.bin"
+		binclude "Levels/ALZ/Blocks/Primary.kos"
 		even
 ALZ_8x8_KosM:
-		binclude "Levels/ALZ/Tiles/Primary.bin"
+		binclude "Levels/ALZ/Tiles/Primary.kosm"
 		even
 ALZ_128x128_Kos:
-		binclude "Levels/ALZ/Chunks/Primary.bin"
+		binclude "Levels/ALZ/Chunks/Primary.kos"
 		even
 BPZ_16x16_Kos:
-		binclude "Levels/BPZ/Blocks/Primary.bin"
+		binclude "Levels/BPZ/Blocks/Primary.kos"
 		even
 BPZ_8x8_KosM:
-		binclude "Levels/BPZ/Tiles/Primary.bin"
+		binclude "Levels/BPZ/Tiles/Primary.kosm"
 		even
 BPZ_128x128_Kos:
-		binclude "Levels/BPZ/Chunks/Primary.bin"
+		binclude "Levels/BPZ/Chunks/Primary.kos"
 		even
 DPZ_16x16_Kos:
-		binclude "Levels/DPZ/Blocks/Primary.bin"
+		binclude "Levels/DPZ/Blocks/Primary.kos"
 		even
 DPZ_8x8_KosM:
-		binclude "Levels/DPZ/Tiles/Primary.bin"
+		binclude "Levels/DPZ/Tiles/Primary.kosm"
 		even
 DPZ_128x128_Kos:
-		binclude "Levels/DPZ/Chunks/Primary.bin"
+		binclude "Levels/DPZ/Chunks/Primary.kos"
 		even
 CGZ_16x16_Kos:
-		binclude "Levels/CGZ/Blocks/Primary.bin"
+		binclude "Levels/CGZ/Blocks/Primary.kos"
 		even
 CGZ_8x8_KosM:
-		binclude "Levels/CGZ/Tiles/Primary.bin"
+		binclude "Levels/CGZ/Tiles/Primary.kosm"
 		even
 CGZ_128x128_Kos:
-		binclude "Levels/CGZ/Chunks/Primary.bin"
+		binclude "Levels/CGZ/Chunks/Primary.kos"
 		even
 EMZ_16x16_Kos:
-		binclude "Levels/EMZ/Blocks/Primary.bin"
+		binclude "Levels/EMZ/Blocks/Primary.kos"
 		even
 EMZ_8x8_KosM:
-		binclude "Levels/EMZ/Tiles/Primary.bin"
+		binclude "Levels/EMZ/Tiles/Primary.kosm"
 		even
 EMZ_128x128_Kos:
-		binclude "Levels/EMZ/Chunks/Primary.bin"
+		binclude "Levels/EMZ/Chunks/Primary.kos"
 		even
 Gumball_16x16_Kos:
-		binclude "Levels/Gumball/Blocks/Primary.bin"
+		binclude "Levels/Gumball/Blocks/Primary.kos"
 		even
 Gumball_8x8_KosM:
-		binclude "Levels/Gumball/Tiles/Gumball.bin"
+		binclude "Levels/Gumball/Tiles/Gumball.kosm"
 		even
 Gumball_128x128_Kos:
-		binclude "Levels/Gumball/Chunks/Primary.bin"
+		binclude "Levels/Gumball/Chunks/Primary.kos"
 		even
 Pachinko_16x16_Kos:
 ArtKosM_Pachinko:

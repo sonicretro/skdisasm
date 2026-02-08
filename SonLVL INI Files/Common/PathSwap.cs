@@ -16,7 +16,7 @@ namespace S3KObjectDefinitions.SOZ
 
 		public override void Init(ObjectData data)
 		{
-			var art = LevelData.ReadFile("../General/Sprites/Ring/RingHUDText.bin", CompressionType.Nemesis);
+			var art = LevelData.ReadFile("../General/Sprites/Ring/RingHUDText.nem", CompressionType.Nemesis);
 			var map = LevelData.ASMToBin(
 				"../General/Sprites/Level Misc/Map - Path Swap.asm", LevelData.Game.MappingsVersion);
 
@@ -42,7 +42,7 @@ namespace S3KObjectDefinitions.Common
 		public override void Init(ObjectData data)
 		{
 			List<byte> tmpartfile = new List<byte>();
-			tmpartfile.AddRange(ObjectHelper.OpenArtFile("Common/pathswapper-art.bin", CompressionType.Nemesis));
+			tmpartfile.AddRange(ObjectHelper.OpenArtFile("Common/pathswapper-art.nem", CompressionType.Nemesis));
 			byte[] artfile1 = tmpartfile.ToArray();
 			img = ObjectHelper.MapASMToBmp(artfile1, "../General/Sprites/Level Misc/Map - Path Swap.asm", 0, 0);
 			img.InvertPriority();

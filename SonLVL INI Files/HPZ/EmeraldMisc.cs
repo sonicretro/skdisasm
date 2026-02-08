@@ -43,7 +43,7 @@ namespace S3KObjectDefinitions.HPZMini
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);
 
 			sprite = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../General/Sprites/Teleporter/Teleporter.bin", CompressionType.KosinskiM),
+				"../General/Sprites/Teleporter/Teleporter.kosm", CompressionType.KosinskiM),
 				"../General/Sprites/Teleporter/Map - Teleporter.asm", 10, 4);
 
 			var emeralds = BuildEmeraldSprites(7);
@@ -107,7 +107,7 @@ namespace S3KObjectDefinitions.HPZ
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);
 
 			sprite = BuildFlippedSprites(ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../Levels/HPZ/Nemesis Art/Emerald Misc Art.bin", CompressionType.Nemesis),
+				"../Levels/HPZ/Nemesis Art/Emerald Misc Art.nem", CompressionType.Nemesis),
 				"../Levels/HPZ/Misc Object Data/Map - Emerald Misc Art.asm", 11, startpal));
 		}
 
@@ -224,7 +224,7 @@ namespace S3KObjectDefinitions.HPZ
 		{
 			var version = LevelData.Game.MappingsVersion;
 			var art = LevelData.ReadFile(
-				"../Levels/HPZ/Nemesis Art/Emerald Misc Art.bin", CompressionType.Nemesis);
+				"../Levels/HPZ/Nemesis Art/Emerald Misc Art.nem", CompressionType.Nemesis);
 			var map = LevelData.ASMToBin(
 				"../Levels/HPZ/Misc Object Data/Map - Emerald Misc Art.asm", version);
 

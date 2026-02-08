@@ -2,11 +2,11 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Dissolving Sand Bar" Depth="4">
   <Images>
     <ImageFromMappings id="short">
-      <ArtFile filename="../Levels/DPZ/Nemesis Art/Misc Art.bin" />
+      <ArtFile filename="../Levels/DPZ/Nemesis Art/Misc Art.nem" />
       <MapFile type="ASM" filename="../Levels/DPZ/Misc Object Data/Map - Dissolving Sand Bar.asm" label="word_36110" startpal="2" />
     </ImageFromMappings>
     <ImageFromMappings id="long">
-      <ArtFile filename="../Levels/DPZ/Nemesis Art/Misc Art.bin" />
+      <ArtFile filename="../Levels/DPZ/Nemesis Art/Misc Art.nem" />
       <MapFile type="ASM" filename="../Levels/DPZ/Misc Object Data/Map - Dissolving Sand Bar.asm" label="word_3619C" startpal="2" />
     </ImageFromMappings>
   </Images>

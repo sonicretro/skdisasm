@@ -69,7 +69,7 @@ namespace S3KObjectDefinitions.DDZ
 		{
 			var version = LevelData.Game.MappingsVersion;
 			var art = LevelData.ReadFile(
-				"../Levels/DDZ/KosinskiM Art/Misc Art.bin", CompressionType.KosinskiM);
+				"../Levels/DDZ/KosinskiM Art/Misc Art.kosm", CompressionType.KosinskiM);
 			var map = LevelData.ASMToBin(
 				"../Levels/DDZ/Misc Object Data/Map - Missile Asteroid.asm", version);
 

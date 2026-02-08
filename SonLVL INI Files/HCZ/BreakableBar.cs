@@ -55,7 +55,7 @@ namespace S3KObjectDefinitions.HCZ
 		public override void Init(ObjectData data)
 		{
 			var version = LevelData.Game.MappingsVersion;
-			var art = LevelData.ReadFile("../Levels/HCZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis);
+			var art = LevelData.ReadFile("../Levels/HCZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis);
 			var map = LevelData.ASMToBin("../Levels/HCZ/Misc Object Data/Map - Breakable Bar.asm", version);
 			var unknownSprite = BuildFlippedSprites(ObjectHelper.UnknownObject);
 

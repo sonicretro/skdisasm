@@ -115,7 +115,7 @@ namespace S3KObjectDefinitions.CNZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/CNZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis)), -1952);
+				"../Levels/CNZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis)), -1952);
 
 			properties = new PropertySpec[2];
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);

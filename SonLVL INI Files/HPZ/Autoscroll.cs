@@ -63,7 +63,7 @@ namespace S3KObjectDefinitions.HPZ
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);
 			unknownSprite = BuildFlippedSprites(ObjectHelper.UnknownObject);
 			sprite = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../Levels/LRZ/KosinskiM Art/Autoscroll.bin", CompressionType.KosinskiM),
+				"../Levels/LRZ/KosinskiM Art/Autoscroll.kosm", CompressionType.KosinskiM),
 				"../Levels/LRZ/Misc Object Data/Map - Act 3 Autoscroll.asm", 0, 1);
 		}
 

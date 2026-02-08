@@ -2,7 +2,7 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Curled Vine" Image="image" Depth="5">
   <Images>
     <ImageFromMappings id="image">
-      <ArtFile filename="../Levels/MHZ/Nemesis Art/Misc Art.bin" offset="-384" />
+      <ArtFile filename="../Levels/MHZ/Nemesis Art/Misc Art.nem" offset="-384" />
       <MapFile type="ASM" filename="../Levels/MHZ/Misc Object Data/Map - Curled Vine.asm" startpal="2" />
     </ImageFromMappings>
   </Images>

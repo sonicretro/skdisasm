@@ -80,7 +80,7 @@ namespace S3KObjectDefinitions.LBZ
 
 		public override void Init(ObjectData data)
 		{
-			var art = LevelData.ReadFile("../General/Sprites/Ribot/Ribot.bin", CompressionType.KosinskiM);
+			var art = LevelData.ReadFile("../General/Sprites/Ribot/Ribot.kosm", CompressionType.KosinskiM);
 			var map = LevelData.ASMToBin("../General/Sprites/Ribot/Map - Ribot.asm", LevelData.Game.MappingsVersion);
 			sprites = new Sprite[6];
 

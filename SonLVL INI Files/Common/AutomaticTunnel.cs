@@ -52,7 +52,7 @@ namespace S3KObjectDefinitions.LBZ
 			base.Init(data);
 
 			var art = LevelData.ReadFile(
-				"../Levels/LBZ/Nemesis Art/Tube Transport.bin", CompressionType.Nemesis);
+				"../Levels/LBZ/Nemesis Art/Tube Transport.nem", CompressionType.Nemesis);
 			var map =LevelData.ASMToBin(
 				"../Levels/LBZ/Misc Object Data/Map - Tube Elevator.asm", LevelData.Game.MappingsVersion);
 
@@ -115,7 +115,7 @@ namespace S3KObjectDefinitions.LBZ
 
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/LBZ/Nemesis Art/Act 2 Misc Art.bin", CompressionType.Nemesis)), 128);
+				"../Levels/LBZ/Nemesis Art/Act 2 Misc Art.nem", CompressionType.Nemesis)), 128);
 			sprite = ObjectHelper.MapASMToBmp(indexer.ToArray(),
 				"../Levels/LBZ/Misc Object Data/Map - PipePlug.asm", 7, 2);
 

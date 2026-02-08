@@ -71,10 +71,10 @@ namespace S3KObjectDefinitions.DEZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			var springs = new List<byte>(LevelData.ReadFile(
-				"../General/Sprites/Level Misc/SpikesSprings.bin", CompressionType.Nemesis));
+				"../General/Sprites/Level Misc/SpikesSprings.nem", CompressionType.Nemesis));
 			indexer.AddFile(springs, 11328);
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/DEZ/Nemesis Art/Act 2 Extra Art.bin", CompressionType.Nemesis)), 0);
+				"../Levels/DEZ/Nemesis Art/Act 2 Extra Art.nem", CompressionType.Nemesis)), 0);
 
 			properties = new PropertySpec[1];
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);

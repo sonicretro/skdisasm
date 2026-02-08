@@ -2,15 +2,15 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Monkey Dude" Image="main" Depth="5">
   <Images>
     <ImageFromMappings id="main">
-      <ArtFile filename="../General/Sprites/Monkey Dude/Monkey Dude.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Monkey Dude/Monkey Dude.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Monkey Dude/Map - Monkey Dude.asm" frame="0" startpal="1" />
     </ImageFromMappings>
     <ImageFromMappings id="arm">
-      <ArtFile filename="../General/Sprites/Monkey Dude/Monkey Dude.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Monkey Dude/Monkey Dude.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Monkey Dude/Map - Monkey Dude.asm" frame="3" startpal="1" />
     </ImageFromMappings>
     <ImageFromMappings id="coconut">
-      <ArtFile filename="../General/Sprites/Monkey Dude/Monkey Dude.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Monkey Dude/Monkey Dude.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Monkey Dude/Map - Monkey Dude.asm" frame="6" />
     </ImageFromMappings>
   </Images>

@@ -30,7 +30,7 @@ namespace S3KObjectDefinitions.CNZ
 		public override void Init(ObjectData data)
 		{
 			BuildSpritesProperties("../Levels/CNZ/Misc Object Data/Map - Cork Floor.asm",
-				"../Levels/CNZ/Nemesis Art/Platform.bin", 0, 2);
+				"../Levels/CNZ/Nemesis Art/Platform.nem", 0, 2);
 		}
 	}
 }
@@ -42,7 +42,7 @@ namespace S3KObjectDefinitions.FBZ
 		public override void Init(ObjectData data)
 		{
 			BuildSpritesProperties("../Levels/FBZ/Misc Object Data/Map - Cork Floor.asm",
-				"../Levels/FBZ/Nemesis Art/Misc Art 1.bin", -6176, 1);
+				"../Levels/FBZ/Nemesis Art/Misc Art 1.nem", -6176, 1);
 		}
 	}
 }

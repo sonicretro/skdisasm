@@ -80,7 +80,7 @@ namespace S3KObjectDefinitions.DEZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/DEZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis)), -9824);
+				"../Levels/DEZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis)), -9824);
 
 			properties = new PropertySpec[3];
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);
