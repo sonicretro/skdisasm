@@ -6081,7 +6081,7 @@ loc_4C78:
 loc_4CAC:
 		move.w	#0,(a5)
 		lea	$80(a5),a5
-		cmpa.l	#Player_1,a5
+		cmpa.l	#Sprite_table_input_end,a5
 		blo.s	loc_4CAC
 
 loc_4CBC:
@@ -29823,7 +29823,7 @@ Render_Sprites_NextLevel:
 
 loc_1946A:
 		lea	$80(a5),a5	; load next priority level
-		cmpa.l	#Player_1,a5
+		cmpa.l	#Sprite_table_input_end,a5
 		blo.w	loc_193B8
 		move.w	d7,d6
 		bmi.s	loc_19486
@@ -30397,7 +30397,7 @@ loc_19924:
 
 loc_1992A:
 		lea	$80(a5),a5
-		cmpa.l	#Player_1,a5
+		cmpa.l	#Sprite_table_input_end,a5
 		blo.w	loc_1987E
 		tst.w	d7
 		bmi.s	loc_19946
@@ -30501,7 +30501,7 @@ loc_19A24:
 
 loc_19A2C:
 		lea	$80(a5),a5
-		cmpa.l	#Player_1,a5
+		cmpa.l	#Sprite_table_input_end,a5
 		blo.w	loc_19980
 		tst.w	d7
 		bmi.s	loc_19A48
