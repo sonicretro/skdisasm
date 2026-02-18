@@ -75,9 +75,9 @@ namespace S3KObjectDefinitions.LBZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/LBZ/Nemesis Art/Act 2 Misc Art.bin", CompressionType.Nemesis)), 0);
+				"../Levels/LBZ/Nemesis Art/Act 2 Misc Art.nem", CompressionType.Nemesis)), 0);
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/LBZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis)), 6944);
+				"../Levels/LBZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis)), 6944);
 
 			var version = LevelData.Game.MappingsVersion;
 			var art = indexer.ToArray();

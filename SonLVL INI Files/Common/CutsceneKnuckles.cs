@@ -21,7 +21,7 @@ namespace S3KObjectDefinitions.LBZ
 	{
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesSubtypes(7, true, "../Levels/LBZ/Tiles/Act 2 Death Egg 2.bin");
+			BuildSpritesSubtypes(7, true, "../Levels/LBZ/Tiles/Act 2 Death Egg 2.kosm");
 		}
 	}
 
@@ -29,7 +29,7 @@ namespace S3KObjectDefinitions.LBZ
 	{
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesSubtypes(7, false, "../Levels/LBZ/Tiles/Act 2 Death Egg 2.bin");
+			BuildSpritesSubtypes(7, false, "../Levels/LBZ/Tiles/Act 2 Death Egg 2.kosm");
 		}
 	}
 }
@@ -107,7 +107,7 @@ namespace S3KObjectDefinitions.Common
 			BuildSpritesSubtypes(7, false);
 		}
 
-		protected void BuildSpritesSubtypes(int startpal, bool s3, string girderart = "../General/Sprites/SS Entry/Badnik Explosion.bin")
+		protected void BuildSpritesSubtypes(int startpal, bool s3, string girderart = "../General/Sprites/SS Entry/Badnik Explosion.nem")
 		{
 			var bytes = new byte[s3 ? 7 : 13];
 			for (var i = 0; i < bytes.Length; i++)
@@ -141,7 +141,7 @@ namespace S3KObjectDefinitions.Common
 				foreach (var sprite in sprites[3]) sprite.Offset(158, 0);
 
 				extraSprites[3] = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-					"../General/Sprites/Buttons/Gray Button.bin", CompressionType.Nemesis),
+					"../General/Sprites/Buttons/Gray Button.nem", CompressionType.Nemesis),
 					"../General/Sprites/Buttons/Map - Button.asm", 2, 0, true);
 				extraSprites[3].Offset(0, 12);
 			}
@@ -176,7 +176,7 @@ namespace S3KObjectDefinitions.Common
 				"../General/Sprites/Knuckles/Cutscene/DPLC - MHZ Press.asm", 3, startpal, true), false);
 
 			extraSprites[9] = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../General/Sprites/Knuckles/Cutscene/Knuckles MHZ Switch.bin", CompressionType.KosinskiM),
+				"../General/Sprites/Knuckles/Cutscene/Knuckles MHZ Switch.kosm", CompressionType.KosinskiM),
 				"../General/Sprites/Knuckles/Cutscene/Map - Act 2 Knuckles Switch.asm", 0, startpal, true);
 			extraSprites[9].Offset(-8, 0);
 

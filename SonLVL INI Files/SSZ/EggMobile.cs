@@ -60,7 +60,7 @@ namespace S3KObjectDefinitions.SSZ
 		{
 			var version = LevelData.Game.MappingsVersion;
 			var art = LevelData.ReadFile(
-				"../General/Sprites/Robotnik/Robotnik Ship Crane.bin", CompressionType.KosinskiM);
+				"../General/Sprites/Robotnik/Robotnik Ship Crane.kosm", CompressionType.KosinskiM);
 			var map = LevelData.ASMToBin(
 				"../General/Sprites/Robotnik/Map - Robotnik Ship Crane.asm", version);
 
@@ -68,11 +68,11 @@ namespace S3KObjectDefinitions.SSZ
 			var claw1 = ObjectHelper.MapToBmp(art, map, 1, 0, true);
 
 			image = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../General/Sprites/Robotnik/Ship.bin", CompressionType.Nemesis),
+				"../General/Sprites/Robotnik/Ship.nem", CompressionType.Nemesis),
 				"../General/Sprites/Robotnik/Map - Robotnik Ship.asm", 10, 0, true);
 
 			var head = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../General/Sprites/Egg Robo/Egg Robo Head.bin", CompressionType.KosinskiM),
+				"../General/Sprites/Egg Robo/Egg Robo Head.kosm", CompressionType.KosinskiM),
 				"../General/Sprites/Egg Robo/Map - Egg Robo Head.asm", 0, 0, true);
 
 			var mecha = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
@@ -80,7 +80,7 @@ namespace S3KObjectDefinitions.SSZ
 				"../General/Sprites/Mecha Sonic/Map - Mecha Sonic.asm", 0, 1, true);
 
 			var emerald = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../General/Sprites/SSZ Master Emerald/Master Emerald.bin", CompressionType.KosinskiM),
+				"../General/Sprites/SSZ Master Emerald/Master Emerald.kosm", CompressionType.KosinskiM),
 				"../General/Sprites/SSZ Master Emerald/Map - Master Emerald.asm", 0, 0, true);
 
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);

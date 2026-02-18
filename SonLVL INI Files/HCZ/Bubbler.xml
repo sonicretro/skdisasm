@@ -2,7 +2,7 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Bubbler" Image="spawner" Depth="1" DefaultSubtype="80">
   <Images>
     <ImageFromMappings id="spawner">
-      <ArtFile filename="../General/Sprites/Bubbles/Bubbles.bin" />
+      <ArtFile filename="../General/Sprites/Bubbles/Bubbles.nem" />
       <MapFile type="ASM" filename="../General/Sprites/Bubbles/Map - Bubbler.asm" label="word_2FD82" />
     </ImageFromMappings>
   </Images>

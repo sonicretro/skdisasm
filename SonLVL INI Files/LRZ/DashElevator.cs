@@ -74,7 +74,7 @@ namespace S3KObjectDefinitions.LRZ
 			properties = new PropertySpec[2];
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);
 			sprite = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../Levels/LRZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis),
+				"../Levels/LRZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis),
 				"../Levels/LRZ/Misc Object Data/Map - Dash Elevator.asm", 0, 0);
 
 			properties[0] = new PropertySpec("Distance", typeof(int), "Extended",

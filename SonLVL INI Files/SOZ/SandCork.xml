@@ -2,7 +2,7 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Sand Cork" Image="img" Depth="5">
   <Images>
     <ImageFromMappings id="img">
-      <ArtFile filename="../Levels/SOZ/Nemesis Art/Act 2 Extra Art.bin" offset="-448" />
+      <ArtFile filename="../Levels/SOZ/Nemesis Art/Act 2 Extra Art.nem" offset="-448" />
       <MapFile type="ASM" filename="../Levels/SOZ/Misc Object Data/Map - Sand Cork.asm" startpal="2" />
     </ImageFromMappings>
   </Images>

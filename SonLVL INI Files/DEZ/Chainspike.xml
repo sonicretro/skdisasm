@@ -2,11 +2,11 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Chainspike" Depth="5">
   <Images>
     <ImageFromMappings id="main" priority="true">
-      <ArtFile filename="../General/Sprites/Chainspike/Chainspike.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Chainspike/Chainspike.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Chainspike/Map - Chainspike.asm" frame="0" startpal="1" />
     </ImageFromMappings>
     <ImageFromMappings id="spike" priority="true">
-      <ArtFile filename="../General/Sprites/Chainspike/Chainspike.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Chainspike/Chainspike.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Chainspike/Map - Chainspike.asm" frame="2" startpal="1" />
     </ImageFromMappings>
   </Images>

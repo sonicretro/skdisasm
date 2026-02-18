@@ -8,18 +8,18 @@ Object Palette: objdef\skobj1.pcx
 
 8x8 Compression:      5
 Num 8x8 Pages:        1
-8x8 Tiles Page 0:     ..\Levels\DEZ\Tiles\Final Boss Act.bin
+8x8 Tiles Page 0:     ..\Levels\DEZ\Tiles\Final Boss Act.kosm
 
 16x16 Compression:    1
 Num 16x16 Pages:      1
 Page0 8x8 Page:       0
-16x16 Tiles Page 0:   ..\Levels\DEZ\Blocks\Act 3.bin
+16x16 Tiles Page 0:   ..\Levels\DEZ\Blocks\Act 3.kos
 
 Metatile Size:        128
 128x128 Compression:  1
 Num 128x128 Pages:    1
 Page0 16x16 Page:     0
-128x128 Tiles Page 0: ..\Levels\DEZ\Chunks\Act 3.bin
+128x128 Tiles Page 0: ..\Levels\DEZ\Chunks\Act 3.kos
 
 Layout Format:        2
 Layout Compression:   0

@@ -2,24 +2,24 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Balloon" Depth="5">
   <Images>
     <ImageFromMappings id="player">
-      <ArtFile filename="../Levels/CNZ/Nemesis Art/Misc Art.bin" />
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/Misc Art.nem" />
       <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - Balloon.asm" frame="0" />
     </ImageFromMappings>
     <ImageFromMappings id="blue">
-      <ArtFile filename="../Levels/CNZ/Nemesis Art/Misc Art.bin" />
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/Misc Art.nem" />
       <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - Balloon.asm" frame="5" />
     </ImageFromMappings>
     <ImageFromMappings id="yellow">
-      <ArtFile filename="../Levels/CNZ/Nemesis Art/Misc Art.bin" />
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/Misc Art.nem" />
       <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - Balloon.asm" frame="10" />
     </ImageFromMappings>
     <ImageFromMappings id="black">
-      <ArtFile filename="../Levels/CNZ/Nemesis Art/Misc Art.bin" />
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/Misc Art.nem" />
       <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - Balloon.asm" frame="15" />
     </ImageFromMappings>
     <ImageFromMappings id="red">
-      <ArtFile filename="../Levels/CNZ/Nemesis Art/Misc Art.bin" />
-      <ArtFile filename="../Levels/CNZ/KosinskiM Art/Balloon.bin" compression="KosinskiM" offset="17504" />
+      <ArtFile filename="../Levels/CNZ/Nemesis Art/Misc Art.nem" />
+      <ArtFile filename="../Levels/CNZ/KosinskiM Art/Balloon.kosm" compression="KosinskiM" offset="17504" />
       <MapFile type="ASM" filename="../Levels/CNZ/Misc Object Data/Map - Balloon.asm" frame="20" />
     </ImageFromMappings>
   </Images>

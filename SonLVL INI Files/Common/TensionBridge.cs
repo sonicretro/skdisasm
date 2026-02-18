@@ -11,7 +11,7 @@ namespace S3KObjectDefinitions.HCZ
 		public override void Init(ObjectData data)
 		{
 			BuildSpritesProperties(
-				"../Levels/HCZ/Nemesis Art/Act 2 Block Platform.bin", -512,
+				"../Levels/HCZ/Nemesis Art/Act 2 Block Platform.nem", -512,
 				"../Levels/Misc/Map - Tension Bridge.asm", 2, false, null, null, 0);
 		}
 	}
@@ -24,7 +24,7 @@ namespace S3KObjectDefinitions.ICZ
 		public override void Init(ObjectData data)
 		{
 			BuildSpritesProperties(
-				"../Levels/ICZ/Nemesis Art/Misc Art 1.bin", 0,
+				"../Levels/ICZ/Nemesis Art/Misc Art 1.nem", 0,
 				"../Levels/ICZ/Misc Object Data/Map - ICZ Tension Bridge.asm", 2, false,
 				"Angled", "If set, the bridge segments will be angled diagonally.", 3);
 		}

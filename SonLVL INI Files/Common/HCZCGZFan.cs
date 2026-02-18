@@ -44,7 +44,7 @@ namespace S3KObjectDefinitions.HCZ
 		public override void Init(ObjectData data)
 		{
 			var tiles = new List<byte>(
-				LevelData.ReadFile("../Levels/HCZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis));
+				LevelData.ReadFile("../Levels/HCZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis));
 
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(tiles, -2080);
@@ -95,7 +95,7 @@ namespace S3KObjectDefinitions.CGZ
 
 		public override void Init(ObjectData data)
 		{
-			var art = LevelData.ReadFile("../Levels/CGZ/Nemesis Art/Platform.bin", CompressionType.Nemesis);
+			var art = LevelData.ReadFile("../Levels/CGZ/Nemesis Art/Platform.nem", CompressionType.Nemesis);
 			BuildSpritesProperties(art, "../Levels/CGZ/Misc Object Data/Map - Fan.asm", 3);
 		}
 	}

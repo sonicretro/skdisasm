@@ -2,11 +2,11 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Turbo Spiker" Image="main" Depth="5">
   <Images>
     <ImageFromMappings id="main">
-      <ArtFile filename="../General/Sprites/Turbo Spiker/Turbo Spiker.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Turbo Spiker/Turbo Spiker.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Turbo Spiker/Map - Turbo Spiker.asm" frame="0" startpal="1" />
     </ImageFromMappings>
     <ImageFromMappings id="shell">
-      <ArtFile filename="../General/Sprites/Turbo Spiker/Turbo Spiker.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Turbo Spiker/Turbo Spiker.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Turbo Spiker/Map - Turbo Spiker.asm" frame="3" startpal="1" />
     </ImageFromMappings>
     <ImageFromMappings id="waterfall">

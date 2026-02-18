@@ -58,7 +58,7 @@ namespace S3KObjectDefinitions.FBZ
 		public override void Init(ObjectData data)
 		{
 			var version = LevelData.Game.MappingsVersion;
-			var art = LevelData.ReadFile("../Levels/FBZ/Nemesis Art/Act 2 Subboss.bin", CompressionType.Nemesis);
+			var art = LevelData.ReadFile("../Levels/FBZ/Nemesis Art/Act 2 Subboss.nem", CompressionType.Nemesis);
 			var map = LevelData.ASMToBin("../Levels/FBZ/Misc Object Data/Map - Act 2 Subboss.asm", version);
 
 			sprite = BuildFlippedSprites(ObjectHelper.MapToBmp(art, map, 0, 5, true));
@@ -78,7 +78,7 @@ namespace S3KObjectDefinitions.FBZ
 			var beam2 = new Sprite(beam1, true, false);
 
 			var eggman = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../General/Sprites/Robotnik/FBZ Robotnik Stand.bin", CompressionType.Nemesis),
+				"../General/Sprites/Robotnik/FBZ Robotnik Stand.nem", CompressionType.Nemesis),
 				"../General/Sprites/Robotnik/Map - FBZ Robotnik Stand.asm", 0, 0, true);
 			eggman.Offset(216, 116);
 

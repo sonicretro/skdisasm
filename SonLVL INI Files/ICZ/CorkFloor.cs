@@ -74,7 +74,7 @@ namespace S3KObjectDefinitions.ICZ
 				sprites[index] = BuildFlippedSprites(ObjectHelper.MapToBmp(art, map, index * 2, 2));
 
 			sprites[5] = BuildFlippedSprites(ObjectHelper.MapToBmp(LevelData.ReadFile(
-				"../Levels/ICZ/Nemesis Art/Misc Art 1.bin", CompressionType.Nemesis), map, 10, 2));
+				"../Levels/ICZ/Nemesis Art/Misc Art 1.nem", CompressionType.Nemesis), map, 10, 2));
 			sprites[6] = BuildFlippedSprites(ObjectHelper.UnknownObject);
 			sprites[7] = sprites[6];
 		}

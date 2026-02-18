@@ -2,15 +2,15 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Swing Vine" Depth="4">
   <Images>
     <ImageFromMappings id="rope">
-      <ArtFile filename="../Levels/MHZ/Nemesis Art/Misc Art.bin" offset="-8640" />
+      <ArtFile filename="../Levels/MHZ/Nemesis Art/Misc Art.nem" offset="-8640" />
       <MapFile type="ASM" filename="../Levels/AIZ/Misc Object Data/Map - (&amp;MHZ) Ride Vine.asm" />
     </ImageFromMappings>
     <ImageFromMappings id="handle">
-      <ArtFile filename="../Levels/MHZ/Nemesis Art/Misc Art.bin" offset="-8640" />
+      <ArtFile filename="../Levels/MHZ/Nemesis Art/Misc Art.nem" offset="-8640" />
       <MapFile type="ASM" filename="../Levels/AIZ/Misc Object Data/Map - (&amp;MHZ) Ride Vine.asm" frame="34" />
     </ImageFromMappings>
     <ImageFromMappings id="axle">
-      <ArtFile filename="../Levels/MHZ/Nemesis Art/Misc Art.bin" offset="-8640" />
+      <ArtFile filename="../Levels/MHZ/Nemesis Art/Misc Art.nem" offset="-8640" />
       <MapFile type="ASM" filename="../Levels/AIZ/Misc Object Data/Map - (&amp;MHZ) Ride Vine.asm" frame="35" />
     </ImageFromMappings>
   </Images>

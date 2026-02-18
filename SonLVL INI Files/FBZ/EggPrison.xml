@@ -6,19 +6,19 @@
       <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Egg Capsule.asm" frame="0" />
     </ImageFromMappings>
     <ImageFromMappings id="button">
-      <ArtFile filename="../Levels/FBZ/Nemesis Art/Egg Capsule.bin" offset="27552" />
+      <ArtFile filename="../Levels/FBZ/Nemesis Art/Egg Capsule.nem" offset="27552" />
       <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Egg Capsule.asm" frame="5" />
     </ImageFromMappings>
     <ImageFromMappings id="animal">
-      <ArtFile filename="../General/Sprites/Animals/Squirrel.bin" />
+      <ArtFile filename="../General/Sprites/Animals/Squirrel.nem" />
       <MapFile type="ASM" filename="../General/Sprites/Animals/Map - Animals 3.asm" />
     </ImageFromMappings>
     <ImageFromMappings id="ring">
-      <ArtFile filename="../General/Sprites/Ring/RingHUDText.bin" />
+      <ArtFile filename="../General/Sprites/Ring/RingHUDText.nem" />
       <MapFile type="ASM" filename="../General/Sprites/Ring/Map - Ring.asm" frame="1" startpal="1" />
     </ImageFromMappings>
     <ImageFromMappings id="enemy">
-      <ArtFile filename="../General/Sprites/Technosqueek/Technosqueek.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Technosqueek/Technosqueek.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Technosqueek/Map - Technosqueek.asm" startpal="1" />
     </ImageFromMappings>
     <ImageFromMappings id="ghost">

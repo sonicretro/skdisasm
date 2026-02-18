@@ -111,7 +111,7 @@ namespace S3KObjectDefinitions.SOZ
 
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/SOZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis)), -4480);
+				"../Levels/SOZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis)), -4480);
 
 			sprite = BuildFlippedSprites(ObjectHelper.MapToBmp(indexer.ToArray(), map, 0, 2));
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);

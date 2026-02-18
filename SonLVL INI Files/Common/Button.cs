@@ -10,7 +10,7 @@ namespace S3KObjectDefinitions.HCZ
 	{
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesProperties("../Levels/HCZ/Nemesis Art/Button.bin",
+			BuildSpritesProperties("../Levels/HCZ/Nemesis Art/Button.nem",
 				"../General/Sprites/Buttons/Map - Button 2.asm", null, 1);
 		}
 	}
@@ -24,7 +24,7 @@ namespace S3KObjectDefinitions.CNZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/CNZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis)), -6432);
+				"../Levels/CNZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis)), -6432);
 
 			BuildSpritesProperties(indexer.ToArray(),
 				"../Levels/CNZ/Misc Object Data/Map - Button.asm", null, 2);
@@ -43,7 +43,7 @@ namespace S3KObjectDefinitions.LRZ
 
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesProperties("../Levels/LRZ/Nemesis Art/Misc Art.bin",
+			BuildSpritesProperties("../Levels/LRZ/Nemesis Art/Misc Art.nem",
 				"../Levels/LRZ/Misc Object Data/Map - Button Horizontal.asm", "word_42D82", 3);
 		}
 	}
@@ -52,7 +52,7 @@ namespace S3KObjectDefinitions.LRZ
 	{
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesProperties("../Levels/LRZ/Nemesis Art/Act 2 Misc Art.bin",
+			BuildSpritesProperties("../Levels/LRZ/Nemesis Art/Act 2 Misc Art.nem",
 				"../Levels/LRZ/Misc Object Data/Map - Button Horizontal.asm", "word_42DA2", 1);
 		}
 	}
@@ -61,7 +61,7 @@ namespace S3KObjectDefinitions.LRZ
 	{
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesProperties("../Levels/LRZ/Nemesis Art/Misc Art.bin",
+			BuildSpritesProperties("../Levels/LRZ/Nemesis Art/Misc Art.nem",
 				"../Levels/LRZ/Misc Object Data/Map - Button.asm", null, 3);
 		}
 	}
@@ -72,7 +72,7 @@ namespace S3KObjectDefinitions.LRZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/LRZ/Nemesis Art/Act 2 Misc Art.bin", CompressionType.Nemesis)), -896);
+				"../Levels/LRZ/Nemesis Art/Act 2 Misc Art.nem", CompressionType.Nemesis)), -896);
 
 			BuildSpritesProperties(indexer.ToArray(),
 				"../Levels/LRZ/Misc Object Data/Map - Button.asm", null, 1);
@@ -86,7 +86,7 @@ namespace S3KObjectDefinitions.DPZ
 	{
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesProperties("../Levels/DPZ/Nemesis Art/Misc Art.bin",
+			BuildSpritesProperties("../Levels/DPZ/Nemesis Art/Misc Art.nem",
 				"../Levels/DPZ/Misc Object Data/Map - Button.asm", "word_36354", 2);
 
 			properties = new[] { properties[0] };
@@ -100,7 +100,7 @@ namespace S3KObjectDefinitions.Common
 	{
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesProperties("../General/2P Zone/Nemesis Art/Misc Art 1.bin",
+			BuildSpritesProperties("../General/2P Zone/Nemesis Art/Misc Art 1.nem",
 				"../General/2P Zone/Map - 2P Button.asm", null, 0);
 
 			properties = new[] { properties[0], properties[3] };
@@ -155,7 +155,7 @@ namespace S3KObjectDefinitions.Common
 
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesProperties("../General/Sprites/Buttons/Gray Button.bin",
+			BuildSpritesProperties("../General/Sprites/Buttons/Gray Button.nem",
 				"../General/Sprites/Buttons/Map - Button.asm", null, 0);
 		}
 

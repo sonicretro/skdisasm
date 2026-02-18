@@ -64,7 +64,7 @@ namespace S3KObjectDefinitions.LRZ
 			properties = new PropertySpec[2];
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);
 			sprite = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../Levels/LRZ/Nemesis Art/Big Spike Ball.bin", CompressionType.Nemesis),
+				"../Levels/LRZ/Nemesis Art/Big Spike Ball.nem", CompressionType.Nemesis),
 				"../Levels/LRZ/Misc Object Data/Map - Spike Ball.asm", 0, 1);
 
 			sprite.Offset(64, 0);

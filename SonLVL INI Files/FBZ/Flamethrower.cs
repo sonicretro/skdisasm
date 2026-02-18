@@ -67,7 +67,7 @@ namespace S3KObjectDefinitions.FBZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/FBZ/Nemesis Art/Misc Art 1.bin", CompressionType.Nemesis)), -5248);
+				"../Levels/FBZ/Nemesis Art/Misc Art 1.nem", CompressionType.Nemesis)), -5248);
 			var art = indexer.ToArray();
 			var map = LevelData.ASMToBin(
 				"../Levels/FBZ/Misc Object Data/Map - Flamethrower.asm", LevelData.Game.MappingsVersion);

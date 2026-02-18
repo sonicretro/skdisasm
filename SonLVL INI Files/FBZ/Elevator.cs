@@ -77,7 +77,7 @@ namespace S3KObjectDefinitions.FBZ
 			properties = new PropertySpec[1];
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);
 			sprite = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../Levels/FBZ/Nemesis Art/Misc Art 2.bin", CompressionType.Nemesis),
+				"../Levels/FBZ/Nemesis Art/Misc Art 2.nem", CompressionType.Nemesis),
 				"../Levels/FBZ/Misc Object Data/Map - Elevator.asm", 0, 2);
 
 			properties[0] = new PropertySpec("Distance", typeof(int), "Extended",

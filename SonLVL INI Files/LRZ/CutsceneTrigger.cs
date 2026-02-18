@@ -70,7 +70,7 @@ namespace S3KObjectDefinitions.LRZ
 			sprite.Flip(true, false);
 			sprite.Offset(48, 10);
 			sprite = new Sprite(sprite, ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../Levels/LRZ/KosinskiM Art/Knuckles Boulder.bin", CompressionType.KosinskiM),
+				"../Levels/LRZ/KosinskiM Art/Knuckles Boulder.kosm", CompressionType.KosinskiM),
 				"../Levels/LRZ/Misc Object Data/Map - Knuckles Boulder.asm", 0, 2));
 		}
 

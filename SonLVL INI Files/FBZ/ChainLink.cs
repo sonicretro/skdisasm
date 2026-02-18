@@ -96,7 +96,7 @@ namespace S3KObjectDefinitions.FBZ
 		public override void Init(ObjectData data)
 		{
 			var version = LevelData.Game.MappingsVersion;
-			var art = LevelData.ReadFile("../Levels/FBZ/Nemesis Art/Misc Art 1.bin", CompressionType.Nemesis);
+			var art = LevelData.ReadFile("../Levels/FBZ/Nemesis Art/Misc Art 1.nem", CompressionType.Nemesis);
 			var map = LevelData.ASMToBin("../Levels/FBZ/Misc Object Data/Map - Chain Link.asm", version);
 
 			properties = new PropertySpec[2];

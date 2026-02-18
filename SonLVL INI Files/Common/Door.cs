@@ -10,7 +10,7 @@ namespace S3KObjectDefinitions.HCZ
 	{
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesSubtypes("../Levels/HCZ/Nemesis Art/Misc Art.bin", -320, 0, -1, 2);
+			BuildSpritesSubtypes("../Levels/HCZ/Nemesis Art/Misc Art.nem", -320, 0, -1, 2);
 		}
 	}
 }
@@ -21,7 +21,7 @@ namespace S3KObjectDefinitions.CNZ
 	{
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesSubtypes("../Levels/CNZ/Nemesis Art/Misc Art.bin", -6304, 1, 0, 2);
+			BuildSpritesSubtypes("../Levels/CNZ/Nemesis Art/Misc Art.nem", -6304, 1, 0, 2);
 		}
 	}
 }
@@ -32,7 +32,7 @@ namespace S3KObjectDefinitions.DEZ
 	{
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesSubtypes("../Levels/DEZ/Nemesis Art/Misc Art.bin", -960, 2, -1, 1);
+			BuildSpritesSubtypes("../Levels/DEZ/Nemesis Art/Misc Art.nem", -960, 2, -1, 1);
 		}
 	}
 }

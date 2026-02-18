@@ -67,7 +67,7 @@ namespace S3KObjectDefinitions.SOZ
 		public override void Init(ObjectData data)
 		{
 			var art = LevelData.ReadFile(
-				"../General/Sprites/Skorp/Skorp.bin", CompressionType.KosinskiM);
+				"../General/Sprites/Skorp/Skorp.kosm", CompressionType.KosinskiM);
 			var map = LevelData.ASMToBin(
 				"../General/Sprites/Skorp/Map - Skorp.asm", LevelData.Game.MappingsVersion);
 

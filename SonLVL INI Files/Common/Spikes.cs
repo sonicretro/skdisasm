@@ -130,7 +130,7 @@ namespace S3KObjectDefinitions.Common
 			if (competition)
 			{
 				map = LevelData.ASMToBin("../General/2P Zone/Map - Spikes.asm", LevelData.Game.MappingsVersion);
-				horzart = LevelData.ReadFile("../General/2P Zone/Nemesis Art/Misc Art 2.bin", CompressionType.Nemesis);
+				horzart = LevelData.ReadFile("../General/2P Zone/Nemesis Art/Misc Art 2.nem", CompressionType.Nemesis);
 				vertart = horzart;
 
 				numRoutines = 2;
@@ -139,7 +139,7 @@ namespace S3KObjectDefinitions.Common
 			else
 			{
 				map = LevelData.ASMToBin("../General/Sprites/Level Misc/Map - Spikes.asm", LevelData.Game.MappingsVersion);
-				horzart = LevelData.ReadFile("../General/Sprites/Level Misc/SpikesSprings.bin", CompressionType.Nemesis);
+				horzart = LevelData.ReadFile("../General/Sprites/Level Misc/SpikesSprings.nem", CompressionType.Nemesis);
 				if (vertart == null)
 				{
 					var indexer = new MultiFileIndexer<byte>();

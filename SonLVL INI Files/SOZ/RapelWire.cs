@@ -117,7 +117,7 @@ namespace S3KObjectDefinitions.SOZ
 			var map = LevelData.ASMToBin(
 				"../Levels/SOZ/Misc Object Data/Map - Rapel Wire.asm", version);
 			var tiles = new List<byte>(LevelData.ReadFile(
-				"../Levels/SOZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis));
+				"../Levels/SOZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis));
 
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(tiles, -2304);

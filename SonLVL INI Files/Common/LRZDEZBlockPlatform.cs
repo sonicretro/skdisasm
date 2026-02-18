@@ -19,7 +19,7 @@ namespace S3KObjectDefinitions.DEZ
 
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/DEZ/Nemesis Art/Act 2 Extra Art.bin", CompressionType.Nemesis)), -256);
+				"../Levels/DEZ/Nemesis Art/Act 2 Extra Art.nem", CompressionType.Nemesis)), -256);
 
 			sprites = new[]
 			{

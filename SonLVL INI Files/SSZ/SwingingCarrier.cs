@@ -93,7 +93,7 @@ namespace S3KObjectDefinitions.SSZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/SSZ/Nemesis Art/Misc.bin", CompressionType.Nemesis)), -3712);
+				"../Levels/SSZ/Nemesis Art/Misc.nem", CompressionType.Nemesis)), -3712);
 			var art = indexer.ToArray();
 
 			var version = LevelData.Game.MappingsVersion;
