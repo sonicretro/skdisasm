@@ -6444,8 +6444,8 @@ UpdateWaterSurface:
 		; the water surface sprite to the right every frame. To fix this,
 		; just avoid pushing the sprite to the right when the game is about
 		; to be paused.
-		move.b	(Ctrl_1_Press).w,d0 ; is Start button pressed?
-		or.b	(Ctrl_2_Press).w,d0 ; (either player)
+		move.b	(Ctrl_1_pressed).w,d0 ; is Start button pressed?
+		or.b	(Ctrl_2_pressed).w,d0 ; (either player)
 		andi.b	#button_start_mask,d0
 		bne.s	loc_50D2
 	endif
