@@ -11,7 +11,7 @@ namespace S3KObjectDefinitions.HCZ
 		public override void Init(ObjectData data)
 		{
 			BuildSpritesProperties("../Levels/HCZ/Nemesis Art/Button.bin",
-				"../General/Sprites/Buttons/Map - Button 2.asm", null, 1);
+				"../Levels/HCZ/Misc Object Data/Map - Button.asm", null, 1);
 		}
 	}
 }
