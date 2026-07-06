@@ -1326,7 +1326,7 @@ HInt4_Do_Updates:
 ; Identical to HInt5, except for faster systems
 ; ---------------------------------------------------------------------------
 
-HInt_6:
+HInt6:
 		tst.w	(H_int_flag).w
 		beq.s	HInt6_Done
 		move.w	#0,(H_int_flag).w
@@ -6552,7 +6552,7 @@ loc_519E:
 		move.l	#HInt5,(H_int_addr).w
 		cmpi.w	#$1000,(V_blank_cycles).w
 		blo.s	loc_51C0
-		move.l	#HInt_6,(H_int_addr).w
+		move.l	#HInt6,(H_int_addr).w
 
 loc_51C0:
 		bra.s	loc_51D0
@@ -70526,7 +70526,7 @@ AIZ2SE_ShipRefresh:
 
 loc_3B332:
 		st	(Events_bg+$04).w
-		move.l	#HInt6,(H_int_addr).w	; HInt is needed to change Y scroll value to proper amount mid-draw
+		move.l	#HInt7,(H_int_addr).w	; HInt is needed to change Y scroll value to proper amount mid-draw
 		clr.b	(Water_flag).w
 		move.b	#$40,(H_int_counter).w		; Set HInt position
 		addq.w	#4,(Events_routine_fg).w
@@ -70575,7 +70575,7 @@ AIZ2SE_End:
 		jmp	DrawTilesAsYouMove(pc)
 ; ---------------------------------------------------------------------------
 
-HInt6:
+HInt7:
 		move.w	#$8AFF,(VDP_control_port).l
 		move.l	#vdpComm($0000,VSRAM,WRITE),(VDP_control_port).l
 		move.w	(Camera_Y_pos_copy).w,(VDP_data_port).l
