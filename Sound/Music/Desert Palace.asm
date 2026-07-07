@@ -445,7 +445,12 @@ Snd_DPZ_Jump02:
 	dc.b	nRst, $08, nAb4, $0C, smpsNoAttack, $04, nRst, $02, nF4, $04, nRst, $02
 	dc.b	nFs4, $04, nRst, $02, nG4, $04, nRst, $02, nAb4, $04, nRst, $02
 	dc.b	nA4, $04, nRst, $02, nBb4, $04, nRst, $02, nB4, $04
+    if FixMusicAndSFXDataBugs
+	smpsJump            Snd_DPZ_Jump02
+    else
+	; There is a bug here in which PSG1's smpsAlterNote setting of $FF is overwritten with PSG2's setting of $00 for every loop.
 	smpsJump            Snd_DPZ_PSG2
+    endif
 
 ; Unreachable
 	smpsStop
