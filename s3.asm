@@ -61,8 +61,8 @@ Checksum:	dc.w $A8F2
 Input:		dc.b "J               "
 ROMStartLoc:	dc.l StartOfROM
 ROMEndLoc:	dc.l EndOfROM-1
-RAMStartLoc:	dc.l (RAM_start&$FFFFFF)
-RAMEndLoc:	dc.l (RAM_start&$FFFFFF)+$FFFF
+RAMStartLoc:	dc.l (RAM_start)&$FFFFFF
+RAMEndLoc:	dc.l (RAM_end-1)&$FFFFFF
 CartRAM_Info:	dc.b "RA"
 CartRAM_Type:	dc.w %1111100000100000	; Save odd number 8-bit addresses
 CartRAMStartLoc:dc.l SRAM_start
@@ -71,7 +71,7 @@ Modem_Info:	dc.b "  "
 		dc.b "          "
 Unknown_Header:	dc.w 1
 		dc.b "      "
-		dc.w $20, 0
+		dc.l EndOfROM
 		dc.l $3FFFFF
 		dc.l SRAM_start
 		dc.l SRAM_end
@@ -556,14 +556,24 @@ loc_6BC:
 		movea.l	#ROMEndLoc,a1
 		move.l	(a1),d0
 		moveq	#0,d1
+
+ChecksumLoop:
 		add.w	(a0)+,d1
 		cmp.l	a0,d0
+	if 0
+		bcc.w	ChecksumLoop
+	else
 		nop
 		nop
+	endif
 		movea.l	#Checksum,a1
 		cmp.w	(a1),d1
+	if 0
+		bne.w	ChecksumError
+	else
 		nop
 		nop
+	endif
 		lea	(CrossResetRAM).w,a6
 		moveq	#0,d7
 		move.w	#bytesToLcnt(CrossResetRAM_End-CrossResetRAM),d6
@@ -589,7 +599,7 @@ loc_716:
 		bsr.w	SndDrvInit
 		bsr.w	Init_Controllers
 		jsr	(SRAM_Load).l
-		move.b	#0,(Game_mode).w
+		move.b	#GameMode_SegaScreen,(Game_mode).w
 
 GameLoop:
 		move.b	(Game_mode).w,d0
@@ -599,31 +609,37 @@ GameLoop:
 		bra.s	GameLoop
 ; ---------------------------------------------------------------------------
 GameModes:
-		dc.l Sega_Screen		;   0
-		dc.l Title_Screen		;   4
-		dc.l Level			;   8
-		dc.l Level			;  $C
-		dc.l JumpToSegaScreen		; $10
-		dc.l ContinueScreen		; $14
-		dc.l JumpToSegaScreen		; $18
-		dc.l LevelSelect_S2Options	; $1C
-		dc.l S3Credits			; $20
-		dc.l LevelSelect_S2Options	; $24
-		dc.l LevelSelect_S2Options	; $28
-		dc.l SpecialStage		; $2C
-		dc.l SpecialStage		; $30
-		dc.l SpecialStage		; $34
-		dc.l Competition_Menu		; $38
-		dc.l Competition_PlayerSelect	; $3C
-		dc.l Competition_LevelSelect	; $40
-		dc.l Competition_Results	; $44
-		dc.l SpecialStage_Results	; $48
-		dc.l SaveScreen			; $4C
-		dc.l TimeAttack_Records		; $50
+
+gmptr:		macro gamemode,{INTLABEL}
+__LABEL__:	label	*-GameModes
+		dc.l	gamemode
+		endm
+
+GameMode_SegaScreen:		gmptr Sega_Screen			;   0
+GameMode_TitleScreen:		gmptr Title_Screen			;   4
+GameMode_Demo:			gmptr Level				;   8
+GameMode_Level:			gmptr Level				;  $C
+GameMode_SpecialStage_S2:	gmptr JumpToSegaScreen			; $10
+GameMode_Continue:		gmptr ContinueScreen			; $14
+GameMode_2PResults_S2:		gmptr JumpToSegaScreen			; $18
+GameMode_2PLevelSelect:		gmptr LevelSelect_S2Options		; $1C
+GameMode_S3Credits:		gmptr S3Credits				; $20
+GameMode_OptionsMenu:		gmptr LevelSelect_S2Options		; $24
+GameMode_LevelSelect:		gmptr LevelSelect_S2Options		; $28
+GameMode_SpecialStage:		gmptr SpecialStage			; $2C
+GameMode_SpecialStage2:		gmptr SpecialStage			; $30
+GameMode_SpecialStage3:		gmptr SpecialStage			; $34
+GameMode_CompetitionMenu:	gmptr Competition_Menu			; $38
+GameMode_CompetitionPlayerSelect:	gmptr Competition_PlayerSelect	; $3C
+GameMode_CompetitionLevelSelect:	gmptr Competition_LevelSelect	; $40
+GameMode_CompetitionResults:	gmptr Competition_Results		; $44
+GameMode_SpecialStageResults:	gmptr SpecialStage_Results		; $48
+GameMode_SaveScreen:		gmptr SaveScreen			; $4C
+GameMode_TimeAttackRecords:	gmptr TimeAttack_Records		; $50
 ; ---------------------------------------------------------------------------
 
 JumpToSegaScreen:
-		move.b	#0,(Game_mode).w
+		move.b	#GameMode_SegaScreen,(Game_mode).w
 		rts
 ; ---------------------------------------------------------------------------
 ; unused/dead code
@@ -661,21 +677,21 @@ DetectPAL:
 		move.w	#$8174,(a5)		; VDP Command $8174 - Display on, VInt on, DMA on, PAL off
 		moveq	#0,d0
 
-$$waitForVBlankStart:
+.waitForVBlankStart:
 		move.w	(a5),d1
 		andi.w	#8,d1
-		beq.s	$$waitForVBlankStart
+		beq.s	.waitForVBlankStart
 
-$$waitForVBlankEnd:
+.waitForVBlankEnd:
 		move.w	(a5),d1
 		andi.w	#8,d1
-		bne.s	$$waitForVBlankEnd	; Wait for VBlank to run once
+		bne.s	.waitForVBlankEnd	; Wait for VBlank to run once
 
-$$waitForNextVBlank:
+.waitForNextVBlank:
 		addq.w	#1,d0
 		move.w	(a5),d1
 		andi.w	#8,d1
-		beq.s	$$waitForNextVBlank
+		beq.s	.waitForNextVBlank
 		move.w	d0,(V_blank_cycles).w	; Count cycles between VBlanks (likely to detect PAL systems and/or for other timing mechanisms
 		rts
 ; End of function DetectPAL
@@ -704,7 +720,7 @@ loc_810:
 
 loc_83E:
 		move.b	(V_int_routine).w,d0
-		move.b	#0,(V_int_routine).w
+		move.b	#VInt_ID_0,(V_int_routine).w
 		move.w	#1,(H_int_flag).w		; Allow H Interrupt code to run
 		andi.w	#$3E,d0
 		move.w	VInt_Table(pc,d0.w),d0
@@ -716,22 +732,28 @@ VInt_Done:
 		rte
 ; ---------------------------------------------------------------------------
 VInt_Table:
-		dc.w VInt_0-VInt_Table
-		dc.w VInt_2-VInt_Table
-		dc.w VInt_4-VInt_Table
-		dc.w VInt_6-VInt_Table
-		dc.w VInt_8-VInt_Table
-		dc.w VInt_A_C-VInt_Table
-		dc.w VInt_A_C-VInt_Table
-		dc.w VInt_E-VInt_Table
-		dc.w VInt_10-VInt_Table
-		dc.w VInt_12-VInt_Table
-		dc.w VInt_14-VInt_Table
-		dc.w VInt_16-VInt_Table
-		dc.w VInt_18-VInt_Table
-		dc.w VInt_1A-VInt_Table
-		dc.w VInt_1C-VInt_Table
-		dc.w VInt_1E-VInt_Table
+
+vintptr:	macro vintroutine,{INTLABEL}
+__LABEL__:	label	*-VInt_Table
+		dc.w	vintroutine-VInt_Table
+		endm
+
+VInt_ID_0:	vintptr VInt_0
+VInt_ID_2:	vintptr VInt_2
+VInt_ID_4:	vintptr VInt_4
+VInt_ID_6:	vintptr VInt_6
+VInt_ID_8:	vintptr VInt_8
+VInt_ID_A:	vintptr VInt_A_C
+VInt_ID_C:	vintptr VInt_A_C
+VInt_ID_E:	vintptr VInt_E
+VInt_ID_10:	vintptr VInt_10
+VInt_ID_12:	vintptr VInt_12
+VInt_ID_14:	vintptr VInt_14
+VInt_ID_16:	vintptr VInt_16
+VInt_ID_18:	vintptr VInt_18
+VInt_ID_1A:	vintptr VInt_1A
+VInt_ID_1C:	vintptr VInt_1C
+VInt_ID_1E:	vintptr VInt_1E
 ; ---------------------------------------------------------------------------
 
 VInt_0:
@@ -741,13 +763,13 @@ VInt_0_Main:
 		addq.w	#1,(Lag_frame_count).w
 
 		; branch if a level or demo is running
-		cmpi.b	#8+$80,(Game_mode).w
+		cmpi.b	#GameMode_Demo+$80,(Game_mode).w
 		beq.s	VInt_0_Level
-		cmpi.b	#$C+$80,(Game_mode).w
+		cmpi.b	#GameMode_Level+$80,(Game_mode).w
 		beq.s	VInt_0_Level
-		cmpi.b	#8,(Game_mode).w
+		cmpi.b	#GameMode_Demo,(Game_mode).w
 		beq.s	VInt_0_Level
-		cmpi.b	#$C,(Game_mode).w
+		cmpi.b	#GameMode_Level,(Game_mode).w
 		beq.s	VInt_0_Level
 		stopZ80
 		bsr.w	sndDriverInput
@@ -769,12 +791,12 @@ VInt_0_Level:
 		stopZ80
 		tst.b	(Water_full_screen_flag).w
 		bne.s	VInt_0_FullyUnderwater
-		dma68kToVDP Normal_palette,$0000,$80,CRAM
+		dma68kToVDP Normal_palette,0,Normal_palette_end-Normal_palette,CRAM
 		bra.s	VInt_0_Water_Cont
 ; ---------------------------------------------------------------------------
 
 VInt_0_FullyUnderwater:
-		dma68kToVDP Water_palette,$0000,$80,CRAM
+		dma68kToVDP Water_palette,0,Water_palette_end-Water_palette,CRAM
 
 VInt_0_Water_Cont:
 		move.w	(H_int_counter_command).w,(a5)
@@ -812,11 +834,11 @@ VInt_0_NoWater:
 		; Upload the front buffer.
 		tst.w	(Current_sprite_table_page).w
 		beq.s	+
-		dma68kToVDP Sprite_table,$F800,$280,VRAM
+		dma68kToVDP Sprite_table,$F800,Sprite_table_end-Sprite_table,VRAM
 		bra.s	VInt_0_Done
 
 +
-		dma68kToVDP Sprite_table_alternate,$F800,$280,VRAM
+		dma68kToVDP Sprite_table_alternate,$F800,Sprite_table_alternate_end-Sprite_table_alternate,VRAM
 
 VInt_0_Done:
 		bsr.w	sndDriverInput
@@ -826,7 +848,7 @@ VInt_0_Done:
 
 VInt_2:
 		bsr.w	Do_ControllerPal
-		dma68kToVDP H_scroll_buffer,$F000,$380,VRAM
+		dma68kToVDP H_scroll_buffer,$F000,H_scroll_buffer_end-H_scroll_buffer,VRAM
 		jsr	(SegaScr_VInt).l
 		tst.w	(Demo_timer).w
 		beq.w	locret_A4C
@@ -873,7 +895,7 @@ VInt_6:
 ; ---------------------------------------------------------------------------
 
 VInt_10:
-		cmpi.b	#$34,(Game_mode).w
+		cmpi.b	#GameMode_SpecialStage3,(Game_mode).w
 		beq.w	VInt_1C		; If in a special stage, branch
 
 VInt_8:
@@ -882,16 +904,16 @@ VInt_8:
 
 		tst.b	(Water_full_screen_flag).w
 		bne.s	+
-		dma68kToVDP Normal_palette,$0000,$80,CRAM
+		dma68kToVDP Normal_palette,0,Normal_palette_end-Normal_palette,CRAM
 		bra.s	++
 
 +
-		dma68kToVDP Water_palette,$0000,$80,CRAM
+		dma68kToVDP Water_palette,0,Water_palette_end-Water_palette,CRAM
 
 +
 		move.w	(H_int_counter_command).w,(a5)
 
-		dma68kToVDP H_scroll_buffer,$F000,$380,VRAM
+		dma68kToVDP H_scroll_buffer,$F000,H_scroll_buffer_end-H_scroll_buffer,VRAM
 
 		tst.w	(Competition_mode).w
 		beq.s	++
@@ -909,11 +931,11 @@ VInt_8:
 		; Upload the front buffer.
 		tst.w	(Current_sprite_table_page).w
 		bne.s	+
-		dma68kToVDP Sprite_table_alternate,$F800,$280,VRAM
+		dma68kToVDP Sprite_table_alternate,$F800,Sprite_table_alternate_end-Sprite_table_alternate,VRAM
 		bra.s	++
 
 +
-		dma68kToVDP Sprite_table,$F800,$280,VRAM
+		dma68kToVDP Sprite_table,$F800,Sprite_table_end-Sprite_table,VRAM
 
 +
 		bsr.w	Process_DMA_Queue
@@ -956,15 +978,15 @@ VInt_A_C:
 		bsr.w	Poll_Controllers
 		tst.b	(Water_full_screen_flag).w
 		bne.s	+
-		dma68kToVDP Normal_palette,$0000,$80,CRAM
+		dma68kToVDP Normal_palette,0,Normal_palette_end-Normal_palette,CRAM
 		bra.s	++
 
 +
-		dma68kToVDP Water_palette,$0000,$80,CRAM
+		dma68kToVDP Water_palette,0,Water_palette_end-Water_palette,CRAM
 
 +
 		move.w	(H_int_counter_command).w,(a5)
-		dma68kToVDP H_scroll_buffer,$F000,$380,VRAM
+		dma68kToVDP H_scroll_buffer,$F000,H_scroll_buffer_end-H_scroll_buffer,VRAM
 
 		tst.w	(Competition_mode).w
 		beq.s	++
@@ -982,11 +1004,11 @@ VInt_A_C:
 		; Upload the front buffer.
 		tst.w	(Current_sprite_table_page).w
 		bne.s	+
-		dma68kToVDP Sprite_table_alternate,$F800,$280,VRAM
+		dma68kToVDP Sprite_table_alternate,$F800,Sprite_table_alternate_end-Sprite_table_alternate,VRAM
 		bra.s	++
 
 +
-		dma68kToVDP Sprite_table,$F800,$280,VRAM
+		dma68kToVDP Sprite_table,$F800,Sprite_table_end-Sprite_table,VRAM
 
 +
 		bsr.w	Process_DMA_Queue
@@ -999,7 +1021,7 @@ VInt_A_C:
 
 VInt_E:
 		bsr.w	Do_ControllerPal
-		move.b	#$E,(V_int_routine).w
+		move.b	#VInt_ID_E,(V_int_routine).w
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -1013,13 +1035,13 @@ VInt_18:
 		stopZ80
 		bsr.w	Poll_Controllers
 
-		dma68kToVDP Normal_palette,$0000,$80,CRAM
-		dma68kToVDP Sprite_table,$F800,$280,VRAM
-		dma68kToVDP H_scroll_buffer,$F000,$380,VRAM
+		dma68kToVDP Normal_palette,0,Normal_palette_end-Normal_palette,CRAM
+		dma68kToVDP Sprite_table,$F800,Sprite_table_end-Sprite_table,VRAM
+		dma68kToVDP H_scroll_buffer,$F000,H_scroll_buffer_end-H_scroll_buffer,VRAM
 
 		bclr	#0,(_unkFA88).w
 		beq.s	loc_DEA
-		dma68kToVDP $FF2000,$C000,$2000,VRAM
+		dma68kToVDP RAM_start+$2000,$C000,$2000,VRAM
 
 loc_DEA:
 		bsr.w	Process_DMA_Queue
@@ -1032,9 +1054,9 @@ VInt_16:
 		stopZ80
 		bsr.w	Poll_Controllers
 
-		dma68kToVDP Normal_palette,$0000,$80,CRAM
-		dma68kToVDP Sprite_table,$F800,$280,VRAM
-		dma68kToVDP H_scroll_buffer,$F000,$380,VRAM
+		dma68kToVDP Normal_palette,0,Normal_palette_end-Normal_palette,CRAM
+		dma68kToVDP Sprite_table,$F800,Sprite_table_end-Sprite_table,VRAM
+		dma68kToVDP H_scroll_buffer,$F000,H_scroll_buffer_end-H_scroll_buffer,VRAM
 
 		bsr.w	Process_DMA_Queue
 		bsr.w	sndDriverInput
@@ -1081,15 +1103,15 @@ Do_ControllerPal:
 		bsr.w	Poll_Controllers
 		tst.b	(Water_full_screen_flag).w
 		bne.s	loc_F20
-		dma68kToVDP Normal_palette,$0000,$80,CRAM
+		dma68kToVDP Normal_palette,0,Normal_palette_end-Normal_palette,CRAM
 		bra.s	loc_F44
 
 loc_F20:
-		dma68kToVDP Water_palette,$0000,$80,CRAM
+		dma68kToVDP Water_palette,0,Water_palette_end-Water_palette,CRAM
 
 loc_F44:
-		dma68kToVDP Sprite_table,$F800,$280,VRAM
-		dma68kToVDP H_scroll_buffer,$F000,$380,VRAM
+		dma68kToVDP Sprite_table,$F800,Sprite_table_end-Sprite_table,VRAM
+		dma68kToVDP H_scroll_buffer,$F000,H_scroll_buffer_end-H_scroll_buffer,VRAM
 		bsr.w	Process_DMA_Queue
 		bsr.w	sndDriverInput
 		startZ80
@@ -1133,11 +1155,11 @@ HInt:
 		; Upload the front buffer.
 		tst.w	(Current_sprite_table_page).w
 		beq.s	+
-		dma68kToVDP Sprite_table_P2,$F800,$280,VRAM
+		dma68kToVDP Sprite_table_P2,$F800,Sprite_table_P2_end-Sprite_table_P2,VRAM
 		bra.s	++
 
 +
-		dma68kToVDP Sprite_table_P2_alternate,$F800,$280,VRAM
+		dma68kToVDP Sprite_table_P2_alternate,$F800,Sprite_table_P2_alternate_end-Sprite_table_P2_alternate,VRAM
 
 +
 		startZ80
@@ -1174,11 +1196,11 @@ HInt3:
 		move.w	(a2)+,d1
 		move.b	(H_int_counter).w,d0
 		subi.b	#200,d0	; is H-int occurring below line 200?
-		bcs.s	$$transferColors	; if it is, branch
+		bcs.s	.transferColors	; if it is, branch
 		sub.b	d0,d1
-		bcs.s	$$skipTransfer
+		bcs.s	.skipTransfer
 
-$$transferColors:
+.transferColors:
 		move.w	(a2)+,d0
 		lea	(Water_palette).w,a0
 		adda.w	d0,a0
@@ -1191,9 +1213,9 @@ $$transferColors:
 		nop
 		moveq	#$24,d0
 		dbf	d0,*	; waste some cycles
-		dbf	d1,$$transferColors	; repeat for number of colors
+		dbf	d1,.transferColors	; repeat for number of colors
 
-$$skipTransfer:
+.skipTransfer:
 		startZ80
 		movem.l	(sp)+,d0-d1/a0-a2
 		tst.b	(Do_Updates_in_H_int).w
@@ -1231,11 +1253,11 @@ HInt5:
 		move.w	(a2)+,d1
 		move.b	(H_int_counter).w,d0
 		subi.b	#200,d0
-		bcs.s	$$transferColors
+		bcs.s	.transferColors
 		sub.b	d0,d1
-		bcs.s	$$skipTransfer
+		bcs.s	.skipTransfer
 
-$$transferColors:
+.transferColors:
 		move.w	(a2)+,d0
 		lea	(Normal_palette).w,a0
 		adda.w	d0,a0
@@ -1248,9 +1270,9 @@ $$transferColors:
 		nop
 		moveq	#$24,d0
 		dbf	d0,*	; waste some cycles
-		dbf	d1,$$transferColors
+		dbf	d1,.transferColors
 
-$$skipTransfer:
+.skipTransfer:
 		startZ80
 		movem.l	(sp)+,d0-d1/a0-a2
 		tst.b	(Do_Updates_in_H_int).w
@@ -1287,11 +1309,11 @@ HInt4:
 		move.w	(a2)+,d1
 		move.b	(H_int_counter).w,d0
 		subi.b	#200,d0
-		bcs.s	$$transferColors
+		bcs.s	.transferColors
 		sub.b	d0,d1
-		bcs.s	$$skipTransfer
+		bcs.s	.skipTransfer
 
-$$transferColors:
+.transferColors:
 		move.w	(a2)+,d0
 		lea	(Water_palette).w,a0
 		adda.w	d0,a0
@@ -1303,9 +1325,9 @@ $$transferColors:
 		nop
 		moveq	#$33,d0
 		dbf	d0,*	; waste some cycles
-		dbf	d1,$$transferColors
+		dbf	d1,.transferColors
 
-$$skipTransfer:
+.skipTransfer:
 		startZ80
 		movem.l	(sp)+,d0-d1/a0-a2
 		tst.b	(Do_Updates_in_H_int).w
@@ -1342,11 +1364,11 @@ HInt6:
 		move.w	(a2)+,d1
 		move.b	(H_int_counter).w,d0
 		subi.b	#200,d0
-		bcs.s	$$transferColors
+		bcs.s	.transferColors
 		sub.b	d0,d1
-		bcs.s	$$skipTransfer
+		bcs.s	.skipTransfer
 
-$$transferColors:
+.transferColors:
 		move.w	(a2)+,d0
 		lea	(Normal_palette).w,a0
 		adda.w	d0,a0
@@ -1358,9 +1380,9 @@ $$transferColors:
 		nop
 		moveq	#$33,d0
 		dbf	d0,*	; waste some cycles
-		dbf	d1,$$transferColors
+		dbf	d1,.transferColors
 
-$$skipTransfer:
+.skipTransfer:
 		startZ80
 		movem.l	(sp)+,d0-d1/a0-a2
 		tst.b	(Do_Updates_in_H_int).w
@@ -1477,11 +1499,11 @@ Init_VDP:
 		lea	(VDP_control_port).l,a0
 		lea	(VDP_data_port).l,a1
 		lea	(VDP_register_values).l,a2
-		moveq	#19-1,d7
+		moveq	#bytesToWcnt(VDP_register_values_end-VDP_register_values),d7
 
-$$setRegisters:
+.setRegisters:
 		move.w	(a2)+,(a0)
-		dbf	d7,$$setRegisters
+		dbf	d7,.setRegisters
 		move.w	(VDP_register_values+2).l,d0	; get command for register #1
 		move.w	d0,(VDP_reg_1_command).w	; and store it in RAM (for easy display blanking/enabling)
 		move.w	#$8A00+224-1,(H_int_counter_command).w
@@ -1492,9 +1514,9 @@ $$setRegisters:
 		move.l	#vdpComm($0000,CRAM,WRITE),(VDP_control_port).l
 		move.w	#bytesToWcnt($80),d7
 
-$$clearCRAM:
+.clearCRAM:
 		move.w	d0,(a1)
-		dbf	d7,$$clearCRAM
+		dbf	d7,.clearCRAM
 		clr.l	(V_scroll_value).w
 		clr.l	(_unkF61A).w
 		move.l	d1,-(sp)
@@ -1524,6 +1546,7 @@ VDP_register_values:
 		dc.w $9001	; Scroll planes are 64x32 cells
 		dc.w $9100
 		dc.w $9200	; Window disabled
+VDP_register_values_end
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1546,13 +1569,13 @@ Clear_DisplayData_Cont:
 		clr.l	(V_scroll_value).w
 		clr.l	(_unkF61A).w
 	if FixBugs
-		clearRAM Sprite_table,$280
-		clearRAM H_scroll_buffer,$400
+		clearRAM Sprite_table,(Sprite_table_end-Sprite_table)
+		clearRAM H_scroll_buffer,(Collision_response_list_end-H_scroll_buffer)
 	else
-		; Bug: this should be $280
-		clearRAM Sprite_table,$280+4
-		; Bug: this should be $400
-		clearRAM H_scroll_buffer,$400+4
+		; Bug: this should be (Sprite_table_End-Sprite_table)
+		clearRAM Sprite_table,(Sprite_table_end-Sprite_table)+4
+		; Bug: this should be (Collision_response_list_End-H_scroll_buffer)
+		clearRAM H_scroll_buffer,(Collision_response_list_end-H_scroll_buffer)+4
 	endif
 
 		startZ80
@@ -1705,13 +1728,13 @@ loc_168E:
 		startZ80
 
 Pause_Loop:
-		move.b	#$10,(V_int_routine).w
+		move.b	#VInt_ID_10,(V_int_routine).w
 		bsr.w	Wait_VSync
 		tst.b	(Slow_motion_flag).w
 		beq.s	Pause_NoSlowMo
 		btst	#button_A,(Ctrl_1_pressed).w
 		beq.s	Pause_ChkFrameAdvance	; branch if A isn't pressed
-		move.b	#$28,(Game_mode).w	; go to level select (oddly enough this is only for Sonic 3 Alone, Sonic 2, the Nov 3rd 1993 Prototype and Sonic & Knuckles do not have it set to go to the level select. This line was eventually changed to go back to the title screen once more by the 0610 build of Sonic & Knuckles.)
+		move.b	#GameMode_LevelSelect,(Game_mode).w	; go to level select (oddly enough this is only for Sonic 3 Alone. Sonic 2, the Nov 3rd Prototype and Sonic & Knuckles don't have it set for the level select. This line was eventually changed to return to the title screen once more by the 0610 build of Sonic & Knuckles.)
 		nop
 		bra.s	Pause_ResumeMusic
 ; ---------------------------------------------------------------------------
@@ -1731,7 +1754,7 @@ Pause_NoSlowMo:
 		bpl.s	Pause_ChkStart
 		btst	#button_B,(Ctrl_1_pressed).w
 		beq.s	Pause_ChkStart
-		move.b	#$40+$80,(Game_mode).w	; If in time attack mode, go back to 2P menu if B is pressed
+		move.b	#GameMode_CompetitionLevelSelect+$80,(Game_mode).w	; If in time attack mode, go back to 2P menu if B is pressed
 		bra.s	Pause_ResumeMusic
 ; ---------------------------------------------------------------------------
 
@@ -1882,9 +1905,9 @@ Process_DMA_Queue:
 		lea	(VDP_control_port).l,a5
 		lea	(DMA_queue).w,a1
 
-$$loop:
+.loop:
 		move.w	(a1)+,d0	; has a stop token been encountered?
-		beq.s	$$stop	; if it has, branch
+		beq.s	.stop	; if it has, branch
 		move.w	d0,(a5)
 		move.w	(a1)+,(a5)
 		move.w	(a1)+,(a5)
@@ -1893,9 +1916,9 @@ $$loop:
 		move.w	(a1)+,(a5)
 		move.w	(a1)+,(a5)
 		cmpa.w	#DMA_queue_slot,a1	; has the end of the queue been reached?
-		bne.s	$$loop	; if not, loop
+		bne.s	.loop	; if not, loop
 
-$$stop:
+.stop:
 		move.w	#0,(DMA_queue).w
 		move.l	#DMA_queue,(DMA_queue_slot).w
 		rts
@@ -2142,23 +2165,23 @@ Load_PLC:
 		lea	(a1,d0.w),a1
 		lea	(Nem_decomp_queue).w,a2
 
-$$findFreeSlot:
+.findFreeSlot:
 		tst.l	(a2)	; is the current slot in the queue free?
-		beq.s	$$getPieceCount	; if it is, branch
+		beq.s	.getPieceCount	; if it is, branch
 		addq.w	#6,a2	; otherwise check the next slot
-		bra.s	$$findFreeSlot
+		bra.s	.findFreeSlot
 ; ---------------------------------------------------------------------------
 
-$$getPieceCount:
+.getPieceCount:
 		move.w	(a1)+,d0
-		bmi.s	$$done
+		bmi.s	.done
 
-$$queuePieces:
+.queuePieces:
 		move.l	(a1)+,(a2)+	; store compressed data location
 		move.w	(a1)+,(a2)+	; store destination in VRAM
-		dbf	d0,$$queuePieces
+		dbf	d0,.queuePieces
 
-$$done:
+.done:
 		movem.l	(sp)+,a1-a2
 		rts
 ; End of function Load_PLC
@@ -2174,23 +2197,23 @@ $$done:
 Load_PLC_Raw:
 		lea	(Nem_decomp_queue).w,a2
 
-$$findFreeSlot:
+.findFreeSlot:
 		tst.l	(a2)
-		beq.s	$$getPieceCount
+		beq.s	.getPieceCount
 		addq.w	#6,a2
-		bra.s	$$findFreeSlot
+		bra.s	.findFreeSlot
 ; ---------------------------------------------------------------------------
 
-$$getPieceCount:
+.getPieceCount:
 		move.w	(a1)+,d0
-		bmi.s	$$done
+		bmi.s	.done
 
-$$queuePieces:
+.queuePieces:
 		move.l	(a1)+,(a2)+
 		move.w	(a1)+,(a2)+
-		dbf	d0,$$queuePieces
+		dbf	d0,.queuePieces
 
-$$done:
+.done:
 		rts
 ; End of function Load_PLC_Raw
 
@@ -2212,14 +2235,14 @@ Load_PLC_2:
 		bsr.s	Clear_Nem_Queue
 		lea	(Nem_decomp_queue).w,a2
 		move.w	(a1)+,d0
-		bmi.s	$$done
+		bmi.s	.done
 
-$$queuePieces:
+.queuePieces:
 		move.l	(a1)+,(a2)+
 		move.w	(a1)+,(a2)+
-		dbf	d0,$$queuePieces
+		dbf	d0,.queuePieces
 
-$$done:
+.done:
 		movem.l	(sp)+,a1-a2
 		rts
 ; End of function Load_PLC_2
@@ -2235,9 +2258,9 @@ Clear_Nem_Queue:
 		lea	(Nem_decomp_queue).w,a2
 		moveq	#bytesToLcnt($80),d0	; clear till the end of Nem_decomp_vars
 
-$$loop:
+.loop:
 		clr.l	(a2)+
-		dbf	d0,$$loop
+		dbf	d0,.loop
 		rts
 ; End of function Clear_Nem_Queue
 
@@ -2387,7 +2410,7 @@ Process_Nem_Queue_ShiftUp:
 ; End of function Process_Nem_Queue_Main
 
 ; ---------------------------------------------------------------------------
-		; unused
+		; unused leftover from Sonic 1/2
 		lea	(Offs_PLC).l,a1
 		add.w	d0,d0
 		move.w	(a1,d0.w),d0
@@ -2403,7 +2426,7 @@ Process_Nem_Queue_ShiftUp:
 
 
 Load_PLC_Immediate:
-$$decompPieces:
+.decompPieces:
 		movea.l	(a1)+,a0	; get source address
 		moveq	#0,d0
 		move.w	(a1)+,d0	; get destination VRAM address
@@ -2413,7 +2436,7 @@ $$decompPieces:
 		swap	d0	; d0 = VDP command to write to destination
 		move.l	d0,(VDP_control_port).l
 		bsr.w	Nem_Decomp
-		dbf	d1,$$decompPieces
+		dbf	d1,.decompPieces
 		rts
 ; End of function Load_PLC_Immediate
 
@@ -2483,29 +2506,29 @@ Eni_Decomp_01:
 Eni_Decomp_100:
 		bsr.w	Eni_Decomp_FetchInlineValue
 
-$$loop:
+.loop:
 		move.w	d1,(a1)+	; copy inline value
-		dbf	d2,$$loop	; repeat
+		dbf	d2,.loop	; repeat
 		bra.s	Eni_Decomp_Loop
 ; ---------------------------------------------------------------------------
 
 Eni_Decomp_101:
 		bsr.w	Eni_Decomp_FetchInlineValue
 
-$$loop:
+.loop:
 		move.w	d1,(a1)+	; copy inline value
 		addq.w	#1,d1	; increment
-		dbf	d2,$$loop	; repeat
+		dbf	d2,.loop	; repeat
 		bra.s	Eni_Decomp_Loop
 ; ---------------------------------------------------------------------------
 
 Eni_Decomp_110:
 		bsr.w	Eni_Decomp_FetchInlineValue
 
-$$loop:
+.loop:
 		move.w	d1,(a1)+	; copy inline value
 		subq.w	#1,d1	; decrement
-		dbf	d2,$$loop	; repeat
+		dbf	d2,.loop	; repeat
 		bra.s	Eni_Decomp_Loop
 ; ---------------------------------------------------------------------------
 
@@ -2513,10 +2536,10 @@ Eni_Decomp_111:
 		cmpi.w	#$F,d2
 		beq.s	Eni_Decomp_Done
 
-$$loop:
+.loop:
 		bsr.w	Eni_Decomp_FetchInlineValue	; fetch new inline value
 		move.w	d1,(a1)+	; copy it
-		dbf	d2,$$loop	; and repeat
+		dbf	d2,.loop	; and repeat
 		bra.s	Eni_Decomp_Loop
 ; ---------------------------------------------------------------------------
 
@@ -2609,7 +2632,7 @@ loc_1C46:
 		move.w	d5,d1
 		move.w	d6,d7
 		sub.w	a5,d7	; subtract length in bits of inline copy value
-		bcc.s	$$enoughBits	; branch if a new word doesn't need to be read
+		bcc.s	.enoughBits	; branch if a new word doesn't need to be read
 		move.w	d7,d6
 		addi.w	#$10,d6
 		neg.w	d7	; calculate bit deficit
@@ -2620,7 +2643,7 @@ loc_1C46:
 		and.w	Eni_Decomp_Masks-2(pc,d7.w),d5
 		add.w	d5,d1	; combine upper bits with lower bits
 
-$$maskValue:
+.maskValue:
 		move.w	a5,d0	; get length in bits of inline copy value
 		add.w	d0,d0
 		and.w	Eni_Decomp_Masks-2(pc,d0.w),d1	; mask value appropriately
@@ -2631,8 +2654,8 @@ $$maskValue:
 		rts
 ; ---------------------------------------------------------------------------
 
-$$enoughBits:
-		beq.s	$$justEnough	; if the word has been exactly exhausted, branch
+.enoughBits:
+		beq.s	.justEnough	; if the word has been exactly exhausted, branch
 		lsr.w	d7,d1	; get inline copy value
 		move.w	a5,d0
 		add.w	d0,d0
@@ -2642,9 +2665,9 @@ $$enoughBits:
 		bra.s	Eni_Decomp_FetchByte
 ; ---------------------------------------------------------------------------
 
-$$justEnough:
+.justEnough:
 		moveq	#$10,d6	; reset shift value
-		bra.s	$$maskValue
+		bra.s	.maskValue
 ; End of function Eni_Decomp_FetchInlineValue
 
 ; ---------------------------------------------------------------------------
@@ -2804,14 +2827,14 @@ Queue_Kos_Module:
 		beq.s	Process_Kos_Module_Queue_Init	; if it is, branch
 		addq.w	#6,a2	; otherwise, check next slot
 
-$$findFreeSlot:
+.findFreeSlot:
 		tst.l	(a2)
-		beq.s	$$freeSlotFound
+		beq.s	.freeSlotFound
 		addq.w	#6,a2
-		bra.s	$$findFreeSlot
+		bra.s	.findFreeSlot
 ; ---------------------------------------------------------------------------
 
-$$freeSlotFound:
+.freeSlotFound:
 		move.l	a1,(a2)+	; store source address
 		move.w	d2,(a2)+	; store destination VRAM address
 		rts
@@ -2858,16 +2881,16 @@ loc_1DA0:
 
 Process_Kos_Module_Queue:
 		tst.b	(Kos_modules_left).w
-		bne.s	$$modulesLeft
+		bne.s	.modulesLeft
 
-$$done:
+.done:
 		rts
 ; ---------------------------------------------------------------------------
 
-$$modulesLeft:
-		bmi.s	$$decompressionStarted
+.modulesLeft:
+		bmi.s	.decompressionStarted
 		cmpi.w	#4,(Kos_decomp_queue_count).w
-		bhs.s	$$done	; branch if the Kosinski decompression queue is full
+		bhs.s	.done	; branch if the Kosinski decompression queue is full
 		movea.l	(Kos_module_queue).w,a1
 		lea	(Kos_decomp_buffer).w,a2
 		bsr.w	Queue_Kos	; add current module to decompression queue
@@ -2875,9 +2898,9 @@ $$modulesLeft:
 		rts
 ; ---------------------------------------------------------------------------
 
-$$decompressionStarted:
+.decompressionStarted:
 		tst.w	(Kos_decomp_queue_count).w
-		bne.s	$$done	; branch if the decompression isn't complete
+		bne.s	.done	; branch if the decompression isn't complete
 
 		; otherwise, DMA the decompressed data to VRAM
 		andi.b	#$7F,(Kos_modules_left).w
@@ -4313,7 +4336,7 @@ Pal_FadeFromBlack:
 		move.w	#$15,d4
 
 loc_3284:
-		move.b	#$12,(V_int_routine).w
+		move.b	#VInt_ID_12,(V_int_routine).w
 		bsr.w	Wait_VSync
 		bsr.s	Pal_FromBlack
 		bsr.w	Process_Nem_Queue_Init
@@ -4438,7 +4461,7 @@ Pal_FadeToBlack:
 		move.w	#$15,d4
 
 loc_3348:
-		move.b	#$12,(V_int_routine).w
+		move.b	#VInt_ID_12,(V_int_routine).w
 		bsr.w	Wait_VSync
 		bsr.s	Pal_ToBlack
 		bsr.w	Process_Nem_Queue_Init
@@ -4526,7 +4549,7 @@ loc_33D6:
 		move.w	#$15,d4
 
 loc_33E0:
-		move.b	#$12,(V_int_routine).w
+		move.b	#VInt_ID_12,(V_int_routine).w
 		bsr.w	Wait_VSync
 		bsr.s	Pal_FromWhite
 		bsr.w	Process_Nem_Queue_Init
@@ -4615,7 +4638,7 @@ Pal_FadeToWhite:
 		move.w	#$15,d4
 
 loc_3470:
-		move.b	#$12,(V_int_routine).w
+		move.b	#VInt_ID_12,(V_int_routine).w
 		bsr.w	Wait_VSync
 		bsr.s	Pal_ToWhite
 		bsr.w	Process_Nem_Queue_Init
@@ -4766,7 +4789,7 @@ LoadPalette2_Immediate:
 ; ---------------------------------------------------------------------------
 
 Sega_Screen:
-		move.b	#4,(Game_mode).w	; set to title screen
+		move.b	#GameMode_TitleScreen,(Game_mode).w	; set to title screen
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -4787,21 +4810,21 @@ Title_Screen:
 		clr.b	(Water_full_screen_flag).w
 		move.w	#$8C81,(a6)			; Command $8C81 - 40cell screen size, no interlacing, no s/h
 		bsr.w	Clear_DisplayData
-		clearRAM	Sprite_table_input,$400		; Clear object display array
+		clearRAM	Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)	; Clear object display array
 		clearRAM	Object_RAM,(Kos_decomp_buffer-Object_RAM)	; Clear SST array
-		clearRAM	Tails_CPU_interact,$100	; Clear active play variables
-		clearRAM	Camera_RAM,$100	; Clear play positional values
+		clearRAM	Tails_CPU_interact,(Sprite_table-Tails_CPU_interact)	; Clear active play variables
+		clearRAM	Camera_RAM,(Camera_RAM_end-Camera_RAM)	; Clear play positional values
 		jsr	(Init_SpriteTable).l		; Initialize the sprite table
-		clearRAM	Normal_palette,$100	; Clear main palette
+		clearRAM	Normal_palette,(Stack_contents-Normal_palette)	; Clear main palette
 		move.b	#0,(Last_star_post_hit).w
 		move.b	#0,(Special_bonus_entry_flag).w
 		move.w	#0,(Debug_placement_mode).w
 		move.w	#0,(Demo_mode_flag).w
 		move.w	#0,(Palette_cycle_counter1).w
-		move.w	#0,(Competition_mode).w
+		move.w	#0,(Competition_mode).w		; Clear Competition mode
 		move.b	#0,(Level_started_flag).w
 		move.b	#0,(Debug_mode_flag).w
-		move.w	#0,(Competition_mode).w
+		move.w	#0,(Competition_mode).w		; Clear Competition mode again?
 		move.w	#0,(Level_select_cheat_counter).w
 		move.w	#0,(Debug_mode_cheat_counter).w
 		move.w	#(6*60)-1,(Demo_timer).w		; Wait on title screen for six seconds
@@ -4827,7 +4850,7 @@ Title_Screen:
 		jsr	(Plane_Map_To_VRAM).l		; Copy screen mappings to VRAM
 		lea	(Pal_TitleSonic1).l,a0
 		lea	(Target_palette).w,a1
-		moveq	#bytesToLcnt($20),d0
+		moveq	#bytesToLcnt(Target_palette_line_2-Target_palette),d0
 
 loc_36AE:
 		move.l	(a0)+,(a1)+				; Fill 2 palette lines with title screen data
@@ -4842,7 +4865,7 @@ loc_36AE:
 		move.w	#3*60,(Demo_timer).w		; Set to wait for 3 seconds
 
 Wait_Sega:
-		move.b	#$14,(V_int_routine).w
+		move.b	#VInt_ID_14,(V_int_routine).w
 		bsr.w	Wait_VSync				; Wait for SEGA sound
 		move.b	(Ctrl_1_pressed).w,d0
 		or.b	(Ctrl_2_pressed).w,d0
@@ -4857,7 +4880,7 @@ loc_36F8:
 		lea	(Pal_Title).l,a1
 
 loc_3704:
-		move.b	#2,(V_int_routine).w
+		move.b	#VInt_ID_2,(V_int_routine).w
 		bsr.w	Wait_VSync
 		lea	(Normal_palette).w,a2
 		move.l	(a1)+,(a2)+
@@ -4881,7 +4904,7 @@ loc_3704:
 		bsr.w	Play_Music				; Start playing the title screen music
 
 Wait_Title:
-		move.b	#4,(V_int_routine).w
+		move.b	#VInt_ID_4,(V_int_routine).w
 		jsr	(Process_Kos_Queue).l
 		bsr.w	Wait_VSync
 		bsr.w	Iterate_TitleSonicFrame
@@ -4899,13 +4922,13 @@ Wait_Title:
 loc_379E:
 		move.w	#$C,(Title_anim_frame).w
 		lea	(Normal_palette).w,a1
-		moveq	#bytesToWcnt($80),d1
+		moveq	#bytesToWcnt(Normal_palette_end-Normal_palette),d1
 
 loc_37AA:
 		move.w	#$EEE,(a1)+
 		dbf	d1,loc_37AA				; Flash palette white
 		move.b	#3,(Title_anim_delay).w
-		move.b	#4,(V_int_routine).w
+		move.b	#VInt_ID_4,(V_int_routine).w
 		bsr.w	Wait_VSync
 		lea	(ArtKos_S3TitleSonicD).l,a0
 		lea	(RAM_start).l,a1
@@ -4934,11 +4957,11 @@ loc_37AA:
 		moveq	#40-1,d1
 		moveq	#28-1,d2
 		jsr	(Plane_Map_To_VRAM).l		; Load S3K Title BG to $E000 VRAM
-		move.b	#4,(V_int_routine).w
+		move.b	#VInt_ID_4,(V_int_routine).w
 		bsr.w	Wait_VSync
 		lea	(Pal_TitleSonicD).l,a0		; Title palette
 		lea	(Target_palette).w,a1
-		moveq	#bytesToLcnt($80),d0
+		moveq	#bytesToLcnt(Target_palette_end-Target_palette),d0
 
 loc_384E:
 		move.l	(a0)+,(a1)+
@@ -4958,7 +4981,7 @@ loc_384E:
 		move.l	#Obj_TitleSonicFinger,(Dynamic_object_RAM+object_size).w
 		move.l	#Obj_TitleSonicWink,(Dynamic_object_RAM+(object_size*2)).w
 		move.l	#Obj_TitleTailsPlane,(Dynamic_object_RAM+(object_size*3)).w		; Load all applicable title objects
-		moveq	#0,d0
+		moveq	#PLCID_00,d0
 		bsr.w	Load_PLC_2
 	if 0
 		; Sonic 2 Beta 4 reveals that these were the original instructions.
@@ -4976,7 +4999,7 @@ loc_384E:
 		move.b	#0,(Title_anim_delay).w
 
 loc_38D8:
-		move.b	#4,(V_int_routine).w
+		move.b	#VInt_ID_4,(V_int_routine).w
 		bsr.w	Wait_VSync
 		jsr	(Process_Sprites).l
 		jsr	(Render_Sprites).l
@@ -4988,7 +5011,7 @@ loc_38D8:
 		move.b	(Ctrl_1_pressed).w,d0
 		andi.b	#button_start_mask,d0
 		beq.w	loc_38D8			; Repeat until start has been pressed
-		move.b	#$C,(Game_mode).w
+		move.b	#GameMode_Level,(Game_mode).w
 		move.b	#3,(Life_count).w
 		move.b	#3,(Life_count_P2).w
 		moveq	#0,d0
@@ -5006,19 +5029,19 @@ loc_38D8:
 		moveq	#0,d0
 		move.b	(Title_screen_option).w,d0		; Selection is stored here
 		bne.w	loc_3964
-		move.b	#$4C,(Game_mode).w		; Game Mode 4C is the save select
+		move.b	#GameMode_SaveScreen,(Game_mode).w		; Game Mode 4C is the save select
 		rts
 ; ---------------------------------------------------------------------------
 
 loc_3964:
 		subq.b	#1,d0
 		bne.s	loc_3970
-		move.b	#$38,(Game_mode).w		; Game Mode 38 is Competition mode
+		move.b	#GameMode_CompetitionMenu,(Game_mode).w		; Game Mode 38 is Competition mode
 		rts
 ; ---------------------------------------------------------------------------
 
 loc_3970:
-		move.b	#$28,(Game_mode).w		; Game Mode 28 is the level select
+		move.b	#GameMode_LevelSelect,(Game_mode).w		; Game Mode 28 is the level select
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -5039,7 +5062,7 @@ loc_3978:
 
 loc_39AA:
 		move.w	#1,(Demo_mode_flag).w
-		move.b	#8,(Game_mode).w	; We're about to perform a level demo
+		move.b	#GameMode_Demo,(Game_mode).w	; We're about to perform a level demo
 		move.b	#3,(Life_count).w
 		move.b	#3,(Life_count_P2).w
 		moveq	#0,d0
@@ -5069,7 +5092,7 @@ TitleAnim_FlipBuffer:
 		move.b	#4-1,(Title_anim_delay).w
 		lea	(Target_palette).w,a0
 		lea	(Normal_palette).w,a1
-		moveq	#bytesToLcnt($40),d0
+		moveq	#bytesToLcnt(Target_palette_line_3-Target_palette),d0
 
 loc_3A18:
 		move.l	(a0)+,(a1)+
@@ -5096,7 +5119,7 @@ loc_3A4E:
 loc_3A54:
 		lea	(Target_palette).w,a0
 		lea	(Normal_palette).w,a1
-		moveq	#bytesToLcnt($80),d0
+		moveq	#bytesToLcnt(Target_palette_end-Target_palette),d0
 
 loc_3A5E:
 		move.l	(a0)+,(a1)+
@@ -5209,7 +5232,7 @@ loc_3B5A:
 loc_3B66:
 		movea.l	(a2)+,a0			; Palette data address
 		lea	(Target_palette).w,a1
-		moveq	#bytesToLcnt($40),d0
+		moveq	#bytesToLcnt(Target_palette_line_3-Target_palette),d0
 
 loc_3B6E:
 		move.l	(a0)+,(a1)+
@@ -5675,18 +5698,18 @@ LevelMusic_Playlist:
 
 Level:
 		bset	#7,(Game_mode).w		; Set bit 7 of F600 is indicate that we're loading the level
-		tst.w	(Demo_mode_flag).w
-		bmi.s	loc_46C2
+		tst.w	(Demo_mode_flag).w		; Are we on an ending demo? (Sonic 1 leftover)
+		bmi.s	loc_46C2			; If so, branch (Sonic 1 leftover)
 		moveq	#signextendB(cmd_FadeOut),d0		; If a demo
 		bsr.w	Play_SFX
 
 loc_46C2:
 		clr.w	(Kos_decomp_queue_count).w
-		clearRAM	Kos_decomp_stored_registers,$6C	; Clear the KosM bytes
+		clearRAM	Kos_decomp_stored_registers,(Kos_decomp_module_end-Kos_decomp_stored_registers)	; Clear the KosM bytes
 		bsr.w	Clear_Nem_Queue				; Clear PLCs
 		bsr.w	Pal_FadeToBlack
-		tst.w	(Demo_mode_flag).w
-		bmi.w	loc_479A			; Skip ahead if negative (?)
+		tst.w	(Demo_mode_flag).w		; Are we on an ending demo? (Sonic 1 leftover)
+		bmi.w	loc_479A			; If so, branch (Sonic 1 leftover)
 		move	#$2700,sr
 		bsr.w	Clear_DisplayData		; Clear the screen
 		move	#$2300,sr
@@ -5739,32 +5762,32 @@ loc_4756:
 		bne.s	loc_4782
 		cmpi.w	#2,(Player_mode).w
 		beq.s	loc_4782
-		moveq	#1,d0					; If in AIZ intro
+		moveq	#PLCID_01,d0					; If in AIZ intro
 		jsr	(Load_PLC_2).l
-		moveq	#$A,d0
+		moveq	#PLCID_0A,d0
 		bsr.w	Load_PLC					; Load the AIZ Intro graphics
 		bra.s	loc_479A
 ; ---------------------------------------------------------------------------
 
 loc_4782:
-		moveq	#6,d0
+		moveq	#PLCID_06,d0
 		tst.w	(Competition_mode).w
 		bne.s	loc_4796
-		moveq	#1,d0
+		moveq	#PLCID_01,d0
 		cmpi.w	#2,(Player_mode).w
 		bne.s	loc_4796
-		moveq	#7,d0
+		moveq	#PLCID_07,d0
 
 loc_4796:
 		bsr.w	Load_PLC
 
 loc_479A:
-		clearRAM	Sprite_table_input,$400
+		clearRAM	Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
 		clearRAM	Object_RAM,(Kos_decomp_buffer-Object_RAM)
-		clearRAM	Lag_frame_count,$58
-		clearRAM	Tails_CPU_interact,$100
+		clearRAM	Lag_frame_count,(Nem_decomp_queue-Lag_frame_count)
+		clearRAM	Tails_CPU_interact,(Sprite_table-Tails_CPU_interact)
 		clearRAM	Oscillating_table,(AIZ_vine_angle-Oscillating_table)
-		clearRAM	_unkFA80,$80
+		clearRAM	_unkFA80,(DMA_queue-_unkFA80)
 		jsr	(Init_SpriteTable).l
 		lea	(VDP_control_port).l,a6
 		move.w	#$8B03,(a6)
@@ -5806,17 +5829,17 @@ loc_4886:
 		move.w	(H_int_counter_command).w,(a6)
 		clr.w	(DMA_queue).w
 		move.l	#DMA_queue,(DMA_queue_slot).w
-		moveq	#3,d0
+		moveq	#PalID_SonicTails,d0
 		bsr.w	LoadPalette_Immediate
 		bsr.w	CheckLevelForWater
-		clearRAM	Water_palette_line_2,$60
+		clearRAM	Water_palette_line_2,(Water_palette_end-Water_palette_line_2)
 		tst.b	(Water_flag).w
 		beq.s	loc_48BA
 		move.w	#$8014,(a6)
 
 loc_48BA:
-		tst.w	(Demo_mode_flag).w
-		bmi.w	loc_4942
+		tst.w	(Demo_mode_flag).w		; Are we on an ending demo? (Sonic 1 leftover)
+		bmi.w	loc_4942			; If so, branch (Sonic 1 leftover)
 		moveq	#0,d0
 		move.w	(Current_zone_and_act).w,d0
 		ror.b	#1,d0
@@ -5838,7 +5861,7 @@ loc_48F2:
 		move.l	#Obj_TitleCard,(Dynamic_object_RAM+(object_size*5)).w
 
 loc_4902:
-		move.b	#$C,(V_int_routine).w
+		move.b	#VInt_ID_C,(V_int_routine).w
 		jsr	(Process_Kos_Queue).l
 		bsr.w	Wait_VSync
 		jsr	(Process_Sprites).l
@@ -5856,7 +5879,7 @@ loc_4934:
 		move	#$2300,sr
 
 loc_4942:
-		moveq	#3,d0
+		moveq	#PalID_SonicTails,d0
 		bsr.w	LoadPalette
 		jsr	(Get_LevelSizeStart).l
 		jsr	(DeformBgLayer).l
@@ -5879,10 +5902,10 @@ loc_4942:
 		move.b	#0,(Level_started_flag).w
 		tst.b	(Water_flag).w
 		beq.s	loc_49DC
-		cmpi.b	#1,(Current_zone).w
-		beq.s	loc_49C6
-		cmpi.b	#1,(Current_zone).w
-		bne.s	loc_49DC
+		cmpi.b	#1,(Current_zone).w		; Is current zone Hydrocity?
+		beq.s	loc_49C6			; If so, branch
+		cmpi.b	#1,(Current_zone).w		; Is current zone Hydrocity?
+		bne.s	loc_49DC			; If not, branch
 
 loc_49C6:
 		move.l	#Obj_HCZWaveSplash,(Wave_Splash).w
@@ -5916,6 +5939,9 @@ loc_4A0C:
 		move.w	d0,(Monitors_broken_P2).w
 		move.w	d0,(Loser_time_left).w
 		move.b	d0,(LRZ_rocks_routine).w
+	if FixBugs
+		move.b	d0,(Super_Sonic_Knux_flag).w
+	endif
 		bsr.w	OscillateNumInit
 		move.b	#1,(Update_HUD_score).w
 		move.b	#1,(Update_HUD_ring_count).w
@@ -5939,7 +5965,7 @@ loc_4A0C:
 
 loc_4AA2:
 		bsr.w	LoadWaterPalette
-		clearRAM	Water_palette_line_2,$60
+		clearRAM	Water_palette_line_2,(Water_palette_end-Water_palette_line_2)
 		move.b	#0,(Ctrl_1_locked).w
 		move.b	#0,(Ctrl_2_locked).w
 		jsr	GetDemoPtr(pc)
@@ -5965,7 +5991,7 @@ loc_4AE8:
 
 LevelLoop:
 		bsr.w	Pause_Game
-		move.b	#8,(V_int_routine).w
+		move.b	#VInt_ID_8,(V_int_routine).w
 		jsr	(Process_Kos_Queue).l
 		bsr.w	Wait_VSync
 		addq.w	#1,(Level_frame_counter).w
@@ -5987,9 +6013,9 @@ LevelLoop:
 		bsr.w	ChangeRingFrame
 		jsr	(Render_Sprites).l
 		jsr	(Load_Sprites).l
-		cmpi.b	#8,(Game_mode).w
+		cmpi.b	#GameMode_Demo,(Game_mode).w
 		beq.s	DemoMode
-		cmpi.b	#$C,(Game_mode).w
+		cmpi.b	#GameMode_Level,(Game_mode).w
 		beq.w	LevelLoop
 		rts
 ; ---------------------------------------------------------------------------
@@ -5999,16 +6025,16 @@ DemoMode:
 		bne.s	loc_4BB2
 		tst.w	(Demo_timer).w
 		beq.s	loc_4BB2
-		cmpi.b	#8,(Game_mode).w
+		cmpi.b	#GameMode_Demo,(Game_mode).w
 		beq.w	LevelLoop
-		move.b	#0,(Game_mode).w
+		move.b	#GameMode_SegaScreen,(Game_mode).w
 		rts
 ; ---------------------------------------------------------------------------
 
 loc_4BB2:
-		cmpi.b	#8,(Game_mode).w
+		cmpi.b	#GameMode_Demo,(Game_mode).w
 		bne.s	loc_4BC2
-		move.b	#0,(Game_mode).w
+		move.b	#GameMode_SegaScreen,(Game_mode).w
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -6018,7 +6044,7 @@ loc_4BC2:
 		clr.w	(Pal_fade_delay).w
 
 loc_4BD2:
-		move.b	#8,(V_int_routine).w
+		move.b	#VInt_ID_8,(V_int_routine).w
 		bsr.w	Wait_VSync
 		bsr.w	Demo_PlayRecord
 		jsr	(Process_Sprites).l
@@ -6058,7 +6084,7 @@ loc_4C3C:
 
 loc_4C5A:
 		bsr.w	Pause_Game
-		move.b	#8,(V_int_routine).w
+		move.b	#VInt_ID_8,(V_int_routine).w
 		jsr	(Process_Kos_Queue).l
 		bsr.w	Wait_VSync
 		addq.w	#1,(Level_frame_counter).w
@@ -6101,9 +6127,9 @@ loc_4CCC:
 		jsr	(Animate_Palette).l
 		bsr.w	Process_Nem_Queue_Init
 		jsr	(Process_Kos_Module_Queue).l
-		cmpi.b	#8,(Game_mode).w
+		cmpi.b	#GameMode_Demo,(Game_mode).w
 		beq.s	loc_4D10
-		cmpi.b	#$C,(Game_mode).w
+		cmpi.b	#GameMode_Level,(Game_mode).w
 		beq.w	loc_4C5A
 		rts
 ; ---------------------------------------------------------------------------
@@ -6113,16 +6139,16 @@ loc_4D10:
 		bne.s	loc_4D2E
 		tst.w	(Demo_timer).w
 		beq.s	loc_4D2E
-		cmpi.b	#8,(Game_mode).w
+		cmpi.b	#GameMode_Demo,(Game_mode).w
 		beq.w	loc_4C5A
-		move.b	#0,(Game_mode).w
+		move.b	#GameMode_SegaScreen,(Game_mode).w
 		rts
 ; ---------------------------------------------------------------------------
 
 loc_4D2E:
-		cmpi.b	#8,(Game_mode).w
+		cmpi.b	#GameMode_Demo,(Game_mode).w
 		bne.s	loc_4D3E
-		move.b	#0,(Game_mode).w
+		move.b	#GameMode_SegaScreen,(Game_mode).w
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -6132,7 +6158,7 @@ loc_4D3E:
 		clr.w	(Pal_fade_delay).w
 
 loc_4D4E:
-		move.b	#8,(V_int_routine).w
+		move.b	#VInt_ID_8,(V_int_routine).w
 		bsr.w	Wait_VSync
 		bsr.w	Demo_PlayRecord
 		jsr	(Process_Sprites).l
@@ -6155,7 +6181,7 @@ loc_4D90:
 
 
 LevelLoad_ActiveCharacter:
-		cmpi.b	#8+$80,(Game_mode).w
+		cmpi.b	#GameMode_Demo+$80,(Game_mode).w
 		beq.s	loc_4DAE
 		tst.w	(Competition_mode).w
 		bne.s	loc_4DAE
@@ -6412,7 +6438,7 @@ loc_5074:
 loc_507C:
 		lea	(Target_palette_line_2).w,a2
 		lea	(Pal_Level_2P).l,a1
-		move.w	#bytesToWcnt($20),d0
+		move.w	#bytesToWcnt(Target_palette_line_3-Target_palette_line_2),d0
 
 loc_508A:
 		move.w	(a1)+,(a2)+
@@ -6839,7 +6865,7 @@ loc_53F4:
 		lsl.l	#8,d1
 		add.l	d1,y_pos(a1)
 		move.b	#$F,anim(a1)
-		bset	#1,status(a1)
+		bset	#Status_InAir,status(a1)
 		tst.b	$C(a2)
 		bne.s	loc_547A
 		btst	#button_up,d6
@@ -6945,7 +6971,7 @@ sub_55BC:
 		movea.w	d0,a2
 		move.b	(a2),d0
 		lea	byte_574E(pc),a2
-		moveq	#$A-1,d1
+		moveq	#(byte_574E-byte_5744)-1,d1
 
 loc_55F0:
 		cmp.b	-(a2),d0
@@ -6995,7 +7021,7 @@ sub_5624:
 		movea.w	d0,a2
 		move.b	(a2),d0
 		lea	WaterTransition_AIZ1(pc),a2
-		moveq	#$A-1,d1
+		moveq	#(WaterTransition_AIZ1-byte_574E)-1,d1
 
 loc_5658:
 		cmp.b	-(a2),d0
@@ -7100,6 +7126,7 @@ loc_572E:
 ; ---------------------------------------------------------------------------
 byte_573A:
 		dc.b  $F8, $F8,   8,   8, $F4, $F4, $F4,  $C,  $C,  $C
+byte_5744:
 		dc.b  $1C, $72, $83, $84, $8B, $91, $9F, $A0, $A5, $A6
 byte_574E:
 		dc.b  $2E, $C6, $33, $C5, $24, $2A, $44, $1F, $27, $2B
@@ -7282,7 +7309,7 @@ loc_587C:
 		or.b	(Ctrl_2_pressed).w,d0
 		andi.b	#button_start_mask,d0
 		beq.s	loc_5890
-		move.b	#4,(Game_mode).w
+		move.b	#GameMode_TitleScreen,(Game_mode).w
 
 loc_5890:
 		movea.l	(Demo_data_addr).w,a0
@@ -7370,7 +7397,7 @@ loc_5958:
 		lea	(Oscillating_table).w,a1
 		lea	(Osc_Data2).l,a2
 		move.w	(a1)+,d3
-		moveq	#$10-1,d1
+		moveq	#bytesToLcnt(Osc_Data2_end-Osc_Data2),d1
 
 loc_5966:
 		move.w	(a2)+,d2
@@ -7423,6 +7450,7 @@ Osc_Data2:
 		dc.w    7, $70
 		dc.w    2, $40
 		dc.w    2, $40
+Osc_Data2_end:
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -7495,7 +7523,7 @@ loc_5E38:
 		jsr	(Queue_Kos_Module).l
 
 loc_5E7E:
-		move.b	#$C,(V_int_routine).w
+		move.b	#VInt_ID_C,(V_int_routine).w
 		jsr	(Process_Kos_Queue).l
 		bsr.w	Wait_VSync
 		bsr.w	Process_Nem_Queue_Init
@@ -7561,34 +7589,34 @@ loc_5F08:
 LoadWaterPalette:
 		tst.b	(Water_flag).w
 		beq.w	locret_5FEE
-		moveq	#$2B,d0
+		moveq	#PalID_AIZ_Water,d0
 		cmpi.w	#0,(Current_zone_and_act).w
 		beq.w	loc_5FD6
-		moveq	#$2C,d0
+		moveq	#PalID_AIZ2_Water,d0
 		move.l	#WaterTransition_AIZ2,(Water_palette_data_addr).w
 		cmpi.w	#1,(Current_zone_and_act).w
 		beq.s	loc_5FD6
-		moveq	#$31,d0
+		moveq	#PalID_HCZ1_Water,d0
 		move.l	#WaterTransition_HCZLBZ1,(Water_palette_data_addr).w
 		cmpi.w	#$100,(Current_zone_and_act).w
 		beq.s	loc_5FD6
-		moveq	#$32,d0
+		moveq	#PalID_HCZ2_Water,d0
 		move.l	#WaterTransition_HCZLBZ1,(Water_palette_data_addr).w
 		cmpi.w	#$101,(Current_zone_and_act).w
 		beq.s	loc_5FD6
-		moveq	#$3A,d0
+		moveq	#PalID_CNZ_Water,d0
 		move.l	#WaterTransition_CNZ2ICZ2,(Water_palette_data_addr).w
 		cmpi.w	#$301,(Current_zone_and_act).w
 		beq.s	loc_5FD6
-		moveq	#$39,d0
+		moveq	#PalID_ICZ2_Water,d0
 		move.l	#WaterTransition_CNZ2ICZ2,(Water_palette_data_addr).w
 		cmpi.w	#$501,(Current_zone_and_act).w
 		beq.s	loc_5FD6
-		moveq	#$2D,d0
+		moveq	#PalID_LBZ_Water,d0
 		move.l	#WaterTransition_HCZLBZ1,(Water_palette_data_addr).w
 		cmpi.w	#$600,(Current_zone_and_act).w
 		beq.s	loc_5FD6
-		moveq	#$2E,d0
+		moveq	#PalID_LBZ2_Water,d0
 		move.l	#WaterTransition_LBZ2,(Water_palette_data_addr).w
 		cmpi.w	#$601,(Current_zone_and_act).w
 		beq.s	loc_5FD6
@@ -7702,7 +7730,7 @@ LevelSelect_S2Options:
 		move.w	#$8700,(a6)
 		move.w	#$8C81,(a6)
 		move.w	#$9001,(a6)
-		clearRAM	Sprite_table_input,$400
+		clearRAM	Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
 		clearRAM	Object_RAM,(Kos_decomp_buffer-Object_RAM)
 		clr.w	(DMA_queue).w
 		move.l	#DMA_queue,(DMA_queue_slot).w
@@ -7724,9 +7752,9 @@ LevelSelect_S2Options:
 		moveq	#40-1,d1
 		moveq	#28-1,d2
 		jsr	(Plane_Map_To_VRAM).l
-		cmpi.b	#$24,(Game_mode).w	; is the game mode id equal to $24?
+		cmpi.b	#GameMode_OptionsMenu,(Game_mode).w	; is the game mode id equal to $24?
 		beq.w	MenuScreen_Options	; if so, then branch to the options menu (leftover from Sonic 2)
-		cmpi.b	#$28,(Game_mode).w	; is the game mode id equal to $28?
+		cmpi.b	#GameMode_LevelSelect,(Game_mode).w	; is the game mode id equal to $28?
 		beq.w	MenuScreen_LevelSelect	; if so, then branch to the level select menu
 		lea	(RAM_start).l,a1
 		lea	(MapEni_S2LevSel2P).l,a0
@@ -7766,11 +7794,11 @@ loc_626C:
 		clr.w	(_unkFF98).w
 		lea	(AniPLC_SONICMILES).l,a2
 		jsr	(AnimateTiles_DoAniPLC).l
-		moveq	#4,d0
+		moveq	#PalID_S2Menu,d0
 		bsr.w	LoadPalette
 		lea	(Normal_palette_line_3).w,a1
 		lea	(Target_palette_line_3).w,a2
-		moveq	#bytesToLcnt($20),d1
+		moveq	#bytesToLcnt(Normal_palette_line_4-Normal_palette_line_3),d1
 
 loc_62E0:
 		move.l	(a1),(a2)+
@@ -7782,7 +7810,7 @@ loc_62E0:
 		clr.w	(Competition_mode).w
 		clr.l	(Camera_X_pos).w
 		clr.l	(Camera_Y_pos).w
-		move.b	#$16,(V_int_routine).w
+		move.b	#VInt_ID_16,(V_int_routine).w
 		bsr.w	Wait_VSync
 		move.w	(VDP_reg_1_command).w,d0
 		ori.b	#$40,d0
@@ -7790,7 +7818,7 @@ loc_62E0:
 		bsr.w	Pal_FadeFromBlack
 
 LevelSelect2P_Main:
-		move.b	#$16,(V_int_routine).w
+		move.b	#VInt_ID_16,(V_int_routine).w
 		bsr.w	Wait_VSync
 		move	#$2700,sr
 		bsr.w	ClearOld2PLevSelSelection
@@ -7815,7 +7843,7 @@ LevelSelect2P_PressStart:
 ; ---------------------------------------------------------------------------
 
 loc_6368:
-		move.b	#0,(Game_mode).w
+		move.b	#GameMode_SegaScreen,(Game_mode).w
 		rts
 ; ---------------------------------------------------------------------------
 		; unused leftover from Sonic 2
@@ -7828,7 +7856,7 @@ loc_6368:
 		move.w	d0,(Apparent_zone_and_act).w
 		move.w	d0,(Saved_zone_and_act).w
 		move.w	#1,(Competition_mode).w
-		move.b	#$C,(Game_mode).w
+		move.b	#GameMode_Level,(Game_mode).w
 		move.b	#0,(Last_star_post_hit).w
 		move.b	#0,(Special_bonus_entry_flag).w
 		moveq	#0,d0
@@ -7841,7 +7869,7 @@ loc_6368:
 
 loc_63BE:
 		move.b	#4,(Current_special_stage).w
-		move.b	#$10,(Game_mode).w
+		move.b	#GameMode_SpecialStage_S2,(Game_mode).w
 		moveq	#1,d0
 		move.w	d0,(Competition_mode).w
 		move.w	d0,(Competition_settings).w
@@ -8030,7 +8058,7 @@ MenuScreen_Options:
 		clr.w	(Anim_Counters).w
 		lea	(AniPLC_SONICMILES).l,a2
 		jsr	(AnimateTiles_DoAniPLC).l
-		moveq	#4,d0
+		moveq	#PalID_S2Menu,d0
 		bsr.w	LoadPalette
 		moveq	#signextendB(mus_DataSelect),d0
 		bsr.w	Play_Music
@@ -8039,7 +8067,7 @@ MenuScreen_Options:
 		clr.l	(Camera_Y_pos).w
 		clr.w	(Level_select_cheat_counter).w
 		clr.w	(Debug_mode_cheat_counter).w
-		move.b	#$16,(V_int_routine).w
+		move.b	#VInt_ID_16,(V_int_routine).w
 		bsr.w	Wait_VSync
 		move.w	(VDP_reg_1_command).w,d0
 		ori.b	#$40,d0
@@ -8047,7 +8075,7 @@ MenuScreen_Options:
 		bsr.w	Pal_FadeFromBlack
 
 OptionScreen_Main:
-		move.b	#$16,(V_int_routine).w
+		move.b	#VInt_ID_16,(V_int_routine).w
 		bsr.w	Wait_VSync
 		move	#$2700,sr
 		bsr.w	OptionScreen_DrawUnselected
@@ -8072,7 +8100,7 @@ OptionScreen_Select:
 		move.w	d0,(Current_zone_and_act).w
 		move.w	d0,(Apparent_zone_and_act).w
 		move.w	d0,(Saved_zone_and_act).w
-		move.b	#$C,(Game_mode).w
+		move.b	#GameMode_Level,(Game_mode).w
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -8082,14 +8110,14 @@ OptionScreen_Select_Not1P:
 		moveq	#1,d0
 		move.w	d0,(Competition_mode).w
 		move.w	d0,(Competition_settings).w
-		move.b	#$1C,(Game_mode).w
+		move.b	#GameMode_2PLevelSelect,(Game_mode).w
 		move.b	#0,(Current_zone_2P).w
 		move.w	#0,(Player_mode).w
 		rts
 ; ---------------------------------------------------------------------------
 
 OptionScreen_Select_Other:
-		move.b	#0,(Game_mode).w
+		move.b	#GameMode_SegaScreen,(Game_mode).w
 		rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -8415,11 +8443,11 @@ MenuScreen_LevelSelect:
 		clr.w	(Anim_Counters).w
 		lea	(AniPLC_SONICMILES).l,a2
 		jsr	(AnimateTiles_DoAniPLC).l
-		moveq	#4,d0
+		moveq	#PalID_S2Menu,d0
 		bsr.w	LoadPalette
 		lea	(Normal_palette_line_3).w,a1
 		lea	(Target_palette_line_3).w,a2
-		moveq	#bytesToLcnt($20),d1
+		moveq	#bytesToLcnt(Normal_palette_line_4-Normal_palette_line_3),d1
 
 loc_696C:
 		move.l	(a1),(a2)+
@@ -8436,7 +8464,7 @@ loc_696C:
 		move.w	#(1<<8)|1,(Debug_cheat_flag).w
 		clr.w	(Level_select_cheat_counter).w
 		clr.w	(Debug_mode_cheat_counter).w
-		move.b	#$16,(V_int_routine).w
+		move.b	#VInt_ID_16,(V_int_routine).w
 		bsr.w	Wait_VSync
 		move.w	(VDP_reg_1_command).w,d0
 		ori.b	#$40,d0
@@ -8444,7 +8472,7 @@ loc_696C:
 		bsr.w	Pal_FadeFromBlack
 
 LevelSelect_Main:	; routine running during level select
-		move.b	#$16,(V_int_routine).w
+		move.b	#VInt_ID_16,(V_int_routine).w
 		bsr.w	Wait_VSync
 		move	#$2700,sr
 		moveq	#palette_line_0,d3
@@ -8474,16 +8502,16 @@ LevelSelect_PressStart:
 		beq.w	LevelSelect_SpecialStage	; If so, branch
 		cmpi.w	#$4000,d0			; Is Special Stage 1 selected?
 		bne.w	LevelSelect_StartZone	; If not, branch
-		move.b	#$2C,(Game_mode).w
+		move.b	#GameMode_SpecialStage,(Game_mode).w
 		rts
 ; ---------------------------------------------------------------------------
 
 LevelSelect_SpecialStage:
-		move.b	#$34,(Game_mode).w
+		move.b	#GameMode_SpecialStage3,(Game_mode).w
 		rts
 ; ---------------------------------------------------------------------------
 		; unused leftover from Sonic 2
-		move.b	#$10,(Game_mode).w
+		move.b	#GameMode_SpecialStage_S2,(Game_mode).w
 		clr.w	(Current_zone_and_act).w
 		clr.w	(Apparent_zone_and_act).w
 		clr.w	(Saved_zone_and_act).w
@@ -8534,7 +8562,7 @@ LS_Level_Order:
 ; ---------------------------------------------------------------------------
 
 LevelSelect_Return:
-		move.b	#0,(Game_mode).w
+		move.b	#GameMode_SegaScreen,(Game_mode).w
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -8543,7 +8571,13 @@ LevelSelect_StartZone:
 		move.w	d0,(Current_zone_and_act).w
 		move.w	d0,(Apparent_zone_and_act).w
 		move.w	d0,(Saved_zone_and_act).w
-		move.b	#$C,(Game_mode).w
+	if FixBugs
+		; Sonic 3 Alone fails to set the saved apparent zone and act. This causes the "Doilus Stage" bug found in the level select when entering a Bonus Stage.
+		; This can also be affected by checkpoints as well when returning to the level select from different zones.
+		; This bug was fixed in Sonic & Knuckles since the 0517 Prototype.
+		move.w	d0,(Saved_apparent_zone_and_act).w
+	endif
+		move.b	#GameMode_Level,(Game_mode).w
 		move.b	#3,(Life_count).w
 		move.b	#3,(Life_count_P2).w
 		moveq	#0,d0
@@ -9104,15 +9138,15 @@ SpecialStage:
 		clr.b	(Water_full_screen_flag).w
 		move.w	#$8C81,(a6)
 		bsr.w	Clear_DisplayData
-		clearRAM	Sprite_table_input,$400
+		clearRAM	Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
 		clearRAM	Object_RAM,(Kos_decomp_buffer-Object_RAM)
-		clearRAM	Stat_table,$100
+		clearRAM	Stat_table,(Pos_table-Stat_table)
 		jsr	(Init_SpriteTable).l
 		clr.w	(DMA_queue).w
 		move.l	#DMA_queue,(DMA_queue_slot).w
 		lea	(Pal_SStage_Main).l,a1
 		lea	(Target_palette).w,a2
-		move.w	#bytesToWcnt($80),d0
+		move.w	#bytesToWcnt(Target_palette_end-Target_palette),d0
 
 loc_7546:
 		move.w	(a1)+,(a2)+
@@ -9249,7 +9283,7 @@ loc_7770:
 		jsr	Draw_SSSprites(pc)
 		bsr.w	sub_8B9A
 		move.b	#1,(Special_stage_fade_timer).w
-		move.b	#$1C,(V_int_routine).w
+		move.b	#VInt_ID_1C,(V_int_routine).w
 		bsr.w	Wait_VSync
 		move.b	#0,(Special_stage_fade_timer).w
 		move.w	#$8C89,(VDP_control_port).l
@@ -9262,7 +9296,7 @@ loc_7770:
 
 loc_77D2:
 		bsr.w	Pause_Game
-		move.b	#$1C,(V_int_routine).w
+		move.b	#VInt_ID_1C,(V_int_routine).w
 		jsr	(Process_Kos_Queue).l
 		bsr.w	Wait_VSync
 		addq.w	#1,(Level_frame_counter).w
@@ -9275,11 +9309,11 @@ loc_77D2:
 		bsr.w	sub_89E2
 		bsr.w	Process_Nem_Queue_Init
 		jsr	(Process_Kos_Module_Queue).l
-		cmpi.b	#$34,(Game_mode).w
+		cmpi.b	#GameMode_SpecialStage3,(Game_mode).w
 		beq.s	loc_77D2
 		tst.w	(Demo_mode_flag).w
 		beq.s	loc_7828
-		move.b	#0,(Game_mode).w
+		move.b	#GameMode_SegaScreen,(Game_mode).w
 
 loc_7828:
 		move.w	#60,(Demo_timer).w
@@ -9287,7 +9321,7 @@ loc_7828:
 		clr.w	(Pal_fade_delay).w
 
 loc_7838:
-		move.b	#$1C,(V_int_routine).w
+		move.b	#VInt_ID_1C,(V_int_routine).w
 		bsr.w	Wait_VSync
 		jsr	(Process_Sprites).l
 		bsr.w	Animate_SSRings
@@ -9982,7 +10016,7 @@ locret_82CC:
 
 sub_82CE:
 		lea	(Pos_table).w,a2
-		move.w	#bytesToLcnt($100),d0
+		move.w	#bytesToLcnt(Pos_table_end-Pos_table),d0
 
 loc_82D6:
 		move.l	#0,(a2)+
@@ -10304,7 +10338,7 @@ sub_85FE:
 		tst.b	(Special_stage_fade_timer).w
 		bne.s	locret_866C
 		move.b	#1,(Special_stage_fade_timer).w
-		move.b	#$48,(Game_mode).w
+		move.b	#GameMode_SpecialStageResults,(Game_mode).w
 		tst.b	(Special_bonus_entry_flag).w
 		beq.s	loc_8664
 		move.w	(Saved2_zone_and_act).w,(Current_zone_and_act).w
@@ -10574,7 +10608,7 @@ loc_88BC:
 		lea	(Level_layout_header).w,a2
 		lea	(SStage_extra_sprites).w,a4
 		lea	(Sprite_table).w,a6
-		moveq	#$50-1,d7
+		moveq	#80-1,d7
 		moveq	#0,d6
 		move.b	(Sprites_drawn).w,d6
 		sub.b	d6,d7
@@ -10810,7 +10844,7 @@ loc_8ADA:
 loc_8B2E:
 		addq.b	#1,(Special_stage_clear_routine).w
 		move.b	#1,(Special_stage_fade_timer).w
-		move.b	#$48,(Game_mode).w
+		move.b	#GameMode_SpecialStageResults,(Game_mode).w
 		tst.b	(Special_bonus_entry_flag).w
 		beq.s	loc_8B50
 		move.w	(Saved2_zone_and_act).w,(Current_zone_and_act).w
@@ -10882,7 +10916,7 @@ loc_8BFE:
 
 Find_SStageCollisionResponseSlot:
 		lea	(SStage_collision_response_list).w,a2
-		move.w	#bytesToXcnt($100,8),d0
+		move.w	#bytesToXcnt(SStage_blue_sphere_to_ring_queue-SStage_collision_response_list,8),d0
 
 loc_8C0E:
 		tst.b	(a2)
@@ -10900,7 +10934,7 @@ locret_8C18:
 
 Touch_SSSprites:
 		lea	(SStage_collision_response_list).w,a0
-		move.w	#bytesToXcnt($100,8),d7
+		move.w	#bytesToXcnt(SStage_blue_sphere_to_ring_queue-SStage_collision_response_list,8),d7
 
 loc_8C22:
 		moveq	#0,d0
@@ -11355,14 +11389,14 @@ SStage_4_Directions:
 Load_SSSprite_Mappings:
 		lea	(SStage_extra_sprites).w,a1
 		lea	(MapPtr_8F1A).l,a0
-		moveq	#bytesToXcnt($68,8),d1
+		moveq	#bytesToXcnt(MapPtr_8F1A_end-MapPtr_8F1A,8),d1
 
 loc_8F02:
 		move.l	(a0)+,(a1)+
 		move.l	(a0)+,(a1)+
 		dbf	d1,loc_8F02
 		lea	(SStage_collision_response_list).w,a1
-		move.w	#bytesToLcnt($100),d1
+		move.w	#bytesToLcnt(SStage_blue_sphere_to_ring_queue-SStage_collision_response_list),d1
 
 loc_8F12:
 		clr.l	(a1)+
@@ -11398,6 +11432,7 @@ MapPtr_8F1A:
 		dc.w make_art_tile(ArtTile_SStage_Sphere,2,1), $0000
 		dc.l Map_SStageSphere
 		dc.w make_art_tile(ArtTile_SStage_Sphere,2,1), $0000
+MapPtr_8F1A_end:
 ; ---------------------------------------------------------------------------
 		; unused
 		ext.l	d1
@@ -11557,7 +11592,7 @@ Competition_Menu:
 		move.w	#$8C81,(a6)
 		move.w	#$9011,(a6)
 		jsr	sub_B512(pc)
-		clearRAM	Sprite_table_input,$400
+		clearRAM	Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
 		clearRAM	Object_RAM,(Kos_decomp_buffer-Object_RAM)
 		clr.w	(DMA_queue).w
 		move.l	#DMA_queue,(DMA_queue_slot).w
@@ -11581,7 +11616,7 @@ loc_95AE:
 		movea.w	#tiles_to_bytes(ArtTile_S3MenuBG),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		move.l	#locret_952E,(_unkEF44_1).w
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		lea	(ArtKos_CompetitionLevel).l,a0				; Decompress source
 		lea	(RAM_start).l,a1					; Decompress destination/Transfer source, used by the next KosArt_To_VDP also
@@ -11590,7 +11625,7 @@ loc_95AE:
 		lea	(ArtKos_CompetitionMode).l,a0				; Decompress source
 		movea.w	#tiles_to_bytes(ArtTile_Competition_ModeSel),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		lea	Pal_Competition1(pc),a0
 		lea	(Target_palette).w,a1
@@ -11624,7 +11659,7 @@ loc_9658:
 		jsr	(Render_Sprites).l
 		moveq	#signextendB(mus_CompetitionMenu),d0
 		jsr	(Play_Music).l
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		move.w	(VDP_reg_1_command).w,d0
 		ori.b	#$40,d0
@@ -11632,7 +11667,7 @@ loc_9658:
 		bsr.w	Pal_FadeFromBlack
 
 loc_96B8:
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		addq.w	#1,(Level_frame_counter).w
 		jsr	(Process_Sprites).l
@@ -11659,7 +11694,7 @@ loc_96F8:
 ; ---------------------------------------------------------------------------
 
 loc_96FE:
-		move.b	#4,(Game_mode).w
+		move.b	#GameMode_TitleScreen,(Game_mode).w
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -11669,7 +11704,7 @@ loc_9706:
 		move.b	(Ctrl_2_pressed).w,d0
 		andi.b	#button_A_mask|button_C_mask|button_start_mask,d0
 		sne	(Not_ghost_flag).w
-		move.b	#$3C,(Game_mode).w
+		move.b	#GameMode_CompetitionPlayerSelect,(Game_mode).w
 		bra.s	loc_975E
 ; ---------------------------------------------------------------------------
 
@@ -11679,7 +11714,7 @@ loc_9724:
 		move.b	(Ctrl_2_pressed).w,d0
 		andi.b	#button_A_mask|button_C_mask|button_start_mask,d0
 		sne	(Not_ghost_flag).w
-		move.b	#$40,(Game_mode).w
+		move.b	#GameMode_CompetitionLevelSelect,(Game_mode).w
 		bra.s	loc_975E
 ; ---------------------------------------------------------------------------
 
@@ -11689,7 +11724,7 @@ loc_9744:
 		beq.s	loc_9776
 		move.w	#-1,(Competition_settings).w
 		clr.b	(Not_ghost_flag).w
-		move.b	#$40+$80,(Game_mode).w
+		move.b	#GameMode_CompetitionLevelSelect+$80,(Game_mode).w
 
 loc_975E:
 		lea	($FF7800).l,a1
@@ -11824,7 +11859,7 @@ Competition_LevelSelect:
 		move.w	#$8C89,(a6)
 		move.w	#$9011,(a6)
 		jsr	sub_B512(pc)
-		clearRAM	Sprite_table_input,$400
+		clearRAM	Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
 		clearRAM	Object_RAM,(Kos_decomp_buffer-Object_RAM)
 		clr.w	(DMA_queue).w
 		move.l	#DMA_queue,(DMA_queue_slot).w
@@ -11867,7 +11902,7 @@ Competition_LevelSelect:
 		movea.w	#tiles_to_bytes(ArtTile_S3MenuBG),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		move.l	#locret_952E,(_unkEF44_1).w
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		lea	(ArtKos_CompetitionLevel).l,a0				; Decompress source
 		lea	(RAM_start).l,a1					; Decompress destination/Transfer source, used by the next KosArt_To_VDP also
@@ -11876,17 +11911,17 @@ Competition_LevelSelect:
 		lea	(ArtKos_CompetitionPlayer).l,a0				; Decompress source
 		movea.w	#tiles_to_bytes(ArtTile_Competition_CharSel),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		lea	(Pal_CompetitionMenuBG).l,a0
 		lea	(Target_palette).w,a1
-		moveq	#bytesToLcnt($20),d0
+		moveq	#bytesToLcnt(Target_palette_line_2-Target_palette),d0
 
 loc_9B70:
 		move.l	(a0)+,(a1)+
 		dbf	d0,loc_9B70
 		lea	Pal_Competition2(pc),a0
-		moveq	#bytesToLcnt($60),d0
+		moveq	#bytesToLcnt(Target_palette_end-Target_palette_line_2),d0
 
 loc_9B7C:
 		move.l	(a0)+,(a1)+
@@ -11941,7 +11976,7 @@ loc_9BF4:
 		move.w	#$B0,x_pos(a0)
 		moveq	#signextendB(mus_CompetitionMenu),d0
 		jsr	(Play_Music).l
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		move.w	(VDP_reg_1_command).w,d0
 		ori.b	#$40,d0
@@ -11949,7 +11984,7 @@ loc_9BF4:
 		jsr	(Pal_FadeFromBlack).l
 
 loc_9C5C:
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		addq.w	#1,(Level_frame_counter).w
 		jsr	(Process_Sprites).l
@@ -12065,7 +12100,7 @@ loc_9D5C:
 		move.b	Comp_ZoneList(pc,d0.w),(Current_zone_and_act).w
 		clr.b	(Current_act).w
 		jsr	sub_B5EC(pc)
-		move.b	#$C,(Game_mode).w
+		move.b	#GameMode_Level,(Game_mode).w
 		rts
 ; ---------------------------------------------------------------------------
 Comp_ZoneList:
@@ -12125,7 +12160,7 @@ loc_9E06:
 
 loc_9E0A:
 		lea	(Normal_palette_line_3).w,a2
-		moveq	#bytesToLcnt($20),d0
+		moveq	#bytesToLcnt(Normal_palette_line_4-Normal_palette_line_3),d0
 
 loc_9E10:
 		move.l	(a1)+,(a2)+
@@ -12441,7 +12476,7 @@ Competition_PlayerSelect:
 		jsr	sub_B534(pc)
 		move.w	#VRAM_Plane_A_Name_Table+$820,d0
 		jsr	sub_B534(pc)
-		clearRAM	Sprite_table_input,$400
+		clearRAM	Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
 		clearRAM	Object_RAM,(Kos_decomp_buffer-Object_RAM)
 		clr.w	(DMA_queue).w
 		move.l	#DMA_queue,(DMA_queue_slot).w
@@ -12462,7 +12497,7 @@ Competition_PlayerSelect:
 		movea.w	#tiles_to_bytes(ArtTile_S3MenuBG),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		move.l	#locret_952E,(_unkEF44_1).w
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		lea	(ArtKos_CompetitionLevel).l,a0				; Decompress source
 		lea	(RAM_start).l,a1					; Decompress destination/Transfer source, used by the next KosArt_To_VDP also
@@ -12471,17 +12506,17 @@ Competition_PlayerSelect:
 		lea	(ArtKos_CompetitionPlayer).l,a0				; Decompress source
 		movea.w	#tiles_to_bytes(ArtTile_Competition_CharSel),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		lea	(Pal_CompetitionMenuBG).l,a0
 		lea	(Target_palette).w,a1
-		moveq	#bytesToLcnt($20),d0
+		moveq	#bytesToLcnt(Target_palette_line_2-Target_palette),d0
 
 loc_A280:
 		move.l	(a0)+,(a1)+
 		dbf	d0,loc_A280
 		lea	Pal_Competition2(pc),a0
-		moveq	#bytesToLcnt($60),d0
+		moveq	#bytesToLcnt(Target_palette_end-Target_palette_line_2),d0
 
 loc_A28C:
 		move.l	(a0)+,(a1)+
@@ -12522,7 +12557,7 @@ loc_A29C:
 		jsr	(Render_Sprites).l
 		moveq	#signextendB(mus_CompetitionMenu),d0
 		jsr	(Play_Music).l
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		move.w	(VDP_reg_1_command).w,d0
 		ori.b	#$40,d0
@@ -12530,7 +12565,7 @@ loc_A29C:
 		jsr	(Pal_FadeFromBlack).l
 
 loc_A33E:
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		addq.w	#1,(Level_frame_counter).w
 		jsr	(Process_Sprites).l
@@ -12553,7 +12588,7 @@ loc_A376:
 		bne.s	loc_A33E
 		move.w	#$E00,(Current_zone_and_act).w
 		jsr	sub_B5EC(pc)
-		move.b	#$C,(Game_mode).w
+		move.b	#GameMode_Level,(Game_mode).w
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -12820,7 +12855,7 @@ Competition_Results:
 		jsr	sub_B534(pc)
 		move.w	#VRAM_Plane_A_Name_Table+$82A,d0
 		jsr	sub_B534(pc)
-		clearRAM	Sprite_table_input,$400
+		clearRAM	Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
 		clearRAM	Object_RAM,(Kos_decomp_buffer-Object_RAM)
 		clr.w	(DMA_queue).w
 		move.l	#DMA_queue,(DMA_queue_slot).w
@@ -12844,7 +12879,7 @@ Competition_Results:
 		movea.w	#tiles_to_bytes(ArtTile_S3MenuBG),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		move.l	#locret_952E,(_unkEF44_1).w
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		lea	(ArtKos_CompetitionLevel).l,a0				; Decompress source
 		lea	(RAM_start).l,a1					; Decompress destination/Transfer source, used by the next two KosArt_To_VDP also
@@ -12856,23 +12891,23 @@ Competition_Results:
 		lea	(ArtKos_CompetitionPlayer).l,a0				; Decompress source
 		movea.w	#tiles_to_bytes(ArtTile_Competition_CharSel),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		lea	(Pal_CompetitionMenuBG).l,a0
 		lea	(Target_palette).w,a1
-		moveq	#bytesToLcnt($20),d0
+		moveq	#bytesToLcnt(Target_palette_line_2-Target_palette),d0
 
 loc_AACC:
 		move.l	(a0)+,(a1)+
 		dbf	d0,loc_AACC
 		lea	Pal_Competition2(pc),a0
-		moveq	#bytesToLcnt($40),d0
+		moveq	#bytesToLcnt(Target_palette_line_4-Target_palette_line_2),d0
 
 loc_AAD8:
 		move.l	(a0)+,(a1)+
 		dbf	d0,loc_AAD8
 		lea	Pal_CompetitionResults(pc),a0
-		moveq	#bytesToLcnt($20),d0
+		moveq	#bytesToLcnt(Target_palette_end-Target_palette_line_4),d0
 
 loc_AAE4:
 		move.l	(a0)+,(a1)+
@@ -12900,7 +12935,7 @@ loc_AAF4:
 		jsr	(Render_Sprites).l
 		moveq	#signextendB(mus_Continue),d0
 		jsr	(Play_Music).l
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		move.w	(VDP_reg_1_command).w,d0
 		ori.b	#$40,d0
@@ -12908,7 +12943,7 @@ loc_AAF4:
 		jsr	(Pal_FadeFromBlack).l
 
 loc_AB62:
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		addq.w	#1,(Level_frame_counter).w
 		move.w	(_unkEEA0).w,d7
@@ -12958,7 +12993,7 @@ loc_ABC0:
 loc_ABC8:
 		andi.w	#button_start_mask|button_A_mask|button_C_mask,d0
 		beq.s	loc_ABD6
-		move.b	#$38,(Game_mode).w
+		move.b	#GameMode_CompetitionMenu,(Game_mode).w
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -13239,7 +13274,7 @@ TimeAttack_Records:
 		jsr	sub_B512(pc)
 		move.w	#VRAM_Plane_A_Name_Table+$1AA,d0
 		jsr	sub_B534(pc)
-		clearRAM	Sprite_table_input,$400
+		clearRAM	Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
 		clearRAM	Object_RAM,(Kos_decomp_buffer-Object_RAM)
 		clr.w	(DMA_queue).w
 		move.l	#DMA_queue,(DMA_queue_slot).w
@@ -13276,7 +13311,7 @@ TimeAttack_Records:
 		movea.w	#tiles_to_bytes(ArtTile_S3MenuBG),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
 		move.l	#locret_952E,(_unkEF44_1).w
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		lea	(ArtKos_CompetitionLevel).l,a0				; Decompress source
 		lea	(RAM_start).l,a1					; Decompress destination/Transfer source, used by the next two KosArt_To_VDP also
@@ -13288,7 +13323,7 @@ TimeAttack_Records:
 		lea	(ArtKos_CompetitionPlayer).l,a0				; Decompress source
 		movea.w	#tiles_to_bytes(ArtTile_Competition_CharSel),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		lea	(ArtKos_SSResultsGeneral).l,a0
 		lea	(RAM_start+$20).l,a1
@@ -13306,19 +13341,19 @@ loc_B0C2:
 		dbf	d0,loc_B0C2
 		lea	(Pal_CompetitionMenuBG).l,a0
 		lea	(Target_palette).w,a1
-		moveq	#bytesToLcnt($20),d0
+		moveq	#bytesToLcnt(Target_palette_line_2-Target_palette),d0
 
 loc_B0D4:
 		move.l	(a0)+,(a1)+
 		dbf	d0,loc_B0D4
 		lea	Pal_Competition2(pc),a0
-		moveq	#bytesToLcnt($40),d0
+		moveq	#bytesToLcnt(Target_palette_line_4-Target_palette_line_2),d0
 
 loc_B0E0:
 		move.l	(a0)+,(a1)+
 		dbf	d0,loc_B0E0
 		lea	Pal_CompetitionTimeAttack(pc),a0
-		moveq	#bytesToLcnt($20),d0
+		moveq	#bytesToLcnt(Target_palette_end-Target_palette_line_4),d0
 
 loc_B0EC:
 		move.l	(a0)+,(a1)+
@@ -13346,7 +13381,7 @@ loc_B0FC:
 		jsr	(Render_Sprites).l
 		moveq	#signextendB(mus_Continue),d0
 		jsr	(Play_Music).l
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		move.w	(VDP_reg_1_command).w,d0
 		ori.b	#$40,d0
@@ -13354,7 +13389,7 @@ loc_B0FC:
 		jsr	(Pal_FadeFromBlack).l
 
 loc_B16A:
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		addq.w	#1,(Level_frame_counter).w
 		move.w	(_unkEEA0).w,d7
@@ -13381,7 +13416,7 @@ loc_B1A6:
 		move.b	(Ctrl_1_pressed).w,d0
 		andi.w	#button_start_mask|button_A_mask|button_C_mask,d0
 		beq.s	loc_B1B8
-		move.b	#$40+$80,(Game_mode).w
+		move.b	#GameMode_CompetitionLevelSelect+$80,(Game_mode).w
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -13553,7 +13588,7 @@ KosArt_To_VDP:
 
 sub_B512:
 		move.l	#$80008000,d0
-		move.w	#$800-1,d1
+		move.w	#bytesToLcnt($2000),d1
 		move.l	#vdpComm(VRAM_Plane_A_Name_Table,VRAM,WRITE),(VDP_control_port).l
 		lea	(VDP_data_port).l,a6
 
@@ -13719,7 +13754,7 @@ SRAM_Load:
 		beq.s	loc_B674		; If the data read was successful, branch
 		lea	SaveData_GeneralDefault(pc),a0
 		lea	(Competition_saved_data).w,a1
-		moveq	#bytesToWcnt($52),d0
+		moveq	#bytesToWcnt((Competition_saved_data_end-Competition_saved_data)-2),d0
 
 loc_B66A:
 		move.w	(a0)+,(a1)+		; Reset the general save data to the default
@@ -13976,7 +14011,7 @@ SaveScreen:
 		move.w	#$8C81,(a6)
 		move.w	#$9003,(a6)
 		move.w	#$9280,(a6)
-		clearRAM	Sprite_table_input,$400
+		clearRAM	Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
 		clearRAM	Object_RAM,(Kos_decomp_buffer-Object_RAM)
 		clr.w	(DMA_queue).w
 		move.l	#DMA_queue,(DMA_queue_slot).w
@@ -14011,23 +14046,23 @@ SaveScreen:
 		movea.w	#tiles_to_bytes(ArtTile_S3MenuBG),a2	; Transfer destination
 		jsr	(KosArt_To_VDP).l
 		move.l	#locret_B85A,(_unkEF44_1).w
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		lea	(ArtKos_SaveScreenMisc).l,a0			; Decompress source
 		lea	(RAM_start).l,a1				; Decompress destination/Transfer source
 		movea.w	#tiles_to_bytes(ArtTile_Save_Misc),a2	; Transfer destination
 		jsr	KosArt_To_VDP(pc)
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		lea	(Pal_SaveMenuBG).l,a0
 		lea	(Target_palette).w,a1
-		moveq	#bytesToLcnt($20),d0
+		moveq	#bytesToLcnt(Target_palette_line_2-Target_palette),d0
 
 loc_B9D4:
 		move.l	(a0)+,(a1)+
 		dbf	d0,loc_B9D4
 		lea	Pal_Save_Chars(pc),a0
-		moveq	#bytesToLcnt($40),d0
+		moveq	#bytesToLcnt(Target_palette_line_4-Target_palette_line_2),d0
 
 loc_B9E0:
 		move.l	(a0)+,(a1)+
@@ -14053,7 +14088,7 @@ loc_B9F0:
 		jsr	(Render_Sprites).l
 		lea	(Normal_palette_line_4).w,a0
 		lea	(Target_palette_line_4).w,a1
-		moveq	#bytesToLcnt($20),d0
+		moveq	#bytesToLcnt(Normal_palette_end-Normal_palette_line_4),d0
 
 loc_BA3E:
 		move.l	(a0),(a1)+
@@ -14065,7 +14100,7 @@ loc_BA3E:
 		moveq	#signextendB(mus_DataSelect),d0
 		jsr	(Play_Music).l
 		move.l	#loc_BB0A,(_unkEF44_1).w
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		move.w	(VDP_reg_1_command).w,d0
 		ori.b	#$40,d0
@@ -14073,7 +14108,7 @@ loc_BA3E:
 		jsr	(Pal_FadeFromBlack).l
 
 SaveScreen_MainLoop:
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		addq.w	#1,(Level_frame_counter).w
 		jsr	(Process_Sprites).l
@@ -14098,7 +14133,7 @@ loc_BAC8:
 		dbf	d0,loc_BAC8
 
 loc_BAD0:
-		cmpi.b	#$4C,(Game_mode).w	; are we still in the savescreen mode?
+		cmpi.b	#GameMode_SaveScreen,(Game_mode).w	; are we still in the savescreen mode?
 		beq.s	SaveScreen_MainLoop	; if so, loop
 		moveq	#signextendB(sfx_EnterSS),d0
 		jmp	(Play_SFX).l
@@ -14359,7 +14394,7 @@ loc_C0AC:
 		bne.s	loc_C0C4
 		btst	#button_B,(Ctrl_1_pressed).w
 		beq.s	loc_C0C4
-		move.b	#4,(Game_mode).w
+		move.b	#GameMode_TitleScreen,(Game_mode).w
 		bra.w	loc_C180
 ; ---------------------------------------------------------------------------
 
@@ -14490,7 +14525,7 @@ Obj_SaveScreen_NoSave_Slot:
 		move.b	(Ctrl_1_pressed).w,d0
 		andi.w	#button_A_mask|button_C_mask|button_start_mask,d0
 		beq.s	loc_C224
-		move.b	#$C,(Game_mode).w
+		move.b	#GameMode_Level,(Game_mode).w
 		move.w	(Dataselect_nosave_player).w,(Player_option).w
 		clr.w	(Current_zone_and_act).w
 		clr.w	(Apparent_zone_and_act).w
@@ -14644,7 +14679,7 @@ loc_C36C:
 		move.b	(Ctrl_1_pressed).w,d0
 		andi.w	#button_A_mask|button_C_mask|button_start_mask,d0
 		beq.w	loc_C2A2
-		move.b	#$C,(Game_mode).w
+		move.b	#GameMode_Level,(Game_mode).w
 		clr.l	(Collected_special_ring_array).w
 		cmpi.b	#6,3(a1)
 		bls.s	loc_C3AE
@@ -14652,7 +14687,7 @@ loc_C36C:
 		cmpi.b	#6,d0
 		bls.s	loc_C3BE
 		move.w	#$601,d0
-		move.b	#$20,(Game_mode).w
+		move.b	#GameMode_S3Credits,(Game_mode).w
 		bra.s	loc_C3C0
 ; ---------------------------------------------------------------------------
 
@@ -14701,7 +14736,7 @@ loc_C40A:
 		move.b	(Ctrl_1_pressed).w,d0
 		andi.w	#button_A_mask|button_C_mask|button_start_mask,d0
 		beq.s	loc_C476
-		move.b	#$C,(Game_mode).w
+		move.b	#GameMode_Level,(Game_mode).w
 		clr.l	(a1)
 		clr.l	4(a1)
 		move.w	$34(a0),d0
@@ -15038,7 +15073,7 @@ loc_C782:
 		lsl.w	#5,d0
 		adda.w	d0,a2
 		lea	(Normal_palette_line_4).w,a3
-		moveq	#bytesToLcnt($20),d0
+		moveq	#bytesToLcnt(Normal_palette_end-Normal_palette_line_4),d0
 
 loc_C78C:
 		move.l	(a2)+,(a3)+
@@ -15978,7 +16013,7 @@ sub_F7C0:
 		tst.b	(Respawn_table_keep).w
 		bne.s	loc_F7D6
 		lea	(Ring_status_table).w,a1
-		move.w	#bytesToLcnt($400),d1
+		move.w	#bytesToLcnt(Ring_status_table_end-Ring_status_table),d1
 
 loc_F7D0:
 		move.l	d0,(a1)+
@@ -15986,7 +16021,7 @@ loc_F7D0:
 
 loc_F7D6:
 		lea	(Ring_consumption_table).w,a1
-		moveq	#bytesToLcnt($80),d1
+		moveq	#bytesToLcnt(Ring_consumption_table_end-Ring_consumption_table),d1
 
 loc_F7DC:
 		move.l	d0,(a1)+
@@ -15999,7 +16034,7 @@ loc_F7DC:
 		move.l	a1,(Ring_start_addr_ROM).w
 		addq.w	#4,a1
 		moveq	#0,d5
-		move.w	#$1FF-1,d0
+		move.w	#511-1,d0
 
 loc_F800:
 		tst.l	(a1)+
@@ -18568,6 +18603,12 @@ locret_11116:
 
 ObjCheckLeftWallDist:
 		add.w	x_pos(a0),d3
+	if FixBugs
+		; Engine bug: colliding with left walls is erratic with this function.
+		; The cause is this: a missing instruction to flip collision on the found
+		; 16x16 block; this one:
+		eori.w	#$F,d3
+	endif
 
 ObjCheckLeftWallDist_Part2:
 		move.w	y_pos(a0),d2
@@ -19930,7 +19971,7 @@ Sonic_RecordPosCompetition:
 
 Sonic_RecordPosCompetitionP2:
 		move.w	(Pos_table_index_P2).w,d0
-		lea	(Stat_table).w,a1
+		lea	(Pos_table_P2).w,a1
 		lea	(a1,d0.w),a1
 		move.w	x_pos(a0),(a1)+			; write location to pos_table
 		move.w	y_pos(a0),(a1)+
@@ -19946,8 +19987,8 @@ Reset_Player_Position_Array:
 		cmpa.w	#Player_1,a0			; is object player 1?
 		bne.s	Reset_Player_Position_ArrayP2	; if not, branch
 		lea	(Pos_table).w,a1
-		lea	(Stat_table).w,a2
-		move.w	#bytesToLcnt($100),d0
+		lea	(Pos_table_P2).w,a2
+		move.w	#bytesToLcnt(Pos_table_end-Pos_table),d0
 
 .loop:
 		move.w	x_pos(a0),(a1)+			; write location to pos_table
@@ -19959,8 +20000,8 @@ Reset_Player_Position_Array:
 Reset_Player_Position_ArrayP2:
 		tst.w	(Competition_mode).w	; are we in Competition mode?
 		beq.s	.return		; if not, branch
-		lea	(Stat_table).w,a1
-		move.w	#bytesToLcnt($100),d0
+		lea	(Pos_table_P2).w,a1
+		move.w	#bytesToLcnt(Pos_table_P2_end-Pos_table_P2),d0
 
 .loop:
 		move.w	x_pos(a0),(a1)+
@@ -20063,7 +20104,6 @@ loc_12028:
 		jmp	(Play_SFX).l
 ; End of function Sonic_Water
 
-; ---------------------------------------------------------------------------
 ; ---------------------------------------------------------------------------
 ; Start of subroutine Obj01_MdNormal
 ; Called if Sonic is neither airborne nor rolling this frame
@@ -20679,7 +20719,7 @@ loc_125F0:
 		bne.s	loc_12636
 		tst.b	spin_dash_flag(a0)
 		bne.s	loc_12624
-		bclr	#2,status(a0)
+		bclr	#Status_Roll,status(a0)
 		move.b	y_radius(a0),d0
 		move.b	default_y_radius(a0),y_radius(a0)
 		move.b	default_x_radius(a0),x_radius(a0)
@@ -21168,7 +21208,12 @@ Sonic_Super:
 		tst.b	(Update_HUD_timer).w	; Level over?
 		beq.s	.revertToNormal
 		subq.w	#1,(Super_frame_count).w
-		bpl.w	.return			; This should be a 'bhi'; currently counts down 61 frames
+	if FixBugs
+		bhi.w	.return
+	else
+		; Bug: This should be a 'bhi'; currently counts down 61 frames
+		bpl.w	.return
+	endif
 		move.w	#60,(Super_frame_count).w
 		tst.w	(Ring_count).w
 		beq.s	.revertToNormal	; If rings depleted, return to normal
@@ -21914,7 +21959,7 @@ loc_13142:
 loc_1315C:
 		jsr	(MoveSprite2).l
 		addi.w	#$30,y_vel(a0)
-		btst	#6,status(a0)
+		btst	#Status_Underwater,status(a0)
 		beq.s	loc_13176
 		subi.w	#$20,y_vel(a0)
 
@@ -21946,7 +21991,7 @@ loc_131B2:
 		movem.l	a4-a6,-(sp)
 		bsr.w	Sonic_DoLevelCollision
 		movem.l	(sp)+,a4-a6
-		btst	#1,status(a0)
+		btst	#Status_InAir,status(a0)
 		bne.s	locret_131F6
 		moveq	#0,d0
 		move.w	d0,y_vel(a0)
@@ -22042,7 +22087,7 @@ loc_132D0:
 		move.b	#8,routine(a0)
 		move.w	#mus_GameOver,d0
 		jsr	(Play_Music).l
-		moveq	#3,d0
+		moveq	#PLCID_03,d0
 		jmp	(Load_PLC_2).l
 ; ---------------------------------------------------------------------------
 
@@ -22073,7 +22118,7 @@ loc_13320:
 		move.w	(Saved_solid_bits).w,top_solid_bit(a0)
 		clr.w	(Ring_count).w
 		clr.b	(Extra_life_flags).w
-		move.b	#1,(_unkF74A).w
+		move.b	#1,(Competition_lap_count_flag).w	; disable the lap count flag, however, later on this value is reset to 0 in Obj_2PGoalMarker
 		bra.s	loc_13382
 ; ---------------------------------------------------------------------------
 
@@ -22084,7 +22129,7 @@ loc_1335A:
 		move.w	(Saved2_art_tile).w,art_tile(a0)
 		move.w	(Saved2_solid_bits).w,top_solid_bit(a0)
 		clr.w	(Ring_count_P2).w
-		move.b	#1,(_unkF74B).w
+		move.b	#1,(Competition_lap_count_flag_P2).w	; disable the lap count flag, however, later on this value is reset to 0 in Obj_2PGoalMarker
 
 loc_13382:
 		move.b	#0,object_control(a0)
@@ -22182,7 +22227,7 @@ loc_1345E:
 		move.b	d0,prev_anim(a0)
 		move.b	#0,anim_frame(a0)
 		move.b	#0,anim_frame_timer(a0)
-		bclr	#5,status(a0)
+		bclr	#Status_Push,status(a0)
 
 loc_13480:
 		add.w	d0,d0
@@ -22268,7 +22313,7 @@ loc_13528:
 		andi.b	#$FC,render_flags(a0)
 		eor.b	d1,d2
 		or.b	d2,render_flags(a0)
-		btst	#5,status(a0)
+		btst	#Status_Push,status(a0)
 		bne.w	loc_137CE
 		lsr.b	#4,d0
 		andi.b	#6,d0
@@ -23673,7 +23718,7 @@ loc_146BA:
 
 Tails_CPU_Control:
 		move.b	(Ctrl_2_held).w,d0
-		andi.b	#$7F,d0
+		andi.b	#button_up_mask|button_down_mask|button_left_mask|button_right_mask|button_B_mask|button_C_mask|button_A_mask,d0
 		beq.s	loc_146EE
 		move.w	#10*60,(Tails_CPU_idle_timer).w
 
@@ -24950,7 +24995,7 @@ Tails_Spin_Path:
 		beq.s	loc_15564
 		lea	(Player_1).w,a1
 		clr.b	object_control(a1)
-		bset	#1,status(a1)
+		bset	#Status_InAir,status(a1)
 		clr.w	(Flying_carrying_Sonic_flag).w
 
 loc_15564:
@@ -27904,7 +27949,7 @@ off_1756E:
 Obj_Invincibility:
 		move.l	#ArtUnc_Invincibility,d1
 		move.w	#tiles_to_bytes(ArtTile_Shield),d2
-		move.w	#$200,d3
+		move.w	#(ArtUnc_Invincibility_end-ArtUnc_Invincibility)/2,d3
 		jsr	(Add_To_DMA_Queue).l
 		moveq	#0,d2
 		lea	off_1756E-6(pc),a2
@@ -29410,7 +29455,7 @@ loc_19162:
 Init_SpriteTable2:
 		moveq	#0,d0
 		moveq	#1,d1
-		moveq	#$50-1,d7
+		moveq	#bytesToXcnt(Sprite_table_end-Sprite_table,8),d7
 
 .loop:
 		move.w	d0,(a0)
@@ -29427,7 +29472,7 @@ Init_SpriteTable2:
 
 
 Init_SpriteTable_2Player:
-		lea	-$280(a0),a0
+		lea	-(Sprite_table_end-Sprite_table)(a0),a0
 		move.l	#$EB0301,(a0)+
 		move.l	#1,(a0)+
 		move.l	#$EB0302,(a0)+
@@ -29451,7 +29496,7 @@ Process_Sprites:
 		bhs.s	loc_191D2
 
 loc_191BE:
-		moveq	#(Object_RAM_end-Object_RAM)/object_size-1,d7
+		moveq	#bytesToXcnt(Object_RAM_end-Object_RAM,object_size),d7
 ; End of function Process_Sprites
 
 
@@ -29743,7 +29788,7 @@ locret_1938C:
 Render_Sprites:
 		tst.w	(Competition_mode).w
 		bne.w	Render_Sprites_CompetitionMode
-		moveq	#$50-1,d7
+		moveq	#80-1,d7	; Number of sprites to render.
 		moveq	#0,d6
 		lea	(Sprite_table_input).w,a5
 		lea	(Camera_X_pos_copy).w,a3
@@ -29843,7 +29888,7 @@ loc_19486:
 		clr.w	(Spritemask_flag).w
 		lea	(Sprite_table-4).w,a0
 		move.w	#$7C0,d0
-		moveq	#$50-1,d1
+		moveq	#80-1,d1
 
 loc_194A4:
 		addq.w	#8,a0
@@ -30311,7 +30356,7 @@ loc_1984E:
 ; ---------------------------------------------------------------------------
 
 Render_Sprites_CompetitionMode:
-		moveq	#($50-2)-1,d7
+		moveq	#(80-2)-1,d7	; Number of sprites to render.
 		moveq	#0,d6
 		lea	(Sprite_table_input).w,a5
 		lea	(Camera_X_pos_copy).w,a3
@@ -30416,7 +30461,7 @@ loc_19946:
 		move.l	d0,(Sprite_table_input+2+($80*2)).w
 
 loc_19958:
-		moveq	#$50-1,d7
+		moveq	#80-1,d7	; Number of sprites to render.
 		lea	(Sprite_table_input).w,a5
 		lea	(Camera_X_pos_P2_copy).w,a3
 		; Unlike in Sonic 2, the sprite tables are page-flipped in two-player mode.
@@ -30845,10 +30890,10 @@ loc_19D24:
 		lsr.w	#5,d0
 		lea	(SpriteLocPtrs).l,a0
 		movea.l	(a0,d0.w),a0
-		cmpi.b	#$13,(Current_zone).w
-		bcc.s	loc_19D44
-		tst.w	(Competition_mode).w
-		beq.s	loc_19D6C
+		cmpi.b	#$13,(Current_zone).w	; Is this the Gumball Machine?
+		bcc.s	loc_19D44	; if so, branch
+		tst.w	(Competition_mode).w	; Is Competition Mode active?
+		beq.s	loc_19D6C	; if not, branch
 
 loc_19D44:
 		addq.b	#8,(Object_load_routine).w
@@ -32003,7 +32048,7 @@ Do_ResizeEvents:
 		move.w	(Current_zone_and_act).w,d0
 		ror.b	#1,d0
 		lsr.w	#6,d0
-	if ~~FixBugs
+	if FixBugs=0
 		; Bug: this clamps the array index too hard, causing Competition and bonus
 		; stages to execute resize routines meant for the early game levels
 		andi.w	#$3E,d0
@@ -32122,11 +32167,11 @@ loc_1A920:
 		bne.s	loc_1A958
 		cmpi.w	#2,(Player_mode).w
 		beq.s	loc_1A958
-		moveq	#$B,d0
+		moveq	#PLCID_0B,d0
 		jsr	(Load_PLC).l
 
 loc_1A958:
-		moveq	#$2A,d0
+		moveq	#PalID_AIZ,d0
 		jsr	(LoadPalette_Immediate).l
 		move.w	#2,(Tails_CPU_routine).w
 		addq.b	#2,(Dynamic_resize_routine).w
@@ -32160,7 +32205,7 @@ loc_1A9BE:
 		move.w	#$41A,(Saved_Y_pos).w
 		jsr	(Save_Level_Data).l
 		move.l	#0,(Saved_timer).w
-		moveq	#8,d0
+		moveq	#PLCID_08,d0
 		jsr	(Load_PLC).l
 		addq.b	#2,(Dynamic_resize_routine).w
 
@@ -32187,7 +32232,7 @@ loc_1AA1E:
 		blo.s	locret_1AA3E
 		move.w	#$C02,(Normal_palette_line_3+$1E).w
 		move.w	#$2D80,(Camera_min_X_pos).w
-		moveq	#$5A,d0
+		moveq	#PLCID_5A,d0
 		jsr	(Load_PLC).l
 		addq.b	#2,(Dynamic_resize_routine).w
 
@@ -32206,7 +32251,7 @@ loc_1AA40:
 		lea	(AIZ1_8x8_Flames_KosM).l,a1
 		move.w	#tiles_to_bytes($500),d2
 		jsr	(Queue_Kos_Module).l
-		moveq	#$C,d0
+		moveq	#PLCID_0C,d0
 		jsr	(Load_PLC).l
 		addq.b	#2,(Dynamic_resize_routine).w
 
@@ -32339,7 +32384,7 @@ AIZ2_Resize4:
 		lea	(ArtKosM_AIZ2Bombership2_8x8).l,a1
 		move.w	#tiles_to_bytes(ArtTile_AIZ2Bombership),d2
 		jsr	(Queue_Kos_Module).l				; Load all battleship art
-		moveq	#$30,d0
+		moveq	#PalID_AIZBoss,d0
 		jsr	(LoadPalette_Immediate).l			; Load palette
 		st	(Events_fg_5).w						; Send signal to background event
 		addq.b	#2,(Dynamic_resize_routine).w
@@ -41842,7 +41887,7 @@ loc_234E0:
 loc_234EE:
 		move.w	(a1)+,(a2)+
 		dbf	d0,loc_234EE
-		moveq	#9,d0
+		moveq	#PLCID_09,d0
 		jsr	(Load_PLC).l
 		bra.w	Obj_SphereTest_Main
 
@@ -41965,7 +42010,7 @@ loc_2364C:
 loc_2365A:
 		move.w	(a1)+,(a2)+
 		dbf	d0,loc_2365A
-		moveq	#9,d0
+		moveq	#PLCID_09,d0
 		jsr	(Load_PLC).l
 		bra.w	Obj_SphereTest_Main
 
@@ -52969,10 +53014,10 @@ loc_2CA0E:
 loc_2CA3C:
 		tst.b	(Time_over_flag).w
 		bne.s	loc_2CA56
-		move.b	#$14,(Game_mode).w
+		move.b	#GameMode_Continue,(Game_mode).w
 		tst.b	(Continue_count).w
 		bne.s	loc_2CA60
-		move.b	#0,(Game_mode).w
+		move.b	#GameMode_SegaScreen,(Game_mode).w
 		bra.s	loc_2CA60
 ; ---------------------------------------------------------------------------
 
@@ -53067,7 +53112,7 @@ loc_2CB20:
 		beq.s	loc_2CB72
 		cmpi.b	#6,(Apparent_zone).w
 		bne.s	loc_2CB72
-		moveq	#$25,d0			; If title card is mid-level and it's in LBZ, load the LBZ 2 misc art
+		moveq	#PLCID_25,d0			; If title card is mid-level and it's in LBZ, load the LBZ 2 misc art
 		jsr	(Load_PLC).l
 
 loc_2CB72:
@@ -53820,7 +53865,7 @@ SpecialStage_Results:
 		move.w	#$8B00,(a6)
 		move.w	#$8C81,(a6)
 		move.w	#$9011,(a6)
-		clearRAM	Sprite_table_input,$400
+		clearRAM	Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
 		clearRAM	Object_RAM,(Kos_decomp_buffer-Object_RAM)
 		clr.w	(DMA_queue).w
 		move.l	#DMA_queue,(DMA_queue_slot).w
@@ -53829,7 +53874,7 @@ SpecialStage_Results:
 		clr.w	(Plane_buffer).w
 		clr.w	(Special_V_int_routine).w
 		clr.b	(Update_HUD_timer).w
-		moveq	#0,d0
+		moveq	#PLCID_00,d0
 		jsr	(Load_PLC_2).l
 		lea	(ArtKosM_ResultsGeneral).l,a1
 		move.w	#tiles_to_bytes($520),d2
@@ -53854,7 +53899,7 @@ loc_2D2DE:
 		move.l	#locret_2D216,(_unkEF44_1).w
 
 loc_2D300:
-		move.b	#$1E,(V_int_routine).w
+		move.b	#VInt_ID_1E,(V_int_routine).w
 		jsr	(Process_Kos_Queue).l
 		jsr	(Wait_VSync).l
 		jsr	(Process_Nem_Queue_Init).l
@@ -53885,12 +53930,12 @@ loc_2D35C:
 		move.w	d0,(VDP_control_port).l
 
 loc_2D378:
-		move.b	#8,(V_int_routine).w
+		move.b	#VInt_ID_8,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		addq.w	#1,(Level_frame_counter).w
 		jsr	(Process_Sprites).l
 		jsr	(Render_Sprites).l
-		cmpi.b	#$48,(Game_mode).w
+		cmpi.b	#GameMode_SpecialStageResults,(Game_mode).w
 		beq.s	loc_2D378
 		rts
 ; ---------------------------------------------------------------------------
@@ -54038,7 +54083,7 @@ loc_2D562:
 ; ---------------------------------------------------------------------------
 
 loc_2D588:
-		move.b	#$C,(Game_mode).w
+		move.b	#GameMode_Level,(Game_mode).w
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -54076,7 +54121,7 @@ loc_2D5DC:
 ; ---------------------------------------------------------------------------
 
 loc_2D5E8:
-		move.b	#$C,(Game_mode).w
+		move.b	#GameMode_Level,(Game_mode).w
 		rts
 ; ---------------------------------------------------------------------------
 ObjDat2_2D5F0:
@@ -64001,13 +64046,13 @@ loc_3627C:
 		lea	$34(a0),a2
 		lea	(Player_1).w,a1
 		lea	(Competition_current_lap).w,a3
-		lea	(_unkF74A).w,a4
+		lea	(Competition_lap_count_flag).w,a4
 		lea	(Timer).w,a5
 		lea	($FF7828).l,a6
 		bsr.w	sub_3638E
 		lea	(Player_2).w,a1
 		lea	(Competition_current_lap_2P).w,a3
-		lea	(_unkF74B).w,a4
+		lea	(Competition_lap_count_flag_P2).w,a4
 		lea	(Timer_P2).w,a5
 		lea	($FF7840).l,a6
 		bsr.w	sub_3638E
@@ -64064,8 +64109,8 @@ loc_3637C:
 
 
 sub_3638E:
-		tst.b	(a4)
-		bne.w	loc_3648E
+		tst.b	(a4)		; check the lap count flag
+		bne.w	loc_3648E	; if not equal to zero, branch
 		tst.b	(a2)+
 		bne.w	loc_3649E
 		cmp.w	x_pos(a1),d1
@@ -64155,7 +64200,7 @@ locret_3648C:
 ; ---------------------------------------------------------------------------
 
 loc_3648E:
-		clr.b	(a4)
+		clr.b	(a4)			; enable the lap count flag
 		move.b	#0,(a2)+
 		subq.b	#1,(a3)
 		bcc.s	locret_3649C
@@ -64202,7 +64247,7 @@ locret_364EA:
 
 sub_364EC:
 		lea	($FF7828).l,a1
-		moveq	#$C-1,d0
+		moveq	#bytesToLcnt($30),d0
 
 .loop:
 		clr.l	(a1)+
@@ -64494,10 +64539,10 @@ loc_36862:
 loc_36880:
 		subq.w	#1,(Events_bg+$16).w
 		bpl.s	locret_36898
-		move.b	#$40,(Game_mode).w
+		move.b	#GameMode_CompetitionLevelSelect,(Game_mode).w
 		tst.b	(Competition_type).w
 		bpl.s	locret_36898
-		move.b	#$50,(Game_mode).w
+		move.b	#GameMode_TimeAttackRecords,(Game_mode).w
 
 locret_36898:
 		rts
@@ -64553,7 +64598,7 @@ loc_3690A:
 ; ---------------------------------------------------------------------------
 
 loc_36924:
-		move.b	#$44,(Game_mode).w
+		move.b	#GameMode_CompetitionResults,(Game_mode).w
 
 locret_3692A:
 		rts
@@ -64702,7 +64747,7 @@ Map_2PNeonDisplay:
 ; ---------------------------------------------------------------------------
 
 loc_37220:
-		move.l	#$FF7000,mappings(a0)
+		move.l	#Map_2PTime_P1_RAM,mappings(a0)
 		move.w	#make_art_tile(ArtTile_2PTime,0,1),art_tile(a0)
 		move.w	#0,priority(a0)
 		move.b	#$40,width_pixels(a0)
@@ -64710,9 +64755,9 @@ loc_37220:
 		move.w	#$C8,x_pos(a0)
 		move.w	#$90,y_pos(a0)
 		bset	#3,render_flags(a0)
-		lea	(word_37420).l,a1
-		lea	($FF7000).l,a2
-		move.w	#bytesToWcnt($34),d0
+		lea	(Map_2PTime).l,a1
+		lea	(Map_2PTime_P1_RAM).l,a2
+		move.w	#bytesToWcnt(Map_2PTime_end-Map_2PTime),d0
 
 loc_37262:
 		move.w	(a1)+,(a2)+
@@ -64721,7 +64766,7 @@ loc_37262:
 
 loc_3726E:
 		lea	(Score).w,a1
-		lea	($FF700A).l,a2
+		lea	(Map_2PTime_P1_RAM+$A).l,a2
 		lea	(Timer_minute).w,a3
 		moveq	#0,d1
 		move.b	(Competition_lap_count).w,d1
@@ -64738,7 +64783,7 @@ loc_37292:
 ; ---------------------------------------------------------------------------
 
 loc_3729E:
-		move.l	#$FF7080,mappings(a0)
+		move.l	#Map_2PTime_P2_RAM,mappings(a0)
 		move.w	#make_art_tile(ArtTile_2PTime,0,1),art_tile(a0)
 		move.w	#0,priority(a0)
 		move.b	#$40,width_pixels(a0)
@@ -64746,9 +64791,9 @@ loc_3729E:
 		move.w	#$C8,x_pos(a0)
 		move.w	#$90,y_pos(a0)
 		bset	#4,render_flags(a0)
-		lea	(word_37420).l,a1
-		lea	($FF7080).l,a2
-		move.w	#bytesToWcnt($34),d0
+		lea	(Map_2PTime).l,a1
+		lea	(Map_2PTime_P2_RAM).l,a2
+		move.w	#bytesToWcnt(Map_2PTime_end-Map_2PTime),d0
 
 loc_372E0:
 		move.w	(a1)+,(a2)+
@@ -64757,7 +64802,7 @@ loc_372E0:
 
 loc_372EC:
 		lea	(Score_P2).w,a1
-		lea	($FF708A).l,a2
+		lea	(Map_2PTime_P2_RAM+$A).l,a2
 		lea	(Timer_minute_P2).w,a3
 		moveq	#0,d1
 		move.b	(Competition_lap_count_2P).w,d1
@@ -64858,8 +64903,8 @@ byte_373E4:
 		dc.b    0,   1,   3,   5,   6,   8,  $A,  $B,  $D,  $F, $10, $12, $14, $15, $17, $19, $1A, $1C, $1E, $1F
 		dc.b  $21, $23, $24, $26, $28, $29, $2B, $2D, $2E, $30, $32, $33, $35, $37, $38, $3A, $3C, $3D, $3F, $41
 		dc.b  $42, $44, $46, $47, $49, $4B, $4C, $4E, $50, $51, $53, $55, $56, $58, $5A, $5B, $5D, $5F, $60, $62
-word_37420:
-		dc.w word_37422-word_37420
+Map_2PTime:
+		dc.w word_37422-Map_2PTime
 word_37422:	dc.w 8
 		dc.b  $F8,  $D,   0,   0, $FF, $C0
 		dc.b  $F8,   5,   0,   8, $FF, $E8
@@ -64869,6 +64914,7 @@ word_37422:	dc.w 8
 		dc.b  $F0,   0,   0, $2F,   0, $14
 		dc.b  $F8,   5,   0,   8,   0, $1C
 		dc.b  $F8,   5,   0,   8,   0, $28
+Map_2PTime_end
 ; ---------------------------------------------------------------------------
 
 loc_37454:
@@ -68647,7 +68693,7 @@ PlainDeformation:
 		swap	d0
 		move.w	(Camera_X_pos_BG_copy).w,d0
 		neg.w	d0
-		moveq	#bytesToXcnt($380,$10),d1
+		moveq	#bytesToXcnt(H_scroll_buffer_end-H_scroll_buffer,$10),d1
 
 loc_39E66:
 		move.l	d0,(a1)+
@@ -70165,7 +70211,7 @@ loc_3AF02:
 		jsr	(Load_Level).l
 		jsr	(LoadSolids).l
 		jsr	(CheckLevelForWater).l
-		moveq	#$B,d0
+		moveq	#PalID_AIZFire,d0
 		jsr	(LoadPalette_Immediate).l
 		movem.l	(sp)+,d7-a0/a2-a3
 		lea	(Normal_palette_line_4+$2).w,a1
@@ -70681,7 +70727,7 @@ loc_3B4CC:
 		cmpi.w	#$310,(Camera_Y_pos_BG_copy).w
 		blo.s	loc_3B544			; If fire hasn't subsided, branch
 		movem.l	d7-a0/a2-a3,-(sp)
-		moveq	#$C,d0
+		moveq	#PLCID_0C,d0
 		jsr	(Load_PLC).l
 		jsr	(LoadEnemyArt).l
 		movem.l	(sp)+,d7-a0/a2-a3
@@ -70708,7 +70754,7 @@ loc_3B544:
 		lea	(H_scroll_buffer+2).w,a1
 		move.w	(Camera_X_pos_BG_copy).w,d0	; Cancel out background deformation since we're still in the open field
 		neg.w	d0
-		moveq	#bytesToXcnt($1C0,8),d1
+		moveq	#bytesToLcnt(224),d1
 
 loc_3B554:
 		move.w	d0,(a1)
@@ -70934,7 +70980,7 @@ loc_3B744:
 		lea	(H_scroll_buffer).w,a1		; This is for what I assume to be the flying battleship sequence.
 		move.w	(_unkEE98).w,d0			; Nullifies the top 8 tiles worth of FG waviness for this effect
 		neg.w	d0						; And replaces it with position data from the second BG camera.
-		moveq	#bytesToXcnt($80,8),d1
+		moveq	#bytesToLcnt($40),d1
 
 loc_3B75E:
 		move.w	d0,(a1)
@@ -71548,9 +71594,9 @@ HCZ1BGE_Normal:
 		lea	(HCZ2_8x8_Secondary_KosM).l,a1	; Load secondary HCZ2 art, blocks, and chunks so as to not compromise current position
 		move.w	#tiles_to_bytes($11B),d2
 		jsr	(Queue_Kos_Module).l
-		moveq	#$10,d0
+		moveq	#PLCID_10,d0
 		jsr	(Load_PLC).l
-		moveq	#$11,d0
+		moveq	#PLCID_11,d0
 		jsr	(Load_PLC).l					; load HCZ 2 PLCs
 		movem.l	(sp)+,d7-a0/a2-a3
 		st	(Events_bg+$16).w
@@ -71588,7 +71634,7 @@ HCZ1BGE_DoTransition:
 		move.w	d0,(Water_level).w
 		move.w	d0,(Mean_water_level).w
 		move.w	d0,(Target_water_level).w	; Set the water up
-		moveq	#$D,d0
+		moveq	#PalID_HCZ2,d0
 		jsr	(LoadPalette_Immediate).l	; Load HCZ2 palette
 		movem.l	(sp)+,d7-a0/a2-a3
 		move.w	#$3600,d0
@@ -72098,7 +72144,7 @@ MGZ1BGE_Normal:
 		lea	(MGZ2_8x8_Secondary_KosM).l,a1
 		move.w	#tiles_to_bytes($252),d2
 		jsr	(Queue_Kos_Module).l		; Queue art, blocks and chunks for act 2
-		moveq	#$14,d0
+		moveq	#PLCID_14,d0
 		jsr	(Load_PLC).l					; Load act 2 PLCs
 		movem.l	(sp)+,d7-a0/a2-a3
 		addq.w	#4,(Events_routine_bg).w
@@ -72124,7 +72170,7 @@ MGZ1BGE_Transition:
 		movem.l	d7-a0/a2-a3,-(sp)
 		jsr	(Load_Level).l
 		jsr	(LoadSolids).l
-		moveq	#$F,d0
+		moveq	#PalID_MGZ2,d0
 		jsr	(LoadPalette_Immediate).l
 		movem.l	(sp)+,d7-a0/a2-a3
 		move.w	#$2E00,d0
@@ -73588,9 +73634,9 @@ CNZ1BGE_DoTransition:
 		beq.w	loc_3D870				; Don't do anything until signpost lands
 		clr.w	(Events_fg_5).w
 		movem.l	d7-a0/a2-a3,-(sp)
-		moveq	#$18,d0
+		moveq	#PLCID_18,d0
 		jsr	(Load_PLC).l
-		moveq	#$19,d0
+		moveq	#PLCID_19,d0
 		jsr	(Load_PLC).l					; Load CNZ 2 PLCs
 		move.w	#$301,(Current_zone_and_act).w		; Change to act 2
 		clr.b	(Dynamic_resize_routine).w
@@ -73603,7 +73649,7 @@ CNZ1BGE_DoTransition:
 		jsr	(LoadSolids).l
 		jsr	(CheckLevelForWater).l		; Level stuff, etc.
 		move.w	#$8014,(VDP_control_port).l		; Turn HInt on for water
-		moveq	#$11,d0
+		moveq	#PalID_CNZ2,d0
 		jsr	(LoadPalette_Immediate).l	; Load CNZ palette
 		movem.l	(sp)+,d7-a0/a2-a3
 		move.w	#$3000,d0
@@ -74097,7 +74143,7 @@ ICZ1BGE_Normal:
 		lea	(ICZ2_8x8_Secondary_KosM).l,a1
 		move.w	#tiles_to_bytes($122),d2
 		jsr	(Queue_Kos_Module).l
-		moveq	#$20,d0
+		moveq	#PLCID_20,d0
 		jsr	(Load_PLC).l
 		movem.l	(sp)+,d7-a0/a2-a3
 		addq.w	#4,(Events_routine_bg).w
@@ -74125,7 +74171,7 @@ ICZ1BGE_Transition:
 		jsr	(LoadSolids).l
 		jsr	(CheckLevelForWater).l
 		move.w	#$8014,(VDP_control_port).l		; Turn on HInt since ICZ2 has water
-		moveq	#$15,d0
+		moveq	#PalID_ICZ2,d0
 		jsr	(LoadPalette_Immediate).l
 		movem.l	(sp)+,d7-a0/a2-a3
 		move.w	#$6880,d0
@@ -75155,7 +75201,7 @@ LBZ1BGE_DoTransition:
 		jsr	(LoadSolids).l
 		jsr	(CheckLevelForWater).l
 		move.w	#$8014,(VDP_control_port).l		; Water in this stage yaaay
-		moveq	#$17,d0
+		moveq	#PalID_LBZ2,d0
 		jsr	(LoadPalette_Immediate).l
 		movem.l	(sp)+,d7-a0/a2-a3
 		move.w	#$3A00,d0
@@ -76229,7 +76275,7 @@ loc_3F0F4:
 		bsr.w	sub_3F5FE
 		jsr	(Process_Sprites).l
 		jsr	(Render_Sprites).l
-		move.b	#$18,(V_int_routine).w
+		move.b	#VInt_ID_18,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		move.w	(VDP_reg_1_command).w,d0
 		ori.b	#$40,d0
@@ -76239,7 +76285,7 @@ loc_3F0F4:
 		jsr	(Pal_FadeFromBlack).l
 
 loc_3F168:
-		move.b	#$18,(V_int_routine).w
+		move.b	#VInt_ID_18,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		jsr	(Process_Sprites).l
 		jsr	(Render_Sprites).l
@@ -76247,12 +76293,12 @@ loc_3F168:
 		beq.s	loc_3F168
 		subq.b	#1,d0
 		beq.s	loc_3F192
-		move.b	#0,(Game_mode).w
+		move.b	#GameMode_SegaScreen,(Game_mode).w
 		rts
 ; ---------------------------------------------------------------------------
 
 loc_3F192:
-		move.b	#$C,(Game_mode).w
+		move.b	#GameMode_Level,(Game_mode).w
 		move.b	#3,(Life_count).w
 		move.b	#3,(Life_count_P2).w
 		moveq	#0,d0
@@ -76773,18 +76819,18 @@ S3Credits:
 		move.w	d0,(VDP_control_port).l
 		jsr	(Clear_DisplayData).l
 	if FixBugs
-		clearRAM	Sprite_table,$280
-		clearRAM	H_scroll_buffer,$400
+		clearRAM	Sprite_table,(Sprite_table_end-Sprite_table)
+		clearRAM	H_scroll_buffer,(Collision_response_list_end-H_scroll_buffer)
 	else
-		; Bug: this should be $280
-		clearRAM	Sprite_table,$280+4
-		; Bug: this should be $400
-		clearRAM	H_scroll_buffer,$400+4
+		; Bug: this should be Sprite_table_End-Sprite_table
+		clearRAM	Sprite_table,(Sprite_table_end-Sprite_table)+4
+		; Bug: this should be Collision_response_list_End-H_scroll_buffer
+		clearRAM	H_scroll_buffer,(Collision_response_list_end-H_scroll_buffer)+4
 	endif
-		clearRAM	Sprite_table_input,$400
-		clearRAM	Player_1,$2000
+		clearRAM	Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
+		clearRAM	Player_1,(Kos_decomp_buffer-Player_1)
 		clearRAM	RAM_start+$2000,$2000
-		clearRAM	_unkFA80,$80
+		clearRAM	_unkFA80,(DMA_queue-_unkFA80)
 		clr.w	(DMA_queue).w
 		move.l	#DMA_queue,(DMA_queue_slot).w
 		clr.w	(Player_mode).w
@@ -76825,7 +76871,7 @@ loc_404AC:
 		moveq	#signextendB(mus_Credits3),d0
 		jsr	(Play_Music).l
 		move.w	#3*60,(_unkFA82).w
-		move.b	#$18,(V_int_routine).w
+		move.b	#VInt_ID_18,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		move.w	(VDP_reg_1_command).w,d0
 		ori.b	#$40,d0
@@ -76833,7 +76879,7 @@ loc_404AC:
 		jsr	(Pal_FadeFromBlack).l
 
 loc_404E0:
-		move.b	#$18,(V_int_routine).w
+		move.b	#VInt_ID_18,(V_int_routine).w
 		jsr	(Process_Kos_Queue).l
 		jsr	(Wait_VSync).l
 		addq.w	#1,(Level_frame_counter).w
@@ -76842,7 +76888,7 @@ loc_404E0:
 		bsr.w	sub_4051E
 		jsr	(Process_Nem_Queue_Init).l
 		jsr	(Process_Kos_Module_Queue).l
-		cmpi.b	#$20,(Game_mode).w
+		cmpi.b	#GameMode_S3Credits,(Game_mode).w
 		beq.w	loc_404E0
 		rts
 
@@ -76880,7 +76926,7 @@ loc_40538:
 		beq.w	loc_405FA
 		lea	(a1,d0.w),a1
 		bsr.w	sub_40A4A
-		move.b	#$18,(V_int_routine).w
+		move.b	#VInt_ID_18,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		jmp	(Pal_FadeFromBlack).l
 ; ---------------------------------------------------------------------------
@@ -76968,7 +77014,7 @@ loc_4065C:
 		dbf	d0,loc_4065C
 		jsr	(Process_Sprites).l
 		jsr	(Render_Sprites).l
-		move.b	#$18,(V_int_routine).w
+		move.b	#VInt_ID_18,(V_int_routine).w
 		jsr	(Wait_VSync).l
 		jmp	(Pal_FadeFromBlack).l
 ; ---------------------------------------------------------------------------
@@ -77068,7 +77114,7 @@ loc_40774:
 ; ---------------------------------------------------------------------------
 
 loc_40780:
-		move.b	#0,(Game_mode).w
+		move.b	#GameMode_SegaScreen,(Game_mode).w
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -77247,7 +77293,7 @@ loc_409E0:
 ; ---------------------------------------------------------------------------
 
 loc_409F6:
-		move.b	#0,(Game_mode).w
+		move.b	#GameMode_SegaScreen,(Game_mode).w
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -77984,7 +78030,11 @@ ChildObjDat_4192A:
 AniRaw_41932:
 		dc.b   $F,   1,   2, $FC
 AniRaw_41936:
-		dc.b    7,   1,   1,   3,   4, $F8,   7, $7F,   4,   4, $FC
+		dc.b    7,   1,   1,   3,   4
+		dc.b  $F8, .jump-AniRaw_41936
+
+.jump:
+		dc.b  $7F,   4,   4, $FC
 AniRaw_41941:
 		dc.b   $F,  $A,  $B, $FC
 AniRaw_41945:
@@ -78145,10 +78195,10 @@ loc_4328A:
 		bchg	#0,render_flags(a0)
 		bchg	#0,status(a0)
 	if FixBugs
-		clearRAM	H_scroll_buffer,$1000
+		clearRAM	H_scroll_buffer,(Target_water_palette-H_scroll_buffer)
 	else
-		; Bug: this should be $1000
-		clearRAM	H_scroll_buffer,$1000+4
+		; Bug: this should be (Target_water_palette-H_scroll_buffer)
+		clearRAM	H_scroll_buffer,(Target_water_palette-H_scroll_buffer)+4
 	endif
 		lea	(H_scroll_buffer+$13C).w,a1
 		lea	Streak_Horizontal_offsets(pc),a2
@@ -79625,7 +79675,7 @@ SSEntryFlash_GoSS:
 		jsr	(Clear_SpriteRingMem).l
 		jsr	(Save_Level_Data2).l
 		move.b	#1,(Special_bonus_entry_flag).w
-		move.b	#$34,(Game_mode).w
+		move.b	#GameMode_SpecialStage3,(Game_mode).w
 		move.b	#1,(Respawn_table_keep).w
 		move.b	subtype(a0),d0
 		move.l	(Collected_special_ring_array).w,d1
@@ -79692,7 +79742,10 @@ DPLCPtr_SSEntryFlash:
 		dc.l ArtUnc_SSEntryFlash
 		dc.l DPLC_SSEntryFlash
 AniRaw_SSEntryRing:
-		dc.b    4,   0,   0,   1,   2,   3,   4,   5,   6,   7, $F8,  $C
+		dc.b    4,   0,   0,   1,   2,   3,   4,   5,   6,   7
+		dc.b  $F8, .jump-AniRaw_SSEntryRing
+
+.jump:
 		dc.b    6,  $A,   9,   8,  $B, $FC
 AniRaw_SSEntryFlash:
 		dc.b    0,   0,   0,   1,   2,   3|$40,   3,   2,   1,   0, $F4
@@ -81155,7 +81208,8 @@ byte_45775:
 byte_4577B:
 		dc.b    1,   8,   4,   8,   5,   8,   6,   8,   7, $FC
 byte_45785:
-		dc.b    7, $1C, $1C, $1D, $F8,   6
+		dc.b    7, $1C, $1C, $1D
+		dc.b  $F8, byte_4578B-byte_45785
 byte_4578B:
 		dc.b    7, $1E, $1F, $FC
 byte_4578F:
@@ -82350,7 +82404,7 @@ loc_4645E:
 		move.b	#$60,collision_property(a0)
 		move.w	(Camera_max_X_pos).w,(Camera_stored_max_X_pos).w
 		move.b	#1,(Boss_flag).w
-		moveq	#$5A,d0
+		moveq	#PLCID_5A,d0
 		jmp	(Load_PLC).l
 ; ---------------------------------------------------------------------------
 
@@ -82839,7 +82893,7 @@ loc_46996:
 		jsr	(SetUp_ObjAttributes).l
 		move.b	#6,collision_property(a0)
 		move.b	#1,(Boss_flag).w
-		moveq	#$5A,d0
+		moveq	#PLCID_5A,d0
 		jsr	(Load_PLC).l
 		lea	Pal_AIZMiniboss(pc),a1
 		jmp	(PalLoad_Line1).l
@@ -83582,7 +83636,7 @@ loc_470BE:
 		jsr	(Play_Music).l
 		move.b	#1,(Boss_flag).w		; Lock the screen
 		clr.b	(_unkFAA3).w
-		moveq	#$6B,d0
+		moveq	#PLCID_6B,d0
 		jsr	(Load_PLC).l					; Load Robotnik's ship and explosions
 		lea	(ArtKosM_AIZEndBoss).l,a1
 		move.w	#tiles_to_bytes(ArtTile_AIZEndBoss),d2
@@ -84733,7 +84787,7 @@ Obj_HCZMiniboss:
 		move.l	#loc_47D30,(a0)
 		move.b	#1,(Boss_flag).w
 		st	(Events_bg+$16).w
-		moveq	#$5B,d0
+		moveq	#PLCID_5B,d0
 		jsr	(Load_PLC).l
 		move.w	#$300,(Camera_min_Y_pos).w
 		lea	ChildObjDat_48BB2(pc),a2
@@ -84786,7 +84840,12 @@ loc_47D82:
 
 loc_47DBA:
 		move.l	#Obj_HCZ_MinibossLoop,(a0)
+	if FixBugs
+		moveq	#signextendB(mus_Miniboss),d0
+	else
+		; Bug: This is incorrectly using the End Boss music for a Miniboss.
 		moveq	#signextendB(mus_EndBoss),d0
+	endif
 		jsr	(Play_Music).l
 
 locret_47DC8:
@@ -86327,7 +86386,7 @@ loc_48D62:
 		move.w	#$80,y_vel(a0)
 		move.w	#$EF,$2E(a0)
 		move.l	#loc_48DC8,$34(a0)
-		moveq	#$6C,d0
+		moveq	#PLCID_6C,d0
 		jsr	(Load_PLC).l
 		move.w	#0,(Normal_palette+$1E).w
 		lea	Pal_HCZEndBoss(pc),a1
@@ -87896,7 +87955,7 @@ Obj_MGZ2DrillingRobotnik:
 		lea	(ArtKosM_MGZEndBossDebris).l,a1
 		move.w	#tiles_to_bytes(ArtTile_MGZEndBossDebris),d2
 		jsr	(Queue_Kos_Module).l
-		moveq	#$6D,d0
+		moveq	#PLCID_6D,d0
 		jsr	(Load_PLC).l
 		lea	Pal_MGZEndBoss(pc),a1
 		jmp	(PalLoad_Line1).l
@@ -88142,7 +88201,7 @@ loc_4A04A:
 		lea	(MGZ2_8x8_Secondary_KosM).l,a1
 		move.w	#tiles_to_bytes($252),d2
 		jsr	(Queue_Kos_Module).l
-		moveq	#$14,d0
+		moveq	#PLCID_14,d0
 		jsr	(Load_PLC).l
 		lea	(ArtKosM_Spiker).l,a1
 		move.w	#tiles_to_bytes(ArtTile_Spiker),d2
@@ -88219,7 +88278,7 @@ loc_4A132:
 		lea	(ArtKosM_MGZEndBossDebris).l,a1
 		move.w	#tiles_to_bytes(ArtTile_MGZEndBossDebris),d2
 		jsr	(Queue_Kos_Module).l
-		moveq	#$6D,d0
+		moveq	#PLCID_6D,d0
 		jsr	(Load_PLC).l
 		lea	Pal_MGZEndBoss(pc),a1
 		jsr	(PalLoad_Line1).l
@@ -89992,8 +90051,8 @@ byte_4B45B:
 		dc.b    9,   3
 		dc.b   $A,   3
 		dc.b   $B,   3
-		dc.b  $F8, $20
-byte_4B47B:	; unused
+		dc.b  $F8, byte_4B47B-byte_4B45B
+byte_4B47B:
 		dc.b    9,   2
 		dc.b   $A,   2
 		dc.b   $B,   2
@@ -90014,7 +90073,7 @@ byte_4B482:
 		dc.b   $C,   3
 		dc.b   $D,   3
 		dc.b   $E,   3
-		dc.b  $F8, $20
+		dc.b  $F8, byte_4B4A2-byte_4B482
 byte_4B4A2:
 		dc.b   $C,   2
 		dc.b   $D,   2
@@ -90036,7 +90095,7 @@ byte_4B4A9:
 		dc.b  $20,   3
 		dc.b  $21,   3
 		dc.b  $22,   3
-		dc.b  $F8, $20
+		dc.b  $F8, byte_4B4C9-byte_4B4A9
 byte_4B4C9:
 		dc.b  $20,   2
 		dc.b  $21,   2
@@ -90071,7 +90130,7 @@ byte_4B4E1:
 		dc.b   $F,   3
 		dc.b  $10,   3
 		dc.b  $11,   3
-		dc.b  $F8, $20
+		dc.b  $F8, byte_4B501-byte_4B4E1
 byte_4B501:
 		dc.b   $F,   2
 		dc.b  $10,   2
@@ -90174,7 +90233,7 @@ loc_4B5B4:
 		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l				; Fade out music
 		move.b	#1,(Boss_flag).w		; Lock screen
-		moveq	#$5D,d0
+		moveq	#PLCID_5D,d0
 		jsr	(Load_PLC).l					; Load CNZ Miniboss PLC
 		lea	Pal_CNZMiniboss(pc),a1		; Load CNZ Miniboss palette
 		jmp	(PalLoad_Line1).l
@@ -91079,7 +91138,7 @@ Obj_CNZEndBoss:
 		move.w	#$4760,$1C(a0)
 		move.w	#$47E0,(Camera_max_X_pos).w
 		move.l	#loc_4BFFA,$34(a0)
-		moveq	#$6E,d0
+		moveq	#PLCID_6E,d0
 		jsr	(Load_PLC).l
 		lea	Pal_CNZEndBoss(pc),a1
 		jmp	(PalLoad_Line1).l
@@ -92063,7 +92122,7 @@ loc_4C976:
 		move.w	#$540,(Camera_target_max_Y_pos).w
 		move.w	#$2E20,$3A(a0)
 		move.l	#loc_4C9CA,$34(a0)
-		moveq	#$5E,d0
+		moveq	#PLCID_5E,d0
 		jsr	(Load_PLC).l
 		lea	Pal_FBZMiniboss(pc),a1
 		jsr	(PalLoad_Line1).l
@@ -93319,7 +93378,7 @@ loc_4D57A:
 		moveq	#signextendB(cmd_FadeOut),d0
 		jsr	(Play_Music).l
 		move.b	#1,(Boss_flag).w
-		moveq	#$6A,d0
+		moveq	#PLCID_6A,d0
 		jsr	(Load_PLC).l
 		lea	Pal_FBZ2Subboss(pc),a1
 		jsr	PalLoad_Line1(pc)
@@ -93866,7 +93925,10 @@ byte_4DB61:
 		dc.b    5,  $A
 		dc.b  $FC
 byte_4DB66:
-		dc.b    0,   6,   6,  $A,   7,  $A, $F8,   8
+		dc.b    0,   6,   6,  $A,   7,  $A
+		dc.b  $F8, .jump-byte_4DB66
+
+.jump:
 		dc.b    0,   8,  $A, $FC
 byte_4DB72:
 		dc.b    0,   7
@@ -93904,7 +93966,7 @@ loc_4DBC0:
 		move.b	#1,(Boss_flag).w
 		move.w	(Camera_max_X_pos).w,(Camera_stored_max_X_pos).w
 		move.w	#$3090,(Camera_max_X_pos).w
-		moveq	#$6F,d0
+		moveq	#PLCID_6F,d0
 		jsr	(Load_PLC).l
 		lea	Pal_FBZEndBoss(pc),a1
 		jsr	(PalLoad_Line1).l
@@ -94695,7 +94757,7 @@ Obj_ICZMiniboss:
 		move.w	#$6F0,$1C(a0)
 		move.w	#$6F0,(Camera_max_X_pos).w
 		move.l	#loc_4E3FA,$34(a0)
-		moveq	#$5F,d0
+		moveq	#PLCID_5F,d0
 		jsr	(Load_PLC).l
 		lea	Pal_ICZMiniboss(pc),a1
 		jmp	PalLoad_Line1(pc)
@@ -95564,7 +95626,7 @@ Obj_ICZEndBoss:
 		move.w	#$4390,$1C(a0)
 		move.w	#$4390,(Camera_max_X_pos).w
 		move.l	#loc_4ED34,$34(a0)
-		moveq	#$70,d0
+		moveq	#PLCID_70,d0
 		jsr	(Load_PLC).l
 		lea	Pal_ICZEndBoss(pc),a1
 		jmp	PalLoad_Line1(pc)
@@ -96852,8 +96914,14 @@ ChildObjDat_4F96E:
 byte_4F974:
 		dc.b   $F,   0,   1,   0,   2, $FC
 byte_4F97A:
-		dc.b    7,   3,   4,   5, $F8,   6
-		dc.b  $3F,   5,   5,   5, $F8,   6
+		dc.b    7,   3,   4,   5
+		dc.b  $F8, .jump-byte_4F97A
+
+.jump:
+		dc.b  $3F,   5,   5,   5
+		dc.b  $F8, .jump2-.jump
+
+.jump2:
 		dc.b    7,   5,   4,   3,   4, $FC
 Pal_LBZMiniboss:
 		binclude "Levels/LBZ/Palettes/Miniboss.bin"
@@ -96884,7 +96952,7 @@ loc_4F9CE:
 		move.b	#1,(Boss_flag).w
 		move.w	#$7F,$2E(a0)
 		move.l	#loc_4FA32,$34(a0)
-		moveq	#$71,d0
+		moveq	#PLCID_71,d0
 		jsr	(Load_PLC).l
 		jsr	(AllocateObject).l
 		bne.s	loc_4FA0C
@@ -97943,7 +98011,7 @@ loc_50444:
 		move.l	#loc_504B4,$34(a0)
 		lea	ChildObjDat_50BD8(pc),a2
 		jsr	CreateChild1_Normal(pc)
-		moveq	#$77,d0
+		moveq	#PLCID_77,d0
 		jsr	(Load_PLC).l
 		lea	(ArtKosM_LBZEndBoss).l,a1
 		move.w	#tiles_to_bytes(ArtTile_LBZEndBoss),d2
@@ -99940,7 +100008,7 @@ loc_51982:
 ; ---------------------------------------------------------------------------
 
 loc_51988:
-		move.b	#$20,(Game_mode).w
+		move.b	#GameMode_S3Credits,(Game_mode).w
 		jmp	(Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -106518,7 +106586,9 @@ byte_554B9:
 		dc.b    8,  $F
 		dc.b    9,  $F
 		dc.b   $A,  $F
-		dc.b  $F8,  $A
+		dc.b  $F8, .jump-byte_554B9
+
+.jump:
 		dc.b    6, $7E
 		dc.b  $FC
 		even
@@ -108538,6 +108608,8 @@ ChildObjDat_56920:
 		dc.w 1-1
 		dc.l loc_56630
 		dc.b    0,   0
+
+		; unused
 		dc.b    0,   5
 		dc.b    1,   5
 		dc.b    2,   5
@@ -112348,7 +112420,7 @@ loc_58B78:
 		btst	#p2_standing_bit,d0
 		beq.s	locret_58BD0
 	if FixBugs
-		lea	(Player_2).w,a2
+		lea	(Player_2).w,a1
 	else
 		; Bug: this should instead write Player_2 to a1
 		lea	(Player_1).w,a2
@@ -114424,6 +114496,8 @@ ChildObjDat_59E80:
 		dc.b    0,-$10
 		dc.l loc_59E10
 		dc.b -$10,   0
+
+		; unused
 		dc.b    0,   5
 		dc.b    1,   5
 		dc.b    2,   5
@@ -114833,10 +114907,16 @@ byte_5A294:
 byte_5A2A0:
 		dc.b    2,  $A,  $A,  $B,  $C,  $D,  $E,  $F, $F4
 byte_5A2A9:
-		dc.b    3, $10, $10, $11, $12, $13, $F8,   8
+		dc.b    3, $10, $10, $11, $12, $13
+		dc.b  $F8, .jump-byte_5A2A9
+
+.jump:
 		dc.b    3, $13, $13, $FC
 byte_5A2B5:
-		dc.b    3,  $A,  $A, $14, $F8,   6
+		dc.b    3,  $A,  $A, $14
+		dc.b  $F8, .jump-byte_5A2B5
+
+.jump:
 		dc.b    3, $14, $14, $FC
 		even
 ; ---------------------------------------------------------------------------
@@ -114872,7 +114952,7 @@ loc_5A2F8:
 		jsr	(Swing_Setup1).l
 		move.w	#$3820,(Camera_min_X_pos).w
 		move.w	#$3AE8,(Camera_max_X_pos).w
-		moveq	#$60,d0
+		moveq	#PLCID_60,d0
 		jsr	(Load_PLC).l
 		lea	(ArtKosM_LBZMinibossBox).l,a1
 		move.w	#tiles_to_bytes(ArtTile_LBZMinibossBox),d2
@@ -115582,9 +115662,13 @@ ObjDat_LBZ2RobotnikShip:
 		dc.w make_art_tile(ArtTile_RobotnikShip,0,1)
 		dc.w    $80
 		dc.b  $20, $20,  $A, $CA
+
+		; unused
 		dc.w 1-1
 		dc.l Obj_LBZ2RobotnikShip
 		dc.b    0,   0
+
+		; unused
 		dc.b    0,   5
 		dc.b    1,   5
 		dc.b    2,   5
@@ -115592,188 +115676,195 @@ ObjDat_LBZ2RobotnikShip:
 		dc.b  $FC
 		even
 ; ---------------------------------------------------------------------------
-;	1st PLC		palette                          2nd 8x8 data                                       2nd 16x16 data                                     2nd 128x128 data
-;		2nd PLC           1st 8x8 data                                    1st 16x16 data                                      1st 128x128 data
+;		   1st PLC	       palette				       2nd 8x8 data					  2nd 16x16 data				     2nd 128x128 data
+;			     2nd PLC			1st 8x8 data					1st 16x16 data					    1st 128x128 data
 LevelLoadBlock:
-	levartptrs $B,  $B,  $A,  AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Primary_Kos,   AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; ANGEL ISLAND ZONE ACT 1
-	levartptrs $C,  $C,  $B,  AIZ2_8x8_Primary_KosM, AIZ2_8x8_Secondary_KosM, AIZ2_16x16_Primary_Kos,   AIZ2_16x16_Secondary_Kos, AIZ2_128x128_Kos,        AIZ2_128x128_Kos			; ANGEL ISLAND ZONE ACT 2
-	levartptrs $E,  $F,  $C,  HCZ_8x8_Primary_KosM,  HCZ1_8x8_Secondary_KosM, HCZ_16x16_Primary_Kos,    HCZ1_16x16_Secondary_Kos, HCZ_128x128_Primary_Kos, HCZ1_128x128_Secondary_Kos	; HYDROCITY ZONE ACT 1
-	levartptrs $10, $11, $D,  HCZ_8x8_Primary_KosM,  HCZ2_8x8_Secondary_KosM, HCZ_16x16_Primary_Kos,    HCZ2_16x16_Secondary_Kos, HCZ_128x128_Primary_Kos, HCZ2_128x128_Secondary_Kos	; HYDROCITY ZONE ACT 2
-	levartptrs $12, $12, $E,  MGZ_8x8_Primary_KosM,  MGZ1_8x8_Secondary_KosM, MGZ_16x16_Primary_Kos,    MGZ1_16x16_Secondary_Kos, MGZ_128x128_Primary_Kos, MGZ1_128x128_Secondary_Kos	; MARBLE GARDEN ZONE ACT 1
-	levartptrs $14, $14, $F,  MGZ_8x8_Primary_KosM,  MGZ2_8x8_Secondary_KosM, MGZ_16x16_Primary_Kos,    MGZ2_16x16_Secondary_Kos, MGZ_128x128_Primary_Kos, MGZ2_128x128_Secondary_Kos	; MARBLE GARDEN ZONE ACT 2
-	levartptrs $16, $17, $10, CNZ_8x8_KosM,          CNZ_8x8_KosM,            CNZ_16x16_Kos,            CNZ_16x16_Kos,            CNZ_128x128_Kos,         CNZ_128x128_Kos			; CARNIVAL NIGHT ZONE ACT 1
-	levartptrs $18, $19, $11, CNZ_8x8_KosM,          CNZ_8x8_KosM,            CNZ_16x16_Kos,            CNZ_16x16_Kos,            CNZ_128x128_Kos,         CNZ_128x128_Kos			; CARNIVAL NIGHT ZONE ACT 2
-	levartptrs $1A, $1A, $12, FBZ1_8x8_KosM,         FBZ1_8x8_KosM,           FBZ1_16x16_Kos,           FBZ1_16x16_Kos,           FBZ1_128x128_Kos,        FBZ1_128x128_Kos			; FLYING BATTERY ZONE ACT 1 (unused)
-	levartptrs $1C, $1C, $13, FBZ2_8x8_KosM,         FBZ2_8x8_KosM,           FBZ2_16x16_Kos,           FBZ2_16x16_Kos,           FBZ2_128x128_Kos,        FBZ2_128x128_Kos			; FLYING BATTERY ZONE ACT 2 (unused)
-	levartptrs $1E, $1E, $14, ICZ_8x8_Primary_KosM,  ICZ1_8x8_Secondary_KosM, ICZ_16x16_Primary_Kos,    ICZ1_16x16_Secondary_Kos, ICZ_128x128_Primary_Kos, ICZ1_128x128_Secondary_Kos	; ICECAP ZONE ACT 1
-	levartptrs $20, $20, $15, ICZ_8x8_Primary_KosM,  ICZ2_8x8_Secondary_KosM, ICZ_16x16_Primary_Kos,    ICZ2_16x16_Secondary_Kos, ICZ_128x128_Primary_Kos, ICZ2_128x128_Secondary_Kos	; ICECAP ZONE ACT 2
-	levartptrs $22, $22, $16, LBZ_8x8_Primary_KosM,  LBZ1_8x8_Secondary_KosM, LBZ_16x16_Primary_Kos,    LBZ1_16x16_Secondary_Kos, LBZ1_128x128_Kos,        LBZ1_128x128_Kos			; LAUNCH BASE ZONE ACT 1
-	levartptrs $24, $25, $17, LBZ_8x8_Primary_KosM,  LBZ2_8x8_Secondary_KosM, LBZ_16x16_Primary_Kos,    LBZ2_16x16_Secondary_Kos, LBZ2_128x128_Kos,        LBZ2_128x128_Kos			; LAUNCH BASE ZONE ACT 2
-	levartptrs $26, $26, $18, ArtKosM_MHZ,           ArtKosM_MHZ,             MHZ_16x16_Kos,            MHZ_16x16_Kos,            MHZ_128x128_Kos,         MHZ_128x128_Kos			; MUSHROOM HILL ZONE ACT 1 (unused)
-	levartptrs $28, $28, $19, ArtKosM_MHZ,           ArtKosM_MHZ,             MHZ_16x16_Kos,            MHZ_16x16_Kos,            MHZ_128x128_Kos,         MHZ_128x128_Kos			; MUSHROOM HILL ZONE ACT 2 (unused)
-	levartptrs $B,  $B,  $A,  AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; SANDOPOLIS ZONE ACT 1 (unused)
-	levartptrs $C,  $C,  $B,  AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; SANDOPOLIS ZONE ACT 2 (unused)
-	levartptrs $2E, $2E, $1C, ArtKosM_LRZ,           ArtKosM_LRZ,             LRZ_16x16_Kos,            LRZ_16x16_Kos,            LRZ_128x128_Kos,         LRZ_128x128_Kos			; LAVA REEF ZONE ACT 1 (unused)
-	levartptrs $30, $30, $1D, ArtKosM_LRZ,           ArtKosM_LRZ,             LRZ_16x16_Kos,            LRZ_16x16_Kos,            LRZ_128x128_Kos,         LRZ_128x128_Kos			; LAVA REEF ZONE ACT 2 (unused)
-	levartptrs $B,  $B,  $A,  AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; SKY SANCTUARY ZONE (SONIC/TAILS) (unused)
-	levartptrs $C,  $C,  $B,  AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; SKY SANCTUARY ZONE (KNUCKLES) (unused)
-	levartptrs $B,  $B,  $A,  AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; DEATH EGG ZONE ACT 1 (unused)
-	levartptrs $C,  $C,  $B,  AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; DEATH EGG ZONE ACT 2 (unused)
-	levartptrs $B,  $B,  $A,  AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; DOOMSDAY ZONE (unused)
-	levartptrs $C,  $C,  $B,  AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; DOOMSDAY ZONE (unused)
+	levartptrs PLCID_0B, PLCID_0B, PalID_AIZIntro,	AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Primary_Kos,   AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; ANGEL ISLAND ZONE ACT 1
+	levartptrs PLCID_0C, PLCID_0C, PalID_AIZFire,	AIZ2_8x8_Primary_KosM, AIZ2_8x8_Secondary_KosM, AIZ2_16x16_Primary_Kos,   AIZ2_16x16_Secondary_Kos, AIZ2_128x128_Kos,        AIZ2_128x128_Kos			; ANGEL ISLAND ZONE ACT 2
+	levartptrs PLCID_0E, PLCID_0F, PalID_HCZ1,	HCZ_8x8_Primary_KosM,  HCZ1_8x8_Secondary_KosM, HCZ_16x16_Primary_Kos,    HCZ1_16x16_Secondary_Kos, HCZ_128x128_Primary_Kos, HCZ1_128x128_Secondary_Kos	; HYDROCITY ZONE ACT 1
+	levartptrs PLCID_10, PLCID_11, PalID_HCZ2,	HCZ_8x8_Primary_KosM,  HCZ2_8x8_Secondary_KosM, HCZ_16x16_Primary_Kos,    HCZ2_16x16_Secondary_Kos, HCZ_128x128_Primary_Kos, HCZ2_128x128_Secondary_Kos	; HYDROCITY ZONE ACT 2
+	levartptrs PLCID_12, PLCID_12, PalID_MGZ1,	MGZ_8x8_Primary_KosM,  MGZ1_8x8_Secondary_KosM, MGZ_16x16_Primary_Kos,    MGZ1_16x16_Secondary_Kos, MGZ_128x128_Primary_Kos, MGZ1_128x128_Secondary_Kos	; MARBLE GARDEN ZONE ACT 1
+	levartptrs PLCID_14, PLCID_14, PalID_MGZ2,	MGZ_8x8_Primary_KosM,  MGZ2_8x8_Secondary_KosM, MGZ_16x16_Primary_Kos,    MGZ2_16x16_Secondary_Kos, MGZ_128x128_Primary_Kos, MGZ2_128x128_Secondary_Kos	; MARBLE GARDEN ZONE ACT 2
+	levartptrs PLCID_16, PLCID_17, PalID_CNZ1,	CNZ_8x8_KosM,          CNZ_8x8_KosM,            CNZ_16x16_Kos,            CNZ_16x16_Kos,            CNZ_128x128_Kos,         CNZ_128x128_Kos			; CARNIVAL NIGHT ZONE ACT 1
+	levartptrs PLCID_18, PLCID_19, PalID_CNZ2,	CNZ_8x8_KosM,          CNZ_8x8_KosM,            CNZ_16x16_Kos,            CNZ_16x16_Kos,            CNZ_128x128_Kos,         CNZ_128x128_Kos			; CARNIVAL NIGHT ZONE ACT 2
+	levartptrs PLCID_1A, PLCID_1A, PalID_FBZ1,	FBZ1_8x8_KosM,         FBZ1_8x8_KosM,           FBZ1_16x16_Kos,           FBZ1_16x16_Kos,           FBZ1_128x128_Kos,        FBZ1_128x128_Kos			; FLYING BATTERY ZONE ACT 1 (unused)
+	levartptrs PLCID_1C, PLCID_1C, PalID_FBZ2,	FBZ2_8x8_KosM,         FBZ2_8x8_KosM,           FBZ2_16x16_Kos,           FBZ2_16x16_Kos,           FBZ2_128x128_Kos,        FBZ2_128x128_Kos			; FLYING BATTERY ZONE ACT 2 (unused)
+	levartptrs PLCID_1E, PLCID_1E, PalID_ICZ1,	ICZ_8x8_Primary_KosM,  ICZ1_8x8_Secondary_KosM, ICZ_16x16_Primary_Kos,    ICZ1_16x16_Secondary_Kos, ICZ_128x128_Primary_Kos, ICZ1_128x128_Secondary_Kos	; ICECAP ZONE ACT 1
+	levartptrs PLCID_20, PLCID_20, PalID_ICZ2,	ICZ_8x8_Primary_KosM,  ICZ2_8x8_Secondary_KosM, ICZ_16x16_Primary_Kos,    ICZ2_16x16_Secondary_Kos, ICZ_128x128_Primary_Kos, ICZ2_128x128_Secondary_Kos	; ICECAP ZONE ACT 2
+	levartptrs PLCID_22, PLCID_22, PalID_LBZ1,	LBZ_8x8_Primary_KosM,  LBZ1_8x8_Secondary_KosM, LBZ_16x16_Primary_Kos,    LBZ1_16x16_Secondary_Kos, LBZ1_128x128_Kos,        LBZ1_128x128_Kos			; LAUNCH BASE ZONE ACT 1
+	levartptrs PLCID_24, PLCID_25, PalID_LBZ2,	LBZ_8x8_Primary_KosM,  LBZ2_8x8_Secondary_KosM, LBZ_16x16_Primary_Kos,    LBZ2_16x16_Secondary_Kos, LBZ2_128x128_Kos,        LBZ2_128x128_Kos			; LAUNCH BASE ZONE ACT 2
+	levartptrs PLCID_26, PLCID_26, PalID_MHZ1,	ArtKosM_MHZ,           ArtKosM_MHZ,             MHZ_16x16_Kos,            MHZ_16x16_Kos,            MHZ_128x128_Kos,         MHZ_128x128_Kos			; MUSHROOM HILL ZONE ACT 1 (unused)
+	levartptrs PLCID_28, PLCID_28, PalID_MHZ2,	ArtKosM_MHZ,           ArtKosM_MHZ,             MHZ_16x16_Kos,            MHZ_16x16_Kos,            MHZ_128x128_Kos,         MHZ_128x128_Kos			; MUSHROOM HILL ZONE ACT 2 (unused)
+	levartptrs PLCID_0B, PLCID_0B, PalID_AIZIntro,	AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; SANDOPOLIS ZONE ACT 1 (unused)
+	levartptrs PLCID_0C, PLCID_0C, PalID_AIZFire,	AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; SANDOPOLIS ZONE ACT 2 (unused)
+	levartptrs PLCID_2E, PLCID_2E, PalID_LRZ1,	ArtKosM_LRZ,           ArtKosM_LRZ,             LRZ_16x16_Kos,            LRZ_16x16_Kos,            LRZ_128x128_Kos,         LRZ_128x128_Kos			; LAVA REEF ZONE ACT 1 (unused)
+	levartptrs PLCID_30, PLCID_30, PalID_LRZ2,	ArtKosM_LRZ,           ArtKosM_LRZ,             LRZ_16x16_Kos,            LRZ_16x16_Kos,            LRZ_128x128_Kos,         LRZ_128x128_Kos			; LAVA REEF ZONE ACT 2 (unused)
+	levartptrs PLCID_0B, PLCID_0B, PalID_AIZIntro,	AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; SKY SANCTUARY ZONE (SONIC/TAILS) (unused)
+	levartptrs PLCID_0C, PLCID_0C, PalID_AIZFire,	AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; SKY SANCTUARY ZONE (KNUCKLES) (unused)
+	levartptrs PLCID_0B, PLCID_0B, PalID_AIZIntro,	AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; DEATH EGG ZONE ACT 1 (unused)
+	levartptrs PLCID_0C, PLCID_0C, PalID_AIZFire,	AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; DEATH EGG ZONE ACT 2 (unused)
+	levartptrs PLCID_0B, PLCID_0B, PalID_AIZIntro,	AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; DOOMSDAY ZONE (unused)
+	levartptrs PLCID_0C, PLCID_0C, PalID_AIZFire,	AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; DOOMSDAY ZONE (unused)
 
-	levartptrs $B,  $B,  $2A, AIZ1_8x8_Primary_KosM, AIZ1_8x8_MainLevel_KosM, AIZ1_16x16_Primary_Kos,   AIZ1_16x16_MainLevel_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; SONIC/TAILS INTRO (unused)
-	levartptrs $C,  $C,  $B,  AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; SONIC/TAILS ENDING (unused)
+	levartptrs PLCID_0B, PLCID_0B, PalID_AIZ,	AIZ1_8x8_Primary_KosM, AIZ1_8x8_MainLevel_KosM, AIZ1_16x16_Primary_Kos,   AIZ1_16x16_MainLevel_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; SONIC/TAILS INTRO (unused)
+	levartptrs PLCID_0C, PLCID_0C, PalID_AIZFire,	AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; SONIC/TAILS ENDING (unused)
 
-	levartptrs $42, $42, $26, ALZ_8x8_KosM,          ALZ_8x8_KosM,            ALZ_16x16_Kos,            ALZ_16x16_Kos,            ALZ_128x128_Kos,         ALZ_128x128_Kos			; AZURE LAKE ZONE
-	levartptrs $42, $42, $27, ALZ_8x8_KosM,          ALZ_8x8_KosM,            ALZ_16x16_Kos,            ALZ_16x16_Kos,            ALZ_128x128_Kos,         ALZ_128x128_Kos			; AZURE LAKE ZONE (unused)
-	levartptrs $43, $43, $28, BPZ_8x8_KosM,          BPZ_8x8_KosM,            BPZ_16x16_Kos,            BPZ_16x16_Kos,            BPZ_128x128_Kos,         BPZ_128x128_Kos			; BALLOON PARK ZONE
-	levartptrs $43, $43, $29, BPZ_8x8_KosM,          BPZ_8x8_KosM,            BPZ_16x16_Kos,            BPZ_16x16_Kos,            BPZ_128x128_Kos,         BPZ_128x128_Kos			; BALLOON PARK ZONE (unused)
-	levartptrs $44, $44, $34, DPZ_8x8_KosM,          DPZ_8x8_KosM,            DPZ_16x16_Kos,            DPZ_16x16_Kos,            DPZ_128x128_Kos,         DPZ_128x128_Kos			; DESERT PALACE ZONE
-	levartptrs $44, $44, $34, DPZ_8x8_KosM,          DPZ_8x8_KosM,            DPZ_16x16_Kos,            DPZ_16x16_Kos,            DPZ_128x128_Kos,         DPZ_128x128_Kos			; DESERT PALACE ZONE (unused)
-	levartptrs $45, $45, $35, CGZ_8x8_KosM,          CGZ_8x8_KosM,            CGZ_16x16_Kos,            CGZ_16x16_Kos,            CGZ_128x128_Kos,         CGZ_128x128_Kos			; CHROME GADGET ZONE
-	levartptrs $45, $45, $35, CGZ_8x8_KosM,          CGZ_8x8_KosM,            CGZ_16x16_Kos,            CGZ_16x16_Kos,            CGZ_128x128_Kos,         CGZ_128x128_Kos			; CHROME GADGET ZONE (unused)
-	levartptrs $46, $46, $36, EMZ_8x8_KosM,          EMZ_8x8_KosM,            EMZ_16x16_Kos,            EMZ_16x16_Kos,            EMZ_128x128_Kos,         EMZ_128x128_Kos			; ENDLESS MINE ZONE
-	levartptrs $46, $46, $36, EMZ_8x8_KosM,          EMZ_8x8_KosM,            EMZ_16x16_Kos,            EMZ_16x16_Kos,            EMZ_128x128_Kos,         EMZ_128x128_Kos			; ENDLESS MINE ZONE (unused)
+	levartptrs PLCID_42, PLCID_42, PalID_ALZ,	ALZ_8x8_KosM,          ALZ_8x8_KosM,            ALZ_16x16_Kos,            ALZ_16x16_Kos,            ALZ_128x128_Kos,         ALZ_128x128_Kos			; AZURE LAKE ZONE
+	levartptrs PLCID_42, PLCID_42, PalID_ALZ_2,	ALZ_8x8_KosM,          ALZ_8x8_KosM,            ALZ_16x16_Kos,            ALZ_16x16_Kos,            ALZ_128x128_Kos,         ALZ_128x128_Kos			; AZURE LAKE ZONE (unused)
+	levartptrs PLCID_43, PLCID_43, PalID_BPZ,	BPZ_8x8_KosM,          BPZ_8x8_KosM,            BPZ_16x16_Kos,            BPZ_16x16_Kos,            BPZ_128x128_Kos,         BPZ_128x128_Kos			; BALLOON PARK ZONE
+	levartptrs PLCID_43, PLCID_43, PalID_BPZ_2,	BPZ_8x8_KosM,          BPZ_8x8_KosM,            BPZ_16x16_Kos,            BPZ_16x16_Kos,            BPZ_128x128_Kos,         BPZ_128x128_Kos			; BALLOON PARK ZONE (unused)
+	levartptrs PLCID_44, PLCID_44, PalID_DPZ,	DPZ_8x8_KosM,          DPZ_8x8_KosM,            DPZ_16x16_Kos,            DPZ_16x16_Kos,            DPZ_128x128_Kos,         DPZ_128x128_Kos			; DESERT PALACE ZONE
+	levartptrs PLCID_44, PLCID_44, PalID_DPZ,	DPZ_8x8_KosM,          DPZ_8x8_KosM,            DPZ_16x16_Kos,            DPZ_16x16_Kos,            DPZ_128x128_Kos,         DPZ_128x128_Kos			; DESERT PALACE ZONE (unused)
+	levartptrs PLCID_45, PLCID_45, PalID_CGZ,	CGZ_8x8_KosM,          CGZ_8x8_KosM,            CGZ_16x16_Kos,            CGZ_16x16_Kos,            CGZ_128x128_Kos,         CGZ_128x128_Kos			; CHROME GADGET ZONE
+	levartptrs PLCID_45, PLCID_45, PalID_CGZ,	CGZ_8x8_KosM,          CGZ_8x8_KosM,            CGZ_16x16_Kos,            CGZ_16x16_Kos,            CGZ_128x128_Kos,         CGZ_128x128_Kos			; CHROME GADGET ZONE (unused)
+	levartptrs PLCID_46, PLCID_46, PalID_EMZ,	EMZ_8x8_KosM,          EMZ_8x8_KosM,            EMZ_16x16_Kos,            EMZ_16x16_Kos,            EMZ_128x128_Kos,         EMZ_128x128_Kos			; ENDLESS MINE ZONE
+	levartptrs PLCID_46, PLCID_46, PalID_EMZ,	EMZ_8x8_KosM,          EMZ_8x8_KosM,            EMZ_16x16_Kos,            EMZ_16x16_Kos,            EMZ_128x128_Kos,         EMZ_128x128_Kos			; ENDLESS MINE ZONE (unused)
 
-	levartptrs $47, $47, $33, Gumball_8x8_KosM,      Gumball_8x8_KosM,        Gumball_16x16_Kos,        Gumball_16x16_Kos,        Gumball_128x128_Kos,     Gumball_128x128_Kos		; GUMBALL
-	levartptrs $47, $47, $33, Gumball_8x8_KosM,      Gumball_8x8_KosM,        Gumball_16x16_Kos,        Gumball_16x16_Kos,        Gumball_128x128_Kos,     Gumball_128x128_Kos		; GUMBALL (unused)
-	levartptrs $47, $47, $37, ArtKosM_Pachinko,      ArtKosM_Pachinko,        Pachinko_16x16_Kos,       Pachinko_16x16_Kos,       Pachinko_128x128_Kos,    Pachinko_128x128_Kos		; PACHINKO (unused)
-	levartptrs $47, $47, $37, ArtKosM_Pachinko,      ArtKosM_Pachinko,        Pachinko_16x16_Kos,       Pachinko_16x16_Kos,       Pachinko_128x128_Kos,    Pachinko_128x128_Kos		; PACHINKO (unused)
-	levartptrs $47, $47, $38, ArtKosM_Slots,         ArtKosM_Slots,           Slots_16x16_Kos,          Slots_16x16_Kos,          Slots_128x128_Kos,       Slots_128x128_Kos		; SLOTS (unused)
-	levartptrs $47, $47, $38, ArtKosM_Slots,         ArtKosM_Slots,           Slots_16x16_Kos,          Slots_16x16_Kos,          Slots_128x128_Kos,       Slots_128x128_Kos		; SLOTS (unused)
+	levartptrs PLCID_47, PLCID_47, PalID_Gumball_Special,	Gumball_8x8_KosM,      Gumball_8x8_KosM,        Gumball_16x16_Kos,        Gumball_16x16_Kos,        Gumball_128x128_Kos,     Gumball_128x128_Kos		; GUMBALL
+	levartptrs PLCID_47, PLCID_47, PalID_Gumball_Special,	Gumball_8x8_KosM,      Gumball_8x8_KosM,        Gumball_16x16_Kos,        Gumball_16x16_Kos,        Gumball_128x128_Kos,     Gumball_128x128_Kos		; GUMBALL (unused)
+	levartptrs PLCID_47, PLCID_47, PalID_Pachinko_Special,	ArtKosM_Pachinko,      ArtKosM_Pachinko,        Pachinko_16x16_Kos,       Pachinko_16x16_Kos,       Pachinko_128x128_Kos,    Pachinko_128x128_Kos		; PACHINKO (unused)
+	levartptrs PLCID_47, PLCID_47, PalID_Pachinko_Special,	ArtKosM_Pachinko,      ArtKosM_Pachinko,        Pachinko_16x16_Kos,       Pachinko_16x16_Kos,       Pachinko_128x128_Kos,    Pachinko_128x128_Kos		; PACHINKO (unused)
+	levartptrs PLCID_47, PLCID_47, PalID_Slot_Special,	ArtKosM_Slots,         ArtKosM_Slots,           Slots_16x16_Kos,          Slots_16x16_Kos,          Slots_128x128_Kos,       Slots_128x128_Kos		; SLOTS (unused)
+	levartptrs PLCID_47, PLCID_47, PalID_Slot_Special,	ArtKosM_Slots,         ArtKosM_Slots,           Slots_16x16_Kos,          Slots_16x16_Kos,          Slots_128x128_Kos,       Slots_128x128_Kos		; SLOTS (unused)
 
-	levartptrs $B,  $B,  $A,  AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; LAVA REEF ZONE BOSS (unused)
-	levartptrs $C,  $C,  $B,  AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; HIDDEN PALACE ZONE (unused)
-	levartptrs $B,  $B,  $A,  AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; SONIC/TAILS FINAL BOSS (unused)
-	levartptrs $C,  $C,  $B,  AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; SPECIAL STAGE HUB (unused)
+	levartptrs PLCID_0B, PLCID_0B, PalID_AIZIntro,	AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; LAVA REEF ZONE BOSS (unused)
+	levartptrs PLCID_0C, PLCID_0C, PalID_AIZFire,	AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; HIDDEN PALACE ZONE (unused)
+	levartptrs PLCID_0B, PLCID_0B, PalID_AIZIntro,	AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; SONIC/TAILS FINAL BOSS (unused)
+	levartptrs PLCID_0C, PLCID_0C, PalID_AIZFire,	AIZ1_8x8_Primary_KosM, AIZ1_8x8_Secondary_KosM, AIZ1_16x16_Secondary_Kos, AIZ1_16x16_Secondary_Kos, AIZ1_128x128_Kos,        AIZ1_128x128_Kos			; SPECIAL STAGE HUB (unused)
 
 ; ---------------------------------------------------------------------------
+
+; Macro to define PLC pointer entry
+plcptr:		macro plc,{INTLABEL}
+__LABEL__:	label	(*-Offs_PLC)/2
+		dc.w	plc-Offs_PLC
+		endm
+
 Offs_PLC:
-		dc.w PLC_00-Offs_PLC					; Sonic life icon/universal level graphics
-		dc.w PLC_01-Offs_PLC					; Sonic life icon/universal level graphics
-		dc.w PLC_02-Offs_PLC					; Explosions + Squirrel/Flicky (unused)
-		dc.w PLC_03-Offs_PLC					; Game Over text
-		dc.w PLC_04-Offs_PLC					; Signpost art (unused)
-		dc.w PLC_05-Offs_PLC					; Spikes and springs (unused)
-		dc.w PLC_06-Offs_PLC					; 2P mode-specific art
-		dc.w PLC_07-Offs_PLC					; Tails life icon/universal level graphics
-		dc.w PLC_08-Offs_PLC					; Monitor art only
-		dc.w PLC_09-Offs_PLC					; Revolving spheres
-		dc.w PLC_0A-Offs_PLC					; AIZ intro graphics
-		dc.w PLC_0B-Offs_PLC					; AIZ1
-		dc.w PLC_0C_0D-Offs_PLC					; AIZ2
-		dc.w PLC_0C_0D-Offs_PLC					; AIZ2 (unused)
-		dc.w PLC_0E-Offs_PLC					; HCZ1 part 1
-		dc.w PLC_0F-Offs_PLC					; HCZ1 part 2
-		dc.w PLC_10-Offs_PLC					; HCZ2 part 1
-		dc.w PLC_11-Offs_PLC					; HCZ2 part 2
-		dc.w PLC_12_13-Offs_PLC					; MGZ1
-		dc.w PLC_12_13-Offs_PLC					; MGZ1 (unused)
-		dc.w PLC_14_15-Offs_PLC					; MGZ2
-		dc.w PLC_14_15-Offs_PLC					; MGZ2 (unused)
-		dc.w PLC_16_17_18_19-Offs_PLC				; CNZ (used for act 1)
-		dc.w PLC_16_17_18_19-Offs_PLC				; CNZ (used for act 1)
-		dc.w PLC_16_17_18_19-Offs_PLC				; CNZ (used for act 2)
-		dc.w PLC_16_17_18_19-Offs_PLC				; CNZ (used for act 2)
-		dc.w PLC_1A_1B_1C_1D-Offs_PLC				; FBZ (used for act 1)
-		dc.w PLC_1A_1B_1C_1D-Offs_PLC				; FBZ (act 1, unused)
-		dc.w PLC_1A_1B_1C_1D-Offs_PLC				; FBZ (used for act 2)
-		dc.w PLC_1A_1B_1C_1D-Offs_PLC				; FBZ (act 2, unused)
-		dc.w PLC_1E_1F-Offs_PLC					; ICZ1
-		dc.w PLC_1E_1F-Offs_PLC					; ICZ1 (unused)
-		dc.w PLC_20_21-Offs_PLC					; ICZ2
-		dc.w PLC_20_21-Offs_PLC					; ICZ2 (unused)
-		dc.w PLC_22_23-Offs_PLC					; LBZ1
-		dc.w PLC_22_23-Offs_PLC					; LBZ1 (unused)
-		dc.w PLC_24-Offs_PLC					; LBZ2
-		dc.w PLC_25-Offs_PLC					; LBZ2 misc art
-		dc.w PLC_26_Through_2D-Offs_PLC				; MHZ (used for act 1)
-		dc.w PLC_26_Through_2D-Offs_PLC				; MHZ (act 1, unused)
-		dc.w PLC_26_Through_2D-Offs_PLC				; MHZ (used for act 2)
-		dc.w PLC_26_Through_2D-Offs_PLC				; MHZ (act 2, unused)
-		dc.w PLC_26_Through_2D-Offs_PLC				; MHZ (SOZ1, unused)
-		dc.w PLC_26_Through_2D-Offs_PLC				; MHZ (SOZ1, unused)
-		dc.w PLC_26_Through_2D-Offs_PLC				; MHZ (SOZ2, unused)
-		dc.w PLC_26_Through_2D-Offs_PLC				; MHZ (SOZ2, unused)
-		dc.w PLC_2E_Through_41-Offs_PLC				; LRZ (used for act 1)
-		dc.w PLC_2E_Through_41-Offs_PLC				; LRZ (act 1, unused)
-		dc.w PLC_2E_Through_41-Offs_PLC				; LRZ (used for act 2)
-		dc.w PLC_2E_Through_41-Offs_PLC				; LRZ (act 2, unused)
-		dc.w PLC_2E_Through_41-Offs_PLC				; LRZ (SSZ1, unused)
-		dc.w PLC_2E_Through_41-Offs_PLC				; LRZ (SSZ1, unused)
-		dc.w PLC_2E_Through_41-Offs_PLC				; LRZ (SSZ2, unused)
-		dc.w PLC_2E_Through_41-Offs_PLC				; LRZ (SSZ2, unused)
-		dc.w PLC_2E_Through_41-Offs_PLC				; LRZ (DEZ1, unused)
-		dc.w PLC_2E_Through_41-Offs_PLC				; LRZ (DEZ1, unused)
-		dc.w PLC_2E_Through_41-Offs_PLC				; LRZ (DEZ2, unused)
-		dc.w PLC_2E_Through_41-Offs_PLC				; LRZ (DEZ2, unused)
-		dc.w PLC_2E_Through_41-Offs_PLC				; LRZ (DDZ1, unused)
-		dc.w PLC_2E_Through_41-Offs_PLC				; LRZ (DDZ1, unused)
-		dc.w PLC_2E_Through_41-Offs_PLC				; LRZ (DDZ2, unused)
-		dc.w PLC_2E_Through_41-Offs_PLC				; LRZ (DDZ2, unused)
-		dc.w PLC_2E_Through_41-Offs_PLC				; LRZ (ending 1, unused)
-		dc.w PLC_2E_Through_41-Offs_PLC				; LRZ (ending 1, unused)
-		dc.w PLC_2E_Through_41-Offs_PLC				; LRZ (ending 2, unused)
-		dc.w PLC_2E_Through_41-Offs_PLC				; LRZ (ending 2, unused)
-		dc.w PLC_42-Offs_PLC					; ALZ
-		dc.w PLC_43-Offs_PLC					; BPZ
-		dc.w PLC_44-Offs_PLC					; DPZ
-		dc.w PLC_45-Offs_PLC					; CGZ
-		dc.w PLC_46-Offs_PLC					; EMZ
-		dc.w PLC_47-Offs_PLC					; Gumball Bonus
-		dc.w PLC_48_Through_5A-Offs_PLC				; AIZ1 boss (unused)
-		dc.w PLC_48_Through_5A-Offs_PLC				; AIZ1 boss (unused)
-		dc.w PLC_48_Through_5A-Offs_PLC				; AIZ1 boss (unused)
-		dc.w PLC_48_Through_5A-Offs_PLC				; AIZ1 boss (unused)
-		dc.w PLC_48_Through_5A-Offs_PLC				; AIZ1 boss (unused)
-		dc.w PLC_48_Through_5A-Offs_PLC				; AIZ1 boss (unused)
-		dc.w PLC_48_Through_5A-Offs_PLC				; AIZ1 boss (unused)
-		dc.w PLC_48_Through_5A-Offs_PLC				; AIZ1 boss (unused)
-		dc.w PLC_48_Through_5A-Offs_PLC				; AIZ1 boss (unused)
-		dc.w PLC_48_Through_5A-Offs_PLC				; AIZ1 boss (unused)
-		dc.w PLC_48_Through_5A-Offs_PLC				; AIZ1 boss (unused)
-		dc.w PLC_48_Through_5A-Offs_PLC				; AIZ1 boss (unused)
-		dc.w PLC_48_Through_5A-Offs_PLC				; AIZ1 boss (unused)
-		dc.w PLC_48_Through_5A-Offs_PLC				; AIZ1 boss (unused)
-		dc.w PLC_48_Through_5A-Offs_PLC				; AIZ1 boss (unused)
-		dc.w PLC_48_Through_5A-Offs_PLC				; AIZ1 boss (unused)
-		dc.w PLC_48_Through_5A-Offs_PLC				; AIZ1 boss (unused)
-		dc.w PLC_48_Through_5A-Offs_PLC				; AIZ1 boss (unused)
-		dc.w PLC_48_Through_5A-Offs_PLC				; AIZ1 boss
-		dc.w PLC_5B-Offs_PLC					; HCZ1 boss
-		dc.w PLC_5C_5D-Offs_PLC					; CNZ1 boss (unused)
-		dc.w PLC_5C_5D-Offs_PLC					; CNZ1 boss
-		dc.w PLC_5E-Offs_PLC					; FBZ1 boss
-		dc.w PLC_5F-Offs_PLC					; ICZ1 boss
-		dc.w PLC_60-Offs_PLC					; LBZ1 Eggman
-		dc.w PLC_61_Through_6A-Offs_PLC				; FBZ2 subboss (unused)
-		dc.w PLC_61_Through_6A-Offs_PLC				; FBZ2 subboss (unused)
-		dc.w PLC_61_Through_6A-Offs_PLC				; FBZ2 subboss (unused)
-		dc.w PLC_61_Through_6A-Offs_PLC				; FBZ2 subboss (unused)
-		dc.w PLC_61_Through_6A-Offs_PLC				; FBZ2 subboss (unused)
-		dc.w PLC_61_Through_6A-Offs_PLC				; FBZ2 subboss (unused)
-		dc.w PLC_61_Through_6A-Offs_PLC				; FBZ2 subboss (unused)
-		dc.w PLC_61_Through_6A-Offs_PLC				; FBZ2 subboss (unused)
-		dc.w PLC_61_Through_6A-Offs_PLC				; FBZ2 subboss (unused)
-		dc.w PLC_61_Through_6A-Offs_PLC				; FBZ2 subboss
-		dc.w PLC_6B-Offs_PLC					; AIZ2 boss
-		dc.w PLC_6C-Offs_PLC					; HCZ2 boss
-		dc.w PLC_6D-Offs_PLC					; MGZ2 boss
-		dc.w PLC_6E-Offs_PLC					; CNZ2 boss
-		dc.w PLC_6F-Offs_PLC					; FBZ2 end boss
-		dc.w PLC_70-Offs_PLC					; ICZ2 boss
-		dc.w PLC_71-Offs_PLC					; LBZ2 final boss 1
-		dc.w PLC_72_73_74_75_76_77-Offs_PLC			; LBZ2 Eggman (unused)
-		dc.w PLC_72_73_74_75_76_77-Offs_PLC			; LBZ2 Eggman (unused)
-		dc.w PLC_72_73_74_75_76_77-Offs_PLC			; LBZ2 Eggman (unused)
-		dc.w PLC_72_73_74_75_76_77-Offs_PLC			; LBZ2 Eggman (unused)
-		dc.w PLC_72_73_74_75_76_77-Offs_PLC			; LBZ2 Eggman (unused)
-		dc.w PLC_72_73_74_75_76_77-Offs_PLC			; LBZ2 Eggman
-		dc.w PLC_78_79_7A_7B-Offs_PLC				; Boss ship and explosion (unused)
-		dc.w PLC_78_79_7A_7B-Offs_PLC				; Boss ship and explosion (unused)
-		dc.w PLC_78_79_7A_7B-Offs_PLC				; Boss ship and explosion (unused)
-		dc.w PLC_78_79_7A_7B-Offs_PLC				; Boss ship and explosion (unused)
+PLCID_00:	plcptr PLC_00					; Sonic life icon/universal level graphics
+PLCID_01:	plcptr PLC_01					; Sonic life icon/universal level graphics
+PLCID_02:	plcptr PLC_02					; Explosions + Squirrel/Flicky (unused)
+PLCID_03:	plcptr PLC_03					; Game Over text
+PLCID_04:	plcptr PLC_04					; Signpost art (unused)
+PLCID_05:	plcptr PLC_05					; Spikes and springs (unused)
+PLCID_06:	plcptr PLC_06					; 2P mode-specific art
+PLCID_07:	plcptr PLC_07					; Tails life icon/universal level graphics
+PLCID_08:	plcptr PLC_08					; Monitor art only
+PLCID_09:	plcptr PLC_09					; Revolving spheres
+PLCID_0A:	plcptr PLC_0A					; AIZ intro graphics
+PLCID_0B:	plcptr PLC_0B					; AIZ1
+PLCID_0C:	plcptr PLC_0C_0D				; AIZ2
+PLCID_0D:	plcptr PLC_0C_0D				; AIZ2 (unused)
+PLCID_0E:	plcptr PLC_0E					; HCZ1 part 1
+PLCID_0F:	plcptr PLC_0F					; HCZ1 part 2
+PLCID_10:	plcptr PLC_10					; HCZ2 part 1
+PLCID_11:	plcptr PLC_11					; HCZ2 part 2
+PLCID_12:	plcptr PLC_12_13				; MGZ1
+PLCID_13:	plcptr PLC_12_13				; MGZ1 (unused)
+PLCID_14:	plcptr PLC_14_15				; MGZ2
+PLCID_15:	plcptr PLC_14_15				; MGZ2 (unused)
+PLCID_16:	plcptr PLC_16_17_18_19				; CNZ (used for act 1)
+PLCID_17:	plcptr PLC_16_17_18_19				; CNZ (used for act 1)
+PLCID_18:	plcptr PLC_16_17_18_19				; CNZ (used for act 2)
+PLCID_19:	plcptr PLC_16_17_18_19				; CNZ (used for act 2)
+PLCID_1A:	plcptr PLC_1A_1B_1C_1D				; FBZ (used for act 1)
+PLCID_1B:	plcptr PLC_1A_1B_1C_1D				; FBZ (act 1, unused)
+PLCID_1C:	plcptr PLC_1A_1B_1C_1D				; FBZ (used for act 2)
+PLCID_1D:	plcptr PLC_1A_1B_1C_1D				; FBZ (act 2, unused)
+PLCID_1E:	plcptr PLC_1E_1F				; ICZ1
+PLCID_1F:	plcptr PLC_1E_1F				; ICZ1 (unused)
+PLCID_20:	plcptr PLC_20_21				; ICZ2
+PLCID_21:	plcptr PLC_20_21				; ICZ2 (unused)
+PLCID_22:	plcptr PLC_22_23				; LBZ1
+PLCID_23:	plcptr PLC_22_23				; LBZ1 (unused)
+PLCID_24:	plcptr PLC_24					; LBZ2
+PLCID_25:	plcptr PLC_25					; LBZ2 misc art
+PLCID_26:	plcptr PLC_26_Through_2D			; MHZ (used for act 1)
+PLCID_27:	plcptr PLC_26_Through_2D			; MHZ (act 1, unused)
+PLCID_28:	plcptr PLC_26_Through_2D			; MHZ (used for act 2)
+PLCID_29:	plcptr PLC_26_Through_2D			; MHZ (act 2, unused)
+PLCID_2A:	plcptr PLC_26_Through_2D			; MHZ (SOZ1, unused)
+PLCID_2B:	plcptr PLC_26_Through_2D			; MHZ (SOZ1, unused)
+PLCID_2C:	plcptr PLC_26_Through_2D			; MHZ (SOZ2, unused)
+PLCID_2D:	plcptr PLC_26_Through_2D			; MHZ (SOZ2, unused)
+PLCID_2E:	plcptr PLC_2E_Through_41			; LRZ (used for act 1)
+PLCID_2F:	plcptr PLC_2E_Through_41			; LRZ (act 1, unused)
+PLCID_30:	plcptr PLC_2E_Through_41			; LRZ (used for act 2)
+PLCID_31:	plcptr PLC_2E_Through_41			; LRZ (act 2, unused)
+PLCID_32:	plcptr PLC_2E_Through_41			; LRZ (SSZ1, unused)
+PLCID_33:	plcptr PLC_2E_Through_41			; LRZ (SSZ1, unused)
+PLCID_34:	plcptr PLC_2E_Through_41			; LRZ (SSZ2, unused)
+PLCID_35:	plcptr PLC_2E_Through_41			; LRZ (SSZ2, unused)
+PLCID_36:	plcptr PLC_2E_Through_41			; LRZ (DEZ1, unused)
+PLCID_37:	plcptr PLC_2E_Through_41			; LRZ (DEZ1, unused)
+PLCID_38:	plcptr PLC_2E_Through_41			; LRZ (DEZ2, unused)
+PLCID_39:	plcptr PLC_2E_Through_41			; LRZ (DEZ2, unused)
+PLCID_3A:	plcptr PLC_2E_Through_41			; LRZ (DDZ1, unused)
+PLCID_3B:	plcptr PLC_2E_Through_41			; LRZ (DDZ1, unused)
+PLCID_3C:	plcptr PLC_2E_Through_41			; LRZ (DDZ2, unused)
+PLCID_3D:	plcptr PLC_2E_Through_41			; LRZ (DDZ2, unused)
+PLCID_3E:	plcptr PLC_2E_Through_41			; LRZ (ending 1, unused)
+PLCID_3F:	plcptr PLC_2E_Through_41			; LRZ (ending 1, unused)
+PLCID_40:	plcptr PLC_2E_Through_41			; LRZ (ending 2, unused)
+PLCID_41:	plcptr PLC_2E_Through_41			; LRZ (ending 2, unused)
+PLCID_42:	plcptr PLC_42					; ALZ
+PLCID_43:	plcptr PLC_43					; BPZ
+PLCID_44:	plcptr PLC_44					; DPZ
+PLCID_45:	plcptr PLC_45					; CGZ
+PLCID_46:	plcptr PLC_46					; EMZ
+PLCID_47:	plcptr PLC_47					; Gumball Bonus
+PLCID_48:	plcptr PLC_48_Through_5A			; AIZ1 boss (unused)
+PLCID_49:	plcptr PLC_48_Through_5A			; AIZ1 boss (unused)
+PLCID_4A:	plcptr PLC_48_Through_5A			; AIZ1 boss (unused)
+PLCID_4B:	plcptr PLC_48_Through_5A			; AIZ1 boss (unused)
+PLCID_4C:	plcptr PLC_48_Through_5A			; AIZ1 boss (unused)
+PLCID_4D:	plcptr PLC_48_Through_5A			; AIZ1 boss (unused)
+PLCID_4E:	plcptr PLC_48_Through_5A			; AIZ1 boss (unused)
+PLCID_4F:	plcptr PLC_48_Through_5A			; AIZ1 boss (unused)
+PLCID_50:	plcptr PLC_48_Through_5A			; AIZ1 boss (unused)
+PLCID_51:	plcptr PLC_48_Through_5A			; AIZ1 boss (unused)
+PLCID_52:	plcptr PLC_48_Through_5A			; AIZ1 boss (unused)
+PLCID_53:	plcptr PLC_48_Through_5A			; AIZ1 boss (unused)
+PLCID_54:	plcptr PLC_48_Through_5A			; AIZ1 boss (unused)
+PLCID_55:	plcptr PLC_48_Through_5A			; AIZ1 boss (unused)
+PLCID_56:	plcptr PLC_48_Through_5A			; AIZ1 boss (unused)
+PLCID_57:	plcptr PLC_48_Through_5A			; AIZ1 boss (unused)
+PLCID_58:	plcptr PLC_48_Through_5A			; AIZ1 boss (unused)
+PLCID_59:	plcptr PLC_48_Through_5A			; AIZ1 boss (unused)
+PLCID_5A:	plcptr PLC_48_Through_5A			; AIZ1 boss
+PLCID_5B:	plcptr PLC_5B					; HCZ1 boss
+PLCID_5C:	plcptr PLC_5C_5D				; CNZ1 boss (unused)
+PLCID_5D:	plcptr PLC_5C_5D				; CNZ1 boss
+PLCID_5E:	plcptr PLC_5E					; FBZ1 boss
+PLCID_5F:	plcptr PLC_5F					; ICZ1 boss
+PLCID_60:	plcptr PLC_60					; LBZ1 Eggman
+PLCID_61:	plcptr PLC_61_Through_6A			; FBZ2 subboss (unused)
+PLCID_62:	plcptr PLC_61_Through_6A			; FBZ2 subboss (unused)
+PLCID_63:	plcptr PLC_61_Through_6A			; FBZ2 subboss (unused)
+PLCID_64:	plcptr PLC_61_Through_6A			; FBZ2 subboss (unused)
+PLCID_65:	plcptr PLC_61_Through_6A			; FBZ2 subboss (unused)
+PLCID_66:	plcptr PLC_61_Through_6A			; FBZ2 subboss (unused)
+PLCID_67:	plcptr PLC_61_Through_6A			; FBZ2 subboss (unused)
+PLCID_68:	plcptr PLC_61_Through_6A			; FBZ2 subboss (unused)
+PLCID_69:	plcptr PLC_61_Through_6A			; FBZ2 subboss (unused)
+PLCID_6A:	plcptr PLC_61_Through_6A			; FBZ2 subboss
+PLCID_6B:	plcptr PLC_6B					; AIZ2 boss
+PLCID_6C:	plcptr PLC_6C					; HCZ2 boss
+PLCID_6D:	plcptr PLC_6D					; MGZ2 boss
+PLCID_6E:	plcptr PLC_6E					; CNZ2 boss
+PLCID_6F:	plcptr PLC_6F					; FBZ2 end boss
+PLCID_70:	plcptr PLC_70					; ICZ2 boss
+PLCID_71:	plcptr PLC_71					; LBZ2 final boss 1
+PLCID_72:	plcptr PLC_72_73_74_75_76_77			; LBZ2 Eggman (unused)
+PLCID_73:	plcptr PLC_72_73_74_75_76_77			; LBZ2 Eggman (unused)
+PLCID_74:	plcptr PLC_72_73_74_75_76_77			; LBZ2 Eggman (unused)
+PLCID_75:	plcptr PLC_72_73_74_75_76_77			; LBZ2 Eggman (unused)
+PLCID_76:	plcptr PLC_72_73_74_75_76_77			; LBZ2 Eggman (unused)
+PLCID_77:	plcptr PLC_72_73_74_75_76_77			; LBZ2 Eggman
+PLCID_78:	plcptr PLC_78_79_7A_7B				; Boss ship and explosion (unused)
+PLCID_79:	plcptr PLC_78_79_7A_7B				; Boss ship and explosion (unused)
+PLCID_7A:	plcptr PLC_78_79_7A_7B				; Boss ship and explosion (unused)
+PLCID_7B:	plcptr PLC_78_79_7A_7B				; Boss ship and explosion (unused)
 
 PLC_00: plrlistheader
 		plreq ArtTile_PlayerLifeIcon, ArtNem_SonicLifeIcon
@@ -118353,6 +118444,7 @@ ArtNem_Surfboard:
 		even
 ArtUnc_Invincibility:
 		binclude "General/Sprites/Shields/Invincibility.bin"
+ArtUnc_Invincibility_end:
 		even
 ArtUnc_DashDust:
 		binclude "General/Sprites/Dash Dust/Dash Dust.bin"
