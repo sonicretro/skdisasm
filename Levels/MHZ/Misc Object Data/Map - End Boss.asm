@@ -30,11 +30,7 @@ word_185F4E:	dc.w 4
 		dc.b  $C3,   7,   0, $10,   0, $20
 		dc.b  $C4,   7,   0, $51,   0, $30
 word_185F68:
-	if FixBugs
-				dc.w 3	; This covers all entries.
-	else
-				dc.w 2	; Bug: This misses the last entry of the mappings.
-	endif
+		dc.w 2	; Bug: This misses the last entry of the mappings. Change the 2 to a 3 to fix this bug.
 		dc.b  $DB,   9,   0, $D5, $FF, $FC
 		dc.b  $F4,   7,   0, $43, $FF, $D8
 		dc.b  $F4,   6,   0, $4B, $FF, $E8
