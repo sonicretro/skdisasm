@@ -135,7 +135,7 @@ namespace S3KObjectDefinitions.SOZ
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile("LevelArt", 0)), -32);
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/SOZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis)), 30976);
+				"../Levels/SOZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis)), 30976);
 			var art = indexer.ToArray();
 
 			var version = LevelData.Game.MappingsVersion;

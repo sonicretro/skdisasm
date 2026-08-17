@@ -2,7 +2,7 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Bloominator" Image="img" Depth="4">
   <Images>
     <ImageFromMappings id="img">
-      <ArtFile filename="../General/Sprites/Bloominator/Bloominator.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Bloominator/Bloominator.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Bloominator/Map - Bloominator.asm" startpal="1" />
     </ImageFromMappings>
   </Images>

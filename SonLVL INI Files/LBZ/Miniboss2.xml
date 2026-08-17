@@ -2,15 +2,15 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Miniboss (Knuckles)" Depth="5">
   <Images>
     <ImageFromMappings id="main">
-      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Miniboss.asm" frame="0" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="shell">
-      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Miniboss.asm" frame="5" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="spike">
-      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Miniboss.asm" frame="6" startpal="5" />
     </ImageFromMappings>
   </Images>

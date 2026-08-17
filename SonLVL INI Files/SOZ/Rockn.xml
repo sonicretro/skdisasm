@@ -2,11 +2,11 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Rock'n" Depth="4">
   <Images>
     <ImageFromMappings id="rock">
-      <ArtFile filename="../Levels/SOZ/Nemesis Art/Misc Art.bin" offset="-512" />
+      <ArtFile filename="../Levels/SOZ/Nemesis Art/Misc Art.nem" offset="-512" />
       <MapFile type="ASM" filename="../Levels/SOZ/Misc Object Data/Map - Breakable Sand Rock.asm" startpal="2" />
     </ImageFromMappings>
     <ImageFromMappings id="eyes">
-      <ArtFile filename="../General/Sprites/Rockn/Rock'n.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Rockn/Rock'n.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Rockn/Map - Rock'n.asm" startpal="1" frame="3" />
     </ImageFromMappings>
   </Images>

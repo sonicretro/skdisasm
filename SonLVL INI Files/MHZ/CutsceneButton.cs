@@ -57,13 +57,13 @@ namespace S3KObjectDefinitions.MHZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/MHZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis)), -4160);
+				"../Levels/MHZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis)), -4160);
 			childSprite = ObjectHelper.MapASMToBmp(indexer.ToArray(),
 				"../Levels/MHZ/Misc Object Data/Map - Knuckles Switch Door.asm", 0, 3);
 
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);
 			sprite = BuildFlippedSprites(ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../General/Sprites/Buttons/Gray Button.bin", CompressionType.Nemesis),
+				"../General/Sprites/Buttons/Gray Button.nem", CompressionType.Nemesis),
 				"../General/Sprites/Buttons/Map - Button.asm", 0, 0));
 		}
 

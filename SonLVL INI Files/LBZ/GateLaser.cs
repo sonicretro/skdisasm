@@ -67,7 +67,7 @@ namespace S3KObjectDefinitions.LBZ
 			properties = new PropertySpec[2];
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);
 			sprite = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../Levels/LBZ/Nemesis Art/Act 2 Misc Art.bin", CompressionType.Nemesis),
+				"../Levels/LBZ/Nemesis Art/Act 2 Misc Art.nem", CompressionType.Nemesis),
 				"../Levels/LBZ/Misc Object Data/Map - Gate Laser.asm", 0, 2);
 
 			var bitmap = new BitmapBits(sprite.Width, sprite.Height);

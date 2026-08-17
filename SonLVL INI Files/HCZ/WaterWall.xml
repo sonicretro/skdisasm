@@ -2,11 +2,11 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Water Jet" Depth="6" Debug="true">
   <Images>
     <ImageFromMappings id="horz">
-      <ArtFile filename="../Levels/HCZ/KosinskiM Art/Geyser Horizontal.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/HCZ/KosinskiM Art/Geyser Horizontal.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/HCZ/Misc Object Data/Map - Waterfall.asm" frame="0" startpal="2" />
     </ImageFromMappings>
     <ImageFromMappings id="vert">
-      <ArtFile filename="../Levels/HCZ/KosinskiM Art/Geyser Vertical.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/HCZ/KosinskiM Art/Geyser Vertical.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/HCZ/Misc Object Data/Map - Waterfall.asm" frame="1" startpal="2" />
     </ImageFromMappings>
   </Images>

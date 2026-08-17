@@ -69,7 +69,7 @@ namespace S3KObjectDefinitions.LRZ
 		{
 			var version = LevelData.Game.MappingsVersion;
 			var art = LevelData.ReadFile(
-				"../Levels/LRZ/Nemesis Art/Act 2 Misc Art.bin", CompressionType.Nemesis);
+				"../Levels/LRZ/Nemesis Art/Act 2 Misc Art.nem", CompressionType.Nemesis);
 			var map = LevelData.ASMToBin(
 				"../Levels/LRZ/Misc Object Data/Map - Spike Ball Launcher.asm", version);
 

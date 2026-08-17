@@ -65,9 +65,9 @@ namespace S3KObjectDefinitions.LRZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/LRZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis)), 0);
+				"../Levels/LRZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis)), 0);
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/LRZ/Nemesis Art/Spike Crush.bin", CompressionType.Nemesis)), 4832);
+				"../Levels/LRZ/Nemesis Art/Spike Crush.nem", CompressionType.Nemesis)), 4832);
 
 			properties = new PropertySpec[1];
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <StartPosDef xmlns="http://www.sonicretro.org">
   <ImageFromMappings>
-    <ArtFile filename="../General/Sprites/Tails/Art/Tails tails.bin" compression="Uncompressed" />
+    <ArtFile filename="../General/Sprites/Tails/Art/Tails tails.unc" compression="Uncompressed" />
     <MapFile type="ASM" filename="../General/Sprites/Tails/Map - Tails tails.asm"
       dplcfile="../General/Sprites/Tails/DPLC - Tails tails.asm" dplcver="S2" frame="39" />
   </ImageFromMappings>
   <ImageFromMappings>
-    <ArtFile filename="../General/Sprites/Tails/Art/Tails.bin" compression="Uncompressed" />
+    <ArtFile filename="../General/Sprites/Tails/Art/Tails.unc" compression="Uncompressed" />
     <MapFile type="ASM" filename="../General/Sprites/Tails/Map - Tails.asm"
       dplcfile="../General/Sprites/Tails/DPLC - Tails.asm" dplcver="S2" frame="162" />
   </ImageFromMappings>
   <ImageFromMappings>
-    <ArtFile filename="../General/Sprites/Sonic/Art/Sonic.bin" compression="Uncompressed" />
+    <ArtFile filename="../General/Sprites/Sonic/Art/Sonic.unc" compression="Uncompressed" />
     <MapFile type="ASM" filename="../General/Sprites/Sonic/Map - Sonic.asm"
       dplcfile="../General/Sprites/Sonic/DPLC - Sonic.asm" dplcver="S2" frame="144" />
     <Offset Y="28" />

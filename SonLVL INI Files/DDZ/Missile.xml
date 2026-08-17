@@ -2,11 +2,11 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Missile" Image="main" Depth="3">
   <Images>
     <ImageFromMappings id="main">
-      <ArtFile filename="../Levels/DDZ/KosinskiM Art/Misc Art.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/DDZ/KosinskiM Art/Misc Art.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/DDZ/Misc Object Data/Map - Missile Asteroid.asm" frame="14" startpal="2" />
     </ImageFromMappings>
     <ImageFromMappings id="fire">
-      <ArtFile filename="../Levels/DDZ/KosinskiM Art/Misc Art.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/DDZ/KosinskiM Art/Misc Art.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/DDZ/Misc Object Data/Map - Missile Asteroid.asm" frame="22" startpal="2" />
     </ImageFromMappings>
   </Images>

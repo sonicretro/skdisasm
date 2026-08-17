@@ -76,7 +76,7 @@ namespace S3KObjectDefinitions.SOZ
 
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/SOZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis)), -4480);
+				"../Levels/SOZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis)), -4480);
 			var art = indexer.ToArray();
 
 			properties = new PropertySpec[2];

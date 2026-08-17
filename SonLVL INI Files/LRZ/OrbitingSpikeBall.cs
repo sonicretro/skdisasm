@@ -100,7 +100,7 @@ namespace S3KObjectDefinitions.LRZ
 			properties = new PropertySpec[2];
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);
 			sprite = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../Levels/LRZ/Nemesis Art/Act 2 Misc Art.bin", CompressionType.Nemesis),
+				"../Levels/LRZ/Nemesis Art/Act 2 Misc Art.nem", CompressionType.Nemesis),
 				"../Levels/LRZ/Misc Object Data/Map - Orbiting Spike Ball.asm", 0, 1);
 
 			unknownSprite = BuildFlippedSprites(ObjectHelper.UnknownObject);

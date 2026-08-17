@@ -70,7 +70,7 @@ namespace S3KObjectDefinitions.SOZ
 		public override void Init(ObjectData data)
 		{
 			var version = LevelData.Game.MappingsVersion;
-			var art = LevelData.ReadFile("../Levels/SOZ/Nemesis Art/Act 2 Extra Art.bin", CompressionType.Nemesis);
+			var art = LevelData.ReadFile("../Levels/SOZ/Nemesis Art/Act 2 Extra Art.nem", CompressionType.Nemesis);
 			var map = LevelData.ASMToBin("../Levels/SOZ/Misc Object Data/Map - Light Switch.asm", version);
 
 			properties = new PropertySpec[2];

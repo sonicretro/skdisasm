@@ -60,7 +60,7 @@ namespace S3KObjectDefinitions.HCZ
 		public override void Init(ObjectData data)
 		{
 			var version = LevelData.Game.MappingsVersion;
-			var art = LevelData.ReadFile("../Levels/HCZ/Nemesis Art/Miniboss.bin", CompressionType.Nemesis);
+			var art = LevelData.ReadFile("../Levels/HCZ/Nemesis Art/Miniboss.nem", CompressionType.Nemesis);
 			var map = LevelData.ASMToBin("../Levels/HCZ/Misc Object Data/Map - Miniboss.asm", version);
 
 			image = ObjectHelper.MapToBmp(art, map, 0, 5, true);

@@ -6,7 +6,7 @@
       <MapFile type="ASM" filename="../Levels/AIZ/Misc Object Data/Map - Disappearing Floor.asm" label="Frame_229540" startpal="2" />
     </ImageFromMappings>
     <ImageFromMappings id="splash">
-      <ArtFile filename="../Levels/AIZ/Nemesis Art/Misc Art 2.bin" />
+      <ArtFile filename="../Levels/AIZ/Nemesis Art/Misc Art 2.nem" />
       <MapFile type="ASM" filename="../Levels/AIZ/Misc Object Data/Map - Disappearing Floor.asm" label="Frame_229566" startpal="3" />
     </ImageFromMappings>
   </Images>

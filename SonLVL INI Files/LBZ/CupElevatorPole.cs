@@ -58,7 +58,7 @@ namespace S3KObjectDefinitions.LBZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/LBZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis)), -2368);
+				"../Levels/LBZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis)), -2368);
 			var art = indexer.ToArray();
 			var map = LevelData.ASMToBin(
 				"../Levels/LBZ/Misc Object Data/Map - Cup Elevator.asm", LevelData.Game.MappingsVersion);

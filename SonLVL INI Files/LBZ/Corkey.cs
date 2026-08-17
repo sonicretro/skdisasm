@@ -64,7 +64,7 @@ namespace S3KObjectDefinitions.LBZ
 
 		public override void Init(ObjectData data)
 		{
-			var art = LevelData.ReadFile("../General/Sprites/Corkey/Corkey.bin", CompressionType.KosinskiM);
+			var art = LevelData.ReadFile("../General/Sprites/Corkey/Corkey.kosm", CompressionType.KosinskiM);
 			var map = LevelData.ASMToBin("../General/Sprites/Corkey/Map - Corkey.asm", LevelData.Game.MappingsVersion);
 			var barrel = ObjectHelper.MapToBmp(art, map, 1, 1);
 			barrel.Offset(0, 12);

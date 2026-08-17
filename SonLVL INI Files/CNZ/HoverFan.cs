@@ -98,9 +98,9 @@ namespace S3KObjectDefinitions.CNZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/CNZ/Animated Tiles/4.bin", CompressionType.Uncompressed)), 0);
+				"../Levels/CNZ/Animated Tiles/4.unc", CompressionType.Uncompressed)), 0);
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/CNZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis)), 2464);
+				"../Levels/CNZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis)), 2464);
 			var map = LevelData.ASMToBin(
 				"../Levels/CNZ/Misc Object Data/Map - Hover Fan.asm", LevelData.Game.MappingsVersion);
 			var art = indexer.ToArray();

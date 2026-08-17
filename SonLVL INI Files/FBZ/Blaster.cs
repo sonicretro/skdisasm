@@ -83,7 +83,7 @@ namespace S3KObjectDefinitions.FBZ
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);
 			properties = new PropertySpec[1];
 			sprite = BuildFlippedSprites(ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../General/Sprites/Blaster/Blaster.bin", CompressionType.KosinskiM),
+				"../General/Sprites/Blaster/Blaster.kosm", CompressionType.KosinskiM),
 				"../General/Sprites/Blaster/Map - Blaster.asm", 0, 1, true));
 
 			var bitmap = new BitmapBits(32, 24);

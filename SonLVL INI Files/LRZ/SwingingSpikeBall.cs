@@ -10,7 +10,7 @@ namespace S3KObjectDefinitions.LRZ
 	{
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesProperties("../Levels/LRZ/Nemesis Art/Act 2 Misc Art.bin", 2);
+			BuildSpritesProperties("../Levels/LRZ/Nemesis Art/Act 2 Misc Art.nem", 2);
 		}
 	}
 
@@ -96,7 +96,7 @@ namespace S3KObjectDefinitions.LRZ
 
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesProperties("../Levels/LRZ/Nemesis Art/Misc Art.bin", 0);
+			BuildSpritesProperties("../Levels/LRZ/Nemesis Art/Misc Art.nem", 0);
 		}
 
 		protected void BuildSpritesProperties(string artfile, int frame)

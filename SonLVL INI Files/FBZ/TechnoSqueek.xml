@@ -2,19 +2,19 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="TechnoSqueek" Image="horz" Depth="5">
   <Images>
     <ImageFromMappings id="horz" priority="true">
-      <ArtFile filename="../General/Sprites/Technosqueek/Technosqueek.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Technosqueek/Technosqueek.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Technosqueek/Map - Technosqueek.asm" frame="0" startpal="1" />
     </ImageFromMappings>
     <ImageFromMappings id="horztail" priority="true">
-      <ArtFile filename="../General/Sprites/Technosqueek/Technosqueek.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Technosqueek/Technosqueek.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Technosqueek/Map - Technosqueek.asm" frame="2" startpal="1" />
     </ImageFromMappings>
     <ImageFromMappings id="vert" priority="true">
-      <ArtFile filename="../General/Sprites/Technosqueek/Technosqueek.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Technosqueek/Technosqueek.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Technosqueek/Map - Technosqueek.asm" frame="5" startpal="1" />
     </ImageFromMappings>
     <ImageFromMappings id="verttail" priority="true">
-      <ArtFile filename="../General/Sprites/Technosqueek/Technosqueek.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Technosqueek/Technosqueek.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Technosqueek/Map - Technosqueek.asm" frame="7" startpal="1" />
     </ImageFromMappings>
   </Images>

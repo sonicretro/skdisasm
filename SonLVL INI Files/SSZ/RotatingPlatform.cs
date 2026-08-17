@@ -65,7 +65,7 @@ namespace S3KObjectDefinitions.SSZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/SSZ/Nemesis Art/Misc.bin", CompressionType.Nemesis)), -5440);
+				"../Levels/SSZ/Nemesis Art/Misc.nem", CompressionType.Nemesis)), -5440);
 
 			properties = new PropertySpec[1];
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);

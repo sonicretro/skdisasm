@@ -21,7 +21,7 @@ namespace S3KObjectDefinitions.LBZ
 	{
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesSubtypes(7, true, "../Levels/LBZ/Tiles/Act 2 Death Egg 2.bin");
+			BuildSpritesSubtypes(7, true, "../Levels/LBZ/Tiles/Act 2 Death Egg 2.kosm");
 		}
 	}
 
@@ -29,7 +29,7 @@ namespace S3KObjectDefinitions.LBZ
 	{
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesSubtypes(7, false, "../Levels/LBZ/Tiles/Act 2 Death Egg 2.bin");
+			BuildSpritesSubtypes(7, false, "../Levels/LBZ/Tiles/Act 2 Death Egg 2.kosm");
 		}
 	}
 }
@@ -107,7 +107,7 @@ namespace S3KObjectDefinitions.Common
 			BuildSpritesSubtypes(7, false);
 		}
 
-		protected void BuildSpritesSubtypes(int startpal, bool s3, string girderart = "../General/Sprites/SS Entry/Badnik Explosion.bin")
+		protected void BuildSpritesSubtypes(int startpal, bool s3, string girderart = "../General/Sprites/SS Entry/Badnik Explosion.kosm")
 		{
 			var bytes = new byte[s3 ? 7 : 13];
 			for (var i = 0; i < bytes.Length; i++)
@@ -121,7 +121,7 @@ namespace S3KObjectDefinitions.Common
 
 			sprites[0] = BuildFlippedSprites(ObjectHelper.UnknownObject, false);
 
-			var art = LevelData.ReadFile("../General/Sprites/Knuckles/Cutscene/Cutscene Main.bin", CompressionType.Uncompressed);
+			var art = LevelData.ReadFile("../General/Sprites/Knuckles/Cutscene/Cutscene Main.unc", CompressionType.Uncompressed);
 			var map = LevelData.ASMToBin("../General/Sprites/Knuckles/Cutscene/Map - Cutscene Knuckles.asm", EngineVersion.S3K);
 			var plc = LevelData.ASMToBin("../General/Sprites/Knuckles/Cutscene/DPLC - Cutscene Knuckles.asm", EngineVersion.S3K);
 
@@ -141,7 +141,7 @@ namespace S3KObjectDefinitions.Common
 				foreach (var sprite in sprites[3]) sprite.Offset(158, 0);
 
 				extraSprites[3] = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-					"../General/Sprites/Buttons/Gray Button.bin", CompressionType.Nemesis),
+					"../General/Sprites/Buttons/Gray Button.nem", CompressionType.Nemesis),
 					"../General/Sprites/Buttons/Map - Button.asm", 2, 0, true);
 				extraSprites[3].Offset(0, 12);
 			}
@@ -171,16 +171,16 @@ namespace S3KObjectDefinitions.Common
 
 			subtypeNames[8] = "Mushroom Hill 2";
 			sprites[9] = BuildFlippedSprites(ObjectHelper.MapASMDPLCToBmp(LevelData.ReadFile(
-				"../General/Sprites/Knuckles/Cutscene/MHZ2 Press.bin", CompressionType.Uncompressed),
+				"../General/Sprites/Knuckles/Cutscene/MHZ2 Press.unc", CompressionType.Uncompressed),
 				"../General/Sprites/Knuckles/Cutscene/Map - MHZ2 Press.asm",
 				"../General/Sprites/Knuckles/Cutscene/DPLC - MHZ Press.asm", 3, startpal, true), false);
 
 			extraSprites[9] = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../General/Sprites/Knuckles/Cutscene/Knuckles MHZ Switch.bin", CompressionType.KosinskiM),
+				"../General/Sprites/Knuckles/Cutscene/Knuckles MHZ Switch.kosm", CompressionType.KosinskiM),
 				"../General/Sprites/Knuckles/Cutscene/Map - Act 2 Knuckles Switch.asm", 0, startpal, true);
 			extraSprites[9].Offset(-8, 0);
 
-			art = LevelData.ReadFile("../General/Sprites/Knuckles/Art/Knuckles.bin", CompressionType.Uncompressed);
+			art = LevelData.ReadFile("../General/Sprites/Knuckles/Art/Knuckles.unc", CompressionType.Uncompressed);
 			map = LevelData.ASMToBin("../General/Sprites/Knuckles/Map - Knuckles.asm", EngineVersion.S3K);
 			plc = LevelData.ASMToBin("../General/Sprites/Knuckles/DPLC - Knuckles.asm", EngineVersion.S2);
 
@@ -200,13 +200,13 @@ namespace S3KObjectDefinitions.Common
 
 			subtypeNames[11] = "Sky Sanctuary";
 			sprites[12] = BuildFlippedSprites(ObjectHelper.MapASMDPLCToBmp(LevelData.ReadFile(
-				"../General/Sprites/Knuckles/Cutscene/SSZ Tired.bin", CompressionType.Uncompressed),
+				"../General/Sprites/Knuckles/Cutscene/SSZ Tired.unc", CompressionType.Uncompressed),
 				"../General/Sprites/Knuckles/Cutscene/Map - SSZ Tired.asm",
 				"../General/Sprites/Knuckles/Cutscene/DPLC - SSZ Tired.asm", 1, startpal, true), true);
 
 			subtypeNames[12] = "S&K Intro";
 			sprites[13] = BuildFlippedSprites(ObjectHelper.MapASMDPLCToBmp(LevelData.ReadFile(
-				"../General/Sprites/Knuckles/Cutscene/Intro Laying.bin", CompressionType.Uncompressed),
+				"../General/Sprites/Knuckles/Cutscene/Intro Laying.unc", CompressionType.Uncompressed),
 				"../General/Sprites/Knuckles/Cutscene/Map - Intro Laying.asm",
 				"../General/Sprites/Knuckles/Cutscene/DPLC - Intro Laying.asm", 0, 4), false);
 		}

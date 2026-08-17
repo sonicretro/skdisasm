@@ -2,27 +2,27 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Egg Mobile" Image="ship" Depth="2">
   <Images>
     <ImageFromMappings id="head">
-      <ArtFile filename="../General/Sprites/Robotnik/Ship.bin" />
+      <ArtFile filename="../General/Sprites/Robotnik/Ship.nem" />
       <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Robotnik Ship.asm" frame="0" />
     </ImageFromMappings>
     <ImageFromMappings id="ship">
-      <ArtFile filename="../General/Sprites/Robotnik/Ship.bin" />
+      <ArtFile filename="../General/Sprites/Robotnik/Ship.nem" />
       <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Robotnik Ship.asm" frame="10" />
     </ImageFromMappings>
     <ImageFromMappings id="box1">
-      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss Box.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss Box.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Miniboss Box.asm" frame="0" startpal="2" />
     </ImageFromMappings>
     <ImageFromMappings id="box2">
-      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss Box.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss Box.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Miniboss Box.asm" frame="3" startpal="2" />
     </ImageFromMappings>
     <ImageFromMappings id="box3">
-      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss Box.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss Box.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Miniboss Box.asm" frame="6" startpal="2" />
     </ImageFromMappings>
     <ImageFromMappings id="box4">
-      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss Box.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/LBZ/KosinskiM Art/Miniboss Box.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Miniboss Box.asm" frame="9" startpal="2" />
     </ImageFromMappings>
   </Images>

@@ -92,7 +92,7 @@ namespace S3KObjectDefinitions.DEZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/DEZ/Nemesis Art/Miniboss.bin", CompressionType.Nemesis)), -1568);
+				"../Levels/DEZ/Nemesis Art/Miniboss.nem", CompressionType.Nemesis)), -1568);
 			var sprite = ObjectHelper.MapASMToBmp(indexer.ToArray(),
 				"../Levels/DEZ/Misc Object Data/Map - Bumper Wall.asm", 0, 1);
 

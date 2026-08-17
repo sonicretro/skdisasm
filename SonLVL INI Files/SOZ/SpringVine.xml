@@ -2,7 +2,7 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Spring Vine" Image="image" Depth="4">
   <Images>
     <ImageFromMappings id="image">
-      <ArtFile filename="../Levels/SOZ/Nemesis Art/Misc Art.bin" />
+      <ArtFile filename="../Levels/SOZ/Nemesis Art/Misc Art.nem" />
       <MapFile type="ASM" filename="../Levels/SOZ/Misc Object Data/Map - Spring Vine.asm" startpal="2" />
     </ImageFromMappings>
   </Images>

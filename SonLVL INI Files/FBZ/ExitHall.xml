@@ -2,11 +2,11 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Exit Hall">
   <Images>
     <ImageFromMappings id="img0">
-      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Exit Door.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Exit Door.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Exit Hall.asm" frame="0" startpal="2" />
     </ImageFromMappings>
     <ImageFromMappings id="img1">
-      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Exit Hall.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/FBZ/KosinskiM Art/Exit Hall.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/FBZ/Misc Object Data/Map - Exit Hall.asm" frame="1" startpal="2" />
     </ImageFromMappings>
   </Images>

@@ -2,31 +2,31 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Miniboss" Image="main" Depth="5">
   <Images>
     <ImageFromMappings id="main" priority="true">
-      <ArtFile filename="../Levels/ICZ/Nemesis Art/Miniboss.bin" />
+      <ArtFile filename="../Levels/ICZ/Nemesis Art/Miniboss.nem" />
       <MapFile type="ASM" filename="../Levels/ICZ/Misc Object Data/Map - Miniboss.asm" frame="0" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="left1" priority="true">
-      <ArtFile filename="../Levels/ICZ/Nemesis Art/Miniboss.bin" />
+      <ArtFile filename="../Levels/ICZ/Nemesis Art/Miniboss.nem" />
       <MapFile type="ASM" filename="../Levels/ICZ/Misc Object Data/Map - Miniboss.asm" frame="1" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="left2" priority="true">
-      <ArtFile filename="../Levels/ICZ/Nemesis Art/Miniboss.bin" />
+      <ArtFile filename="../Levels/ICZ/Nemesis Art/Miniboss.nem" />
       <MapFile type="ASM" filename="../Levels/ICZ/Misc Object Data/Map - Miniboss.asm" frame="2" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="bottom1" priority="true">
-      <ArtFile filename="../Levels/ICZ/Nemesis Art/Miniboss.bin" />
+      <ArtFile filename="../Levels/ICZ/Nemesis Art/Miniboss.nem" />
       <MapFile type="ASM" filename="../Levels/ICZ/Misc Object Data/Map - Miniboss.asm" frame="3" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="bottom2" priority="true">
-      <ArtFile filename="../Levels/ICZ/Nemesis Art/Miniboss.bin" />
+      <ArtFile filename="../Levels/ICZ/Nemesis Art/Miniboss.nem" />
       <MapFile type="ASM" filename="../Levels/ICZ/Misc Object Data/Map - Miniboss.asm" frame="4" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="right1" priority="true">
-      <ArtFile filename="../Levels/ICZ/Nemesis Art/Miniboss.bin" />
+      <ArtFile filename="../Levels/ICZ/Nemesis Art/Miniboss.nem" />
       <MapFile type="ASM" filename="../Levels/ICZ/Misc Object Data/Map - Miniboss.asm" frame="9" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="right2" priority="true">
-      <ArtFile filename="../Levels/ICZ/Nemesis Art/Miniboss.bin" />
+      <ArtFile filename="../Levels/ICZ/Nemesis Art/Miniboss.nem" />
       <MapFile type="ASM" filename="../Levels/ICZ/Misc Object Data/Map - Miniboss.asm" frame="10" startpal="5" />
     </ImageFromMappings>
   </Images>

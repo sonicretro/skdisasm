@@ -2,27 +2,27 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Collapsing Log Bridge" Image="right" Depth="4" DefaultSubtype="8">
   <Images>
     <ImageFromMappings id="main">
-      <ArtFile filename="../Levels/AIZ/Nemesis Art/Misc Art 2.bin" />
+      <ArtFile filename="../Levels/AIZ/Nemesis Art/Misc Art 2.nem" />
       <MapFile type="ASM" filename="../Levels/AIZ/Misc Object Data/Map - Collapsing Log Bridge.asm" frame="0" startpal="2" />
     </ImageFromMappings>
     <ImageFromMappings id="left">
-      <ArtFile filename="../Levels/AIZ/Nemesis Art/Misc Art 2.bin" />
+      <ArtFile filename="../Levels/AIZ/Nemesis Art/Misc Art 2.nem" />
       <MapFile type="ASM" filename="../Levels/AIZ/Misc Object Data/Map - Collapsing Log Bridge.asm" frame="1" startpal="2" />
     </ImageFromMappings>
     <ImageFromMappings id="right">
-      <ArtFile filename="../Levels/AIZ/Nemesis Art/Misc Art 2.bin" />
+      <ArtFile filename="../Levels/AIZ/Nemesis Art/Misc Art 2.nem" />
       <MapFile type="ASM" filename="../Levels/AIZ/Misc Object Data/Map - Collapsing Log Bridge.asm" frame="2" startpal="2" />
     </ImageFromMappings>
     <ImageFromMappings id="drawmain" priority="true">
-      <ArtFile filename="../Levels/AIZ/Nemesis Art/Misc Art 2.bin" />
+      <ArtFile filename="../Levels/AIZ/Nemesis Art/Misc Art 2.nem" />
       <MapFile type="ASM" filename="../Levels/AIZ/Misc Object Data/Map - Draw Bridge Fire.asm" frame="0" startpal="2" />
     </ImageFromMappings>
     <ImageFromMappings id="drawleft" priority="true">
-      <ArtFile filename="../Levels/AIZ/Nemesis Art/Misc Art 2.bin" />
+      <ArtFile filename="../Levels/AIZ/Nemesis Art/Misc Art 2.nem" />
       <MapFile type="ASM" filename="../Levels/AIZ/Misc Object Data/Map - Draw Bridge Fire.asm" frame="1" startpal="2" />
     </ImageFromMappings>
     <ImageFromMappings id="drawright" priority="true">
-      <ArtFile filename="../Levels/AIZ/Nemesis Art/Misc Art 2.bin" />
+      <ArtFile filename="../Levels/AIZ/Nemesis Art/Misc Art 2.nem" />
       <MapFile type="ASM" filename="../Levels/AIZ/Misc Object Data/Map - Draw Bridge Fire.asm" frame="2" startpal="2" />
     </ImageFromMappings>
   </Images>

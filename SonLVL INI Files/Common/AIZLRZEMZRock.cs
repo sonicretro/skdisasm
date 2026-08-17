@@ -10,7 +10,7 @@ namespace S3KObjectDefinitions.AIZ
 	{
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesProperties("../Levels/AIZ/Nemesis Art/Misc Art 1.bin",
+			BuildSpritesProperties("../Levels/AIZ/Nemesis Art/Misc Art 1.nem",
 				"../Levels/AIZ/Misc Object Data/Map - Rock.asm", 0, 1, 0x04,
 				new Dictionary<string, int>
 				{
@@ -25,7 +25,7 @@ namespace S3KObjectDefinitions.AIZ
 	{
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesProperties("../Levels/AIZ/Nemesis Art/Misc Art 2.bin",
+			BuildSpritesProperties("../Levels/AIZ/Nemesis Art/Misc Art 2.nem",
 				"../Levels/AIZ/Misc Object Data/Map - Rock 2.asm", 0, 2, 0x04,
 				new Dictionary<string, int>
 				{
@@ -61,7 +61,7 @@ namespace S3KObjectDefinitions.LRZ
 	{
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesProperties("../Levels/LRZ/Nemesis Art/Act 2 Misc Art.bin",
+			BuildSpritesProperties("../Levels/LRZ/Nemesis Art/Act 2 Misc Art.nem",
 				"../Levels/LRZ/Misc Object Data/Map - Breakable Rock 2.asm", 4, 3, 0x74,
 				new Dictionary<string, int>
 				{
@@ -78,7 +78,7 @@ namespace S3KObjectDefinitions.EMZ
 	{
 		public override void Init(ObjectData data)
 		{
-			BuildSpritesProperties("../Levels/EMZ/Nemesis Art/Misc Art.bin",
+			BuildSpritesProperties("../Levels/EMZ/Nemesis Art/Misc Art.nem",
 				"../Levels/EMZ/Misc Object Data/Map - Rock.asm", -3, 3, 0x31,
 				new Dictionary<string, int>
 				{

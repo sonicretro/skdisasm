@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <StartPosDef xmlns="http://www.sonicretro.org">
   <ImageFromMappings>
-    <ArtFile filename="../General/Sprites/Sonic/Art/Sonic.bin" compression="Uncompressed" />
+    <ArtFile filename="../General/Sprites/Sonic/Art/Sonic.unc" compression="Uncompressed" />
     <MapFile type="ASM" filename="../General/Sprites/Sonic/Map - Sonic.asm"
       dplcfile="../General/Sprites/Sonic/DPLC - Sonic.asm" dplcver="S2" frame="151" />
   </ImageFromMappings>

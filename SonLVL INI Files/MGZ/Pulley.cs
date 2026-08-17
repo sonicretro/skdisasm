@@ -77,7 +77,7 @@ namespace S3KObjectDefinitions.MGZ
 
 		public override void Init(ObjectData data)
 		{
-			var art = LevelData.ReadFile("../Levels/MGZ/Nemesis Art/Misc Art 1.bin", CompressionType.Nemesis);
+			var art = LevelData.ReadFile("../Levels/MGZ/Nemesis Art/Misc Art 1.nem", CompressionType.Nemesis);
 			var map = LevelData.ASMToBin("../Levels/MGZ/Misc Object Data/Map - Pulley.asm", LevelData.Game.MappingsVersion);
 
 			properties = new PropertySpec[1];

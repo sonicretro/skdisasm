@@ -75,7 +75,7 @@ namespace S3KObjectDefinitions.MHZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/MHZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis)), -7072);
+				"../Levels/MHZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis)), -7072);
 			var map = LevelData.ASMToBin(
 				"../Levels/MHZ/Misc Object Data/Map - Pulley Lift.asm", LevelData.Game.MappingsVersion);
 			var art = indexer.ToArray();

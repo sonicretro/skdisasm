@@ -2,31 +2,31 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Boss (Knuckles)" Depth="6">
   <Images>
     <ImageFromMappings id="main">
-      <ArtFile filename="../Levels/LBZ/Nemesis Art/Final Boss 1.bin" />
+      <ArtFile filename="../Levels/LBZ/Nemesis Art/Final Boss 1.nem" />
       <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Final Boss 1.asm" frame="0" startpal="6" />
     </ImageFromMappings>
     <ImageFromMappings id="rockets">
-      <ArtFile filename="../Levels/LBZ/Nemesis Art/Final Boss 1.bin" />
+      <ArtFile filename="../Levels/LBZ/Nemesis Art/Final Boss 1.nem" />
       <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Final Boss 1.asm" frame="1" startpal="6" />
     </ImageFromMappings>
     <ImageFromMappings id="cockpit">
-      <ArtFile filename="../Levels/LBZ/Nemesis Art/Final Boss 1.bin" />
+      <ArtFile filename="../Levels/LBZ/Nemesis Art/Final Boss 1.nem" />
       <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Final Boss 1.asm" frame="2" startpal="6" />
     </ImageFromMappings>
     <ImageFromMappings id="gun">
-      <ArtFile filename="../Levels/LBZ/Nemesis Art/Final Boss 1.bin" />
+      <ArtFile filename="../Levels/LBZ/Nemesis Art/Final Boss 1.nem" />
       <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Final Boss 1.asm" frame="4" startpal="6" />
     </ImageFromMappings>
     <ImageFromMappings id="fire">
-      <ArtFile filename="../Levels/LBZ/Nemesis Art/Final Boss 1.bin" />
+      <ArtFile filename="../Levels/LBZ/Nemesis Art/Final Boss 1.nem" />
       <MapFile type="ASM" filename="../Levels/LBZ/Misc Object Data/Map - Final Boss 1.asm" frame="10" />
     </ImageFromMappings>
     <ImageFromMappings id="head">
-      <ArtFile filename="../General/Sprites/Robotnik/Ship.bin" />
+      <ArtFile filename="../General/Sprites/Robotnik/Ship.nem" />
       <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Robotnik Ship.asm" frame="0" />
     </ImageFromMappings>
     <ImageFromMappings id="ship">
-      <ArtFile filename="../General/Sprites/Robotnik/Ship.bin" />
+      <ArtFile filename="../General/Sprites/Robotnik/Ship.nem" />
       <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Robotnik Ship.asm" frame="12" />
     </ImageFromMappings>
   </Images>

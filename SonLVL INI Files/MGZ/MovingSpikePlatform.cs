@@ -58,7 +58,7 @@ namespace S3KObjectDefinitions.MGZ
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile("LevelArt", 0)), -32);
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/MGZ/Nemesis Art/Misc Art 2.bin", CompressionType.Nemesis)), 32704);
+				"../Levels/MGZ/Nemesis Art/Misc Art 2.nem", CompressionType.Nemesis)), 32704);
 
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);
 			sprite = BuildFlippedSprites(ObjectHelper.MapASMToBmp(indexer.ToArray(),

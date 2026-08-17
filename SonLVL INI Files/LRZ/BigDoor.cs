@@ -57,7 +57,7 @@ namespace S3KObjectDefinitions.LRZ
 		{
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);
 			sprite = BuildFlippedSprites(ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../Levels/LRZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis),
+				"../Levels/LRZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis),
 				"../Levels/LRZ/Misc Object Data/Map - Big Door.asm", 0, 2));
 		}
 

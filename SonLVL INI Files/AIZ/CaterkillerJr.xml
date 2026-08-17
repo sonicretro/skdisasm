@@ -2,23 +2,23 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Catakiller, Jr." Image="head" Depth="5">
   <Images>
     <ImageFromMappings id="head" priority="true">
-      <ArtFile filename="../General/Sprites/Caterkiller Jr/Caterkiller Jr.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Caterkiller Jr/Caterkiller Jr.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Caterkiller Jr/Map - Caterkiller Jr.asm" frame="0" startpal="1" />
     </ImageFromMappings>
     <ImageFromMappings id="torso" priority="true">
-      <ArtFile filename="../General/Sprites/Caterkiller Jr/Caterkiller Jr.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Caterkiller Jr/Caterkiller Jr.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Caterkiller Jr/Map - Caterkiller Jr.asm" frame="1" startpal="1" />
     </ImageFromMappings>
     <ImageFromMappings id="abdomen" priority="true">
-      <ArtFile filename="../General/Sprites/Caterkiller Jr/Caterkiller Jr.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Caterkiller Jr/Caterkiller Jr.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Caterkiller Jr/Map - Caterkiller Jr.asm" frame="2" startpal="1" />
     </ImageFromMappings>
     <ImageFromMappings id="tail" priority="true">
-      <ArtFile filename="../General/Sprites/Monkey Dude/Monkey Dude.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Monkey Dude/Monkey Dude.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Monkey Dude/Map - Monkey Dude.asm" frame="3" startpal="1" />
     </ImageFromMappings>
     <ImageFromMappings id="attack" priority="true">
-      <ArtFile filename="../General/Sprites/Caterkiller Jr/Caterkiller Jr.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Caterkiller Jr/Caterkiller Jr.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Caterkiller Jr/Map - Caterkiller Jr.asm" frame="3" startpal="1" />
     </ImageFromMappings>
   </Images>

@@ -57,7 +57,7 @@ namespace S3KObjectDefinitions.Common
 		public override void Init(ObjectData data)
 		{
 			var art = LevelData.ReadFile(
-				"../General/2P Zone/Nemesis Art/Misc Art 3.bin", CompressionType.Nemesis);
+				"../General/2P Zone/Nemesis Art/Misc Art 3.nem", CompressionType.Nemesis);
 			var map = LevelData.ASMToBin(
 				"../General/2P Zone/Map - Item.asm", LevelData.Game.MappingsVersion);
 

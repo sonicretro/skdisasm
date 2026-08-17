@@ -2,7 +2,7 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Lightning" Image="img" Depth="5">
   <Images>
     <ImageFromMappings id="img">
-      <ArtFile filename="../Levels/DEZ/Nemesis Art/Misc Art.bin" offset="-1408" />
+      <ArtFile filename="../Levels/DEZ/Nemesis Art/Misc Art.nem" offset="-1408" />
       <MapFile type="ASM" filename="../Levels/DEZ/Misc Object Data/Map - Lightning.asm" frame="3" startpal="1" />
     </ImageFromMappings>
   </Images>

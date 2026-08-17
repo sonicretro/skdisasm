@@ -12,7 +12,7 @@ namespace S3KObjectDefinitions.SSZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/SSZ/Nemesis Art/Misc.bin", CompressionType.Nemesis)), -4352);
+				"../Levels/SSZ/Nemesis Art/Misc.nem", CompressionType.Nemesis)), -4352);
 
 			BuildSpritesProperties(indexer.ToArray(), 0, 0);
 		}
@@ -26,7 +26,7 @@ namespace S3KObjectDefinitions.HPZ
 		public override void Init(ObjectData data)
 		{
 			var art = LevelData.ReadFile(
-				"../General/Sprites/Teleporter/Teleporter.bin", CompressionType.KosinskiM);
+				"../General/Sprites/Teleporter/Teleporter.kosm", CompressionType.KosinskiM);
 
 			BuildSpritesProperties(art, 10, 4);
 		}

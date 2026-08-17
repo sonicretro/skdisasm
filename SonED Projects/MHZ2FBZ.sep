@@ -8,23 +8,23 @@ Object Palette: objdef\skobj1.pcx
 
 8x8 Compression:      5
 Num 8x8 Pages:        2
-8x8 Tiles Page 0:     ..\Levels\MHZ\Tiles\Primary.bin
-8x8 Tiles Page 1:     ..\Levels\MHZ\Tiles\Custom.bin
+8x8 Tiles Page 0:     ..\Levels\MHZ\Tiles\Primary.kosm
+8x8 Tiles Page 1:     ..\Levels\MHZ\Tiles\Custom.kosm
 
 16x16 Compression:    1
 Num 16x16 Pages:      2
 Page0 8x8 Page:       0
-16x16 Tiles Page 0:   ..\Levels\MHZ\Blocks\Primary.bin
+16x16 Tiles Page 0:   ..\Levels\MHZ\Blocks\Primary.kos
 Page1 8x8 Page:       0
-16x16 Tiles Page 1:   ..\Levels\MHZ\Blocks\Custom.bin
+16x16 Tiles Page 1:   ..\Levels\MHZ\Blocks\Custom.kos
 
 Metatile Size:        128
 128x128 Compression:  1
 Num 128x128 Pages:    2
 Page0 16x16 Page:     0
-128x128 Tiles Page 0: ..\Levels\MHZ\Chunks\Primary.bin
+128x128 Tiles Page 0: ..\Levels\MHZ\Chunks\Primary.kos
 Page1 16x16 Page:     0
-128x128 Tiles Page 1: ..\Levels\MHZ\Chunks\Custom.bin
+128x128 Tiles Page 1: ..\Levels\MHZ\Chunks\Custom.kos
 
 Layout Format:        2
 Layout Compression:   0

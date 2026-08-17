@@ -72,7 +72,7 @@ namespace S3KObjectDefinitions.LRZ
 		public override void Init(ObjectData data)
 		{
 			BuildSpritesProperties(LevelData.ReadFile(
-				"../Levels/LRZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis), 0);
+				"../Levels/LRZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis), 0);
 		}
 
 		protected void BuildSpritesProperties(byte[] art, int frame)

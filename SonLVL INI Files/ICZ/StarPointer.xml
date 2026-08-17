@@ -2,19 +2,19 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Star Pointer" Image="lowmain" Depth="5">
   <Images>
     <ImageFromMappings id="lowmain">
-      <ArtFile filename="../General/Sprites/Star Pointer/Star Pointer.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Star Pointer/Star Pointer.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Star Pointer/Map - Star Pointer.asm" frame="0" startpal="1" />
     </ImageFromMappings>
     <ImageFromMappings id="highmain" priority="true">
-      <ArtFile filename="../General/Sprites/Star Pointer/Star Pointer.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Star Pointer/Star Pointer.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Star Pointer/Map - Star Pointer.asm" frame="0" startpal="1" />
     </ImageFromMappings>
     <ImageFromMappings id="lowspike">
-      <ArtFile filename="../General/Sprites/Star Pointer/Star Pointer.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Star Pointer/Star Pointer.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Star Pointer/Map - Star Pointer.asm" frame="1" startpal="1" />
     </ImageFromMappings>
     <ImageFromMappings id="highspike" priority="true">
-      <ArtFile filename="../General/Sprites/Star Pointer/Star Pointer.bin" compression="KosinskiM" />
+      <ArtFile filename="../General/Sprites/Star Pointer/Star Pointer.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../General/Sprites/Star Pointer/Map - Star Pointer.asm" frame="1" startpal="1" />
     </ImageFromMappings>
   </Images>

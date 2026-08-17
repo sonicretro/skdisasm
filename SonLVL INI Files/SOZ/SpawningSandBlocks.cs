@@ -83,7 +83,7 @@ namespace S3KObjectDefinitions.SOZ
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);
 			properties = new PropertySpec[1];
 			sprite = BuildFlippedSprites(ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../Levels/SOZ/Nemesis Art/Tile.bin", CompressionType.Nemesis),
+				"../Levels/SOZ/Nemesis Art/Tile.nem", CompressionType.Nemesis),
 				"../Levels/SOZ/Misc Object Data/Map - Spawning Sand Blocks.asm", 0, 2));
 
 			properties[0] = new PropertySpec("Distance", typeof(int), "Extended",

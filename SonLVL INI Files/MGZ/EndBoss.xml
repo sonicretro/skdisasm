@@ -2,35 +2,35 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Boss" Image="main" Depth="6">
   <Images>
     <ImageFromMappings id="main">
-      <ArtFile filename="../Levels/MGZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/MGZ/KosinskiM Art/End Boss.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/MGZ/Misc Object Data/Map - End Boss.asm" frame="0" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="divot">
-      <ArtFile filename="../Levels/MGZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/MGZ/KosinskiM Art/End Boss.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/MGZ/Misc Object Data/Map - End Boss.asm" frame="1" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="shaft">
-      <ArtFile filename="../Levels/MGZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/MGZ/KosinskiM Art/End Boss.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/MGZ/Misc Object Data/Map - End Boss.asm" frame="4" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="rocket">
-      <ArtFile filename="../Levels/MGZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/MGZ/KosinskiM Art/End Boss.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/MGZ/Misc Object Data/Map - End Boss.asm" frame="6" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="drill">
-      <ArtFile filename="../Levels/MGZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/MGZ/KosinskiM Art/End Boss.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/MGZ/Misc Object Data/Map - End Boss.asm" frame="15" startpal="5" />
     </ImageFromMappings>
     <ImageFromMappings id="fire">
-      <ArtFile filename="../Levels/MGZ/KosinskiM Art/End Boss.bin" compression="KosinskiM" />
+      <ArtFile filename="../Levels/MGZ/KosinskiM Art/End Boss.kosm" compression="KosinskiM" />
       <MapFile type="ASM" filename="../Levels/MGZ/Misc Object Data/Map - End Boss.asm" frame="25" />
     </ImageFromMappings>
     <ImageFromMappings id="head">
-      <ArtFile filename="../General/Sprites/Robotnik/Ship.bin" />
+      <ArtFile filename="../General/Sprites/Robotnik/Ship.nem" />
       <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Robotnik Ship.asm" frame="0" />
     </ImageFromMappings>
     <ImageFromMappings id="ship">
-      <ArtFile filename="../General/Sprites/Robotnik/Ship.bin" />
+      <ArtFile filename="../General/Sprites/Robotnik/Ship.nem" />
       <MapFile type="ASM" filename="../General/Sprites/Robotnik/Map - Robotnik Ship.asm" frame="9" />
     </ImageFromMappings>
   </Images>

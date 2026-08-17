@@ -63,7 +63,7 @@ namespace S3KObjectDefinitions.AIZ
 		{
 			var version = LevelData.Game.MappingsVersion;
 			var art = LevelData.ReadFile(
-				"../Levels/AIZ/Nemesis Art/Misc Art 2.bin", CompressionType.Nemesis);
+				"../Levels/AIZ/Nemesis Art/Misc Art 2.nem", CompressionType.Nemesis);
 			var map = LevelData.ASMToBin(
 				"../Levels/AIZ/Misc Object Data/Map - Flipping Bridge.asm", version);
 

@@ -2,7 +2,7 @@
 <ObjDef xmlns="http://www.sonicretro.org" Name="Flybot767" Image="img" Depth="5">
   <Images>
     <ImageFromMappings id="img" priority="true">
-      <ArtFile filename="../General/Sprites/Flybot767/Flybot767.bin" compression="Uncompressed" />
+      <ArtFile filename="../General/Sprites/Flybot767/Flybot767.unc" compression="Uncompressed" />
       <MapFile type="ASM" filename="../General/Sprites/Flybot767/Map - Flybot767.asm"
         dplcfile="../General/Sprites/Flybot767/DPLC - Flybot767.asm" frame="3" startpal="1" />
     </ImageFromMappings>

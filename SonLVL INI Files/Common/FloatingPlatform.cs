@@ -10,7 +10,7 @@ namespace S3KObjectDefinitions.AIZ
 	{
 		public override void Init(ObjectData data)
 		{
-			BuildSprites("../Levels/AIZ/Nemesis Art/Cork Floor 1.bin",
+			BuildSprites("../Levels/AIZ/Nemesis Art/Cork Floor 1.nem",
 				"../Levels/AIZ/Misc Object Data/Map - Floating Platform.asm", 0x20);
 		}
 	}
@@ -19,7 +19,7 @@ namespace S3KObjectDefinitions.AIZ
 	{
 		public override void Init(ObjectData data)
 		{
-			BuildSprites("../Levels/AIZ/Nemesis Art/Cork Floor 2.bin",
+			BuildSprites("../Levels/AIZ/Nemesis Art/Cork Floor 2.nem",
 				"../Levels/AIZ/Misc Object Data/Map - Floating Platform.asm", 0x20);
 		}
 	}
@@ -33,7 +33,7 @@ namespace S3KObjectDefinitions.HCZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/HCZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis)), -2656);
+				"../Levels/HCZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis)), -2656);
 
 			BuildSprites(indexer.ToArray(),
 				"../Levels/HCZ/Misc Object Data/Map - Floating Platform.asm", 0x10);
@@ -90,7 +90,7 @@ namespace S3KObjectDefinitions.LBZ
 		public override void Init(ObjectData data)
 		{
 			var version = LevelData.Game.MappingsVersion;
-			var art = LevelData.ReadFile("../Levels/LBZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis);
+			var art = LevelData.ReadFile("../Levels/LBZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis);
 			var map = LevelData.ASMToBin("../Levels/LBZ/Misc Object Data/Map - Moving Platform.asm", version);
 
 			BuildSprites(art, map, 0x00);

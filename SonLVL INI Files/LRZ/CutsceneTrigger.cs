@@ -63,14 +63,14 @@ namespace S3KObjectDefinitions.LRZ
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);
 			unknownSprite = BuildFlippedSprites(ObjectHelper.UnknownObject);
 			sprite = ObjectHelper.MapDPLCToBmp(LevelData.ReadFile(
-				"../General/Sprites/Knuckles/Art/Knuckles.bin", CompressionType.Uncompressed), LevelData.ASMToBin(
+				"../General/Sprites/Knuckles/Art/Knuckles.unc", CompressionType.Uncompressed), LevelData.ASMToBin(
 				"../General/Sprites/Knuckles/Map - Knuckles.asm", EngineVersion.S3K), EngineVersion.S3K, LevelData.ASMToBin(
 				"../General/Sprites/Knuckles/DPLC - Knuckles.asm", EngineVersion.S2), EngineVersion.S2, 0x56, 7, true);
 
 			sprite.Flip(true, false);
 			sprite.Offset(48, 10);
 			sprite = new Sprite(sprite, ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../Levels/LRZ/KosinskiM Art/Knuckles Boulder.bin", CompressionType.KosinskiM),
+				"../Levels/LRZ/KosinskiM Art/Knuckles Boulder.kosm", CompressionType.KosinskiM),
 				"../Levels/LRZ/Misc Object Data/Map - Knuckles Boulder.asm", 0, 2));
 		}
 

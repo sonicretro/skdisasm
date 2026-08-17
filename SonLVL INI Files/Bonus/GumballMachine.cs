@@ -57,12 +57,12 @@ namespace S3KObjectDefinitions.Gumball
 		public override void Init(ObjectData data)
 		{
 			var version = LevelData.Game.MappingsVersion;
-			var art = LevelData.ReadFile("../Levels/Gumball/Nemesis Art/Gumball Bonus.bin", CompressionType.Nemesis);
+			var art = LevelData.ReadFile("../Levels/Gumball/Nemesis Art/Gumball Bonus.nem", CompressionType.Nemesis);
 			var map = LevelData.ASMToBin("../Levels/Gumball/Misc Object Data/Map - Gumball Bonus.asm", version);
 
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../General/Sprites/Level Misc/SpikesSprings.bin", CompressionType.Nemesis)), -512);
+				"../General/Sprites/Level Misc/SpikesSprings.nem", CompressionType.Nemesis)), -512);
 
 			var spring1 = ObjectHelper.MapASMToBmp(indexer.ToArray(),
 				"../General/Sprites/Level Misc/Map - Spring.asm", "word_23788", 0);

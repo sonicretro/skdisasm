@@ -124,7 +124,7 @@ namespace S3KObjectDefinitions.DEZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/DEZ/Nemesis Art/Miniboss.bin", CompressionType.Nemesis)), -192);
+				"../Levels/DEZ/Nemesis Art/Miniboss.nem", CompressionType.Nemesis)), -192);
 			var art = indexer.ToArray();
 
 			var version = LevelData.Game.MappingsVersion;

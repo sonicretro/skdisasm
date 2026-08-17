@@ -65,7 +65,7 @@ namespace S3KObjectDefinitions.SSZ
 		public override void Init(ObjectData data)
 		{
 			var art = LevelData.ReadFile(
-				"../General/Sprites/Egg Robo/Egg Robo Badnik.bin", CompressionType.KosinskiM);
+				"../General/Sprites/Egg Robo/Egg Robo Badnik.kosm", CompressionType.KosinskiM);
 			var map = LevelData.ASMToBin(
 				"../General/Sprites/Egg Robo/Map - Egg Robo Badnik.asm", LevelData.Game.MappingsVersion);
 
@@ -88,10 +88,10 @@ namespace S3KObjectDefinitions.SSZ
 			sprites[2] = BuildFlippedSprites(new Sprite(arm, legs, body));
 
 			var cucky = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../General/Sprites/Animals/Chicken.bin", CompressionType.Nemesis),
+				"../General/Sprites/Animals/Chicken.nem", CompressionType.Nemesis),
 				"../General/Sprites/Animals/Map - Animals 4.asm", 0, 0);
 			var pocky = ObjectHelper.MapASMToBmp(LevelData.ReadFile(
-				"../General/Sprites/Animals/Rabbit.bin", CompressionType.Nemesis),
+				"../General/Sprites/Animals/Rabbit.nem", CompressionType.Nemesis),
 				"../General/Sprites/Animals/Map - Animals 5.asm", 0, 0);
 
 			pocky.Offset(32, 20);

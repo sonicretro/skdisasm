@@ -11,7 +11,7 @@ namespace S3KObjectDefinitions.AIZ
 		public override void Init(ObjectData data)
 		{
 			var art1 = LevelData.ReadFile(
-				"../Levels/AIZ/Nemesis Art/Misc Art 2.bin", CompressionType.Nemesis);
+				"../Levels/AIZ/Nemesis Art/Misc Art 2.nem", CompressionType.Nemesis);
 
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile("LevelArt", 0)), -32);
@@ -32,7 +32,7 @@ namespace S3KObjectDefinitions.AIZ
 		public override void Init(ObjectData data)
 		{
 			var art = LevelData.ReadFile(
-				"../Levels/AIZ/Nemesis Art/Misc Art 2.bin", CompressionType.Nemesis);
+				"../Levels/AIZ/Nemesis Art/Misc Art 2.nem", CompressionType.Nemesis);
 
 			BuildSpritesSubtypes(
 				new AnimatedStillSpriteData(0, art, 0, 3, false, 6, "Short Ember"),
@@ -69,7 +69,7 @@ namespace S3KObjectDefinitions.HCZ
 			var art1 = indexer.ToArray();
 
 			var bytes = new List<byte>(LevelData.ReadFile(
-				"../Levels/HCZ/Nemesis Art/Act 2 Slide.bin", CompressionType.Nemesis));
+				"../Levels/HCZ/Nemesis Art/Act 2 Slide.nem", CompressionType.Nemesis));
 
 			indexer.AddFile(bytes, -384);
 			var art2 = indexer.ToArray();
@@ -81,7 +81,7 @@ namespace S3KObjectDefinitions.HCZ
 			var art5 = indexer.ToArray();
 
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/HCZ/Nemesis Art/Act 2 Block Platform.bin", CompressionType.Nemesis)), -512);
+				"../Levels/HCZ/Nemesis Art/Act 2 Block Platform.nem", CompressionType.Nemesis)), -512);
 			var art6 = indexer.ToArray();
 
 			BuildSpritesSubtypes(
@@ -106,7 +106,7 @@ namespace S3KObjectDefinitions.MGZ
 		public override void Init(ObjectData data)
 		{
 			var art = LevelData.ReadFile(
-				"../Levels/MGZ/Nemesis Art/Direction Signs.bin", CompressionType.Nemesis);
+				"../Levels/MGZ/Nemesis Art/Direction Signs.nem", CompressionType.Nemesis);
 
 			BuildSpritesSubtypes(
 				new StillSpriteData(art, 11, 2, false, 6, "Signpost Left"),
@@ -124,7 +124,7 @@ namespace S3KObjectDefinitions.FBZ
 		public override void Init(ObjectData data)
 		{
 			var art1 = LevelData.ReadFile(
-				"../Levels/FBZ/Nemesis Art/Misc Art 1.bin", CompressionType.Nemesis);
+				"../Levels/FBZ/Nemesis Art/Misc Art 1.nem", CompressionType.Nemesis);
 
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(art1), -6464);
@@ -144,14 +144,14 @@ namespace S3KObjectDefinitions.FBZ
 		public override void Init(ObjectData data)
 		{
 			var art1 = LevelData.ReadFile(
-				"../Levels/FBZ/Nemesis Art/Misc Art 1.bin", CompressionType.Nemesis);
+				"../Levels/FBZ/Nemesis Art/Misc Art 1.nem", CompressionType.Nemesis);
 
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(art1), -6464);
 			var art2 = indexer.ToArray();
 
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/FBZ/Nemesis Art/Misc Art 2.bin", CompressionType.Nemesis)), -3296);
+				"../Levels/FBZ/Nemesis Art/Misc Art 2.nem", CompressionType.Nemesis)), -3296);
 			var art3 = indexer.ToArray();
 
 			BuildSpritesSubtypes(
@@ -173,7 +173,7 @@ namespace S3KObjectDefinitions.LBZ
 		public override void Init(ObjectData data)
 		{
 			var bytes = new List<byte>(LevelData.ReadFile(
-				"../Levels/LBZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis));
+				"../Levels/LBZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis));
 
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(bytes, -2368);
@@ -197,7 +197,7 @@ namespace S3KObjectDefinitions.MHZ
 		public override void Init(ObjectData data)
 		{
 			var art4 = LevelData.ReadFile(
-				"../Levels/MHZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis);
+				"../Levels/MHZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis);
 
 			var indexer = new MultiFileIndexer<byte>();
 			var bytes = new List<byte>(art4);
@@ -244,7 +244,7 @@ namespace S3KObjectDefinitions.SOZ
 			var art1 = indexer.ToArray();
 
 			var art2 = LevelData.ReadFile(
-				"../Levels/SOZ/Nemesis Art/Act 2 Extra Art.bin", CompressionType.Nemesis);
+				"../Levels/SOZ/Nemesis Art/Act 2 Extra Art.nem", CompressionType.Nemesis);
 
 			BuildSpritesSubtypes(
 				new StillSpriteData(art1, 46, 2, true, 2, "Indoor Sloped Edge"),
@@ -258,7 +258,7 @@ namespace S3KObjectDefinitions.SOZ
 		{
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile(
-				"../Levels/SOZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis)), -2240);
+				"../Levels/SOZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis)), -2240);
 			var art = indexer.ToArray();
 
 			BuildSpritesSubtypes(
@@ -277,7 +277,7 @@ namespace S3KObjectDefinitions.LRZ
 		public override void Init(ObjectData data)
 		{
 			var art1 = LevelData.ReadFile(
-				"../Levels/LRZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis);
+				"../Levels/LRZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis);
 
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(new List<byte>(LevelData.ReadFile("LevelArt", 0)), -6752);
@@ -313,7 +313,7 @@ namespace S3KObjectDefinitions.LRZ
 		public override void Init(ObjectData data)
 		{
 			var art = LevelData.ReadFile(
-				"../Levels/LRZ/Nemesis Art/Act 2 Misc Art.bin", CompressionType.Nemesis);
+				"../Levels/LRZ/Nemesis Art/Act 2 Misc Art.nem", CompressionType.Nemesis);
 
 			BuildSpritesSubtypes(
 				new AnimatedStillSpriteData(3, art, 11, 1, false, 6, "Pulley"));
@@ -328,7 +328,7 @@ namespace S3KObjectDefinitions.DEZ
 		public override void Init(ObjectData data)
 		{
 			var bytes = new List<byte>(LevelData.ReadFile(
-				"../Levels/DEZ/Nemesis Art/Misc Art.bin", CompressionType.Nemesis));
+				"../Levels/DEZ/Nemesis Art/Misc Art.nem", CompressionType.Nemesis));
 
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(bytes, -5696);

@@ -55,7 +55,7 @@ namespace S3KObjectDefinitions.LBZ
 		public override void Init(ObjectData data)
 		{
 			var art = LevelData.ReadFile(
-				"../Levels/LBZ/Nemesis Art/Tube Transport.bin", CompressionType.Nemesis);
+				"../Levels/LBZ/Nemesis Art/Tube Transport.nem", CompressionType.Nemesis);
 			BuildSpritesProperties(art,
 				"../Levels/LBZ/Misc Object Data/Map - Smashing Spikes.asm");
 		}

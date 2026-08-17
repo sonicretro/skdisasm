@@ -75,7 +75,7 @@ namespace S3KObjectDefinitions.FBZ
 			var map = LevelData.ASMToBin(
 				"../Levels/FBZ/Misc Object Data/Map - Magnetic Spike Ball.asm", version);
 			var tiles = new List<byte>(LevelData.ReadFile(
-				"../Levels/FBZ/Nemesis Art/Misc Art 1.bin", CompressionType.Nemesis));
+				"../Levels/FBZ/Nemesis Art/Misc Art 1.nem", CompressionType.Nemesis));
 
 			var indexer = new MultiFileIndexer<byte>();
 			indexer.AddFile(tiles, -6464);

@@ -11,7 +11,7 @@ namespace S3KObjectDefinitions.AIZ
 		public override void Init(ObjectData data)
 		{
 			BuildSpritesProperties(
-				"../Levels/AIZ/Nemesis Art/Misc Art 2.bin",
+				"../Levels/AIZ/Nemesis Art/Misc Art 2.nem",
 				"../Levels/AIZ/Misc Object Data/Map - Falling Log 2.asm",
 				"../Levels/AIZ/Misc Object Data/Map - Falling Log Splash 2.asm", 3);
 		}
@@ -87,7 +87,7 @@ namespace S3KObjectDefinitions.AIZ
 		public override void Init(ObjectData data)
 		{
 			BuildSpritesProperties(
-				"../Levels/AIZ/Nemesis Art/Falling Log.bin",
+				"../Levels/AIZ/Nemesis Art/Falling Log.nem",
 				"../Levels/AIZ/Misc Object Data/Map - Falling Log.asm",
 				"../Levels/AIZ/Misc Object Data/Map - Falling Log Splash.asm", 2);
 		}
