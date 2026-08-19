@@ -2848,10 +2848,20 @@ Queue_Kos_Module:
 
 
 Process_Kos_Module_Queue_Init:
+		; Leftover Lava Reef graphics in the Sonic 3 prototype show
+		; that placeholder tiles are placed right at offset $8000.
+		; It's possible that those tiles were only meant to be visible
+		; in development tools (to highlight which areas have not been
+		; replaced with proper graphics), but not in-game, which would
+		; explain why the following check exists. However, no such
+		; placeholder tiles exist in the final build of Sonic 3 or
+		; Sonic & Knuckles, so the check doesn't really have a purpose
+		; anymore and can safely be removed.
+
 		move.w	(a1)+,d3	; get uncompressed size
-		cmpi.w	#$A000,d3
-		bne.s	loc_1D80
-		move.w	#$8000,d3	; $A000 means $8000 for some reason
+		cmpi.w	#$A000,d3	; does this data contain placeholder tiles? (prototype leftover)
+		bne.s	loc_1D80	; if not, branch
+		move.w	#$8000,d3	; don't load the placeholder tiles
 
 loc_1D80:
 		lsr.w	#1,d3
