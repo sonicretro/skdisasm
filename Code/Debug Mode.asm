@@ -1,6 +1,7 @@
-
-; =============== S U B R O U T I N E =======================================
-
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; When Debug Mode is currently in use (entered from player objects)
+; ---------------------------------------------------------------------------
 
 DebugMode:
 		moveq	#0,d0
@@ -10,12 +11,13 @@ DebugMode:
 ; End of function DebugMode
 
 ; ---------------------------------------------------------------------------
+
 DebugMode_Index:
-		dc.w locK_92A20-DebugMode_Index
-		dc.w locK_92AB0-DebugMode_Index
+		dc.w Debug_Init-DebugMode_Index
+		dc.w Debug_Action-DebugMode_Index
 ; ---------------------------------------------------------------------------
-; loc3_5B532:
-locK_92A20:
+; loc3_5B532: locK_92A20:
+Debug_Init:
 		addq.b	#2,(Debug_placement_routine).w
 		move.l	mappings(a0),(Debug_saved_mappings).w
 	if ~~Sonic3_Alone
@@ -54,11 +56,11 @@ locK_92A6E:
 		move.b	#0,(Debug_object).w
 ; loc3_5B5AA:
 locK_92AA0:
-		bsr.w	subK_92C88
+		bsr.w	Debug_ShowItem
 		move.b	#$C,(Debug_camera_delay).w
 		move.b	#1,(Debug_camera_speed).w
-; loc3_5B5BA:
-locK_92AB0:
+; loc3_5B5BA: locK_92AB0:
+Debug_Action:
 		moveq	#0,d0
 		move.w	(Current_zone_and_act).w,d0
 		ror.b	#1,d0
@@ -67,13 +69,13 @@ locK_92AB0:
 		lea	(DebugOffs).l,a2
 		adda.w	(a2,d0.w),a2
 		move.w	(a2)+,d6
-		bsr.w	subK_92AD4
+		bsr.w	Debug_Control
 		jmp	(Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-; sub3_5B5DE:
-subK_92AD4:
+; sub3_5B5DE: subK_92AD4:
+Debug_Control:
 		moveq	#0,d4
 		move.w	#1,d1
 		move.b	(Ctrl_1_pressed).w,d4
@@ -84,7 +86,7 @@ subK_92AD4:
 		bne.s	locK_92AFE
 		move.b	#$C,(Debug_camera_delay).w
 		move.b	#$F,(Debug_camera_speed).w
-		bra.w	locK_92B7A
+		bra.w	Debug_ChangeItem
 ; ---------------------------------------------------------------------------
 ; loc3_5B608:
 locK_92AFE:
@@ -143,35 +145,35 @@ locK_92B6A:
 locK_92B72:
 		move.l	d2,y_pos(a0)
 		move.l	d3,x_pos(a0)
-; loc3_5B684:
-locK_92B7A:
+; loc3_5B684: locK_92B7A:
+Debug_ChangeItem:
 		btst	#button_A,(Ctrl_1_held).w
-		beq.s	locK_92BB2
+		beq.s	Debug_SpawnObject
 		btst	#button_C,(Ctrl_1_pressed).w
-		beq.s	locK_92B96
+		beq.s	Debug_CycleObjects
 		subq.b	#1,(Debug_object).w
 		bcc.s	locK_92BAE
 		add.b	d6,(Debug_object).w
 		bra.s	locK_92BAE
 ; ---------------------------------------------------------------------------
-; loc3_5B6A0:
-locK_92B96:
+; loc3_5B6A0: locK_92B96:
+Debug_CycleObjects:
 		btst	#button_A,(Ctrl_1_pressed).w
-		beq.s	locK_92BB2
+		beq.s	Debug_SpawnObject
 		addq.b	#1,(Debug_object).w
 		cmp.b	(Debug_object).w,d6
 		bhi.s	locK_92BAE
 		move.b	#0,(Debug_object).w
 ; loc3_5B6B8:
 locK_92BAE:
-		bra.w	subK_92C88
+		bra.w	Debug_ShowItem
 ; ---------------------------------------------------------------------------
-; loc3_5B6BC:
-locK_92BB2:
+; loc3_5B6BC: locK_92BB2:
+Debug_SpawnObject:
 		btst	#button_C,(Ctrl_1_pressed).w
-		beq.s	locK_92C0C
+		beq.s	Debug_ExitDebugMode
 		jsr	(AllocateObject).l
-		bne.s	locK_92C0C
+		bne.s	Debug_ExitDebugMode
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
 		move.b	render_flags(a0),render_flags(a1)
@@ -187,16 +189,19 @@ locK_92BB2:
 		move.l	(a2,d0.w),(a1)
 		move.b	#0,(a1)
 	if ~~Sonic3_Alone
+		; In the Sonic 3C 0408 prototype, all monitor subtypes in Debug Mode were changed
+		; to the thunder shield. Rather than changing them back in later versions, STI
+		; just implemented this hack to force all monitors to 'S' monitor.
 		cmpi.l	#Obj_Monitor,(a1)
 		bne.s	locretK_92C0A
 		move.b	#9,subtype(a1)
-	endif
 
 locretK_92C0A:
+	endif
 		rts
-; ---------------------------------------------------------------------------
-; loc3_5B708:
-locK_92C0C:
+; ===========================================================================
+; loc3_5B708: locK_92C0C:
+Debug_ExitDebugMode:
 		btst	#button_B,(Ctrl_1_pressed).w
 		beq.s	locretK_92C52
 		moveq	#0,d0
@@ -211,27 +216,30 @@ locK_92C0C:
 		lea	(Player_1).w,a1
 		move.l	(Debug_saved_mappings).w,mappings(a1)
 		move.w	(Debug_saved_art_tile).w,art_tile(a1)
-		bsr.s	subK_92C54
+		bsr.s	Debug_ResetPlayerStats
 		move.b	#$13,y_radius(a1)
 		move.b	#9,x_radius(a1)
 ; locret3_5B734:
 locretK_92C52:
 		rts
-; End of function subK_92AD4
+; End of function Debug_Control
 
-
-; =============== S U B R O U T I N E =======================================
-
-; sub3_5B736:
-subK_92C54:
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; Subroutine to reset player variables when exiting Debug Mode. This
+; function was inlined with the above in the Sonic & Knuckles Collection
+; ---------------------------------------------------------------------------
+; sub3_5B736: subK_92C54:
+Debug_ResetPlayerStats:
 	if FixBugs
-		; Clear the entirety of d0, which results in the variables below being cleared.
+		; This tries to clear the player's variables using d0, but d0 becomes dirty
+		; after the HUD_DrawInitial call, which wasn't there in Sonic 3. Miraculously,
+		; drawing the lives HUD sets d0 back to zero, but since that part is skipped
+		; in Competition Mode, exiting debug is broken there.
+
+		; This was not fixed in the Sonic & Knuckles Collection, rather that version
+		; disables Debug Mode in Competition Mode entirely.
 		moveq	#0,d0
-	else
-		; Bug: this tries to clear the player's variables using d0, but d0 becomes
-		; dirty after the HUD_DrawInitial call, which wasn't there in S3.
-		; Miraculously, drawing the lives HUD sets d0 back to zero, but since that
-		; part is skipped in Competition mode, exiting debug is broken there.
 	endif
 		move.b	d0,anim(a1)
 		move.w	d0,x_pos+2(a1)
@@ -241,7 +249,10 @@ subK_92C54:
 		move.w	d0,x_vel(a1)
 		move.w	d0,y_vel(a1)
 		move.w	d0,ground_vel(a1)
-	if Sonic3_Alone
+	if (Sonic3_Alone=1)&(FixBugs=0)
+		; This resets the 'is underwater' flag, causing the bug where if you enter
+		; Debug Mode underwater, and exit it above-water, Sonic will still move as
+		; if he's underwater.
 		move.b	#1<<Status_InAir,status(a1)
 	else
 		andi.b	#1<<Status_Facing,status(a1)
@@ -249,13 +260,20 @@ subK_92C54:
 	endif
 		move.b	#2,routine(a1)
 		rts
-; End of function subK_92C54
+; End of function Debug_ResetPlayerStats
 
-
-; =============== S U B R O U T I N E =======================================
-
-; sub3_5B764:
-subK_92C88:
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; Subroutine to set mappings and graphics for displayed debug object.
+; Each entry in DebugList is 8 bytes in the following format:
+;	0:   frame ID
+; 	0-3: object ID (upper byte is ignored for 24-bit addressing)
+;	4:   subtype
+;	4-7: mappings address (upper byte is ignored for 24-bit addressing)
+;	8-9: VRAM settings
+; ---------------------------------------------------------------------------
+; sub3_5B764: subK_92C88:
+Debug_ShowItem:
 		moveq	#0,d0
 		move.b	(Debug_object).w,d0
 		add.w	d0,d0
@@ -266,7 +284,7 @@ subK_92C88:
 		move.w	8(a2,d0.w),art_tile(a0)
 		move.b	(a2,d0.w),mapping_frame(a0)
 		rts
-; End of function subK_92C88
+; End of function Debug_ShowItem
 
 ; ---------------------------------------------------------------------------
 DebugOffs:		include "Levels/Misc/Debug list pointers.asm"
