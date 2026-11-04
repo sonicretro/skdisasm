@@ -1,5 +1,452 @@
 ; ---------------------------------------------------------------------------
 
+Obj_Sonic2P:
+		cmpa.w	#Player_1,a0
+		bne.s	locK_105F2
+		lea	(Max_speed).w,a4
+		lea	(Distance_from_top).w,a5
+		lea	(Dust).w,a6
+		move.b	(Player_2+character_id).w,d0
+		cmp.b	character_id(a0),d0
+		bne.s	locK_105E6
+		bchg	#3,render_flags(a0)
+; loc3_116FE:
+locK_105E6:
+		tst.w	(Debug_placement_mode).w
+		beq.s	locK_1060E
+		jmp	(DebugMode).l
+; ---------------------------------------------------------------------------
+; loc3_1170A:
+locK_105F2:
+		lea	(Max_speed_P2).w,a4
+		lea	(Distance_from_top_P2).w,a5
+		lea	(Dust_P2).w,a6
+		move.b	(Player_1+character_id).w,d0
+		cmp.b	character_id(a0),d0
+		bne.s	locK_1060E
+		bchg	#4,render_flags(a0)
+; loc3_11726:
+locK_1060E:
+		moveq	#0,d0
+		move.b	routine(a0),d0
+		move.w	Sonic2P_Index(pc,d0.w),d1
+		jmp	Sonic2P_Index(pc,d1.w)
+; ---------------------------------------------------------------------------
+
+Sonic2P_Index:
+		dc.w locK_10628-Sonic2P_Index
+		dc.w locK_10740-Sonic2P_Index
+		dc.w locK_122BE-Sonic2P_Index
+		dc.w locK_12390-Sonic2P_Index
+		dc.w locK_1257C-Sonic2P_Index
+		dc.w locK_12590-Sonic2P_Index
+; ---------------------------------------------------------------------------
+; loc3_11740:
+locK_10628:
+		addq.b	#2,routine(a0)
+		move.b	#$B,y_radius(a0)
+		move.b	#5,x_radius(a0)
+		move.b	#$B,default_y_radius(a0)
+		move.b	#5,default_x_radius(a0)
+		move.w	#$100,priority(a0)
+		move.b	#$C,width_pixels(a0)
+		move.b	#$C,height_pixels(a0)
+		move.b	#4,render_flags(a0)
+		lea	(Character_Speeds).l,a1
+		moveq	#0,d0
+		move.b	character_id(a0),d0
+		lsl.w	#3,d0
+		lea	(a1,d0.w),a1
+		move.w	(a1)+,Max_speed-Max_speed(a4)
+		move.w	(a1)+,Acceleration-Max_speed(a4)
+		move.w	(a1)+,Deceleration-Max_speed(a4)
+		tst.b	(Last_star_post_hit).w
+		bne.w	locK_10724
+		move.b	#$C,top_solid_bit(a0)
+		move.b	#$D,lrb_solid_bit(a0)
+		cmpa.w	#Player_1,a0
+		bne.s	locK_106DC
+		move.w	#make_art_tile(ArtTile_Player_1,0,0),art_tile(a0)
+		move.l	#Map_Sonic2P,mappings(a0)
+		tst.b	character_id(a0)
+		beq.s	locK_106B4
+		move.l	#Map_Knuckles2P,mappings(a0)
+		addi.w	#palette_line_1,art_tile(a0)
+; loc3_116CC:
+locK_106B4:
+		cmpi.b	#$12,(Current_zone).w
+		bne.s	locK_106C2
+		ori.w	#high_priority,art_tile(a0)
+; loc3_117DA:
+locK_106C2:
+		move.w	x_pos(a0),(Saved_X_pos).w
+		move.w	y_pos(a0),(Saved_Y_pos).w
+		move.w	art_tile(a0),(Saved_art_tile).w
+		move.w	top_solid_bit(a0),(Saved_solid_bits).w
+		bra.s	locK_10724
+; ---------------------------------------------------------------------------
+; loc3_117F4:
+locK_106DC:
+		move.w	#make_art_tile(ArtTile_Player_2,0,0),art_tile(a0)
+		move.l	#Map_Sonic2P,mappings(a0)
+		tst.b	character_id(a0)
+		beq.s	locK_106FE
+		move.l	#Map_Knuckles2P,mappings(a0)
+		addi.w	#palette_line_1,art_tile(a0)
+; loc3_11816:
+locK_106FE:
+		cmpi.b	#$12,(Current_zone).w
+		bne.s	locK_1070C
+		ori.w	#high_priority,art_tile(a0)
+; loc3_11824:
+locK_1070C:
+		move.w	x_pos(a0),(Saved2_X_pos).w
+		move.w	y_pos(a0),(Saved2_Y_pos).w
+		move.w	art_tile(a0),(Saved2_art_tile).w
+		move.w	top_solid_bit(a0),(Saved2_solid_bits).w
+; loc3_1183C:
+locK_10724:
+		move.b	#0,flips_remaining(a0)
+		move.b	#4,flip_speed(a0)
+		move.b	#0,(Super_Sonic_Knux_flag).w
+		move.b	#30,air_left(a0)
+		bsr.w	Reset_Player_Position_Array
+; loc3_11858:
+locK_10740:
+		tst.w	(Debug_mode_flag).w
+		beq.s	locK_10760
+		cmpa.w	#Player_1,a0
+		bne.s	locK_10760
+		btst	#button_B,(Ctrl_1_pressed).w
+		beq.s	locK_10760
+		move.w	#1,(Debug_placement_mode).w
+		clr.b	(Ctrl_1_locked).w
+		rts
+; ---------------------------------------------------------------------------
+; loc3_11878:
+locK_10760:
+		cmpa.w	#Player_1,a0
+		bne.s	locK_10774
+		tst.b	(Ctrl_1_locked).w
+		bne.s	locK_10780
+		move.w	(Ctrl_1).w,(Ctrl_1_logical).w
+		bra.s	locK_10780
+; ---------------------------------------------------------------------------
+; loc3_1188C:
+locK_10774:
+		tst.b	(Ctrl_2_locked).w
+		bne.s	locK_10780
+		move.w	(Ctrl_2).w,(Ctrl_1_logical).w
+; loc3_11898:
+locK_10780:
+		bsr.w	Sonic_Display
+		btst	#0,object_control(a0)
+		bne.s	locK_1079E
+		moveq	#0,d0
+		move.b	status(a0),d0
+		andi.w	#6,d0
+		move.w	offK_107EE(pc,d0.w),d1
+		jsr	offK_107EE(pc,d1.w)
+; loc3_118B6:
+locK_1079E:
+		cmpi.w	#-$100,(Camera_min_Y_pos).w
+		bne.s	locK_107AE
+		move.w	(Screen_Y_wrap_value).w,d0
+		and.w	d0,y_pos(a0)
+; loc3_118C6:
+locK_107AE:
+		move.w	(Screen_X_wrap_value).w,d0
+		and.w	d0,x_pos(a0)
+		addi.w	#$400,x_pos(a0)
+		bsr.w	Sonic_RecordPos
+		move.b	(Primary_Angle).w,next_tilt(a0)
+		move.b	(Secondary_Angle).w,tilt(a0)
+		btst	#1,object_control(a0)
+		bne.s	locK_107DC
+		bsr.w	Animate_SonicKnuckles_2P
+		bsr.w	SonicKnuckles2P_Load_PLC
+; loc3_118F4:
+locK_107DC:
+		move.b	object_control(a0),d0
+		andi.b	#$A0,d0
+		bne.s	locretK_107EC
+		jsr	(TouchResponse_CompetitionMode).l
+; locret3_11904:
+locretK_107EC:
+		rts
+; ---------------------------------------------------------------------------
+; off3_11906:
+offK_107EE:
+		dc.w locK_107F6-offK_107EE
+		dc.w locK_10868-offK_107EE
+		dc.w locK_10896-offK_107EE
+		dc.w locK_108B8-offK_107EE
+; ---------------------------------------------------------------------------
+; loc3_1190E:
+locK_107F6:
+		move.b	(Ctrl_1_pressed_logical).w,d0
+		andi.b	#button_A_mask|button_B_mask|button_C_mask,d0
+		bne.s	locK_10844
+		cmpi.b	#$A,anim(a0)
+		beq.s	locretK_10866
+		cmpi.b	#$B,anim(a0)
+		beq.s	locretK_10866
+		cmpi.b	#5,anim(a0)
+		bne.s	locK_10844
+		cmpi.b	#$1E,anim_frame(a0)
+		blo.s	locK_10844
+		bsr.w	Player_SlopeResist
+		move.b	(Ctrl_1_logical).w,d0
+		andi.b	#button_up_mask|button_down_mask|button_left_mask|button_right_mask|button_A_mask|button_B_mask|button_C_mask,d0
+		beq.s	locK_1085E
+		move.b	#$A,anim(a0)
+		cmpi.b	#$AC,anim_frame(a0)
+		blo.s	locK_1085E
+		move.b	#$B,anim(a0)
+		bra.s	locK_1085E
+; ---------------------------------------------------------------------------
+; loc3_1195C:
+locK_10844:
+		bsr.w	subK_1094C
+		bsr.w	Sonic_Jump
+		bsr.w	Player_SlopeResist
+		bsr.w	Sonic_Move
+		bsr.w	subK_108E6
+		jsr	(MoveSprite2).l
+; loc3_11976:
+locK_1085E:
+		bsr.w	Player_AnglePos
+		bsr.w	Player_SlopeRepel
+; locret3_1197E:
+locretK_10866:
+		rts
+; ---------------------------------------------------------------------------
+; loc3_11980:
+locK_10868:
+		bsr.w	Sonic_JumpHeight
+		bsr.w	Sonic_ChgJumpDir
+		jsr	(MoveSprite).l
+		btst	#Status_Underwater,status(a0)
+		beq.s	locK_10884
+		subi.w	#$28,y_vel(a0)
+; loc3_1199C:
+locK_10884:
+		bsr.w	Player_JumpAngle
+		movem.l	a4-a6,-(sp)
+		bsr.w	SonicKnux_DoLevelCollision
+		movem.l	(sp)+,a4-a6
+		rts
+; ---------------------------------------------------------------------------
+; loc3_119AE:
+locK_10896:
+		tst.b	spin_dash_flag(a0)
+		bne.s	locK_108A0
+		bsr.w	Sonic_Jump
+; loc3_119B8:
+locK_108A0:
+		bsr.w	Player_RollRepel
+		bsr.w	Sonic_RollSpeed
+		jsr	(MoveSprite2).l
+		bsr.w	Player_AnglePos
+		bsr.w	Player_SlopeRepel
+		rts
+; ---------------------------------------------------------------------------
+; loc3_119D0:
+locK_108B8:
+		bsr.w	Sonic_JumpHeight
+		bsr.w	Sonic_ChgJumpDir
+		jsr	(MoveSprite).l
+		btst	#Status_Underwater,status(a0)
+		beq.s	locK_108D4
+		subi.w	#$28,y_vel(a0)
+; loc3_119EC:
+locK_108D4:
+		bsr.w	Player_JumpAngle
+		movem.l	a4-a6,-(sp)
+		bsr.w	SonicKnux_DoLevelCollision
+		movem.l	(sp)+,a4-a6
+		rts
+
+; =============== S U B R O U T I N E =======================================
+
+; sub3_119FE:
+subK_108E6:
+		tst.b	status_secondary(a0)
+		bmi.s	locretK_1090C
+		move.w	ground_vel(a0),d0
+		bpl.s	locK_108F4
+		neg.w	d0
+; loc3_11A0C:
+locK_108F4:
+		cmpi.w	#$80,d0
+		blo.s	locretK_1090C
+		move.b	(Ctrl_1_logical).w,d0
+		andi.b	#button_left_mask|button_right_mask,d0
+		bne.s	locretK_1090C
+		btst	#button_down,(Ctrl_1_held_logical).w
+		bne.s	locK_1090E
+; locret3_11A24:
+locretK_1090C:
+		rts
+; ---------------------------------------------------------------------------
+; loc3_11A26:
+locK_1090E:
+		btst	#Status_Roll,status(a0)
+		beq.s	locK_10918
+		rts
+; ---------------------------------------------------------------------------
+; loc3_11A30:
+locK_10918:
+		bset	#Status_Roll,status(a0)
+		move.b	#7,y_radius(a0)
+		move.b	#3,x_radius(a0)
+		move.b	#2,anim(a0)
+		addq.w	#4,y_pos(a0)
+		move.w	#sfx_Roll,d0
+		jsr	(Play_SFX).l
+		tst.w	ground_vel(a0)
+		bne.s	locretK_1094A
+		move.w	#$200,ground_vel(a0)
+; locret3_11A62:
+locretK_1094A:
+		rts
+; End of function subK_108E6
+
+
+; =============== S U B R O U T I N E =======================================
+
+; sub3_11A64:
+subK_1094C:
+		tst.b	spin_dash_flag(a0)
+		bne.s	locK_10998
+		cmpi.b	#8,anim(a0)
+		bne.s	locretK_10996
+		move.b	(Ctrl_1_pressed_logical).w,d0
+		andi.b	#button_A_mask|button_B_mask|button_C_mask,d0
+		beq.w	locretK_10996
+		move.b	#9,anim(a0)
+		move.w	#signextendB(sfx_Spindash),d0
+		jsr	(Play_SFX).l
+		addq.l	#4,sp
+		move.b	#1,spin_dash_flag(a0)
+		move.w	#0,spin_dash_counter(a0)
+		cmpi.b	#12,air_left(a0)
+		blo.s	locK_10992
+		move.b	#2,anim(a6)
+; loc3_11AAA:
+locK_10992:
+		bsr.w	Player_AnglePos
+; locret3_11AAE:
+locretK_10996:
+		rts
+; ---------------------------------------------------------------------------
+; loc3_11AB0:
+locK_10998:
+		move.b	(Ctrl_1_logical).w,d0
+		btst	#button_down,d0
+		bne.w	locK_10A38
+		move.b	#7,y_radius(a0)
+		move.b	#3,x_radius(a0)
+		move.b	#2,anim(a0)
+		addq.w	#4,y_pos(a0)
+		move.b	#0,spin_dash_flag(a0)
+		moveq	#0,d0
+		move.b	spin_dash_counter(a0),d0
+		add.w	d0,d0
+		move.w	wordK_10A14(pc,d0.w),ground_vel(a0)
+	if Sonic3_Alone
+		tst.b	(Super_Sonic_Knux_flag).w
+		beq.s	loc3_11AF2
+		move.w	wordK_10A26(pc,d0.w),ground_vel(a0)
+
+loc3_11AF2:
+	endif
+		move.w	ground_vel(a0),d0
+		subi.w	#$800,d0
+		add.w	d0,d0
+		andi.w	#$1F00,d0
+		neg.w	d0
+		addi.w	#$2000,d0
+		lea	(H_scroll_frame_offset).w,a1
+		cmpa.w	#Player_1,a0
+		beq.s	locK_109F0
+		lea	(H_scroll_frame_offset_P2).w,a1
+; loc3_11B14:
+locK_109F0:
+		move.w	d0,(a1)
+		btst	#Status_Facing,status(a0)
+		beq.s	locK_109FE
+		neg.w	ground_vel(a0)
+; loc3_11B22:
+locK_109FE:
+		bset	#Status_Roll,status(a0)
+		move.b	#0,anim(a6)
+		moveq	#signextendB(sfx_Dash),d0
+		jsr	(Play_SFX).l
+		bra.s	locK_10A80
+; ---------------------------------------------------------------------------
+; word3_11B38:
+wordK_10A14:
+		dc.w   $800
+		dc.w   $880
+		dc.w   $900
+		dc.w   $980
+		dc.w   $A00
+		dc.w   $A80
+		dc.w   $B00
+		dc.w   $B80
+		dc.w   $C00
+; word3_11B4A:
+wordK_10A26:
+		dc.w   $B00
+		dc.w   $B80
+		dc.w   $C00
+		dc.w   $C80
+		dc.w   $D00
+		dc.w   $D80
+		dc.w   $E00
+		dc.w   $E80
+		dc.w   $F00
+; ---------------------------------------------------------------------------
+; loc3_11B5C:
+locK_10A38:
+		tst.w	spin_dash_counter(a0)
+		beq.s	locK_10A50
+		move.w	spin_dash_counter(a0),d0
+		lsr.w	#5,d0
+		sub.w	d0,spin_dash_counter(a0)
+		bcc.s	locK_10A50
+		move.w	#0,spin_dash_counter(a0)
+; loc3_11B74:
+locK_10A50:
+		move.b	(Ctrl_1_pressed_logical).w,d0
+		andi.b	#button_A_mask|button_B_mask|button_C_mask,d0
+		beq.w	locK_10A80
+		move.w	#9<<8,anim(a0)	; and prev_anim
+		move.w	#signextendB(sfx_Spindash),d0
+		jsr	(Play_SFX).l
+		addi.w	#$200,spin_dash_counter(a0)
+		cmpi.w	#$800,spin_dash_counter(a0)
+		blo.s	locK_10A80
+		move.w	#$800,spin_dash_counter(a0)
+; loc3_11BA4:
+locK_10A80:
+		addq.l	#4,sp
+		cmpi.w	#$60,(a5)
+		beq.s	locK_10A8E
+		bcc.s	locK_10A8C
+		addq.w	#4,(a5)
+; loc3_11BB0:
+locK_10A8C:
+		subq.w	#2,(a5)
+; loc3_11BB2:
+locK_10A8E:
+		bsr.w	Player_AnglePos
+		rts
+; End of function subK_1094C
+
+; ---------------------------------------------------------------------------
+
 Obj_Sonic:
 		; Load some addresses into registers
 		; This is done to allow some subroutines to be
@@ -3770,3 +4217,300 @@ Perform_Player_DPLC:
 		bra.w	Knuckles_Load_PLC2
 	endif
 ; End of function Perform_Player_DPLC
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+Animate_SonicKnuckles_2P:
+		lea	(AniSonic2P).l,a1
+		tst.b	character_id(a0)
+		beq.s	locK_12D48
+		lea	(AniKnuckles2P).l,a1
+; loc3_13A9E:
+locK_12D48:
+		moveq	#0,d0
+		move.b	anim(a0),d0
+		cmp.b	prev_anim(a0),d0
+		beq.s	locK_12D6A
+		move.b	d0,prev_anim(a0)
+		move.b	#0,anim_frame(a0)
+		move.b	#0,anim_frame_timer(a0)
+		bclr	#Status_Push,status(a0)
+; loc3_13AC0:
+locK_12D6A:
+		add.w	d0,d0
+		adda.w	(a1,d0.w),a1
+		move.b	(a1),d0
+		bmi.s	locK_12DDA
+		move.b	status(a0),d1
+		andi.b	#1,d1
+		andi.b	#$FC,render_flags(a0)
+		or.b	d1,render_flags(a0)
+		subq.b	#1,anim_frame_timer(a0)
+		bpl.s	locretK_12DA8
+		move.b	d0,anim_frame_timer(a0)
+; loc3_13AE6:
+locK_12D90:
+		moveq	#0,d1
+		move.b	anim_frame(a0),d1
+		move.b	1(a1,d1.w),d0
+		cmpi.b	#$FC,d0
+		bhs.s	locK_12DAA
+; loc3_13AF6:
+locK_12DA0:
+		move.b	d0,mapping_frame(a0)
+		addq.b	#1,anim_frame(a0)
+; locret3_13AFE:
+locretK_12DA8:
+		rts
+; ---------------------------------------------------------------------------
+; loc3_13B00:
+locK_12DAA:
+		addq.b	#1,d0
+		bne.s	locK_12DBA
+		move.b	#0,anim_frame(a0)
+		move.b	1(a1),d0
+		bra.s	locK_12DA0
+; ---------------------------------------------------------------------------
+; loc3_13B10:
+locK_12DBA:
+		addq.b	#1,d0
+		bne.s	locK_12DCE
+		move.b	2(a1,d1.w),d0
+		sub.b	d0,anim_frame(a0)
+		sub.b	d0,d1
+		move.b	1(a1,d1.w),d0
+		bra.s	locK_12DA0
+; ---------------------------------------------------------------------------
+; loc3_13B24:
+locK_12DCE:
+		addq.b	#1,d0
+		bne.s	locretK_12DD8
+		move.b	2(a1,d1.w),anim(a0)
+; locret3_13B2E:
+locretK_12DD8:
+		rts
+; ---------------------------------------------------------------------------
+; loc3_13B30:
+locK_12DDA:
+		addq.b	#1,d0
+		bne.w	locK_12EF4
+		moveq	#0,d0
+		move.b	flip_angle(a0),d0
+		bne.w	locK_12E8E
+		moveq	#0,d1
+		move.b	angle(a0),d0
+		bmi.s	locK_12DF6
+		beq.s	locK_12DF6
+		subq.b	#1,d0
+; loc3_13B4C:
+locK_12DF6:
+		move.b	status(a0),d2
+		andi.b	#1,d2
+		bne.s	locK_12E02
+		not.b	d0
+; loc3_13B58:
+locK_12E02:
+		addi.b	#$10,d0
+		bpl.s	locK_12E0A
+		moveq	#3,d1
+; loc3_13B60:
+locK_12E0A:
+		andi.b	#$FC,render_flags(a0)
+		eor.b	d1,d2
+		or.b	d2,render_flags(a0)
+		btst	#Status_Push,status(a0)
+		bne.w	locK_12F3C
+		lsr.b	#5,d0
+		andi.b	#3,d0
+		move.w	ground_vel(a0),d2
+		bpl.s	locK_12E2E
+		neg.w	d2
+; loc3_13B84:
+locK_12E2E:
+		tst.b	status_secondary(a0)
+		bpl.w	locK_12E38
+		add.w	d2,d2
+; loc3_13B8E:
+locK_12E38:
+		move.b	d0,d3
+		lea	(AniSonic2P01).l,a1
+		cmpi.w	#$600,d2
+		bhs.s	locK_12E4E
+		lea	(AniSonic2P00).l,a1
+		add.b	d0,d0
+; loc3_13BA4:
+locK_12E4E:
+		add.b	d0,d3
+		moveq	#0,d1
+		move.b	anim_frame(a0),d1
+		move.b	1(a1,d1.w),d0
+		cmpi.b	#-1,d0
+		bne.s	locK_12E6A
+		move.b	#0,anim_frame(a0)
+		move.b	1(a1),d0
+; loc3_13BC0:
+locK_12E6A:
+		move.b	d0,mapping_frame(a0)
+		add.b	d3,mapping_frame(a0)
+		subq.b	#1,anim_frame_timer(a0)
+		bpl.s	locretK_12E8C
+		neg.w	d2
+		addi.w	#$800,d2
+		bpl.s	locK_12E82
+		moveq	#0,d2
+; loc3_13BD8:
+locK_12E82:
+		lsr.w	#8,d2
+		move.b	d2,anim_frame_timer(a0)
+		addq.b	#1,anim_frame(a0)
+; locret3_13BE2:
+locretK_12E8C:
+		rts
+; ---------------------------------------------------------------------------
+; loc3_13BE4:
+locK_12E8E:
+		move.b	flip_angle(a0),d0
+		moveq	#0,d1
+		move.b	status(a0),d2
+		andi.b	#1,d2
+		bne.s	locK_12EBC
+		andi.b	#$FC,render_flags(a0)
+		addi.b	#$16,d0
+		divu.w	#$2C,d0
+		addi.b	#$15,d0
+		move.b	d0,mapping_frame(a0)
+		move.b	#0,anim_frame_timer(a0)
+		rts
+; ---------------------------------------------------------------------------
+; loc3_13C12:
+locK_12EBC:
+		andi.b	#$FC,render_flags(a0)
+		tst.b	flip_type(a0)
+		bpl.s	locK_12ED4
+		ori.b	#1,render_flags(a0)
+		addi.b	#$16,d0
+		bra.s	locK_12EE0
+; ---------------------------------------------------------------------------
+; loc3_13C2A:
+locK_12ED4:
+		ori.b	#3,render_flags(a0)
+		neg.b	d0
+		addi.b	#$9A,d0
+; loc3_13C36:
+locK_12EE0:
+		divu.w	#$2C,d0
+		addi.b	#$15,d0
+		move.b	d0,mapping_frame(a0)
+		move.b	#0,anim_frame_timer(a0)
+		rts
+; ---------------------------------------------------------------------------
+; loc3_13C4A:
+locK_12EF4:
+		subq.b	#1,anim_frame_timer(a0)
+		bpl.w	locretK_12DA8
+		move.w	ground_vel(a0),d2
+		bpl.s	locK_12F04
+		neg.w	d2
+; loc3_13C5A:
+locK_12F04:
+		lea	(AniSonic2P03).l,a1
+		cmpi.w	#$600,d2
+		bhs.s	locK_12F16
+		lea	(AniSonic2P02).l,a1
+; loc3_13C6C:
+locK_12F16:
+		neg.w	d2
+		addi.w	#$400,d2
+		bpl.s	locK_12F20
+		moveq	#0,d2
+; loc3_13C76:
+locK_12F20:
+		lsr.w	#8,d2
+		move.b	d2,anim_frame_timer(a0)
+		move.b	status(a0),d1
+		andi.b	#1,d1
+		andi.b	#$FC,render_flags(a0)
+		or.b	d1,render_flags(a0)
+		bra.w	locK_12D90
+; ---------------------------------------------------------------------------
+; loc3_13C92:
+locK_12F3C:
+		subq.b	#1,anim_frame_timer(a0)
+		bpl.w	locretK_12DA8
+		move.w	ground_vel(a0),d2
+		bmi.s	locK_12F4C
+		neg.w	d2
+; loc3_13CA2:
+locK_12F4C:
+		addi.w	#$800,d2
+		bpl.s	locK_12F54
+		moveq	#0,d2
+; loc3_13CAA:
+locK_12F54:
+		lsr.w	#6,d2
+		lea	(AniSonic2P04).l,a1
+		tst.b	character_id(a0)
+		beq.s	locK_12F6A
+		lea	(AniKnuckles2P04).l,a1
+		lsr.w	#2,d2
+; loc3_13CC0:
+locK_12F6A:
+		move.b	d2,anim_frame_timer(a0)
+		move.b	status(a0),d1
+		andi.b	#1,d1
+		andi.b	#$FC,render_flags(a0)
+		or.b	d1,render_flags(a0)
+		bra.w	locK_12D90
+; End of function Animate_SonicKnuckles_2P
+
+; ---------------------------------------------------------------------------
+
+AniSonic2P:
+		include "General/Sprites/Sonic/Anim - Sonic Knuckles 2P.asm"
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+SonicKnuckles2P_Load_PLC:
+		moveq	#0,d0
+		move.b	mapping_frame(a0),d0
+		lea	(PLC_Sonic2P).l,a2
+		move.l	#ArtUnc_Sonic2P,d6
+		tst.b	character_id(a0)
+		beq.s	locK_130BE
+		lea	(PLC_Knuckles2P).l,a2
+		move.l	#ArtUnc_Knuckles2P,d6
+; loc3_13E14:
+locK_130BE:
+		add.w	d0,d0
+		adda.w	(a2,d0.w),a2
+		move.w	(a2)+,d5
+		subq.w	#1,d5
+		bmi.s	locretK_13100
+		move.w	#tiles_to_bytes(ArtTile_Player_1),d4
+		cmpa.w	#Player_1,a0
+		beq.s	locK_130D8
+		move.w	#tiles_to_bytes(ArtTile_Player_2),d4
+; loc3_13E2E:
+locK_130D8:
+		moveq	#0,d1
+		move.w	(a2)+,d1
+		move.w	d1,d3
+		lsr.w	#8,d3
+		andi.w	#$F0,d3
+		addi.w	#$10,d3
+		andi.w	#$FFF,d1
+		lsl.l	#5,d1
+		add.l	d6,d1
+		move.w	d4,d2
+		add.w	d3,d4
+		add.w	d3,d4
+		jsr	(Add_To_DMA_Queue).l
+		dbf	d5,locK_130D8
+; locret3_13E56:
+locretK_13100:
+		rts
+; End of function SonicKnuckles2P_Load_PLC
