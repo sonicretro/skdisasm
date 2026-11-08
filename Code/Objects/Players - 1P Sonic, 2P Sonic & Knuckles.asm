@@ -2250,7 +2250,7 @@ Sonic_Transform:
 		move.b	#$81,object_control(a0)
 		move.b	#$1F,anim(a0)				; enter 'transformation' animation
 	if Sonic3_Alone
-		move.l	#Obj_SuperSonic_Stars,(Super_stars).w	; load Super Stars object
+		move.l	#Obj_SuperSonicKnux_Stars,(Super_stars).w	; load Super Stars object
 	else
 		cmpi.b	#7,(Super_emerald_count).w		; does Sonic have all 7 Super Emeralds?
 		blo.s	.super					; if not, turn Super

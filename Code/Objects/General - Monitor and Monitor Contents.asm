@@ -615,7 +615,7 @@ Monitor_Give_SuperSonic:
 		move.b	#$81,(Player_1+object_control).w
 	if Sonic3_Alone
 		move.b	#$1F,(Player_1+anim).w
-		move.l	#Obj_SuperSonic_Stars,(Super_stars).w
+		move.l	#Obj_SuperSonicKnux_Stars,(Super_stars).w
 		move.w	#$A00,(Max_speed).w
 		move.w	#$30,(Acceleration).w
 		move.w	#$100,(Deceleration).w
