@@ -1636,9 +1636,9 @@ Wait_VSync:
 		rts
 ; End of function Wait_VSync
 
-		include	"Code/Objects/sub Random Number.asm"
-		include	"Code/Objects/sub GetSineCosine.asm"
-		include	"Code/Objects/sub GetArcTan.asm"
+		include	"Code/Objects (Common)/Random Number.asm"
+		include	"Code/Objects (Common)/GetSineCosine.asm"
+		include	"Code/Objects (Common)/GetArcTan.asm"
 
 ; ---------------------------------------------------------------------------
 
@@ -14230,7 +14230,7 @@ locret_11144:
 		; unused
 		rts
 
-		include	"Code/Objects/sub TouchResponse.asm"
+		include	"Code/Objects (Common)/TouchResponse.asm"
 		include	"Code/Objects/Players - 1P Sonic, 2P Sonic & Knuckles.asm"
 
 ; ---------------------------------------------------------------------------
@@ -19523,14 +19523,14 @@ Map_DashDust2P:
 		include	"Code/Objects/General - Rings.asm"
 
 		; Common Object Routines
-		include	"Code/Init SpriteTable.asm"
-		include	"Code/Process Sprites.asm"
-		include	"Code/Objects/sub MoveSprite.asm"
-		include	"Code/Objects/sub Delete Sprite.asm"
-		include	"Code/Objects/sub Draw Sprite.asm"
-		include	"Code/Objects/sub Animate Sprite.asm"
-		include	"Code/Render Sprites.asm"
-		include	"Code/Objects/sub Sprite OnScreen Test.asm"
+		include	"Code/Objects (Common)/Init SpriteTable.asm"
+		include	"Code/Objects (Common)/Process Sprites.asm"
+		include	"Code/Objects (Common)/MoveSprite.asm"
+		include	"Code/Objects (Common)/Delete Sprite.asm"
+		include	"Code/Objects (Common)/Draw Sprite.asm"
+		include	"Code/Objects (Common)/Animate Sprite.asm"
+		include	"Code/Objects (Common)/Render Sprites.asm"
+		include	"Code/Objects (Common)/Sprite OnScreen Test.asm"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -19993,7 +19993,7 @@ locret_1A0C0:
 		rts
 ; End of function sub_19FDC
 
-		include	"Code/Objects/sub AllocateObject.asm"
+		include	"Code/Objects (Common)/AllocateObject.asm"
 
 ; ---------------------------------------------------------------------------
 

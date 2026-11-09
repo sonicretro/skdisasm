@@ -845,7 +845,7 @@ wordK_7509E:
 		dc.w   $888,  $666,  $AAA,  $AAA,  $EEE,  $EEE
 
 	if Sonic3_Alone
-		include	"Code/Objects/sub Perform Art Scaling.asm"
+		include	"Code/Objects (Common)/Perform Art Scaling.asm"
 
 ; =============== S U B R O U T I N E =======================================
 
