@@ -207,7 +207,7 @@ locK_60DE:
 
 loc3_483C:
 	else
-		; No Dark Mode. I'm sad now.
+		; No Night Mode. I'm sad now.
 		tst.b	(Debug_cheat_flag).w
 		beq.s	locK_6182
 	endif
