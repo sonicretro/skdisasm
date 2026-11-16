@@ -68,12 +68,12 @@ locK_188B0:
 		addq.w	#1,$38(a0)
 		lea	byteK_189A0(pc),a6
 		move.b	$34(a0),d6
-		jsr	sub_1898A(pc)
+		jsr	subK_1898A(pc)
 		move.w	d2,(a2)+
 		move.w	d3,(a2)+
 		move.w	d5,(a2)+
 		addi.w	#$20,d6
-		jsr	sub_1898A(pc)
+		jsr	subK_1898A(pc)
 		move.w	d2,(a2)+
 		move.w	d3,(a2)+
 		move.w	d5,(a2)+
@@ -129,13 +129,13 @@ locK_18946:
 		addq.w	#1,$38(a0)
 		lea	byteK_189A0(pc),a6
 		move.b	$34(a0),d6
-		jsr	sub_1898A(pc)
+		jsr	subK_1898A(pc)
 		move.w	d2,(a2)+
 		move.w	d3,(a2)+
 		move.w	d5,(a2)+
 		addi.w	#$20,d6
 		swap	d5
-		jsr	sub_1898A(pc)
+		jsr	subK_1898A(pc)
 		move.w	d2,(a2)+
 		move.w	d3,(a2)+
 		move.w	d5,(a2)+
@@ -151,7 +151,7 @@ locK_18982:
 ; =============== S U B R O U T I N E =======================================
 
 ; sub3_1770A:
-sub_1898A:
+subK_1898A:
 		andi.w	#$3E,d6
 		move.b	(a6,d6.w),d2
 		move.b	1(a6,d6.w),d3
@@ -160,7 +160,7 @@ sub_1898A:
 		add.w	d0,d2
 		add.w	d1,d3
 		rts
-; End of function sub_1898A
+; End of function subK_1898A
 
 ; ---------------------------------------------------------------------------
 ; byte3_17720:

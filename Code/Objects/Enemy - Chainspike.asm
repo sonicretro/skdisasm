@@ -172,7 +172,7 @@ locK_91DE2:
 		move.w	y_pos(a0),d0
 		add.w	y_vel(a0),d0
 		move.w	d0,y_pos(a0)
-		bsr.w	sub_91EB0
+		bsr.w	subK_91EB0
 		cmp.w	$3A(a0),d0
 		beq.s	locK_91E22
 		btst	#1,render_flags(a0)
@@ -247,7 +247,7 @@ locretK_91EAE:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_91EB0:
+subK_91EB0:
 		move.w	$3A(a0),d1
 		sub.w	d0,d1
 		bpl.s	locK_91EBA
@@ -268,7 +268,7 @@ locK_91EC0:
 locK_91ECC:
 		move.b	RawAni_91ED4(pc,d4.w),mapping_frame(a0)
 		rts
-; End of function sub_91EB0
+; End of function subK_91EB0
 
 ; ---------------------------------------------------------------------------
 RawAni_91ED4:

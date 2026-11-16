@@ -112,7 +112,7 @@ SonicOnSegaScr_MidWipe:
 
 loc3_4327E:
 		lea	byte_433F4(pc),a1
-		bsr.w	sub_433A6
+		bsr.w	sub3_433A6
 		bne.s	loc3_4328A
 		rts
 ; ---------------------------------------------------------------------------
@@ -172,7 +172,7 @@ SonicOnSegaScr_EndWipe:
 
 loc3_43322:
 		lea	byte_4346A(pc),a1
-		bsr.w	sub_433A6
+		bsr.w	sub3_433A6
 		bne.s	loc3_4332E
 		rts
 ; ---------------------------------------------------------------------------
@@ -244,7 +244,7 @@ loc3_4339A:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_433A6:
+sub3_433A6:
 		subq.b	#1,$30(a0)
 		bne.s	loc3_433EC
 		moveq	#0,d0
@@ -291,7 +291,7 @@ loc3_433EC:
 loc3_433F0:
 		moveq	#1,d0
 		rts
-; End of function sub_433A6
+; End of function sub3_433A6
 
 ; ---------------------------------------------------------------------------
 byte_433F4:
@@ -371,7 +371,7 @@ loc3_4364A:
 		move.w	(a2)+,d4
 		bclr	#$A,d4
 		beq.s	loc3_43656
-		bsr.w	sub_43664
+		bsr.w	sub3_43664
 
 loc3_43656:
 		move.w	d4,(a6)
@@ -383,14 +383,14 @@ loc3_43656:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_43664:
+sub3_43664:
 		moveq	#bytesToWcnt($52),d5
 
 loc3_43666:
 		move.w	d4,(a6)
 		dbf	d5,loc3_43666
 		rts
-; End of function sub_43664
+; End of function sub3_43664
 
 ; ---------------------------------------------------------------------------
 ObjB1_Streak_fade_to_right:
@@ -464,7 +464,7 @@ Scale_2x:
 		addq.w	#1,d3
 		lsl.w	#6,d3
 		swap	d3
-		bsr.w	sub_436DE
+		bsr.w	sub3_436DE
 		btst	#1,d0
 		beq.w	locret3_432D8
 		btst	#1,d1
@@ -479,7 +479,7 @@ loc3_436DC:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_436DE:
+sub3_436DE:
 		movea.l	a2,a4
 		swap	d2
 		lea	(a2,d2.w),a3
@@ -530,7 +530,7 @@ loc3_43726:
 
 locret3_43756:
 		rts
-; End of function sub_436DE
+; End of function sub3_436DE
 
 
 ; =============== S U B R O U T I N E =======================================
