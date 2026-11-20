@@ -19647,13 +19647,13 @@ loc_1D0F6:
 		andi.b	#p1_standing,d0
 		beq.s	loc_1D12C
 		lea	(Player_1).w,a1
-		bsr.w	sub_228EC
+		bsr.w	Touch_HurtSpikes
 
 loc_1D12C:
 		andi.b	#p2_standing,d6
 		beq.s	loc_1D13A
 		lea	(Player_2).w,a1
-		bsr.w	sub_228EC
+		bsr.w	Touch_HurtSpikes
 
 loc_1D13A:
 		move.w	x_pos(a0),d0
@@ -19687,13 +19687,13 @@ loc_1D15C:
 		andi.b	#1,d0
 		beq.s	loc_1D190
 		lea	(Player_1).w,a1
-		bsr.w	sub_228EC
+		bsr.w	Touch_HurtSpikes
 
 loc_1D190:
 		andi.b	#2,d6
 		beq.s	loc_1D19E
 		lea	(Player_2).w,a1
-		bsr.w	sub_228EC
+		bsr.w	Touch_HurtSpikes
 
 loc_1D19E:
 		move.w	x_pos(a0),d0
@@ -19727,13 +19727,13 @@ loc_1D1C0:
 		andi.b	#4,d0
 		beq.s	loc_1D1F4
 		lea	(Player_1).w,a1
-		bsr.w	sub_228EC
+		bsr.w	Touch_HurtSpikes
 
 loc_1D1F4:
 		andi.b	#8,d6
 		beq.s	loc_1D202
 		lea	(Player_2).w,a1
-		bsr.w	sub_228EC
+		bsr.w	Touch_HurtSpikes
 
 loc_1D202:
 		move.w	x_pos(a0),d0
@@ -21935,460 +21935,7 @@ Map_LBZBreakableWall:
 		include	"Code/Objects/AIZ - Ride Vine & Handle.asm"
 		include	"Code/Objects/AIZ - Surfboard Intro (Unused).asm"
 		include	"Code/Objects/General - Springs.asm"
-
-; ---------------------------------------------------------------------------
-byte_22602:
-		dc.b  $10, $10
-		dc.b  $20, $10
-		dc.b  $30, $10
-		dc.b  $40, $10
-		dc.b  $10, $10
-		dc.b  $10, $20
-		dc.b  $10, $30
-		dc.b  $10, $40
-		even
-; ---------------------------------------------------------------------------
-
-Obj_Spikes:
-		ori.b	#4,render_flags(a0)
-		move.w	#$200,priority(a0)
-		move.b	subtype(a0),d0
-		andi.w	#$F0,d0
-		lsr.w	#3,d0
-		tst.w	(Competition_mode).w
-		bne.s	loc_226A0
-		lea	byte_22602(pc,d0.w),a1
-		move.b	(a1)+,width_pixels(a0)
-		move.b	(a1)+,height_pixels(a0)
-		move.l	#loc_226FC,(a0)
-		move.l	#Map_Spikes,mappings(a0)
-		move.w	#make_art_tile(ArtTile_SpikesSprings+$8,0,0),art_tile(a0)
-		lsr.w	#1,d0
-		move.b	d0,mapping_frame(a0)
-		cmpi.b	#4,d0
-		blo.s	loc_22666
-		move.l	#loc_2274E,(a0)
-		move.w	#make_art_tile(ArtTile_SpikesSprings,0,0),art_tile(a0)
-
-loc_22666:
-		btst	#1,status(a0)
-		beq.s	loc_22674
-		move.l	#loc_227AA,(a0)
-
-loc_22674:
-		move.w	x_pos(a0),$30(a0)
-		move.w	y_pos(a0),$32(a0)
-		move.b	subtype(a0),d0
-		andi.b	#$F,d0
-		add.b	d0,d0
-		move.b	d0,subtype(a0)
-		rts
-; ---------------------------------------------------------------------------
-byte_22690:
-		dc.b   $C,  $C
-		dc.b  $18,  $C
-		dc.b  $24,  $C
-		dc.b  $30,  $C
-		dc.b   $C,  $C
-		dc.b   $C, $18
-		dc.b   $C, $24
-		dc.b   $C, $30
-; ---------------------------------------------------------------------------
-
-loc_226A0:
-		lea	byte_22690(pc,d0.w),a1
-		move.b	(a1)+,width_pixels(a0)
-		move.b	(a1)+,height_pixels(a0)
-		move.l	#loc_227FA,(a0)
-		move.l	#Map_2PSpikes,mappings(a0)
-		move.w	#make_art_tile(ArtTile_2PArt_2,0,0),art_tile(a0)
-		lsr.w	#1,d0
-		move.b	d0,mapping_frame(a0)
-		cmpi.b	#4,d0
-		blo.s	loc_226D2
-		move.l	#loc_22848,(a0)
-
-loc_226D2:
-		btst	#1,status(a0)
-		beq.s	loc_226E0
-		move.l	#loc_228A0,(a0)
-
-loc_226E0:
-		move.w	x_pos(a0),$30(a0)
-		move.w	y_pos(a0),$32(a0)
-		move.b	subtype(a0),d0
-		andi.b	#$F,d0
-		add.b	d0,d0
-		move.b	d0,subtype(a0)
-		rts
-; ---------------------------------------------------------------------------
-
-loc_226FC:
-		bsr.w	sub_22922
-		moveq	#0,d1
-		move.b	width_pixels(a0),d1
-		addi.w	#$B,d1
-		moveq	#0,d2
-		move.b	height_pixels(a0),d2
-		move.w	d2,d3
-		addq.w	#1,d3
-		move.w	x_pos(a0),d4
-		bsr.w	SolidObjectFull
-		move.b	status(a0),d6
-		andi.b	#standing_mask,d6
-		beq.s	loc_22744
-		move.b	d6,d0
-		andi.b	#p1_standing,d0
-		beq.s	loc_22736
-		lea	(Player_1).w,a1
-		bsr.w	sub_228EC
-
-loc_22736:
-		andi.b	#p2_standing,d6
-		beq.s	loc_22744
-		lea	(Player_2).w,a1
-		bsr.w	sub_228EC
-
-loc_22744:
-		move.w	$30(a0),d0
-		jmp	(Sprite_OnScreen_Test2).l
-; ---------------------------------------------------------------------------
-
-loc_2274E:
-		bsr.w	sub_22922
-		moveq	#0,d1
-		move.b	width_pixels(a0),d1
-		addi.w	#$B,d1
-		moveq	#0,d2
-		move.b	height_pixels(a0),d2
-		move.w	d2,d3
-		addq.w	#1,d3
-		move.w	x_pos(a0),d4
-		bsr.w	SolidObjectFull
-		swap	d6
-		andi.w	#1|2,d6
-		beq.s	loc_227A0
-		move.b	d6,d0
-		andi.b	#1,d0
-		beq.s	loc_2278C
-		lea	(Player_1).w,a1
-		bsr.w	sub_228EC
-		bclr	#p1_pushing_bit,status(a0)
-
-loc_2278C:
-		andi.b	#2,d6
-		beq.s	loc_227A0
-		lea	(Player_2).w,a1
-		bsr.w	sub_228EC
-		bclr	#p2_pushing_bit,status(a0)
-
-loc_227A0:
-		move.w	$30(a0),d0
-		jmp	(Sprite_OnScreen_Test2).l
-; ---------------------------------------------------------------------------
-
-loc_227AA:
-		bsr.w	sub_22922
-		moveq	#0,d1
-		move.b	width_pixels(a0),d1
-		addi.w	#$B,d1
-		moveq	#0,d2
-		move.b	height_pixels(a0),d2
-		move.w	d2,d3
-		addq.w	#1,d3
-		move.w	x_pos(a0),d4
-		bsr.w	SolidObjectFull
-		swap	d6
-		andi.w	#4|8,d6
-		beq.s	loc_227F0
-		move.b	d6,d0
-		andi.b	#4,d0
-		beq.s	loc_227E2
-		lea	(Player_1).w,a1
-		bsr.w	sub_228EC
-
-loc_227E2:
-		andi.b	#8,d6
-		beq.s	loc_227F0
-		lea	(Player_2).w,a1
-		bsr.w	sub_228EC
-
-loc_227F0:
-		move.w	$30(a0),d0
-		jmp	(Sprite_OnScreen_Test2).l
-; ---------------------------------------------------------------------------
-
-loc_227FA:
-		bsr.w	sub_229C0
-		moveq	#0,d1
-		move.b	width_pixels(a0),d1
-		addi.w	#7,d1
-		moveq	#0,d2
-		move.b	height_pixels(a0),d2
-		move.w	d2,d3
-		addq.w	#1,d3
-		move.w	x_pos(a0),d4
-		bsr.w	SolidObjectFull
-		move.b	status(a0),d6
-		andi.b	#standing_mask,d6
-		beq.s	loc_22842
-		move.b	d6,d0
-		andi.b	#p1_standing,d0
-		beq.s	loc_22834
-		lea	(Player_1).w,a1
-		bsr.w	sub_228EC
-
-loc_22834:
-		andi.b	#p2_standing,d6
-		beq.s	loc_22842
-		lea	(Player_2).w,a1
-		bsr.w	sub_228EC
-
-loc_22842:
-		jmp	(Draw_Sprite).l
-; ---------------------------------------------------------------------------
-
-loc_22848:
-		bsr.w	sub_229C0
-		moveq	#0,d1
-		move.b	width_pixels(a0),d1
-		addi.w	#7,d1
-		moveq	#0,d2
-		move.b	height_pixels(a0),d2
-		move.w	d2,d3
-		addq.w	#1,d3
-		move.w	x_pos(a0),d4
-		bsr.w	SolidObjectFull
-		swap	d6
-		andi.w	#1|2,d6
-		beq.s	loc_2289A
-		move.b	d6,d0
-		andi.b	#1,d0
-		beq.s	loc_22886
-		lea	(Player_1).w,a1
-		bsr.w	sub_228EC
-		bclr	#p1_pushing_bit,status(a0)
-
-loc_22886:
-		andi.b	#2,d6
-		beq.s	loc_2289A
-		lea	(Player_2).w,a1
-		bsr.w	sub_228EC
-		bclr	#p2_pushing_bit,status(a0)
-
-loc_2289A:
-		jmp	(Draw_Sprite).l
-; ---------------------------------------------------------------------------
-
-loc_228A0:
-		bsr.w	sub_229C0
-		moveq	#0,d1
-		move.b	width_pixels(a0),d1
-		addi.w	#7,d1
-		moveq	#0,d2
-		move.b	height_pixels(a0),d2
-		move.w	d2,d3
-		addq.w	#1,d3
-		move.w	x_pos(a0),d4
-		bsr.w	SolidObjectFull
-		swap	d6
-		andi.w	#4|8,d6
-		beq.s	loc_228E6
-		move.b	d6,d0
-		andi.b	#4,d0
-		beq.s	loc_228D8
-		lea	(Player_1).w,a1
-		bsr.w	sub_228EC
-
-loc_228D8:
-		andi.b	#8,d6
-		beq.s	loc_228E6
-		lea	(Player_2).w,a1
-		bsr.w	sub_228EC
-
-loc_228E6:
-		jmp	(Draw_Sprite).l
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_228EC:
-		btst	#Status_Invincible,status_secondary(a1)
-		bne.s	locret_22920
-		tst.b	invulnerability_timer(a1)
-		bne.s	locret_22920
-		cmpi.b	#4,routine(a1)
-		bhs.s	locret_22920
-		move.l	y_pos(a1),d3
-		move.w	y_vel(a1),d0
-		ext.l	d0
-		asl.l	#8,d0
-		sub.l	d0,d3
-		move.l	d3,y_pos(a1)
-		movea.l	a0,a2
-		movea.l	a1,a0
-		jsr	(HurtCharacter).l
-		movea.l	a2,a0
-
-locret_22920:
-		rts
-; End of function sub_228EC
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_22922:
-		moveq	#0,d0
-		move.b	subtype(a0),d0
-		move.w	off_22930(pc,d0.w),d1
-		jmp	off_22930(pc,d1.w)
-; End of function sub_22922
-
-; ---------------------------------------------------------------------------
-off_22930:
-		dc.w locret_22936-off_22930
-		dc.w loc_22938-off_22930
-		dc.w loc_2294C-off_22930
-; ---------------------------------------------------------------------------
-
-locret_22936:
-		rts
-; ---------------------------------------------------------------------------
-
-loc_22938:
-		bsr.w	sub_22960
-		moveq	#0,d0
-		move.b	$34(a0),d0
-		add.w	$32(a0),d0
-		move.w	d0,y_pos(a0)
-		rts
-; ---------------------------------------------------------------------------
-
-loc_2294C:
-		bsr.w	sub_22960
-		moveq	#0,d0
-		move.b	$34(a0),d0
-		add.w	$30(a0),d0
-		move.w	d0,x_pos(a0)
-		rts
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_22960:
-		tst.w	$38(a0)
-		beq.s	loc_2297C
-		subq.w	#1,$38(a0)
-		bne.s	locret_229BE
-		tst.b	render_flags(a0)
-		bpl.s	locret_229BE
-		moveq	#signextendB(sfx_SpikeMove),d0
-		jsr	(Play_SFX).l
-		bra.s	locret_229BE
-; ---------------------------------------------------------------------------
-
-loc_2297C:
-		tst.w	$36(a0)
-		beq.s	loc_2299E
-		subi.w	#$800,$34(a0)
-		bcc.s	locret_229BE
-		move.w	#0,$34(a0)
-		move.w	#0,$36(a0)
-		move.w	#60,$38(a0)
-		bra.s	locret_229BE
-; ---------------------------------------------------------------------------
-
-loc_2299E:
-		addi.w	#$800,$34(a0)
-		cmpi.w	#$2000,$34(a0)
-		blo.s	locret_229BE
-		move.w	#$2000,$34(a0)
-		move.w	#1,$36(a0)
-		move.w	#60,$38(a0)
-
-locret_229BE:
-		rts
-; End of function sub_22960
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_229C0:
-		moveq	#0,d0
-		move.b	subtype(a0),d0
-		move.w	off_229CE(pc,d0.w),d1
-		jmp	off_229CE(pc,d1.w)
-; End of function sub_229C0
-
-; ---------------------------------------------------------------------------
-off_229CE:
-		dc.w locret_22936-off_229CE
-		dc.w loc_229D4-off_229CE
-		dc.w loc_229E8-off_229CE
-; ---------------------------------------------------------------------------
-
-loc_229D4:
-		bsr.w	sub_229FC
-		moveq	#0,d0
-		move.b	$34(a0),d0
-		add.w	$32(a0),d0
-		move.w	d0,y_pos(a0)
-		rts
-; ---------------------------------------------------------------------------
-
-loc_229E8:
-		bsr.w	sub_229FC
-		moveq	#0,d0
-		move.b	$34(a0),d0
-		add.w	$30(a0),d0
-		move.w	d0,x_pos(a0)
-		rts
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_229FC:
-		tst.w	$38(a0)
-		beq.s	loc_22A18
-		subq.w	#1,$38(a0)
-		bne.s	locret_22A5A
-		tst.b	render_flags(a0)
-		bpl.s	locret_22A5A
-		moveq	#signextendB(sfx_SpikeMove),d0
-		jsr	(Play_SFX).l
-		bra.s	locret_22A5A
-; ---------------------------------------------------------------------------
-
-loc_22A18:
-		tst.w	$36(a0)
-		beq.s	loc_22A3A
-		subi.w	#$800,$34(a0)
-		bcc.s	locret_22A5A
-		move.w	#0,$34(a0)
-		move.w	#0,$36(a0)
-		move.w	#60,$38(a0)
-		bra.s	locret_22A5A
-; ---------------------------------------------------------------------------
-
-loc_22A3A:
-		addi.w	#$800,$34(a0)
-		cmpi.w	#$1800,$34(a0)
-		blo.s	locret_22A5A
-		move.w	#$1800,$34(a0)
-		move.w	#1,$36(a0)
-		move.w	#60,$38(a0)
-
-locret_22A5A:
-		rts
-; End of function sub_229FC
-
-; ---------------------------------------------------------------------------
-Map_Spikes:
-		include "General/Sprites/Level Misc/Map - Spikes.asm"
-Map_2PSpikes:
-		include "General/2P Zone/Map - Spikes.asm"
+		include	"Code/Objects/General - Spikes.asm"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -24776,505 +24323,9 @@ locret_2534A:
 Map_LBZPlayerLauncher:
 		include "Levels/LBZ/Misc Object Data/Map - Player Launcher.asm"
 
-; =============== S U B R O U T I N E =======================================
+		include	"Code/Objects/LBZ - Flamethrower.asm"
+		include	"Code/Objects/LBZ - Ride Grapple.asm"
 
-
-sub_2536C:
-		move.l	#Map_LBZFlameThrower,mappings(a1)
-		move.w	#make_art_tile(ArtTile_LBZMisc-$17,2,0),art_tile(a1)
-		move.b	#$10,width_pixels(a1)
-		move.b	#$10,height_pixels(a1)
-		ori.b	#4,render_flags(a1)
-		move.w	#$200,priority(a1)
-		rts
-; End of function sub_2536C
-
-; ---------------------------------------------------------------------------
-
-Obj_LBZFlameThrower:
-		movea.l	a0,a1
-		bsr.s	sub_2536C
-		move.l	#loc_2539E,(a0)
-
-loc_2539E:
-		move.b	(V_int_run_count+3).w,d0
-		add.b	subtype(a0),d0
-		andi.b	#$7F,d0
-		bne.s	loc_253FE
-		jsr	(AllocateObjectAfterCurrent).l
-		bne.w	loc_253FE
-		move.l	#Obj_AutoSpin460,(a1)
-		bsr.s	sub_2536C
-		move.w	x_pos(a0),x_pos(a1)
-		move.w	y_pos(a0),y_pos(a1)
-		move.b	status(a0),status(a1)
-		move.b	#$9D,collision_flags(a1)
-		bset	#4,shield_reaction(a1)
-		addi.w	#$40,x_pos(a1)
-		btst	#0,status(a0)
-		beq.s	loc_253F0
-		subi.w	#2*$40,x_pos(a1)
-
-loc_253F0:
-		tst.b	render_flags(a0)
-		bpl.s	loc_253FE
-		moveq	#signextendB(sfx_FireAttack),d0
-		jsr	(Play_SFX).l
-
-loc_253FE:
-		moveq	#0,d1
-		move.b	width_pixels(a0),d1
-		addi.w	#$B,d1
-		moveq	#0,d2
-		move.b	height_pixels(a0),d2
-		move.w	d2,d3
-		addq.w	#1,d3
-		move.w	x_pos(a0),d4
-		jsr	(SolidObjectFull).l
-		jmp	(Sprite_OnScreen_Test).l
-; ---------------------------------------------------------------------------
-
-Obj_AutoSpin460:
-		lea	(Ani_LBZFlameThrower).l,a1
-		jsr	(Animate_Sprite).l
-		tst.b	routine(a0)
-		beq.s	loc_2543A
-		move.w	#$7FFF,x_pos(a0)
-
-loc_2543A:
-		jmp	(Sprite_CheckDeleteTouch3).l
-; ---------------------------------------------------------------------------
-Ani_LBZFlameThrower:
-		include "Levels/LBZ/Misc Object Data/Anim - Flame Thrower.asm"
-Map_LBZFlameThrower:
-		include "Levels/LBZ/Misc Object Data/Map - Flame Thrower.asm"
-LBZRideGrapple_Range:
-		dc.w   $A08,  $C78	; 0
-		dc.w  $1208, $14F8	; 1
-		dc.w  $1A08, $1BB8	; 2
-		dc.w  $1C48, $2078	; 3
-		dc.w  $2688, $2878	; 4
-		dc.w  $2988, $2DF8	; 5
-		dc.w  $2F88, $3178	; 6
-		dc.w   $E68, $1098	; 7
-		dc.w   $CE8, $1498	; 8
-		dc.w   $E68, $1398	; 9
-		dc.w  $20E8, $2418	; A
-		dc.w  $2B08, $2E98	; B
-		dc.w  $39E8, $3C98	; C
-; ---------------------------------------------------------------------------
-
-Obj_LBZRideGrapple:
-		move.b	#4,render_flags(a0)
-		move.b	#$10,width_pixels(a0)
-		move.w	#$80,priority(a0)
-		move.b	#$20,height_pixels(a0)
-		move.w	x_pos(a0),$38(a0)
-		move.b	subtype(a0),d0
-		andi.w	#$7F,d0
-		lsl.w	#2,d0
-		move.l	LBZRideGrapple_Range(pc,d0.w),$34(a0)
-		move.l	#Map_LBZRideGrapple,mappings(a0)
-		move.w	#make_art_tile(ArtTile_LBZMisc+$70,1,0),art_tile(a0)
-		jsr	(AllocateObjectAfterCurrent).l
-		bne.s	loc_2562A
-		move.l	#loc_25752,(a1)
-		move.w	x_pos(a0),x_pos(a1)
-		move.w	y_pos(a0),y_pos(a1)
-		move.l	mappings(a0),mappings(a1)
-		move.w	art_tile(a0),art_tile(a1)
-		move.b	render_flags(a0),render_flags(a1)
-		move.w	priority(a0),priority(a1)
-		bset	#6,render_flags(a1)
-		move.b	#$10,width_pixels(a1)
-		move.b	#$20,height_pixels(a1)
-		moveq	#6,d1
-		move.w	d1,mainspr_childsprites(a1)
-		subq.b	#1,d1
-		lea	sub2_x_pos(a1),a2
-
-loc_25610:
-		move.w	x_pos(a1),(a2)+
-		move.w	y_pos(a1),(a2)+
-		move.w	#1,(a2)+
-		dbf	d1,loc_25610
-		move.b	#2,mapping_frame(a1)
-		move.w	a1,$3C(a0)
-
-loc_2562A:
-		move.l	#loc_25630,(a0)
-
-loc_25630:
-		bsr.w	sub_258F2
-		bsr.w	sub_25758
-		tst.w	$30(a0)
-		beq.s	loc_2564C
-		cmpi.w	#$28,$3A(a0)
-		bne.s	loc_2564C
-		move.l	#loc_256A0,(a0)
-
-loc_2564C:
-		move.w	x_pos(a0),d0
-		andi.w	#$FF80,d0
-		sub.w	(Camera_X_pos_coarse_back).w,d0
-		cmpi.w	#$280,d0
-		bhi.w	loc_25666
-		jmp	(Draw_Sprite).l
-; ---------------------------------------------------------------------------
-
-loc_25666:
-		move.w	$38(a0),d0
-		andi.w	#$FF80,d0
-		sub.w	(Camera_X_pos_coarse_back).w,d0
-		cmpi.w	#$280,d0
-		bhi.w	loc_25680
-		jmp	(Draw_Sprite).l
-; ---------------------------------------------------------------------------
-
-loc_25680:
-		move.w	respawn_addr(a0),d0
-		beq.s	loc_2568C
-		movea.w	d0,a2
-		bclr	#7,(a2)
-
-loc_2568C:
-		move.w	$3C(a0),d0
-		beq.s	loc_2569A
-		movea.w	d0,a1
-		jsr	(Delete_Referenced_Sprite).l
-
-loc_2569A:
-		jmp	(Delete_Current_Sprite).l
-; ---------------------------------------------------------------------------
-
-loc_256A0:
-		jsr	(MoveSprite2).l
-		btst	#0,status(a0)
-		beq.s	loc_256C2
-		subi.w	#$20,x_vel(a0)
-		tst.w	x_vel(a0)
-		bmi.s	loc_256D4
-		subi.w	#$60,x_vel(a0)
-		bra.s	loc_256D4
-; ---------------------------------------------------------------------------
-
-loc_256C2:
-		addi.w	#$20,x_vel(a0)
-		tst.w	x_vel(a0)
-		bpl.s	loc_256D4
-		addi.w	#$60,x_vel(a0)
-
-loc_256D4:
-		move.w	x_pos(a0),d0
-		move.w	$34(a0),d1
-		cmp.w	d1,d0
-		bhi.s	loc_256F2
-		move.w	d1,x_pos(a0)
-		bsr.s	sub_25718
-		tst.w	x_vel(a0)
-		bpl.s	loc_256F2
-		move.w	#0,x_vel(a0)
-
-loc_256F2:
-		move.w	$36(a0),d1
-		cmp.w	d1,d0
-		blo.s	loc_2570C
-		move.w	d1,x_pos(a0)
-		bsr.s	sub_25718
-		tst.w	x_vel(a0)
-		bmi.s	loc_2570C
-		move.w	#0,x_vel(a0)
-
-loc_2570C:
-		bsr.w	sub_258F2
-		bsr.w	sub_25758
-		bra.w	loc_2564C
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_25718:
-		tst.b	subtype(a0)
-		bmi.s	locret_25750
-		lea	$30(a0),a2
-		lea	(Player_1).w,a1
-		bsr.s	sub_2572E
-		lea	(Player_2).w,a1
-		addq.w	#1,a2
-; End of function sub_25718
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_2572E:
-		tst.b	(a2)
-		beq.s	locret_25750
-		move.w	x_vel(a0),x_vel(a1)
-		move.w	#0,y_vel(a1)
-		bset	#Status_InAir,status(a1)
-		clr.b	object_control(a1)
-		clr.b	(a2)
-		move.b	#$3C,2(a2)
-
-locret_25750:
-		rts
-; End of function sub_2572E
-
-; ---------------------------------------------------------------------------
-
-loc_25752:
-		jmp	(Draw_Sprite).l
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_25758:
-		movea.w	$3C(a0),a3
-		lea	$31(a0),a2
-		lea	(Player_2).w,a1
-		move.w	(Ctrl_2).w,d0
-		bsr.s	sub_25774
-		lea	(Player_1).w,a1
-		subq.w	#1,a2
-		move.w	(Ctrl_1).w,d0
-; End of function sub_25758
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_25774:
-		tst.b	(a2)
-		beq.w	loc_25868
-		tst.b	render_flags(a1)
-		bpl.s	loc_257DC
-		cmpi.b	#4,routine(a1)
-		bhs.s	loc_257DC
-		andi.b	#button_A_mask|button_B_mask|button_C_mask,d0
-		beq.w	loc_257EA
-		clr.b	$2E(a1)
-		clr.b	(a2)
-		move.b	#$12,2(a2)
-		andi.w	#(button_up_mask|button_down_mask|button_left_mask|button_right_mask)<<8,d0
-		beq.w	loc_257AA
-		move.b	#$3C,2(a2)
-
-loc_257AA:
-		move.w	x_vel(a0),x_vel(a1)
-		move.w	#-$380,y_vel(a1)
-		bset	#Status_InAir,status(a1)
-		move.b	#1,jumping(a1)
-		move.b	#$E,y_radius(a1)
-		move.b	#7,x_radius(a1)
-		move.b	#2,anim(a1)
-		bset	#Status_Roll,status(a1)
-		rts
-; ---------------------------------------------------------------------------
-
-loc_257DC:
-		clr.b	object_control(a1)
-		clr.b	(a2)
-		move.b	#$3C,2(a2)
-		rts
-; ---------------------------------------------------------------------------
-
-loc_257EA:
-		btst	#button_left+8,d0
-		beq.s	loc_257F6
-		bset	#Status_Facing,status(a1)
-
-loc_257F6:
-		btst	#button_right+8,d0
-		beq.s	loc_25802
-		bclr	#Status_Facing,status(a1)
-
-loc_25802:
-		move.b	status(a1),status(a0)
-		move.b	status(a1),d0
-		andi.b	#1<<Status_Facing,d0
-		andi.b	#$FE,render_flags(a1)
-		or.b	d0,render_flags(a1)
-		move.w	x_pos(a3),x_pos(a1)
-		move.w	y_pos(a3),y_pos(a1)
-		addi.w	#$24,y_pos(a1)
-
-loc_2582C:
-		moveq	#0,d0
-		move.b	angle(a0),d0
-		btst	#Status_Facing,status(a1)
-		beq.s	loc_2583C
-		neg.b	d0
-
-loc_2583C:
-		addq.b	#8,d0
-		lsr.w	#4,d0
-		move.b	byte_25858(pc,d0.w),mapping_frame(a1)
-		moveq	#0,d0
-		move.b	mapping_frame(a1),d0
-		move.l	a2,-(sp)
-		jsr	(Perform_Player_DPLC).l
-		movea.l	(sp)+,a2
-		rts
-; ---------------------------------------------------------------------------
-byte_25858:
-		dc.b  $91, $91, $90, $90, $90, $90, $90, $90, $92, $92, $92, $92, $92, $92, $91, $91
-		even
-; ---------------------------------------------------------------------------
-
-loc_25868:
-		tst.b	2(a2)
-		beq.s	loc_25876
-		subq.b	#1,2(a2)
-		bne.w	locret_258F0
-
-loc_25876:
-		move.w	x_pos(a1),d0
-		sub.w	x_pos(a0),d0
-		addi.w	#$10,d0
-		cmpi.w	#$20,d0
-		bhs.w	locret_258F0
-		move.w	y_pos(a1),d1
-		sub.w	y_pos(a0),d1
-		subi.w	#$18,d1
-		cmpi.w	#$18,d1
-		bhs.w	locret_258F0
-		tst.b	object_control(a1)
-		bne.s	locret_258F0
-		cmpi.b	#4,routine(a1)
-		bhs.s	locret_258F0
-		tst.w	(Debug_placement_mode).w
-		bne.s	locret_258F0
-		move.b	status(a1),status(a0)
-		clr.w	x_vel(a1)
-		clr.w	y_vel(a1)
-		clr.w	ground_vel(a1)
-		move.w	x_pos(a0),x_pos(a1)
-		move.w	y_pos(a0),y_pos(a1)
-		addi.w	#$24,y_pos(a1)
-		move.b	#$14,anim(a1)
-		move.b	#0,spin_dash_flag(a1)
-		move.b	#3,object_control(a1)
-		move.b	#1,(a2)
-		bra.w	loc_2582C
-; ---------------------------------------------------------------------------
-
-locret_258F0:
-		rts
-; End of function sub_25774
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_258F2:
-		tst.w	$30(a0)
-		beq.s	loc_25906
-		move.w	$3A(a0),d2
-		cmpi.w	#$28,d2
-		beq.s	loc_2592C
-		addq.w	#1,d2
-		bra.s	loc_25928
-; ---------------------------------------------------------------------------
-
-loc_25906:
-		move.w	$3A(a0),d2
-		beq.s	loc_25910
-		subq.w	#1,d2
-		bne.s	loc_25928
-
-loc_25910:
-		clr.w	angle(a0)
-		clr.b	$40(a0)
-		clr.w	$3E(a0)
-		move.w	#0,x_vel(a0)
-		move.l	#loc_25630,(a0)
-
-loc_25928:
-		move.w	d2,$3A(a0)
-
-loc_2592C:
-		mulu.w	#$33,d2
-		move.w	x_vel(a0),d0
-		bne.s	loc_25970
-		tst.b	$40(a0)
-		bne.s	loc_25956
-		move.w	$3E(a0),d1
-		addi.w	#$40,d1
-		move.w	d1,$3E(a0)
-		add.w	d1,angle(a0)
-		bmi.s	loc_2596E
-		move.b	#1,$40(a0)
-		bra.s	loc_2596E
-; ---------------------------------------------------------------------------
-
-loc_25956:
-		move.w	$3E(a0),d1
-		subi.w	#$40,d1
-		move.w	d1,$3E(a0)
-		add.w	d1,angle(a0)
-		bpl.s	loc_2596E
-		move.b	#0,$40(a0)
-
-loc_2596E:
-		bra.s	loc_259B0
-; ---------------------------------------------------------------------------
-
-loc_25970:
-		neg.w	d0
-		asl.w	#2,d0
-		sub.w	angle(a0),d0
-		bge.s	loc_2598A
-		cmpi.w	#-$3000,angle(a0)
-		ble.s	loc_2598A
-		subi.w	#$180,angle(a0)
-		bra.s	loc_25998
-; ---------------------------------------------------------------------------
-
-loc_2598A:
-		cmpi.w	#$3000,angle(a0)
-		bge.s	loc_25998
-		addi.w	#$180,angle(a0)
-
-loc_25998:
-		move.b	#0,$40(a0)
-		tst.w	x_vel(a0)
-		bpl.s	loc_259AA
-		move.b	#1,$40(a0)
-
-loc_259AA:
-		move.w	#0,$3E(a0)
-
-loc_259B0:
-		move.b	angle(a0),d0
-		jsr	(GetSineCosine).l
-		muls.w	d2,d0
-		muls.w	d2,d1
-		move.l	x_pos(a0),d2
-		move.l	y_pos(a0),d3
-		movea.w	$3C(a0),a1
-		moveq	#6-1,d4
-		lea	sub2_x_pos(a1),a2
-
-loc_259D0:
-		swap	d2
-		swap	d3
-		move.w	d2,(a2)+
-		move.w	d3,(a2)+
-		addq.w	#2,a2
-		swap	d2
-		swap	d3
-		add.l	d0,d2
-		add.l	d1,d3
-		dbf	d4,loc_259D0
-		move.w	$36(a1),x_pos(a1)
-		move.w	$38(a1),y_pos(a1)
-		rts
-; End of function sub_258F2
-
-; ---------------------------------------------------------------------------
-Map_LBZRideGrapple:
-		include "Levels/LBZ/Misc Object Data/Map - Ride Grapple.asm"
 ; ---------------------------------------------------------------------------
 
 Obj_LBZCupElevator:
@@ -26599,13 +25650,13 @@ loc_269A6:
 		andi.b	#p1_standing,d0
 		beq.s	loc_269C0
 		lea	(Player_1).w,a1
-		bsr.w	sub_228EC
+		bsr.w	Touch_HurtSpikes
 
 loc_269C0:
 		andi.b	#p2_standing,d6
 		beq.s	loc_269CE
 		lea	(Player_2).w,a1
-		bsr.w	sub_228EC
+		bsr.w	Touch_HurtSpikes
 
 loc_269CE:
 		lea	(Ani_LBZUnusedSolidHurt).l,a1
@@ -28803,13 +27854,13 @@ loc_28212:
 		andi.b	#4,d0
 		beq.s	loc_28222
 		lea	(Player_1).w,a1
-		bsr.w	sub_228EC
+		bsr.w	Touch_HurtSpikes
 
 loc_28222:
 		andi.b	#8,d6
 		beq.s	loc_28230
 		lea	(Player_2).w,a1
-		bsr.w	sub_228EC
+		bsr.w	Touch_HurtSpikes
 
 loc_28230:
 		jmp	(Sprite_OnScreen_Test).l
@@ -30172,126 +29223,9 @@ locret_291A2:
 ; ---------------------------------------------------------------------------
 Map_LBZTubeElevator:
 		include "Levels/LBZ/Misc Object Data/Map - Tube Elevator.asm"
-; ---------------------------------------------------------------------------
-word_29316:
-		dc.w     1
-		dc.w     3
-		dc.w     7
-		dc.w    $F
-		dc.w   $1F
-		dc.w   $3F
-		dc.w   $7F
-		dc.w   $FF
-		dc.w  $1FF
-		dc.w  $3FF
-		dc.w  $7FF
-		dc.w  $FFF
-		dc.w $1FFF
-		dc.w $3FFF
-		dc.w $7FFF
-		dc.w $FFFF
-; ---------------------------------------------------------------------------
 
-Obj_AIZDisappearingFloor:
-		move.b	subtype(a0),d0
-		move.b	d0,d1
-		andi.w	#$F,d0
-		move.w	d0,d2
-		add.w	d0,d0
-		move.w	word_29316(pc,d0.w),$32(a0)
-		subq.w	#3,d2
-		bcc.s	loc_29350
-		moveq	#0,d2
+		include	"Code/Objects/AIZ - Disappearing Floor in Waterfall.asm"
 
-loc_29350:
-		lsr.w	#4,d1
-		andi.w	#$F,d1
-		lsl.w	d2,d1
-		move.w	d1,$34(a0)
-		move.l	#Map_AIZDisappearingFloor,mappings(a0)
-		move.w	#make_art_tile(ArtTile_AIZMisc2,2,0),art_tile(a0)	; immediately gets overwritten?
-		move.w	#make_art_tile($001,2,0),art_tile(a0)
-		move.b	#$20,width_pixels(a0)
-		move.b	#$18,height_pixels(a0)
-		move.b	#4,render_flags(a0)
-		move.w	#$280,priority(a0)
-		move.w	(Level_frame_counter).w,d0
-		add.w	$34(a0),d0
-		and.w	$32(a0),d0
-		beq.s	loc_293B4
-		subi.w	#$C8,d0
-		bcc.s	loc_293B4
-		neg.w	d0
-		move.b	d0,anim_frame_timer(a0)
-		move.b	#0,anim_frame(a0)
-		move.w	#(2<<8)|2,anim(a0)	; and prev_anim
-		move.b	#5,mapping_frame(a0)
-
-loc_293B4:
-		move.l	#loc_293BA,(a0)
-
-loc_293BA:
-		move.w	(Level_frame_counter).w,d0
-		add.w	$34(a0),d0
-		and.w	$32(a0),d0
-		bne.w	loc_293E4
-		move.w	#(1<<8)|0,anim(a0)	; and prev_anim
-		move.b	#0,$36(a0)
-		tst.b	render_flags(a0)
-		bpl.s	loc_293E4
-		moveq	#signextendB(sfx_WaterfallSplash),d0
-		jsr	(Play_SFX).l
-
-loc_293E4:
-		lea	(Ani_AIZDisappearingFloor).l,a1
-		jsr	(Animate_SpriteIrregularDelay).l
-		cmpi.b	#5,mapping_frame(a0)
-		bne.s	loc_2944A
-		tst.b	$36(a0)
-		bne.s	loc_2944A
-		move.b	#1,$36(a0)
-		jsr	(AllocateObjectAfterCurrent).l
-		bne.w	loc_2944A
-		move.l	#loc_29450,(a1)
-		move.w	x_pos(a0),x_pos(a1)
-		move.w	y_pos(a0),y_pos(a1)
-		move.l	#Map_AIZDisappearingFloor2,mappings(a1)
-		move.w	#make_art_tile(ArtTile_AIZMisc2,3,0),art_tile(a1)
-		move.b	#$28,width_pixels(a1)
-		move.b	#$20,height_pixels(a1)
-		move.b	#4,render_flags(a1)
-		move.w	#$200,priority(a1)
-		move.w	a0,$3C(a1)
-
-loc_2944A:
-		jmp	(Sprite_OnScreen_Test).l
-; ---------------------------------------------------------------------------
-
-loc_29450:
-		movea.w	$3C(a0),a1
-		cmpi.b	#3,mapping_frame(a1)
-		bne.s	loc_29462
-		move.w	#$7FF0,x_pos(a0)
-
-loc_29462:
-		subq.b	#1,anim_frame_timer(a0)
-		bpl.s	loc_29478
-		move.b	#3,anim_frame_timer(a0)
-		addq.b	#1,mapping_frame(a0)
-		andi.b	#3,mapping_frame(a0)
-
-loc_29478:
-		move.w	#$2B,d1
-		move.w	#$18,d2
-		move.w	#$19,d3
-		move.w	x_pos(a0),d4
-		jsr	(SolidObjectFull).l
-		jmp	(Sprite_OnScreen_Test).l
-; ---------------------------------------------------------------------------
-Ani_AIZDisappearingFloor:
-		include "Levels/AIZ/Misc Object Data/Anim - Disappearing Floor.asm"
-Map_AIZDisappearingFloor:
-		include "Levels/AIZ/Misc Object Data/Map - Disappearing Floor.asm"
 ; ---------------------------------------------------------------------------
 
 Obj_CorkFloor:
@@ -40962,7 +39896,7 @@ loc_33AFC:
 		sub.w	y_pos(a0),d0
 		addi.w	#$28,d0
 		bmi.s	loc_33B54
-		jsr	(sub_228EC).l
+		jsr	(Touch_HurtSpikes).l
 
 loc_33B54:
 		andi.b	#2,d6
@@ -40973,7 +39907,7 @@ loc_33B54:
 		sub.w	y_pos(a0),d0
 		addi.w	#$28,d0
 		bmi.s	loc_33B78
-		jsr	(sub_228EC).l
+		jsr	(Touch_HurtSpikes).l
 
 loc_33B78:
 		subq.b	#1,anim_frame_timer(a0)
@@ -43687,7 +42621,7 @@ loc_35EA4:
 		move.l	#loc_35FAC,(a0)
 		move.b	#$B,anim(a0)
 		movea.l	a2,a1
-		jmp	(sub_228EC).l
+		jmp	(Touch_HurtSpikes).l
 ; End of function sub_35E98
 
 
@@ -44817,83 +43751,8 @@ loc_374F2:
 ; ---------------------------------------------------------------------------
 Map_2PItemIcon:
 		include "General/2P Zone/Map - Item Icon.asm"
-; ---------------------------------------------------------------------------
-		; unused
-		move.l	#Map_2PPosition,mappings(a0)
-		move.w	#make_art_tile(ArtTile_2PPosIcon,0,1),art_tile(a0)
-		move.w	#0,priority(a0)
-		move.b	#4,width_pixels(a0)
-		move.b	#4,height_pixels(a0)
-		tst.b	subtype(a0)
-		beq.s	loc_375D6
-		tst.b	(Not_ghost_flag).w
-		bne.s	loc_375B0
-		jmp	(Delete_Current_Sprite).l
-; ---------------------------------------------------------------------------
 
-loc_375B0:
-		move.w	#$90,x_pos(a0)
-		move.w	#$84,y_pos(a0)
-		move.w	(Player_2+x_pos).w,$30(a0)
-		bset	#4,render_flags(a0)
-		move.b	#2,mapping_frame(a0)
-		move.l	#loc_3764E,(a0)
-		bra.s	loc_3764E
-; ---------------------------------------------------------------------------
-
-loc_375D6:
-		move.w	#$90,x_pos(a0)
-		move.w	#$E8,y_pos(a0)
-		move.w	(Player_1+x_pos).w,$30(a0)
-		bset	#3,render_flags(a0)
-		move.b	#1,mapping_frame(a0)
-		move.l	#loc_375FA,(a0)
-
-loc_375FA:
-		move.w	(Player_1+x_pos).w,d0
-		move.w	(Saved_X_pos).w,d1
-
-loc_37602:
-		tst.w	(Events_bg+$14).w
-		beq.s	loc_37612
-		move.w	#0,$34(a0)
-		move.w	d1,$30(a0)
-
-loc_37612:
-		move.w	d0,d1
-		sub.w	$30(a0),d0
-		beq.s	loc_3763A
-		bcc.s	loc_37628
-		cmpi.w	#-$200,d0
-		bge.s	loc_37632
-		addi.w	#$400,d0
-		bra.s	loc_37632
-; ---------------------------------------------------------------------------
-
-loc_37628:
-		cmpi.w	#$200,d0
-		blt.s	loc_37632
-		subi.w	#$400,d0
-
-loc_37632:
-		add.w	d0,$34(a0)
-		move.w	d1,$30(a0)
-
-loc_3763A:
-		move.w	$34(a0),d0
-		asr.w	#6,d0
-		addi.w	#$90,d0
-		move.w	d0,x_pos(a0)
-		jmp	(Draw_Sprite).l
-; ---------------------------------------------------------------------------
-
-loc_3764E:
-		move.w	(Player_2+x_pos).w,d0
-		move.w	(Saved2_X_pos).w,d1
-		bra.s	loc_37602
-; ---------------------------------------------------------------------------
-Map_2PPosition:
-		include "General/2P Zone/Map - Position Icons (Unused).asm"
+		include	"Code/Objects/2P - Position Markers (Unused).asm"
 ; ---------------------------------------------------------------------------
 
 Obj_EMZDripper:
@@ -82776,7 +81635,7 @@ loc_56672:
 		sub.w	y_pos(a0),d0
 		addi.w	#$28,d0
 		bmi.s	loc_566CE
-		jsr	(sub_228EC).l
+		jsr	(Touch_HurtSpikes).l
 
 loc_566CE:
 		andi.b	#2,d6
@@ -82787,7 +81646,7 @@ loc_566CE:
 		sub.w	y_pos(a0),d0
 		addi.w	#$28,d0
 		bmi.s	loc_566F2
-		jsr	(sub_228EC).l
+		jsr	(Touch_HurtSpikes).l
 
 loc_566F2:
 		subq.b	#1,anim_frame_timer(a0)

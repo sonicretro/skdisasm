@@ -392,9 +392,9 @@ offK_1D87C:
 Monitor_Give_Eggman:
 		addq.w	#1,(a2)
 	if Sonic3_Alone
-		bra.w	sub_228EC
+		bra.w	Touch_HurtSpikes
 	else
-		jmp	(sub_24280).l
+		jmp	(Touch_HurtSpikes).l
 	endif
 ; ---------------------------------------------------------------------------
 

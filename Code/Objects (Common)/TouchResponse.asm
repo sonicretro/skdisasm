@@ -552,7 +552,7 @@ locK_10320:
 	 if ~~Sonic3_Alone
 		cmpi.l	#Obj_Spikes,(a2)
 		blo.s	locK_10346
-		cmpi.l	#sub_24280,(a2)
+		cmpi.l	#Touch_HurtSpikes,(a2)
 		bhs.s	locK_10346
 		moveq	#signextendB(sfx_SpikeHit),d0
 
@@ -567,7 +567,7 @@ locK_10350:
 		moveq	#signextendB(sfx_Death),d0
 		cmpi.l	#Obj_Spikes,(a2)
 		blo.s	locK_10364
-		cmpi.l	#sub_24280,(a2)
+		cmpi.l	#Touch_HurtSpikes,(a2)
 		bhs.s	locK_10364
 		moveq	#signextendB(sfx_SpikeHit),d0
 
