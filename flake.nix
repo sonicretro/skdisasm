@@ -54,9 +54,6 @@
             mkdir -p $out/${toolDir}
             cp ${./build_tools}/${toolDir}/asl         $out/${toolDir}/asl
             cp ${./build_tools}/${toolDir}/p2bin       $out/${toolDir}/p2bin
-            cp ${./build_tools}/${toolDir}/as.msg      $out/${toolDir}/as.msg
-            cp ${./build_tools}/${toolDir}/cmdarg.msg  $out/${toolDir}/cmdarg.msg
-            cp ${./build_tools}/${toolDir}/ioerrs.msg  $out/${toolDir}/ioerrs.msg
             chmod +w $out/${toolDir}/*
             autoPatchelf $out/${toolDir}
           '';
