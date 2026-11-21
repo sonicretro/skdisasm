@@ -72,7 +72,7 @@
             lua ${script}
           '';
           installPhase = ''
-            install -Dm644 ${outputName}.bin $out
+            install -Dm644 ${outputName}.bin $out/${outputName}.bin
           '';
         };
     in
