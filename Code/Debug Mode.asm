@@ -237,8 +237,7 @@ Debug_ResetPlayerStats:
 		; drawing the lives HUD sets d0 back to zero, but since that part is skipped
 		; in Competition Mode, exiting debug is broken there.
 
-		; This was not fixed in the Sonic & Knuckles Collection, rather that version
-		; disables Debug Mode in Competition Mode entirely.
+		; This was fixed in the Sonic & Knuckles Collection.
 		moveq	#0,d0
 	endif
 		move.b	d0,anim(a1)

@@ -3455,11 +3455,7 @@ locK_12410:
 		cmpi.w	#2,(Player_mode).w
 		beq.s	locK_12432
 		move.b	#2,routine(a0)
-	if Sonic3_Alone
-		bra.w	sub_14B58
-	else
-		bra.w	sub_13ECA
-	endif
+		bra.w	subK_13ECA
 ; ---------------------------------------------------------------------------
 ; loc3_1328A:
 locK_12432:
