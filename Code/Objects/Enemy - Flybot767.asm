@@ -46,11 +46,7 @@ locK_8C9B2:
 ; loc3_5A156:
 locK_8C9E2:
 		jsr	Change_FlipXWithVelocity(pc)
-	if Sonic3_Alone
-		jmp	Animate_Raw(pc)
-	else
-		jmp	(Animate_Raw).l
-	endif
+		jmp_	Animate_Raw
 ; ---------------------------------------------------------------------------
 ; loc3_5A15E:
 locK_8C9EC:
@@ -66,11 +62,7 @@ locK_8C9EC:
 ; loc3_5A188:
 locK_8CA16:
 		jsr	(MoveSprite2).l
-	if Sonic3_Alone
-		jmp	Animate_Raw(pc)
-	else
-		jmp	(Animate_Raw).l
-	endif
+		jmp_	Animate_Raw
 ; ---------------------------------------------------------------------------
 ; loc3_5A192:
 locK_8CA22:
@@ -101,11 +93,7 @@ locK_8CA60:
 		beq.s	locK_8CA7A
 ; loc3_5A1E4:
 locK_8CA74:
-	if Sonic3_Alone
-		jmp	Animate_Raw(pc)
-	else
-		jmp	(Animate_Raw).l
-	endif
+		jmp_	Animate_Raw
 ; ---------------------------------------------------------------------------
 ; loc3_5A1E8:
 locK_8CA7A:
@@ -147,13 +135,8 @@ locK_8CADA:
 		jsr	Chase_ObjectYOnly(pc)
 		jsr	(MoveSprite2).l
 		jsr	Change_FlipXWithVelocity(pc)
-	if Sonic3_Alone
-		jsr	Animate_Raw(pc)
-		jmp	Obj_Wait(pc)
-	else
-		jsr	(Animate_Raw).l
-		jmp	(Obj_Wait).l
-	endif
+		jsr_	Animate_Raw
+		jmp_	Obj_Wait
 ; ---------------------------------------------------------------------------
 ; loc3_5A272:
 locK_8CB08:

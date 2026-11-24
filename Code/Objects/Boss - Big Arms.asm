@@ -6,11 +6,7 @@ Obj_LBZFinalBoss2:
 		move.w	LBZFinalBoss2_Index(pc,d0.w),d1
 		jsr	LBZFinalBoss2_Index(pc,d1.w)
 		jsr	(subK_74FD2).l
-	if Sonic3_Alone
-		jmp	Draw_And_Touch_Sprite(pc)
-	else
-		jmp	(Draw_And_Touch_Sprite).l
-	endif
+		jmp_	Draw_And_Touch_Sprite
 ; ---------------------------------------------------------------------------
 LBZFinalBoss2_Index:
 		dc.w locK_742A8-LBZFinalBoss2_Index
@@ -43,11 +39,7 @@ LBZFinalBoss2_Index:
 ; loc3_50CEE:
 locK_742A8:
 		lea	ObjDat_LBZFinalBoss2(pc),a1
-	if Sonic3_Alone
-		jsr	SetUp_ObjAttributes(pc)
-	else
-		jsr	(SetUp_ObjAttributes).l
-	endif
+		jsr_	SetUp_ObjAttributes
 		move.b	#8,collision_property(a0)
 		bset	#3,$38(a0)
 		st	(Disable_death_plane).w
@@ -62,17 +54,14 @@ locK_742A8:
 		move.l	#locK_74314,$34(a0)
 	endif
 		lea	Pal_LBZFinalBoss2(pc),a1
-	if Sonic3_Alone
-		jsr	PalLoad_Line1(pc)
-	else
-		jsr	(PalLoad_Line1).l
-	endif
+		jsr_	PalLoad_Line1
 		lea	(ArtKosM_LBZFinalBoss2).l,a1
 		move.w	#tiles_to_bytes(ArtTile_LBZFinalBoss2),d2
 		jsr	(Queue_Kos_Module).l
 		lea	(Child1_MakeRoboHead4).l,a2
+		jmp_	CreateChild1_Normal
+
 	if Sonic3_Alone
-		jmp	CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
 loc3_50D28:
@@ -100,36 +89,22 @@ loc3_50D64:
 
 locret3_50D72:
 		rts
-	else
-		jmp	(CreateChild1_Normal).l
 	endif
 ; ---------------------------------------------------------------------------
 ; loc3_50D74:
 locK_7430E:
-	if Sonic3_Alone
-		jmp	Obj_Wait(pc)
-	else
-		jmp	(Obj_Wait).l
-	endif
+		jmp_	Obj_Wait
 ; ---------------------------------------------------------------------------
 ; loc_50D78:
 locK_74314:
 		move.b	#6,routine(a0)
 		move.b	#8,mapping_frame(a0)
 		lea	ChildObjDat_75122(pc),a2
-	if Sonic3_Alone
-		jmp	CreateChild1_Normal(pc)
-	else
-		jmp	(CreateChild1_Normal).l
-	endif
+		jmp_	CreateChild1_Normal
 ; ---------------------------------------------------------------------------
 ; loc3_50D8C:
 locK_7432A:
-	if Sonic3_Alone
-		jsr	MoveSprite_LightGravity(pc)
-	else
-		jsr	(MoveSprite_LightGravity).l
-	endif
+		jsr_	MoveSprite_LightGravity
 		move.w	(Camera_Y_pos).w,d0
 		addi.w	#$120,d0
 		cmp.w	y_pos(a0),d0
@@ -143,11 +118,7 @@ locK_74340:
 		move.b	#$F,$28(a0)
 		bchg	#0,render_flags(a0)
 		lea	ChildObjDat_7513C(pc),a2
-	if Sonic3_Alone
-		jsr	CreateChild1_Normal(pc)
-	else
-		jsr	(CreateChild1_Normal).l
-	endif
+		jsr_	CreateChild1_Normal
 ; loc3_50DBE:
 locK_74360:
 		move.b	#8,routine(a0)
@@ -190,11 +161,7 @@ locK_743CE:
 		move.w	offK_743E6(pc,d0.w),d0
 		jsr	offK_743E6(pc,d0.w)
 		jsr	(MoveSprite2).l
-	if Sonic3_Alone
-		jmp	Obj_Wait(pc)
-	else
-		jmp	(Obj_Wait).l
-	endif
+		jmp_	Obj_Wait
 ; ---------------------------------------------------------------------------
 ; off3_50E42:
 offK_743E6:
@@ -233,11 +200,7 @@ locK_74412:
 		move.w	#$F0,d2
 		bsr.w	subK_74FA8
 		jsr	(MoveSprite2).l
-	if Sonic3_Alone
-		jmp	Obj_Wait(pc)
-	else
-		jmp	(Obj_Wait).l
-	endif
+		jmp_	Obj_Wait
 ; ---------------------------------------------------------------------------
 ; loc3_50E82:
 locK_74428:
@@ -249,11 +212,7 @@ locK_74428:
 ; ---------------------------------------------------------------------------
 ; loc_50E9C:
 locK_74442:
-	if Sonic3_Alone
-		jmp	Obj_Wait(pc)
-	else
-		jmp	(Obj_Wait).l
-	endif
+		jmp_	Obj_Wait
 ; ---------------------------------------------------------------------------
 ; loc3_50EA0:
 locK_74448:
@@ -263,11 +222,7 @@ locK_74448:
 ; ---------------------------------------------------------------------------
 ; loc3_50EAE:
 locK_74456:
-	if Sonic3_Alone
-		jsr	MoveSprite_LightGravity(pc)
-	else
-		jsr	(MoveSprite_LightGravity).l
-	endif
+		jsr_	MoveSprite_LightGravity
 		move.w	(Camera_Y_pos_copy).w,d0
 		addi.w	#$C0,d0
 		cmp.w	y_pos(a0),d0
@@ -324,11 +279,7 @@ locK_744C6:
 ; ---------------------------------------------------------------------------
 ; loc3_50F3A:
 locK_744E4:
-	if Sonic3_Alone
-		jmp	Obj_Wait(pc)
-	else
-		jmp	(Obj_Wait).l
-	endif
+		jmp_	Obj_Wait
 ; ---------------------------------------------------------------------------
 ; loc3_50F3E:
 locK_744EA:
@@ -342,11 +293,7 @@ locK_744FC:
 		move.w	#$110,d2
 		bsr.w	subK_74FA8
 		jsr	(MoveSprite2).l
-	if Sonic3_Alone
-		jmp	Obj_Wait(pc)
-	else
-		jmp	(Obj_Wait).l
-	endif
+		jmp_	Obj_Wait
 ; ---------------------------------------------------------------------------
 ; loc3_50F64:
 locK_74512:
@@ -357,11 +304,7 @@ locK_74512:
 ; ---------------------------------------------------------------------------
 ; loc3_50F7A:
 locK_74528:
-	if Sonic3_Alone
-		jmp	Obj_Wait(pc)
-	else
-		jmp	(Obj_Wait).l
-	endif
+		jmp_	Obj_Wait
 ; ---------------------------------------------------------------------------
 ; loc_50F7E:
 locK_7452E:
@@ -385,11 +328,7 @@ locK_74558:
 ; ---------------------------------------------------------------------------
 ; loc3_50FAC:
 locK_7455C:
-	if Sonic3_Alone
-		jmp	Obj_Wait(pc)
-	else
-		jmp	(Obj_Wait).l
-	endif
+		jmp_	Obj_Wait
 ; ---------------------------------------------------------------------------
 ; loc3_50FB0:
 locK_74562:
@@ -416,11 +355,7 @@ locK_7458C:
 ; ---------------------------------------------------------------------------
 ; loc3_50FF0:
 locK_745A2:
-	if Sonic3_Alone
-		jmp	Obj_Wait(pc)
-	else
-		jmp	(Obj_Wait).l
-	endif
+		jmp_	Obj_Wait
 ; ---------------------------------------------------------------------------
 ; loc3_50FF4:
 locK_745A8:
@@ -477,11 +412,7 @@ locK_74624:
 ; ---------------------------------------------------------------------------
 ; loc_51086:
 locK_7463A:
-	if Sonic3_Alone
-		jmp	Obj_Wait(pc)
-	else
-		jmp	(Obj_Wait).l
-	endif
+		jmp_	Obj_Wait
 ; ---------------------------------------------------------------------------
 ; loc_5108A:
 locK_74640:
@@ -541,11 +472,7 @@ locK_746D8:
 		move.b	#5,mapping_frame(a0)
 		bset	#4,$38(a0)
 		lea	ChildObjDat_7515E(pc),a2
-	if Sonic3_Alone
-		jmp	CreateChild1_Normal(pc)
-	else
-		jmp	(CreateChild1_Normal).l
-	endif
+		jmp_	CreateChild1_Normal
 ; ---------------------------------------------------------------------------
 ; loc3_510F8:
 locK_746F4:
@@ -788,13 +715,11 @@ locK_75046:
 		move.l	#Wait_FadeToLevelMusic,(a0)
 	endif
 		move.l	#locK_746D8,$34(a0)
-	if Sonic3_Alone
-		jsr	BossDefeated_StopTimer(pc)
+		jsr_	BossDefeated_StopTimer
 		lea	(Child6_CreateBossExplosion).l,a2
+	if Sonic3_Alone
 		jsr	(CreateChild1_Normal).l
 	else
-		jsr	(BossDefeated_StopTimer).l
-		lea	(Child6_CreateBossExplosion).l,a2
 		jsr	(CreateChild6_Simple).l
 	endif
 		bne.s	locK_7506E
@@ -808,15 +733,12 @@ locK_7506E:
 		; Bug: this branch is inverted, freeing the player if they're _not_ being held
 		bne.s	locK_7507A
 	endif
-	if Sonic3_Alone
-		jsr	Restore_PlayerControl(pc)
+		jsr_	Restore_PlayerControl
 ; loc3_51D82:
 locK_7507A:
+	if Sonic3_Alone
 		jmp	(SaveGame).l
 	else
-		jsr	(Restore_PlayerControl).l
-; loc3_51D82:
-locK_7507A:
 		lea	ChildObjDat_75186(pc),a2
 		jmp	(CreateChild1_Normal).l
 	endif
@@ -829,11 +751,7 @@ locK_7507A:
 subK_75084:
 		lea	wordK_75092(pc),a1
 		lea	wordK_7509E(pc,d0.w),a2
-	if Sonic3_Alone
-		jmp	CopyWordData_6(pc)
-	else
-		jmp	(CopyWordData_6).l
-	endif
+		jmp_	CopyWordData_6
 ; End of function subK_75084
 
 ; ---------------------------------------------------------------------------

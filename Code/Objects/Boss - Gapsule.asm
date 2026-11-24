@@ -29,11 +29,7 @@ wordK_6EE98:
 
 locK_6EEA8:
 		lea	ObjDat_FBZMiniboss(pc),a1
-	if Sonic3_Alone
-		jsr	SetUp_ObjAttributes(pc)
-	else
-		jsr	(SetUp_ObjAttributes).l
-	endif
+		jsr_	SetUp_ObjAttributes
 		move.b	#6,collision_property(a0)
 		move.b	#1,(Boss_flag).w
 		move.w	(Camera_max_X_pos).w,(Camera_stored_max_X_pos).w
@@ -54,11 +50,7 @@ locK_6EEA8:
 		lea	Pal_FBZMiniboss(pc),a1
 		jsr	(PalLoad_Line1).l
 		lea	ChildObjDat_6FA76(pc),a2
-	if Sonic3_Alone
-		jmp	CreateChild1_Normal(pc)
-	else
-		jmp	(CreateChild1_Normal).l
-	endif
+		jmp_	CreateChild1_Normal
 ; ---------------------------------------------------------------------------
 
 locK_6EF0E:
@@ -102,11 +94,7 @@ locretK_6EF58:
 ; ---------------------------------------------------------------------------
 
 locK_6EF5A:
-	if Sonic3_Alone
-		jmp	Obj_Wait(pc)
-	else
-		jmp	(Obj_Wait).l
-	endif
+		jmp_	Obj_Wait
 ; ---------------------------------------------------------------------------
 
 locK_6EF60:
@@ -123,12 +111,9 @@ locK_6EF76:
 		bclr	#7,$38(a0)
 		beq.s	locretK_6EF58
 		lea	ChildObjDat_6FAA8(pc),a2
-	if Sonic3_Alone
-		jmp	CreateChild1_Normal(pc)
-	else
-		jmp	(CreateChild1_Normal).l
+		jmp_	CreateChild1_Normal
 ; ---------------------------------------------------------------------------
-
+	if ~~Sonic3_Alone
 locK_6EF88:
 		subq.w	#1,$2E(a0)
 		bmi.s	locK_6EF98
@@ -231,11 +216,7 @@ locK_6F060:
 		move.b	routine(a0),d0
 		move.w	offK_6F074(pc,d0.w),d1
 		jsr	offK_6F074(pc,d1.w)
-	if Sonic3_Alone
-		jmp	Child_Draw_Sprite2(pc)
-	else
-		jmp	(Child_Draw_Sprite2).l
-	endif
+		jmp_	Child_Draw_Sprite2
 ; ---------------------------------------------------------------------------
 offK_6F074:
 		dc.w locK_6F07C-offK_6F074
@@ -246,11 +227,7 @@ offK_6F074:
 
 locK_6F07C:
 		lea	wordK_6FA58(pc),a1
-	if Sonic3_Alone
-		jmp	SetUp_ObjAttributes3(pc)
-	else
-		jmp	(SetUp_ObjAttributes3).l
-	endif
+		jmp_	SetUp_ObjAttributes3
 ; ---------------------------------------------------------------------------
 
 locK_6F086:
@@ -268,11 +245,7 @@ locK_6F094:
 ; ---------------------------------------------------------------------------
 
 locK_6F0AA:
-	if Sonic3_Alone
-		jmp	Obj_Wait(pc)
-	else
-		jmp	(Obj_Wait).l
-	endif
+		jmp_	Obj_Wait
 ; ---------------------------------------------------------------------------
 
 locK_6F0B0:
@@ -282,11 +255,7 @@ locK_6F0B0:
 
 locK_6F0B8:
 		btst	#2,(V_int_run_count+3).w
-	if Sonic3_Alone
-		jsr	Find_SonicTails8Way(pc)
-	else
-		jsr	(Find_SonicTails8Way).l
-	endif
+		jsr_	Find_SonicTails8Way
 		addi.w	#9,d4
 		move.b	d4,mapping_frame(a0)
 		rts
@@ -294,11 +263,7 @@ locK_6F0B8:
 
 locK_6F0CE:
 		lea	wordK_6FA5E(pc),a1
-	if Sonic3_Alone
-		jsr	SetUp_ObjAttributes3(pc)
-	else
-		jsr	(SetUp_ObjAttributes3).l
-	endif
+		jsr_	SetUp_ObjAttributes3
 		move.l	#locK_6F102,(a0)
 		move.w	#$EEE,(Normal_palette_line_2+$1E).w
 		lea	(wordK_6FAE0).l,a1
@@ -320,11 +285,7 @@ locK_6F10E:
 		move.b	routine(a0),d0
 		move.w	offK_6F122(pc,d0.w),d1
 		jsr	offK_6F122(pc,d1.w)
-	if Sonic3_Alone
-		jmp	Child_Draw_Sprite2(pc)
-	else
-		jmp	(Child_Draw_Sprite2).l
-	endif
+		jmp_	Child_Draw_Sprite2
 ; ---------------------------------------------------------------------------
 offK_6F122:
 		dc.w locK_6F12A-offK_6F122
@@ -335,11 +296,7 @@ offK_6F122:
 ; loc3_4CB9E:
 locK_6F12A:
 		lea	wordK_6FA40(pc),a1
-	if Sonic3_Alone
-		jsr	SetUp_ObjAttributes3(pc)
-	else
-		jsr	(SetUp_ObjAttributes3).l
-	endif
+		jsr_	SetUp_ObjAttributes3
 		move.b	subtype(a0),d0
 		lsr.b	#1,d0
 		addq.b	#1,d0
@@ -362,11 +319,7 @@ locK_6F150:
 ; loc3_4CBD4:
 locK_6F162:
 		jsr	(MoveSprite2).l
-	if Sonic3_Alone
-		jmp	Obj_Wait(pc)
-	else
-		jmp	(Obj_Wait).l
-	endif
+		jmp_	Obj_Wait
 ; ---------------------------------------------------------------------------
 ; loc3_4CBDE:
 locK_6F16E:
@@ -403,11 +356,7 @@ offK_6F190:
 ; loc3_4CC16:
 locK_6F1A6:
 		lea	wordK_6FA46(pc),a1
-	if Sonic3_Alone
-		jsr	SetUp_ObjAttributes3(pc)
-	else
-		jsr	(SetUp_ObjAttributes3).l
-	endif
+		jsr_	SetUp_ObjAttributes3
 		move.w	#-$140,d0
 		subi.b	#$A,subtype(a0)
 		beq.s	locK_6F1CA
@@ -435,11 +384,7 @@ locK_6F1E4:
 ; ---------------------------------------------------------------------------
 ; loc3_4CC62:
 locK_6F1F4:
-	if Sonic3_Alone
-		jmp	Obj_Wait(pc)
-	else
-		jmp	(Obj_Wait).l
-	endif
+		jmp_	Obj_Wait
 ; ---------------------------------------------------------------------------
 ; loc3_4CC66:
 locK_6F1FA:
@@ -452,11 +397,7 @@ locK_6F1FA:
 ; loc3_4CC84:
 locK_6F218:
 		jsr	(MoveSprite2).l
-	if Sonic3_Alone
-		jmp	Obj_Wait(pc)
-	else
-		jmp	(Obj_Wait).l
-	endif
+		jmp_	Obj_Wait
 ; ---------------------------------------------------------------------------
 ; loc3_4CC8E:
 locK_6F224:
@@ -491,11 +432,7 @@ locretK_6F29C:
 ; loc3_4CD08:
 locK_6F29E:
 		bsr.w	subK_6F7F2
-	if Sonic3_Alone
-		jmp	Obj_Wait(pc)
-	else
-		jmp	(Obj_Wait).l
-	endif
+		jmp_	Obj_Wait
 ; ---------------------------------------------------------------------------
 ; loc3_4CD10:
 locK_6F2A8:
@@ -599,11 +536,7 @@ locK_6F3C4:
 		bset	#4,$38(a0)
 		move.w	#$3F,$2E(a0)
 		moveq	#0,d0
-	if Sonic3_Alone
-		jmp	Set_IndexedVelocity(pc)
-	else
-		jmp	(Set_IndexedVelocity).l
-	endif
+		jmp_	Set_IndexedVelocity
 ; ---------------------------------------------------------------------------
 ; loc3_4CE44:
 locK_6F3DE:
@@ -612,11 +545,7 @@ locK_6F3DE:
 		move.w	offK_6F3F6(pc,d0.w),d1
 		jsr	offK_6F3F6(pc,d1.w)
 		bsr.w	subK_6FA14
-	if Sonic3_Alone
-		jmp	Draw_And_Touch_Sprite(pc)
-	else
-		jmp	(Draw_And_Touch_Sprite).l
-	endif
+		jmp_	Draw_And_Touch_Sprite
 ; ---------------------------------------------------------------------------
 ; off3_4CE5A:
 offK_6F3F6:
@@ -644,21 +573,13 @@ locK_6F416:
 		beq.s	locK_6F432
 		lea	wordK_6FA4C(pc),a1
 		move.w	#4,$3E(a0)
-	if Sonic3_Alone
-		jmp	SetUp_ObjAttributes3(pc)
-	else
-		jmp	(SetUp_ObjAttributes3).l
-	endif
+		jmp_	SetUp_ObjAttributes3
 ; ---------------------------------------------------------------------------
 ; loc3_4CE94:
 locK_6F432:
 		lea	wordK_6FA52(pc),a1
 		move.w	#3,$3E(a0)
-	if Sonic3_Alone
-		jsr	SetUp_ObjAttributes3(pc)
-	else
-		jsr	(SetUp_ObjAttributes3).l
-	endif
+		jsr_	SetUp_ObjAttributes3
 		move.b	#$86,collision_flags(a0)
 		movea.w	parent3(a0),a1
 		movea.w	parent3(a1),a1
@@ -672,11 +593,7 @@ locK_6F432:
 ; ---------------------------------------------------------------------------
 ; loc3_4CECA:
 locK_6F46A:
-	if Sonic3_Alone
-		jsr	Refresh_ChildPosition(pc)
-	else
-		jsr	(Refresh_ChildPosition).l
-	endif
+		jsr_	Refresh_ChildPosition
 		movea.w	parent3(a0),a1
 		btst	#3,$38(a1)
 		bne.s	locK_6F47E
@@ -703,11 +620,7 @@ locretK_6F4BE:
 ; loc3_4CF1E:
 locK_6F4C0:
 		jsr	(MoveSprite2).l
-	if Sonic3_Alone
-		jmp	Obj_Wait(pc)
-	else
-		jmp	(Obj_Wait).l
-	endif
+		jmp_	Obj_Wait
 ; ---------------------------------------------------------------------------
 ; loc3_4CF28:
 locK_6F4CC:
@@ -753,21 +666,13 @@ locK_6F53E:
 ; loc3_4CFA6:
 locK_6F54A:
 		move.w	$3E(a0),d2
-	if Sonic3_Alone
-		jmp	MoveSprite_CircularSimple(pc)
-	else
-		jmp	(MoveSprite_CircularSimple).l
-	endif
+		jmp_	MoveSprite_CircularSimple
 ; ---------------------------------------------------------------------------
 ; loc3_4CFAE:
 locK_6F554:
 		bsr.w	subK_6F7F2
 		move.w	$3E(a0),d2
-	if Sonic3_Alone
-		jsr	MoveSprite_CircularSimple(pc)
-	else
-		jsr	(MoveSprite_CircularSimple).l
-	endif
+		jsr_	MoveSprite_CircularSimple
 		movea.w	parent3(a0),a1
 		btst	#1,$38(a1)
 		bne.s	locK_6F578
@@ -808,11 +713,7 @@ locK_6F5B8:
 ; loc3_4D02E:
 locK_6F5D6:
 		move.w	$3E(a0),d2
-	if Sonic3_Alone
-		jmp	MoveSprite_CircularSimple(pc)
-	else
-		jmp	(MoveSprite_CircularSimple).l
-	endif
+		jmp_	MoveSprite_CircularSimple
 ; ---------------------------------------------------------------------------
 ; loc3_4D036:
 locK_6F5E0:
@@ -820,11 +721,7 @@ locK_6F5E0:
 		btst	#3,$38(a1)
 		bne.s	locK_6F5F6
 		move.w	$3E(a0),d2
-	if Sonic3_Alone
-		jmp	MoveSprite_CircularSimple(pc)
-	else
-		jmp	(MoveSprite_CircularSimple).l
-	endif
+		jmp_	MoveSprite_CircularSimple
 ; ---------------------------------------------------------------------------
 ; loc3_4D04A:
 locK_6F5F6:
@@ -836,11 +733,7 @@ locK_6F5F6:
 ; ---------------------------------------------------------------------------
 ; loc3_4D066:
 locK_6F612:
-	if Sonic3_Alone
-		jmp	Obj_Wait(pc)
-	else
-		jmp	(Obj_Wait).l
-	endif
+		jmp_	Obj_Wait
 ; ---------------------------------------------------------------------------
 ; loc3_4D06A:
 locK_6F618:
@@ -852,11 +745,7 @@ locK_6F620:
 		move.b	#$14,d4
 		bsr.w	subK_6F85A
 		move.w	$3E(a0),d2
-	if Sonic3_Alone
-		jmp	MoveSprite_CircularSimple(pc)
-	else
-		jmp	(MoveSprite_CircularSimple).l
-	endif
+		jmp_	MoveSprite_CircularSimple
 ; ---------------------------------------------------------------------------
 ; loc3_4D082:
 locK_6F632:
@@ -885,11 +774,7 @@ locK_6F64E:
 ; loc_4D0C4:
 locK_6F674:
 		move.w	$3E(a0),d2
-	if Sonic3_Alone
-		jmp	MoveSprite_CircularSimple(pc)
-	else
-		jmp	(MoveSprite_CircularSimple).l
-	endif
+		jmp_	MoveSprite_CircularSimple
 ; ---------------------------------------------------------------------------
 ; loc3_4D0CC:
 locK_6F67E:
@@ -903,11 +788,7 @@ locK_6F67E:
 ; loc3_4D0EA:
 locK_6F69C:
 		move.w	$3E(a0),d2
-	if Sonic3_Alone
-		jmp	MoveSprite_CircularSimple(pc)
-	else
-		jmp	(MoveSprite_CircularSimple).l
-	endif
+		jmp_	MoveSprite_CircularSimple
 ; ---------------------------------------------------------------------------
 ; loc3_4D0F2:
 locK_6F6A6:
@@ -915,11 +796,7 @@ locK_6F6A6:
 		btst	#3,$38(a1)
 		bne.s	locK_6F6BC
 		move.w	$3E(a0),d2
-	if Sonic3_Alone
-		jmp	MoveSprite_CircularSimple(pc)
-	else
-		jmp	(MoveSprite_CircularSimple).l
-	endif
+		jmp_	MoveSprite_CircularSimple
 ; ---------------------------------------------------------------------------
 ; loc3_4D106:
 locK_6F6BC:
@@ -936,20 +813,12 @@ locK_6F6E4:
 		cmpi.b	#$A,subtype(a0)
 		beq.s	locK_6F6F6
 		bsr.w	subK_6F93A
-	if Sonic3_Alone
-		jmp	Obj_Wait(pc)
-	else
-		jmp	(Obj_Wait).l
-	endif
+		jmp_	Obj_Wait
 ; ---------------------------------------------------------------------------
 ; loc3_4D13E:
 locK_6F6F6:
 		jsr	(MoveSprite2).l
-	if Sonic3_Alone
-		jmp	Obj_Wait(pc)
-	else
-		jmp	(Obj_Wait).l
-	endif
+		jmp_	Obj_Wait
 ; ---------------------------------------------------------------------------
 ; loc3_4D148:
 locK_6F702:
@@ -969,11 +838,7 @@ locK_6F720:
 ; ---------------------------------------------------------------------------
 ; loc3_4D166:
 locK_6F728:
-	if Sonic3_Alone
-		jsr	Obj_Wait(pc)
-	else
-		jsr	(Obj_Wait).l
-	endif
+		jsr_	Obj_Wait
 ; loc3_4D16A:
 locK_6F72E:
 		move.b	#$1C,routine(a0)
@@ -1348,11 +1213,7 @@ locK_6F9B6:
 locK_6F9C2:
 		lea	wordK_6F9FC(pc),a1
 		lea	wordK_6FA04(pc,d0.w),a2
-	if Sonic3_Alone
-		jsr	CopyWordData_4(pc)
-	else
-		jsr	(CopyWordData_4).l
-	endif
+		jsr_	CopyWordData_4
 		subq.b	#1,$20(a0)
 		bne.s	locretK_6F9DC
 		bclr	#6,$3A(a0)

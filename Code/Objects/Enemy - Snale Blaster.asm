@@ -158,11 +158,7 @@ offK_8C134:
 ; loc3_598D2:
 locK_8C13A:
 		lea	wordK_8C272(pc),a1
-	if Sonic3_Alone
-		jmp	SetUp_ObjAttributes3(pc)
-	else
-		jmp	(SetUp_ObjAttributes3).l
-	endif
+		jmp_	SetUp_ObjAttributes3
 ; ---------------------------------------------------------------------------
 ; loc3_598DA:
 locK_8C144:
@@ -204,11 +200,7 @@ offK_8C192:
 ; loc3_59930:
 locK_8C19A:
 		lea	wordK_8C278(pc),a1
-	if Sonic3_Alone
-		jmp	SetUp_ObjAttributes3(pc)
-	else
-		jmp	(SetUp_ObjAttributes3).l
-	endif
+		jmp_	SetUp_ObjAttributes3
 ; ---------------------------------------------------------------------------
 ; loc3_59938:
 locK_8C1A4:
@@ -242,11 +234,7 @@ locK_8C1D8:
 		moveq	#signextendB(sfx_Projectile),d0
 		jsr	(Play_SFX).l
 		lea	ChildObjDat_8C29E(pc),a2
-	if Sonic3_Alone
-		jsr	CreateChild2_Complex(pc)
-	else
-		jsr	(CreateChild2_Complex).l
-	endif
+		jsr_	CreateChild2_Complex
 		movea.w	parent3(a0),a2
 		btst	#0,render_flags(a2)
 		beq.s	locK_8C212

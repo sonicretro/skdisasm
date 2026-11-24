@@ -88,6 +88,32 @@ tracenum := (tracenum+1)
    endm
 tracenum := 0
 
+; Sonic & Knuckles extended some address lengths from relative to absolute, so we'll
+; do it like this so as to make the code differences appear neater
+lea_ macro address,reg
+	if Sonic3_Alone
+		!lea address(pc),reg
+	else
+		!lea (address).l,reg
+	endif
+    endm
+
+jmp_ macro address
+	if Sonic3_Alone
+		!jmp address(pc)
+	else
+		!jmp (address).l
+	endif
+    endm
+
+jsr_ macro address
+	if Sonic3_Alone
+		!jsr address(pc)
+	else
+		!jsr (address).l
+	endif
+    endm
+
 bit function nBits,1<<(nBits-1)
 signmask function val,nBits,-((-(val&bit(nBits)))&bit(nBits))
 signextend function val,nBits,(val+signmask(val,nBits))!signmask(val,nBits)
