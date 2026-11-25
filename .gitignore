@@ -20,3 +20,7 @@ Sound/DAC/generated/hashes.lua
 Sound/PCM/generated/*.inc
 Sound/PCM/generated/*.pcm
 Sound/PCM/generated/hashes.lua
+
+# Original unsplit ASMs (for size comparison)
+s3.1orig.asm
+sonic3k.1orig.asm
